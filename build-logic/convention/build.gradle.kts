@@ -38,7 +38,7 @@ gradlePlugin {
             implementationClass = "AndroidApplicationConventionPlugin"
         }
         register("androidComposeApplication") {
-            id = "com.maia.dmt.convention.android.application.compoe"
+            id = "com.maia.dmt.convention.android.application.compose"
             implementationClass = "AndroidApplicationComposeConventionPlugin"
         }
     }

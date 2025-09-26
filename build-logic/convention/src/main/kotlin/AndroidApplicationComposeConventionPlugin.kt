@@ -9,7 +9,7 @@ class AndroidApplicationComposeConventionPlugin: Plugin<Project> {
     override fun apply(target: Project) {
         with(target) {
             with(pluginManager) {
-                apply("com.maia.proms.convention.android.application")
+                apply("com.maia.dmt.convention.android.application")
                 apply("org.jetbrains.kotlin.plugin.compose")
             }
 
@@ -17,4 +17,6 @@ class AndroidApplicationComposeConventionPlugin: Plugin<Project> {
             configureAndroidCompose(extension)
         }
     }
+
+
 }

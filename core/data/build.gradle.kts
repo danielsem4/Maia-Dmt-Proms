@@ -11,6 +11,8 @@ kotlin {
 
                 implementation(libs.kotlin.stdlib)
                 implementation(libs.bundles.ktor.common)
+                implementation(libs.touchlab.kermit)
+
             }
         }
         androidMain {

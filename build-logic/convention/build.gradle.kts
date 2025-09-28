@@ -11,6 +11,10 @@ dependencies {
     compileOnly(libs.android.tools.common)
     compileOnly(libs.kotlin.gradlePlugin)
     compileOnly(libs.compose.gradlePlugin)
+    compileOnly(libs.ksp.gradlePlugin)
+    implementation(libs.buildkonfig.gradlePlugin)
+    implementation(libs.buildkonfig.compiler)
+
 }
 
 java {
@@ -54,8 +58,12 @@ gradlePlugin {
             implementationClass = "KmpLibraryConventionPlugin"
         }
         register("cmpFeature") {
-            id = "com.maia.dmt.convention.cmp.library"
+            id = "com.maia.dmt.convention.cmp.feature"
             implementationClass = "CmpFeatureConventionPlugin"
+        }
+        register("buildKonfig") {
+            id = "com.maia.dmt.convention.buildkonfig"
+            implementationClass = "BuildKonfigConventionPlugin"
         }
     }
 }

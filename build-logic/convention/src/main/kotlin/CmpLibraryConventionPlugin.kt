@@ -7,19 +7,21 @@ import org.gradle.kotlin.dsl.dependencies
 class CmpLibraryConventionPlugin: Plugin<Project> {
 
     override fun apply(target: Project) {
-       with(target) {
-           with(pluginManager) {
-               apply("com.maia.dmt.convention.kmp.library")
-               apply("org.jetbrains.kotlin.plugin.compose")
-               apply("org.jetbrains.compose")
-           }
+        with(target) {
+            with(pluginManager) {
+                apply("com.maia.dmt.convention.kmp.library")
+                apply("org.jetbrains.kotlin.plugin.compose")
+                apply("org.jetbrains.compose")
+            }
 
-           dependencies {
-               "commonMainImplementation"(libs.findLibrary("jetbrains-compose-ui").get())
-               "commonMainImplementation"(libs.findLibrary("jetbrains-compose-foundation").get())
-               "commonMainImplementation"(libs.findLibrary("jetbrains-compose-material3").get())
-               "commonMainImplementation"(libs.findLibrary("jetbrains-compose-material-icons-core").get())
-           }
-       }
+            dependencies {
+                "commonMainImplementation"(libs.findLibrary("jetbrains-compose-ui").get())
+                "commonMainImplementation"(libs.findLibrary("jetbrains-compose-foundation").get())
+                "commonMainImplementation"(libs.findLibrary("jetbrains-compose-material3").get())
+                "commonMainImplementation"(libs.findLibrary("jetbrains-compose-material-icons-core").get())
+
+                "debugImplementation"(libs.findLibrary("androidx-compose-ui-tooling").get())
+            }
+        }
     }
 }

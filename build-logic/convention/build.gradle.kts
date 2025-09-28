@@ -56,7 +56,7 @@ gradlePlugin {
         }
         register("cmpLibrary") {
             id = "com.maia.dmt.convention.cmp.library"
-            implementationClass = "KmpLibraryConventionPlugin"
+            implementationClass = "CmpLibraryConventionPlugin"
         }
         register("cmpFeature") {
             id = "com.maia.dmt.convention.cmp.feature"

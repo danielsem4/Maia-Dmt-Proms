@@ -170,6 +170,7 @@ convention-kmp-library = { id = "com.maia.dmt.convention.kmp.library", version =
 convention-cmp-library = { id = "com.maia.dmt.convention.cmp.library", version = "unspecified" }
 convention-cmp-feature = { id = "com.maia.dmt.convention.cmp.feature", version = "unspecified" }
 convention-buildkonfig = { id = "com.maia.dmt.convention.buildkonfig", version = "unspecified" }
+convention-room = { id = "com.maia.dmt.convention.room", version = "unspecified" }
 
 
 # Android

@@ -12,6 +12,7 @@ dependencies {
     compileOnly(libs.kotlin.gradlePlugin)
     compileOnly(libs.compose.gradlePlugin)
     compileOnly(libs.ksp.gradlePlugin)
+    compileOnly(libs.androidx.room.gradle.plugin)
     implementation(libs.buildkonfig.gradlePlugin)
     implementation(libs.buildkonfig.compiler)
 
@@ -64,6 +65,10 @@ gradlePlugin {
         register("buildKonfig") {
             id = "com.maia.dmt.convention.buildkonfig"
             implementationClass = "BuildKonfigConventionPlugin"
+        }
+        register("room") {
+            id = "com.maia.dmt.convention.room"
+            implementationClass = "RoomConventionPlugin"
         }
     }
 }

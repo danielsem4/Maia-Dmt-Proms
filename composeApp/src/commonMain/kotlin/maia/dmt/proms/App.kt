@@ -18,11 +18,12 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 
 import dmtproms.composeapp.generated.resources.Res
 import dmtproms.composeapp.generated.resources.compose_multiplatform
+import maia.dmt.core.designsystem.theme.DmtTheme
 
 @Composable
 @Preview
 fun App() {
-    MaterialTheme {
+    DmtTheme {
         var showContent by remember { mutableStateOf(false) }
         Column(
             modifier = Modifier

@@ -41,8 +41,8 @@ fun DmtAdaptiveFormLayout(
     headerText: String,
     errorText: String? = null,
     logo: @Composable () -> Unit,
+    modifier: Modifier = Modifier,
     formContent: @Composable ColumnScope.() -> Unit,
-    modifier: Modifier = Modifier
 ) {
     val configuration = currentDeviceConfiguration()
     val headerColor = if(configuration == DeviceConfiguration.MOBILE_LANDSCAPE) {
@@ -79,6 +79,7 @@ fun DmtAdaptiveFormLayout(
                 modifier = modifier
                     .fillMaxSize()
                     .consumeWindowInsets(WindowInsets.displayCutout)
+                    .consumeWindowInsets(WindowInsets.navigationBars)
             ) {
                 Column(
                     modifier = Modifier
@@ -90,14 +91,17 @@ fun DmtAdaptiveFormLayout(
                     AuthHeaderSection(
                         headerText = headerText,
                         headerColor = headerColor,
-                        errorText = errorText
+                        errorText = errorText,
+                        headerTextAlignment = TextAlign.Start
                     )
                 }
                 DmtSurface(
                     modifier = Modifier
                         .weight(1f)
                 ) {
+                    Spacer(modifier = Modifier.height(16.dp))
                     formContent()
+                    Spacer(modifier = Modifier.height(16.dp))
                 }
             }
         }
@@ -120,7 +124,6 @@ fun DmtAdaptiveFormLayout(
                         .clip(RoundedCornerShape(32.dp))
                         .background(MaterialTheme.colorScheme.surface)
                         .padding(horizontal = 24.dp, vertical = 32.dp),
-                    verticalArrangement = Arrangement.spacedBy(24.dp),
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     AuthHeaderSection(
@@ -140,12 +143,13 @@ fun ColumnScope.AuthHeaderSection(
     headerText: String,
     headerColor: Color,
     errorText: String? = null,
+    headerTextAlignment: TextAlign = TextAlign.Center
 ) {
     Text(
         text = headerText,
         style = MaterialTheme.typography.titleLarge,
         color = headerColor,
-        textAlign = TextAlign.Center,
+        textAlign = headerTextAlignment,
         modifier = Modifier.fillMaxWidth()
     )
     AnimatedVisibility(
@@ -158,7 +162,7 @@ fun ColumnScope.AuthHeaderSection(
                 color = MaterialTheme.colorScheme.error,
                 modifier = Modifier
                     .fillMaxWidth(),
-                textAlign = TextAlign.Center
+                textAlign = headerTextAlignment
             )
         }
     }

@@ -27,7 +27,7 @@ class LoginViewModel : ViewModel() {
 
     fun onAction(action: LoginAction) {
         when (action) {
-            else -> TODO("Handle actions")
+            else -> Unit
         }
     }
 

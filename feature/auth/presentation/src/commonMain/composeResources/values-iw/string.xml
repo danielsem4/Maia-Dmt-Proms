@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="label_email">אימייל</string>
+    <string name="label_password">סיסמה</string>
+
+    <string name="title_welcome">ברוכים הבאים ל-Dmt</string>
+
+    <string name="hint_email">אנא הכנס את האימייל שלך</string>
+    <string name="hint_password">אנא הכנס את הסיסמה שלך</string>
+    <string name="placeholder_email_example">hello@dmt.com</string>
+
+    <string name="button_login">התחבר</string>
+
+</resources>

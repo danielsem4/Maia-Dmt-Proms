@@ -15,6 +15,9 @@ kotlin {
             implementation(projects.core.domain)
             implementation(projects.core.designsystem)
 
+            implementation(projects.feature.auth.presentation)
+            implementation(projects.feature.auth.domain)
+
             implementation(compose.runtime)
             implementation(compose.foundation)
             implementation(compose.material3)

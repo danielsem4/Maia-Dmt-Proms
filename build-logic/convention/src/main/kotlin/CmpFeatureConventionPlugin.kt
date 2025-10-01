@@ -8,6 +8,9 @@ class CmpFeatureConventionPlugin: Plugin<Project> {
     override fun apply(target: Project) {
         with(target) {
             with(pluginManager) {
+
+                apply("com.maia.dmt.convention.cmp.library")
+
                 dependencies {
                     "commonMainImplementation"(project(":core:presentation"))
                     "commonMainImplementation"(project(":core:designsystem"))

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="error_disk_full">Упс, похоже, что ваше хранилище заполнено!</string>
+    <string name="error_not_found">Не удалось найти запрошенный элемент</string>
+    <string name="error_unknown">Произошла неизвестная ошибка</string>
+    <string name="error_bad_request">Некорректный запрос</string>
+    <string name="error_request_timeout">Время ожидания запроса истекло</string>
+    <string name="error_unauthorized">Неверные учетные данные</string>
+    <string name="error_forbidden">У вас нет прав для выполнения этого действия</string>
+    <string name="error_conflict">Произошел конфликт</string>
+    <string name="error_too_many_requests">Вы превысили лимит запросов</string>
+    <string name="error_no_internet">Не удалось подключиться. Пожалуйста, проверьте соединение с интернетом.</string>
+    <string name="error_payload_too_large">Прикрепленный файл слишком большой</string>
+    <string name="error_server">Упс, произошла ошибка на стороне сервера</string>
+    <string name="error_service_unavailable">Сервис недоступен, попробуйте позже</string>
+    <string name="error_serialization">Ошибка сериализации</string>
+</resources>

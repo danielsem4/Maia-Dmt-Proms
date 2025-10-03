@@ -9,6 +9,7 @@
     <string name="hint_email">Please enter your Email</string>
     <string name="hint_password">Please enter your password</string>
     <string name="placeholder_email_example">hello@dmt.com</string>
+    <string name="error_invalid_email">This is not valid email</string>
 
     <string name="button_login">Login</string>
 

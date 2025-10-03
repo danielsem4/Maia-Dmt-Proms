@@ -9,6 +9,7 @@
     <string name="hint_email">Пожалуйста, введите ваш Email</string>
     <string name="hint_password">Пожалуйста, введите ваш пароль</string>
     <string name="placeholder_email_example">hello@dmt.com</string>
+    <string name="error_invalid_email">Это недействительный адрес электронной почты</string>
 
     <string name="button_login">Войти</string>
 

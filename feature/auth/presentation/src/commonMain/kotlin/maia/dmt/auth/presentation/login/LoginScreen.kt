@@ -26,17 +26,29 @@ import maia.dmt.core.designsystem.components.layouts.DmtSnackbarScaffold
 import maia.dmt.core.designsystem.components.logo.DmtLogo
 import maia.dmt.core.designsystem.components.textFields.DmtPasswordTextField
 import maia.dmt.core.designsystem.components.textFields.DmtTextField
+import maia.dmt.core.presentation.util.ObserveAsEvents
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
+import org.koin.compose.viewmodel.koinViewModel
 
 
 @Composable
 fun LoginRoot(
-    viewModel: LoginViewModel = viewModel()
+    viewModel: LoginViewModel = koinViewModel(),
+    onLoginSuccess: (String) -> Unit
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
 
     val snackbarHostState = remember { SnackbarHostState() }
+
+    ObserveAsEvents(viewModel.events) {
+        when (it) {
+            is LoginEvent.Success -> {
+                onLoginSuccess(it.message)
+            }
+
+        }
+    }
 
     LoginScreen(
         state = state,

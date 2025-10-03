@@ -25,6 +25,8 @@ import maia.dmt.core.designsystem.theme.DmtTheme
 @Preview
 fun App() {
     DmtTheme {
-        LoginRoot()
+        LoginRoot(
+            onLoginSuccess = {}
+        )
     }
 }

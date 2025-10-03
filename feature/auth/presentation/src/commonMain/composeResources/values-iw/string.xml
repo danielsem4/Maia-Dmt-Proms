@@ -9,7 +9,7 @@
     <string name="hint_email">אנא הכנס את האימייל שלך</string>
     <string name="hint_password">אנא הכנס את הסיסמה שלך</string>
     <string name="placeholder_email_example">hello@dmt.com</string>
-
+    <string name="error_invalid_email">זהו לא אימייל חוקי</string>
     <string name="button_login">התחבר</string>
 
 </resources>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="label_email">Электронная почта</string>
+    <string name="label_password">Пароль</string>
+
+    <string name="title_welcome">Добро пожаловать в Dmt</string>
+
+    <string name="hint_email">Пожалуйста, введите ваш Email</string>
+    <string name="hint_password">Пожалуйста, введите ваш пароль</string>
+    <string name="placeholder_email_example">hello@dmt.com</string>
+    <string name="error_invalid_email">Это недействительный адрес электронной почты</string>
+
+    <string name="button_login">Войти</string>
+
+</resources>

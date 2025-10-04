@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="label_email">Email</string>
+    <string name="label_password">Password</string>
+
+    <string name="title_welcome">Welcome To Dmt</string>
+
+    <string name="hint_email">Please enter your Email</string>
+    <string name="hint_password">Please enter your password</string>
+    <string name="placeholder_email_example">hello@dmt.com</string>
+    <string name="error_invalid_email">This is not valid email</string>
+
+    <string name="button_login">Login</string>
+
+</resources>

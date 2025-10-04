@@ -8,12 +8,17 @@ kotlin {
         androidMain.dependencies {
             implementation(compose.preview)
             implementation(libs.androidx.activity.compose)
+
+            implementation(libs.koin.android)
         }
         commonMain.dependencies {
             implementation(projects.core.presentation)
             implementation(projects.core.data)
             implementation(projects.core.domain)
             implementation(projects.core.designsystem)
+
+            implementation(projects.feature.auth.presentation)
+            implementation(projects.feature.auth.domain)
 
             implementation(compose.runtime)
             implementation(compose.foundation)

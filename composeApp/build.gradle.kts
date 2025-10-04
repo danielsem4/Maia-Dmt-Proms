@@ -20,6 +20,13 @@ kotlin {
             implementation(projects.feature.auth.presentation)
             implementation(projects.feature.auth.domain)
 
+            implementation(projects.feature.home.presentation)
+            implementation(projects.feature.home.data)
+
+
+        }
+        commonTest.dependencies {
+
             implementation(compose.runtime)
             implementation(compose.foundation)
             implementation(compose.material3)

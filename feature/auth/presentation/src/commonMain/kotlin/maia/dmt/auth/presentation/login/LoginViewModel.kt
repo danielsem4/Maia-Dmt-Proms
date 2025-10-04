@@ -119,9 +119,7 @@ class LoginViewModel(
                     )
                 }
             }
-
             LoginAction.OnInputTextFocusGain -> {}
-            else -> Unit
         }
     }
 

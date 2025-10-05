@@ -88,6 +88,7 @@ suspend inline fun <reified Request, reified Response: Any> HttpClient.put(
 suspend inline fun <reified T> responseToResult(response: HttpResponse): Result<T, DataError.Remote> {
     return when(response.status.value) {
         in 200..299 -> {
+            println("HTTP 200 response: $response")
             try {
                 Result.Success(response.body<T>())
             } catch(e: NoTransformationFoundException) {
@@ -108,9 +109,11 @@ suspend inline fun <reified T> responseToResult(response: HttpResponse): Result<
 }
 
 fun constructRoute(route: String): String {
-    return when {
+    val route =  when {
         route.contains(UrlConstants.BASE_URL_HTTP) -> route
         route.startsWith("/") -> "${UrlConstants.BASE_URL_HTTP}$route"
-        else -> "${UrlConstants.BASE_URL_HTTP}/$route"
+        else -> "${UrlConstants.BASE_URL_HTTP}$route"
     }
+    println("ROUTE: $route")
+    return route
 }

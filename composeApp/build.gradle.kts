@@ -23,9 +23,7 @@ kotlin {
             implementation(projects.feature.home.presentation)
             implementation(projects.feature.home.data)
 
-
-        }
-        commonTest.dependencies {
+            implementation(libs.jetbrains.compose.navigation)
 
             implementation(compose.runtime)
             implementation(compose.foundation)
@@ -35,6 +33,8 @@ kotlin {
             implementation(compose.components.uiToolingPreview)
             implementation(libs.jetbrains.compose.viewmodel)
             implementation(libs.jetbrains.lifecycle.compose)
+
+
         }
     }
 }

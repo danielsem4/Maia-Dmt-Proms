@@ -11,24 +11,24 @@ import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
 fun HomeRoot(
-    viewModel: HomeViewModel = koinViewModel(),
-    onHomeSuccess: (String) -> Unit
+//    viewModel: HomeViewModel = koinViewModel(),
+//    onHomeSuccess: (String) -> Unit
 ) {
-    val state by viewModel.state.collectAsStateWithLifecycle()
+//    val state by viewModel.state.collectAsStateWithLifecycle()
 
     val snackbarHostState = remember { SnackbarHostState() }
 
     HomeScreen(
-        state = state,
-        onAction = viewModel::onAction,
+//        state = state,
+//        onAction = viewModel::onAction,
         snackbarHostState = snackbarHostState
     )
 }
 
 @Composable
 fun HomeScreen(
-    state: HomeState,
-    onAction: (HomeAction) -> Unit,
+//    state: HomeState,
+//    onAction: (HomeAction) -> Unit,
     snackbarHostState: SnackbarHostState
 ) {
     DmtSnackbarScaffold(

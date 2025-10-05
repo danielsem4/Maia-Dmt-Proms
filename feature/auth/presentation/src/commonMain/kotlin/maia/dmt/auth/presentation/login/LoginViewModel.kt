@@ -5,7 +5,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dmtproms.feature.auth.presentation.generated.resources.Res
 import dmtproms.feature.auth.presentation.generated.resources.error_invalid_email
-import dmtproms.feature.auth.presentation.generated.resources.placeholder_email_example
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -13,7 +12,6 @@ import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.stateIn
@@ -21,6 +19,7 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import maia.dmt.auth.domain.EmailValidator
 import maia.dmt.core.domain.auth.AuthService
+import maia.dmt.core.domain.auth.SessionStorage
 import maia.dmt.core.domain.util.DataError
 import maia.dmt.core.domain.util.onFailure
 import maia.dmt.core.domain.util.onSuccess
@@ -29,7 +28,8 @@ import maia.dmt.core.presentation.util.UiText
 import maia.dmt.core.presentation.util.toUiText
 
 class LoginViewModel(
-    private val authService: AuthService
+    private val authService: AuthService,
+    private val sessionStorage: SessionStorage
 ) : ViewModel() {
 
     private val eventChanel = Channel<LoginEvent>()
@@ -90,7 +90,7 @@ class LoginViewModel(
             authService
                 .login(email, password)
                 .onSuccess {
-                    println("TOKEN: ${it.token}")
+                    sessionStorage.set(it)
                     eventChanel.send(LoginEvent.Success)
                     _state.update {
                         it.copy(

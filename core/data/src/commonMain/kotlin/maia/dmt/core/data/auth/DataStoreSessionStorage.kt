@@ -7,6 +7,8 @@ import androidx.datastore.preferences.core.stringPreferencesKey
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import kotlinx.serialization.json.Json
+import maia.dmt.core.data.dto.LoginSuccessfulRequestSerializable
+import maia.dmt.core.data.mapper.toDomain
 import maia.dmt.core.data.mapper.toSerializable
 import maia.dmt.core.domain.auth.SessionStorage
 import maia.dmt.core.domain.dto.LoginSuccessfulRequest
@@ -25,7 +27,7 @@ class DataStoreSessionStorage(
         return dataStore.data.map { preferences ->
             val serializedJson = preferences[authInfoKey]
             serializedJson?.let {
-                json.decodeFromString(it)
+                json.decodeFromString<LoginSuccessfulRequestSerializable>(it).toDomain()
             }
         }
     }

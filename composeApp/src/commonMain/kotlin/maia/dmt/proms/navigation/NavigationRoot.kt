@@ -1,24 +1,21 @@
 package maia.dmt.proms.navigation
 
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
 import maia.dmt.auth.presentation.navigation.AuthGraphRoutes
 import maia.dmt.auth.presentation.navigation.authGraph
-import maia.dmt.home.presentation.home.HomeRoot
-import maia.dmt.home.presentation.home.HomeScreen
 import maia.dmt.home.presentation.navigation.HomeGraphRoutes
+import maia.dmt.home.presentation.navigation.homeGraph
 
 @Composable
 fun NavigationRoot(
-    modifier: Modifier = Modifier
+    navController: NavHostController,
+    startDestination: Any
 ) {
-    val navController = rememberNavController()
     NavHost(
         navController = navController,
-        startDestination = AuthGraphRoutes.Graph
+        startDestination = startDestination
     ) {
         authGraph(
             navController = navController,
@@ -30,9 +27,8 @@ fun NavigationRoot(
                 }
             }
         )
-
-        composable<HomeGraphRoutes.Home> {
-            HomeRoot()
-        }
+        homeGraph(
+            navController = navController
+        )
     }
 }

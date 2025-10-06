@@ -12,6 +12,7 @@ fun initKoin(config: KoinAppDeclaration? = null) {
         config?.invoke(this)
         modules(
             coreDataModule,
+            appModule,
             authPresentationModule,
             homePresentationModule
         )

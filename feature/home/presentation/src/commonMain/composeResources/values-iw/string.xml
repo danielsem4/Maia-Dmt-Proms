@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="home_title">בית</string>
+    <string name="log_out_title">התנתקות</string>
+    <string name="log_out_message">האם ברצונך להתנתק?</string>
+    <string name="yes">כן</string>
+    <string name="no">לא</string>
+    <string name="messages">הודעות</string>
+    <string name="no_available_modules">אין מודולות זמינות</string>
+
+    <string name="cdt">מבחן השעון</string>
+    <string name="evaluations">הערכות</string>
+    <string name="medications">תרופות</string>
+    <string name="hitber">היטבר</string>
+    <string name="memory">זיכרון</string>
+    <string name="orientation">התמצאות</string>
+    <string name="activities">פעילויות</string>
+    <string name="pass">פאס</string>
+    <string name="graphs">גרפים</string>
+    <string name="settings">הגדרות</string>
+    <string name="sensors">חיישנים</string>
+
+
+</resources>

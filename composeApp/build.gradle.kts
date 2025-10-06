@@ -23,6 +23,7 @@ kotlin {
 
             implementation(projects.feature.home.presentation)
             implementation(projects.feature.home.data)
+            implementation(projects.feature.home.domain)
 
             implementation(libs.jetbrains.compose.navigation)
             implementation(libs.bundles.koin.common)

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="home_title">Главная</string>
+    <string name="log_out_title">Выйти</string>
+    <string name="log_out_message">Вы уверены, что хотите выйти?</string>
+    <string name="yes">Да</string>
+    <string name="no">Нет</string>
+    <string name="messages">Сообщения</string>
+    <string name="no_available_modules">אין מודולות זמינות</string>
+
+
+    <string name="cdt">CDT</string>
+    <string name="evaluations">Оценки</string>
+    <string name="medications">Лекарства</string>
+    <string name="hitber">HitBer</string>
+    <string name="memory">Память</string>
+    <string name="orientation">Ориентация</string>
+    <string name="activities">Активности</string>
+    <string name="pass">Пройдено</string>
+    <string name="graphs">Графики</string>
+    <string name="settings">Настройки</string>
+    <string name="sensors">Датчики</string>
+
+
+</resources>

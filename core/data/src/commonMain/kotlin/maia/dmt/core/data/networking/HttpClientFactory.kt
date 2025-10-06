@@ -18,6 +18,7 @@ import io.ktor.http.ContentType
 import io.ktor.http.contentType
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.coroutines.flow.firstOrNull
+import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.json.Json
 import maia.dmt.core.domain.auth.SessionStorage
 import maia.dmt.core.domain.logger.DmtLogger
@@ -45,10 +46,19 @@ class HttpClientFactory(
                 socketTimeoutMillis = 20_000L
                 requestTimeoutMillis = 20_000L
             }
+//            install(Logging) {
+//                logger = object : Logger {
+//                    override fun log(message: String) {
+//                        dmtLogger.debug(message)
+//                    }
+//                }
+//                level = LogLevel.ALL
+//            }
             install(Logging) {
                 logger = object : Logger {
                     override fun log(message: String) {
                         dmtLogger.debug(message)
+                        println("KTOR: $message")
                     }
                 }
                 level = LogLevel.ALL
@@ -57,36 +67,14 @@ class HttpClientFactory(
                 pingIntervalMillis = 20_000L
             }
             defaultRequest {
-                header("x-api-key", BuildKonfig.API_KEY)
                 contentType(ContentType.Application.Json)
-            }
 
-            install(Auth) {
-                bearer {
-                    loadTokens {
-                        sessionStorage
-                            .observeAuthInfo()
-                            .firstOrNull()
-                            ?.let { authInfo ->
-                                BearerTokens(
-                                    accessToken = authInfo.token.toString(),
-                                    refreshToken = ""
-                                )
-                            }
-                    }
-
-                    // Handle token refresh needs to be done, in feauture
-                    refreshTokens {
-                        sessionStorage
-                            .observeAuthInfo()
-                            .firstOrNull()
-                            ?.let { authInfo ->
-                                BearerTokens(
-                                    accessToken = authInfo.token.toString(),
-                                    refreshToken = ""
-                                )
-                            }
-                    }
+                val token = runBlocking {
+                    sessionStorage.observeAuthInfo().firstOrNull()?.token
+                }
+                token?.let {
+                    header("Authorization", "Token $it")
+                    println("Adding token to request: ${it.take(10)}...")
                 }
             }
         }

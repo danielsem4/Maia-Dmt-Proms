@@ -41,7 +41,7 @@ fun DmtModuleSection(
         DeviceConfiguration.DESKTOP -> 20.dp
     }
 
-    Column(
+    Box(
         modifier = modifier
             .fillMaxWidth()
             .padding(16.dp)
@@ -60,6 +60,7 @@ fun DmtModuleSection(
                 verticalArrangement = Arrangement.spacedBy(spacing),
                 modifier = Modifier
                     .fillMaxWidth()
+                    .padding(8.dp)
             ) {
                 items(modules) { module ->
                     DmtIconCard(
@@ -77,12 +78,6 @@ fun DmtModuleSection(
 @Preview
 fun DmtModuleSectionPreview() {
     DmtTheme {
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(6.dp)
-                .background(MaterialTheme.colorScheme.background)
-        ) {
             DmtModuleSection(
                 modules = listOf(
                     ModuleUiModel(
@@ -132,7 +127,6 @@ fun DmtModuleSectionPreview() {
                     )
                 )
             )
-        }
     }
 }
 

@@ -28,7 +28,19 @@ fun NavigationRoot(
             }
         )
         homeGraph(
-            navController = navController
+            navController = navController,
+            onLogoutSuccess = {
+                navController.navigate(AuthGraphRoutes.Graph){
+                    popUpTo(HomeGraphRoutes.Graph) {
+                        inclusive = true
+                    }
+                }
+            },
+            onModuleClicked = {
+                when (it) {
+
+                }
+            },
         )
     }
 }

@@ -13,10 +13,12 @@ import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material.icons.filled.Star
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.onStart
+import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
@@ -34,6 +36,8 @@ class HomeViewModel(
 ): ViewModel() {
 
     private val _state = MutableStateFlow(HomeState())
+    private val eventChannel = Channel<HomeEvent>()
+    val events = eventChannel.receiveAsFlow()
 
     private var hasLoadedInitialData = false
     val state = _state
@@ -51,8 +55,22 @@ class HomeViewModel(
 
     fun onAction(action: HomeAction) {
         when (action) {
-            HomeAction.OnLogoutClick -> logout()
+            HomeAction.OnLogoutClick -> showLogoutDialog()
+            HomeAction.OnLogoutConfirm -> logout()
+            HomeAction.OnLogoutCancel -> dismissLogoutDialog()
             is HomeAction.OnFeatureClicked -> handleFeatureClick(action.moduleId)
+        }
+    }
+
+    private fun showLogoutDialog() {
+        _state.update {
+            it.copy(showLogoutDialog = true)
+        }
+    }
+
+    private fun dismissLogoutDialog() {
+        _state.update {
+            it.copy(showLogoutDialog = false)
         }
     }
 
@@ -137,12 +155,18 @@ class HomeViewModel(
     }
 
     private fun handleFeatureClick(moduleId: Int) {
-        println("Feature clicked: $moduleId")
+        viewModelScope.launch {
+            eventChannel.send(HomeEvent.ModuleClicked(moduleId))
+        }
     }
 
     private fun logout() {
         viewModelScope.launch {
+            _state.update {
+                it.copy(showLogoutDialog = false)
+            }
             sessionStorage.set(null)
+            eventChannel.send(HomeEvent.LogoutSuccess)
         }
     }
 }

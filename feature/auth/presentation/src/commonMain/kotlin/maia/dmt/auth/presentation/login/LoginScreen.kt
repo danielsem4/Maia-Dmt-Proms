@@ -9,6 +9,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import maia.dmt.core.designsystem.theme.DmtTheme
@@ -35,7 +36,7 @@ import org.koin.compose.viewmodel.koinViewModel
 @Composable
 fun LoginRoot(
     viewModel: LoginViewModel = koinViewModel(),
-    onLoginSuccess: (String) -> Unit
+    onLoginSuccess: () -> Unit
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
 
@@ -44,7 +45,7 @@ fun LoginRoot(
     ObserveAsEvents(viewModel.events) {
         when (it) {
             is LoginEvent.Success -> {
-                onLoginSuccess(it.message)
+                onLoginSuccess()
             }
 
         }
@@ -77,6 +78,7 @@ fun LoginScreen(
                 title = stringResource(Res.string.label_email),
                 supportingText = state.emailError?.asString(),
                 isError = state.emailError != null,
+                keyboardType = KeyboardType.Email,
                 onFocusChanged = { isFocused ->
                     onAction(LoginAction.OnInputTextFocusGain)
                 }

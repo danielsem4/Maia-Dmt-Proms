@@ -8,6 +8,7 @@ kotlin {
         androidMain.dependencies {
             implementation(compose.preview)
             implementation(libs.androidx.activity.compose)
+            implementation(libs.core.splashscreen)
 
             implementation(libs.koin.android)
         }
@@ -20,6 +21,12 @@ kotlin {
             implementation(projects.feature.auth.presentation)
             implementation(projects.feature.auth.domain)
 
+            implementation(projects.feature.home.presentation)
+            implementation(projects.feature.home.data)
+
+            implementation(libs.jetbrains.compose.navigation)
+            implementation(libs.bundles.koin.common)
+
             implementation(compose.runtime)
             implementation(compose.foundation)
             implementation(compose.material3)
@@ -28,6 +35,8 @@ kotlin {
             implementation(compose.components.uiToolingPreview)
             implementation(libs.jetbrains.compose.viewmodel)
             implementation(libs.jetbrains.lifecycle.compose)
+
+
         }
     }
 }

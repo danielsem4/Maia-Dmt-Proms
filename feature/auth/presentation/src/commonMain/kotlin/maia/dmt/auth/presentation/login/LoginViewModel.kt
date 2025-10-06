@@ -5,7 +5,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dmtproms.feature.auth.presentation.generated.resources.Res
 import dmtproms.feature.auth.presentation.generated.resources.error_invalid_email
-import dmtproms.feature.auth.presentation.generated.resources.placeholder_email_example
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -13,7 +12,6 @@ import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.stateIn
@@ -21,6 +19,7 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import maia.dmt.auth.domain.EmailValidator
 import maia.dmt.core.domain.auth.AuthService
+import maia.dmt.core.domain.auth.SessionStorage
 import maia.dmt.core.domain.util.DataError
 import maia.dmt.core.domain.util.onFailure
 import maia.dmt.core.domain.util.onSuccess
@@ -29,12 +28,14 @@ import maia.dmt.core.presentation.util.UiText
 import maia.dmt.core.presentation.util.toUiText
 
 class LoginViewModel(
-    private val authService: AuthService
+    private val authService: AuthService,
+    private val sessionStorage: SessionStorage
 ) : ViewModel() {
 
     private val eventChanel = Channel<LoginEvent>()
     val events = eventChanel.receiveAsFlow()
     private var hasLoadedInitialData = false
+
 
     private val _state = MutableStateFlow(LoginState())
     val state = _state
@@ -54,20 +55,22 @@ class LoginViewModel(
     private val isEmailValidFlow = snapshotFlow { state.value.emailTextState.text.toString() }
         .map { email -> EmailValidator.validate(email) }
         .distinctUntilChanged()
-//    private val isPasswordValidFlow = snapshotFlow { state.value.passwordTextState.text.toString() }
-//        .map { password -> PasswordValidator.validate(password) }
+    private val isPasswordBlankFlow = snapshotFlow { state.value.passwordTextState.text.toString() }
+        .map { it.isNotBlank() }.distinctUntilChanged()
 
 
     private fun observeValidationState() {
-        isEmailValidFlow
-            .onEach { isEmailValid ->
-                _state.update {
-                    it.copy(
-                        canLogin = !it.isLoggingIn && isEmailValid
-                    )
-                }
+        combine(
+            isEmailValidFlow,
+            isPasswordBlankFlow
+        ) { isEmailValid, isPasswordBlank ->
+            val allValid = isEmailValid && isPasswordBlank
+            _state.update {
+                it.copy(
+                    canLogin = allValid
+                )
             }
-            .launchIn(viewModelScope)
+        }.launchIn(viewModelScope)
     }
 
     private fun login() {
@@ -81,12 +84,14 @@ class LoginViewModel(
                 )
             }
 
-            val email = state.value.emailTextState.toString()
-            val password = state.value.passwordTextState.toString()
+            val email = state.value.emailTextState.text.toString()
+            val password = state.value.passwordTextState.text.toString()
 
             authService
                 .login(email, password)
                 .onSuccess {
+                    sessionStorage.set(it)
+                    eventChanel.send(LoginEvent.Success)
                     _state.update {
                         it.copy(
                             isLoggingIn = false,
@@ -95,8 +100,10 @@ class LoginViewModel(
                     }
                 }
                 .onFailure { error ->
+                    println("Login failed with error: $error")
                     val loginError = when (error) {
-                        DataError.Remote.CONFLICT -> UiText.Resource(Res.string.error_invalid_email)
+                        DataError.Remote.UNAUTHORIZED -> UiText.Resource(Res.string.error_invalid_email)
+                        DataError.Remote.FORBIDDEN -> UiText.Resource(Res.string.error_invalid_email)
                         else -> error.toUiText()
                     }
                     _state.update {
@@ -119,9 +126,7 @@ class LoginViewModel(
                     )
                 }
             }
-
             LoginAction.OnInputTextFocusGain -> {}
-            else -> Unit
         }
     }
 
@@ -148,10 +153,6 @@ class LoginViewModel(
             UiText.Resource(Res.string.error_invalid_email)
         } else null
 
-//        val passwordError = if(!passwordValidationState.isValidPassword) {
-//            UiText.Resource(Res.string.error_invalid_password)
-//        } else null
-
         val passwordError =
             null // for now always true, in the future when we will need to validate the passowrd will be in use
 
@@ -162,6 +163,6 @@ class LoginViewModel(
             )
         }
 
-        return isEmailValid && passwordValidationState.isValidPassword
+        return isEmailValid && password.isNotBlank()
     }
 }

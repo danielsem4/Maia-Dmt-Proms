@@ -18,7 +18,7 @@ val coreDataModule = module {
     includes(platformCoreDataModule)
     single<DmtLogger> { KermitLogger }
     single {
-        HttpClientFactory(get()).create(get())
+        HttpClientFactory(get(), get()).create(get())
     }
 
     singleOf(::KtorAuthService) bind AuthService::class

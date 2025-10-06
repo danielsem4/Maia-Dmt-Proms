@@ -3,13 +3,9 @@ package maia.dmt.home.presentation.home
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.wrapContentHeight
-import androidx.compose.foundation.lazy.grid.LazyHorizontalGrid
-import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.SnackbarHostState
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
@@ -22,11 +18,9 @@ import dmtproms.feature.home.presentation.generated.resources.home_title
 import dmtproms.feature.home.presentation.generated.resources.logout_icon
 import dmtproms.feature.home.presentation.generated.resources.messages
 import maia.dmt.core.designsystem.components.layouts.DmtBaseScreen
-import maia.dmt.core.designsystem.components.layouts.DmtSnackbarScaffold
-import maia.dmt.core.designsystem.components.layouts.DmtSurface
 import maia.dmt.core.designsystem.theme.DmtTheme
 import maia.dmt.home.presentation.components.DmtMessageSection
-import org.jetbrains.compose.resources.getString
+import maia.dmt.home.presentation.components.DmtModuleSection
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.resources.vectorResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
@@ -41,12 +35,14 @@ fun HomeRoot(
     val snackbarHostState = remember { SnackbarHostState() }
 
     HomeScreen(
+        state = state,
         onAction = viewModel::onAction,
     )
 }
 
 @Composable
 fun HomeScreen(
+    state: HomeState,
     onAction: (HomeAction) -> Unit,
 ) {
 
@@ -56,37 +52,41 @@ fun HomeScreen(
         onIconClick = { onAction(HomeAction.OnLogoutClick) },
         content = {
             Column(
-                Modifier
-                    .fillMaxSize(),
+                Modifier.fillMaxSize(),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-
                 Spacer(modifier = Modifier.padding(12.dp))
+
                 DmtMessageSection(
                     title = stringResource(Res.string.messages),
                     messages = listOf(
                         "Don't forget take your test.",
                         "Take 2 pills at 12:00"
-                    )
+                    ),
+                    modifier = Modifier.weight(weight = 0.5f)
                 )
-            }
 
-//            LazyHorizontalGrid(
-//                rows = 2,
-//                columns = 2,
-//                modifier = Modifier.fillMaxSize(),
-//            ) {
-//
-//            }
+                Spacer(modifier = Modifier.padding(12.dp))
+
+                if (state.isLoadingModules) {
+                    CircularProgressIndicator()
+                } else {
+                    DmtModuleSection(
+                        modules = state.modules
+                    )
+                }
+            }
         }
     )
 }
+
 
 @Composable
 @Preview
 fun HomeScreenPrev() {
     DmtTheme {
         HomeScreen(
+            state = HomeState(),
             onAction = {}
         )
     }

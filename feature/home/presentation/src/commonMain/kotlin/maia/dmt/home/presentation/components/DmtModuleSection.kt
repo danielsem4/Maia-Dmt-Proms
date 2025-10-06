@@ -60,7 +60,6 @@ fun DmtModuleSection(
                 verticalArrangement = Arrangement.spacedBy(spacing),
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(8.dp)
             ) {
                 items(modules) { module ->
                     DmtIconCard(
@@ -81,6 +80,7 @@ fun DmtModuleSectionPreview() {
         Column(
             modifier = Modifier
                 .fillMaxSize()
+                .padding(6.dp)
                 .background(MaterialTheme.colorScheme.background)
         ) {
             DmtModuleSection(

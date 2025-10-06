@@ -1,8 +1,9 @@
 plugins {
-    alias(libs.plugins.convention.cmp.feature)
+    alias(libs.plugins.convention.cmp.library)
 }
 
 kotlin {
+
 
     sourceSets {
         commonMain {
@@ -10,13 +11,6 @@ kotlin {
                 implementation(libs.kotlin.stdlib)
 
                 implementation(projects.core.domain)
-                implementation(projects.core.data)
-                implementation(projects.feature.home.domain)
-                
-                implementation(libs.bundles.ktor.common)
-                implementation(libs.koin.core)
-
-
             }
         }
 
@@ -25,7 +19,6 @@ kotlin {
 
             }
         }
-
 
         iosMain {
             dependencies {

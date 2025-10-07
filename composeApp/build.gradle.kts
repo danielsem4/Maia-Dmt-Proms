@@ -25,6 +25,15 @@ kotlin {
             implementation(projects.feature.home.data)
             implementation(projects.feature.home.domain)
 
+            implementation(projects.feature.medication.presentation)
+            implementation(projects.feature.medication.domain)
+
+            implementation(projects.feature.graphs.presentation)
+            implementation(projects.feature.graphs.domain)
+
+            implementation(projects.feature.evaluation.presentation)
+            implementation(projects.feature.evaluation.domain)
+
             implementation(libs.jetbrains.compose.navigation)
             implementation(libs.bundles.koin.common)
 

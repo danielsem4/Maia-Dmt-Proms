@@ -41,7 +41,6 @@ class LoginViewModel(
     val state = _state
         .onStart {
             if (!hasLoadedInitialData) {
-                /** Load initial data here **/
                 observeValidationState()
                 hasLoadedInitialData = true
             }

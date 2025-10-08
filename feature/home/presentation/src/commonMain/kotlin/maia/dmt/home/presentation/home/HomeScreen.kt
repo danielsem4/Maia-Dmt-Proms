@@ -15,10 +15,16 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import dmtproms.feature.home.presentation.generated.resources.Res
 import dmtproms.feature.home.presentation.generated.resources.home_title
+import dmtproms.feature.home.presentation.generated.resources.log_out_message
+import dmtproms.feature.home.presentation.generated.resources.log_out_title
 import dmtproms.feature.home.presentation.generated.resources.logout_icon
 import dmtproms.feature.home.presentation.generated.resources.messages
+import dmtproms.feature.home.presentation.generated.resources.no
+import dmtproms.feature.home.presentation.generated.resources.yes
+import maia.dmt.core.designsystem.components.dialogs.DmtConfirmationDialog
 import maia.dmt.core.designsystem.components.layouts.DmtBaseScreen
 import maia.dmt.core.designsystem.theme.DmtTheme
+import maia.dmt.core.presentation.util.ObserveAsEvents
 import maia.dmt.home.presentation.components.DmtMessageSection
 import maia.dmt.home.presentation.components.DmtModuleSection
 import org.jetbrains.compose.resources.stringResource
@@ -29,10 +35,23 @@ import org.koin.compose.viewmodel.koinViewModel
 @Composable
 fun HomeRoot(
     viewModel: HomeViewModel = koinViewModel(),
+    onLogoutSuccess: () -> Unit,
+    onModuleClicked: (Int) -> Unit
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
 
     val snackbarHostState = remember { SnackbarHostState() }
+
+    ObserveAsEvents(viewModel.events) { event ->
+        when (event) {
+            is HomeEvent.LogoutSuccess -> {
+                onLogoutSuccess()
+            }
+            is HomeEvent.ModuleClicked -> {
+                onModuleClicked(event.moduleId)
+            }
+        }
+    }
 
     HomeScreen(
         state = state,
@@ -63,7 +82,7 @@ fun HomeScreen(
                         "Don't forget take your test.",
                         "Take 2 pills at 12:00"
                     ),
-                    modifier = Modifier.weight(weight = 0.5f)
+                    modifier = Modifier.weight(weight = 0.4f)
                 )
 
                 Spacer(modifier = Modifier.padding(12.dp))
@@ -78,6 +97,19 @@ fun HomeScreen(
             }
         }
     )
+
+    // Logout Confirmation Dialog
+    if (state.showLogoutDialog) {
+        DmtConfirmationDialog(
+            title = "Logout",
+            description = "Are you sure you want to logout?",
+            confirmButtonText = "Yes, Logout",
+            cancelButtonText = "Cancel",
+            onConfirmClick = { onAction(HomeAction.OnLogoutConfirm) },
+            onCancelClick = { onAction(HomeAction.OnLogoutCancel) },
+            onDismiss = { onAction(HomeAction.OnLogoutCancel) }
+        )
+    }
 }
 
 

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="medications">Лекарства</string>
+    <string name="all_medications">Все лекарства</string>
+
+    <string name="report_medications">Отчёт о лекарствах</string>
+    <string name="medication_reminder">Напоминание о приёме лекарств</string>
+
+    <string name="search">Поиск</string>
+    <string name="date_and_time">Дата и время</string>
+
+    <string name="report">Отчёт</string>
+    <string name="interval">Интервал</string>
+    <string name="dose">Доза</string>
+    <string name="medication_report_body">Я принял лекарство</string>
+
+    <string name="start_date">Дата начала</string>
+    <string name="end_date">Дата окончания</string>
+    <string name="start_time">Время начала</string>
+    <string name="end_time">Время окончания</string>
+
+</resources>

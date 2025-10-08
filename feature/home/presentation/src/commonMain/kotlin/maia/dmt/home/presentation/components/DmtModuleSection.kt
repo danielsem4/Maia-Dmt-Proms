@@ -5,13 +5,13 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import dmtproms.feature.home.presentation.generated.resources.Res
+import dmtproms.feature.home.presentation.generated.resources.memory_icon
 import maia.dmt.core.designsystem.components.cards.DmtIconCard
 import maia.dmt.core.designsystem.theme.DmtTheme
 import maia.dmt.core.presentation.util.DeviceConfiguration
@@ -41,7 +41,7 @@ fun DmtModuleSection(
         DeviceConfiguration.DESKTOP -> 20.dp
     }
 
-    Column(
+    Box(
         modifier = modifier
             .fillMaxWidth()
             .padding(16.dp)
@@ -60,6 +60,7 @@ fun DmtModuleSection(
                 verticalArrangement = Arrangement.spacedBy(spacing),
                 modifier = Modifier
                     .fillMaxWidth()
+                    .padding(8.dp)
             ) {
                 items(modules) { module ->
                     DmtIconCard(
@@ -77,62 +78,55 @@ fun DmtModuleSection(
 @Preview
 fun DmtModuleSectionPreview() {
     DmtTheme {
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(6.dp)
-                .background(MaterialTheme.colorScheme.background)
-        ) {
             DmtModuleSection(
                 modules = listOf(
                     ModuleUiModel(
-                        icon = Icons.Default.Home,
+                        icon = Res.drawable.memory_icon,
                         text = "Home",
                         onClick = { }
                     ),
                     ModuleUiModel(
-                        icon = Icons.Default.Person,
+                        icon = Res.drawable.memory_icon,
                         text = "Profile",
                         onClick = { }
                     ),
                     ModuleUiModel(
-                        icon = Icons.Default.Settings,
+                        icon = Res.drawable.memory_icon,
                         text = "Settings",
                         onClick = { }
                     ),
                     ModuleUiModel(
-                        icon = Icons.Default.Notifications,
+                        icon = Res.drawable.memory_icon,
                         text = "Notifications",
                         onClick = { }
                     ),
                     ModuleUiModel(
-                        icon = Icons.Default.Search,
+                        icon = Res.drawable.memory_icon,
                         text = "Search",
                         onClick = { }
                     ),
                     ModuleUiModel(
-                        icon = Icons.Default.Favorite,
+                        icon = Res.drawable.memory_icon,
                         text = "Favorites",
                         onClick = { }
                     ),
                     ModuleUiModel(
-                        icon = Icons.Default.Email,
+                        icon = Res.drawable.memory_icon,
                         text = "Messages",
                         onClick = { }
                     ),
                     ModuleUiModel(
-                        icon = Icons.Default.ShoppingCart,
+                        icon = Res.drawable.memory_icon,
                         text = "Cart",
                         onClick = { }
                     ),
                     ModuleUiModel(
-                        icon = Icons.Default.AccountCircle,
+                        icon = Res.drawable.memory_icon,
                         text = "Account",
                         onClick = { }
                     )
                 )
             )
-        }
     }
 }
 

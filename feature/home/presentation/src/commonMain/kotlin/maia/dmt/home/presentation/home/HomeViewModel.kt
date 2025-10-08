@@ -13,6 +13,16 @@ import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material.icons.filled.Star
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import dmtproms.feature.home.presentation.generated.resources.Res
+import dmtproms.feature.home.presentation.generated.resources.activities_icon
+import dmtproms.feature.home.presentation.generated.resources.clock_icon
+import dmtproms.feature.home.presentation.generated.resources.evaluation_icon
+import dmtproms.feature.home.presentation.generated.resources.file_upload_icon
+import dmtproms.feature.home.presentation.generated.resources.hitber_icon
+import dmtproms.feature.home.presentation.generated.resources.logout_icon
+import dmtproms.feature.home.presentation.generated.resources.medications_icon
+import dmtproms.feature.home.presentation.generated.resources.memory_icon
+import dmtproms.feature.home.presentation.generated.resources.orientation_icon
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -29,6 +39,8 @@ import maia.dmt.core.presentation.util.UiText
 import maia.dmt.core.presentation.util.toUiText
 import maia.dmt.home.domain.home.HomeService
 import maia.dmt.home.presentation.module.ModuleUiModel
+import org.jetbrains.compose.resources.DrawableResource
+import org.jetbrains.compose.resources.imageResource
 
 class HomeViewModel(
     private val homeService: HomeService,
@@ -138,19 +150,19 @@ class HomeViewModel(
         }
     }
 
-    private fun mapModuleIcon(moduleId: Int): androidx.compose.ui.graphics.vector.ImageVector {
+    private fun mapModuleIcon(moduleId: Int): DrawableResource {
         // Map module IDs to appropriate icons
         return when (moduleId) {
-            1 -> Icons.Default.Home
-            2 -> Icons.Default.Person
-            3 -> Icons.Default.Settings
-            4 -> Icons.Default.Notifications
-            5 -> Icons.Default.Search
-            6 -> Icons.Default.Favorite
-            7 -> Icons.Default.Email
-            8 -> Icons.Default.ShoppingCart
-            9 -> Icons.Default.AccountCircle
-            else -> Icons.Default.Star
+            3 -> (Res.drawable.file_upload_icon)
+            4 -> Res.drawable.evaluation_icon
+            7 -> Res.drawable.medications_icon
+            8 -> Res.drawable.activities_icon
+            13 ->Res.drawable.memory_icon
+            16 ->Res.drawable.clock_icon
+            20 ->Res.drawable.orientation_icon
+            22 ->Res.drawable.hitber_icon
+            9 -> Res.drawable.hitber_icon
+            else -> Res.drawable.logout_icon
         }
     }
 

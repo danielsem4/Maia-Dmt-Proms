@@ -4,8 +4,6 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Home
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
@@ -14,19 +12,22 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import dmtproms.core.designsystem.generated.resources.Res
+import dmtproms.core.designsystem.generated.resources.upload_icon
 import maia.dmt.core.designsystem.theme.DmtTheme
 import maia.dmt.core.presentation.util.DeviceConfiguration
 import maia.dmt.core.presentation.util.currentDeviceConfiguration
+import org.jetbrains.compose.resources.DrawableResource
+import org.jetbrains.compose.resources.vectorResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
 fun DmtIconCard(
     modifier: Modifier = Modifier,
-    icon: ImageVector,
+    icon: DrawableResource,
     text: String,
     onClick: () -> Unit = {}
 ) {
@@ -74,7 +75,7 @@ fun DmtIconCard(
             verticalArrangement = Arrangement.Center
         ) {
             Icon(
-                imageVector = icon,
+                imageVector = vectorResource(icon),
                 contentDescription = text,
                 modifier = Modifier.size(iconSize),
                 tint = MaterialTheme.colorScheme.primary
@@ -105,7 +106,7 @@ fun DmtIconCardPreview() {
                 .padding(16.dp)
         ) {
             DmtIconCard(
-                icon = Icons.Default.Home,
+                icon = Res.drawable.upload_icon,
                 text = "Home"
             )
         }

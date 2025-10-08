@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="medications">תרופות</string>
+    <string name="all_medications">כל התרופות</string>
+
+    <string name="report_medications">דיווח על תרופות</string>
+    <string name="medication_reminder">תזכורת לתרופות</string>
+
+    <string name="search">חיפוש</string>
+    <string name="date_and_time">תאריך ושעה</string>
+
+    <string name="report">דיווח</string>
+    <string name="interval">מרווח</string>
+    <string name="dose">מינון</string>
+    <string name="medication_report_body">נטלתי תרופה</string>
+
+    <string name="start_date">תאריך התחלה</string>
+    <string name="end_date">תאריך סיום</string>
+    <string name="start_time">שעת התחלה</string>
+    <string name="end_time">שעת סיום</string>
+
+</resources>

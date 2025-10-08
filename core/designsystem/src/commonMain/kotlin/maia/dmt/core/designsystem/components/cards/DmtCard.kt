@@ -29,7 +29,8 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 enum class DmtCardStyle {
     PRIMARY,
     SECONDARY,
-    OUTLINED
+    OUTLINED,
+    ELEVATED
 }
 
 @Composable
@@ -61,6 +62,12 @@ fun DmtCard(
             disabledContainerColor = Color.Transparent,
             disabledContentColor = MaterialTheme.colorScheme.extended.textDisabled
         )
+        DmtCardStyle.ELEVATED -> CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.surface,
+            contentColor = MaterialTheme.colorScheme.onSurface,
+            disabledContainerColor = MaterialTheme.colorScheme.extended.disabledFill,
+            disabledContentColor = MaterialTheme.colorScheme.extended.textDisabled
+        )
     }
 
     val border = when {
@@ -72,11 +79,32 @@ fun DmtCard(
                 MaterialTheme.colorScheme.extended.disabledOutline
             }
         )
+        style == DmtCardStyle.ELEVATED -> BorderStroke(
+            width = 1.dp,
+            color = if(enabled) {
+                MaterialTheme.colorScheme.outlineVariant
+            } else {
+                MaterialTheme.colorScheme.extended.disabledOutline
+            }
+        )
         !enabled -> BorderStroke(
             width = 1.dp,
             color = MaterialTheme.colorScheme.extended.disabledOutline
         )
         else -> null
+    }
+
+    val elevation = when(style) {
+        DmtCardStyle.ELEVATED -> CardDefaults.cardElevation(
+            defaultElevation = 4.dp,
+            pressedElevation = 6.dp,
+            disabledElevation = 0.dp
+        )
+        else -> CardDefaults.cardElevation(
+            defaultElevation = 2.dp,
+            pressedElevation = 4.dp,
+            disabledElevation = 0.dp
+        )
     }
 
     Card(
@@ -85,11 +113,7 @@ fun DmtCard(
         shape = RoundedCornerShape(12.dp),
         colors = colors,
         border = border,
-        elevation = CardDefaults.cardElevation(
-            defaultElevation = 2.dp,
-            pressedElevation = 4.dp,
-            disabledElevation = 0.dp
-        )
+        elevation = elevation
     ) {
         Box(
             contentAlignment = Alignment.CenterStart,
@@ -170,6 +194,25 @@ fun DmtOutlinedCardPreview() {
             text = "Outlined Card",
             onClick = {},
             style = DmtCardStyle.OUTLINED,
+            leadingIcon = {
+                Icon(
+                    imageVector = Icons.Default.Add,
+                    contentDescription = null,
+                    modifier = Modifier.size(24.dp)
+                )
+            }
+        )
+    }
+}
+
+@Composable
+@Preview
+fun DmtElevatedCardPreview() {
+    DmtTheme(darkTheme = false) {
+        DmtCard(
+            text = "Elevated Card",
+            onClick = {},
+            style = DmtCardStyle.ELEVATED,
             leadingIcon = {
                 Icon(
                     imageVector = Icons.Default.Add,

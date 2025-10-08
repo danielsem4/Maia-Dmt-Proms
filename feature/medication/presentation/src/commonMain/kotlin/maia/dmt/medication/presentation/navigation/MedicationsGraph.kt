@@ -4,6 +4,8 @@ import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
+import androidx.navigation.toRoute
+import maia.dmt.medication.presentation.allMedications.AllMedicationRoot
 import maia.dmt.medication.presentation.medications.MedicationsRoot
 
 fun NavGraphBuilder.medicationGraph(
@@ -23,10 +25,14 @@ fun NavGraphBuilder.medicationGraph(
             )
         }
 
-        // Add your AllMedications screen here
-        // composable<MedicationsGraphRoutes.AllMedications> { backStackEntry ->
-        //     val args = backStackEntry.toRoute<MedicationsGraphRoutes.AllMedications>()
-        //     AllMedicationsRoot(isReport = args.isReport)
-        // }
+        composable<MedicationsGraphRoutes.AllMedications> { backStackEntry ->
+            val args = backStackEntry.toRoute<MedicationsGraphRoutes.AllMedications>()
+            AllMedicationRoot(
+                isReport = args.isReport,
+                onNavigateBack = {
+                    navController.navigateUp()
+                }
+            )
+        }
     }
 }

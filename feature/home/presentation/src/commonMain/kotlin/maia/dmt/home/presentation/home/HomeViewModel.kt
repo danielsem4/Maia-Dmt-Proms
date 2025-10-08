@@ -95,7 +95,6 @@ class HomeViewModel(
                 )
             }
 
-            // Get auth info from session
             val authInfo = sessionStorage.observeAuthInfo().firstOrNull()
 
             if (authInfo == null) {
@@ -108,7 +107,6 @@ class HomeViewModel(
                 return@launch
             }
 
-            // Extract clinic_id from authInfo
             val clinicId = authInfo.user?.clinicId
 
             if (clinicId == null || clinicId == 0) {

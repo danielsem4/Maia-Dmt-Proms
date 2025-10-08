@@ -20,5 +20,8 @@
     <string name="start_time">Start Time</string>
     <string name="end_time">End Time</string>
 
+    <string name="no_medications_found_matching">No medications found matching</string>
+    <string name="no_medications_found">No medications found</string>
+
 
 </resources>

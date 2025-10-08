@@ -219,7 +219,7 @@ fun DmtPrimaryButtonIconPreview() {
         DmtButton(
             text = "Hello world!",
             onClick = {},
-            style = DmtButtonStyle.PRIMARY,
+            style = DmtButtonStyle.SECONDARY,
             leadingIcon = {
                 Icon(
                     imageVector = Icons.Default.Add,

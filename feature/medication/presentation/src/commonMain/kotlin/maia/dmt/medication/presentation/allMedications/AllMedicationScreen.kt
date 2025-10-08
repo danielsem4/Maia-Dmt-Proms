@@ -6,12 +6,15 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.text.input.rememberTextFieldState
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -25,6 +28,7 @@ import dmtproms.feature.medication.presentation.generated.resources.Res
 import dmtproms.feature.medication.presentation.generated.resources.back_arrow_icon
 import dmtproms.feature.medication.presentation.generated.resources.medication_reminder
 import dmtproms.feature.medication.presentation.generated.resources.medications
+import dmtproms.feature.medication.presentation.generated.resources.medications_icon
 import dmtproms.feature.medication.presentation.generated.resources.no_medications_found
 import dmtproms.feature.medication.presentation.generated.resources.no_medications_found_matching
 import dmtproms.feature.medication.presentation.generated.resources.search
@@ -136,7 +140,14 @@ fun AllMedicationScreen(
                                 modifier = Modifier
                                     .fillMaxWidth()
                                     .padding(horizontal = 16.dp, vertical = 8.dp),
-                                style = DmtCardStyle.ELEVATED
+                                style = DmtCardStyle.ELEVATED,
+                                leadingIcon = {
+                                    Icon(
+                                        imageVector = vectorResource(Res.drawable.medications_icon),
+                                        contentDescription = null,
+                                        modifier = Modifier.size(24.dp)
+                                    )
+                                }
                             )
                         }
                     }
@@ -157,7 +168,7 @@ fun AllMedicationPreview() {
                     MedicationUiModel(
                         id = 1,
                         text = "Aspirin 100mg",
-                        onClick = {}
+                        onClick = {},
                     ),
                     MedicationUiModel(
                         id = 2,

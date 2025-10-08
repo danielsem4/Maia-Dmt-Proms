@@ -16,14 +16,18 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import dmtproms.feature.medication.presentation.generated.resources.Res
+import dmtproms.feature.medication.presentation.generated.resources.back_arrow_icon
+import dmtproms.feature.medication.presentation.generated.resources.bell_icon
 import dmtproms.feature.medication.presentation.generated.resources.medication_reminder
 import dmtproms.feature.medication.presentation.generated.resources.medications
 import dmtproms.feature.medication.presentation.generated.resources.medications_icon
 import dmtproms.feature.medication.presentation.generated.resources.report_medications
-import maia.dmt.core.designsystem.components.buttons.DmtButton
-import maia.dmt.core.designsystem.components.buttons.DmtButtonStyle
+import dmtproms.feature.medication.presentation.generated.resources.send_icon
+import maia.dmt.core.designsystem.components.cards.DmtCard
+import maia.dmt.core.designsystem.components.cards.DmtCardStyle
 import maia.dmt.core.designsystem.components.layouts.DmtBaseScreen
 import maia.dmt.core.designsystem.theme.DmtTheme
+import maia.dmt.core.presentation.util.ObserveAsEvents
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.resources.vectorResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
@@ -32,9 +36,21 @@ import org.koin.compose.viewmodel.koinViewModel
 @Composable
 fun MedicationsRoot(
     viewModel: MedicationViewModel = koinViewModel(),
+    onNavigateBack: () -> Unit,
+    onNavigateToAllMedications: (Boolean) -> Unit
 ) {
-
     val state by viewModel.state.collectAsStateWithLifecycle()
+
+    ObserveAsEvents(viewModel.events) { event ->
+        when (event) {
+            is MedicationEvent.NavigateBack -> {
+                onNavigateBack()
+            }
+            is MedicationEvent.NavigateToAllMedications -> {
+                onNavigateToAllMedications(event.isReport)
+            }
+        }
+    }
 
     MedicationsScreen(
         state = state,
@@ -49,7 +65,7 @@ fun MedicationsScreen(
 ) {
     DmtBaseScreen(
         titleText = stringResource(Res.string.medications),
-        iconBar = vectorResource(Res.drawable.medications_icon),
+        iconBar = vectorResource(Res.drawable.back_arrow_icon),
         onIconClick = { onAction(MedicationAction.OnBackClick) },
         content = {
             Column(
@@ -60,16 +76,16 @@ fun MedicationsScreen(
                 Column(
                     modifier = Modifier
                         .padding(horizontal = 12.dp)
-                        .width(IntrinsicSize.Max),
+                        .fillMaxWidth(),
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    DmtButton(
+                    DmtCard(
                         modifier = Modifier.fillMaxWidth(),
                         text = stringResource(Res.string.report_medications),
-                        style = DmtButtonStyle.PRIMARY,
+                        style = DmtCardStyle.PRIMARY,
                         leadingIcon = {
                             Icon(
-                                imageVector = vectorResource(Res.drawable.medications_icon),
+                                imageVector = vectorResource(Res.drawable.send_icon),
                                 contentDescription = null,
                                 modifier = Modifier.size(20.dp)
                             )
@@ -77,18 +93,18 @@ fun MedicationsScreen(
                         onClick = { onAction(MedicationAction.OnMedicationReportClick) }
                     )
                     Spacer(modifier = Modifier.padding(12.dp))
-                    DmtButton(
+                    DmtCard(
                         modifier = Modifier.fillMaxWidth(),
                         text = stringResource(Res.string.medication_reminder),
-                        style = DmtButtonStyle.PRIMARY,
+                        style = DmtCardStyle.PRIMARY,
                         leadingIcon = {
                             Icon(
-                                imageVector = vectorResource(Res.drawable.medications_icon),
+                                imageVector = vectorResource(Res.drawable.bell_icon),
                                 contentDescription = null,
                                 modifier = Modifier.size(20.dp)
                             )
                         },
-                        onClick = { onAction(MedicationAction.OnMedicationReminderCLick) }
+                        onClick = { onAction(MedicationAction.OnMedicationReminderClick) }
                     )
                 }
                 Spacer(modifier = Modifier.weight(4f))
@@ -96,8 +112,6 @@ fun MedicationsScreen(
         }
     )
 }
-
-
 
 @Composable
 @Preview

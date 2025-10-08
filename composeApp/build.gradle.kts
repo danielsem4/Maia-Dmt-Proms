@@ -27,6 +27,7 @@ kotlin {
 
             implementation(projects.feature.medication.presentation)
             implementation(projects.feature.medication.domain)
+            implementation(projects.feature.medication.data)
 
             implementation(projects.feature.graphs.presentation)
             implementation(projects.feature.graphs.domain)

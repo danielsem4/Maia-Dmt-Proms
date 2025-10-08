@@ -5,7 +5,7 @@ import maia.dmt.medication.presentation.medications.MedicationViewModel
 import org.koin.core.module.dsl.viewModelOf
 import org.koin.dsl.module
 
-val homePresentationModule = module {
+val medicationPresentationModule = module {
     viewModelOf(::AllMedicationViewModel)
     viewModelOf(::MedicationViewModel)
 

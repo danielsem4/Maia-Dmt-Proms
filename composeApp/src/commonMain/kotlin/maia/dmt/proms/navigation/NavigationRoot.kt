@@ -7,6 +7,8 @@ import maia.dmt.auth.presentation.navigation.AuthGraphRoutes
 import maia.dmt.auth.presentation.navigation.authGraph
 import maia.dmt.home.presentation.navigation.HomeGraphRoutes
 import maia.dmt.home.presentation.navigation.homeGraph
+import maia.dmt.medication.presentation.navigation.MedicationsGraphRoutes
+import maia.dmt.medication.presentation.navigation.medicationGraph
 
 @Composable
 fun NavigationRoot(
@@ -38,9 +40,12 @@ fun NavigationRoot(
             },
             onModuleClicked = {
                 when (it) {
-
+                    7 -> navController.navigate(MedicationsGraphRoutes.Graph)
                 }
             },
+        )
+        medicationGraph(
+            navController = navController
         )
     }
 }

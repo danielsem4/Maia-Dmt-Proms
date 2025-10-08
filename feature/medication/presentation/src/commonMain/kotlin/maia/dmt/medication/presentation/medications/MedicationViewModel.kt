@@ -8,6 +8,7 @@ import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.launch
 import maia.dmt.core.domain.auth.SessionStorage
 
 class MedicationViewModel(
@@ -20,7 +21,6 @@ class MedicationViewModel(
     val events = eventChannel.receiveAsFlow()
 
     private var hasLoadedInitialData = false
-
 
     val state = _state
         .onStart {
@@ -36,13 +36,27 @@ class MedicationViewModel(
 
     fun onAction(action: MedicationAction) {
         when (action) {
-            MedicationAction.OnMedicationReportClick -> {}
-            MedicationAction.OnMedicationReminderCLick -> {}
-            MedicationAction.OnBackClick -> {}
-            else -> {}
+            MedicationAction.OnMedicationReportClick -> navigateToReport()
+            MedicationAction.OnMedicationReminderClick -> navigateToReminder()
+            MedicationAction.OnBackClick -> navigateBack()
         }
     }
 
+    private fun navigateToReport() {
+        viewModelScope.launch {
+            eventChannel.send(MedicationEvent.NavigateToAllMedications(isReport = true))
+        }
+    }
 
+    private fun navigateToReminder() {
+        viewModelScope.launch {
+            eventChannel.send(MedicationEvent.NavigateToAllMedications(isReport = false))
+        }
+    }
 
+    private fun navigateBack() {
+        viewModelScope.launch {
+            eventChannel.send(MedicationEvent.NavigateBack)
+        }
+    }
 }

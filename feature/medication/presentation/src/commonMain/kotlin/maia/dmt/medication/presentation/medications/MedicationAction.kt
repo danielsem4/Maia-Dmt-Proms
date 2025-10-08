@@ -1,10 +1,7 @@
 package maia.dmt.medication.presentation.medications
 
-interface MedicationAction {
-
+sealed interface MedicationAction {
     data object OnMedicationReportClick: MedicationAction
-    data object OnMedicationReminderCLick: MedicationAction
-
+    data object OnMedicationReminderClick: MedicationAction
     data object OnBackClick: MedicationAction
-
 }

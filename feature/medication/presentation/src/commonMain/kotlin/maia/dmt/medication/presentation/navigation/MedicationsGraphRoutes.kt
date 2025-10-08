@@ -11,12 +11,10 @@ interface MedicationsGraphRoutes {
     data object Medications: MedicationsGraphRoutes
 
     @Serializable
-    data object AllMedications: MedicationsGraphRoutes
+    data class AllMedications(val isReport: Boolean): MedicationsGraphRoutes
 
     @Serializable
     data object MedicationReminder: MedicationsGraphRoutes
-
-
 
 
 }

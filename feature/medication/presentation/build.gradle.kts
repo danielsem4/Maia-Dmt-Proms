@@ -14,6 +14,8 @@ kotlin {
                 implementation(projects.core.designsystem)
                 implementation(projects.core.presentation)
 
+                implementation(libs.kotlinx.datetime)
+
                 implementation(compose.components.resources)
                 implementation(compose.components.uiToolingPreview)
 

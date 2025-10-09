@@ -26,23 +26,34 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import dmtproms.feature.medication.presentation.generated.resources.Res
 import dmtproms.feature.medication.presentation.generated.resources.back_arrow_icon
+import dmtproms.feature.medication.presentation.generated.resources.date_and_time
 import dmtproms.feature.medication.presentation.generated.resources.medication_reminder
+import dmtproms.feature.medication.presentation.generated.resources.medication_report_body
 import dmtproms.feature.medication.presentation.generated.resources.medications
 import dmtproms.feature.medication.presentation.generated.resources.medications_icon
 import dmtproms.feature.medication.presentation.generated.resources.no_medications_found
 import dmtproms.feature.medication.presentation.generated.resources.no_medications_found_matching
+import dmtproms.feature.medication.presentation.generated.resources.report
 import dmtproms.feature.medication.presentation.generated.resources.search
+import kotlinx.datetime.TimeZone
+import kotlinx.datetime.toLocalDateTime
+import maia.dmt.core.designsystem.components.buttons.DmtButtonStyle
 import maia.dmt.core.designsystem.components.cards.DmtCard
 import maia.dmt.core.designsystem.components.cards.DmtCardStyle
+import maia.dmt.core.designsystem.components.dialogs.DmtCustomDialog
 import maia.dmt.core.designsystem.components.layouts.DmtBaseScreen
 import maia.dmt.core.designsystem.components.textFields.DmtSearchTextField
 import maia.dmt.core.designsystem.theme.DmtTheme
 import maia.dmt.core.presentation.util.ObserveAsEvents
+import maia.dmt.core.presentation.util.getCurrentDate
+import maia.dmt.core.presentation.util.getCurrentTime
 import maia.dmt.medication.presentation.model.MedicationUiModel
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.resources.vectorResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.koin.compose.viewmodel.koinViewModel
+import kotlin.time.Clock
+import kotlin.time.Instant
 
 @Composable
 fun AllMedicationRoot(
@@ -57,6 +68,12 @@ fun AllMedicationRoot(
         when (event) {
             is AllMedicationEvent.NavigateBack -> {
                 onNavigateBack()
+            }
+            is AllMedicationEvent.ReportMedicationSuccess -> {
+                // Handle success - maybe show a toast or snackbar
+            }
+            is AllMedicationEvent.ReminderMedicationSetupSuccess -> {
+                // Handle reminder success
             }
         }
     }
@@ -155,6 +172,35 @@ fun AllMedicationScreen(
             }
         }
     )
+
+    if (isReport && state.showMedicationReportDialog) {
+        val instant = Instant.fromEpochMilliseconds(state.selectedDateTime)
+        val localDateTime = instant.toLocalDateTime(TimeZone.currentSystemDefault())
+        val dateString = getCurrentDate(localDateTime)
+        val timeString = getCurrentTime(localDateTime)
+
+        DmtCustomDialog(
+            title = state.selectedMedication?.text ?: "",
+            icon = Res.drawable.medications_icon,
+            description = "${stringResource(Res.string.medication_report_body)}\n$dateString at $timeString",
+            primaryButtonText = stringResource(Res.string.report),
+            secondaryButtonText = stringResource(Res.string.date_and_time),
+            onPrimaryClick = {
+                if (!state.isReportingMedication) {
+                    onAction(AllMedicationAction.OnConfirmReport)
+                }
+                onAction(AllMedicationAction.OnDismissReportDialog)
+            },
+            onSecondaryClick = {
+                onAction(AllMedicationAction.OnDateTimeClick)
+            },
+            onDismiss = {
+                onAction(AllMedicationAction.OnDismissReportDialog)
+            },
+            primaryButtonStyle = DmtButtonStyle.PRIMARY,
+            secondaryButtonStyle = DmtButtonStyle.PRIMARY,
+        )
+    }
 }
 
 

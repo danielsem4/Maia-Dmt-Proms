@@ -228,6 +228,7 @@ class AllMedicationViewModel(
                     eventChannel.send(AllMedicationEvent.ReportMedicationSuccess)
                 }
                 .onFailure { error ->
+                    eventChannel.send(AllMedicationEvent.ReportMedicationError(error.name))
                     _state.update {
                         it.copy(
                             isReportingMedication = false,

@@ -1,54 +1,86 @@
 package maia.dmt.core.designsystem.components.dialogs
 
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.DatePicker
+import androidx.compose.material3.DatePickerDialog
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.material3.rememberDatePickerState
 import androidx.compose.runtime.Composable
-import maia.dmt.core.designsystem.components.buttons.DmtButton
-import maia.dmt.core.designsystem.components.buttons.DmtButtonStyle
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.dp
+import kotlinx.datetime.LocalDate
+import kotlinx.datetime.TimeZone
+import kotlinx.datetime.toLocalDateTime
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import kotlin.time.Clock
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DmtDatePickerDialog(
-    initialDateMillis: Long? = null,
-    onDateSelected: (Long) -> Unit,
-    onDismiss: () -> Unit
+    title: String,
+    onDismiss: () -> Unit,
+    onConfirm: (Long) -> Unit,
+    initialDateMillis: Long? = null
 ) {
     val datePickerState = rememberDatePickerState(
-        initialSelectedDateMillis = initialDateMillis
+        initialSelectedDateMillis = initialDateMillis ?: Clock.System.now().toEpochMilliseconds()
     )
 
-    androidx.compose.material3.DatePickerDialog(
+    DatePickerDialog(
         onDismissRequest = onDismiss,
         confirmButton = {
-            DmtButton(
-                text = "OK",
+            TextButton(
                 onClick = {
-                    datePickerState.selectedDateMillis?.let { onDateSelected(it) }
+                    datePickerState.selectedDateMillis?.let { onConfirm(it) }
                 },
-                style = DmtButtonStyle.PRIMARY
-            )
+                enabled = datePickerState.selectedDateMillis != null
+            ) {
+                Text("OK")
+            }
         },
         dismissButton = {
-            DmtButton(
-                text = "Cancel",
-                onClick = onDismiss,
-                style = DmtButtonStyle.SECONDARY
-            )
+            TextButton(onClick = onDismiss) {
+                Text("Cancel")
+            }
         }
     ) {
-        androidx.compose.material3.DatePicker(state = datePickerState)
+        DatePicker(
+            state = datePickerState,
+            title = {
+                Text(
+                    text = title,
+                    style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold),
+                    modifier = Modifier.padding(16.dp)
+                )
+            }
+        )
     }
 }
 
+private fun validateDate(date: LocalDate, restrictionType: RestrictionType): Boolean {
+    val today = Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault()).date
+
+    return when (restrictionType) {
+        RestrictionType.NoPastDates -> date >= today
+        else -> true
+    }
+}
+
+enum class RestrictionType {
+    None, NoPastDates
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 @Preview
 fun DmtDatePickerDialogPreview() {
     DmtDatePickerDialog(
-        initialDateMillis = Clock.System.now().toEpochMilliseconds(),
-        onDateSelected = {},
-        onDismiss = {}
+        title = "Select Date",
+        onDismiss = {},
+        onConfirm = {}
     )
-
 }

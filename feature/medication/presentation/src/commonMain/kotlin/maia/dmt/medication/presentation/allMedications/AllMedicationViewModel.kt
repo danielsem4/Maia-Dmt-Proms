@@ -11,7 +11,9 @@ import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import kotlinx.datetime.LocalDateTime
 import kotlinx.datetime.TimeZone
+import kotlinx.datetime.number
 import kotlinx.datetime.toInstant
 import kotlinx.datetime.toLocalDateTime
 import maia.dmt.core.domain.auth.SessionStorage
@@ -25,8 +27,6 @@ import maia.dmt.medication.domain.models.Medication
 import maia.dmt.medication.domain.models.MedicationReport
 import maia.dmt.medication.presentation.model.MedicationUiModel
 import kotlin.time.Clock
-import kotlin.time.Instant
-
 
 class AllMedicationViewModel(
     private val sessionStorage: SessionStorage,
@@ -204,8 +204,8 @@ class AllMedicationViewModel(
                 return@launch
             }
 
-            // Convert timestamp to formatted string
-            val instant = Instant.fromEpochMilliseconds(currentState.selectedDateTime)
+            // Convert timestamp to formatted string using kotlin.time.Instant
+            val instant = kotlin.time.Instant.fromEpochMilliseconds(currentState.selectedDateTime)
             val localDateTime = instant.toLocalDateTime(TimeZone.currentSystemDefault())
             val formattedTimestamp = getCurrentFormattedDateTime(localDateTime)
 
@@ -254,14 +254,14 @@ class AllMedicationViewModel(
     }
 
     private fun handleTimeSelected(hour: Int, minute: Int) {
-        val currentDateTime = Instant.fromEpochMilliseconds(_state.value.selectedDateTime)
+        val currentDateTime = kotlin.time.Instant.fromEpochMilliseconds(_state.value.selectedDateTime)
             .toLocalDateTime(TimeZone.currentSystemDefault())
 
         val updatedDateTime = currentDateTime.let {
-            kotlinx.datetime.LocalDateTime(
+            LocalDateTime(
                 year = it.year,
-                monthNumber = it.monthNumber,
-                dayOfMonth = it.dayOfMonth,
+                month = it.month.number,
+                day = it.day,
                 hour = hour,
                 minute = minute,
                 second = 0,

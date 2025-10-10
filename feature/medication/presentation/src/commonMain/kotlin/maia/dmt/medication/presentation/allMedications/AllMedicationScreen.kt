@@ -20,29 +20,46 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import dmtproms.feature.medication.presentation.generated.resources.Res
 import dmtproms.feature.medication.presentation.generated.resources.back_arrow_icon
+import dmtproms.feature.medication.presentation.generated.resources.date_and_time
 import dmtproms.feature.medication.presentation.generated.resources.medication_reminder
+import dmtproms.feature.medication.presentation.generated.resources.medication_report_body
 import dmtproms.feature.medication.presentation.generated.resources.medications
 import dmtproms.feature.medication.presentation.generated.resources.medications_icon
 import dmtproms.feature.medication.presentation.generated.resources.no_medications_found
 import dmtproms.feature.medication.presentation.generated.resources.no_medications_found_matching
+import dmtproms.feature.medication.presentation.generated.resources.report
 import dmtproms.feature.medication.presentation.generated.resources.search
+import kotlinx.datetime.TimeZone
+import kotlinx.datetime.toLocalDateTime
+import maia.dmt.core.designsystem.components.buttons.DmtButtonStyle
 import maia.dmt.core.designsystem.components.cards.DmtCard
 import maia.dmt.core.designsystem.components.cards.DmtCardStyle
+import maia.dmt.core.designsystem.components.dialogs.DmtCustomDialog
 import maia.dmt.core.designsystem.components.layouts.DmtBaseScreen
 import maia.dmt.core.designsystem.components.textFields.DmtSearchTextField
+import maia.dmt.core.designsystem.components.toast.DmtToastMessage
+import maia.dmt.core.designsystem.components.toast.ToastDuration
+import maia.dmt.core.designsystem.components.toast.ToastType
 import maia.dmt.core.designsystem.theme.DmtTheme
 import maia.dmt.core.presentation.util.ObserveAsEvents
+import maia.dmt.core.presentation.util.getCurrentDate
+import maia.dmt.core.presentation.util.getCurrentTime
 import maia.dmt.medication.presentation.model.MedicationUiModel
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.resources.vectorResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.koin.compose.viewmodel.koinViewModel
+import kotlin.time.Clock
+import kotlin.time.Instant
 
 @Composable
 fun AllMedicationRoot(
@@ -52,11 +69,25 @@ fun AllMedicationRoot(
 ) {
 
     val state by viewModel.state.collectAsStateWithLifecycle()
+    var toastMessage by remember { mutableStateOf<String?>(null) }
+    var toastType by remember { mutableStateOf(ToastType.Success) }
 
     ObserveAsEvents(viewModel.events) { event ->
         when (event) {
             is AllMedicationEvent.NavigateBack -> {
                 onNavigateBack()
+            }
+            is AllMedicationEvent.ReportMedicationSuccess -> {
+                toastMessage = "Medication reported successfully!"
+                toastType = ToastType.Success
+            }
+            is AllMedicationEvent.ReportMedicationError -> {
+                toastMessage = event.message ?: "Failed to report medication"
+                toastType = ToastType.Error
+            }
+            is AllMedicationEvent.ReminderMedicationSetupSuccess -> {
+                toastMessage = "Reminder set successfully!"
+                toastType = ToastType.Success
             }
         }
     }
@@ -67,6 +98,15 @@ fun AllMedicationRoot(
         onAction = viewModel::onAction,
     )
 
+    // Show toast when there's a message
+    toastMessage?.let { message ->
+        DmtToastMessage(
+            message = message,
+            type = toastType,
+            duration = ToastDuration.MEDIUM,
+            onDismiss = { toastMessage = null }
+        )
+    }
 }
 
 @Composable
@@ -155,46 +195,33 @@ fun AllMedicationScreen(
             }
         }
     )
-}
 
+    if (isReport && state.showMedicationReportDialog) {
+        val instant = Instant.fromEpochMilliseconds(state.selectedDateTime)
+        val localDateTime = instant.toLocalDateTime(TimeZone.currentSystemDefault())
+        val dateString = getCurrentDate(localDateTime)
+        val timeString = getCurrentTime(localDateTime)
 
-@Composable
-@Preview
-fun AllMedicationPreview() {
-    DmtTheme {
-        AllMedicationScreen(
-            state = AllMedicationState(
-                medications = listOf(
-                    MedicationUiModel(
-                        id = 1,
-                        text = "Aspirin 100mg",
-                        onClick = {},
-                    ),
-                    MedicationUiModel(
-                        id = 2,
-                        text = "Metformin 500mg",
-                        onClick = {}
-                    ),
-                    MedicationUiModel(
-                        id = 3,
-                        text = "Lisinopril 10mg",
-                        onClick = {}
-                    ),
-                    MedicationUiModel(
-                        id = 4,
-                        text = "Atorvastatin 20mg",
-                        onClick = {}
-                    ),
-                    MedicationUiModel(
-                        id = 5,
-                        text = "Levothyroxine 50mcg",
-                        onClick = {}
-                    )
-                ),
-                isLoadingMedications = false,
-                medicationsError = null
-            ),
-            onAction = {}
+        DmtCustomDialog(
+            title = state.selectedMedication?.text ?: "",
+            icon = Res.drawable.medications_icon,
+            description = "${stringResource(Res.string.medication_report_body)}\n$dateString at $timeString",
+            primaryButtonText = stringResource(Res.string.report),
+            secondaryButtonText = stringResource(Res.string.date_and_time),
+            onPrimaryClick = {
+                if (!state.isReportingMedication) {
+                    onAction(AllMedicationAction.OnConfirmReport)
+                }
+                onAction(AllMedicationAction.OnDismissReportDialog)
+            },
+            onSecondaryClick = {
+                onAction(AllMedicationAction.OnDateTimeClick)
+            },
+            onDismiss = {
+                onAction(AllMedicationAction.OnDismissReportDialog)
+            },
+            primaryButtonStyle = DmtButtonStyle.PRIMARY,
+            secondaryButtonStyle = DmtButtonStyle.PRIMARY,
         )
     }
 }

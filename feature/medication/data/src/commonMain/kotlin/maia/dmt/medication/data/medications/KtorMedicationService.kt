@@ -9,6 +9,7 @@ import maia.dmt.core.domain.util.Result
 import maia.dmt.core.domain.util.map
 import maia.dmt.medication.data.dto.MedicationDto
 import maia.dmt.medication.data.mapper.toDomain
+import maia.dmt.medication.data.mapper.toSerial
 import maia.dmt.medication.domain.medications.MedicationService
 import maia.dmt.medication.domain.models.Medication
 import maia.dmt.medication.domain.models.MedicationNotification
@@ -36,7 +37,7 @@ class KtorMedicationService(
 
         return httpClient.post(
             route = "report_medication/",
-            body = body
+            body = body.toSerial()
         )
 
     }

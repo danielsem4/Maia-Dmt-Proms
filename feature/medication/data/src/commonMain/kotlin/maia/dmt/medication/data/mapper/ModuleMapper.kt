@@ -3,6 +3,7 @@ package maia.dmt.medication.data.mapper
 import maia.dmt.medication.data.dto.MedicationDto
 import maia.dmt.medication.data.dto.MedicationReportDto
 import maia.dmt.medication.domain.models.Medication
+import maia.dmt.medication.domain.models.MedicationReport
 
 fun MedicationDto.toDomain(): Medication {
     return Medication(
@@ -20,7 +21,7 @@ fun MedicationDto.toDomain(): Medication {
     )
 }
 
-fun MedicationReportDto.toDomain(): MedicationReportDto {
+fun MedicationReport.toSerial(): MedicationReportDto {
     return MedicationReportDto(
         clinic_id = clinic_id,
         patient_id = patient_id,

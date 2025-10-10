@@ -10,7 +10,7 @@ kotlin {
                 implementation(projects.core.domain)
 
                 implementation(compose.components.resources)
-
+                implementation(libs.kotlinx.datetime)
                 implementation(libs.material3.adaptive)
             }
             androidMain {

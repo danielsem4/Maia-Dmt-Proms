@@ -14,9 +14,11 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.compose.material3.rememberTimePickerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -44,6 +46,8 @@ import maia.dmt.core.designsystem.components.buttons.DmtButtonStyle
 import maia.dmt.core.designsystem.components.cards.DmtCard
 import maia.dmt.core.designsystem.components.cards.DmtCardStyle
 import maia.dmt.core.designsystem.components.dialogs.DmtCustomDialog
+import maia.dmt.core.designsystem.components.dialogs.DmtDatePickerDialog
+import maia.dmt.core.designsystem.components.dialogs.DmtTimePickerDialog
 import maia.dmt.core.designsystem.components.layouts.DmtBaseScreen
 import maia.dmt.core.designsystem.components.textFields.DmtSearchTextField
 import maia.dmt.core.designsystem.components.toast.DmtToastMessage
@@ -109,6 +113,7 @@ fun AllMedicationRoot(
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AllMedicationScreen(
     state: AllMedicationState,
@@ -222,6 +227,46 @@ fun AllMedicationScreen(
             },
             primaryButtonStyle = DmtButtonStyle.PRIMARY,
             secondaryButtonStyle = DmtButtonStyle.PRIMARY,
+        )
+    }
+
+    if (state.showDatePicker) {
+        DmtDatePickerDialog(
+            title = stringResource(Res.string.date_and_time),
+            onDismiss = {
+                onAction(AllMedicationAction.OnDismissDatePicker)
+            },
+            onConfirm = { dateMillis ->
+                onAction(AllMedicationAction.OnDateSelected(dateMillis))
+            },
+            initialDateMillis = state.selectedDateTime
+        )
+    }
+
+    if (state.showTimePicker) {
+        val instant = Instant.fromEpochMilliseconds(state.selectedDateTime)
+        val localDateTime = instant.toLocalDateTime(TimeZone.currentSystemDefault())
+
+        val timePickerState = rememberTimePickerState(
+            initialHour = localDateTime.hour,
+            initialMinute = localDateTime.minute,
+            is24Hour = true
+        )
+
+        DmtTimePickerDialog(
+            state = timePickerState,
+            title = stringResource(Res.string.date_and_time),
+            onDismiss = {
+                onAction(AllMedicationAction.OnDismissTimePicker)
+            },
+            onConfirm = {
+                onAction(
+                    AllMedicationAction.OnTimeSelected(
+                        hour = timePickerState.hour,
+                        minute = timePickerState.minute
+                    )
+                )
+            }
         )
     }
 }

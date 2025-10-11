@@ -35,6 +35,26 @@ kotlin {
             implementation(projects.feature.evaluation.presentation)
             implementation(projects.feature.evaluation.domain)
 
+            implementation(projects.feature.hitber.presentation)
+            implementation(projects.feature.hitber.domain)
+            implementation(projects.feature.hitber.data)
+
+            implementation(projects.feature.cdt.presentation)
+            implementation(projects.feature.cdt.domain)
+            implementation(projects.feature.cdt.data)
+
+            implementation(projects.feature.pass.presentation)
+            implementation(projects.feature.pass.domain)
+            implementation(projects.feature.pass.data)
+
+            implementation(projects.feature.orientation.presentation)
+            implementation(projects.feature.orientation.domain)
+            implementation(projects.feature.orientation.data)
+
+            implementation(projects.feature.memory.presentation)
+            implementation(projects.feature.memory.domain)
+            implementation(projects.feature.memory.data)
+
             implementation(libs.jetbrains.compose.navigation)
             implementation(libs.bundles.koin.common)
 

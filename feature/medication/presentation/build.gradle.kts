@@ -8,7 +8,6 @@ kotlin {
             dependencies {
                 implementation(libs.kotlin.stdlib)
 
-                implementation(libs.kotlin.stdlib)
                 implementation(projects.feature.medication.domain)
                 implementation(projects.core.domain)
                 implementation(projects.core.designsystem)

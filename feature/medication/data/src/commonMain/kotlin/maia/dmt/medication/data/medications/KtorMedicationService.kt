@@ -30,7 +30,6 @@ class KtorMedicationService(
                 "patient_id" to patientId
             )
         ).map { it.map { it.toDomain() } }
-
     }
 
     override suspend fun reportMedication(body: MedicationReport): EmptyResult<DataError.Remote> {

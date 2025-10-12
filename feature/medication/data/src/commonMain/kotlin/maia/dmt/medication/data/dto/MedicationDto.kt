@@ -10,7 +10,7 @@ data class MedicationDto(
     val name: String,
     val form: String,
     val unit: String,
-    val frequency: String,
+    val frequency: String?,
     val frequency_data: String,
     val start_date: String,
     val end_date: String?,

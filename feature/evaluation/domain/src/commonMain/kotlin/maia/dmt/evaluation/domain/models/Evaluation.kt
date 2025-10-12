@@ -1,5 +1,8 @@
 package maia.dmt.evaluation.domain.models
 
+import kotlinx.serialization.Serializable
+
+@Serializable
 data class Evaluation(
     val id: Int,
     val measurement_name: String,

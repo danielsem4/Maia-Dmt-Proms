@@ -18,6 +18,7 @@ import maia.dmt.core.presentation.util.UiText
 import maia.dmt.core.presentation.util.toUiText
 import maia.dmt.evaluation.domain.evaluations.EvaluationService
 import maia.dmt.evaluation.domain.models.Evaluation
+import maia.dmt.evaluation.presentation.evaluation.EvaluationEvent
 
 class AllEvaluationsViewModel(
     private val evaluationService: EvaluationService,
@@ -46,7 +47,7 @@ class AllEvaluationsViewModel(
         when (action) {
 
             is AllEvaluationsAction.OnBackClick -> { navigateBack() }
-            is AllEvaluationsAction.OnEvaluationClick -> { handleEvaluationClickById(action.evaluationId) }
+            is AllEvaluationsAction.OnEvaluationClick -> { handleEvaluationClickById(action.evaluation) }
             is AllEvaluationsAction.OnSearchQueryChange -> {
                 _state.update {
                     it.copy(
@@ -125,9 +126,11 @@ class AllEvaluationsViewModel(
         }
     }
 
-    fun handleEvaluationClickById(evaluationId: Int) {
-        println("Evaluation clicked! $evaluationId")
-
+    fun handleEvaluationClickById(evaluation: Evaluation) {
+        println("Evaluation clicked! $evaluation")
+        viewModelScope.launch {
+            eventChannel.send(AllEvaluationsEvent.NavigateToSelectedEvaluation(evaluation.id))
+        }
     }
 
     private fun navigateBack() {

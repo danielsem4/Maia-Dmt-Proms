@@ -1,14 +1,11 @@
 package maia.dmt.evaluation.presentation.allEvaluations
 
+import maia.dmt.evaluation.domain.models.Evaluation
+
 interface AllEvaluationsAction {
 
     data object OnBackClick: AllEvaluationsAction
-    data class OnEvaluationClick(val evaluationId: Int): AllEvaluationsAction
+    data class OnEvaluationClick(val evaluation: Evaluation): AllEvaluationsAction
     data class OnSearchQueryChange(val query: String): AllEvaluationsAction
-
-//    data object OnEvaluationReportClick: AllEvaluationsAction
-//
-//    data object OnEvaluationNextClick: AllEvaluationsAction
-//    data object OnEvaluationPreviousClick: AllEvaluationsAction
 
 }

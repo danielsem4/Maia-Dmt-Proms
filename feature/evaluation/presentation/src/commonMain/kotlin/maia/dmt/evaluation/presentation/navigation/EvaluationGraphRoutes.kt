@@ -1,6 +1,7 @@
 package maia.dmt.evaluation.presentation.navigation
 
 import kotlinx.serialization.Serializable
+import maia.dmt.evaluation.domain.models.Evaluation
 
 interface EvaluationGraphRoutes {
 
@@ -11,6 +12,6 @@ interface EvaluationGraphRoutes {
     data object AllEvaluations: EvaluationGraphRoutes
 
     @Serializable
-    data object Evaluation: EvaluationGraphRoutes
+    data class SelectedEvaluation(val evaluationId: Int): EvaluationGraphRoutes
 
 }

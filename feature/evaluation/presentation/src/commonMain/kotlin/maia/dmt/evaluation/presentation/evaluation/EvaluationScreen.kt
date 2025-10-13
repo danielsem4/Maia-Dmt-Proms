@@ -14,6 +14,7 @@ import dmtproms.feature.evaluation.presentation.generated.resources.back_arrow_i
 import dmtproms.feature.evaluation.presentation.generated.resources.evaluation
 import maia.dmt.core.designsystem.components.layouts.DmtBaseScreen
 import maia.dmt.core.designsystem.components.scale.DmtScaleSlider
+import maia.dmt.core.designsystem.components.select.DmtHumanBodyLayout
 import maia.dmt.core.designsystem.components.toast.DmtToastMessage
 import maia.dmt.core.designsystem.components.toast.ToastDuration
 import maia.dmt.core.designsystem.components.toast.ToastType
@@ -76,16 +77,9 @@ fun EvaluationScreen(
         onIconClick = { onAction(EvaluationAction.OnBackClick) },
         content = {
             DmtEvaluationLayout {
-                DmtScaleSlider(
-                    startValue = 0,
-                    endValue = 10,
-                    step = 1,
-                    startText = "not in pain",
-                    endText = "in pain",
-                    initialValue = 6,
-                    onValueChange = { value ->
-                        painValue = value
-                        println("Pain level: $value")
+                DmtHumanBodyLayout(
+                    onPainAreasChanged = { selections ->
+                        println("Pain selections: $selections")
                     }
                 )
             }

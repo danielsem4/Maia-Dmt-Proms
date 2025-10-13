@@ -9,7 +9,6 @@ kotlin {
                 implementation(libs.kotlin.stdlib)
 
                 implementation(libs.kotlin.stdlib)
-                implementation(projects.feature.graphs.domain)
                 implementation(projects.core.domain)
                 implementation(projects.core.designsystem)
                 implementation(projects.core.presentation)

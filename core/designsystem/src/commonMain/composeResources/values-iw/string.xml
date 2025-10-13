@@ -2,4 +2,5 @@
 <resources>
     <string name="hide_password">הסתר סיסמה</string>
     <string name="show_password">הצג סיסמה</string>
+    <string name="dismiss_dialog">סגור דיאלוג</string>
 </resources>

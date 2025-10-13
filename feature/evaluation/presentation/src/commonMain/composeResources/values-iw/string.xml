@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="evaluation">הערכה</string>
+    <string name="next">הבא</string>
+    <string name="prev">הקודם</string>
+    <string name="finish">סיום</string>
+
+    <string name="no_evaluations_found_matching">לא נמצאו הערכות תואמות</string>
+    <string name="no_evaluations_found">לא נמצאו הערכות</string>
+    <string name="evaluation_uploaded_successfully">ההערכה הועלתה בהצלחה</string>
+    <string name="evaluation_upload_failed">העלאת ההערכה נכשלה</string>
+
+    <string name="search">חיפוש</string>
+
+</resources>

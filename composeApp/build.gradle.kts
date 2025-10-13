@@ -34,6 +34,7 @@ kotlin {
 
             implementation(projects.feature.evaluation.presentation)
             implementation(projects.feature.evaluation.domain)
+            implementation(projects.feature.evaluation.data)
 
             implementation(libs.jetbrains.compose.navigation)
             implementation(libs.bundles.koin.common)

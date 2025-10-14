@@ -11,10 +11,12 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import dmtproms.core.designsystem.generated.resources.Res
+import dmtproms.core.designsystem.generated.resources.arrow_left_icon
 import dmtproms.core.designsystem.generated.resources.log_out_icon
 import maia.dmt.core.designsystem.theme.DmtTheme
 import maia.dmt.core.presentation.util.DeviceConfiguration
 import maia.dmt.core.presentation.util.currentDeviceConfiguration
+import org.jetbrains.compose.resources.imageResource
 import org.jetbrains.compose.resources.vectorResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
@@ -22,7 +24,7 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 fun DmtBaseScreen(
     modifier: Modifier = Modifier,
     titleText: String = "Screen",
-    iconBar: ImageVector? = null,
+    iconBar: ImageVector? = vectorResource(Res.drawable.arrow_left_icon),
     onIconClick: (() -> Unit)? = null,
     textBar: String? = null,
 //    screenOrientation: ScreenOrientation = ScreenOrientation.UNSPECIFIED,

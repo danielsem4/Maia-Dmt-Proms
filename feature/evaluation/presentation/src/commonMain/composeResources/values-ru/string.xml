@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="evaluation">Оценка</string>
-    <string name="next">Далее</string>
-    <string name="prev">Назад</string>
-    <string name="finish">Готово</string>
+    <string name="evaluation_headline">Оценка</string>
+    <string name="evaluation_next">Далее</string>
+    <string name="evaluation_prev">Назад</string>
+    <string name="evaluation_finish">Готово</string>
 
     <string name="no_evaluations_found_matching">Подходящих оценок не найдено</string>
     <string name="no_evaluations_found">Оценок не найдено</string>
     <string name="evaluation_uploaded_successfully">Оценка успешно загружена</string>
     <string name="evaluation_upload_failed">Не удалось загрузить оценку</string>
 
-    <string name="search">Search</string>
+    <string name="evaluation_search">Search</string>
 </resources>

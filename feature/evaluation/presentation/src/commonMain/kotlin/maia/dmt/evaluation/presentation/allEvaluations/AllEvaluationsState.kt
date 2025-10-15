@@ -1,7 +1,7 @@
 package maia.dmt.evaluation.presentation.allEvaluations
 
 import maia.dmt.core.presentation.util.UiText
-import maia.dmt.evaluation.domain.models.Evaluation
+import maia.dmt.core.domain.dto.evaluation.Evaluation
 
 data class AllEvaluationsState(
     val searchQuery: String = "",

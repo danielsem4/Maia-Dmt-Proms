@@ -31,7 +31,7 @@ fun NavGraphBuilder.evaluationGraph(
                 onNavigateBack = {
                     navController.navigateUp()
                 },
-                evaluationId = args.evaluationId
+                evaluationString = args.evaluationString
             )
         }
 

@@ -1,6 +1,6 @@
 package maia.dmt.evaluation.presentation.allEvaluations
 
-import maia.dmt.evaluation.domain.models.Evaluation
+import maia.dmt.core.domain.dto.evaluation.Evaluation
 
 interface AllEvaluationsAction {
 

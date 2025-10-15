@@ -42,7 +42,7 @@ import org.koin.compose.viewmodel.koinViewModel
 fun AllEvaluationsRoot(
     viewModel: AllEvaluationsViewModel = koinViewModel(),
     onNavigateBack: () -> Unit,
-    onNavigateToSelectedEvaluation: (Int) -> Unit
+    onNavigateToSelectedEvaluation: (String) -> Unit
 ) {
 
     val state by viewModel.state.collectAsStateWithLifecycle()
@@ -55,7 +55,7 @@ fun AllEvaluationsRoot(
                 onNavigateBack()
             }
             is AllEvaluationsEvent.NavigateToSelectedEvaluation -> {
-                onNavigateToSelectedEvaluation(event.evaluationId)
+                onNavigateToSelectedEvaluation(event.evaluationString)
             }
         }
     }

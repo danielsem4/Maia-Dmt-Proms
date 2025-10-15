@@ -23,7 +23,7 @@ import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
 fun EvaluationRoot(
-    evaluationId: Int,
+    evaluationString: String,
     viewModel: EvaluationViewModel = koinViewModel(),
     onNavigateBack: () -> Unit,
 ) {
@@ -31,6 +31,8 @@ fun EvaluationRoot(
     val state by viewModel.state.collectAsStateWithLifecycle()
     var toastMessage by remember { mutableStateOf<String?>(null) }
     var toastType by remember { mutableStateOf(ToastType.Success) }
+
+    viewModel.initialize(evaluationString)
 
     ObserveAsEvents(viewModel.events) { event ->
         when(event) {
@@ -66,7 +68,7 @@ fun EvaluationScreen(
             stringResource(Res.string.evaluation_headline),
         onIconClick = { onAction(EvaluationAction.OnBackClick) },
         content = {
-            DmtEvaluationLayout {
+            DmtEvaluationLayout() {
                 DmtHumanBodyLayout()
             }
         }

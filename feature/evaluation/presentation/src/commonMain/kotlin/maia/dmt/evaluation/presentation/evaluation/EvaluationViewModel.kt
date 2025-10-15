@@ -5,12 +5,18 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import maia.dmt.core.domain.auth.SessionStorage
-import maia.dmt.evaluation.domain.evaluation.EvaluationService
+import maia.dmt.core.domain.evaluation.EvaluationService
+import maia.dmt.core.domain.util.onFailure
+import maia.dmt.core.domain.util.onSuccess
+import maia.dmt.core.presentation.util.UiText
+import maia.dmt.core.presentation.util.toUiText
 
 
 class EvaluationViewModel(
@@ -22,6 +28,7 @@ class EvaluationViewModel(
     private val eventChannel = Channel<EvaluationEvent>()
     val events = eventChannel.receiveAsFlow()
 
+    private var selectedEvaluationName: String = ""
     private var hasLoadedInitialData = false
     val state = _state
         .onStart {
@@ -38,7 +45,6 @@ class EvaluationViewModel(
 
     fun onAction(action: EvaluationAction) {
         when (action) {
-
             is EvaluationAction.OnBackClick -> { navigateBack() }
             is EvaluationAction.OnEvaluationNextClick -> { handleEvaluationNextClick() }
             is EvaluationAction.OnEvaluationPreviousClick -> { handleEvaluationPreviousClick() }
@@ -46,6 +52,66 @@ class EvaluationViewModel(
             else -> {}
         }
     }
+
+    fun initialize(evaluationName: String) {
+        if (selectedEvaluationName == "") {
+            selectedEvaluationName = evaluationName
+            loadEvaluation()
+        }
+    }
+
+    private fun loadEvaluation() {
+        viewModelScope.launch {
+            _state.update {
+                it.copy(isLoadingEvaluationUpload = true)
+            }
+
+            val authInfo = sessionStorage.observeAuthInfo().firstOrNull()
+
+            if (authInfo == null) {
+                _state.update {
+                    it.copy(
+                        isLoadingEvaluationUpload = false,
+                        evaluationError = UiText.DynamicString("Session not found.")
+                    )
+                }
+                return@launch
+            }
+
+            val clinicId = authInfo.user?.clinicId
+            val patientId = authInfo.user?.id
+
+            if (clinicId == null || patientId == null || selectedEvaluationName == "") {
+                _state.update {
+                    it.copy(
+                        isLoadingEvaluationUpload = false,
+                        evaluationError = UiText.DynamicString("No clinic/patient ID found.")
+                    )
+                }
+                return@launch
+            }
+
+            evaluationService.getEvaluation(clinicId, patientId, selectedEvaluationName)
+                .onSuccess { evaluation ->
+                    _state.update {
+                        it.copy(
+                            evaluation = evaluation,
+                            isLoadingEvaluationUpload = false,
+                            evaluationError = null
+                        )
+                    }
+                }
+                .onFailure { error ->
+                    _state.update {
+                        it.copy(
+                            isLoadingEvaluationUpload = false,
+                            evaluationError = error.toUiText()
+                        )
+                    }
+                }
+        }
+    }
+
 
     private fun handleEvaluationNextClick() {
 

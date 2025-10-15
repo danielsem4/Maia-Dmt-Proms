@@ -11,6 +11,6 @@ interface EvaluationGraphRoutes {
     data object AllEvaluations: EvaluationGraphRoutes
 
     @Serializable
-    data class SelectedEvaluation(val evaluationId: Int): EvaluationGraphRoutes
+    data class SelectedEvaluation(val evaluationString: String): EvaluationGraphRoutes
 
 }

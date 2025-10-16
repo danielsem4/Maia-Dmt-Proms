@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="activities_title">Activities</string>
+    <string name="activities_instruction">Please choose your activity</string>
+
+    <string name="activities_dialog_body">I made the activity</string>
+    <string name="activities_dialog_body_date">At:</string>
+
+    <string name="activities_report">Report</string>
+    <string name="activities_date_and_time">Date &amp; Time</string>
+
+
+</resources>

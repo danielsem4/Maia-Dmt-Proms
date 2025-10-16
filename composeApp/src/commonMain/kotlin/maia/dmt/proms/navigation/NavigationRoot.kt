@@ -3,6 +3,8 @@ package maia.dmt.proms.navigation
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
+import maia.dmt.activities.presentation.navigation.ActivitiesGraphRoutes
+import maia.dmt.activities.presentation.navigation.activitiesGraph
 import maia.dmt.auth.presentation.navigation.AuthGraphRoutes
 import maia.dmt.auth.presentation.navigation.authGraph
 import maia.dmt.evaluation.presentation.navigation.EvaluationGraphRoutes
@@ -44,6 +46,8 @@ fun NavigationRoot(
                 when (it) {
                     7 -> navController.navigate(MedicationsGraphRoutes.Graph)
                     4 -> navController.navigate(EvaluationGraphRoutes.Graph)
+                    8 -> navController.navigate(ActivitiesGraphRoutes.Graph)
+                    else -> {}
                 }
             },
         )
@@ -55,5 +59,8 @@ fun NavigationRoot(
             navController = navController
         )
 
+        activitiesGraph(
+            navController = navController
+        )
     }
 }

@@ -8,5 +8,4 @@ import org.koin.dsl.module
 val medicationPresentationModule = module {
     viewModelOf(::AllMedicationViewModel)
     viewModelOf(::MedicationViewModel)
-
 }

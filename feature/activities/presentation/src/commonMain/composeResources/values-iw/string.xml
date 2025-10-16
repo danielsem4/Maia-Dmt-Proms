@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="activities_title">פעילויות</string>
+    <string name="activities_instruction">אנא בחר את הפעילות שלך</string>
+
+    <string name="activities_dialog_body">ביצעתי את הפעילות</string>
+    <string name="activities_dialog_body_date">בתאריך:</string>
+
+    <string name="activities_report">דיווח</string>
+    <string name="activities_date_and_time">תאריך ושעה</string>
+
+</resources>

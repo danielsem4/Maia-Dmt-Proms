@@ -5,6 +5,8 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import maia.dmt.auth.presentation.navigation.AuthGraphRoutes
 import maia.dmt.auth.presentation.navigation.authGraph
+import maia.dmt.evaluation.presentation.navigation.EvaluationGraphRoutes
+import maia.dmt.evaluation.presentation.navigation.evaluationGraph
 import maia.dmt.home.presentation.navigation.HomeGraphRoutes
 import maia.dmt.home.presentation.navigation.homeGraph
 import maia.dmt.medication.presentation.navigation.MedicationsGraphRoutes
@@ -41,11 +43,17 @@ fun NavigationRoot(
             onModuleClicked = {
                 when (it) {
                     7 -> navController.navigate(MedicationsGraphRoutes.Graph)
+                    4 -> navController.navigate(EvaluationGraphRoutes.Graph)
                 }
             },
         )
         medicationGraph(
             navController = navController
         )
+
+        evaluationGraph(
+            navController = navController
+        )
+
     }
 }

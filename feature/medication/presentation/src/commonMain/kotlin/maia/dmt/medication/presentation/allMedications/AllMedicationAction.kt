@@ -3,7 +3,7 @@ package maia.dmt.medication.presentation.allMedications
 import maia.dmt.medication.presentation.medications.MedicationAction
 
 interface AllMedicationAction {
-    data class OnMedicationClick(val medicationId: Int): AllMedicationAction
+    data class OnMedicationClick(val medicationId: String): AllMedicationAction
     data class OnSearchQueryChange(val query: String): AllMedicationAction
     data object OnBackClick: AllMedicationAction
     data object OnMedicationReportClick: AllMedicationAction

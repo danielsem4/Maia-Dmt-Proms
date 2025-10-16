@@ -18,6 +18,8 @@ import maia.dmt.core.presentation.util.DeviceConfiguration
 import maia.dmt.core.presentation.util.currentDeviceConfiguration
 import maia.dmt.home.presentation.module.ModuleUiModel
 import org.jetbrains.compose.ui.tooling.preview.Preview
+import kotlin.math.ceil
+
 @Composable
 fun DmtModuleSection(
     modifier: Modifier = Modifier,
@@ -26,10 +28,10 @@ fun DmtModuleSection(
     val configuration = currentDeviceConfiguration()
 
     val columnCount = when (configuration) {
-        DeviceConfiguration.MOBILE_PORTRAIT -> 3
-        DeviceConfiguration.MOBILE_LANDSCAPE -> 4
-        DeviceConfiguration.TABLET_PORTRAIT -> 4
-        DeviceConfiguration.TABLET_LANDSCAPE -> 5
+        DeviceConfiguration.MOBILE_PORTRAIT -> 2
+        DeviceConfiguration.MOBILE_LANDSCAPE -> 3
+        DeviceConfiguration.TABLET_PORTRAIT -> 3
+        DeviceConfiguration.TABLET_LANDSCAPE -> 4
         DeviceConfiguration.DESKTOP -> 6
     }
 
@@ -41,10 +43,29 @@ fun DmtModuleSection(
         DeviceConfiguration.DESKTOP -> 20.dp
     }
 
+    val maxVisibleRows = when (configuration) {
+        DeviceConfiguration.MOBILE_PORTRAIT -> 3
+        DeviceConfiguration.MOBILE_LANDSCAPE -> 2
+        DeviceConfiguration.TABLET_PORTRAIT -> 3
+        DeviceConfiguration.TABLET_LANDSCAPE -> 3
+        DeviceConfiguration.DESKTOP -> 5
+    }
+
+    val totalRows = ceil(modules.size.toFloat() / columnCount).toInt()
+    val shouldConstrainHeight = totalRows > maxVisibleRows
+
+    val estimatedCardHeight = 100.dp
+
+    val maxHeight = if (shouldConstrainHeight) {
+        (estimatedCardHeight * maxVisibleRows) + (spacing * (maxVisibleRows - 1))
+    } else {
+        null
+    }
+
     Box(
         modifier = modifier
             .fillMaxWidth()
-            .padding(16.dp)
+            .padding(horizontal = 16.dp)
     ) {
         if (modules.isEmpty()) {
             Text(
@@ -60,7 +81,14 @@ fun DmtModuleSection(
                 verticalArrangement = Arrangement.spacedBy(spacing),
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(8.dp)
+                    .then(
+                        if (maxHeight != null) {
+                            Modifier.height(maxHeight)
+                        } else {
+                            Modifier
+                        }
+                    )
+                    .padding(vertical = 8.dp)
             ) {
                 items(modules) { module ->
                     DmtIconCard(
@@ -78,55 +106,70 @@ fun DmtModuleSection(
 @Preview
 fun DmtModuleSectionPreview() {
     DmtTheme {
-            DmtModuleSection(
-                modules = listOf(
-                    ModuleUiModel(
-                        icon = Res.drawable.memory_icon,
-                        text = "Home",
-                        onClick = { }
-                    ),
-                    ModuleUiModel(
-                        icon = Res.drawable.memory_icon,
-                        text = "Profile",
-                        onClick = { }
-                    ),
-                    ModuleUiModel(
-                        icon = Res.drawable.memory_icon,
-                        text = "Settings",
-                        onClick = { }
-                    ),
-                    ModuleUiModel(
-                        icon = Res.drawable.memory_icon,
-                        text = "Notifications",
-                        onClick = { }
-                    ),
-                    ModuleUiModel(
-                        icon = Res.drawable.memory_icon,
-                        text = "Search",
-                        onClick = { }
-                    ),
-                    ModuleUiModel(
-                        icon = Res.drawable.memory_icon,
-                        text = "Favorites",
-                        onClick = { }
-                    ),
-                    ModuleUiModel(
-                        icon = Res.drawable.memory_icon,
-                        text = "Messages",
-                        onClick = { }
-                    ),
-                    ModuleUiModel(
-                        icon = Res.drawable.memory_icon,
-                        text = "Cart",
-                        onClick = { }
-                    ),
-                    ModuleUiModel(
-                        icon = Res.drawable.memory_icon,
-                        text = "Account",
-                        onClick = { }
-                    )
+        DmtModuleSection(
+            modules = listOf(
+                ModuleUiModel(
+                    icon = Res.drawable.memory_icon,
+                    text = "Home",
+                    onClick = { }
+                ),
+                ModuleUiModel(
+                    icon = Res.drawable.memory_icon,
+                    text = "Profile",
+                    onClick = { }
+                ),
+                ModuleUiModel(
+                    icon = Res.drawable.memory_icon,
+                    text = "Settings",
+                    onClick = { }
+                ),
+                ModuleUiModel(
+                    icon = Res.drawable.memory_icon,
+                    text = "Notifications",
+                    onClick = { }
+                ),
+                ModuleUiModel(
+                    icon = Res.drawable.memory_icon,
+                    text = "Search",
+                    onClick = { }
+                ),
+                ModuleUiModel(
+                    icon = Res.drawable.memory_icon,
+                    text = "Favorites",
+                    onClick = { }
+                ),
+                ModuleUiModel(
+                    icon = Res.drawable.memory_icon,
+                    text = "Messages",
+                    onClick = { }
+                ),
+                ModuleUiModel(
+                    icon = Res.drawable.memory_icon,
+                    text = "Cart",
+                    onClick = { }
+                ),
+                ModuleUiModel(
+                    icon = Res.drawable.memory_icon,
+                    text = "Account",
+                    onClick = { }
+                ),
+                ModuleUiModel(
+                    icon = Res.drawable.memory_icon,
+                    text = "History",
+                    onClick = { }
+                ),
+                ModuleUiModel(
+                    icon = Res.drawable.memory_icon,
+                    text = "Support",
+                    onClick = { }
+                ),
+                ModuleUiModel(
+                    icon = Res.drawable.memory_icon,
+                    text = "About",
+                    onClick = { }
                 )
             )
+        )
     }
 }
 

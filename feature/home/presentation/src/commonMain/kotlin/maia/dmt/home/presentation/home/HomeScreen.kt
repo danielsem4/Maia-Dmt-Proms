@@ -27,6 +27,9 @@ import maia.dmt.core.designsystem.theme.DmtTheme
 import maia.dmt.core.presentation.util.ObserveAsEvents
 import maia.dmt.home.presentation.components.DmtMessageSection
 import maia.dmt.home.presentation.components.DmtModuleSection
+// Import the new data models
+import maia.dmt.home.presentation.components.Message
+import maia.dmt.home.presentation.components.MessageType
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.resources.vectorResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
@@ -79,8 +82,8 @@ fun HomeScreen(
                 DmtMessageSection(
                     title = stringResource(Res.string.messages),
                     messages = listOf(
-                        "Don't forget take your test.",
-                        "Take 2 pills at 12:00"
+                        Message("Take 2 pills at 12:00", MessageType.MESSAGE),
+                        Message("Your results from Oct 15 are ready.", MessageType.INFO)
                     ),
                     modifier = Modifier.weight(weight = 0.4f)
                 )
@@ -98,7 +101,6 @@ fun HomeScreen(
         }
     )
 
-    // Logout Confirmation Dialog
     if (state.showLogoutDialog) {
         DmtConfirmationDialog(
             title = "Logout",

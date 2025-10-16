@@ -4,7 +4,7 @@ import org.jetbrains.compose.resources.DrawableResource
 
 data class MedicationUiModel(
     val text: String,
-    val id: Int,
+    val id: String,
     val onClick: () -> Unit,
     val icon: DrawableResource? = null
 )

@@ -108,7 +108,7 @@ class AllMedicationViewModel(
                     val medicationUiModels = medications.map { medication ->
                         MedicationUiModel(
                             text = medication.name,
-                            id = medication.id,
+                            id = medication.medicine_id,
                             onClick = { handleMedicationClick(medication) }
                         )
                     }
@@ -137,7 +137,7 @@ class AllMedicationViewModel(
         println("Medication clicked: ${medication.name}")
     }
 
-    private fun handleMedicationClickById(medicationId: Int) {
+    private fun handleMedicationClickById(medicationId: String) {
         val medication = _state.value.allMedications.find { it.id == medicationId }
         println("Medication clicked: ${medication?.text}")
 

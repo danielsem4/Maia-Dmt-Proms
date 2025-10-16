@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="evaluation_headline">Evaluation</string>
+    <string name="evaluation_next">Next</string>
+    <string name="evaluation_prev">Prev</string>
+    <string name="evaluation_finish">Finish</string>
+
+    <string name="no_evaluations_found_matching">No evaluations found matching</string>
+    <string name="no_evaluations_found">No evaluations found</string>
+    <string name="evaluation_uploaded_successfully">Evaluation uploaded successfully</string>
+    <string name="evaluation_upload_failed">Evaluation upload failed</string>
+
+    <string name="evaluation_search">Search</string>
+
+
+</resources>

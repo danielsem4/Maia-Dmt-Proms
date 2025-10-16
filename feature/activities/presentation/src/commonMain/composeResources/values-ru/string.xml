@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="activities_title">Активности</string>
+    <string name="activities_instruction">Пожалуйста, выберите свою активность</string>
+
+    <string name="activities_dialog_body">Я выполнил(а) активность</string>
+    <string name="activities_dialog_body_date">В:</string>
+
+    <string name="activities_report">Отчёт</string>
+    <string name="activities_date_and_time">Дата и время</string>
+
+</resources>

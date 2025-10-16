@@ -7,6 +7,5 @@ data class EvaluationState(
     val evaluation: Evaluation? = null,
     val isLoadingEvaluationUpload: Boolean = false,
     val evaluationError: UiText? = null,
-    val isNextButtonPressed : Boolean = false,
-    val isPreviousButtonPressed : Boolean = false,
+    val currentScreenIndex: Int = 1
     )

@@ -12,11 +12,13 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import maia.dmt.core.domain.auth.SessionStorage
+import maia.dmt.core.domain.dto.evaluation.EvaluationObject
 import maia.dmt.core.domain.evaluation.EvaluationService
 import maia.dmt.core.domain.util.onFailure
 import maia.dmt.core.domain.util.onSuccess
 import maia.dmt.core.presentation.util.UiText
 import maia.dmt.core.presentation.util.toUiText
+import maia.dmt.evaluation.presentation.model.EvaluationAnswer
 
 
 class EvaluationViewModel(
@@ -30,6 +32,8 @@ class EvaluationViewModel(
 
     private var selectedEvaluationName: String = ""
     private var hasLoadedInitialData = false
+
+    private val answers = mutableMapOf<Int, String>()
     val state = _state
         .onStart {
             if (!hasLoadedInitialData) {
@@ -49,7 +53,9 @@ class EvaluationViewModel(
             is EvaluationAction.OnEvaluationNextClick -> { handleEvaluationNextClick() }
             is EvaluationAction.OnEvaluationPreviousClick -> { handleEvaluationPreviousClick() }
             is EvaluationAction.OnEvaluationReportClick -> { uploadEvaluationResults() }
-            else -> {}
+            is EvaluationAction.OnAnswerChanged -> {
+                answers[action.questionId] = action.answer
+            }
         }
     }
 
@@ -114,15 +120,57 @@ class EvaluationViewModel(
 
 
     private fun handleEvaluationNextClick() {
+        val currentEvaluation = _state.value.evaluation ?: return
+        val maxScreen = currentEvaluation.measurement_objects.maxOfOrNull { it.measurement_screen } ?: return
 
+        val currentScreen = _state.value.currentScreenIndex
+
+        if (currentScreen < maxScreen) {
+            _state.update {
+                it.copy(currentScreenIndex = currentScreen + 1)
+            }
+        } else {
+            uploadEvaluationResults()
+        }
     }
 
     private fun handleEvaluationPreviousClick() {
+        val currentScreen = _state.value.currentScreenIndex
 
+        if (currentScreen > 1) {
+            _state.update {
+                it.copy(currentScreenIndex = currentScreen - 1)
+            }
+        }
     }
 
-    private fun  uploadEvaluationResults() {
+    private fun uploadEvaluationResults() {
+        viewModelScope.launch {
+            _state.update { it.copy(isLoadingEvaluationUpload = true) }
 
+            val evaluationAnswers = answers.map { (questionId, answer) ->
+                EvaluationAnswer(questionId = questionId, value = answer)
+            }
+
+            // API to upload evaluationAnswers
+
+            _state.update { it.copy(isLoadingEvaluationUpload = false) }
+
+            eventChannel.send(EvaluationEvent.NavigateBack)
+        }
+    }
+
+    fun getCurrentScreenQuestions(): List<EvaluationObject> {
+        val evaluation = _state.value.evaluation ?: return emptyList()
+        val currentScreen = _state.value.currentScreenIndex
+
+        return evaluation.measurement_objects
+            .filter { it.measurement_screen == currentScreen }
+            .sortedWith(compareBy({ it.measurement_screen }, { it.measurement_order }))
+    }
+
+    fun getAnswer(questionId: Int): String {
+        return answers[questionId] ?: ""
     }
 
 

@@ -2,7 +2,9 @@ package maia.dmt.home.presentation.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
@@ -11,16 +13,53 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import maia.dmt.core.designsystem.theme.DmtTheme
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
+enum class MessageType {
+    INFO, REMINDER, MESSAGE
+}
+
+data class Message(
+    val text: String,
+    val type: MessageType
+)
+
+
+@Composable
+fun MessageSlot(message: Message) {
+
+    val backgroundColor = when (message.type) {
+        MessageType.INFO -> Color(0xFFD6EAF8)
+        MessageType.REMINDER -> Color(0xFFFADBD8)
+        MessageType.MESSAGE -> Color(0xFFD5F5E3)
+    }
+
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .clip(RoundedCornerShape(24.dp))
+            .background(backgroundColor)
+            .padding(horizontal = 16.dp, vertical = 12.dp),
+        contentAlignment = Alignment.CenterStart
+    ) {
+        Text(
+            text = message.text,
+            style = MaterialTheme.typography.bodyLarge,
+            color = MaterialTheme.colorScheme.onSurface,
+        )
+    }
+}
+
+
 @Composable
 fun DmtMessageSection(
     modifier: Modifier = Modifier,
     title: String = "Title",
-    messages: List<String> = emptyList()
+    messages: List<Message> = emptyList()
 ) {
     Card(
         modifier = modifier
@@ -35,7 +74,6 @@ fun DmtMessageSection(
         Column(
             modifier = Modifier.fillMaxWidth()
         ) {
-            // Header
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -52,45 +90,30 @@ fun DmtMessageSection(
                 )
             }
 
-            // Messages List
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(24.dp),
+                    .padding(horizontal = 24.dp, vertical = 12.dp)
+                    .verticalScroll(rememberScrollState()),
                 verticalArrangement = Arrangement.spacedBy(12.dp)
             ) {
                 if (messages.isEmpty()) {
                     Text(
                         text = "No messages",
                         style = MaterialTheme.typography.bodyLarge,
-                        color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f)
+                        color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f),
+                        modifier = Modifier.align(Alignment.CenterHorizontally)
                     )
                 } else {
                     messages.forEach { message ->
-                        Row(
-                            modifier = Modifier.fillMaxWidth(),
-                            horizontalArrangement = Arrangement.Start,
-                            verticalAlignment = Alignment.Top
-                        ) {
-                            Text(
-                                text = "• ",
-                                style = MaterialTheme.typography.bodyLarge,
-                                color = MaterialTheme.colorScheme.onSurface,
-                                fontWeight = FontWeight.Bold
-                            )
-                            Text(
-                                text = message,
-                                style = MaterialTheme.typography.bodyLarge,
-                                color = MaterialTheme.colorScheme.onSurface,
-                                modifier = Modifier.weight(1f)
-                            )
-                        }
+                        MessageSlot(message = message)
                     }
                 }
             }
         }
     }
 }
+
 
 @Composable
 @Preview
@@ -104,8 +127,10 @@ fun DmtMessageSectionPreview() {
             DmtMessageSection(
                 title = "Messages",
                 messages = listOf(
-                    "Don't forget take your test.",
-                    "Take 2 pills at 12:00"
+                    Message("Your lab results are available.", MessageType.INFO),
+                    Message("Reminder: Doctor's appointment tomorrow at 10:00 AM.", MessageType.REMINDER),
+                    Message("Take 2 pills with your breakfast.", MessageType.MESSAGE),
+                    Message("A new health article is available for you.", MessageType.INFO)
                 )
             )
         }

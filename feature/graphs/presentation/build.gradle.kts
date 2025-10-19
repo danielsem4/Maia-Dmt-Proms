@@ -18,6 +18,7 @@ kotlin {
                 implementation(compose.components.uiToolingPreview)
 
                 implementation(libs.bundles.koin.common)
+                implementation(libs.bundles.visco.common)
             }
         }
 

@@ -48,6 +48,7 @@ coil-network = "3.3.0"
 moko = "0.19.1"
 buildkonfig = "0.17.1"
 kermit = "2.0.6"
+vico = "2.0.0-alpha.22"
 
 projectApplicationId = "maia.dmt.proms"
 projectVersionName = "1.0"
@@ -139,6 +140,10 @@ moko-permissions-notifications = { module = "dev.icerock.moko:permissions-notifi
 # Logging
 touchlab-kermit = { module = "co.touchlab:kermit", version.ref = "kermit" }
 
+# Graphs
+vico-core = { module = "com.patrykandpatrick.vico:core", version.ref = "vico" }
+vico-compose-m3 = { module = "com.patrykandpatrick.vico:compose-m3", version.ref = "vico" }
+
 android-desugarJdkLibs = { module = "com.android.tools:desugar_jdk_libs", version.ref = "androidDesugarJdkLibs" }
 android-gradlePlugin = { group = "com.android.tools.build", name = "gradle", version.ref = "agp" }
 android-tools-common = { group = "com.android.tools", name = "common", version.ref = "androidTools" }
@@ -216,4 +221,9 @@ ktor-common = [
     "ktor-serialization-kotlinx-json",
     "ktor-client-auth",
     "ktor-client-logging"
+]
+
+visco-common = [
+    "vico-core",
+    "vico-compose-m3"
 ]

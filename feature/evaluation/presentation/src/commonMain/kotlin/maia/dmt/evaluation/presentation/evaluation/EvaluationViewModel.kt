@@ -33,7 +33,6 @@ class EvaluationViewModel(
     private var selectedEvaluationName: String = ""
     private var hasLoadedInitialData = false
 
-    private val answers = mutableMapOf<Int, String>()
     val state = _state
         .onStart {
             if (!hasLoadedInitialData) {
@@ -54,7 +53,11 @@ class EvaluationViewModel(
             is EvaluationAction.OnEvaluationPreviousClick -> { handleEvaluationPreviousClick() }
             is EvaluationAction.OnEvaluationReportClick -> { uploadEvaluationResults() }
             is EvaluationAction.OnAnswerChanged -> {
-                answers[action.questionId] = action.answer
+                _state.update {
+                    it.copy(
+                        answers = it.answers + (action.questionId to action.answer)
+                    )
+                }
             }
         }
     }
@@ -141,6 +144,8 @@ class EvaluationViewModel(
             _state.update {
                 it.copy(currentScreenIndex = currentScreen - 1)
             }
+        } else {
+            navigateBack()
         }
     }
 
@@ -148,10 +153,11 @@ class EvaluationViewModel(
         viewModelScope.launch {
             _state.update { it.copy(isLoadingEvaluationUpload = true) }
 
-            val evaluationAnswers = answers.map { (questionId, answer) ->
+            val evaluationAnswers = _state.value.answers.map { (questionId, answer) ->
                 EvaluationAnswer(questionId = questionId, value = answer)
             }
 
+            println("all answers: $evaluationAnswers")
             // API to upload evaluationAnswers
 
             _state.update { it.copy(isLoadingEvaluationUpload = false) }
@@ -168,11 +174,6 @@ class EvaluationViewModel(
             .filter { it.measurement_screen == currentScreen }
             .sortedWith(compareBy({ it.measurement_screen }, { it.measurement_order }))
     }
-
-    fun getAnswer(questionId: Int): String {
-        return answers[questionId] ?: ""
-    }
-
 
     private fun navigateBack() {
         viewModelScope.launch {

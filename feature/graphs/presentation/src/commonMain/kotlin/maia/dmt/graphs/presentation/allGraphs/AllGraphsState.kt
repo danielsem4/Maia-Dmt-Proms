@@ -1,11 +1,10 @@
 package maia.dmt.graphs.presentation.allGraphs
 
 import maia.dmt.core.presentation.util.UiText
+import maia.dmt.graphs.domain.models.ChartResponse
 
 data class AllGraphsState(
     val isLoadingGraphs: Boolean = false,
-    val graphError: UiText? = null,
-
-    val allGraphs: List<Any> = emptyList(),
-    val graphs: List<Any> = emptyList(),
+    val graphsError: UiText? = null,
+    val allGraphs: ChartResponse? = null,
 )

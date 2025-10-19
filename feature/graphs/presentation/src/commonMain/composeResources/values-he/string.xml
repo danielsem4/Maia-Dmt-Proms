@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="graphs_title">Graphs</string>
+    <string name="no_graphs_found">No graphs found</string>
+
+</resources>

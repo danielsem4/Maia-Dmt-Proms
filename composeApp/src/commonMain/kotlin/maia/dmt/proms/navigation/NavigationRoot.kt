@@ -9,6 +9,8 @@ import maia.dmt.auth.presentation.navigation.AuthGraphRoutes
 import maia.dmt.auth.presentation.navigation.authGraph
 import maia.dmt.evaluation.presentation.navigation.EvaluationGraphRoutes
 import maia.dmt.evaluation.presentation.navigation.evaluationGraph
+import maia.dmt.graphs.presentation.navigation.GraphsGraphRoutes
+import maia.dmt.graphs.presentation.navigation.graphsGraph
 import maia.dmt.home.presentation.navigation.HomeGraphRoutes
 import maia.dmt.home.presentation.navigation.homeGraph
 import maia.dmt.medication.presentation.navigation.MedicationsGraphRoutes
@@ -47,6 +49,7 @@ fun NavigationRoot(
                     7 -> navController.navigate(MedicationsGraphRoutes.Graph)
                     4 -> navController.navigate(EvaluationGraphRoutes.Graph)
                     8 -> navController.navigate(ActivitiesGraphRoutes.Graph)
+                    28 -> navController.navigate(GraphsGraphRoutes.Graph)
                     else -> {}
                 }
             },
@@ -60,6 +63,10 @@ fun NavigationRoot(
         )
 
         activitiesGraph(
+            navController = navController
+        )
+
+        graphsGraph(
             navController = navController
         )
     }

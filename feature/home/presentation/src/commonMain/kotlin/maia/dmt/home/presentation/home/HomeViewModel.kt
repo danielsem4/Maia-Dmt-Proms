@@ -23,6 +23,7 @@ import dmtproms.feature.home.presentation.generated.resources.logout_icon
 import dmtproms.feature.home.presentation.generated.resources.medications_icon
 import dmtproms.feature.home.presentation.generated.resources.memory_icon
 import dmtproms.feature.home.presentation.generated.resources.orientation_icon
+import dmtproms.feature.home.presentation.generated.resources.statistics_icon
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -159,6 +160,7 @@ class HomeViewModel(
             16 ->Res.drawable.clock_icon
             20 ->Res.drawable.orientation_icon
             22 ->Res.drawable.hitber_icon
+            28 -> Res.drawable.statistics_icon
             9 -> Res.drawable.hitber_icon
             else -> Res.drawable.logout_icon
         }

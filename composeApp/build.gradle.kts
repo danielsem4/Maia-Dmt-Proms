@@ -31,6 +31,8 @@ kotlin {
 
             implementation(projects.feature.graphs.presentation)
             implementation(projects.feature.graphs.domain)
+            implementation(projects.feature.graphs.data)
+
 
             implementation(projects.feature.evaluation.presentation)
             implementation(projects.feature.evaluation.domain)

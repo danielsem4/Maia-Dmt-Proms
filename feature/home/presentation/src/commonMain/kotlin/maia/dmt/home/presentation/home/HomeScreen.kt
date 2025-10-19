@@ -18,6 +18,7 @@ import dmtproms.feature.home.presentation.generated.resources.home_title
 import dmtproms.feature.home.presentation.generated.resources.log_out_message
 import dmtproms.feature.home.presentation.generated.resources.log_out_title
 import dmtproms.feature.home.presentation.generated.resources.logout_icon
+import dmtproms.feature.home.presentation.generated.resources.memory_icon
 import dmtproms.feature.home.presentation.generated.resources.messages
 import dmtproms.feature.home.presentation.generated.resources.no
 import dmtproms.feature.home.presentation.generated.resources.yes
@@ -30,6 +31,7 @@ import maia.dmt.home.presentation.components.DmtModuleSection
 // Import the new data models
 import maia.dmt.home.presentation.components.Message
 import maia.dmt.home.presentation.components.MessageType
+import maia.dmt.home.presentation.module.ModuleUiModel
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.resources.vectorResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
@@ -96,6 +98,7 @@ fun HomeScreen(
                     DmtModuleSection(
                         modules = state.modules
                     )
+                    Spacer(modifier = Modifier.padding(2.dp))
                 }
             }
         }

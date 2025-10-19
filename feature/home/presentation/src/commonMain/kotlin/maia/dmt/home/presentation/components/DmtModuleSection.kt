@@ -51,17 +51,6 @@ fun DmtModuleSection(
         DeviceConfiguration.DESKTOP -> 5
     }
 
-    val totalRows = ceil(modules.size.toFloat() / columnCount).toInt()
-    val shouldConstrainHeight = totalRows > maxVisibleRows
-
-    val estimatedCardHeight = 100.dp
-
-    val maxHeight = if (shouldConstrainHeight) {
-        (estimatedCardHeight * maxVisibleRows) + (spacing * (maxVisibleRows - 1))
-    } else {
-        null
-    }
-
     Box(
         modifier = modifier
             .fillMaxWidth()
@@ -81,13 +70,6 @@ fun DmtModuleSection(
                 verticalArrangement = Arrangement.spacedBy(spacing),
                 modifier = Modifier
                     .fillMaxWidth()
-                    .then(
-                        if (maxHeight != null) {
-                            Modifier.height(maxHeight)
-                        } else {
-                            Modifier
-                        }
-                    )
                     .padding(vertical = 8.dp)
             ) {
                 items(modules) { module ->

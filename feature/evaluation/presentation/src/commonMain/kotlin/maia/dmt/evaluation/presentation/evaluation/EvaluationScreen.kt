@@ -45,8 +45,7 @@ fun EvaluationRoot(
     EvaluationScreen(
         state = state,
         onAction = viewModel::onAction,
-        getCurrentScreenQuestions = { viewModel.getCurrentScreenQuestions() },
-        getAnswer = { viewModel.getAnswer(it) }
+        getCurrentScreenQuestions = { viewModel.getCurrentScreenQuestions() }
     )
 
     toastMessage?.let { message ->
@@ -64,7 +63,6 @@ fun EvaluationScreen(
     state: EvaluationState,
     onAction: (EvaluationAction) -> Unit,
     getCurrentScreenQuestions: () -> List<EvaluationObject>,
-    getAnswer: (Int) -> String
 ) {
     val questions = getCurrentScreenQuestions()
     val maxScreen = state.evaluation?.measurement_objects?.maxOfOrNull { it.measurement_screen } ?: 1
@@ -89,13 +87,15 @@ fun EvaluationScreen(
                     verticalArrangement = Arrangement.spacedBy(16.dp)
                 ) {
                     questions.forEach { question ->
-                        RenderQuestion(
-                            question = question,
-                            currentAnswer = getAnswer(question.id),
-                            onAnswerChange = { answer ->
-                                onAction(EvaluationAction.OnAnswerChanged(question.id, answer))
-                            }
-                        )
+                        key(question.id) {
+                            RenderQuestion(
+                                question = question,
+                                currentAnswer = state.answers[question.id] ?: "",
+                                onAnswerChange = { answer ->
+                                    onAction(EvaluationAction.OnAnswerChanged(question.id, answer))
+                                }
+                            )
+                        }
                     }
                 }
             }
@@ -124,7 +124,6 @@ fun EvaluationScreenPreview() {
             state = EvaluationState(),
             onAction = {},
             getCurrentScreenQuestions = { emptyList() },
-            getAnswer = { "" }
         )
     }
 }

@@ -7,5 +7,6 @@ data class EvaluationState(
     val evaluation: Evaluation? = null,
     val isLoadingEvaluationUpload: Boolean = false,
     val evaluationError: UiText? = null,
-    val currentScreenIndex: Int = 1
+    val currentScreenIndex: Int = 1,
+    val answers: Map<Int, String> = emptyMap()
     )

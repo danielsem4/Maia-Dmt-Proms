@@ -37,36 +37,65 @@ data class BodyArea(
 @Composable
 fun DmtHumanBodyLayout(
     modifier: Modifier = Modifier,
+    frontAreasValues: List<String> = emptyList(),
+    backAreasValues: List<String> = emptyList(),
+    initialSelections: Map<String, List<String>> = emptyMap(),
     onPainAreasChanged: (Map<String, List<String>>) -> Unit = {}
 ) {
     var showingBack by remember { mutableStateOf(false) }
     var selectedArea by remember { mutableStateOf<BodyArea?>(null) }
-    val painSelections = remember { mutableStateMapOf<String, List<String>>() }
-
-    val frontAreas = remember {
-        listOf(
-            BodyArea("Head", Offset(0.5f, 0.12f), painOptions = listOf("Headache", "Migraine", "Dizziness", "Other")),
-            BodyArea("Chest", Offset(0.5f, 0.32f), painOptions = listOf("Sharp pain", "Pressure", "Burning", "Other")),
-            BodyArea("Belly", Offset(0.5f, 0.45f), painOptions = listOf("Cramps", "Bloating", "Sharp pain", "Other")),
-            BodyArea("Left Shoulder", Offset(0.35f, 0.25f), painOptions = listOf("Stiffness", "Sharp pain", "Weakness", "Other")),
-            BodyArea("Right Shoulder", Offset(0.65f, 0.25f), painOptions = listOf("Stiffness", "Sharp pain", "Weakness", "Other")),
-            BodyArea("Left Arm", Offset(0.25f, 0.40f), painOptions = listOf("Numbness", "Tingling", "Sharp pain", "Other")),
-            BodyArea("Right Arm", Offset(0.75f, 0.40f), painOptions = listOf("Numbness", "Tingling", "Sharp pain", "Other")),
-            BodyArea("Left Knee", Offset(0.43f, 0.72f), painOptions = listOf("Swelling", "Stiffness", "Sharp pain", "Other")),
-            BodyArea("Right Knee", Offset(0.57f, 0.72f), painOptions = listOf("Swelling", "Stiffness", "Sharp pain", "Other")),
-            BodyArea("Left Foot", Offset(0.42f, 0.92f), painOptions = listOf("Swelling", "Numbness", "Sharp pain", "Other")),
-            BodyArea("Right Foot", Offset(0.58f, 0.92f), painOptions = listOf("Swelling", "Numbness", "Sharp pain", "Other"))
-        )
+    val painSelections = remember {
+        mutableStateMapOf<String, List<String>>().apply {
+            putAll(initialSelections)
+        }
     }
 
-    val backAreas = remember {
-        listOf(
-            BodyArea("Neck", Offset(0.5f, 0.18f), painOptions = listOf("Stiffness", "Sharp pain", "Limited mobility", "Other")),
-            BodyArea("Upper Back", Offset(0.5f, 0.32f), painOptions = listOf("Muscle pain", "Stiffness", "Sharp pain", "Other")),
-            BodyArea("Lower Back", Offset(0.5f, 0.50f), painOptions = listOf("Dull ache", "Sharp pain", "Radiating pain", "Other")),
-            BodyArea("Buttocks", Offset(0.5f, 0.60f), painOptions = listOf("Muscle pain", "Numbness", "Sharp pain", "Other"))
-        )
+    // Parse the available values into BodyArea objects
+    fun parseAreaValues(values: List<String>, predefinedAreas: List<BodyArea>): List<BodyArea> {
+        return predefinedAreas.map { area ->
+            // Find matching value for this area
+            val matchingValue = values.find { value ->
+                value.split("(?)")[0].trim().contains(area.id, ignoreCase = true)
+            }
+
+            if (matchingValue != null) {
+                // Extract pain options from the value
+                val parts = matchingValue.split("(?)")
+                val painOptions = if (parts.size >= 2) {
+                    parts[1].trim().split(",").map { it.trim() }
+                } else {
+                    emptyList()
+                }
+                area.copy(painOptions = painOptions)
+            } else {
+                area
+            }
+        }
     }
+
+    val frontAreaDefaults = listOf(
+        BodyArea("Head", Offset(0.5f, 0.12f), painOptions = emptyList()),
+        BodyArea("Chest", Offset(0.5f, 0.32f), painOptions = emptyList()),
+        BodyArea("Belly", Offset(0.5f, 0.45f), painOptions = emptyList()),
+        BodyArea("Left Shoulder", Offset(0.35f, 0.25f), painOptions = emptyList()),
+        BodyArea("Right Shoulder", Offset(0.65f, 0.25f), painOptions = emptyList()),
+        BodyArea("Left Arm", Offset(0.25f, 0.40f), painOptions = emptyList()),
+        BodyArea("Right Arm", Offset(0.75f, 0.40f), painOptions = emptyList()),
+        BodyArea("Left Knee", Offset(0.43f, 0.72f), painOptions = emptyList()),
+        BodyArea("Right Knee", Offset(0.57f, 0.72f), painOptions = emptyList()),
+        BodyArea("Left Foot", Offset(0.42f, 0.92f), painOptions = emptyList()),
+        BodyArea("Right Foot", Offset(0.58f, 0.92f), painOptions = emptyList())
+    )
+
+    val backAreaDefaults = listOf(
+        BodyArea("Neck", Offset(0.5f, 0.18f), painOptions = emptyList()),
+        BodyArea("Upper Back", Offset(0.5f, 0.32f), painOptions = emptyList()),
+        BodyArea("Lower Back", Offset(0.5f, 0.50f), painOptions = emptyList()),
+        BodyArea("Buttocks", Offset(0.5f, 0.60f), painOptions = emptyList())
+    )
+
+    val frontAreas = parseAreaValues(frontAreasValues, frontAreaDefaults)
+    val backAreas = parseAreaValues(backAreasValues, backAreaDefaults)
 
     val currentAreas = if (showingBack) backAreas else frontAreas
 
@@ -101,7 +130,6 @@ fun DmtHumanBodyLayout(
                 val imageWidth = constraints.maxWidth.toFloat()
                 val imageHeight = constraints.maxHeight.toFloat()
 
-                // Body Image
                 Image(
                     painter = painterResource(if (showingBack) Res.drawable.body_back_img else Res.drawable.body_front_img),
                     contentDescription = if (showingBack) "Back of body" else "Front of body",
@@ -115,20 +143,21 @@ fun DmtHumanBodyLayout(
                     val selectedColor = Color(0xFF2196F3)
 
                     currentAreas.forEach { area ->
-                        val position = Offset(
-                            area.position.x * size.width,
-                            area.position.y * size.height
-                        )
+                        if (area.painOptions.isNotEmpty()) {
+                            val position = Offset(
+                                area.position.x * size.width,
+                                area.position.y * size.height
+                            )
 
-                        val hasSelection = painSelections[area.id]?.isNotEmpty() == true
-                        val color = if (hasSelection) selectedColor else primaryColor
+                            val hasSelection = painSelections[area.id]?.isNotEmpty() == true
+                            val color = if (hasSelection) selectedColor else primaryColor
 
-                        drawCircle(color.copy(alpha = 0.4f), area.radius, position)
-                        drawCircle(color.copy(alpha = 0.9f), area.radius * 0.6f, position)
+                            drawCircle(color.copy(alpha = 0.4f), area.radius, position)
+                            drawCircle(color.copy(alpha = 0.9f), area.radius * 0.6f, position)
+                        }
                     }
                 }
 
-                // Touch overlay
                 Box(
                     modifier = Modifier
                         .fillMaxSize()
@@ -181,6 +210,8 @@ fun DmtHumanBodyLayout(
 @Composable
 fun DmtHumanBodyLayoutPreview() {
     DmtTheme {
-        DmtHumanBodyLayout()
+        DmtHumanBodyLayout(
+
+        )
     }
 }

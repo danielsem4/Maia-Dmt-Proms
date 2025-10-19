@@ -34,10 +34,10 @@ fun DmtIconCard(
     val configuration = currentDeviceConfiguration()
 
     val cardSize = when (configuration) {
-        DeviceConfiguration.MOBILE_PORTRAIT -> 100.dp
+        DeviceConfiguration.MOBILE_PORTRAIT -> 110.dp
         DeviceConfiguration.MOBILE_LANDSCAPE -> 90.dp
         DeviceConfiguration.TABLET_PORTRAIT -> 120.dp
-        DeviceConfiguration.TABLET_LANDSCAPE -> 110.dp
+        DeviceConfiguration.TABLET_LANDSCAPE -> 120.dp
         DeviceConfiguration.DESKTOP -> 140.dp
     }
 
@@ -60,6 +60,7 @@ fun DmtIconCard(
     Card(
         modifier = modifier
             .size(cardSize)
+            .padding(6.dp)
             .clickable(onClick = onClick),
         shape = RoundedCornerShape(16.dp),
         elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
@@ -91,6 +92,7 @@ fun DmtIconCard(
                 maxLines = 2,
                 overflow = TextOverflow.Ellipsis
             )
+            Spacer(modifier = Modifier.height(4.dp))
         }
     }
 }

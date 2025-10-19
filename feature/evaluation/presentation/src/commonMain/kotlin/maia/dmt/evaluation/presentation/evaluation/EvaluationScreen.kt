@@ -7,6 +7,8 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import dmtproms.feature.evaluation.presentation.generated.resources.Res
 import dmtproms.feature.evaluation.presentation.generated.resources.evaluation_headline
+import dmtproms.feature.evaluation.presentation.generated.resources.evaluation_next
+import dmtproms.feature.evaluation.presentation.generated.resources.evaluation_prev
 import maia.dmt.core.designsystem.components.layouts.DmtBaseScreen
 import maia.dmt.core.designsystem.components.toast.DmtToastMessage
 import maia.dmt.core.designsystem.components.toast.ToastDuration
@@ -79,8 +81,8 @@ fun EvaluationScreen(
                     }
                 },
                 onNextClick = { onAction(EvaluationAction.OnEvaluationNextClick) },
-                prevButtonText = if (state.currentScreenIndex == 1) "" else "Previous",
-                nextButtonText = if (state.currentScreenIndex == maxScreen) "Submit" else "Next"
+                prevButtonText = stringResource(Res.string.evaluation_prev),
+                nextButtonText = stringResource(Res.string.evaluation_next)
             ) {
                 Column(
                     modifier = Modifier.fillMaxWidth(),

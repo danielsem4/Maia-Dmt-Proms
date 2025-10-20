@@ -2,10 +2,12 @@ package maia.dmt.core.data.di
 
 import maia.dmt.core.data.auth.DataStoreSessionStorage
 import maia.dmt.core.data.auth.KtorAuthService
+import maia.dmt.core.data.evaluation.KtorEvaluationsService
 import maia.dmt.core.data.logging.KermitLogger
 import maia.dmt.core.data.networking.HttpClientFactory
 import maia.dmt.core.domain.auth.AuthService
 import maia.dmt.core.domain.auth.SessionStorage
+import maia.dmt.core.domain.evaluation.EvaluationService
 import maia.dmt.core.domain.logger.DmtLogger
 import org.koin.core.module.Module
 import org.koin.core.module.dsl.singleOf
@@ -23,4 +25,5 @@ val coreDataModule = module {
 
     singleOf(::KtorAuthService) bind AuthService::class
     singleOf(::DataStoreSessionStorage) bind SessionStorage::class
+    singleOf(::KtorEvaluationsService) bind EvaluationService::class
 }

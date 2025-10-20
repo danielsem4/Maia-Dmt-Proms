@@ -29,7 +29,7 @@ import kotlin.math.sqrt
 
 data class BodyArea(
     val id: String,
-    val position: Offset, // normalized [0..1]
+    val position: Offset,
     val radius: Float = 30f,
     val painOptions: List<String>
 )
@@ -59,7 +59,6 @@ fun DmtHumanBodyLayout(
             }
 
             if (matchingValue != null) {
-                // Extract pain options from the value
                 val parts = matchingValue.split("(?)")
                 val painOptions = if (parts.size >= 2) {
                     parts[1].trim().split(",").map { it.trim() }

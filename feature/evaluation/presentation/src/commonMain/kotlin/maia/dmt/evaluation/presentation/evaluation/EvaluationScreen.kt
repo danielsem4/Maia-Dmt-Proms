@@ -9,6 +9,8 @@ import dmtproms.feature.evaluation.presentation.generated.resources.Res
 import dmtproms.feature.evaluation.presentation.generated.resources.evaluation_headline
 import dmtproms.feature.evaluation.presentation.generated.resources.evaluation_next
 import dmtproms.feature.evaluation.presentation.generated.resources.evaluation_prev
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import maia.dmt.core.designsystem.components.layouts.DmtBaseScreen
 import maia.dmt.core.designsystem.components.toast.DmtToastMessage
 import maia.dmt.core.designsystem.components.toast.ToastDuration
@@ -16,6 +18,7 @@ import maia.dmt.core.designsystem.components.toast.ToastType
 import maia.dmt.core.designsystem.theme.DmtTheme
 import maia.dmt.core.domain.dto.evaluation.EvaluationObject
 import maia.dmt.core.presentation.util.ObserveAsEvents
+import maia.dmt.core.presentation.util.UiText
 import maia.dmt.evaluation.presentation.components.layout.DmtEvaluationLayout
 import maia.dmt.evaluation.presentation.renderers.QuestionRendererProvider
 import org.jetbrains.compose.resources.stringResource
@@ -39,6 +42,20 @@ fun EvaluationRoot(
             is EvaluationEvent.NavigateBack -> {
                 onNavigateBack()
             }
+            is EvaluationEvent.UploadSuccess -> {
+                toastType = ToastType.Success
+                toastMessage = when(val msg = event.message) {
+                    is UiText.DynamicString -> msg.value
+                    else -> "Success"
+                }
+            }
+            is EvaluationEvent.UploadError -> {
+                toastType = ToastType.Error
+                toastMessage = when(val err = event.error) {
+                    is UiText.DynamicString -> err.value
+                    else -> "An unknown error occurred"
+                }
+            }
         }
     }
 
@@ -53,7 +70,10 @@ fun EvaluationRoot(
             message = message,
             type = toastType,
             duration = ToastDuration.MEDIUM,
-            onDismiss = { toastMessage = null }
+            onDismiss = {
+                toastMessage = null
+                onNavigateBack()
+            }
         )
     }
 }
@@ -74,9 +94,7 @@ fun EvaluationScreen(
             DmtEvaluationLayout(
                 title = questions.firstOrNull()?.object_label ?: "",
                 onPrevClick = {
-                    if (state.currentScreenIndex > 1) {
-                        onAction(EvaluationAction.OnEvaluationPreviousClick)
-                    }
+                    onAction(EvaluationAction.OnEvaluationPreviousClick)
                 },
                 onNextClick = { onAction(EvaluationAction.OnEvaluationNextClick) },
                 prevButtonText = stringResource(Res.string.evaluation_prev),

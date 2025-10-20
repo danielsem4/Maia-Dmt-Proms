@@ -4,7 +4,6 @@ import maia.dmt.activities.data.di.activitiesDataModule
 import maia.dmt.activities.presentation.di.activitiesPresentationModule
 import maia.dmt.auth.presentation.di.authPresentationModule
 import maia.dmt.core.data.di.coreDataModule
-import maia.dmt.evaluation.data.di.evaluationDataModule
 import maia.dmt.evaluation.presentation.di.evaluationPresentationModule
 import maia.dmt.home.data.di.homeDataModule
 import maia.dmt.home.presentation.di.homePresentationModule
@@ -26,7 +25,6 @@ fun initKoin(config: KoinAppDeclaration? = null) {
             medicationDataModule,
             authPresentationModule,
             evaluationPresentationModule,
-            evaluationDataModule,
             activitiesPresentationModule,
             activitiesDataModule,
         )

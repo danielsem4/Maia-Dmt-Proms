@@ -21,6 +21,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import maia.dmt.core.designsystem.theme.DmtTheme
 import maia.dmt.core.designsystem.theme.extended
@@ -111,7 +112,7 @@ fun DmtButton(
         Box(
             contentAlignment = Alignment.Center,
             modifier = Modifier
-                .padding(6.dp)
+                .padding(vertical = 6.dp, horizontal = 6.dp)
         ) {
             CircularProgressIndicator(
                 modifier = Modifier
@@ -135,7 +136,8 @@ fun DmtButton(
                 leadingIcon?.invoke()
                 Text(
                     text = text,
-                    style = MaterialTheme.typography.titleSmall
+                    style = MaterialTheme.typography.titleSmall,
+                    textAlign = TextAlign.Center
                 )
             }
         }
@@ -227,6 +229,20 @@ fun DmtPrimaryButtonIconPreview() {
                     modifier = Modifier.size(20.dp)
                 )
             }
+        )
+    }
+}
+
+@Composable
+@Preview
+fun DmtPrimaryButtonLongTextPreview() {
+    DmtTheme(
+        darkTheme = true
+    ) {
+        DmtButton(
+            text = "Date & Time",
+            onClick = {},
+            style = DmtButtonStyle.PRIMARY,
         )
     }
 }

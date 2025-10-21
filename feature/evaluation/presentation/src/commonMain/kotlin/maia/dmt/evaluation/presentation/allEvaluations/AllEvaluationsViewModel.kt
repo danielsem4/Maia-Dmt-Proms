@@ -48,13 +48,35 @@ class AllEvaluationsViewModel(
             is AllEvaluationsAction.OnBackClick -> { navigateBack() }
             is AllEvaluationsAction.OnEvaluationClick -> { handleEvaluationClickByName(action.evaluation) }
             is AllEvaluationsAction.OnSearchQueryChange -> {
-                _state.update {
-                    it.copy(
-                        searchQuery = action.query
+                _state.update { currentState ->
+                    val filteredEvaluations = filterEvaluations(
+                        allEvaluations = currentState.allEvaluations,
+                        query = action.query
+                    )
+                    currentState.copy(
+                        searchQuery = action.query,
+                        evaluations = filteredEvaluations
                     )
                 }
             }
             else -> {}
+        }
+    }
+
+    private fun filterEvaluations(
+        allEvaluations: List<Evaluation>,
+        query: String
+    ): List<Evaluation> {
+        if (query.isBlank()) {
+            return allEvaluations
+        }
+
+        val searchQuery = query.trim().lowercase()
+
+        return allEvaluations.filter { evaluation ->
+            evaluation.measurement_name.lowercase().contains(searchQuery) ||
+                    evaluation.measurement_settings.measurement_begin_time?.lowercase()?.contains(searchQuery) == true ||
+                    evaluation.measurement_settings.measurement_repeat_period?.lowercase()?.contains(searchQuery) == true
         }
     }
 

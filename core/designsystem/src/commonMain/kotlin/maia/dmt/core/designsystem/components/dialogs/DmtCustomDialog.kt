@@ -20,6 +20,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
@@ -70,7 +71,8 @@ fun DmtCustomDialog(
         ) {
             Column(
                 modifier = Modifier
-                    .padding(24.dp)
+                    .fillMaxWidth()
+                    .padding(12.dp)
                     .padding(top = if (showCloseButton) 8.dp else 0.dp),
                 verticalArrangement = Arrangement.spacedBy(16.dp),
                 horizontalAlignment = Alignment.CenterHorizontally
@@ -85,13 +87,15 @@ fun DmtCustomDialog(
                 Text(
                     text = title,
                     style = MaterialTheme.typography.titleMedium,
-                    color = MaterialTheme.colorScheme.extended.textPrimary
+                    color = MaterialTheme.colorScheme.extended.textPrimary,
+                    textAlign = TextAlign.Center
                 )
 
                 Text(
                     text = description,
                     style = MaterialTheme.typography.bodySmall,
-                    color = MaterialTheme.colorScheme.extended.textSecondary
+                    color = MaterialTheme.colorScheme.extended.textSecondary,
+                    textAlign = TextAlign.Center
                 )
 
                 Row(
@@ -144,6 +148,26 @@ fun DmtCustomDialogPreview() {
             description = "Are you sure you want to proceed with this action? This will make changes to your account.",
             primaryButtonText = "Confirm",
             secondaryButtonText = "Cancel",
+            onPrimaryClick = {},
+            onSecondaryClick = {},
+            onDismiss = {},
+            primaryButtonStyle = DmtButtonStyle.PRIMARY,
+            secondaryButtonStyle = DmtButtonStyle.SECONDARY
+        )
+    }
+}
+
+@Composable
+@Preview
+fun DmtCustomDialogLongTextPreview() {
+    DmtTheme(darkTheme = true) {
+        DmtCustomDialog(
+            icon = Res.drawable.eye_icon,
+            iconTint = MaterialTheme.colorScheme.primary,
+            title = "Rising",
+            description = "I made the activity\nAt:21/10/2025 at 15:42",
+            primaryButtonText = "Report",
+            secondaryButtonText = "Date & Time",
             onPrimaryClick = {},
             onSecondaryClick = {},
             onDismiss = {},

@@ -22,6 +22,7 @@ import dmtproms.core.designsystem.generated.resources.body_back_img
 import dmtproms.core.designsystem.generated.resources.body_front_img
 import maia.dmt.core.designsystem.components.dialogs.DmtContentDialog
 import maia.dmt.core.designsystem.theme.DmtTheme
+import maia.dmt.core.designsystem.theme.extended
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import kotlin.math.pow
@@ -50,10 +51,8 @@ fun DmtHumanBodyLayout(
         }
     }
 
-    // Parse the available values into BodyArea objects
     fun parseAreaValues(values: List<String>, predefinedAreas: List<BodyArea>): List<BodyArea> {
         return predefinedAreas.map { area ->
-            // Find matching value for this area
             val matchingValue = values.find { value ->
                 value.split("(?)")[0].trim().contains(area.id, ignoreCase = true)
             }
@@ -98,10 +97,12 @@ fun DmtHumanBodyLayout(
 
     val currentAreas = if (showingBack) backAreas else frontAreas
 
+    val extendedColors = MaterialTheme.colorScheme.extended
+
     Box(
         modifier = modifier
             .fillMaxSize()
-            .background(Color.White, RoundedCornerShape(10.dp))
+            .background(color = extendedColors.surfaceHigher, RoundedCornerShape(10.dp))
     ) {
         Column(
             modifier = Modifier.fillMaxSize(),
@@ -123,7 +124,12 @@ fun DmtHumanBodyLayout(
                 modifier = Modifier
                     .fillMaxWidth()
                     .weight(1f)
-                    .padding(horizontal = 32.dp),
+                    .padding(horizontal = 32.dp)
+                    .background(
+                        color = extendedColors.surfaceHigher,
+                        shape = RoundedCornerShape(16.dp)
+                    )
+                    .padding(16.dp),
                 contentAlignment = Alignment.Center
             ) {
                 val imageWidth = constraints.maxWidth.toFloat()

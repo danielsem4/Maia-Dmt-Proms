@@ -17,6 +17,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import maia.dmt.core.designsystem.theme.DmtTheme
+import maia.dmt.core.designsystem.theme.extended
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 enum class MessageType {
@@ -31,11 +32,12 @@ data class Message(
 
 @Composable
 fun MessageSlot(message: Message) {
+    val extendedColors = MaterialTheme.colorScheme.extended
 
     val backgroundColor = when (message.type) {
-        MessageType.INFO -> Color(0xFFD6EAF8)
-        MessageType.REMINDER -> Color(0xFFFADBD8)
-        MessageType.MESSAGE -> Color(0xFFD5F5E3)
+        MessageType.INFO -> extendedColors.cakeBlue
+        MessageType.REMINDER -> extendedColors.cakeRed
+        MessageType.MESSAGE -> extendedColors.cakeGreen
     }
 
     Box(

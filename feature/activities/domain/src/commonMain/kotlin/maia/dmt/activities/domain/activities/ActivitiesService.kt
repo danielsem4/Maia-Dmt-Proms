@@ -8,7 +8,7 @@ import maia.dmt.core.domain.util.Result
 
 interface ActivitiesService {
 
-    suspend fun getActivities(clinicId: Int): Result<List<ActivityItem>, DataError.Remote>
+    suspend fun getActivities(clinicId: Int, patientId: Int): Result<List<ActivityItem>, DataError.Remote>
 
     suspend fun reportActivity(result: ActivityItemReport): EmptyResult<DataError.Remote>
 

@@ -43,59 +43,57 @@ fun DmtCard(
     isLoading: Boolean = false,
     leadingIcon: @Composable (() -> Unit)? = null,
 ) {
-    val colors = when(style) {
-        DmtCardStyle.PRIMARY -> CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.primary,
-            contentColor = MaterialTheme.colorScheme.onPrimary,
-            disabledContainerColor = MaterialTheme.colorScheme.extended.disabledFill,
-            disabledContentColor = MaterialTheme.colorScheme.extended.textDisabled
+    val colors = if (!enabled) {
+        // When disabled, use consistent styling across all card types
+        CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.extended.disabledFill,
+            contentColor = MaterialTheme.colorScheme.extended.textDisabled
         )
-        DmtCardStyle.SECONDARY -> CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.surfaceVariant,
-            contentColor = MaterialTheme.colorScheme.onSurfaceVariant,
-            disabledContainerColor = MaterialTheme.colorScheme.extended.disabledFill,
-            disabledContentColor = MaterialTheme.colorScheme.extended.textDisabled
-        )
-        DmtCardStyle.OUTLINED -> CardDefaults.cardColors(
-            containerColor = Color.Transparent,
-            contentColor = MaterialTheme.colorScheme.extended.textSecondary,
-            disabledContainerColor = Color.Transparent,
-            disabledContentColor = MaterialTheme.colorScheme.extended.textDisabled
-        )
-        DmtCardStyle.ELEVATED -> CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.surface,
-            contentColor = MaterialTheme.colorScheme.onSurface,
-            disabledContainerColor = MaterialTheme.colorScheme.extended.disabledFill,
-            disabledContentColor = MaterialTheme.colorScheme.extended.textDisabled
-        )
+    } else {
+        when(style) {
+            DmtCardStyle.PRIMARY -> CardDefaults.cardColors(
+                containerColor = MaterialTheme.colorScheme.primary,
+                contentColor = MaterialTheme.colorScheme.onPrimary
+            )
+            DmtCardStyle.SECONDARY -> CardDefaults.cardColors(
+                containerColor = MaterialTheme.colorScheme.surfaceVariant,
+                contentColor = MaterialTheme.colorScheme.onSurfaceVariant
+            )
+            DmtCardStyle.OUTLINED -> CardDefaults.cardColors(
+                containerColor = Color.Transparent,
+                contentColor = MaterialTheme.colorScheme.extended.textSecondary
+            )
+            DmtCardStyle.ELEVATED -> CardDefaults.cardColors(
+                containerColor = MaterialTheme.colorScheme.surface,
+                contentColor = MaterialTheme.colorScheme.onSurface
+            )
+        }
     }
 
+    val defaultDisabledBorder = BorderStroke(
+        width = 1.dp,
+        color = MaterialTheme.colorScheme.extended.disabledOutline
+    )
+
     val border = when {
+        // When disabled, always show border like the button
+        !enabled -> defaultDisabledBorder
         style == DmtCardStyle.OUTLINED -> BorderStroke(
             width = 1.dp,
-            color = if(enabled) {
-                MaterialTheme.colorScheme.outline
-            } else {
-                MaterialTheme.colorScheme.extended.disabledOutline
-            }
+            color = MaterialTheme.colorScheme.outline
         )
         style == DmtCardStyle.ELEVATED -> BorderStroke(
             width = 1.dp,
-            color = if(enabled) {
-                MaterialTheme.colorScheme.outlineVariant
-            } else {
-                MaterialTheme.colorScheme.extended.disabledOutline
-            }
-        )
-        !enabled -> BorderStroke(
-            width = 1.dp,
-            color = MaterialTheme.colorScheme.extended.disabledOutline
+            color = MaterialTheme.colorScheme.outlineVariant
         )
         else -> null
     }
 
-    val elevation = when(style) {
-        DmtCardStyle.ELEVATED -> CardDefaults.cardElevation(
+    val elevation = when {
+        !enabled -> CardDefaults.cardElevation(
+            defaultElevation = 0.dp
+        )
+        style == DmtCardStyle.ELEVATED -> CardDefaults.cardElevation(
             defaultElevation = 4.dp,
             pressedElevation = 6.dp,
             disabledElevation = 0.dp

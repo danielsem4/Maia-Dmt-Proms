@@ -4,11 +4,14 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import dmtproms.core.designsystem.generated.resources.Res
 import dmtproms.core.designsystem.generated.resources.arrow_left_icon
@@ -90,60 +93,63 @@ fun DmtBaseScreen(
                     color = MaterialTheme.colorScheme.primary,
                     tonalElevation = 0.dp
                 ) {
-                    Row(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .wrapContentHeight()
-                            .padding(horizontal = horizontalPadding),
-                        verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.SpaceBetween
-                    ) {
-                        // Left icon
-                        Box(
-                            modifier = Modifier.weight(1f),
-                            contentAlignment = Alignment.CenterStart
+                    // Force LTR layout direction for the navbar
+                    CompositionLocalProvider(LocalLayoutDirection provides LayoutDirection.Ltr) {
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .wrapContentHeight()
+                                .padding(horizontal = horizontalPadding),
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.SpaceBetween
                         ) {
-                            if (iconBar != null) {
-                                IconButton(
-                                    onClick = { onIconClick?.invoke() }
-                                ) {
-                                    Icon(
-                                        imageVector = iconBar,
-                                        contentDescription = "Navigation icon",
-                                        modifier = Modifier.size(iconSize),
-                                        tint = MaterialTheme.colorScheme.onSurface
-                                    )
+                            // Left icon
+                            Box(
+                                modifier = Modifier.weight(1f),
+                                contentAlignment = Alignment.CenterStart
+                            ) {
+                                if (iconBar != null) {
+                                    IconButton(
+                                        onClick = { onIconClick?.invoke() }
+                                    ) {
+                                        Icon(
+                                            imageVector = iconBar,
+                                            contentDescription = "Navigation icon",
+                                            modifier = Modifier.size(iconSize),
+                                            tint = MaterialTheme.colorScheme.onSurface
+                                        )
+                                    }
                                 }
                             }
-                        }
 
-                        // Center title
-                        Box(
-                            modifier = Modifier.weight(2f),
-                            contentAlignment = Alignment.Center
-                        ) {
-                            Text(
-                                text = titleText,
-                                style = titleTextStyle,
-                                color = MaterialTheme.colorScheme.onSurface,
-                                textAlign = TextAlign.Center,
-                                maxLines = 1
-                            )
-                        }
-
-                        // Right text
-                        Box(
-                            modifier = Modifier.weight(1f),
-                            contentAlignment = Alignment.CenterEnd
-                        ) {
-                            if (textBar != null) {
+                            // Center title
+                            Box(
+                                modifier = Modifier.weight(2f),
+                                contentAlignment = Alignment.Center
+                            ) {
                                 Text(
-                                    text = textBar,
-                                    style = barTextStyle,
-                                    color = MaterialTheme.colorScheme.primary,
-                                    textAlign = TextAlign.End,
+                                    text = titleText,
+                                    style = titleTextStyle,
+                                    color = MaterialTheme.colorScheme.onSurface,
+                                    textAlign = TextAlign.Center,
                                     maxLines = 1
                                 )
+                            }
+
+                            // Right text
+                            Box(
+                                modifier = Modifier.weight(1f),
+                                contentAlignment = Alignment.CenterEnd
+                            ) {
+                                if (textBar != null) {
+                                    Text(
+                                        text = textBar,
+                                        style = barTextStyle,
+                                        color = MaterialTheme.colorScheme.primary,
+                                        textAlign = TextAlign.End,
+                                        maxLines = 1
+                                    )
+                                }
                             }
                         }
                     }
@@ -187,7 +193,7 @@ fun DmtBaseScreenWithIconPreview() {
             titleText = "Home Screen",
             iconBar = vectorResource(Res.drawable.log_out_icon),
 
-        ) {
+            ) {
             Box(
                 modifier = Modifier.fillMaxSize(),
                 contentAlignment = Alignment.Center

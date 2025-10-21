@@ -9,7 +9,7 @@ import maia.dmt.home.presentation.home.HomeRoot
 fun NavGraphBuilder.homeGraph(
     navController: NavController,
     onLogoutSuccess: () -> Unit,
-    onModuleClicked: (Int) -> Unit
+    onModuleClicked: (String) -> Unit
 ) {
     navigation<HomeGraphRoutes.Graph>(
         startDestination = HomeGraphRoutes.Home

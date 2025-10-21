@@ -41,7 +41,7 @@ import org.koin.compose.viewmodel.koinViewModel
 fun HomeRoot(
     viewModel: HomeViewModel = koinViewModel(),
     onLogoutSuccess: () -> Unit,
-    onModuleClicked: (Int) -> Unit
+    onModuleClicked: (String) -> Unit
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
 
@@ -53,7 +53,7 @@ fun HomeRoot(
                 onLogoutSuccess()
             }
             is HomeEvent.ModuleClicked -> {
-                onModuleClicked(event.moduleId)
+                onModuleClicked(event.moduleName)
             }
         }
     }
@@ -69,7 +69,6 @@ fun HomeScreen(
     state: HomeState,
     onAction: (HomeAction) -> Unit,
 ) {
-
     DmtBaseScreen(
         titleText = stringResource(Res.string.home_title),
         iconBar = vectorResource(Res.drawable.logout_icon),

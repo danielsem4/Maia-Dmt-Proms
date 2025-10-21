@@ -11,6 +11,7 @@ import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material.icons.filled.Star
+import androidx.compose.ui.text.toLowerCase
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dmtproms.feature.home.presentation.generated.resources.Res
@@ -23,6 +24,7 @@ import dmtproms.feature.home.presentation.generated.resources.logout_icon
 import dmtproms.feature.home.presentation.generated.resources.medications_icon
 import dmtproms.feature.home.presentation.generated.resources.memory_icon
 import dmtproms.feature.home.presentation.generated.resources.orientation_icon
+import dmtproms.feature.home.presentation.generated.resources.statistics_icon
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -70,7 +72,7 @@ class HomeViewModel(
             HomeAction.OnLogoutClick -> showLogoutDialog()
             HomeAction.OnLogoutConfirm -> logout()
             HomeAction.OnLogoutCancel -> dismissLogoutDialog()
-            is HomeAction.OnFeatureClicked -> handleFeatureClick(action.moduleId)
+            is HomeAction.OnFeatureClicked -> handleFeatureClick(action.moduleName)
         }
     }
 
@@ -123,9 +125,9 @@ class HomeViewModel(
                 .onSuccess { modules ->
                     val moduleUiModels = modules.map { module ->
                         ModuleUiModel(
-                            icon = mapModuleIcon(module.module_id),
+                            icon = mapModuleIcon(module.module_name),
                             text = module.module_name,
-                            onClick = { onAction(HomeAction.OnFeatureClicked(module.module_id)) }
+                            onClick = { onAction(HomeAction.OnFeatureClicked(module.module_name)) }
                         )
                     }
 
@@ -148,25 +150,25 @@ class HomeViewModel(
         }
     }
 
-    private fun mapModuleIcon(moduleId: Int): DrawableResource {
-        // Map module IDs to appropriate icons
-        return when (moduleId) {
-            3 -> (Res.drawable.file_upload_icon)
-            4 -> Res.drawable.evaluation_icon
-            7 -> Res.drawable.medications_icon
-            8 -> Res.drawable.activities_icon
-            13 ->Res.drawable.memory_icon
-            16 ->Res.drawable.clock_icon
-            20 ->Res.drawable.orientation_icon
-            22 ->Res.drawable.hitber_icon
-            9 -> Res.drawable.hitber_icon
-            else -> Res.drawable.logout_icon
+    private fun mapModuleIcon(moduleName: String): DrawableResource {
+
+        return when (moduleName.lowercase()) {
+            "document share" -> (Res.drawable.file_upload_icon)
+            "measurements" -> Res.drawable.evaluation_icon
+            "medications" -> Res.drawable.medications_icon
+            "activities" -> Res.drawable.activities_icon
+            "memory" ->Res.drawable.memory_icon
+            "cdt" ->Res.drawable.clock_icon
+            "orientation" ->Res.drawable.orientation_icon
+            "hitber" ->Res.drawable.hitber_icon
+            "statistics" -> Res.drawable.statistics_icon
+            else -> Res.drawable.hitber_icon
         }
     }
 
-    private fun handleFeatureClick(moduleId: Int) {
+    private fun handleFeatureClick(moduleName: String) {
         viewModelScope.launch {
-            eventChannel.send(HomeEvent.ModuleClicked(moduleId))
+            eventChannel.send(HomeEvent.ModuleClicked(moduleName))
         }
     }
 

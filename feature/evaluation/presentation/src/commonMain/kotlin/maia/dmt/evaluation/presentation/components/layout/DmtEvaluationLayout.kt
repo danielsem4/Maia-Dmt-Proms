@@ -2,7 +2,6 @@ package maia.dmt.evaluation.presentation.components.layout
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -40,7 +39,6 @@ fun DmtEvaluationLayout(
             text = title,
             fontSize = 28.sp,
             fontWeight = FontWeight.Bold,
-            color = Color.Black,
             modifier = Modifier.padding(top = 32.dp),
             textAlign = TextAlign.Center
         )

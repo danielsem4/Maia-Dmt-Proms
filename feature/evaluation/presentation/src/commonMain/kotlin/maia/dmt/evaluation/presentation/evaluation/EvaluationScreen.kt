@@ -85,7 +85,6 @@ fun EvaluationScreen(
     getCurrentScreenQuestions: () -> List<EvaluationObject>,
 ) {
     val questions = getCurrentScreenQuestions()
-    val maxScreen = state.evaluation?.measurement_objects?.maxOfOrNull { it.measurement_screen } ?: 1
 
     DmtBaseScreen(
         titleText = stringResource(Res.string.evaluation_headline),

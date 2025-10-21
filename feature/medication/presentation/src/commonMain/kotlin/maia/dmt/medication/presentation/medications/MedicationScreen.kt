@@ -97,6 +97,7 @@ fun MedicationsScreen(
                         modifier = Modifier.fillMaxWidth(),
                         text = stringResource(Res.string.medication_reminder),
                         style = DmtCardStyle.ELEVATED,
+                        enabled = false,
                         leadingIcon = {
                             Icon(
                                 imageVector = vectorResource(Res.drawable.bell_icon),

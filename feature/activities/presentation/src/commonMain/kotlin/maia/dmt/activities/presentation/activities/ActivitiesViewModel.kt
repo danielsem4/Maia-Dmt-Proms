@@ -103,7 +103,7 @@ class ActivitiesViewModel(
                 return@launch
             }
 
-            activitiesService.getActivities(clinicId)
+            activitiesService.getActivities(clinicId, patientId)
                 .onSuccess { activities ->
                     val activityUiModels = activities.map { activity ->
                         ActivityUiModel(

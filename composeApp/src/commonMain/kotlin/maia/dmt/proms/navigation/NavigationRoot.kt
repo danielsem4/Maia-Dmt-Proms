@@ -46,7 +46,7 @@ fun NavigationRoot(
                 when (it) {
                     7 -> navController.navigate(MedicationsGraphRoutes.Graph)
                     4 -> navController.navigate(EvaluationGraphRoutes.Graph)
-                    8 -> navController.navigate(ActivitiesGraphRoutes.Graph)
+                    30 -> navController.navigate(ActivitiesGraphRoutes.Graph)
                     else -> {}
                 }
             },

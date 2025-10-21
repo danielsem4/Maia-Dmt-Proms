@@ -39,9 +39,7 @@ enum class ToastType {
     Normal, Success, Info, Warning, Error
 }
 
-/**
- * Data class to hold responsive dimensions for the toast
- */
+
 data class ToastDimensions(
     val iconSize: Dp,
     val iconPadding: Dp,
@@ -55,9 +53,6 @@ data class ToastDimensions(
     val isVertical: Boolean = false
 )
 
-/**
- * Responsive toast component that adapts to different screen sizes
- */
 @Composable
 fun DmtToastView(
     message: String,

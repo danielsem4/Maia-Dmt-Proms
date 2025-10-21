@@ -8,6 +8,7 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 object QuestionRendererProvider {
 
     private val renderers: List<QuestionRenderer> = listOf(
+        InputQuestionRenderer(),
         RadioQuestionRenderer(),
         CheckboxQuestionRenderer(),
         ScaleQuestionRenderer(),

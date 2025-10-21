@@ -46,14 +46,6 @@ class HttpClientFactory(
                 socketTimeoutMillis = 20_000L
                 requestTimeoutMillis = 20_000L
             }
-//            install(Logging) {
-//                logger = object : Logger {
-//                    override fun log(message: String) {
-//                        dmtLogger.debug(message)
-//                    }
-//                }
-//                level = LogLevel.ALL
-//            }
             install(Logging) {
                 logger = object : Logger {
                     override fun log(message: String) {

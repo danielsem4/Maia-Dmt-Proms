@@ -1,13 +1,25 @@
 package maia.dmt.core.data.mapper
 
+import maia.dmt.core.data.dto.MeasurementDetailDto
+import maia.dmt.core.data.dto.MeasurementDetailGenericDto
+import maia.dmt.core.data.dto.MeasurementDetailIntDto
+import maia.dmt.core.data.dto.MeasurementDetailStringDto
 import maia.dmt.core.data.dto.evaluation.EvaluationDto
 import maia.dmt.core.data.dto.evaluation.EvaluationObjectDto
 import maia.dmt.core.data.dto.evaluation.EvaluationSettingsDto
 import maia.dmt.core.data.dto.evaluation.EvaluationValueDto
+import maia.dmt.core.data.dto.evaluation.MeasurementResultDto
+import maia.dmt.core.data.mapper.toDomain
+import maia.dmt.core.data.mapper.toDto
+import maia.dmt.core.domain.dto.MeasurementDetail
+import maia.dmt.core.domain.dto.MeasurementDetailGeneric
+import maia.dmt.core.domain.dto.MeasurementDetailInt
+import maia.dmt.core.domain.dto.MeasurementDetailString
 import maia.dmt.core.domain.dto.evaluation.Evaluation
 import maia.dmt.core.domain.dto.evaluation.EvaluationObject
 import maia.dmt.core.domain.dto.evaluation.EvaluationSettings
 import maia.dmt.core.domain.dto.evaluation.EvaluationValue
+import maia.dmt.core.domain.dto.evaluation.MeasurementResult
 
 fun EvaluationValueDto.toDomain(): EvaluationValue {
     return EvaluationValue(
@@ -129,3 +141,64 @@ fun Evaluation.toSerial(): EvaluationDto {
         measurement_objects = measurement_objects.map { it.toSerial() }
     )
 }
+
+fun MeasurementDetailDto.toDomain(): MeasurementDetail {
+    return when (this) {
+        is MeasurementDetailStringDto -> MeasurementDetailString(
+            dateTime = dateTime,
+            measureObject = measureObject,
+            value = value
+        )
+        is MeasurementDetailIntDto -> MeasurementDetailInt(
+            dateTime = dateTime,
+            measureObject = measureObject,
+            value = value
+        )
+        is MeasurementDetailGenericDto -> MeasurementDetailGeneric(
+            dateTime = dateTime,
+            measureObject = measureObject,
+            value = value
+        )
+    }
+}
+
+fun MeasurementDetail.toDto(): MeasurementDetailDto {
+    return when (this) {
+        is MeasurementDetailString -> MeasurementDetailStringDto(
+            dateTime = dateTime,
+            measureObject = measureObject,
+            value = value
+        )
+        is MeasurementDetailInt -> MeasurementDetailIntDto(
+            dateTime = dateTime,
+            measureObject = measureObject,
+            value = value
+        )
+        is MeasurementDetailGeneric -> MeasurementDetailGenericDto(
+            dateTime = dateTime,
+            measureObject = measureObject,
+            value = value
+        )
+    }
+}
+
+fun MeasurementResultDto.toDomain(): MeasurementResult {
+    return MeasurementResult(
+        clinicId = clinicId,
+        date = date,
+        measurement = measurement,
+        patientId = patient_id,
+        results =  ArrayList(results.map { it.toDomain() as MeasurementDetailString })
+    )
+}
+
+fun MeasurementResult.toDto(): MeasurementResultDto {
+    return MeasurementResultDto(
+        clinicId = clinicId,
+        date = date,
+        measurement = measurement,
+        patient_id = patientId,
+        results = ArrayList(results.map { it.toDto() as MeasurementDetailStringDto })
+    )
+}
+

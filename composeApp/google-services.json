@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "287898714048",
+    "project_id": "healdev-1a214",
+    "storage_bucket": "healdev-1a214.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:287898714048:android:bcae01ec602039b670d225",
+        "android_client_info": {
+          "package_name": "maia.dmt.proms"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDOpOi39D7WnotUZ8vrq-R3qnwnyu9g2UM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:287898714048:android:8376fa89b3bd946070d225",
+        "android_client_info": {
+          "package_name": "org.hitheal.messenger"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDOpOi39D7WnotUZ8vrq-R3qnwnyu9g2UM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

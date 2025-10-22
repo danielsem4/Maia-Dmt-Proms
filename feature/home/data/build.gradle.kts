@@ -22,7 +22,9 @@ kotlin {
 
         androidMain {
             dependencies {
-
+                implementation(project.dependencies.platform(libs.firebase.bom))
+                implementation(libs.firebase.messaging)
+                implementation(libs.koin.android)
             }
         }
 

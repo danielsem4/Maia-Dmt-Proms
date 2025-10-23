@@ -11,6 +11,7 @@ import maia.dmt.core.domain.auth.SessionStorage
 import maia.dmt.core.domain.util.onFailure
 import maia.dmt.core.domain.util.onSuccess
 import maia.dmt.home.data.notificaiton.FirebasePushNotificationService
+import maia.dmt.home.domain.models.FcmTokenRequest
 import maia.dmt.home.domain.notification.DeviceTokenService
 
 class MainViewModel(
@@ -30,7 +31,8 @@ class MainViewModel(
             val authInfo = sessionStorage.observeAuthInfo().firstOrNull()
             _state.update { it.copy(
                 isCheckingAuth = false,
-                isLoggedIn = authInfo != null
+                isLoggedIn = authInfo != null,
+                user = authInfo?.user
             ) }
 
             observeUserAuth()
@@ -75,7 +77,13 @@ class MainViewModel(
 
     private fun registerDeviceToken(token: String, platform: String) {
         viewModelScope.launch {
-            deviceTokenService.registerDeviceToken(token, platform)
+            deviceTokenService.registerDeviceToken(
+                token = FcmTokenRequest(
+                    user_id = state.value.user!!.id.toString(),
+                    clinic_id = state.value.user!!.clinicId.toString(),
+                    fcm_token = token
+                )
+            )
                 .onSuccess {
 
                 }

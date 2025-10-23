@@ -1,10 +1,28 @@
 package maia.dmt.home.data.notificaiton
 
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.onStart
 import maia.dmt.home.domain.notification.PushNotificationService
+import platform.Foundation.NSUserDefaults
+import platform.UIKit.UIApplication
+import platform.UIKit.registerForRemoteNotifications
+import platform.UIKit.registeredForRemoteNotifications
 
-actual class FirebasePushNotificationService :PushNotificationService {
+actual class FirebasePushNotificationService: PushNotificationService {
     actual override fun observeDeviceToken(): Flow<String?> {
-        TODO("Not yet implemented")
+        return IosDeviceTokenHolder
+            .token
+            .onStart {
+                if (IosDeviceTokenHolder.token.value == null) {
+                    val userDefaults = NSUserDefaults.standardUserDefaults()
+                    val fcmToken = userDefaults.stringForKey("FCM_TOKEN")
+
+                    if (fcmToken != null) {
+                        IosDeviceTokenHolder.updateToken(fcmToken)
+                    } else {
+                        UIApplication.sharedApplication.registerForRemoteNotifications()
+                    }
+                }
+            }
     }
 }

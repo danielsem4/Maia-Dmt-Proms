@@ -31,7 +31,5 @@ class DmtFirebaseNotificationService: FirebaseMessagingService() {
                 )
             }
         }
-
     }
-
 }

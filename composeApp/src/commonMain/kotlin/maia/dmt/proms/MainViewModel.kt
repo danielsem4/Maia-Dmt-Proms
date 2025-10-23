@@ -44,7 +44,12 @@ class MainViewModel(
         viewModelScope.launch {
             sessionStorage.observeAuthInfo().collect { authInfo ->
                 val isLoggedIn = authInfo != null
-                _state.update { it.copy(isLoggedIn = isLoggedIn) }
+                _state.update {
+                    it.copy(
+                        isLoggedIn = isLoggedIn,
+                        user = authInfo?.user
+                    )
+                }
 
                 if (isLoggedIn && currentDeviceToken != null) {
                     registerDeviceTokenIfNeeded(currentDeviceToken!!)

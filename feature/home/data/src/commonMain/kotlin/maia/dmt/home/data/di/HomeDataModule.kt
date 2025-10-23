@@ -12,6 +12,7 @@ import org.koin.dsl.module
 
 expect val platformHomeDataModule: Module
 val homeDataModule = module {
+
     singleOf(::KtorHomeService) bind HomeService::class
     singleOf(::KtorDeviceTokenService) bind DeviceTokenService::class
 }

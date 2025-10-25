@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.convention.cmp.application)
     alias(libs.plugins.compose.hot.reload)
+    alias(libs.plugins.google.services)
 }
 
 kotlin {
@@ -29,9 +30,6 @@ kotlin {
             implementation(projects.feature.medication.domain)
             implementation(projects.feature.medication.data)
 
-            implementation(projects.feature.graphs.presentation)
-            implementation(projects.feature.graphs.domain)
-
             implementation(projects.feature.evaluation.presentation)
             implementation(projects.feature.evaluation.domain)
             implementation(projects.feature.evaluation.data)
@@ -51,8 +49,6 @@ kotlin {
             implementation(compose.components.uiToolingPreview)
             implementation(libs.jetbrains.compose.viewmodel)
             implementation(libs.jetbrains.lifecycle.compose)
-
-
         }
     }
 }

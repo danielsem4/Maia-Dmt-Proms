@@ -6,8 +6,16 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		239D022C2EAA13D9004C153C /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = 239D022B2EAA13D9004C153C /* FirebaseCore */; };
+		239D022E2EAA13D9004C153C /* FirebaseInAppMessaging-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = 239D022D2EAA13D9004C153C /* FirebaseInAppMessaging-Beta */; };
+		239D02302EAA13D9004C153C /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 239D022F2EAA13D9004C153C /* FirebaseMessaging */; };
+		239D023B2EAA39E1004C153C /* ComposeApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 239D023A2EAA39E1004C153C /* ComposeApp.framework */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		22E5689ACF6E2AC4A32CDDAD /* DMTProms.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DMTProms.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		239D023A2EAA39E1004C153C /* ComposeApp.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ComposeApp.framework; path = ../composeApp/build/bin/iosSimulatorArm64/debugFramework/ComposeApp.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -41,12 +49,24 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				239D02302EAA13D9004C153C /* FirebaseMessaging in Frameworks */,
+				239D022C2EAA13D9004C153C /* FirebaseCore in Frameworks */,
+				239D022E2EAA13D9004C153C /* FirebaseInAppMessaging-Beta in Frameworks */,
+				239D023B2EAA39E1004C153C /* ComposeApp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		239D02392EAA39E1004C153C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				239D023A2EAA39E1004C153C /* ComposeApp.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		41715A53DBC22E821AB1AC1E /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -60,6 +80,7 @@
 			children = (
 				474B0F45FF9277B6235F732A /* Configuration */,
 				B9A4887167BFEC7B0FC6C940 /* iosApp */,
+				239D02392EAA39E1004C153C /* Frameworks */,
 				41715A53DBC22E821AB1AC1E /* Products */,
 			);
 			sourceTree = "<group>";
@@ -75,6 +96,7 @@
 				2897E4E7D3E2ABDAE7CBE98D /* Sources */,
 				56C26294EE54C516D66AF286 /* Frameworks */,
 				A2DF15E2FC3BAE475D70CDA9 /* Resources */,
+				239D02382EAA3472004C153C /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -85,6 +107,9 @@
 			);
 			name = iosApp;
 			packageProductDependencies = (
+				239D022B2EAA13D9004C153C /* FirebaseCore */,
+				239D022D2EAA13D9004C153C /* FirebaseInAppMessaging-Beta */,
+				239D022F2EAA13D9004C153C /* FirebaseMessaging */,
 			);
 			productName = iosApp;
 			productReference = 22E5689ACF6E2AC4A32CDDAD /* DMTProms.app */;
@@ -114,6 +139,9 @@
 			);
 			mainGroup = 92A34F4670EA7E0131A77CA0;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				239D022A2EAA13D9004C153C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 41715A53DBC22E821AB1AC1E /* Products */;
 			projectDirPath = "";
@@ -154,6 +182,23 @@
 			shellPath = /bin/sh;
 			shellScript = "if [ \"YES\" = \"$OVERRIDE_KOTLIN_BUILD_IDE_SUPPORTED\" ]; then\n  echo \"Skipping Gradle build task invocation due to OVERRIDE_KOTLIN_BUILD_IDE_SUPPORTED environment variable set to \\\"YES\\\"\"\n  exit 0\nfi\ncd \"$SRCROOT/..\"\n./gradlew :composeApp:embedAndSignAppleFrameworkForXcode\n";
 		};
+		239D02382EAA3472004C153C /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "set -e\ncd \"$SRCROOT/..\"\nchmod +x ./gradlew\n./gradlew :composeApp:linkDebugFrameworkIosSimulatorArm64 --no-configuration-cache\n\n";
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -173,6 +218,7 @@
 				ARCHS = arm64;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = iosApp/iosApp.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"iosApp/Preview Content\"";
@@ -190,6 +236,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = maia.dmt.proms;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -260,6 +307,7 @@
 				ARCHS = arm64;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = iosApp/iosApp.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"iosApp/Preview Content\"";
@@ -277,6 +325,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = maia.dmt.proms;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -370,6 +419,35 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		239D022A2EAA13D9004C153C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 12.4.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		239D022B2EAA13D9004C153C /* FirebaseCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 239D022A2EAA13D9004C153C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCore;
+		};
+		239D022D2EAA13D9004C153C /* FirebaseInAppMessaging-Beta */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 239D022A2EAA13D9004C153C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = "FirebaseInAppMessaging-Beta";
+		};
+		239D022F2EAA13D9004C153C /* FirebaseMessaging */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 239D022A2EAA13D9004C153C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseMessaging;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 1CDB54234AD6DFF83F886D38 /* Project object */;
 }

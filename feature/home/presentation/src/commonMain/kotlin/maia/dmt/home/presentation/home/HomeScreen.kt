@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -18,6 +19,8 @@ import dmtproms.feature.home.presentation.generated.resources.messages
 import maia.dmt.core.designsystem.components.dialogs.DmtConfirmationDialog
 import maia.dmt.core.designsystem.components.layouts.DmtBaseScreen
 import maia.dmt.core.designsystem.theme.DmtTheme
+import maia.dmt.core.presentation.permissions.Permission
+import maia.dmt.core.presentation.permissions.rememberPermissionController
 import maia.dmt.core.presentation.util.ObserveAsEvents
 import maia.dmt.home.presentation.components.DmtMessageSection
 import maia.dmt.home.presentation.components.DmtModuleSection
@@ -58,6 +61,13 @@ fun HomeScreen(
     state: HomeState,
     onAction: (HomeAction) -> Unit,
 ) {
+
+    val permissionController = rememberPermissionController()
+
+    LaunchedEffect(true) {
+        permissionController.requestPermission(Permission.NOTIFICATIONS)
+    }
+
     DmtBaseScreen(
         titleText = stringResource(Res.string.home_title),
         iconBar = vectorResource(Res.drawable.logout_icon),

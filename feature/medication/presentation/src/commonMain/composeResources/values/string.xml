@@ -14,6 +14,7 @@
     <string name="interval">Interval</string>
     <string name="dose">Dose</string>
     <string name="medication_report_body">I took medication</string>
+    <string name="medication_statistics">Medications Statistics</string>
 
     <string name="start_date">Start Date</string>
     <string name="end_date">End Date</string>

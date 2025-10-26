@@ -14,6 +14,8 @@
     <string name="interval">Интервал</string>
     <string name="dose">Доза</string>
     <string name="medication_report_body">Я принял лекарство</string>
+    <string name="medication_statistics">Статистика лекарств</string>
+
 
     <string name="start_date">Дата начала</string>
     <string name="end_date">Дата окончания</string>

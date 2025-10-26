@@ -14,6 +14,7 @@
     <string name="interval">מרווח</string>
     <string name="dose">מינון</string>
     <string name="medication_report_body">נטלתי תרופה</string>
+    <string name="medication_statistics">סטטיסטיקת תרופות</string>
 
     <string name="start_date">תאריך התחלה</string>
     <string name="end_date">תאריך סיום</string>

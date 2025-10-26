@@ -40,6 +40,7 @@ fun DmtConfirmationDialog(
     onConfirmClick: () -> Unit,
     onCancelClick: () -> Unit,
     onDismiss: () -> Unit,
+    isLoading: Boolean = false,
 ) {
     Dialog(
         onDismissRequest = onDismiss,
@@ -89,6 +90,7 @@ fun DmtConfirmationDialog(
                     )
                     DmtButton(
                         text = confirmButtonText,
+                        isLoading = isLoading,
                         onClick = onConfirmClick,
                         style = DmtButtonStyle.DESTRUCTIVE_PRIMARY
                     )

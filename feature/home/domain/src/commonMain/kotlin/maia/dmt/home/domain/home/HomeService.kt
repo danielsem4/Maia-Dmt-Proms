@@ -11,5 +11,4 @@ interface HomeService {
 
     suspend fun logout(): EmptyResult<DataError.Remote>
 
-//    suspend fun getMessages()
 }

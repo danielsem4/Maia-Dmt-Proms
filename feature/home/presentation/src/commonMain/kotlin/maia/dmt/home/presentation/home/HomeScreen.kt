@@ -110,7 +110,8 @@ fun HomeScreen(
             cancelButtonText = "Cancel",
             onConfirmClick = { onAction(HomeAction.OnLogoutConfirm) },
             onCancelClick = { onAction(HomeAction.OnLogoutCancel) },
-            onDismiss = { onAction(HomeAction.OnLogoutCancel) }
+            onDismiss = { onAction(HomeAction.OnLogoutCancel) },
+            isLoading = state.isLoggingOut
         )
     }
 }

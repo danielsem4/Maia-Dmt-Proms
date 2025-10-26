@@ -174,11 +174,21 @@ class HomeViewModel(
 
     private fun logout() {
         viewModelScope.launch {
-            _state.update {
-                it.copy(showLogoutDialog = false)
-            }
-            sessionStorage.set(null)
-            eventChannel.send(HomeEvent.LogoutSuccess)
+
+            homeService.logout()
+                .onSuccess {
+                    _state.update {
+                        it.copy(showLogoutDialog = false)
+                    }
+                    sessionStorage.set(null)
+                    eventChannel.send(HomeEvent.LogoutSuccess)
+                }
+                .onFailure {
+                    _state.update {
+                        it.copy(showLogoutDialog = true)
+                    }
+
+                }
         }
     }
 }

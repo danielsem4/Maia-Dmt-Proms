@@ -39,7 +39,8 @@ import org.koin.compose.viewmodel.koinViewModel
 fun MedicationsRoot(
     viewModel: MedicationViewModel = koinViewModel(),
     onNavigateBack: () -> Unit,
-    onNavigateToAllMedications: (Boolean) -> Unit
+    onNavigateToAllMedications: (Boolean) -> Unit,
+    onNavigationToMedicationStatistics: () -> Unit
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
 
@@ -50,6 +51,9 @@ fun MedicationsRoot(
             }
             is MedicationEvent.NavigateToAllMedications -> {
                 onNavigateToAllMedications(event.isReport)
+            }
+            is MedicationEvent.NavigateToMedicationStatistics -> {
+                onNavigationToMedicationStatistics()
             }
         }
     }
@@ -121,7 +125,7 @@ fun MedicationsScreen(
                                 modifier = Modifier.size(20.dp)
                             )
                         },
-                        onClick = {  }
+                        onClick = { onAction(MedicationAction.OnMedicationsStatisticsClick) }
                     )
                 }
                 Spacer(modifier = Modifier.weight(4f))

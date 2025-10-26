@@ -2,8 +2,10 @@ package maia.dmt.medication.data.mapper
 
 import maia.dmt.medication.data.dto.MedicationDto
 import maia.dmt.medication.data.dto.MedicationReportDto
+import maia.dmt.medication.data.dto.ReportedMedicationDto
 import maia.dmt.medication.domain.models.Medication
 import maia.dmt.medication.domain.models.MedicationReport
+import maia.dmt.medication.domain.models.ReportedMedication
 
 fun MedicationDto.toDomain(): Medication {
     return Medication(
@@ -28,4 +30,25 @@ fun MedicationReport.toSerial(): MedicationReportDto {
         medication_id = medication_id,
         timestamp = timestamp
     )
+}
+
+fun ReportedMedicationDto.toDomain(): ReportedMedication {
+    return ReportedMedication(
+        id = id,
+        name = name,
+        form = form,
+        dosage = dosage,
+        time_taken = time_taken
+    )
+}
+
+fun ReportedMedication.toSerial(): ReportedMedicationDto {
+    return ReportedMedicationDto(
+        id = id,
+        name = name,
+        form = form,
+        dosage = dosage,
+        time_taken = time_taken
+    )
+
 }

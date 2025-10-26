@@ -6,6 +6,7 @@ import maia.dmt.core.domain.util.Result
 import maia.dmt.medication.domain.models.Medication
 import maia.dmt.medication.domain.models.MedicationNotification
 import maia.dmt.medication.domain.models.MedicationReport
+import maia.dmt.medication.domain.models.ReportedMedication
 
 
 interface MedicationService {
@@ -16,4 +17,8 @@ interface MedicationService {
 
     suspend fun setMedicationReminders(body: MedicationNotification): EmptyResult<DataError.Remote>
 
+    suspend fun getAllReportedMedications(patientId: Int, clinicId: Int): Result<List<ReportedMedication>, DataError.Remote>
+
 }
+
+

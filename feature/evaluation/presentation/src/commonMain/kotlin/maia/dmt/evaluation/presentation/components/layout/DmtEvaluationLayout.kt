@@ -26,7 +26,8 @@ fun DmtEvaluationLayout(
     onNextClick: () -> Unit = {},
     prevButtonText: String = "Prev",
     nextButtonText: String = "Next",
-    content: @Composable () -> Unit = {}
+    isLoading: Boolean = false,
+    content: @Composable () -> Unit = {},
 ) {
     Column(
         modifier = modifier
@@ -76,7 +77,8 @@ fun DmtEvaluationLayout(
                 modifier = Modifier
                     .weight(1f)
                     .height(72.dp),
-                style = DmtButtonStyle.PRIMARY
+                style = DmtButtonStyle.PRIMARY,
+                isLoading = isLoading
             )
         }
     }

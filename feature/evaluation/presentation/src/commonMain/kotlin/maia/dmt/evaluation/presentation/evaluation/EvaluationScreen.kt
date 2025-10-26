@@ -97,7 +97,8 @@ fun EvaluationScreen(
                 },
                 onNextClick = { onAction(EvaluationAction.OnEvaluationNextClick) },
                 prevButtonText = stringResource(Res.string.evaluation_prev),
-                nextButtonText = stringResource(Res.string.evaluation_next)
+                nextButtonText = stringResource(Res.string.evaluation_next),
+                isLoading = state.isLoadingEvaluationUpload
             ) {
                 Column(
                     modifier = Modifier

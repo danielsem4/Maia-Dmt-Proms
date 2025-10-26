@@ -1,17 +1,5 @@
 package maia.dmt.home.presentation.home
 
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.AccountCircle
-import androidx.compose.material.icons.filled.Email
-import androidx.compose.material.icons.filled.Favorite
-import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.Notifications
-import androidx.compose.material.icons.filled.Person
-import androidx.compose.material.icons.filled.Search
-import androidx.compose.material.icons.filled.Settings
-import androidx.compose.material.icons.filled.ShoppingCart
-import androidx.compose.material.icons.filled.Star
-import androidx.compose.ui.text.toLowerCase
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dmtproms.feature.home.presentation.generated.resources.Res
@@ -20,7 +8,6 @@ import dmtproms.feature.home.presentation.generated.resources.clock_icon
 import dmtproms.feature.home.presentation.generated.resources.evaluation_icon
 import dmtproms.feature.home.presentation.generated.resources.file_upload_icon
 import dmtproms.feature.home.presentation.generated.resources.hitber_icon
-import dmtproms.feature.home.presentation.generated.resources.logout_icon
 import dmtproms.feature.home.presentation.generated.resources.medications_icon
 import dmtproms.feature.home.presentation.generated.resources.memory_icon
 import dmtproms.feature.home.presentation.generated.resources.orientation_icon
@@ -42,7 +29,6 @@ import maia.dmt.core.presentation.util.toUiText
 import maia.dmt.home.domain.home.HomeService
 import maia.dmt.home.presentation.module.ModuleUiModel
 import org.jetbrains.compose.resources.DrawableResource
-import org.jetbrains.compose.resources.imageResource
 
 class HomeViewModel(
     private val homeService: HomeService,

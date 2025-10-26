@@ -21,7 +21,7 @@ class KtorDeviceTokenService(
     ): EmptyResult<DataError.Remote> {
 
         return httpClient.post(
-            route = "registerDeviceToken/",
+            route = "get_fcm_token/",
             body = token.toSerial()
         )
     }

@@ -100,7 +100,8 @@ fun EvaluationScreen(
                 nextButtonText = stringResource(Res.string.evaluation_next)
             ) {
                 Column(
-                    modifier = Modifier.fillMaxWidth(),
+                    modifier = Modifier
+                        .fillMaxWidth(),
                     verticalArrangement = Arrangement.spacedBy(16.dp)
                 ) {
                     questions.forEach { question ->

@@ -10,4 +10,13 @@
     <string name="activities_report">Отчёт</string>
     <string name="activities_date_and_time">Дата и время</string>
 
+    <string name="activities_activity_walk">Ходьба</string>
+    <string name="activities_activity_yoga">Йога</string>
+    <string name="activities_activity_treadmill">Беговая дорожка</string>
+    <string name="activities_activity_swim">Плавание</string>
+    <string name="activities_activity_stand">Стояние</string>
+    <string name="activities_activity_run">Бег</string>
+    <string name="activities_activity_racket_game">Игра с ракеткой</string>
+    <string name="activities_activity_gym_workout">Тренировка в зале</string>
+    <string name="activities_activity_ball_game">Игра с мячом</string>
 </resources>

@@ -137,7 +137,7 @@ fun ActivitiesScreen(
 
         DmtCustomDialog(
             title = state.selectedActivity?.text ?: "",
-            icon = Res.drawable.gym_workout_icon,
+            icon = state.selectedActivity!!.icon,
             description = "${stringResource(Res.string.activities_dialog_body)}\n${
                 stringResource(
                     Res.string.activities_dialog_body_date

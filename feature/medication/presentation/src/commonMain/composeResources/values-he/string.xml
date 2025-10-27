@@ -14,10 +14,17 @@
     <string name="interval">מרווח</string>
     <string name="dose">מינון</string>
     <string name="medication_report_body">נטלתי תרופה</string>
+    <string name="medication_statistics">סטטיסטיקת תרופות</string>
+
+    <string name="medications_sort_by_name">מיון לפי שם</string>
+    <string name="medications_sort_by_date">מיון לפי תאריך</string>
+    <string name="medications_no_medication_logs">לא נמצאו רשומות תרופות</string>
 
     <string name="start_date">תאריך התחלה</string>
     <string name="end_date">תאריך סיום</string>
     <string name="start_time">שעת התחלה</string>
     <string name="end_time">שעת סיום</string>
+
+    <string name="last_medication_taken">התרופות האחרונות שנלקחו</string>
 
 </resources>

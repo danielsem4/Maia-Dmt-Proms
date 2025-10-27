@@ -27,14 +27,32 @@ import maia.dmt.core.presentation.util.UiText
 import maia.dmt.core.presentation.util.getCurrentFormattedDateTime
 import maia.dmt.core.presentation.util.toUiText
 import dmtproms.feature.activities.presentation.generated.resources.Res
+import dmtproms.feature.activities.presentation.generated.resources.activities_activity_ball_game
+import dmtproms.feature.activities.presentation.generated.resources.activities_activity_gym_workout
+import dmtproms.feature.activities.presentation.generated.resources.activities_activity_racket_game
+import dmtproms.feature.activities.presentation.generated.resources.activities_activity_run
+import dmtproms.feature.activities.presentation.generated.resources.activities_activity_stand
+import dmtproms.feature.activities.presentation.generated.resources.activities_activity_swim
+import dmtproms.feature.activities.presentation.generated.resources.activities_activity_treadmill
+import dmtproms.feature.activities.presentation.generated.resources.activities_activity_walk
+import dmtproms.feature.activities.presentation.generated.resources.activities_activity_yoga
+import dmtproms.feature.activities.presentation.generated.resources.ball_game_icon
+import dmtproms.feature.activities.presentation.generated.resources.gym_workout_icon
+import dmtproms.feature.activities.presentation.generated.resources.racket_game_icon
 import dmtproms.feature.activities.presentation.generated.resources.run_icon
+import dmtproms.feature.activities.presentation.generated.resources.stand_icon
+import dmtproms.feature.activities.presentation.generated.resources.swim_icon
+import dmtproms.feature.activities.presentation.generated.resources.treadmill_icon
+import dmtproms.feature.activities.presentation.generated.resources.walk_icon
+import dmtproms.feature.activities.presentation.generated.resources.yoga_icon
+import org.jetbrains.compose.resources.DrawableResource
+import org.jetbrains.compose.resources.getString
 import kotlin.time.Clock
 
 class ActivitiesViewModel(
     private val sessionStorage: SessionStorage,
     private val activitiesService: ActivitiesService
 ): ViewModel() {
-
     private val _state = MutableStateFlow(ActivitiesState())
     private val eventChannel = Channel<ActivitiesEvent>()
     val events = eventChannel.receiveAsFlow()
@@ -109,7 +127,7 @@ class ActivitiesViewModel(
                         ActivityUiModel(
                             text = activity.name,
                             id = activity.id.toString(),
-                            icon = Res.drawable.run_icon,
+                            icon = mapActivityIcon(activity.name),
                             onClick = { handleActivityClickById(activity.name) }
                         )
                     }
@@ -218,6 +236,36 @@ class ActivitiesViewModel(
                         )
                     }
                 }
+        }
+    }
+
+    private fun mapActivityIcon(activityName: String): DrawableResource {
+        return when (activityName.lowercase().trim()) {
+            "walk" -> Res.drawable.walk_icon
+            "yoga" -> Res.drawable.yoga_icon
+            "treadmill" -> Res.drawable.treadmill_icon
+            "swim" -> Res.drawable.swim_icon
+            "stand" -> Res.drawable.stand_icon
+            "run" -> Res.drawable.run_icon
+            "racket game" -> Res.drawable.racket_game_icon
+            "gym workout" -> Res.drawable.gym_workout_icon
+            "ball game" -> Res.drawable.ball_game_icon
+            else -> Res.drawable.run_icon
+        }
+    }
+
+    private suspend fun mapActivityName(activityName: String): String {
+        return when (activityName.lowercase().trim()) {
+            "walk" -> getString(Res.string.activities_activity_walk)
+            "yoga" -> getString(Res.string.activities_activity_yoga)
+            "treadmill" -> getString(Res.string.activities_activity_treadmill)
+            "swim" -> getString(Res.string.activities_activity_swim)
+            "stand" -> getString(Res.string.activities_activity_stand)
+            "run" -> getString(Res.string.activities_activity_run)
+            "rackety game", "racket game" -> getString(Res.string.activities_activity_racket_game)
+            "gym workout" -> getString(Res.string.activities_activity_gym_workout)
+            "ball game" -> getString(Res.string.activities_activity_ball_game)
+            else -> getString(Res.string.activities_activity_walk)
         }
     }
 

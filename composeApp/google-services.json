@@ -9,6 +9,25 @@
       "client_info": {
         "mobilesdk_app_id": "1:287898714048:android:bcae01ec602039b670d225",
         "android_client_info": {
+          "package_name": "com.hit.generic.medial.project"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDOpOi39D7WnotUZ8vrq-R3qnwnyu9g2UM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:287898714048:android:c9ed5beec9b8a49a70d225",
+        "android_client_info": {
           "package_name": "maia.dmt.proms"
         }
       },

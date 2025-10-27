@@ -14,10 +14,16 @@
     <string name="interval">Интервал</string>
     <string name="dose">Доза</string>
     <string name="medication_report_body">Я принял лекарство</string>
+    <string name="medication_statistics">Статистика лекарств</string>
+
+    <string name="medications_sort_by_name">Сортировать по названию</string>
+    <string name="medications_sort_by_date">Сортировать по дате</string>
+    <string name="medications_no_medication_logs">Записи о лекарствах не найдены</string>
 
     <string name="start_date">Дата начала</string>
     <string name="end_date">Дата окончания</string>
     <string name="start_time">Время начала</string>
     <string name="end_time">Время окончания</string>
 
+    <string name="last_medication_taken">Последние принятые препараты</string>
 </resources>

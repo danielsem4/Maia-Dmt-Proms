@@ -97,10 +97,12 @@ fun EvaluationScreen(
                 },
                 onNextClick = { onAction(EvaluationAction.OnEvaluationNextClick) },
                 prevButtonText = stringResource(Res.string.evaluation_prev),
-                nextButtonText = stringResource(Res.string.evaluation_next)
+                nextButtonText = stringResource(Res.string.evaluation_next),
+                isLoading = state.isLoadingEvaluationUpload
             ) {
                 Column(
-                    modifier = Modifier.fillMaxWidth(),
+                    modifier = Modifier
+                        .fillMaxWidth(),
                     verticalArrangement = Arrangement.spacedBy(16.dp)
                 ) {
                     questions.forEach { question ->

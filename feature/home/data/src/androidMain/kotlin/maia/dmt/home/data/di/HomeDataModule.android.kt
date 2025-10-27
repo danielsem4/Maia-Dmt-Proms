@@ -1,5 +1,8 @@
 package maia.dmt.home.data.di
 
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
 import maia.dmt.home.data.lifycycle.AppLifecycleObserver
 import maia.dmt.home.data.notificaiton.FirebasePushNotificationService
 import org.koin.core.module.Module
@@ -10,4 +13,7 @@ import org.koin.dsl.module
 actual val platformHomeDataModule = module {
     singleOf(::FirebasePushNotificationService) bind FirebasePushNotificationService::class
     singleOf(::AppLifecycleObserver)
+    single<CoroutineScope> {
+        CoroutineScope(SupervisorJob() + Dispatchers.IO)
+    }
 }

@@ -17,8 +17,10 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import dmtproms.feature.medication.presentation.generated.resources.Res
 import dmtproms.feature.medication.presentation.generated.resources.back_arrow_icon
+import dmtproms.feature.medication.presentation.generated.resources.bar_cahrt_medications
 import dmtproms.feature.medication.presentation.generated.resources.bell_icon
 import dmtproms.feature.medication.presentation.generated.resources.medication_reminder
+import dmtproms.feature.medication.presentation.generated.resources.medication_statistics
 import dmtproms.feature.medication.presentation.generated.resources.medications
 import dmtproms.feature.medication.presentation.generated.resources.medications_icon
 import dmtproms.feature.medication.presentation.generated.resources.report_medications
@@ -37,7 +39,8 @@ import org.koin.compose.viewmodel.koinViewModel
 fun MedicationsRoot(
     viewModel: MedicationViewModel = koinViewModel(),
     onNavigateBack: () -> Unit,
-    onNavigateToAllMedications: (Boolean) -> Unit
+    onNavigateToAllMedications: (Boolean) -> Unit,
+    onNavigationToMedicationStatistics: () -> Unit
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
 
@@ -48,6 +51,9 @@ fun MedicationsRoot(
             }
             is MedicationEvent.NavigateToAllMedications -> {
                 onNavigateToAllMedications(event.isReport)
+            }
+            is MedicationEvent.NavigateToMedicationStatistics -> {
+                onNavigationToMedicationStatistics()
             }
         }
     }
@@ -106,6 +112,20 @@ fun MedicationsScreen(
                             )
                         },
                         onClick = { onAction(MedicationAction.OnMedicationReminderClick) }
+                    )
+                    Spacer(modifier = Modifier.padding(12.dp))
+                    DmtCard(
+                        modifier = Modifier.fillMaxWidth(),
+                        text = stringResource(Res.string.medication_statistics),
+                        style = DmtCardStyle.ELEVATED,
+                        leadingIcon = {
+                            Icon(
+                                imageVector = vectorResource(Res.drawable.bar_cahrt_medications),
+                                contentDescription = null,
+                                modifier = Modifier.size(20.dp)
+                            )
+                        },
+                        onClick = { onAction(MedicationAction.OnMedicationsStatisticsClick) }
                     )
                 }
                 Spacer(modifier = Modifier.weight(4f))

@@ -6,6 +6,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navigation
 import androidx.navigation.toRoute
 import maia.dmt.medication.presentation.allMedications.AllMedicationRoot
+import maia.dmt.medication.presentation.medicationStatistics.MedicationStatisticsRoot
 import maia.dmt.medication.presentation.medications.MedicationsRoot
 
 fun NavGraphBuilder.medicationGraph(
@@ -21,6 +22,9 @@ fun NavGraphBuilder.medicationGraph(
                 },
                 onNavigateToAllMedications = { isReport ->
                     navController.navigate(MedicationsGraphRoutes.AllMedications(isReport = isReport))
+                },
+                onNavigationToMedicationStatistics = {
+                    navController.navigate(MedicationsGraphRoutes.MedicationStatistics)
                 }
             )
         }
@@ -34,5 +38,22 @@ fun NavGraphBuilder.medicationGraph(
                 }
             )
         }
+
+        composable<MedicationsGraphRoutes.MedicationStatistics> {
+            MedicationStatisticsRoot(
+                onNavigateBack = {
+                    navController.navigateUp()
+                }
+            )
+        }
+
+
+        // composable<MedicationsGraphRoutes.MedicationReminder> {
+        //     MedicationReminderRoot(
+        //         onNavigateBack = {
+        //             navController.navigateUp()
+        //         }
+        //     )
+        // }
     }
 }

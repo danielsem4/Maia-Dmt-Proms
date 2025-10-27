@@ -15,6 +15,7 @@ import androidx.compose.ui.unit.sp
 import maia.dmt.core.designsystem.components.buttons.DmtButton
 import maia.dmt.core.designsystem.components.buttons.DmtButtonStyle
 import maia.dmt.core.designsystem.theme.DmtTheme
+import maia.dmt.core.presentation.util.clearFocusOnTap
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
@@ -25,11 +26,13 @@ fun DmtEvaluationLayout(
     onNextClick: () -> Unit = {},
     prevButtonText: String = "Prev",
     nextButtonText: String = "Next",
-    content: @Composable () -> Unit = {}
+    isLoading: Boolean = false,
+    content: @Composable () -> Unit = {},
 ) {
     Column(
         modifier = modifier
             .fillMaxSize()
+            .clearFocusOnTap()
             .background(MaterialTheme.colorScheme.background)
             .padding(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -74,7 +77,8 @@ fun DmtEvaluationLayout(
                 modifier = Modifier
                     .weight(1f)
                     .height(72.dp),
-                style = DmtButtonStyle.PRIMARY
+                style = DmtButtonStyle.PRIMARY,
+                isLoading = isLoading
             )
         }
     }

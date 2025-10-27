@@ -10,5 +10,13 @@
     <string name="activities_report">Report</string>
     <string name="activities_date_and_time">Date &amp; Time</string>
 
-
+    <string name="activities_activity_walk">Walk</string>
+    <string name="activities_activity_yoga">Yoga</string>
+    <string name="activities_activity_treadmill">Treadmill</string>
+    <string name="activities_activity_swim">Swim</string>
+    <string name="activities_activity_stand">Stand</string>
+    <string name="activities_activity_run">Run</string>
+    <string name="activities_activity_racket_game">Racket game</string>
+    <string name="activities_activity_gym_workout">Gym workout</string>
+    <string name="activities_activity_ball_game">Ball game</string>
 </resources>

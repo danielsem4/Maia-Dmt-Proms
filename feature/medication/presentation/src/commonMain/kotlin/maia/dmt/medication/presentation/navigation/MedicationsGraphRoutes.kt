@@ -16,5 +16,9 @@ interface MedicationsGraphRoutes {
     @Serializable
     data object MedicationReminder: MedicationsGraphRoutes
 
+    @Serializable
+    data object MedicationStatistics: MedicationsGraphRoutes
+
+
 
 }

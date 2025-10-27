@@ -8,12 +8,14 @@ import maia.dmt.core.domain.util.EmptyResult
 import maia.dmt.core.domain.util.Result
 import maia.dmt.core.domain.util.map
 import maia.dmt.medication.data.dto.MedicationDto
+import maia.dmt.medication.data.dto.ReportedMedicationDto
 import maia.dmt.medication.data.mapper.toDomain
 import maia.dmt.medication.data.mapper.toSerial
 import maia.dmt.medication.domain.medications.MedicationService
 import maia.dmt.medication.domain.models.Medication
 import maia.dmt.medication.domain.models.MedicationNotification
 import maia.dmt.medication.domain.models.MedicationReport
+import maia.dmt.medication.domain.models.ReportedMedication
 
 class KtorMedicationService(
     private val httpClient: HttpClient,
@@ -49,5 +51,16 @@ class KtorMedicationService(
         )
     }
 
+    override suspend fun getAllReportedMedications(
+        patientId: Int,
+        clinicId: Int
+    ): Result<List<ReportedMedication>, DataError.Remote> {
+        return httpClient.get<List<ReportedMedicationDto>>(
+            route = "getPatientReports/$clinicId/$patientId/",
+            queryParams = mapOf(
+                "report_type" to "medications"
+            )
+        ).map { it.map { it.toDomain() } }
+    }
 
 }

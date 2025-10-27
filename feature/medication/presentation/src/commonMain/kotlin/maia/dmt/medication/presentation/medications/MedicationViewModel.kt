@@ -38,6 +38,7 @@ class MedicationViewModel(
         when (action) {
             MedicationAction.OnMedicationReportClick -> navigateToReport()
             MedicationAction.OnMedicationReminderClick -> navigateToReminder()
+            MedicationAction.OnMedicationsStatisticsClick -> navigateToMedicationStatistics()
             MedicationAction.OnBackClick -> navigateBack()
         }
     }
@@ -51,6 +52,12 @@ class MedicationViewModel(
     private fun navigateToReminder() {
         viewModelScope.launch {
             eventChannel.send(MedicationEvent.NavigateToAllMedications(isReport = false))
+        }
+    }
+
+    private fun navigateToMedicationStatistics() {
+        viewModelScope.launch {
+            eventChannel.send(MedicationEvent.NavigateToMedicationStatistics)
         }
     }
 

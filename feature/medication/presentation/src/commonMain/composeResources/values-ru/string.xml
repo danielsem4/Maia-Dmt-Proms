@@ -25,4 +25,5 @@
     <string name="start_time">Время начала</string>
     <string name="end_time">Время окончания</string>
 
+    <string name="last_medication_taken">Последние принятые препараты</string>
 </resources>

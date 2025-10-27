@@ -52,7 +52,7 @@ fun DmtSurface(
                     modifier = Modifier
                         .fillMaxSize()
                         .padding(horizontal = 16.dp)
-                        .verticalScroll(rememberScrollState())
+//                        .verticalScroll(rememberScrollState())
                 ) {
                     content()
                 }

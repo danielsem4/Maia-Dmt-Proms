@@ -12,13 +12,11 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import maia.dmt.core.domain.auth.SessionStorage
-import maia.dmt.core.domain.util.Result
 import maia.dmt.core.domain.util.onFailure
 import maia.dmt.core.domain.util.onSuccess
 import maia.dmt.core.presentation.util.UiText
 import maia.dmt.core.presentation.util.toUiText
 import maia.dmt.medication.domain.medications.MedicationService
-import maia.dmt.medication.presentation.model.MedicationUiModel
 import maia.dmt.medication.presentation.model.ReportedMedicationUiModel
 
 class MedicationStatisticsViewModel(
@@ -49,7 +47,7 @@ class MedicationStatisticsViewModel(
     fun onAction(action: MedicationStatisticsAction) {
         when (action) {
             MedicationStatisticsAction.OnBackClick -> navigateBack()
-            is MedicationStatisticsAction.OnSortOptionSelected -> updateSortOption(action.sortOption)
+            is MedicationStatisticsAction.OnSearchQueryChange -> handleSearchQueryChange(action.query)
         }
     }
 
@@ -97,6 +95,7 @@ class MedicationStatisticsViewModel(
                     _state.update {
                         it.copy(
                             medicationLogs = medicationUiModels,
+                            sortedMedicationLogs = medicationUiModels,
                             isLoadingMedicationsStatistics = false,
                             medicationsError = null
                         )
@@ -114,19 +113,23 @@ class MedicationStatisticsViewModel(
         }
     }
 
-    private fun updateSortOption(sortOption: SortOption) {
-        _state.update {
-            it.copy(
-                sortOption = sortOption,
-                medicationLogs = sortMedicationLogs(it.medicationLogs, sortOption)
-            )
-        }
-    }
+    private fun handleSearchQueryChange(query: String) {
+        _state.update { currentState ->
+            val filteredLogs = if (query.isBlank()) {
+                currentState.medicationLogs
+            } else {
+                currentState.medicationLogs.filter { medication ->
+                    medication.name.contains(query, ignoreCase = true) ||
+                            medication.date.contains(query, ignoreCase = true) ||
+                            medication.form.contains(query, ignoreCase = true) ||
+                            medication.dosage.contains(query, ignoreCase = true)
+                }
+            }
 
-    private fun sortMedicationLogs(logs: List<ReportedMedicationUiModel>, sortOption: SortOption): List<ReportedMedicationUiModel> {
-        return when (sortOption) {
-            SortOption.BY_NAME -> logs.sortedBy { it.name }
-            SortOption.BY_DATE -> logs.sortedByDescending { it.date }
+            currentState.copy(
+                searchQuery = query,
+                sortedMedicationLogs = filteredLogs
+            )
         }
     }
 

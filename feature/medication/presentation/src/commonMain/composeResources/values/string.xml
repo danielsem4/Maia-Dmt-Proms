@@ -25,6 +25,9 @@
     <string name="medications_sort_by_date">Sort by Date</string>
     <string name="medications_no_medication_logs">No medication logs found</string>
 
+    <string name="last_medication_taken">Last Medications Taken</string>
+"
+
     <string name="no_medications_found_matching">No medications found matching</string>
     <string name="no_medications_found">No medications found</string>
 

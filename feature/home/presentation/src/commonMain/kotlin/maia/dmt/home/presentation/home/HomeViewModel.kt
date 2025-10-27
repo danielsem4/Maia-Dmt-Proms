@@ -11,6 +11,7 @@ import dmtproms.feature.home.presentation.generated.resources.hitber_icon
 import dmtproms.feature.home.presentation.generated.resources.medications_icon
 import dmtproms.feature.home.presentation.generated.resources.memory_icon
 import dmtproms.feature.home.presentation.generated.resources.orientation_icon
+import dmtproms.feature.home.presentation.generated.resources.settings_icon
 import dmtproms.feature.home.presentation.generated.resources.statistics_icon
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -33,7 +34,7 @@ import org.jetbrains.compose.resources.DrawableResource
 class HomeViewModel(
     private val homeService: HomeService,
     private val sessionStorage: SessionStorage
-): ViewModel() {
+) : ViewModel() {
 
     private val _state = MutableStateFlow(HomeState())
     private val eventChannel = Channel<HomeEvent>()
@@ -143,12 +144,30 @@ class HomeViewModel(
             "measurements" -> Res.drawable.evaluation_icon
             "medications" -> Res.drawable.medications_icon
             "activities" -> Res.drawable.activities_icon
-            "memory" ->Res.drawable.memory_icon
-            "cdt" ->Res.drawable.clock_icon
-            "orientation" ->Res.drawable.orientation_icon
-            "hitber" ->Res.drawable.hitber_icon
+            "memory" -> Res.drawable.memory_icon
+            "cdt" -> Res.drawable.clock_icon
+            "orientation" -> Res.drawable.orientation_icon
+            "hitber" -> Res.drawable.hitber_icon
             "statistics" -> Res.drawable.statistics_icon
+            "settings" -> Res.drawable.settings_icon
             else -> Res.drawable.hitber_icon
+        }
+    }
+
+    private fun mapModuleName(moduleName: String): String {
+
+        return when (moduleName.lowercase()) {
+            "document share" -> ""
+            "measurements" -> ""
+            "medications" -> ""
+            "activities" -> ""
+            "memory" -> ""
+            "cdt" -> ""
+            "orientation" -> ""
+            "hitber" -> ""
+            "statistics" -> ""
+            "settings" -> ""
+            else -> ""
         }
     }
 
@@ -162,10 +181,10 @@ class HomeViewModel(
         viewModelScope.launch {
 
         }
-            viewModelScope.launch {
-                _state.update {
-                    it.copy(isLoggingOut = true)
-                }
+        viewModelScope.launch {
+            _state.update {
+                it.copy(isLoggingOut = true)
+            }
             homeService.logout()
                 .onSuccess {
                     _state.update {

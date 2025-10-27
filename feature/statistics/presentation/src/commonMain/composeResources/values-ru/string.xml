@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="statistics_headline">Статистика</string>
+    <string name="statistics_all_instruction">Пожалуйста, выберите оценку, чтобы просмотреть её статистику</string>
+    <string name="statistics_search">Поиск</string>
+    <string name="statistics_no_statistics_found">Измерения не найдены</string>
+    <string name="statistics_selected_evaluation_statistics">Выберите статистику оценки</string>
+    <string name="statistics_select_graph">Пожалуйста, выберите график</string>
+
+
+</resources>

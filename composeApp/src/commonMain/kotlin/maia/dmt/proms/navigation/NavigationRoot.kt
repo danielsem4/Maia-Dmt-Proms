@@ -13,6 +13,8 @@ import maia.dmt.home.presentation.navigation.HomeGraphRoutes
 import maia.dmt.home.presentation.navigation.homeGraph
 import maia.dmt.medication.presentation.navigation.MedicationsGraphRoutes
 import maia.dmt.medication.presentation.navigation.medicationGraph
+import maia.dmt.statistics.presentation.navigation.StatisticsGraphRoutes
+import maia.dmt.statistics.presentation.navigation.statisticsGraph
 
 @Composable
 fun NavigationRoot(
@@ -47,6 +49,7 @@ fun NavigationRoot(
                     "medications" -> navController.navigate(MedicationsGraphRoutes.Graph)
                     "measurements" -> navController.navigate(EvaluationGraphRoutes.Graph)
                     "activities" -> navController.navigate(ActivitiesGraphRoutes.Graph)
+                    "statistics" -> navController.navigate(StatisticsGraphRoutes.Graph)
                     else -> {}
                 }
             },
@@ -60,6 +63,9 @@ fun NavigationRoot(
         )
 
         activitiesGraph(
+            navController = navController
+        )
+        statisticsGraph(
             navController = navController
         )
     }

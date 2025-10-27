@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="statistics_headline">Statistics</string>
+    <string name="statistics_all_instruction">Please select an evaluation to view its statistics</string>
+    <string name="statistics_search">Search</string>
+    <string name="statistics_no_statistics_found">No measurements found</string>
+
+    <string name="statistics_selected_evaluation_statistics">Select evaluation statistics</string>
+
+    <string name="statistics_select_graph">Please Select Graph</string>
+
+</resources>

@@ -125,7 +125,7 @@ class ActivitiesViewModel(
                 .onSuccess { activities ->
                     val activityUiModels = activities.map { activity ->
                         ActivityUiModel(
-                            text = activity.name,
+                            text = mapActivityName(activity.name),
                             id = activity.id.toString(),
                             icon = mapActivityIcon(activity.name),
                             onClick = { handleActivityClickById(activity.name) }
@@ -152,20 +152,20 @@ class ActivitiesViewModel(
         }
     }
 
-    private fun handleActivityClick(activity: ActivityItem) {
-        println("Activity clicked: ${activity.name}")
-    }
-
     private fun handleActivityClickById(activityId: String) {
-        val activity = _state.value.allActivities.find { it.text == activityId }
-        println("Activity clicked: ${activity?.text}")
+        viewModelScope.launch {
+            val translatedActivity = mapActivityName(activityId)
 
-        _state.update {
-            it.copy(
-                selectedActivity = activity,
-                showActivityReportDialog = true,
-                selectedDateTime = Clock.System.now().toEpochMilliseconds()
-            )
+            val activity = _state.value.allActivities.find { it.text == translatedActivity }
+            println("Activity clicked: ${activity?.text}")
+
+            _state.update {
+                it.copy(
+                    selectedActivity = activity,
+                    showActivityReportDialog = true,
+                    selectedDateTime = Clock.System.now().toEpochMilliseconds()
+                )
+            }
         }
     }
 

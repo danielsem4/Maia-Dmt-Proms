@@ -38,6 +38,10 @@ kotlin {
             implementation(projects.feature.activities.domain)
             implementation(projects.feature.activities.data)
 
+            implementation(projects.feature.statistics.presentation)
+            implementation(projects.feature.statistics.domain)
+            implementation(projects.feature.statistics.data)
+
             implementation(libs.jetbrains.compose.navigation)
             implementation(libs.bundles.koin.common)
 

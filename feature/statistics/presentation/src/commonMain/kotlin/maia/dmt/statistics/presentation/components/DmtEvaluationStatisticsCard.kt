@@ -14,9 +14,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import dmtproms.feature.statistics.presentation.generated.resources.Res
+import dmtproms.feature.statistics.presentation.generated.resources.statistics_last_date_done
+import dmtproms.feature.statistics.presentation.generated.resources.statistics_times_done
 import maia.dmt.core.designsystem.components.cards.DmtCardStyle
 import maia.dmt.core.designsystem.theme.DmtTheme
 import maia.dmt.core.designsystem.theme.extended
+import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
@@ -117,7 +121,7 @@ fun DmtEvaluationStatisticsCard(
             )
 
             Text(
-                text = timesDone.toString(),
+                text = "${stringResource(Res.string.statistics_times_done)} ${timesDone}",
                 style = MaterialTheme.typography.bodyMedium,
                 color = if (isClickable) {
                     MaterialTheme.colorScheme.onSurfaceVariant
@@ -128,7 +132,7 @@ fun DmtEvaluationStatisticsCard(
             )
 
             Text(
-                text = lastDateDone,
+                text = "${stringResource(Res.string.statistics_last_date_done)} ${lastDateDone}",
                 style = MaterialTheme.typography.bodyMedium,
                 color = if (isClickable) {
                     MaterialTheme.colorScheme.onSurfaceVariant

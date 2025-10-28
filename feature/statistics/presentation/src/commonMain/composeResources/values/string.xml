@@ -10,4 +10,7 @@
 
     <string name="statistics_select_graph">Please Select Graph</string>
 
+    <string name="statistics_times_done">Times evaluation done: </string>
+    <string name="statistics_last_date_done">Last date evaluation done: </string>
+
 </resources>

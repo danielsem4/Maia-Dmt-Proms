@@ -8,5 +8,8 @@
     <string name="statistics_selected_evaluation_statistics">בחר סטטיסטיקות של הערכה</string>
     <string name="statistics_select_graph">אנא בחר גרף</string>
 
+    <string name="statistics_times_done">מספר הפעמים שבוצע ההערכה: </string>
+    <string name="statistics_last_date_done">תאריך אחרון שבו בוצעה ההערכה: </string>
+
 
 </resources>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="settings_headline">הגדרות</string>
+    <string name="settings_search">חיפוש</string>
+
+    <string name="settings_appearance">נראות</string>
+    <string name="settings_notifications">התראות</string>
+    <string name="settings_language">שפה</string>
+
+    <string name="settings_dark_mode">מצב כהה</string>
+    <string name="settings_light_mode">מצב בהיר</string>
+    <string name="settings_system_default">ברירת מחדל של המערכת</string>
+
+    <string name="settings_english">אנגלית</string>
+    <string name="settings_arabic">ערבית</string>
+    <string name="settings_russian">רוסית</string>
+    <string name="settings_hebrew">עברית</string>
+
+    <string name="settings_change_password">שנה סיסמה</string>
+    <string name="settings_logout">התנתק</string>
+    <string name="settings_terms_and_conditions">תנאים והגבלות</string>
+
+    <string name="settings_profile">פרופיל</string>
+    <string name="settings_profile_name">שם</string>
+    <string name="settings_profile_email">אימייל</string>
+
+</resources>

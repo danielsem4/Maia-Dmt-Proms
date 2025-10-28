@@ -42,6 +42,8 @@ kotlin {
             implementation(projects.feature.statistics.domain)
             implementation(projects.feature.statistics.data)
 
+            implementation(projects.feature.settings.presentation)
+
             implementation(libs.jetbrains.compose.navigation)
             implementation(libs.bundles.koin.common)
 

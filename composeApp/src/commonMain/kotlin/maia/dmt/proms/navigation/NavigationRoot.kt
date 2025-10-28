@@ -13,6 +13,8 @@ import maia.dmt.home.presentation.navigation.HomeGraphRoutes
 import maia.dmt.home.presentation.navigation.homeGraph
 import maia.dmt.medication.presentation.navigation.MedicationsGraphRoutes
 import maia.dmt.medication.presentation.navigation.medicationGraph
+import maia.dmt.settings.presentation.navigation.SettingsGraphRoutes
+import maia.dmt.settings.presentation.navigation.settingsGraph
 import maia.dmt.statistics.presentation.navigation.StatisticsGraphRoutes
 import maia.dmt.statistics.presentation.navigation.statisticsGraph
 
@@ -50,6 +52,7 @@ fun NavigationRoot(
                     "measurements" -> navController.navigate(EvaluationGraphRoutes.Graph)
                     "activities" -> navController.navigate(ActivitiesGraphRoutes.Graph)
                     "statistics" -> navController.navigate(StatisticsGraphRoutes.Graph)
+                    "settings" -> navController.navigate(SettingsGraphRoutes.Graph)
                     else -> {}
                 }
             },
@@ -66,6 +69,9 @@ fun NavigationRoot(
             navController = navController
         )
         statisticsGraph(
+            navController = navController
+        )
+        settingsGraph(
             navController = navController
         )
     }

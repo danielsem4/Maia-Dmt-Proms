@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="settings_headline">Settings</string>
+    <string name="settings_search">Search</string>
+
+    <string name="settings_appearance">Appearance</string>
+    <string name="settings_notifications">Notifications</string>
+    <string name="settings_language">Language</string>
+
+    <string name="settings_dark_mode">Dark Mode</string>
+    <string name="settings_light_mode">Light Mode</string>
+    <string name="settings_system_default">System Default</string>
+
+    <string name="settings_english">English</string>
+    <string name="settings_arabic">Arabic</string>
+    <string name="settings_russian">Russian</string>
+    <string name="settings_hebrew">Hebrew</string>
+
+    <string name="settings_change_password">Change Password</string>
+    <string name="settings_logout">Logout</string>
+    <string name="settings_terms_and_conditions">Terms and Conditions</string>
+
+    <string name="settings_profile">Profile</string>
+    <string name="settings_profile_name">Name</string>
+    <string name="settings_profile_email">Email</string>
+
+</resources>

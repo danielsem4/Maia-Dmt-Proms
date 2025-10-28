@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="settings_headline">Настройки</string>
+    <string name="settings_search">Поиск</string>
+
+    <string name="settings_appearance">Внешний вид</string>
+    <string name="settings_notifications">Уведомления</string>
+    <string name="settings_language">Язык</string>
+
+    <string name="settings_dark_mode">Тёмная тема</string>
+    <string name="settings_light_mode">Светлая тема</string>
+    <string name="settings_system_default">Системная по умолчанию</string>
+
+    <string name="settings_english">Английский</string>
+    <string name="settings_arabic">Арабский</string>
+    <string name="settings_russian">Русский</string>
+    <string name="settings_hebrew">Иврит</string>
+
+    <string name="settings_change_password">Изменить пароль</string>
+    <string name="settings_logout">Выйти</string>
+    <string name="settings_terms_and_conditions">Условия и положения</string>
+
+    <string name="settings_profile">Профиль</string>
+    <string name="settings_profile_name">Имя</string>
+    <string name="settings_profile_email">Эл. почта</string>
+
+</resources>

@@ -1,16 +1,19 @@
-package maia.dmt.statistics.presentation.allStatistics
+package maia.dmt.statistics.presentation.selectedStatistics
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.text.input.rememberTextFieldState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -22,63 +25,63 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import dmtproms.feature.statistics.presentation.generated.resources.Res
 import dmtproms.feature.statistics.presentation.generated.resources.statistics_headline
+import dmtproms.feature.statistics.presentation.generated.resources.statistics_line_chart
 import dmtproms.feature.statistics.presentation.generated.resources.statistics_no_statistics_found
 import dmtproms.feature.statistics.presentation.generated.resources.statistics_search
+import maia.dmt.core.designsystem.components.cards.DmtCard
+import maia.dmt.core.designsystem.components.cards.DmtCardStyle
 import maia.dmt.core.designsystem.components.layouts.DmtBaseScreen
 import maia.dmt.core.designsystem.components.textFields.DmtSearchTextField
 import maia.dmt.core.designsystem.theme.DmtTheme
 import maia.dmt.core.presentation.util.ObserveAsEvents
-import maia.dmt.statistics.presentation.components.DmtEvaluationStatisticsCard
+import maia.dmt.statistics.presentation.model.StatisticQuestion
 import org.jetbrains.compose.resources.stringResource
+import org.jetbrains.compose.resources.vectorResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
-fun AllStatisticsRoot(
-    viewModel: AllStatisticsViewModel = koinViewModel(),
+fun SelectedStatisticsRoot(
+    viewModel: SelectedStatisticsViewModel = koinViewModel(),
     onNavigateBack: () -> Unit,
-    onNavigateToSelectedEvaluation: (String) -> Unit
+    onNavigateToStatisticDetail: (String, Int) -> Unit
 ) {
 
     val state by viewModel.state.collectAsStateWithLifecycle()
 
     ObserveAsEvents(viewModel.events) { event ->
         when(event) {
-            is AllStatisticsEvent.NavigateBack -> {
+            is SelectedStatisticsEvent.NavigateBack -> {
                 onNavigateBack()
             }
-            is AllStatisticsEvent.NavigateToSelectedEvaluationStatistics -> {
-                onNavigateToSelectedEvaluation(event.evaluationString)
-            }
-            is AllStatisticsEvent.NavigateToSelectedStatistic -> {
-
+            is SelectedStatisticsEvent.NavigateToStatisticDetail -> {
+                onNavigateToStatisticDetail(event.question, event.measurementId)
             }
         }
     }
 
-    AllStatisticsScreen(
+    SelectedStatisticsScreen(
         state = state,
-        onAction = viewModel::onAction,
+        onAction = viewModel::onAction
     )
-
 }
 
+
 @Composable
-fun AllStatisticsScreen(
-    state: AllStatisticsState,
-    onAction: (AllStatisticsAction) -> Unit,
+fun SelectedStatisticsScreen(
+    state: SelectedStatisticsState,
+    onAction: (SelectedStatisticsAction) -> Unit,
 ) {
 
     val searchTextState = rememberTextFieldState(initialText = state.searchQuery)
 
     LaunchedEffect(searchTextState.text) {
-        onAction(AllStatisticsAction.OnSearchQueryChange(searchTextState.text.toString()))
+        onAction(SelectedStatisticsAction.OnSearchQueryChange(searchTextState.text.toString()))
     }
 
     DmtBaseScreen(
-        titleText =
-            stringResource(Res.string.statistics_headline),
-        onIconClick = { onAction(AllStatisticsAction.OnBackClick) },
+        titleText = stringResource(Res.string.statistics_headline),
+        onIconClick = { onAction(SelectedStatisticsAction.OnBackClick) },
         content = {
             Column(
                 modifier = Modifier.fillMaxSize(),
@@ -100,14 +103,14 @@ fun AllStatisticsScreen(
 
                 Spacer(modifier = Modifier.padding(12.dp))
 
-                if(state.isLoadingStatistics) {
+                if(state.isLoadingSelectedStatistics) {
                     CircularProgressIndicator()
-                } else if(state.statisticsEvaluation.isEmpty() && state.searchQuery.isNotBlank()) {
+                } else if(state.selectedStatistics.isEmpty() && state.searchQuery.isNotBlank()) {
                     Text(
                         text = "${stringResource(Res.string.statistics_no_statistics_found)} \"${state.searchQuery}\"",
                         style = MaterialTheme.typography.bodyMedium
                     )
-                } else if(state.statisticsEvaluation.isEmpty()) {
+                } else if(state.selectedStatistics.isEmpty()) {
                     Text(
                         text = stringResource(Res.string.statistics_no_statistics_found),
                         style = MaterialTheme.typography.bodyMedium
@@ -118,18 +121,32 @@ fun AllStatisticsScreen(
                         verticalArrangement = Arrangement.spacedBy(8.dp)
                     ) {
                         items(
-                            count = state.statisticsEvaluation.size,
-                            key = { index -> state.statisticsEvaluation[index].id }
+                            count = state.selectedStatistics.size,
+                            key = { index ->
+                                "${state.selectedStatistics[index].measurementId}_${state.selectedStatistics[index].question}"
+                            }
                         ) { index ->
-                            val evaluation = state.statisticsEvaluation[index]
-
-                            DmtEvaluationStatisticsCard(
-                                name = evaluation.measurement_name,
-                                lastDateDone = evaluation.measurement_settings.measurement_last_time,
-                                timesDone = evaluation.measurement_settings.times_taken,
-                                isClickable = true,
+                            val statistic = state.selectedStatistics[index]
+                            DmtCard(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(horizontal = 16.dp),
+                                text = statistic.question,
+                                style = DmtCardStyle.ELEVATED,
+                                leadingIcon = {
+                                    Icon(
+                                        imageVector = vectorResource(Res.drawable.statistics_line_chart),
+                                        contentDescription = null,
+                                        modifier = Modifier.size(20.dp)
+                                    )
+                                },
                                 onClick = {
-                                    onAction(AllStatisticsAction.OnEvaluationClick(evaluation))
+                                    onAction(
+                                        SelectedStatisticsAction.OnStatisticClick(
+                                            question = statistic.question,
+                                            measurementId = statistic.measurementId
+                                        )
+                                    )
                                 }
                             )
                         }
@@ -138,16 +155,29 @@ fun AllStatisticsScreen(
             }
         }
     )
-
 }
+
 
 @Composable
 @Preview
-fun AllStatisticsPreview() {
+fun SelectedStatisticsPreview() {
     DmtTheme {
-        AllStatisticsRoot(
-            onNavigateBack = {},
-            onNavigateToSelectedEvaluation = {}
+        SelectedStatisticsScreen(
+            state = SelectedStatisticsState(
+                selectedStatistics = listOf(
+                    StatisticQuestion(
+                        question = "מה רמת הכאב שאת/ה מרגיש/ה כרגע?",
+                        measurementId = 43,
+                        measurementName = "Tenscare Measurement"
+                    ),
+                    StatisticQuestion(
+                        question = "כמה טוב את/ה מרגיש/ה היום?",
+                        measurementId = 43,
+                        measurementName = "Tenscare Measurement"
+                    )
+                )
+            ),
+            onAction = {}
         )
     }
 }

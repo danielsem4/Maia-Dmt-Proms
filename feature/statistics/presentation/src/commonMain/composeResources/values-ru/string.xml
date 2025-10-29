@@ -8,5 +8,7 @@
     <string name="statistics_selected_evaluation_statistics">Выберите статистику оценки</string>
     <string name="statistics_select_graph">Пожалуйста, выберите график</string>
 
+    <string name="statistics_times_done">Количество выполненных оценок: </string>
+    <string name="statistics_last_date_done">Дата последней выполненной оценки: </string>
 
 </resources>

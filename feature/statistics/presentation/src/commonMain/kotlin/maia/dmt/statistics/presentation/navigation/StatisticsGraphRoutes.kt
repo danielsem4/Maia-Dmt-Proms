@@ -11,10 +11,11 @@ interface StatisticsGraphRoutes {
     data object AllStatistics: StatisticsGraphRoutes
 
     @Serializable
-    data class SelectedStatistics(val id: String): StatisticsGraphRoutes
+    data class SelectedStatistics(val evaluationId: String) : StatisticsGraphRoutes
 
     @Serializable
-    data class Statistic(val id: String): StatisticsGraphRoutes
-
-
+    data class StatisticDetail(
+        val question: String,
+        val measurementId: Int
+    ) : StatisticsGraphRoutes
 }

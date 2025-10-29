@@ -6,9 +6,5 @@ interface AllStatisticsAction {
 
     data object OnBackClick: AllStatisticsAction
     data class OnEvaluationClick(val evaluation: Evaluation): AllStatisticsAction
-
     data class OnSearchQueryChange(val query: String): AllStatisticsAction
-
-
-
 }

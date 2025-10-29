@@ -148,9 +148,8 @@ class AllStatisticsViewModel(
     }
 
     fun handleEvaluationClickByName(evaluation: Evaluation) {
-        println("Evaluation clicked! $evaluation")
         viewModelScope.launch {
-            eventChannel.send(AllStatisticsEvent.NavigateToSelectedEvaluationStatistics(evaluation.measurement_name))
+            eventChannel.send(AllStatisticsEvent.NavigateToSelectedEvaluationStatistics(evaluation.id.toString()))
         }
     }
 
@@ -160,10 +159,8 @@ class AllStatisticsViewModel(
         }
 
     }
-
     override fun onCleared() {
         super.onCleared()
         eventChannel.close()
     }
-
 }

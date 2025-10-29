@@ -4,7 +4,9 @@ import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
+import androidx.navigation.toRoute
 import maia.dmt.statistics.presentation.allStatistics.AllStatisticsRoot
+import maia.dmt.statistics.presentation.selectedStatistics.SelectedStatisticsRoot
 
 fun NavGraphBuilder.statisticsGraph(
     navController: NavController,
@@ -17,8 +19,26 @@ fun NavGraphBuilder.statisticsGraph(
                 onNavigateBack = {
                     navController.navigateUp()
                 },
-                onNavigateToSelectedEvaluation = { evaluationId ->
+                onNavigateToSelectedEvaluation = { evaluationName ->
+                    navController.navigate(
+                        StatisticsGraphRoutes.SelectedStatistics(evaluationId = evaluationName)
+                    )
+                }
+            )
+        }
 
+        composable<StatisticsGraphRoutes.SelectedStatistics> {
+            SelectedStatisticsRoot(
+                onNavigateBack = {
+                    navController.navigateUp()
+                },
+                onNavigateToStatisticDetail = { question, measurementId ->
+                    navController.navigate(
+                        StatisticsGraphRoutes.StatisticDetail(
+                            question = question,
+                            measurementId = measurementId
+                        )
+                    )
                 }
             )
         }

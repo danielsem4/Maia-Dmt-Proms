@@ -162,16 +162,10 @@ class SelectedStatisticsViewModel(
                         }
                     }
 
-                    val filteredQuestions = if (evaluationId.isNotBlank()) {
-                        allSelectedStatistics.filter { it.measurementName == evaluationId }
-                    } else {
-                        allSelectedStatistics
-                    }
-
                     _state.update {
                         it.copy(
                             allSelectedStatistics = statistics,
-                            selectedStatistics = filteredQuestions,
+                            selectedStatistics = allSelectedStatistics,
                             isLoadingSelectedStatistics = false,
                             selectedStatisticsError = null
                         )

@@ -161,5 +161,9 @@ class AllStatisticsViewModel(
 
     }
 
+    override fun onCleared() {
+        super.onCleared()
+        eventChannel.close()
+    }
 
 }

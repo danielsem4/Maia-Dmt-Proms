@@ -16,12 +16,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import maia.dmt.core.designsystem.theme.DmtTheme
+import maia.dmt.core.domain.dto.ChartData
 import org.jetbrains.compose.ui.tooling.preview.Preview
-
-data class ChartData(
-    val label: String,
-    val value: Float
-)
 
 @Composable
 fun DmtLineChart(

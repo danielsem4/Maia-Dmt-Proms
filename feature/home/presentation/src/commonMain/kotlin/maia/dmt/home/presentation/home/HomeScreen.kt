@@ -13,9 +13,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import dmtproms.feature.home.presentation.generated.resources.Res
+import dmtproms.feature.home.presentation.generated.resources.home_cancel
 import dmtproms.feature.home.presentation.generated.resources.home_title
+import dmtproms.feature.home.presentation.generated.resources.log_out_message
+import dmtproms.feature.home.presentation.generated.resources.log_out_title
 import dmtproms.feature.home.presentation.generated.resources.logout_icon
 import dmtproms.feature.home.presentation.generated.resources.messages
+import dmtproms.feature.home.presentation.generated.resources.yes_log_out
 import maia.dmt.core.designsystem.components.dialogs.DmtConfirmationDialog
 import maia.dmt.core.designsystem.components.layouts.DmtBaseScreen
 import maia.dmt.core.designsystem.theme.DmtTheme
@@ -104,10 +108,10 @@ fun HomeScreen(
 
     if (state.showLogoutDialog) {
         DmtConfirmationDialog(
-            title = "Logout",
-            description = "Are you sure you want to logout?",
-            confirmButtonText = "Yes, Logout",
-            cancelButtonText = "Cancel",
+            title = stringResource(Res.string.log_out_title),
+            description = stringResource(Res.string.log_out_message),
+            confirmButtonText = stringResource(Res.string.yes_log_out),
+            cancelButtonText = stringResource(Res.string.home_cancel),
             onConfirmClick = { onAction(HomeAction.OnLogoutConfirm) },
             onCancelClick = { onAction(HomeAction.OnLogoutCancel) },
             onDismiss = { onAction(HomeAction.OnLogoutCancel) },

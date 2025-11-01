@@ -4,8 +4,9 @@
     <string name="home_title">Home</string>
     <string name="log_out_title">Log out</string>
     <string name="log_out_message">Are you sure you want to log out?</string>
-    <string name="yes">Yes</string>
+    <string name="yes_log_out">Yes, Log out</string>
     <string name="no">No</string>
+    <string name="home_cancel">Cancel</string>
     <string name="messages">Messages</string>
     <string name="no_available_modules">No available modules</string>
 

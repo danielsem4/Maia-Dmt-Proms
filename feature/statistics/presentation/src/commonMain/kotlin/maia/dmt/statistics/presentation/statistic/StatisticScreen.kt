@@ -9,8 +9,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import dmtproms.feature.statistics.presentation.generated.resources.Res
+import dmtproms.feature.statistics.presentation.generated.resources.statistics_average
+import dmtproms.feature.statistics.presentation.generated.resources.statistics_bar_chart
 import dmtproms.feature.statistics.presentation.generated.resources.statistics_headline
 import dmtproms.feature.statistics.presentation.generated.resources.statistics_line_chart
+import dmtproms.feature.statistics.presentation.generated.resources.statistics_summery
+import dmtproms.feature.statistics.presentation.generated.resources.statistics_total_points
+import dmtproms.feature.statistics.presentation.generated.resources.statistics_trend
+import dmtproms.feature.statistics.presentation.generated.resources.statistics_trend_decreasing
+import dmtproms.feature.statistics.presentation.generated.resources.statistics_trend_increasing
+import dmtproms.feature.statistics.presentation.generated.resources.statistics_trend_stable
 import maia.dmt.core.designsystem.components.charts.DmtBarChart
 import maia.dmt.core.designsystem.components.charts.DmtLineChart
 import maia.dmt.core.designsystem.components.layouts.DmtBaseScreen
@@ -74,7 +82,7 @@ fun StatisticScreen(
                     FilterChip(
                         selected = state.selectedChartType == ChartType.LINE,
                         onClick = { onAction(StatisticAction.OnChartTypeChange(ChartType.LINE)) },
-                        label = { Text("Line Chart") },
+                        label = { Text(stringResource(Res.string.statistics_line_chart)) },
                         leadingIcon = {
                             Icon(
                                 imageVector = vectorResource(Res.drawable.statistics_line_chart),
@@ -88,7 +96,7 @@ fun StatisticScreen(
                     FilterChip(
                         selected = state.selectedChartType == ChartType.BAR,
                         onClick = { onAction(StatisticAction.OnChartTypeChange(ChartType.BAR)) },
-                        label = { Text("Bar Chart") },
+                        label = { Text(stringResource(Res.string.statistics_bar_chart)) },
                         leadingIcon = {
                             Icon(
                                 imageVector = vectorResource(Res.drawable.statistics_line_chart),
@@ -107,8 +115,7 @@ fun StatisticScreen(
                     ) {
                         CircularProgressIndicator()
                     }
-                }
-                else if (state.statisticError != null) {
+                } else if (state.statisticError != null) {
                     Box(
                         modifier = Modifier
                             .fillMaxWidth()
@@ -121,8 +128,7 @@ fun StatisticScreen(
                             color = MaterialTheme.colorScheme.error
                         )
                     }
-                }
-                else {
+                } else {
                     Card(
                         modifier = Modifier.fillMaxWidth(),
                         elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
@@ -131,14 +137,15 @@ fun StatisticScreen(
                             ChartType.LINE -> {
                                 DmtLineChart(
                                     data = state.chartData,
-                                    title = "Progress Over Time",
+                                    title = "",
                                     modifier = Modifier.fillMaxWidth()
                                 )
                             }
+
                             ChartType.BAR -> {
                                 DmtBarChart(
                                     data = state.chartData,
-                                    title = "Progress Over Time",
+                                    title = "",
                                     modifier = Modifier.fillMaxWidth()
                                 )
                             }
@@ -157,7 +164,7 @@ fun StatisticScreen(
                                 modifier = Modifier.padding(16.dp)
                             ) {
                                 Text(
-                                    text = "Summary",
+                                    text = stringResource(Res.string.statistics_summery),
                                     style = MaterialTheme.typography.titleMedium,
                                     modifier = Modifier.padding(bottom = 8.dp)
                                 )
@@ -168,7 +175,7 @@ fun StatisticScreen(
                                 ) {
                                     Column {
                                         Text(
-                                            text = "Total Points",
+                                            text = stringResource(Res.string.statistics_total_points),
                                             style = MaterialTheme.typography.bodySmall,
                                             color = MaterialTheme.colorScheme.onSurfaceVariant
                                         )
@@ -180,7 +187,7 @@ fun StatisticScreen(
 
                                     Column {
                                         Text(
-                                            text = "Average",
+                                            text = stringResource(Res.string.statistics_average),
                                             style = MaterialTheme.typography.bodySmall,
                                             color = MaterialTheme.colorScheme.onSurfaceVariant
                                         )
@@ -192,7 +199,7 @@ fun StatisticScreen(
 
                                     Column {
                                         Text(
-                                            text = "Trend",
+                                            text = stringResource(Res.string.statistics_trend),
                                             style = MaterialTheme.typography.bodySmall,
                                             color = MaterialTheme.colorScheme.onSurfaceVariant
                                         )
@@ -200,9 +207,9 @@ fun StatisticScreen(
                                             val first = state.chartData.first().value
                                             val last = state.chartData.last().value
                                             when {
-                                                last > first -> "↑ Increasing"
-                                                last < first -> "↓ Decreasing"
-                                                else -> "→ Stable"
+                                                last > first -> "↑ ${stringResource(Res.string.statistics_trend_increasing)}"
+                                                last < first -> "↓ ${stringResource(Res.string.statistics_trend_decreasing)}"
+                                                else -> "→ ${stringResource(Res.string.statistics_trend_stable)}"
                                             }
                                         } else {
                                             "N/A"

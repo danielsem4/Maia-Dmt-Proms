@@ -11,4 +11,19 @@
     <string name="statistics_times_done">Количество выполненных оценок: </string>
     <string name="statistics_last_date_done">Дата последней выполненной оценки: </string>
 
+    <string name="statistics_line_chart">Линейный график</string>
+    <string name="statistics_bar_chart">Столбчатый график</string>
+
+    <string name="statistics_trend">Тенденция</string>
+    <string name="statistics_trend_increasing">Рост</string>
+    <string name="statistics_trend_decreasing">Падение</string>
+    <string name="statistics_trend_stable">Стабильно</string>
+    <string name="statistics_category_labels">Категории</string>
+
+    <string name="statistics_summery">Сводка</string>
+    <string name="statistics_total_points">Всего баллов</string>
+    <string name="statistics_average">Среднее</string>
+    <string name="statistics_range">Диапазон</string>
+
+
 </resources>

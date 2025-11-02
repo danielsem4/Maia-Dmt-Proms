@@ -69,7 +69,6 @@ fun DmtLineChart(
             val spacing = size.width / (data.size - 1).coerceAtLeast(1)
             val heightScale = (size.height - 40.dp.toPx()) / valueRange
 
-            // Draw grid lines
             val gridColor = Color.Gray.copy(alpha = 0.2f)
             for (i in 0..4) {
                 val y = (size.height - 40.dp.toPx()) * (i / 4f)
@@ -81,7 +80,6 @@ fun DmtLineChart(
                 )
             }
 
-            // Draw line
             val path = Path()
             data.forEachIndexed { index, point ->
                 val x = index * spacing
@@ -103,7 +101,6 @@ fun DmtLineChart(
                 )
             )
 
-            // Draw points
             data.forEachIndexed { index, point ->
                 val x = index * spacing
                 val y = size.height - 40.dp.toPx() - ((point.value - minValue) * heightScale)

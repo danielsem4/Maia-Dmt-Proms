@@ -69,7 +69,6 @@ fun DmtBarChart(
             val spacing = size.width / data.size
             val heightScale = (size.height - 40.dp.toPx()) / valueRange
 
-            // Draw grid lines
             val gridColor = Color.Gray.copy(alpha = 0.2f)
             for (i in 0..4) {
                 val y = (size.height - 40.dp.toPx()) * (i / 4f)
@@ -81,7 +80,6 @@ fun DmtBarChart(
                 )
             }
 
-            // Draw bars
             data.forEachIndexed { index, point ->
                 val barHeight = (point.value - minValue) * heightScale
                 val x = (index * spacing) + ((spacing - barWidth) / 2)

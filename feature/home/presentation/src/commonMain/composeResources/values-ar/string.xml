@@ -10,16 +10,15 @@
     <string name="messages">الرسائل</string>
     <string name="no_available_modules">لا توجد وحدات متاحة</string>
 
-    <string name="cdt">CDT</string>
-    <string name="evaluations">التقييمات</string>
-    <string name="medications">الأدوية</string>
-    <string name="hitber">HitBer</string> <!-- اسم منتج/ميزة غير مترجم -->
-    <string name="memory">الذاكرة</string>
-    <string name="orientation">الاتجاه</string>
-    <string name="activities">الأنشطة</string>
-    <string name="pass">اجتياز</string>
-    <string name="graphs">الرسوم البيانية</string>
-    <string name="settings">الإعدادات</string>
-    <string name="sensors">الحساسات</string>
+    <string name="module_document_share">مشاركة المستندات</string>
+    <string name="module_measurements">قياسات</string>
+    <string name="module_medications">الأدوية</string>
+    <string name="module_activities">أنشطة</string>
+    <string name="module_memory">الذاكرة</string>
+    <string name="module_cdt">اختبار رسم الساعة</string>
+    <string name="module_orientation">التوجيه</string>
+    <string name="module_hitber">هيتبر</string>
+    <string name="module_statistics">إحصائيات</string>
+    <string name="module_settings">الإعدادات</string>
 
 </resources>

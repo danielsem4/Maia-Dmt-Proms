@@ -14,6 +14,7 @@ import dmtproms.feature.settings.presentation.generated.resources.settings_avail
 import dmtproms.feature.settings.presentation.generated.resources.settings_choose_your_language_body
 import dmtproms.feature.settings.presentation.generated.resources.settings_current_language
 import dmtproms.feature.settings.presentation.generated.resources.settings_language
+import dmtproms.feature.settings.presentation.generated.resources.settings_save
 import maia.dmt.core.designsystem.components.buttons.DmtButton
 import maia.dmt.core.designsystem.components.cards.DmtCard
 import maia.dmt.core.designsystem.components.layouts.DmtBaseScreen
@@ -128,7 +129,7 @@ fun SettingsLanguageScreen(
                         Spacer(modifier = Modifier.weight(1f))
 
                         DmtButton(
-                            text = "Save",
+                            text = stringResource(Res.string.settings_save),
                             onClick = { onAction(LanguageAction.OnSaveClick) },
                             enabled = isSaveEnabled,
                             modifier = Modifier

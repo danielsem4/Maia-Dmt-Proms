@@ -2,9 +2,10 @@ package maia.dmt.home.presentation.module
 
 import androidx.compose.ui.graphics.vector.ImageVector
 import org.jetbrains.compose.resources.DrawableResource
+import org.jetbrains.compose.resources.StringResource
 
 data class ModuleUiModel(
     val icon: DrawableResource,
-    val text: String,
+    val text: StringResource,
     val onClick: () -> Unit
 )

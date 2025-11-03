@@ -10,17 +10,16 @@
     <string name="no_available_modules">אין מודולות זמינות</string>
 
 
-    <string name="cdt">CDT</string>
-    <string name="evaluations">Оценки</string>
-    <string name="medications">Лекарства</string>
-    <string name="hitber">HitBer</string>
-    <string name="memory">Память</string>
-    <string name="orientation">Ориентация</string>
-    <string name="activities">Активности</string>
-    <string name="pass">Пройдено</string>
-    <string name="graphs">Графики</string>
-    <string name="settings">Настройки</string>
-    <string name="sensors">Датчики</string>
+    <string name="module_document_share">Обмен документами</string>
+    <string name="module_measurements">Измерения</string>
+    <string name="module_medications">Лекарства</string>
+    <string name="module_activities">Активности</string>
+    <string name="module_memory">Память</string>
+    <string name="module_cdt">Тест рисования часов</string>
+    <string name="module_orientation">Ориентация</string>
+    <string name="module_hitber">ХИТБЕР</string>
+    <string name="module_statistics">Статистика</string>
+    <string name="module_settings">Настройки</string>
 
 
 </resources>

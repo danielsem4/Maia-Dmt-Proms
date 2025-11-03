@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="home_title">الرئيسية</string>
+    <string name="log_out_title">تسجيل الخروج</string>
+    <string name="log_out_message">هل أنت متأكد أنك تريد تسجيل الخروج؟</string>
+    <string name="yes_log_out">نعم، تسجيل الخروج</string>
+    <string name="no">لا</string>
+    <string name="home_cancel">إلغاء</string>
+    <string name="messages">الرسائل</string>
+    <string name="no_available_modules">لا توجد وحدات متاحة</string>
+
+    <string name="cdt">CDT</string>
+    <string name="evaluations">التقييمات</string>
+    <string name="medications">الأدوية</string>
+    <string name="hitber">HitBer</string> <!-- اسم منتج/ميزة غير مترجم -->
+    <string name="memory">الذاكرة</string>
+    <string name="orientation">الاتجاه</string>
+    <string name="activities">الأنشطة</string>
+    <string name="pass">اجتياز</string>
+    <string name="graphs">الرسوم البيانية</string>
+    <string name="settings">الإعدادات</string>
+    <string name="sensors">الحساسات</string>
+
+</resources>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="label_email">البريد الإلكتروني</string>
+    <string name="label_password">كلمة المرور</string>
+
+    <string name="title_welcome">مرحبًا بك في DMT</string>
+
+    <string name="hint_email">يرجى إدخال البريد الإلكتروني</string>
+    <string name="hint_password">يرجى إدخال كلمة المرور</string>
+    <string name="placeholder_email_example">hello@dmt.com</string>
+    <string name="error_invalid_email">هذا البريد الإلكتروني غير صالح</string>
+
+    <string name="button_login">تسجيل الدخول</string>
+
+</resources>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="statistics_headline">الإحصائيات</string>
+    <string name="statistics_all_instruction">يرجى اختيار تقييم لعرض إحصائياته</string>
+    <string name="statistics_search">بحث</string>
+    <string name="statistics_no_statistics_found">لا توجد قياسات</string>
+
+    <string name="statistics_selected_evaluation_statistics">اختر إحصائيات التقييم</string>
+
+    <string name="statistics_select_graph">يرجى اختيار الرسم البياني</string>
+
+    <string name="statistics_times_done">عدد مرات إجراء التقييم: </string>
+    <string name="statistics_last_date_done">آخر تاريخ لإجراء التقييم: </string>
+
+    <string name="statistics_line_chart">مخطط خطي</string>
+    <string name="statistics_bar_chart">مخطط شريطي</string>
+
+    <string name="statistics_trend">الاتجاه</string>
+    <string name="statistics_trend_increasing">متزايد</string>
+    <string name="statistics_trend_decreasing">متناقص</string>
+    <string name="statistics_trend_stable">ثابت</string>
+    <string name="statistics_category_labels">الفئات</string>
+
+    <string name="statistics_summery">الملخص</string>
+    <string name="statistics_total_points">إجمالي النقاط</string>
+    <string name="statistics_average">المعدل</string>
+    <string name="statistics_range">المدى</string>
+
+</resources>

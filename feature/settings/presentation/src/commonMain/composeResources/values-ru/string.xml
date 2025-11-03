@@ -17,6 +17,8 @@
     <string name="settings_russian">Русский</string>
     <string name="settings_hebrew">Иврит</string>
 
+    <string name="settings_save">שמור</string>
+
     <string name="settings_change_password">Изменить пароль</string>
     <string name="settings_logout">Выйти</string>
     <string name="settings_terms_and_conditions">Условия и положения</string>
@@ -24,5 +26,11 @@
     <string name="settings_profile">Профиль</string>
     <string name="settings_profile_name">Имя</string>
     <string name="settings_profile_email">Эл. почта</string>
+
+    <string name="settings_available_languages">Доступные языки</string>
+    <string name="settings_choose_your_language">Выберите язык</string>
+    <string name="settings_choose_your_language_body">Пожалуйста, выберите предпочитаемый язык приложения</string>
+    <string name="settings_current_language">Текущий язык</string>
+
 
 </resources>

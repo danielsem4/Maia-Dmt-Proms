@@ -17,6 +17,8 @@
     <string name="settings_russian">רוסית</string>
     <string name="settings_hebrew">עברית</string>
 
+    <string name="settings_save">שמור</string>
+
     <string name="settings_change_password">שנה סיסמה</string>
     <string name="settings_logout">התנתק</string>
     <string name="settings_terms_and_conditions">תנאים והגבלות</string>
@@ -25,4 +27,8 @@
     <string name="settings_profile_name">שם</string>
     <string name="settings_profile_email">אימייל</string>
 
+    <string name="settings_available_languages">שפות זמינות</string>
+    <string name="settings_choose_your_language">יש לבחור את השפה</string>
+    <string name="settings_choose_your_language_body">יש לבחור את השפה המועדפת בה האפליקציה תהיה</string>
+    <string name="settings_current_language">השפה העדכנית</string>
 </resources>

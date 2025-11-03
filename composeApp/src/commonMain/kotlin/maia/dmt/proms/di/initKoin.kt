@@ -4,6 +4,7 @@ import maia.dmt.activities.data.di.activitiesDataModule
 import maia.dmt.activities.presentation.di.activitiesPresentationModule
 import maia.dmt.auth.presentation.di.authPresentationModule
 import maia.dmt.core.data.di.coreDataModule
+import maia.dmt.core.domain.di.coreDomainModule
 import maia.dmt.evaluation.presentation.di.evaluationPresentationModule
 import maia.dmt.home.data.di.homeDataModule
 import maia.dmt.home.data.di.platformHomeDataModule
@@ -22,6 +23,7 @@ fun initKoin(config: KoinAppDeclaration? = null) {
         config?.invoke(this)
         modules(
             coreDataModule,
+            coreDomainModule,
             appModule,
             homeDataModule,
             homePresentationModule,

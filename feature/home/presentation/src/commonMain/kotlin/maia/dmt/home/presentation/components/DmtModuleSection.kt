@@ -20,7 +20,6 @@ import maia.dmt.core.presentation.util.currentDeviceConfiguration
 import maia.dmt.home.presentation.module.ModuleUiModel
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
-import kotlin.math.ceil
 
 @Composable
 fun DmtModuleSection(
@@ -31,7 +30,7 @@ fun DmtModuleSection(
 
     val columnCount = when (configuration) {
         DeviceConfiguration.MOBILE_PORTRAIT -> 2
-        DeviceConfiguration.MOBILE_LANDSCAPE -> 3
+        DeviceConfiguration.MOBILE_LANDSCAPE -> 2
         DeviceConfiguration.TABLET_PORTRAIT -> 3
         DeviceConfiguration.TABLET_LANDSCAPE -> 4
         DeviceConfiguration.DESKTOP -> 6
@@ -46,8 +45,8 @@ fun DmtModuleSection(
     }
 
     val maxVisibleRows = when (configuration) {
-        DeviceConfiguration.MOBILE_PORTRAIT -> 3
-        DeviceConfiguration.MOBILE_LANDSCAPE -> 2
+        DeviceConfiguration.MOBILE_PORTRAIT -> 4
+        DeviceConfiguration.MOBILE_LANDSCAPE -> 3
         DeviceConfiguration.TABLET_PORTRAIT -> 3
         DeviceConfiguration.TABLET_LANDSCAPE -> 3
         DeviceConfiguration.DESKTOP -> 5
@@ -72,6 +71,7 @@ fun DmtModuleSection(
                 verticalArrangement = Arrangement.spacedBy(spacing),
                 modifier = Modifier
                     .fillMaxWidth()
+                    .heightIn(max = calculateMaxHeight(maxVisibleRows, spacing))
                     .padding(vertical = 8.dp)
             ) {
                 items(modules) { module ->
@@ -84,6 +84,12 @@ fun DmtModuleSection(
             }
         }
     }
+}
+
+@Composable
+private fun calculateMaxHeight(rows: Int, spacing: androidx.compose.ui.unit.Dp): androidx.compose.ui.unit.Dp {
+    val cardHeight = 90.dp
+    return (cardHeight * rows) + (spacing * (rows - 1))
 }
 
 @Composable

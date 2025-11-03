@@ -50,6 +50,9 @@ fun AllStatisticsRoot(
             is AllStatisticsEvent.NavigateToSelectedEvaluationStatistics -> {
                 onNavigateToSelectedEvaluation(event.evaluationString)
             }
+            is AllStatisticsEvent.NavigateToSelectedStatistic -> {
+
+            }
         }
     }
 
@@ -125,7 +128,9 @@ fun AllStatisticsScreen(
                                 lastDateDone = evaluation.measurement_settings.measurement_last_time,
                                 timesDone = evaluation.measurement_settings.times_taken,
                                 isClickable = true,
-                                onClick = {  }
+                                onClick = {
+                                    onAction(AllStatisticsAction.OnEvaluationClick(evaluation))
+                                }
                             )
                         }
                     }

@@ -17,6 +17,9 @@ kotlin {
                 implementation(libs.datastore)
                 implementation(libs.datastore.preferences)
 
+                implementation(libs.multiplatform.settings)
+                implementation(libs.multiplatform.settings.coroutines)
+
             }
         }
         androidMain {

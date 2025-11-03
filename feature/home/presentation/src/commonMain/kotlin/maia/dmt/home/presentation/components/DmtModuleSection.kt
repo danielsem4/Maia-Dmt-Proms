@@ -12,11 +12,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import dmtproms.feature.home.presentation.generated.resources.Res
 import dmtproms.feature.home.presentation.generated.resources.memory_icon
+import dmtproms.feature.home.presentation.generated.resources.no_available_modules
 import maia.dmt.core.designsystem.components.cards.DmtIconCard
 import maia.dmt.core.designsystem.theme.DmtTheme
 import maia.dmt.core.presentation.util.DeviceConfiguration
 import maia.dmt.core.presentation.util.currentDeviceConfiguration
 import maia.dmt.home.presentation.module.ModuleUiModel
+import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import kotlin.math.ceil
 
@@ -58,7 +60,7 @@ fun DmtModuleSection(
     ) {
         if (modules.isEmpty()) {
             Text(
-                text = "No modules available",
+                text = stringResource(Res.string.no_available_modules),
                 style = MaterialTheme.typography.bodyLarge,
                 color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.6f),
                 modifier = Modifier.padding(vertical = 24.dp)
@@ -75,83 +77,12 @@ fun DmtModuleSection(
                 items(modules) { module ->
                     DmtIconCard(
                         icon = module.icon,
-                        text = module.text,
+                        text = stringResource(module.text),
                         onClick = module.onClick
                     )
                 }
             }
         }
-    }
-}
-
-@Composable
-@Preview
-fun DmtModuleSectionPreview() {
-    DmtTheme {
-        DmtModuleSection(
-            modules = listOf(
-                ModuleUiModel(
-                    icon = Res.drawable.memory_icon,
-                    text = "Home",
-                    onClick = { }
-                ),
-                ModuleUiModel(
-                    icon = Res.drawable.memory_icon,
-                    text = "Profile",
-                    onClick = { }
-                ),
-                ModuleUiModel(
-                    icon = Res.drawable.memory_icon,
-                    text = "Settings",
-                    onClick = { }
-                ),
-                ModuleUiModel(
-                    icon = Res.drawable.memory_icon,
-                    text = "Notifications",
-                    onClick = { }
-                ),
-                ModuleUiModel(
-                    icon = Res.drawable.memory_icon,
-                    text = "Search",
-                    onClick = { }
-                ),
-                ModuleUiModel(
-                    icon = Res.drawable.memory_icon,
-                    text = "Favorites",
-                    onClick = { }
-                ),
-                ModuleUiModel(
-                    icon = Res.drawable.memory_icon,
-                    text = "Messages",
-                    onClick = { }
-                ),
-                ModuleUiModel(
-                    icon = Res.drawable.memory_icon,
-                    text = "Cart",
-                    onClick = { }
-                ),
-                ModuleUiModel(
-                    icon = Res.drawable.memory_icon,
-                    text = "Account",
-                    onClick = { }
-                ),
-                ModuleUiModel(
-                    icon = Res.drawable.memory_icon,
-                    text = "History",
-                    onClick = { }
-                ),
-                ModuleUiModel(
-                    icon = Res.drawable.memory_icon,
-                    text = "Support",
-                    onClick = { }
-                ),
-                ModuleUiModel(
-                    icon = Res.drawable.memory_icon,
-                    text = "About",
-                    onClick = { }
-                )
-            )
-        )
     }
 }
 

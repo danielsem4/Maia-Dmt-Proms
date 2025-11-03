@@ -17,6 +17,8 @@
     <string name="settings_russian">Russian</string>
     <string name="settings_hebrew">Hebrew</string>
 
+    <string name="settings_save">Save</string>
+
     <string name="settings_change_password">Change Password</string>
     <string name="settings_logout">Logout</string>
     <string name="settings_terms_and_conditions">Terms and Conditions</string>
@@ -24,5 +26,11 @@
     <string name="settings_profile">Profile</string>
     <string name="settings_profile_name">Name</string>
     <string name="settings_profile_email">Email</string>
+
+    <string name="settings_available_languages">Available languages</string>
+    <string name="settings_choose_your_language">Choose your language</string>
+    <string name="settings_choose_your_language_body">Please select the preferred language for the app</string>
+    <string name="settings_current_language">Current language</string>
+
 
 </resources>

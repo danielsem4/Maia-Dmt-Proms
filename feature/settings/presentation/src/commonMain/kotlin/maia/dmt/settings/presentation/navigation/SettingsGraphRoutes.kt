@@ -10,4 +10,12 @@ interface SettingsGraphRoutes {
     @Serializable
     data object Settings: SettingsGraphRoutes
 
+    @Serializable
+    data object Language: SettingsGraphRoutes
+
+    @Serializable
+    data object Appearance: SettingsGraphRoutes
+
+
+
 }

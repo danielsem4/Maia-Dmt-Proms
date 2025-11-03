@@ -1,5 +1,10 @@
 package maia.dmt.core.data.di
 
+import com.russhwolf.settings.ExperimentalSettingsApi
+import com.russhwolf.settings.ObservableSettings
+import com.russhwolf.settings.Settings
+import com.russhwolf.settings.coroutines.FlowSettings
+import com.russhwolf.settings.coroutines.toFlowSettings
 import maia.dmt.core.data.auth.DataStoreSessionStorage
 import maia.dmt.core.data.auth.KtorAuthService
 import maia.dmt.core.data.evaluation.KtorEvaluationsService
@@ -16,6 +21,7 @@ import org.koin.dsl.module
 
 expect val platformCoreDataModule: Module
 
+@OptIn(ExperimentalSettingsApi::class)
 val coreDataModule = module {
     includes(platformCoreDataModule)
     single<DmtLogger> { KermitLogger }
@@ -26,4 +32,9 @@ val coreDataModule = module {
     singleOf(::KtorAuthService) bind AuthService::class
     singleOf(::DataStoreSessionStorage) bind SessionStorage::class
     singleOf(::KtorEvaluationsService) bind EvaluationService::class
+
+    single<FlowSettings> {
+        get<ObservableSettings>().toFlowSettings()
+    }
+
 }

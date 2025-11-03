@@ -17,8 +17,7 @@ import kotlinx.serialization.json.intOrNull
 data class EvaluationSettingsDto(
     val id: Int,
     val measurement_repeat_period: String,
-    @Serializable(with = DoubleToIntSerializer::class)
-    val measurement_repeat_times: Int,
+    val measurement_repeat_times: Double?,
     val measurement_begin_time: String,
     val measurement_last_time: String,
     val measurement_end_time: String,
@@ -29,25 +28,3 @@ data class EvaluationSettingsDto(
     val clinic: Int,
     val measurement: Int
 )
-
-object DoubleToIntSerializer : KSerializer<Int> {
-    override val descriptor: SerialDescriptor =
-        PrimitiveSerialDescriptor("DoubleToInt", PrimitiveKind.INT)
-
-    override fun deserialize(decoder: Decoder): Int {
-        val jsonDecoder = decoder as JsonDecoder
-        val element = jsonDecoder.decodeJsonElement()
-
-        return when (element) {
-            is JsonPrimitive -> {
-                element.intOrNull ?: element.doubleOrNull?.toInt()
-                ?: throw IllegalArgumentException("Cannot convert to Int")
-            }
-            else -> throw IllegalArgumentException("Expected a number")
-        }
-    }
-
-    override fun serialize(encoder: Encoder, value: Int) {
-        encoder.encodeInt(value)
-    }
-}

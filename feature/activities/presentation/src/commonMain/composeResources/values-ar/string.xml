@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="activities_title">الأنشطة</string>
+    <string name="activities_instruction">يرجى اختيار نشاطك</string>
+
+    <string name="activities_dialog_body">لقد قمت بالنشاط</string>
+    <string name="activities_dialog_body_date">في:</string>
+
+    <string name="activities_report">تقرير</string>
+    <string name="activities_date_and_time">التاريخ والوقت</string>
+
+    <string name="activities_activity_walk">مشاهدة</string>
+    <string name="activities_activity_yoga">يوغا</string>
+    <string name="activities_activity_treadmill">جهاز المشي</string>
+    <string name="activities_activity_swim">سباحة</string>
+    <string name="activities_activity_stand">وقوف</string>
+    <string name="activities_activity_run">ركض</string>
+    <string name="activities_activity_racket_game">لعبة المضرب</string>
+    <string name="activities_activity_gym_workout">تمارين النادي الرياضي</string>
+    <string name="activities_activity_ball_game">لعبة الكرة</string>
+
+</resources>

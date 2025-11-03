@@ -8,6 +8,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -32,6 +33,10 @@ fun DmtCheckboxCardGroup(
     allowMultiple: Boolean = true
 ) {
     var selectedOptions by remember { mutableStateOf(options) }
+
+    LaunchedEffect(options) {
+        selectedOptions = options
+    }
 
     Column(
         modifier = modifier,

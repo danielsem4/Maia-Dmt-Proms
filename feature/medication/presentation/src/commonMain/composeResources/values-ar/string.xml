@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="medications">الأدوية</string>
+    <string name="all_medications">جميع الأدوية</string>
+
+    <string name="report_medications">تقرير الأدوية</string>
+    <string name="medication_reminder">تذكير الأدوية</string>
+
+    <string name="search">بحث</string>
+    <string name="date_and_time">التاريخ والوقت</string>
+
+    <string name="report">تقرير</string>
+    <string name="interval">الفاصل الزمني</string>
+    <string name="dose">الجرعة</string>
+    <string name="medication_report_body">لقد تناولت الدواء</string>
+    <string name="medication_statistics">إحصائيات الأدوية</string>
+
+    <string name="start_date">تاريخ البدء</string>
+    <string name="end_date">تاريخ الانتهاء</string>
+    <string name="start_time">وقت البدء</string>
+    <string name="end_time">وقت الانتهاء</string>
+
+    <string name="medications_sort_by_name">الفرز حسب الاسم</string>
+    <string name="medications_sort_by_date">الفرز حسب التاريخ</string>
+    <string name="medications_no_medication_logs">لا توجد سجلات للأدوية</string>
+
+    <string name="last_medication_taken">آخر الأدوية المتناولة</string>
+
+    <string name="no_medications_found_matching">لا توجد أدوية مطابقة</string>
+    <string name="no_medications_found">لا توجد أدوية</string>
+
+</resources>

@@ -15,6 +15,9 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -29,6 +32,9 @@ import dmtproms.feature.settings.presentation.generated.resources.settings_notif
 import dmtproms.feature.settings.presentation.generated.resources.settings_search
 import maia.dmt.core.designsystem.components.layouts.DmtBaseScreen
 import maia.dmt.core.designsystem.components.textFields.DmtSearchTextField
+import maia.dmt.core.designsystem.components.toast.DmtToastMessage
+import maia.dmt.core.designsystem.components.toast.ToastDuration
+import maia.dmt.core.designsystem.components.toast.ToastType
 import maia.dmt.core.designsystem.theme.DmtTheme
 import maia.dmt.core.presentation.util.ObserveAsEvents
 import maia.dmt.settings.presentation.components.DmtSettingsCard
@@ -46,11 +52,16 @@ fun SettingsRoot(
     onNavigateToAppearance: () -> Unit = {}
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
+    var toastMessage by remember { mutableStateOf<String?>(null) }
+    var toastType by remember { mutableStateOf(ToastType.Success) }
 
     ObserveAsEvents(viewModel.events) { event ->
         when (event) {
             SettingsEvent.NavigateToLanguage -> onNavigateToLanguage()
-            SettingsEvent.NavigateToAppearance -> onNavigateToAppearance()
+            SettingsEvent.NavigateToAppearance -> {
+                toastType = ToastType.Info
+                toastMessage = "Coming soon, use phone settings to change appearance"
+            }
             SettingsEvent.NavigateBack -> onNavigateBack()
         }
     }
@@ -59,6 +70,17 @@ fun SettingsRoot(
         state = state,
         onAction = viewModel::onAction
     )
+
+    toastMessage?.let { message ->
+        DmtToastMessage(
+            message = message,
+            type = toastType,
+            duration = ToastDuration.MEDIUM,
+            onDismiss = {
+                toastMessage = null
+            }
+        )
+    }
 }
 
 @Composable
@@ -98,16 +120,16 @@ fun SettingsScreen(
 
                 Spacer(modifier = Modifier.height(24.dp))
 
-                DmtSettingsSection {
-                    DmtSettingsSwitchCard(
-                        title = stringResource(Res.string.settings_notifications),
-                        icon = Res.drawable.settings_notifications_icon,
-                        checked = state.notificationsEnabled,
-                        onCheckedChange = { enabled ->
-                            onAction(SettingsAction.OnNotificationsToggle(enabled))
-                        }
-                    )
-                }
+//                DmtSettingsSection {
+//                    DmtSettingsSwitchCard(
+//                        title = stringResource(Res.string.settings_notifications),
+//                        icon = Res.drawable.settings_notifications_icon,
+//                        checked = state.notificationsEnabled,
+//                        onCheckedChange = { enabled ->
+//                            onAction(SettingsAction.OnNotificationsToggle(enabled))
+//                        }
+//                    )
+//                }
 
                 Spacer(modifier = Modifier.height(24.dp))
             }

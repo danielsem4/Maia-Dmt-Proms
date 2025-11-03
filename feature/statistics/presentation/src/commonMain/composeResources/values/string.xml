@@ -10,4 +10,23 @@
 
     <string name="statistics_select_graph">Please Select Graph</string>
 
+    <string name="statistics_times_done">Times evaluation done: </string>
+    <string name="statistics_last_date_done">Last date evaluation done: </string>
+
+    <string name="statistics_line_chart">Line Chart</string>
+    <string name="statistics_bar_chart">Bar Chart</string>
+
+    <string name="statistics_trend">Trend</string>
+    <string name="statistics_trend_increasing">Increasing</string>
+    <string name="statistics_trend_decreasing">Decreasing</string>
+    <string name="statistics_trend_stable">Stable</string>
+    <string name="statistics_category_labels">Categories</string>
+
+    <string name="statistics_summery">Summery</string>
+    <string name="statistics_total_points">Total Points</string>
+    <string name="statistics_average">Average</string>
+    <string name="statistics_range">Range</string>
+"
+
+
 </resources>

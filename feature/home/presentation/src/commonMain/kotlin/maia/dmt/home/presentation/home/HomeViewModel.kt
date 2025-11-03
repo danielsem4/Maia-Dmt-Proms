@@ -28,6 +28,8 @@ import maia.dmt.core.domain.util.onSuccess
 import maia.dmt.core.presentation.util.UiText
 import maia.dmt.core.presentation.util.toUiText
 import maia.dmt.home.domain.home.HomeService
+import maia.dmt.home.presentation.mapper.mapModuleIcon
+import maia.dmt.home.presentation.mapper.mapModuleNameResource
 import maia.dmt.home.presentation.module.ModuleUiModel
 import org.jetbrains.compose.resources.DrawableResource
 
@@ -113,7 +115,7 @@ class HomeViewModel(
                     val moduleUiModels = modules.map { module ->
                         ModuleUiModel(
                             icon = mapModuleIcon(module.module_name),
-                            text = module.module_name,
+                            text = mapModuleNameResource(module.module_name),
                             onClick = { onAction(HomeAction.OnFeatureClicked(module.module_name)) }
                         )
                     }
@@ -134,40 +136,6 @@ class HomeViewModel(
                         )
                     }
                 }
-        }
-    }
-
-    private fun mapModuleIcon(moduleName: String): DrawableResource {
-
-        return when (moduleName.lowercase()) {
-            "document share" -> (Res.drawable.file_upload_icon)
-            "measurements" -> Res.drawable.evaluation_icon
-            "medications" -> Res.drawable.medications_icon
-            "activities" -> Res.drawable.activities_icon
-            "memory" -> Res.drawable.memory_icon
-            "cdt" -> Res.drawable.clock_icon
-            "orientation" -> Res.drawable.orientation_icon
-            "hitber" -> Res.drawable.hitber_icon
-            "statistics" -> Res.drawable.statistics_icon
-            "settings" -> Res.drawable.settings_icon
-            else -> Res.drawable.hitber_icon
-        }
-    }
-
-    private fun mapModuleName(moduleName: String): String {
-
-        return when (moduleName.lowercase()) {
-            "document share" -> ""
-            "measurements" -> ""
-            "medications" -> ""
-            "activities" -> ""
-            "memory" -> ""
-            "cdt" -> ""
-            "orientation" -> ""
-            "hitber" -> ""
-            "statistics" -> ""
-            "settings" -> ""
-            else -> ""
         }
     }
 

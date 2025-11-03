@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="evaluation_headline">تقييم</string>
+    <string name="evaluation_next">التالي</string>
+    <string name="evaluation_prev">السابق</string>
+    <string name="evaluation_finish">إنهاء</string>
+
+    <string name="no_evaluations_found_matching">لا توجد تقييمات مطابقة</string>
+    <string name="no_evaluations_found">لا توجد تقييمات</string>
+    <string name="evaluation_uploaded_successfully">تم رفع التقييم بنجاح</string>
+    <string name="evaluation_upload_failed">فشل رفع التقييم</string>
+
+    <string name="evaluation_search">بحث</string>
+
+</resources>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="settings_headline">الإعدادات</string>
+    <string name="settings_search">بحث</string>
+
+    <string name="settings_appearance">المظهر</string>
+    <string name="settings_notifications">الإشعارات</string>
+    <string name="settings_language">اللغة</string>
+
+    <string name="settings_dark_mode">الوضع الداكن</string>
+    <string name="settings_light_mode">الوضع الفاتح</string>
+    <string name="settings_system_default">الإعدادات الافتراضية للنظام</string>
+
+    <string name="settings_english">الإنجليزية</string>
+    <string name="settings_arabic">العربية</string>
+    <string name="settings_russian">الروسية</string>
+    <string name="settings_hebrew">العبرية</string>
+
+    <string name="settings_save">حفظ</string>
+
+    <string name="settings_change_password">تغيير كلمة المرور</string>
+    <string name="settings_logout">تسجيل الخروج</string>
+    <string name="settings_terms_and_conditions">الشروط والأحكام</string>
+
+    <string name="settings_profile">الملف الشخصي</string>
+    <string name="settings_profile_name">الاسم</string>
+    <string name="settings_profile_email">البريد الإلكتروني</string>
+
+    <string name="settings_available_languages">اللغات المتاحة</string>
+    <string name="settings_choose_your_language">اختر لغتك</string>
+    <string name="settings_choose_your_language_body">يرجى اختيار اللغة المفضلة للتطبيق</string>
+    <string name="settings_current_language">اللغة الحالية</string>
+
+</resources>

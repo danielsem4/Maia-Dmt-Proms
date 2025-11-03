@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="error_disk_full">عذرًا، يبدو أن مساحة التخزين ممتلئة!</string>
+    <string name="error_not_found">تعذر العثور على العنصر المطلوب</string>
+    <string name="error_unknown">حدث خطأ غير معروف</string>
+    <string name="error_bad_request">طلب غير صالح</string>
+    <string name="error_request_timeout">انتهت مهلة الطلب</string>
+    <string name="error_unauthorized">بيانات الاعتماد غير صحيحة</string>
+    <string name="error_forbidden">لا يُسمح لك بتنفيذ هذا الإجراء</string>
+    <string name="error_conflict">حدث تعارض</string>
+    <string name="error_too_many_requests">لقد تخطيت الحد المسموح للطلبات</string>
+    <string name="error_no_internet">تعذر الاتصال. يرجى التحقق من اتصال الإنترنت.</string>
+    <string name="error_payload_too_large">الملف المرفق كبير جدًا</string>
+    <string name="error_server">عذرًا، حدث خطأ في الخادم</string>
+    <string name="error_service_unavailable">الخدمة غير متاحة، يرجى المحاولة لاحقًا</string>
+    <string name="error_serialization">خطأ في التسلسل</string>
+</resources>

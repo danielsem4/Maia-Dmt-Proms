@@ -1,6 +1,7 @@
 package maia.dmt.home.presentation.home
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -25,7 +26,9 @@ import maia.dmt.core.designsystem.components.layouts.DmtBaseScreen
 import maia.dmt.core.designsystem.theme.DmtTheme
 import maia.dmt.core.presentation.permissions.Permission
 import maia.dmt.core.presentation.permissions.rememberPermissionController
+import maia.dmt.core.presentation.util.DeviceConfiguration
 import maia.dmt.core.presentation.util.ObserveAsEvents
+import maia.dmt.core.presentation.util.currentDeviceConfiguration
 import maia.dmt.home.presentation.components.DmtMessageSection
 import maia.dmt.home.presentation.components.DmtModuleSection
 import maia.dmt.home.presentation.components.Message
@@ -65,8 +68,9 @@ fun HomeScreen(
     state: HomeState,
     onAction: (HomeAction) -> Unit,
 ) {
-
     val permissionController = rememberPermissionController()
+    val configuration = currentDeviceConfiguration()
+    val isMobileLandscape = configuration == DeviceConfiguration.MOBILE_LANDSCAPE
 
     LaunchedEffect(true) {
         permissionController.requestPermission(Permission.NOTIFICATIONS)
@@ -77,30 +81,67 @@ fun HomeScreen(
         iconBar = vectorResource(Res.drawable.logout_icon),
         onIconClick = { onAction(HomeAction.OnLogoutClick) },
         content = {
-            Column(
-                Modifier.fillMaxSize(),
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                Spacer(modifier = Modifier.padding(12.dp))
-
-                DmtMessageSection(
-                    title = stringResource(Res.string.messages),
-                    messages = listOf(
-                        Message("Take 2 pills at 12:00", MessageType.MESSAGE),
-                        Message("Your results from Oct 15 are ready.", MessageType.INFO)
-                    ),
-                    modifier = Modifier.weight(weight = 0.4f)
-                )
-
-                Spacer(modifier = Modifier.padding(12.dp))
-
-                if (state.isLoadingModules) {
-                    CircularProgressIndicator()
-                } else {
-                    DmtModuleSection(
-                        modules = state.modules
+            if (isMobileLandscape) {
+                // Mobile Landscape: Row layout
+                Row(
+                    modifier = Modifier.fillMaxSize(),
+                    verticalAlignment = Alignment.Top
+                ) {
+                    DmtMessageSection(
+                        title = stringResource(Res.string.messages),
+                        messages = listOf(
+                            Message("Take 2 pills at 12:00", MessageType.MESSAGE),
+                            Message("Your results from Oct 15 are ready.", MessageType.INFO)
+                        ),
+                        modifier = Modifier
+                            .weight(0.4f)
+                            .padding(start = 8.dp)
                     )
-                    Spacer(modifier = Modifier.padding(2.dp))
+
+                    Spacer(modifier = Modifier.padding(8.dp))
+
+                    if (state.isLoadingModules) {
+                        CircularProgressIndicator(
+                            modifier = Modifier
+                                .weight(0.6f)
+                                .align(Alignment.CenterVertically)
+                        )
+                    } else {
+                        DmtModuleSection(
+                            modules = state.modules,
+                            modifier = Modifier
+                                .weight(0.6f)
+                                .padding(end = 8.dp)
+                        )
+                    }
+                }
+            } else {
+                // Other configurations: Column layout
+                Column(
+                    Modifier.fillMaxSize(),
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    Spacer(modifier = Modifier.padding(12.dp))
+
+                    DmtMessageSection(
+                        title = stringResource(Res.string.messages),
+                        messages = listOf(
+                            Message("Take 2 pills at 12:00", MessageType.MESSAGE),
+                            Message("Your results from Oct 15 are ready.", MessageType.INFO)
+                        ),
+                        modifier = Modifier.weight(weight = 0.4f)
+                    )
+
+                    Spacer(modifier = Modifier.padding(12.dp))
+
+                    if (state.isLoadingModules) {
+                        CircularProgressIndicator()
+                    } else {
+                        DmtModuleSection(
+                            modules = state.modules
+                        )
+                        Spacer(modifier = Modifier.padding(2.dp))
+                    }
                 }
             }
         }

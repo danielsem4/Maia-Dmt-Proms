@@ -1,24 +1,20 @@
 package maia.dmt.statistics.presentation.statistic
 
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import dmtproms.feature.statistics.presentation.generated.resources.Res
-import dmtproms.feature.statistics.presentation.generated.resources.statistics_average
 import dmtproms.feature.statistics.presentation.generated.resources.statistics_bar_chart
 import dmtproms.feature.statistics.presentation.generated.resources.statistics_headline
 import dmtproms.feature.statistics.presentation.generated.resources.statistics_line_chart
-import dmtproms.feature.statistics.presentation.generated.resources.statistics_summery
-import dmtproms.feature.statistics.presentation.generated.resources.statistics_total_points
-import dmtproms.feature.statistics.presentation.generated.resources.statistics_trend
-import dmtproms.feature.statistics.presentation.generated.resources.statistics_trend_decreasing
-import dmtproms.feature.statistics.presentation.generated.resources.statistics_trend_increasing
-import dmtproms.feature.statistics.presentation.generated.resources.statistics_trend_stable
 import maia.dmt.core.designsystem.components.charts.DmtBarChart
 import maia.dmt.core.designsystem.components.charts.DmtLineChart
 import maia.dmt.core.designsystem.components.layouts.DmtBaseScreen
@@ -26,6 +22,9 @@ import maia.dmt.core.designsystem.theme.DmtTheme
 import maia.dmt.core.domain.dto.ChartData
 import maia.dmt.core.domain.dto.ChartType
 import maia.dmt.core.presentation.util.ObserveAsEvents
+import maia.dmt.statistics.presentation.components.CategoryLabelsSection
+import maia.dmt.statistics.presentation.components.ChartSection
+import maia.dmt.statistics.presentation.components.StatisticSummarySection
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.resources.vectorResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
@@ -64,6 +63,7 @@ fun StatisticScreen(
             Column(
                 modifier = Modifier
                     .fillMaxSize()
+                    .verticalScroll(rememberScrollState())
                     .padding(16.dp),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
@@ -71,6 +71,7 @@ fun StatisticScreen(
                     text = state.question,
                     style = MaterialTheme.typography.titleLarge,
                     modifier = Modifier.padding(bottom = 16.dp),
+                    textAlign = TextAlign.Center
                 )
                 Row(
                     modifier = Modifier
@@ -106,162 +107,24 @@ fun StatisticScreen(
                         }
                     )
                 }
-                if (state.isLoadingStatistic) {
-                    Box(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .height(300.dp),
-                        contentAlignment = Alignment.Center
-                    ) {
-                        CircularProgressIndicator()
-                    }
-                } else if (state.statisticError != null) {
-                    Box(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .height(300.dp),
-                        contentAlignment = Alignment.Center
-                    ) {
-                        Text(
-                            text = state.statisticError.asString(),
-                            style = MaterialTheme.typography.bodyMedium,
-                            color = MaterialTheme.colorScheme.error
-                        )
-                    }
-                } else {
-                    Card(
-                        modifier = Modifier.fillMaxWidth(),
-                        elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
-                    ) {
-                        when (state.selectedChartType) {
-                            ChartType.LINE -> {
-                                DmtLineChart(
-                                    data = state.chartData,
-                                    title = "",
-                                    modifier = Modifier.fillMaxWidth()
-                                )
-                            }
+                ChartSection(
+                    chartData = state.chartData,
+                    selectedChartType = state.selectedChartType,
+                    isLoading = state.isLoadingStatistic,
+                    error = state.statisticError
+                )
 
-                            ChartType.BAR -> {
-                                DmtBarChart(
-                                    data = state.chartData,
-                                    title = "",
-                                    modifier = Modifier.fillMaxWidth()
-                                )
-                            }
-                        }
-                    }
+                if (state.chartData.isNotEmpty()) {
+                    Spacer(modifier = Modifier.height(16.dp))
 
-                    if (state.chartData.isNotEmpty()) {
+                    StatisticSummarySection(chartData = state.chartData)
+
+                    if (state.isCategoricalData && state.categoryLabels.isNotEmpty()) {
                         Spacer(modifier = Modifier.height(16.dp))
-                        Card(
-                            modifier = Modifier.fillMaxWidth(),
-                            colors = CardDefaults.cardColors(
-                                containerColor = MaterialTheme.colorScheme.surfaceVariant
-                            )
-                        ) {
-                            Column(
-                                modifier = Modifier.padding(16.dp)
-                            ) {
-                                Text(
-                                    text = stringResource(Res.string.statistics_summery),
-                                    style = MaterialTheme.typography.titleMedium,
-                                    modifier = Modifier.padding(bottom = 8.dp)
-                                )
-
-                                Row(
-                                    modifier = Modifier.fillMaxWidth(),
-                                    horizontalArrangement = Arrangement.SpaceBetween
-                                ) {
-                                    Column {
-                                        Text(
-                                            text = stringResource(Res.string.statistics_total_points),
-                                            style = MaterialTheme.typography.bodySmall,
-                                            color = MaterialTheme.colorScheme.onSurfaceVariant
-                                        )
-                                        Text(
-                                            text = state.chartData.size.toString(),
-                                            style = MaterialTheme.typography.titleMedium
-                                        )
-                                    }
-
-                                    Column {
-                                        Text(
-                                            text = stringResource(Res.string.statistics_average),
-                                            style = MaterialTheme.typography.bodySmall,
-                                            color = MaterialTheme.colorScheme.onSurfaceVariant
-                                        )
-                                        Text(
-                                            text = "",
-                                            style = MaterialTheme.typography.titleMedium
-                                        )
-                                    }
-
-                                    Column {
-                                        Text(
-                                            text = stringResource(Res.string.statistics_trend),
-                                            style = MaterialTheme.typography.bodySmall,
-                                            color = MaterialTheme.colorScheme.onSurfaceVariant
-                                        )
-                                        val trend = if (state.chartData.size >= 2) {
-                                            val first = state.chartData.first().value
-                                            val last = state.chartData.last().value
-                                            when {
-                                                last > first -> "↑ ${stringResource(Res.string.statistics_trend_increasing)}"
-                                                last < first -> "↓ ${stringResource(Res.string.statistics_trend_decreasing)}"
-                                                else -> "→ ${stringResource(Res.string.statistics_trend_stable)}"
-                                            }
-                                        } else {
-                                            "N/A"
-                                        }
-                                        Text(
-                                            text = trend,
-                                            style = MaterialTheme.typography.titleMedium
-                                        )
-                                    }
-
-                                    if (state.isCategoricalData && state.categoryLabels.isNotEmpty()) {
-                                        Spacer(modifier = Modifier.height(16.dp))
-                                        Card(
-                                            modifier = Modifier.fillMaxWidth(),
-                                            colors = CardDefaults.cardColors(
-                                                containerColor = MaterialTheme.colorScheme.surfaceVariant
-                                            )
-                                        ) {
-                                            Column(
-                                                modifier = Modifier.padding(16.dp)
-                                            ) {
-                                                Text(
-                                                    text = "Categories",
-                                                    style = MaterialTheme.typography.titleMedium,
-                                                    modifier = Modifier.padding(bottom = 8.dp)
-                                                )
-
-                                                state.categoryLabels.forEach { (value, label) ->
-                                                    Row(
-                                                        modifier = Modifier
-                                                            .fillMaxWidth()
-                                                            .padding(vertical = 4.dp),
-                                                        horizontalArrangement = Arrangement.SpaceBetween
-                                                    ) {
-                                                        Text(
-                                                            text = label,
-                                                            style = MaterialTheme.typography.bodyMedium
-                                                        )
-                                                        Text(
-                                                            text = value.toInt().toString(),
-                                                            style = MaterialTheme.typography.bodySmall,
-                                                            color = MaterialTheme.colorScheme.onSurfaceVariant
-                                                        )
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
+                        CategoryLabelsSection(categoryLabels = state.categoryLabels)
                     }
+
+                    Spacer(modifier = Modifier.height(16.dp))
                 }
             }
         }

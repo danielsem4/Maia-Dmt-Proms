@@ -1,4 +1,4 @@
-package maia.dmt.evaluation.presentation.evaluation
+package maia.dmt.core.domain.dto.evaluation
 
 enum class EvaluationObjectType(val type: Int) {
 

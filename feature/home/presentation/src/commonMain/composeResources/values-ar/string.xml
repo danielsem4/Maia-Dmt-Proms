@@ -9,6 +9,7 @@
     <string name="home_cancel">إلغاء</string>
     <string name="messages">الرسائل</string>
     <string name="no_available_modules">لا توجد وحدات متاحة</string>
+    <string name="home_report">تقرير</string>
 
     <string name="module_document_share">مشاركة المستندات</string>
     <string name="module_measurements">قياسات</string>
@@ -20,5 +21,8 @@
     <string name="module_hitber">هيتبر</string>
     <string name="module_statistics">إحصائيات</string>
     <string name="module_settings">الإعدادات</string>
+
+    <string name="module_new_report">تقرير جديد</string>
+    <string name="module_sensors">الحساسات</string>
 
 </resources>

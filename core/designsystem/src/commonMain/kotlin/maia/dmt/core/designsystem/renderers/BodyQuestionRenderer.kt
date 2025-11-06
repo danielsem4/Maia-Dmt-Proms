@@ -1,9 +1,9 @@
-package maia.dmt.evaluation.presentation.renderers
+package maia.dmt.core.designsystem.renderers
 
 import androidx.compose.runtime.Composable
 import maia.dmt.core.designsystem.components.select.DmtHumanBodyLayout
 import maia.dmt.core.domain.dto.evaluation.EvaluationObject
-import maia.dmt.evaluation.presentation.evaluation.EvaluationObjectType
+import maia.dmt.core.domain.dto.evaluation.EvaluationObjectType
 
 class BodyQuestionRenderer : QuestionRenderer {
     override fun canRender(objectType: Int): Boolean {

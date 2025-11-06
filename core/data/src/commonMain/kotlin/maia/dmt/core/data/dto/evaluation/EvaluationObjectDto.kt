@@ -15,7 +15,7 @@ data class EvaluationObjectDto(
     val order_important: Boolean,
     val show_icon: Boolean,
     val answer: String,
-    val style: String,
+    val style: String?,
     val is_grade: Boolean,
     val object_type: Int,
     val language: Int,

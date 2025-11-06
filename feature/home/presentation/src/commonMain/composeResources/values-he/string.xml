@@ -9,6 +9,7 @@
     <string name="home_cancel">ביטול</string>
     <string name="messages">הודעות</string>
     <string name="no_available_modules">אין מודולות זמינות</string>
+    <string name="home_report">דיווח</string>
 
     <string name="module_document_share">שיתוף מסמכים</string>
     <string name="module_measurements">מדדים</string>
@@ -21,5 +22,7 @@
     <string name="module_statistics">סטטיסטיקה</string>
     <string name="module_settings">הגדרות</string>
 
+    <string name="module_new_report">דיווח חדש</string>
+    <string name="module_sensors">חיישנים</string>
 
 </resources>

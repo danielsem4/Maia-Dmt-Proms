@@ -1,11 +1,11 @@
-package maia.dmt.evaluation.presentation.renderers
+package maia.dmt.core.designsystem.renderers
 
 import androidx.compose.runtime.Composable
 import maia.dmt.core.designsystem.components.select.CheckboxOption
 import maia.dmt.core.designsystem.components.select.DmtCheckBoxGroup
 import maia.dmt.core.designsystem.components.select.DmtCheckboxCardGroup
 import maia.dmt.core.domain.dto.evaluation.EvaluationObject
-import maia.dmt.evaluation.presentation.evaluation.EvaluationObjectType
+import maia.dmt.core.domain.dto.evaluation.EvaluationObjectType
 
 class CheckboxQuestionRenderer : QuestionRenderer {
     override fun canRender(objectType: Int): Boolean {
@@ -24,9 +24,9 @@ class CheckboxQuestionRenderer : QuestionRenderer {
             currentAnswer.split(",").map { it.trim() }
         }
 
-        val hasStyle = question.style.isNotEmpty()
+        val hasStyle = question.style?.isNotEmpty()
 
-        if (hasStyle) {
+        if (hasStyle != null && hasStyle) {
             val options = question.available_values.map {
                 CheckboxOption(
                     text = it.available_value,

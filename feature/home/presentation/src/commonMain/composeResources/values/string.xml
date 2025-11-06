@@ -9,6 +9,7 @@
     <string name="home_cancel">Cancel</string>
     <string name="messages">Messages</string>
     <string name="no_available_modules">No available modules</string>
+    <string name="home_report">Report</string>
 
     <string name="module_document_share">Document Share</string>
     <string name="module_measurements">Measurements</string>
@@ -20,6 +21,9 @@
     <string name="module_hitber">HITBER</string>
     <string name="module_statistics">Statistics</string>
     <string name="module_settings">Settings</string>
+
+    <string name="module_new_report">New Report</string>
+    <string name="module_sensors">Sensors</string>
 
 
 </resources>

@@ -1,11 +1,11 @@
-package maia.dmt.evaluation.presentation.renderers
+package maia.dmt.core.designsystem.renderers
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import maia.dmt.core.designsystem.components.scale.DmtScaleSlider
 import maia.dmt.core.domain.dto.evaluation.EvaluationObject
-import maia.dmt.evaluation.presentation.evaluation.EvaluationObjectType
+import maia.dmt.core.domain.dto.evaluation.EvaluationObjectType
 
 class ScaleQuestionRenderer : QuestionRenderer {
     override fun canRender(objectType: Int): Boolean {

@@ -33,6 +33,7 @@ import maia.dmt.home.presentation.components.DmtMessageSection
 import maia.dmt.home.presentation.components.DmtModuleSection
 import maia.dmt.home.presentation.components.Message
 import maia.dmt.home.presentation.components.MessageType
+import maia.dmt.home.presentation.report.ParkinsonReportDialog
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.resources.vectorResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
@@ -157,6 +158,12 @@ fun HomeScreen(
             onCancelClick = { onAction(HomeAction.OnLogoutCancel) },
             onDismiss = { onAction(HomeAction.OnLogoutCancel) },
             isLoading = state.isLoggingOut
+        )
+    }
+
+    if (state.showParkinsonDialog) {
+        ParkinsonReportDialog(
+            onDismiss = { onAction(HomeAction.OnParkinsonDialogDismiss) }
         )
     }
 }

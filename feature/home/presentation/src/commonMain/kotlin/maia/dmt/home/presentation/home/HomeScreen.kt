@@ -1,5 +1,6 @@
 package maia.dmt.home.presentation.home
 
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -101,9 +102,7 @@ fun HomeScreen(
             ) {
                 if (isMobileLandscape) {
                     Row(
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .verticalScroll(rememberScrollState()),
+                        modifier = Modifier.fillMaxSize(),
                         verticalAlignment = Alignment.Top
                     ) {
                         DmtMessageSection(
@@ -120,11 +119,14 @@ fun HomeScreen(
                         Spacer(modifier = Modifier.padding(8.dp))
 
                         if (state.isLoadingModules) {
-                            CircularProgressIndicator(
+                            Box(
                                 modifier = Modifier
                                     .weight(0.6f)
-                                    .align(Alignment.CenterVertically)
-                            )
+                                    .padding(end = 8.dp),
+                                contentAlignment = Alignment.Center
+                            ) {
+                                CircularProgressIndicator()
+                            }
                         } else {
                             DmtModuleSection(
                                 modules = state.modules,
@@ -136,16 +138,14 @@ fun HomeScreen(
                     }
                 } else {
                     Column(
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .verticalScroll(rememberScrollState()),
+                        modifier = Modifier.fillMaxSize(),
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
                         Spacer(modifier = Modifier.padding(12.dp))
 
                         Text(
                             text = stringResource(Res.string.home_welcome) + ": " + state.patient?.first_name + " " + state.patient?.last_name,
-                            style = MaterialTheme.typography.bodyLarge,
+                            style = MaterialTheme.typography.bodyMedium,
                             fontStyle = FontStyle.Italic
                         )
 
@@ -153,11 +153,7 @@ fun HomeScreen(
 
                         DmtMessageSection(
                             title = stringResource(Res.string.messages),
-                            messages = listOf(
-                                Message("Take 2 pills at 12:00", MessageType.MESSAGE),
-                                Message("Your results from Oct 15 are ready.", MessageType.INFO)
-                            ),
-                            modifier = Modifier.weight(weight = 0.4f, fill = false)
+                            messages = listOf()
                         )
 
                         Spacer(modifier = Modifier.padding(12.dp))
@@ -192,18 +188,6 @@ fun HomeScreen(
     if (state.showParkinsonDialog) {
         ParkinsonReportDialog(
             onDismiss = { onAction(HomeAction.OnParkinsonDialogDismiss) }
-        )
-    }
-}
-
-
-@Composable
-@Preview
-fun HomeScreenPrev() {
-    DmtTheme {
-        HomeScreen(
-            state = HomeState(),
-            onAction = {}
         )
     }
 }

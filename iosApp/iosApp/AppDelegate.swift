@@ -1,7 +1,7 @@
 import Foundation
 import ComposeApp
 import UIKit
-import UserNotifications // Make sure this is imported
+import UserNotifications
 import FirebaseCore
 import FirebaseMessaging
 
@@ -9,13 +9,13 @@ import FirebaseMessaging
 class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDelegate, MessagingDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+
+        InitKoinKt.doInitKoin()
         FirebaseApp.configure()
         
         UNUserNotificationCenter.current().delegate = self
         Messaging.messaging().delegate = self
-        
-        // --- THIS IS THE MISSING SECTION ---
-        // 1. Request permission from the user
+
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { granted, error in
             if let error = error {
                 print("iOS: Error requesting notification permission: \(error.localizedDescription)")
@@ -24,8 +24,6 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
             
             if granted {
                 print("iOS: Notification permission granted.")
-                // 2. Register for remote notifications on the main thread
-                //    This MUST be called after permission is requested.
                 DispatchQueue.main.async {
                     application.registerForRemoteNotifications()
                 }
@@ -33,7 +31,6 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
                 print("iOS: Notification permission denied.")
             }
         }
-        // --- END OF MISSING SECTION ---
         
         return true
     }
@@ -52,35 +49,27 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
         guard let token = fcmToken, !token.isEmpty else {
             return
         }
-        
-        // Save to UserDefaults and update KMP
+
         UserDefaults.standard.set(token, forKey: "FCM_TOKEN")
         IosDeviceTokenHolderBridge.shared.updateToken(token: token)
     }
     
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
-        // This handles background notifications
         Messaging.messaging().appDidReceiveMessage(userInfo)
         completionHandler(.newData)
     }
     
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-        // This handles foreground notifications
-        completionHandler([.banner, .sound, .list]) // Show banner, play sound, add to list
+        completionHandler([.banner, .sound, .list])
     }
     
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
-        // This handles tapping on a notification
         let userInfo = response.notification.request.content.userInfo
         Messaging.messaging().appDidReceiveMessage(userInfo)
         
-        // You can add logic here to navigate to a specific screen
         print("iOS: User tapped on notification: \(userInfo)")
         
         completionHandler()
     }
-    
-    // The custom refreshToken() function is not needed
-    // The `messaging(_:didReceiveRegistrationToken:)` delegate is the
-    // correct and automatic way to handle token updates.
+
 }

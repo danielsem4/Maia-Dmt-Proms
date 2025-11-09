@@ -94,7 +94,7 @@ fun DmtButton(
                 MaterialTheme.colorScheme.extended.disabledOutline
             }
             BorderStroke(
-                width = 1.dp,
+                width = 2.dp,
                 color = borderColor
             )
         }

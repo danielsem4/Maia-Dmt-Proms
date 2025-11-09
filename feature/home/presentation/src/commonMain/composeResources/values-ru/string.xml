@@ -6,8 +6,10 @@
     <string name="log_out_message">Вы уверены, что хотите выйти?</string>
     <string name="yes">Да</string>
     <string name="no">Нет</string>
+    <string name="home_welcome">Добро пожаловать</string>
     <string name="messages">Сообщения</string>
     <string name="no_available_modules">אין מודולות זמינות</string>
+    <string name="home_report">Отчёт</string>
 
 
     <string name="module_document_share">Обмен документами</string>
@@ -20,6 +22,9 @@
     <string name="module_hitber">ХИТБЕР</string>
     <string name="module_statistics">Статистика</string>
     <string name="module_settings">Настройки</string>
+
+    <string name="module_new_report">Новый отчёт</string>
+    <string name="module_sensors">Датчики</string>
 
 
 </resources>

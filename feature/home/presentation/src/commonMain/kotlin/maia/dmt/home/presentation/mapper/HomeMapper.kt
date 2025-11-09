@@ -15,7 +15,9 @@ import dmtproms.feature.home.presentation.generated.resources.module_hitber
 import dmtproms.feature.home.presentation.generated.resources.module_measurements
 import dmtproms.feature.home.presentation.generated.resources.module_medications
 import dmtproms.feature.home.presentation.generated.resources.module_memory
+import dmtproms.feature.home.presentation.generated.resources.module_new_report
 import dmtproms.feature.home.presentation.generated.resources.module_orientation
+import dmtproms.feature.home.presentation.generated.resources.module_sensors
 import dmtproms.feature.home.presentation.generated.resources.module_settings
 import dmtproms.feature.home.presentation.generated.resources.module_statistics
 import dmtproms.feature.home.presentation.generated.resources.orientation_icon
@@ -36,6 +38,8 @@ fun mapModuleIcon(moduleName: String): DrawableResource {
         "hitber" -> Res.drawable.hitber_icon
         "statistics" -> Res.drawable.statistics_icon
         "settings" -> Res.drawable.settings_icon
+        "parkinson sensors" -> Res.drawable.statistics_icon
+        "parkinson report" -> Res.drawable.file_upload_icon
         else -> Res.drawable.hitber_icon
     }
 }
@@ -52,6 +56,8 @@ fun mapModuleNameResource(moduleName: String): StringResource {
         "hitber" -> Res.string.module_hitber
         "statistics" -> Res.string.module_statistics
         "settings" -> Res.string.module_settings
+        "parkinson sensors" -> Res.string.module_sensors
+        "parkinson report" -> Res.string.module_new_report
         else -> Res.string.module_hitber
     }
 }

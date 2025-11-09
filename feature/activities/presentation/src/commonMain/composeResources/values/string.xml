@@ -8,7 +8,7 @@
     <string name="activities_dialog_body_date">At:</string>
 
     <string name="activities_report">Report</string>
-    <string name="activities_date_and_time">Date &amp; Time</string>
+    <string name="activities_date_and_time">Date,Time</string>
 
     <string name="activities_activity_walk">Walk</string>
     <string name="activities_activity_yoga">Yoga</string>

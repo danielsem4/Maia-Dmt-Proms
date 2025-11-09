@@ -1,4 +1,4 @@
-package maia.dmt.evaluation.presentation.renderers
+package maia.dmt.core.designsystem.renderers
 
 import androidx.compose.runtime.Composable
 import maia.dmt.core.designsystem.theme.DmtTheme
@@ -13,6 +13,10 @@ object QuestionRendererProvider {
         CheckboxQuestionRenderer(),
         ScaleQuestionRenderer(),
         BodyQuestionRenderer(),
+        InstructionsQuestionRenderer(),
+        DropDownQuestionRenderer()
+
+
     )
 
     @Composable

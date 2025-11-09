@@ -2,17 +2,6 @@ package maia.dmt.home.presentation.home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import dmtproms.feature.home.presentation.generated.resources.Res
-import dmtproms.feature.home.presentation.generated.resources.activities_icon
-import dmtproms.feature.home.presentation.generated.resources.clock_icon
-import dmtproms.feature.home.presentation.generated.resources.evaluation_icon
-import dmtproms.feature.home.presentation.generated.resources.file_upload_icon
-import dmtproms.feature.home.presentation.generated.resources.hitber_icon
-import dmtproms.feature.home.presentation.generated.resources.medications_icon
-import dmtproms.feature.home.presentation.generated.resources.memory_icon
-import dmtproms.feature.home.presentation.generated.resources.orientation_icon
-import dmtproms.feature.home.presentation.generated.resources.settings_icon
-import dmtproms.feature.home.presentation.generated.resources.statistics_icon
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -31,7 +20,6 @@ import maia.dmt.home.domain.home.HomeService
 import maia.dmt.home.presentation.mapper.mapModuleIcon
 import maia.dmt.home.presentation.mapper.mapModuleNameResource
 import maia.dmt.home.presentation.module.ModuleUiModel
-import org.jetbrains.compose.resources.DrawableResource
 
 class HomeViewModel(
     private val homeService: HomeService,
@@ -46,6 +34,7 @@ class HomeViewModel(
     val state = _state
         .onStart {
             if (!hasLoadedInitialData) {
+                setPatient()
                 loadModules()
                 hasLoadedInitialData = true
             }
@@ -62,6 +51,9 @@ class HomeViewModel(
             HomeAction.OnLogoutConfirm -> logout()
             HomeAction.OnLogoutCancel -> dismissLogoutDialog()
             is HomeAction.OnFeatureClicked -> handleFeatureClick(action.moduleName)
+            HomeAction.OnParkinsonDialogDismiss -> dismissParkinsonDialog()
+            HomeAction.OnShowParkinsonDialog -> showParkinsonDialog()
+            HomeAction.OnRefresh -> loadModules()
         }
     }
 
@@ -74,6 +66,39 @@ class HomeViewModel(
     private fun dismissLogoutDialog() {
         _state.update {
             it.copy(showLogoutDialog = false)
+        }
+    }
+
+    private fun showParkinsonDialog() {
+        _state.update {
+            it.copy(showParkinsonDialog = true)
+        }
+    }
+
+    private fun dismissParkinsonDialog() {
+        _state.update {
+            it.copy(showParkinsonDialog = false)
+        }
+    }
+
+    fun showParkinsonDialogOnLaunch() {
+        if (!_state.value.hasShownParkinsonOnLaunch) {
+            _state.update {
+                it.copy(
+                    showParkinsonDialog = true,
+                    hasShownParkinsonOnLaunch = true
+                )
+            }
+        }
+    }
+
+    private fun setPatient() {
+
+        viewModelScope.launch {
+            val authInfo = sessionStorage.observeAuthInfo().firstOrNull()
+            _state.update {
+                it.copy(patient = authInfo?.user)
+            }
         }
     }
 
@@ -116,7 +141,13 @@ class HomeViewModel(
                         ModuleUiModel(
                             icon = mapModuleIcon(module.module_name),
                             text = mapModuleNameResource(module.module_name),
-                            onClick = { onAction(HomeAction.OnFeatureClicked(module.module_name)) }
+                            onClick = {
+                                if (module.module_name == "Parkinson report") {
+                                    onAction(HomeAction.OnShowParkinsonDialog)
+                                } else {
+                                    onAction(HomeAction.OnFeatureClicked(module.module_name))
+                                }
+                            }
                         )
                     }
 
@@ -126,6 +157,10 @@ class HomeViewModel(
                             isLoadingModules = false,
                             modulesError = null
                         )
+                    }
+
+                    if (modules.any { it.module_name == "Parkinson report" }) {
+                        showParkinsonDialogOnLaunch()
                     }
                 }
                 .onFailure { error ->
@@ -146,9 +181,6 @@ class HomeViewModel(
     }
 
     private fun logout() {
-        viewModelScope.launch {
-
-        }
         viewModelScope.launch {
             _state.update {
                 it.copy(isLoggingOut = true)
@@ -171,7 +203,6 @@ class HomeViewModel(
                             isLoggingOut = false
                         )
                     }
-
                 }
         }
     }

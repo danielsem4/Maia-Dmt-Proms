@@ -1,4 +1,4 @@
-package maia.dmt.evaluation.presentation.renderers
+package maia.dmt.core.designsystem.renderers
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth

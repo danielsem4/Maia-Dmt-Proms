@@ -9,8 +9,6 @@ import dmtproms.feature.evaluation.presentation.generated.resources.Res
 import dmtproms.feature.evaluation.presentation.generated.resources.evaluation_headline
 import dmtproms.feature.evaluation.presentation.generated.resources.evaluation_next
 import dmtproms.feature.evaluation.presentation.generated.resources.evaluation_prev
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 import maia.dmt.core.designsystem.components.layouts.DmtBaseScreen
 import maia.dmt.core.designsystem.components.toast.DmtToastMessage
 import maia.dmt.core.designsystem.components.toast.ToastDuration
@@ -20,7 +18,7 @@ import maia.dmt.core.domain.dto.evaluation.EvaluationObject
 import maia.dmt.core.presentation.util.ObserveAsEvents
 import maia.dmt.core.presentation.util.UiText
 import maia.dmt.evaluation.presentation.components.layout.DmtEvaluationLayout
-import maia.dmt.evaluation.presentation.renderers.QuestionRendererProvider
+import maia.dmt.core.designsystem.renderers.QuestionRendererProvider
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.koin.compose.viewmodel.koinViewModel

@@ -1,5 +1,6 @@
 package maia.dmt.home.presentation.home
 
+import maia.dmt.core.domain.dto.User
 import maia.dmt.core.presentation.util.UiText
 import maia.dmt.home.presentation.module.ModuleUiModel
 
@@ -10,5 +11,6 @@ data class HomeState(
    val isLoadingModules: Boolean = false,
    val modulesError: UiText? = null,
    val showParkinsonDialog: Boolean = false,
-   val hasShownParkinsonOnLaunch: Boolean = false
+   val hasShownParkinsonOnLaunch: Boolean = false,
+   val patient: User? = null
 )

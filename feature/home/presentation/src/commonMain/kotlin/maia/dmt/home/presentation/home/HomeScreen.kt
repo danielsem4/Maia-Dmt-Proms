@@ -5,17 +5,25 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
+import androidx.compose.material3.pulltorefresh.PullToRefreshBox
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import dmtproms.feature.home.presentation.generated.resources.Res
 import dmtproms.feature.home.presentation.generated.resources.home_cancel
 import dmtproms.feature.home.presentation.generated.resources.home_title
+import dmtproms.feature.home.presentation.generated.resources.home_welcome
 import dmtproms.feature.home.presentation.generated.resources.log_out_message
 import dmtproms.feature.home.presentation.generated.resources.log_out_title
 import dmtproms.feature.home.presentation.generated.resources.logout_icon
@@ -55,6 +63,9 @@ fun HomeRoot(
             is HomeEvent.ModuleClicked -> {
                 onModuleClicked(event.moduleName)
             }
+            HomeEvent.RefreshHomePage -> {
+                viewModel.onAction(HomeAction.OnRefresh)
+            }
         }
     }
 
@@ -64,6 +75,7 @@ fun HomeRoot(
     )
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(
     state: HomeState,
@@ -82,66 +94,82 @@ fun HomeScreen(
         iconBar = vectorResource(Res.drawable.logout_icon),
         onIconClick = { onAction(HomeAction.OnLogoutClick) },
         content = {
-            if (isMobileLandscape) {
-                // Mobile Landscape: Row layout
-                Row(
-                    modifier = Modifier.fillMaxSize(),
-                    verticalAlignment = Alignment.Top
-                ) {
-                    DmtMessageSection(
-                        title = stringResource(Res.string.messages),
-                        messages = listOf(
-                            Message("Take 2 pills at 12:00", MessageType.MESSAGE),
-                            Message("Your results from Oct 15 are ready.", MessageType.INFO)
-                        ),
+            PullToRefreshBox(
+                isRefreshing = state.isLoadingModules,
+                onRefresh = { onAction(HomeAction.OnRefresh) },
+                modifier = Modifier.fillMaxSize()
+            ) {
+                if (isMobileLandscape) {
+                    Row(
                         modifier = Modifier
-                            .weight(0.4f)
-                            .padding(start = 8.dp)
-                    )
-
-                    Spacer(modifier = Modifier.padding(8.dp))
-
-                    if (state.isLoadingModules) {
-                        CircularProgressIndicator(
+                            .fillMaxSize()
+                            .verticalScroll(rememberScrollState()),
+                        verticalAlignment = Alignment.Top
+                    ) {
+                        DmtMessageSection(
+                            title = stringResource(Res.string.messages),
+                            messages = listOf(
+                                Message("Take 2 pills at 12:00", MessageType.MESSAGE),
+                                Message("Your results from Oct 15 are ready.", MessageType.INFO)
+                            ),
                             modifier = Modifier
-                                .weight(0.6f)
-                                .align(Alignment.CenterVertically)
+                                .weight(0.4f)
+                                .padding(start = 8.dp)
                         )
-                    } else {
-                        DmtModuleSection(
-                            modules = state.modules,
-                            modifier = Modifier
-                                .weight(0.6f)
-                                .padding(end = 8.dp)
-                        )
+
+                        Spacer(modifier = Modifier.padding(8.dp))
+
+                        if (state.isLoadingModules) {
+                            CircularProgressIndicator(
+                                modifier = Modifier
+                                    .weight(0.6f)
+                                    .align(Alignment.CenterVertically)
+                            )
+                        } else {
+                            DmtModuleSection(
+                                modules = state.modules,
+                                modifier = Modifier
+                                    .weight(0.6f)
+                                    .padding(end = 8.dp)
+                            )
+                        }
                     }
-                }
-            } else {
-                // Other configurations: Column layout
-                Column(
-                    Modifier.fillMaxSize(),
-                    horizontalAlignment = Alignment.CenterHorizontally
-                ) {
-                    Spacer(modifier = Modifier.padding(12.dp))
+                } else {
+                    Column(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .verticalScroll(rememberScrollState()),
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+                        Spacer(modifier = Modifier.padding(12.dp))
 
-                    DmtMessageSection(
-                        title = stringResource(Res.string.messages),
-                        messages = listOf(
-                            Message("Take 2 pills at 12:00", MessageType.MESSAGE),
-                            Message("Your results from Oct 15 are ready.", MessageType.INFO)
-                        ),
-                        modifier = Modifier.weight(weight = 0.4f)
-                    )
-
-                    Spacer(modifier = Modifier.padding(12.dp))
-
-                    if (state.isLoadingModules) {
-                        CircularProgressIndicator()
-                    } else {
-                        DmtModuleSection(
-                            modules = state.modules
+                        Text(
+                            text = stringResource(Res.string.home_welcome) + ": " + state.patient?.first_name + " " + state.patient?.last_name,
+                            style = MaterialTheme.typography.bodyLarge,
+                            fontStyle = FontStyle.Italic
                         )
-                        Spacer(modifier = Modifier.padding(2.dp))
+
+                        Spacer(modifier = Modifier.padding(12.dp))
+
+                        DmtMessageSection(
+                            title = stringResource(Res.string.messages),
+                            messages = listOf(
+                                Message("Take 2 pills at 12:00", MessageType.MESSAGE),
+                                Message("Your results from Oct 15 are ready.", MessageType.INFO)
+                            ),
+                            modifier = Modifier.weight(weight = 0.4f, fill = false)
+                        )
+
+                        Spacer(modifier = Modifier.padding(12.dp))
+
+                        if (state.isLoadingModules) {
+                            CircularProgressIndicator()
+                        } else {
+                            DmtModuleSection(
+                                modules = state.modules
+                            )
+                            Spacer(modifier = Modifier.padding(2.dp))
+                        }
                     }
                 }
             }

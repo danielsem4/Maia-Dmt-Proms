@@ -7,4 +7,6 @@ sealed interface HomeAction {
     data class OnFeatureClicked(val moduleName: String) : HomeAction
     data object OnParkinsonDialogDismiss : HomeAction
     data object OnShowParkinsonDialog : HomeAction
+
+    data object OnRefresh: HomeAction
 }

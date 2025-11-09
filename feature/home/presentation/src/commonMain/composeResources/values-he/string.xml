@@ -6,6 +6,7 @@
     <string name="log_out_message">האם ברצונך להתנתק?</string>
     <string name="yes_log_out">כן, התנתק</string>
     <string name="no">לא</string>
+    <string name="home_welcome">ברוכ/ה הבא/ה</string>
     <string name="home_cancel">ביטול</string>
     <string name="messages">הודעות</string>
     <string name="no_available_modules">אין מודולות זמינות</string>

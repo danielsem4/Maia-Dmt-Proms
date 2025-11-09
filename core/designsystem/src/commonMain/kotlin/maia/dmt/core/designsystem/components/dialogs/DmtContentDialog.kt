@@ -26,7 +26,6 @@ import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import dmtproms.core.designsystem.generated.resources.Res
 import dmtproms.core.designsystem.generated.resources.dismiss_dialog
-import maia.dmt.core.designsystem.components.buttons.DmtButton
 import maia.dmt.core.designsystem.theme.DmtTheme
 import maia.dmt.core.designsystem.theme.extended
 import org.jetbrains.compose.resources.stringResource
@@ -112,6 +111,7 @@ fun DmtContentDialogPreview() {
             onDismiss = {},
             content = {
                 Column(
+                    modifier = Modifier.padding(10.dp),
                     verticalArrangement = Arrangement.spacedBy(12.dp)
                 ) {
                     Text(

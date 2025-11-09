@@ -6,6 +6,7 @@
     <string name="log_out_message">Вы уверены, что хотите выйти?</string>
     <string name="yes">Да</string>
     <string name="no">Нет</string>
+    <string name="home_welcome">Добро пожаловать</string>
     <string name="messages">Сообщения</string>
     <string name="no_available_modules">אין מודולות זמינות</string>
     <string name="home_report">Отчёт</string>

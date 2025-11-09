@@ -34,6 +34,7 @@ class HomeViewModel(
     val state = _state
         .onStart {
             if (!hasLoadedInitialData) {
+                setPatient()
                 loadModules()
                 hasLoadedInitialData = true
             }
@@ -52,6 +53,7 @@ class HomeViewModel(
             is HomeAction.OnFeatureClicked -> handleFeatureClick(action.moduleName)
             HomeAction.OnParkinsonDialogDismiss -> dismissParkinsonDialog()
             HomeAction.OnShowParkinsonDialog -> showParkinsonDialog()
+            HomeAction.OnRefresh -> loadModules()
         }
     }
 
@@ -86,6 +88,16 @@ class HomeViewModel(
                     showParkinsonDialog = true,
                     hasShownParkinsonOnLaunch = true
                 )
+            }
+        }
+    }
+
+    private fun setPatient() {
+
+        viewModelScope.launch {
+            val authInfo = sessionStorage.observeAuthInfo().firstOrNull()
+            _state.update {
+                it.copy(patient = authInfo?.user)
             }
         }
     }
@@ -147,7 +159,6 @@ class HomeViewModel(
                         )
                     }
 
-                    // Show Parkinson dialog on first launch if the module exists
                     if (modules.any { it.module_name == "Parkinson report" }) {
                         showParkinsonDialogOnLaunch()
                     }

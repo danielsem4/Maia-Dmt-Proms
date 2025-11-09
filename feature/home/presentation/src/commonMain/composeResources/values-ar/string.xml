@@ -6,6 +6,7 @@
     <string name="log_out_message">هل أنت متأكد أنك تريد تسجيل الخروج؟</string>
     <string name="yes_log_out">نعم، تسجيل الخروج</string>
     <string name="no">لا</string>
+    <string name="home_welcome">مرحبًا</string>
     <string name="home_cancel">إلغاء</string>
     <string name="messages">الرسائل</string>
     <string name="no_available_modules">لا توجد وحدات متاحة</string>

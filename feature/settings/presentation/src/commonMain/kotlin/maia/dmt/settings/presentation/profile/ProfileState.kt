@@ -4,5 +4,6 @@ import maia.dmt.core.domain.dto.User
 
 data class ProfileState(
     val isLoading: Boolean = false,
-    val patient: User? = null,
+    val user: User? = null,
+    val error: String? = null
 )

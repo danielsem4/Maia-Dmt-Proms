@@ -50,6 +50,7 @@ import org.koin.compose.viewmodel.koinViewModel
 fun SettingsRoot(
     viewModel: SettingsViewModel = koinViewModel(),
     onNavigateBack: () -> Unit = {},
+    onNavigateToProfile : () -> Unit = {},
     onNavigateToLanguage: () -> Unit = {},
     onNavigateToAppearance: () -> Unit = {}
 ) {
@@ -64,7 +65,7 @@ fun SettingsRoot(
                 toastType = ToastType.Info
                 toastMessage = "Coming soon, use phone settings to change appearance"
             }
-            SettingsEvent.NavigateToProfile -> {}
+            SettingsEvent.NavigateToProfile -> onNavigateToProfile()
             SettingsEvent.NavigateBack -> onNavigateBack()
         }
     }

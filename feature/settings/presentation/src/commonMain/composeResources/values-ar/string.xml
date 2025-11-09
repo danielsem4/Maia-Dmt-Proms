@@ -26,6 +26,9 @@
     <string name="settings_profile">الملف الشخصي</string>
     <string name="settings_profile_name">الاسم</string>
     <string name="settings_profile_email">البريد الإلكتروني</string>
+    <string name="settings_profile_phone">هاتف</string>
+    <string name="settings_profile_clinic">عيادة</string>
+
 
     <string name="settings_available_languages">اللغات المتاحة</string>
     <string name="settings_choose_your_language">اختر لغتك</string>

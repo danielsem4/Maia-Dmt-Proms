@@ -6,6 +6,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navigation
 import maia.dmt.settings.presentation.language.SettingsLanguageRoot
 import maia.dmt.settings.presentation.language.SettingsLanguageScreen
+import maia.dmt.settings.presentation.profile.ProfileRoot
 import maia.dmt.settings.presentation.settings.SettingsRoot
 
 fun NavGraphBuilder.settingsGraph(
@@ -22,6 +23,9 @@ fun NavGraphBuilder.settingsGraph(
                 onNavigateToLanguage = {
                     navController.navigate(SettingsGraphRoutes.Language)
                 },
+                onNavigateToProfile = {
+                    navController.navigate(SettingsGraphRoutes.Profile)
+                }
             )
         }
         composable<SettingsGraphRoutes.Language> {
@@ -31,5 +35,14 @@ fun NavGraphBuilder.settingsGraph(
                 }
             )
         }
+
+        composable<SettingsGraphRoutes.Profile> {
+            ProfileRoot(
+                onNavigateBack = {
+                    navController.navigateUp()
+                }
+            )
+        }
+
     }
 }

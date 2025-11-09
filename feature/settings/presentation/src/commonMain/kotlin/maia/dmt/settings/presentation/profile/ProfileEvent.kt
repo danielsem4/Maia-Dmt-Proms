@@ -1,4 +1,5 @@
 package maia.dmt.settings.presentation.profile
 
-interface ProfileEvent {
+sealed interface ProfileEvent {
+    data object NavigateBack : ProfileEvent
 }

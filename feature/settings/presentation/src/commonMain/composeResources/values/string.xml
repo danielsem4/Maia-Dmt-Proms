@@ -26,6 +26,8 @@
     <string name="settings_profile">Profile</string>
     <string name="settings_profile_name">Name</string>
     <string name="settings_profile_email">Email</string>
+    <string name="settings_profile_phone">Phone</string>
+    <string name="settings_profile_clinic">Clinic</string>
 
     <string name="settings_available_languages">Available languages</string>
     <string name="settings_choose_your_language">Choose your language</string>

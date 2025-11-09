@@ -6,8 +6,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
@@ -16,6 +14,9 @@ import androidx.compose.material3.pulltorefresh.PullToRefreshBox
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontStyle
@@ -32,7 +33,9 @@ import dmtproms.feature.home.presentation.generated.resources.messages
 import dmtproms.feature.home.presentation.generated.resources.yes_log_out
 import maia.dmt.core.designsystem.components.dialogs.DmtConfirmationDialog
 import maia.dmt.core.designsystem.components.layouts.DmtBaseScreen
-import maia.dmt.core.designsystem.theme.DmtTheme
+import maia.dmt.core.designsystem.components.toast.DmtToastMessage
+import maia.dmt.core.designsystem.components.toast.ToastDuration
+import maia.dmt.core.designsystem.components.toast.ToastType
 import maia.dmt.core.presentation.permissions.Permission
 import maia.dmt.core.presentation.permissions.rememberPermissionController
 import maia.dmt.core.presentation.util.DeviceConfiguration
@@ -45,7 +48,6 @@ import maia.dmt.home.presentation.components.MessageType
 import maia.dmt.home.presentation.report.ParkinsonReportDialog
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.resources.vectorResource
-import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
@@ -85,6 +87,9 @@ fun HomeScreen(
     val permissionController = rememberPermissionController()
     val configuration = currentDeviceConfiguration()
     val isMobileLandscape = configuration == DeviceConfiguration.MOBILE_LANDSCAPE
+
+    var toastMessage by remember { mutableStateOf<String?>(null) }
+    var toastType by remember { mutableStateOf(ToastType.Success) }
 
     LaunchedEffect(true) {
         permissionController.requestPermission(Permission.NOTIFICATIONS)
@@ -149,11 +154,11 @@ fun HomeScreen(
                             fontStyle = FontStyle.Italic
                         )
 
-                        Spacer(modifier = Modifier.padding(12.dp))
-
                         DmtMessageSection(
                             title = stringResource(Res.string.messages),
-                            messages = listOf()
+                            messages = listOf(
+                                Message("Test message", MessageType.MESSAGE),
+                            )
                         )
 
                         Spacer(modifier = Modifier.padding(12.dp))
@@ -187,7 +192,24 @@ fun HomeScreen(
 
     if (state.showParkinsonDialog) {
         ParkinsonReportDialog(
-            onDismiss = { onAction(HomeAction.OnParkinsonDialogDismiss) }
+            onDismiss = { onAction(HomeAction.OnParkinsonDialogDismiss) },
+            onSubmitSuccess = {
+                toastMessage = "Report submitted successfully!"
+                toastType = ToastType.Success
+            },
+            onSubmitError = { errorMessage ->
+                toastMessage = errorMessage
+                toastType = ToastType.Error
+            }
+        )
+    }
+
+    toastMessage?.let { message ->
+        DmtToastMessage(
+            message = message,
+            type = toastType,
+            duration = ToastDuration.MEDIUM,
+            onDismiss = { toastMessage = null }
         )
     }
 }

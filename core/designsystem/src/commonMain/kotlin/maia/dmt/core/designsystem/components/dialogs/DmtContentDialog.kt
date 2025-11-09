@@ -60,13 +60,13 @@ fun DmtContentDialog(
             Column(
                 modifier = modifier
                     .verticalScroll(rememberScrollState()),
-                verticalArrangement = Arrangement.spacedBy(16.dp),
+                verticalArrangement = Arrangement.spacedBy(8.dp),
                 horizontalAlignment = Alignment.Start
             ) {
                 Box(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .clip(RoundedCornerShape(topStart = 24.dp, topEnd = 24.dp))
+                        .clip(RoundedCornerShape(topStart = 16.dp, topEnd = 16.dp))
                         .background(MaterialTheme.colorScheme.primary)
                         .padding(vertical = 12.dp, horizontal = 16.dp)
                 ) {
@@ -111,7 +111,9 @@ fun DmtContentDialogPreview() {
             onDismiss = {},
             content = {
                 Column(
-                    modifier = Modifier.padding(10.dp),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(10.dp),
                     verticalArrangement = Arrangement.spacedBy(12.dp)
                 ) {
                     Text(

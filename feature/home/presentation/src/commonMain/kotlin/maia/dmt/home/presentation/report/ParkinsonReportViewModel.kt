@@ -94,6 +94,12 @@ class ParkinsonReportViewModel(
         }
     }
 
+    fun clearAnswers() {
+        _state.update {
+            it.copy(answers = emptyMap())
+        }
+    }
+
     fun submitResults() {
         viewModelScope.launch {
             _state.update { it.copy(isSubmitting = true, error = null) }

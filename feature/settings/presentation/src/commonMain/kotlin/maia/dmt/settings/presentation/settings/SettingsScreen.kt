@@ -29,6 +29,8 @@ import dmtproms.feature.settings.presentation.generated.resources.settings_langu
 import dmtproms.feature.settings.presentation.generated.resources.settings_language_icon
 import dmtproms.feature.settings.presentation.generated.resources.settings_notifications
 import dmtproms.feature.settings.presentation.generated.resources.settings_notifications_icon
+import dmtproms.feature.settings.presentation.generated.resources.settings_profile
+import dmtproms.feature.settings.presentation.generated.resources.settings_profile_icon
 import dmtproms.feature.settings.presentation.generated.resources.settings_search
 import maia.dmt.core.designsystem.components.layouts.DmtBaseScreen
 import maia.dmt.core.designsystem.components.textFields.DmtSearchTextField
@@ -62,6 +64,7 @@ fun SettingsRoot(
                 toastType = ToastType.Info
                 toastMessage = "Coming soon, use phone settings to change appearance"
             }
+            SettingsEvent.NavigateToProfile -> {}
             SettingsEvent.NavigateBack -> onNavigateBack()
         }
     }
@@ -101,6 +104,17 @@ fun SettingsScreen(
             ) {
                 Spacer(modifier = Modifier.padding(24.dp))
                 DmtSettingsSection {
+
+                    DmtSettingsCard(
+                        title = stringResource(Res.string.settings_profile),
+                        icon = Res.drawable.settings_profile_icon,
+                        onClick = { onAction(SettingsAction.OnProfileClick) }
+                    )
+
+                    HorizontalDivider(
+                        color = MaterialTheme.colorScheme.outlineVariant
+                    )
+
                     DmtSettingsCard(
                         title = stringResource(Res.string.settings_language),
                         icon = Res.drawable.settings_language_icon,

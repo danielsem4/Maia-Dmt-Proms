@@ -32,6 +32,8 @@ class SettingsViewModel : ViewModel() {
             SettingsAction.OnBackClick -> navigateBack()
             SettingsAction.OnLanguageClick -> navigateToLanguage()
             SettingsAction.OnAppearanceClick -> navigateToAppearance()
+            SettingsAction.OnProfileClick -> {}
+            SettingsAction.OnLogoutClick -> {}
             is SettingsAction.OnNotificationsToggle -> toggleNotifications(action.enabled)
         }
     }
@@ -49,6 +51,12 @@ class SettingsViewModel : ViewModel() {
     private fun navigateToAppearance() {
         viewModelScope.launch {
             eventChannel.send(SettingsEvent.NavigateToAppearance)
+        }
+    }
+
+    private fun navigateToProfile() {
+        viewModelScope.launch {
+            eventChannel.send(SettingsEvent.NavigateToProfile)
         }
     }
 

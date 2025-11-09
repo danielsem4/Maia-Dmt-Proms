@@ -1,12 +1,15 @@
 package maia.dmt.settings.presentation.language
 
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import dmtproms.feature.settings.presentation.generated.resources.Res
@@ -76,13 +79,14 @@ fun SettingsLanguageScreen(
                         modifier = Modifier
                             .padding(horizontal = 16.dp)
                             .padding(top = 16.dp),
-                        verticalArrangement = Arrangement.spacedBy(16.dp)
+                        verticalArrangement = Arrangement.spacedBy(8.dp)
                     ) {
                         Text(
                             text = stringResource(Res.string.settings_choose_your_language_body),
                             style = MaterialTheme.typography.headlineMedium,
+                            textAlign = TextAlign.Center
                         )
-                        Spacer(modifier = Modifier.padding(12.dp))
+                        Spacer(modifier = Modifier.padding(8.dp))
                         Text(
                             text = stringResource(Res.string.settings_current_language),
                             style = MaterialTheme.typography.bodyMedium,
@@ -106,6 +110,7 @@ fun SettingsLanguageScreen(
                     Column(
                         modifier = Modifier
                             .fillMaxSize()
+                            .verticalScroll(rememberScrollState())
                             .padding(horizontal = 16.dp)
                     ) {
                         Spacer(modifier = Modifier.padding(12.dp))

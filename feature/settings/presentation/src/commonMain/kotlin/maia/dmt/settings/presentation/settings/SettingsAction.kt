@@ -4,6 +4,11 @@ sealed interface SettingsAction {
     data object OnBackClick : SettingsAction
     data object OnLanguageClick : SettingsAction
     data object OnAppearanceClick : SettingsAction
+
+    data object OnProfileClick : SettingsAction
+
+    data object OnLogoutClick : SettingsAction
+
     data class OnNotificationsToggle(val enabled: Boolean) : SettingsAction
 
 }

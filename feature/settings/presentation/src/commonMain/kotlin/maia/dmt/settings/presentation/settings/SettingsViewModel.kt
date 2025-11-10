@@ -32,7 +32,7 @@ class SettingsViewModel : ViewModel() {
             SettingsAction.OnBackClick -> navigateBack()
             SettingsAction.OnLanguageClick -> navigateToLanguage()
             SettingsAction.OnAppearanceClick -> navigateToAppearance()
-            SettingsAction.OnProfileClick -> {}
+            SettingsAction.OnProfileClick -> navigateToProfile()
             SettingsAction.OnLogoutClick -> {}
             is SettingsAction.OnNotificationsToggle -> toggleNotifications(action.enabled)
         }

@@ -26,6 +26,9 @@
     <string name="settings_profile">פרופיל</string>
     <string name="settings_profile_name">שם</string>
     <string name="settings_profile_email">אימייל</string>
+    <string name="settings_profile_phone">טלפון</string>
+    <string name="settings_profile_clinic">מרפאה</string>
+
 
     <string name="settings_available_languages">שפות זמינות</string>
     <string name="settings_choose_your_language">יש לבחור את השפה</string>

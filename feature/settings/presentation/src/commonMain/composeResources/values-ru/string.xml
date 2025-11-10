@@ -26,6 +26,9 @@
     <string name="settings_profile">Профиль</string>
     <string name="settings_profile_name">Имя</string>
     <string name="settings_profile_email">Эл. почта</string>
+    <string name="settings_profile_phone">Телефон</string>
+    <string name="settings_profile_clinic">Клиника</string>
+
 
     <string name="settings_available_languages">Доступные языки</string>
     <string name="settings_choose_your_language">Выберите язык</string>

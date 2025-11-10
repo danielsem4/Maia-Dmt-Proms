@@ -1,4 +1,6 @@
 package maia.dmt.settings.presentation.profile
 
-interface ProfileAction {
+sealed interface ProfileAction {
+    data object OnBackClick : ProfileAction
+    data object OnRefreshClick : ProfileAction
 }

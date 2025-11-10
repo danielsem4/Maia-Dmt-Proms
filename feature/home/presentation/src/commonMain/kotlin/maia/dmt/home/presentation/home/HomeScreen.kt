@@ -20,6 +20,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import dmtproms.feature.home.presentation.generated.resources.Res
@@ -150,11 +151,12 @@ fun HomeScreen(
 
                         Text(
                             text = stringResource(Res.string.home_welcome) + ": " + state.patient?.first_name + " " + state.patient?.last_name,
-                            style = MaterialTheme.typography.bodyMedium,
-                            fontStyle = FontStyle.Italic
+                            style = MaterialTheme.typography.titleMedium,
+                            fontWeight = FontWeight.Bold,
                         )
 
                         DmtMessageSection(
+                            modifier = Modifier.weight(0.5f),
                             title = stringResource(Res.string.messages),
                             messages = listOf(
                                 Message("Test message", MessageType.MESSAGE),

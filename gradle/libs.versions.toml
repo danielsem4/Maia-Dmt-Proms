@@ -52,11 +52,11 @@ settings = "1.2.0"
 
 
 projectApplicationId = "maia.dmt.proms"
-projectVersionName = "1.0"
+projectVersionName = "1.0.2"
 projectMinSdkVersion = "26"
 projectTargetSdkVersion = "36"
 projectCompileSdkVersion = "36"
-projectVersionCode = "1"
+projectVersionCode = "3"
 
 # Desktop Version
 desktopPackageName = "Chirp"

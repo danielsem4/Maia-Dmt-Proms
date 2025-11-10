@@ -203,7 +203,9 @@ fun DmtHumanBodyLayout(
                             onPainAreasChanged(painSelections.toMap())
                         },
                         allowMultiple = true,
-                        modifier = Modifier.fillMaxWidth()
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(12.dp)
                     )
                 }
             )

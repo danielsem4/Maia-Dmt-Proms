@@ -44,7 +44,7 @@ class RadioQuestionRenderer : QuestionRenderer {
                     )
                 }
 
-                "radio button" -> {
+                "radio styled" -> {
                     val options = question.available_values?.map {
                         CheckboxOption(
                             text = it.available_value,
@@ -60,6 +60,7 @@ class RadioQuestionRenderer : QuestionRenderer {
                         allowMultiple = false
                     )
                 }
+
 
                 else -> {
                     DefaultRadioButtons(question, currentAnswer, onAnswerChange)

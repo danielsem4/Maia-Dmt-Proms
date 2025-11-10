@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="cogTest_market_part_one_title">اختبار السوق</string>
+
+    <string name="cogTest_market_welcome_title">مرحبًا بكم</string>
+    <string name="cogTest_market_welcome_button_text">اضغط لقراءة التعليمات</string>
+
+    <string name="cogTest_market_intro_title">المرحلة 1 - مهمة السير الناقل</string>
+    <string name="cogTest_market_intro_description">في هذه المهمة سترى المكونات تتحرك على سير ناقل.\n\nاختر فقط المكونات المناسبة للطبق الذي اخترته وفقًا للقائمة الموجودة على جانب الشاشة.</string>
+    <string name="cogTest_market_intro_button_text">اضغط لبدء اللعبة</string>
+
+</resources>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="cogTest_market_part_one_title">Market test</string>
+
+    <string name="cogTest_market_welcome_title">Welcome</string>
+    <string name="cogTest_market_welcome_button_text">Tap to read instructions</string>
+
+    <string name="cogTest_market_intro_title">Stage 1 - Conveyor Task</string>
+    <string name="cogTest_market_intro_description">In this task, you will see items moving on a conveyor belt.\n\nChoose only the items that match the selected dish, according to the list on the side of the screen.</string>
+    <string name="cogTest_market_intro_button_text">Tap to start the game</string>
+
+</resources>

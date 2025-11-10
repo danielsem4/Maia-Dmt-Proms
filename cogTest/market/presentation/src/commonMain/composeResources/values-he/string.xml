@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="cogTest_market_part_one_title">משימת הסופר</string>
+
+    <string name="cogTest_market_welcome_title">ברוכים הבאים</string>
+    <string name="cogTest_market_welcome_button_text">לחצו לקריאת ההוראות</string>
+
+    <string name="cogTest_market_intro_title">שלב 1 - משימת המסוע</string>
+    <string name="cogTest_market_intro_description">.במשימה זו תראו מצרכים עוברים על מסוע\n\nיש לבחור רק את המצרכים שמתאימים למנה שבחרת, לפי הרשימה שמופיעה בצד המסך</string>
+    <string name="cogTest_market_intro_button_text">לחצו להתחלת המשחק</string>
+
+</resources>

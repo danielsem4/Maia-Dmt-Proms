@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="cogTest_market_part_one_title">Тест рынка</string>
+
+    <string name="cogTest_market_welcome_title">Добро пожаловать</string>
+    <string name="cogTest_market_welcome_button_text">Нажмите, чтобы прочитать инструкции</string>
+
+    <string name="cogTest_market_intro_title">Этап 1 - Задание с конвейером</string>
+    <string name="cogTest_market_intro_description">В этом задании вы увидите продукты, движущиеся по конвейеру.\n\nВыберите только те продукты, которые подходят к выбранному блюду, согласно списку на стороне экрана.</string>
+    <string name="cogTest_market_intro_button_text">Нажмите, чтобы начать игру</string>
+
+
+</resources>

@@ -26,10 +26,13 @@ class KtorHomeService(
         ).map { it.map { it.toDomain() } }
     }
 
-    override suspend fun logout(): EmptyResult<DataError.Remote> {
+    override suspend fun logout(fcmToken: String): EmptyResult<DataError.Remote> {
 
         return httpClient.post(
             route = "logout/",
+            queryParams = mapOf(
+                "fcm_token" to fcmToken
+            ),
             body = Unit
         )
     }

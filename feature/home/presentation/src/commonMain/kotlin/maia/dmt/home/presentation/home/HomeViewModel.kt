@@ -17,13 +17,16 @@ import maia.dmt.core.domain.util.onSuccess
 import maia.dmt.core.presentation.util.UiText
 import maia.dmt.core.presentation.util.toUiText
 import maia.dmt.home.domain.home.HomeService
+import maia.dmt.home.domain.notification.DeviceTokenService
+import maia.dmt.home.domain.notification.PushNotificationService
 import maia.dmt.home.presentation.mapper.mapModuleIcon
 import maia.dmt.home.presentation.mapper.mapModuleNameResource
 import maia.dmt.home.presentation.module.ModuleUiModel
 
 class HomeViewModel(
     private val homeService: HomeService,
-    private val sessionStorage: SessionStorage
+    private val sessionStorage: SessionStorage,
+    private val pushNotificationService: PushNotificationService
 ) : ViewModel() {
 
     private val _state = MutableStateFlow(HomeState())
@@ -31,6 +34,7 @@ class HomeViewModel(
     val events = eventChannel.receiveAsFlow()
 
     private var hasLoadedInitialData = false
+    private var currentFcmToken: String? = null
     val state = _state
         .onStart {
             if (!hasLoadedInitialData) {
@@ -180,12 +184,22 @@ class HomeViewModel(
         }
     }
 
+    private fun observeFcmToken() {
+        viewModelScope.launch {
+            pushNotificationService.observeDeviceToken().collect { token ->
+                currentFcmToken = token
+            }
+        }
+    }
+
     private fun logout() {
         viewModelScope.launch {
             _state.update {
                 it.copy(isLoggingOut = true)
             }
-            homeService.logout()
+            val fcmToken = currentFcmToken ?: ""
+
+            homeService.logout(fcmToken)
                 .onSuccess {
                     _state.update {
                         it.copy(

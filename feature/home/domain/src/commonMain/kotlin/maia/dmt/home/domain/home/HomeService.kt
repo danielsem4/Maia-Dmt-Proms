@@ -9,6 +9,6 @@ interface HomeService {
 
     suspend fun getModules(clinicId: Int): Result<List<Module>, DataError.Remote>
 
-    suspend fun logout(): EmptyResult<DataError.Remote>
+    suspend fun logout(fcmToken: String): EmptyResult<DataError.Remote>
 
 }

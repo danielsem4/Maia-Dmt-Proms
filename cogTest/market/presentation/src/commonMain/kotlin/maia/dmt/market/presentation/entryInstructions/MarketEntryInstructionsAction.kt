@@ -1,4 +1,7 @@
 package maia.dmt.market.presentation.entryInstructions
 
-interface MarketEntryInstructionsAction {
+sealed interface MarketEntryInstructionsAction {
+    data object OnNavigateBack : MarketEntryInstructionsAction
+
+    data object OnStartMarketTest : MarketEntryInstructionsAction
 }

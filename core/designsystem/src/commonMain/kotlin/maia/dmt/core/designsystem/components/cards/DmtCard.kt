@@ -76,7 +76,6 @@ fun DmtCard(
     )
 
     val border = when {
-        // When disabled, always show border like the button
         !enabled -> defaultDisabledBorder
         style == DmtCardStyle.OUTLINED -> BorderStroke(
             width = 1.dp,
@@ -247,9 +246,9 @@ fun DmtCardLoadingPreview() {
 fun DmtCardDisabledPreview() {
     DmtTheme(darkTheme = true) {
         DmtCard(
-            text = "Disabled Card",
+            text = "Disabled Card asdfksdafkh askldfjklsdh lsdlfhlksd fsldf lsdh sdklf jlksdjf sakdfj klsadf lskdjfkl slksjf sd askdfj kl sadkfj ssaklj dfss kljfs da",
             onClick = {},
-            style = DmtCardStyle.PRIMARY,
+            style = DmtCardStyle.ELEVATED,
             enabled = false,
         )
     }

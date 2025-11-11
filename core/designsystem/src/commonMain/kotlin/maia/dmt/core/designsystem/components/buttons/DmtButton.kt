@@ -4,8 +4,10 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
@@ -14,7 +16,6 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.SegmentedButtonDefaults.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -25,6 +26,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import maia.dmt.core.designsystem.theme.DmtTheme
 import maia.dmt.core.designsystem.theme.extended
+import maia.dmt.core.presentation.util.DeviceConfiguration
+import maia.dmt.core.presentation.util.currentDeviceConfiguration
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 enum class DmtButtonStyle {
@@ -45,6 +48,51 @@ fun DmtButton(
     isLoading: Boolean = false,
     leadingIcon: @Composable (() -> Unit)? = null,
 ) {
+    val deviceConfig = currentDeviceConfiguration()
+
+    // Determine size based on device configuration
+    val buttonSizing = when(deviceConfig) {
+        DeviceConfiguration.MOBILE_PORTRAIT -> ButtonSizing(
+            minWidth = 120.dp,
+            maxWidth = 280.dp,
+            verticalPadding = 6.dp,
+            horizontalPadding = 6.dp,
+            iconSpacing = 8.dp,
+            iconSize = 20.dp
+        )
+        DeviceConfiguration.MOBILE_LANDSCAPE -> ButtonSizing(
+            minWidth = 140.dp,
+            maxWidth = 320.dp,
+            verticalPadding = 8.dp,
+            horizontalPadding = 8.dp,
+            iconSpacing = 10.dp,
+            iconSize = 22.dp
+        )
+        DeviceConfiguration.TABLET_PORTRAIT -> ButtonSizing(
+            minWidth = 160.dp,
+            maxWidth = 360.dp,
+            verticalPadding = 10.dp,
+            horizontalPadding = 12.dp,
+            iconSpacing = 12.dp,
+            iconSize = 24.dp
+        )
+        DeviceConfiguration.TABLET_LANDSCAPE -> ButtonSizing(
+            minWidth = 180.dp,
+            maxWidth = 400.dp,
+            verticalPadding = 12.dp,
+            horizontalPadding = 14.dp,
+            iconSpacing = 12.dp,
+            iconSize = 26.dp
+        )
+        DeviceConfiguration.DESKTOP -> ButtonSizing(
+            minWidth = 200.dp,
+            maxWidth = 450.dp,
+            verticalPadding = 14.dp,
+            horizontalPadding = 16.dp,
+            iconSpacing = 14.dp,
+            iconSize = 28.dp
+        )
+    }
 
     val colors = when(style) {
         DmtButtonStyle.PRIMARY -> ButtonDefaults.buttonColors(
@@ -103,7 +151,8 @@ fun DmtButton(
 
     Button(
         onClick = onClick,
-        modifier = modifier,
+        modifier = modifier
+            .widthIn(min = buttonSizing.minWidth, max = buttonSizing.maxWidth),
         enabled = enabled,
         shape = RoundedCornerShape(8.dp),
         colors = colors,
@@ -112,7 +161,10 @@ fun DmtButton(
         Box(
             contentAlignment = Alignment.Center,
             modifier = Modifier
-                .padding(vertical = 6.dp, horizontal = 6.dp)
+                .padding(
+                    vertical = buttonSizing.verticalPadding,
+                    horizontal = buttonSizing.horizontalPadding
+                )
         ) {
             CircularProgressIndicator(
                 modifier = Modifier
@@ -125,7 +177,7 @@ fun DmtButton(
             )
             Row(
                 horizontalArrangement = Arrangement.spacedBy(
-                    8.dp,
+                    buttonSizing.iconSpacing,
                     Alignment.CenterHorizontally
                 ),
                 verticalAlignment = Alignment.CenterVertically,
@@ -143,6 +195,15 @@ fun DmtButton(
         }
     }
 }
+
+private data class ButtonSizing(
+    val minWidth: androidx.compose.ui.unit.Dp,
+    val maxWidth: androidx.compose.ui.unit.Dp,
+    val verticalPadding: androidx.compose.ui.unit.Dp,
+    val horizontalPadding: androidx.compose.ui.unit.Dp,
+    val iconSpacing: androidx.compose.ui.unit.Dp,
+    val iconSize: androidx.compose.ui.unit.Dp
+)
 
 @Composable
 @Preview

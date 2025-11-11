@@ -19,7 +19,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -64,9 +63,11 @@ fun HomeRoot(
             is HomeEvent.LogoutSuccess -> {
                 onLogoutSuccess()
             }
+
             is HomeEvent.ModuleClicked -> {
                 onModuleClicked(event.moduleName)
             }
+
             HomeEvent.RefreshHomePage -> {
                 viewModel.onAction(HomeAction.OnRefresh)
             }

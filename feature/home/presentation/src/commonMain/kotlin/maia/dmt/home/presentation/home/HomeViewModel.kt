@@ -40,6 +40,7 @@ class HomeViewModel(
             if (!hasLoadedInitialData) {
                 setPatient()
                 loadModules()
+                observeFcmToken()
                 hasLoadedInitialData = true
             }
         }

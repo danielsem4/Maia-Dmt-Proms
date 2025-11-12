@@ -2,14 +2,16 @@ package maia.dmt.market.presentation.navigation
 
 import kotlinx.serialization.Serializable
 
-interface MarketTestGraphRoutes {
+sealed interface MarketTestGraphRoutes {
+    @Serializable
+    data object Graph : MarketTestGraphRoutes
 
     @Serializable
-    data object Graph: MarketTestGraphRoutes
+    data object MarketEntryInstructions : MarketTestGraphRoutes
 
     @Serializable
-    data object MarketEntryInstructions: MarketTestGraphRoutes
+    data object MarketAllRecipes : MarketTestGraphRoutes
 
     @Serializable
-    data object MarketAllRecipes: MarketTestGraphRoutes
+    data class MarketSelectedRecipe(val recipeId: String) : MarketTestGraphRoutes
 }

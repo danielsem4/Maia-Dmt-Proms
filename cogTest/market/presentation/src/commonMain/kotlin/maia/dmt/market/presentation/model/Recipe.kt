@@ -6,5 +6,6 @@ import org.jetbrains.compose.resources.StringResource
 data class Recipe(
     val id: String,
     val titleRes: StringResource,
-    val imageRes: DrawableResource
+    val imageRes: DrawableResource,
+    val groceries: List<StringResource> = emptyList()
 )

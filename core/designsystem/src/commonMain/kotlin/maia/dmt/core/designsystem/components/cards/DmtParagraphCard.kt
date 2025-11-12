@@ -15,10 +15,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import maia.dmt.core.designsystem.theme.DmtTheme
-import maia.dmt.core.designsystem.theme.extended
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
@@ -26,7 +26,8 @@ fun DmtParagraphCard(
     modifier: Modifier = Modifier,
     text: String = "",
     isLoading: Boolean = false,
-    style: DmtCardStyle = DmtCardStyle.ELEVATED
+    style: DmtCardStyle = DmtCardStyle.ELEVATED,
+    textSize: TextStyle = MaterialTheme.typography.titleMedium
 ) {
     val colors = when(style) {
         DmtCardStyle.PRIMARY -> CardDefaults.cardColors(
@@ -93,7 +94,7 @@ fun DmtParagraphCard(
 
             Text(
                 text = text,
-                style = MaterialTheme.typography.titleMedium,
+                style = textSize,
                 textAlign = TextAlign.Center,
                 modifier = Modifier
                     .fillMaxWidth()

@@ -16,4 +16,31 @@
     <string name="cogTest_market_recipe_title">وصفات</string>
     <string name="cogTest_market_recipe_instructions">يرجى اختيار الطبق الذي ترغب في تحضيره بالضغط على أحد الأزرار</string>
 
+    <string name="cogTest_market_groceries_title">مكونات</string>
+    <string name="cogTest_market_groceries_body">مكونات للتحضير:</string>
+    <string name="cogTest_market_groceries_list">سلة التسوق</string>
+    <string name="cogTest_market_to_start_press_here">اضغط لبدء التسوق</string>
+
+    <string name="cogTest_market_tomato">طماطم</string>
+    <string name="cogTest_market_onion">بصل</string>
+    <string name="cogTest_market_egg">بيضة</string>
+    <string name="cogTest_market_cucumber">خيار</string>
+    <string name="cogTest_market_salt">ملح</string>
+    <string name="cogTest_market_bulgarian_cheese">جبنة بلغارية</string>
+    <string name="cogTest_market_lemon">ليمون</string>
+    <string name="cogTest_market_baguette">خبز باغيت</string>
+    <string name="cogTest_market_olives">زيتون</string>
+    <string name="cogTest_market_olive_oil">زيت الزيتون</string>
+    <string name="cogTest_market_flour">طحين</string>
+    <string name="cogTest_market_eggs">بيض</string>
+    <string name="cogTest_market_white_cheese">جبنة بيضاء</string>
+    <string name="cogTest_market_yellow_cheese">جبنة صفراء</string>
+    <string name="cogTest_market_broccoli">بروكلي</string>
+    <string name="cogTest_market_black_pepper">فلفل أسود</string>
+    <string name="cogTest_market_cocoa">كاكاو</string>
+    <string name="cogTest_market_sugar">سكر</string>
+    <string name="cogTest_market_canola_oil">زيت الكانولا</string>
+    <string name="cogTest_market_baking_powder">بيكنج بودر</string>
+    <string name="cogTest_market_vanilla_extract">خلاصة الفانيليا</string>
+    <string name="cogTest_market_chocolate">شوكولاتة</string>
 </resources>

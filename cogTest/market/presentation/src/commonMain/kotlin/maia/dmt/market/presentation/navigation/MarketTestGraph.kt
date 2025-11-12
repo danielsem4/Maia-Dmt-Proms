@@ -6,6 +6,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navigation
 import maia.dmt.market.presentation.allRecipes.MarketAllRecipesRoot
 import maia.dmt.market.presentation.entryInstructions.MarketEntryInstructionsRoot
+import maia.dmt.market.presentation.selectedRecipe.MarketSelectedRecipeRoot
 
 fun NavGraphBuilder.marketTestGraph(
     navController: NavController,
@@ -28,7 +29,17 @@ fun NavGraphBuilder.marketTestGraph(
                 onNavigateBack = {
                     navController.navigateUp()
                 },
-                onNavigateToSelectedRecipe = {
+                onNavigateToSelectedRecipe = { recipeId ->
+                    navController.navigate(MarketTestGraphRoutes.MarketSelectedRecipe(recipeId))
+                }
+            )
+        }
+        composable<MarketTestGraphRoutes.MarketSelectedRecipe> {
+            MarketSelectedRecipeRoot(
+                onNavigateBack = {
+                    navController.navigateUp()
+                },
+                onStartRecipe = { recipeId ->
 
                 }
             )

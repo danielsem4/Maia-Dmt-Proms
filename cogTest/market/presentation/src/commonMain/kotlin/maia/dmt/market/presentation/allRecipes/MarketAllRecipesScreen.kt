@@ -29,8 +29,8 @@ import maia.dmt.core.designsystem.theme.DmtTheme
 import maia.dmt.core.presentation.util.DeviceConfiguration
 import maia.dmt.core.presentation.util.ObserveAsEvents
 import maia.dmt.core.presentation.util.currentDeviceConfiguration
-import maia.dmt.market.presentation.allRecipes.components.RecipeCategoryItemLandscape
-import maia.dmt.market.presentation.allRecipes.components.RecipeCategoryItemPortrait
+import maia.dmt.market.presentation.components.RecipeCategoryItemLandscape
+import maia.dmt.market.presentation.components.RecipeCategoryItemPortrait
 import maia.dmt.market.presentation.model.Recipe
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview

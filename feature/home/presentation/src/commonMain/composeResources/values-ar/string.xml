@@ -22,6 +22,7 @@
     <string name="module_hitber">هيتبر</string>
     <string name="module_statistics">إحصائيات</string>
     <string name="module_settings">الإعدادات</string>
+    <string name="module_market">Market</string>
 
     <string name="module_new_report">تقرير جديد</string>
     <string name="module_sensors">الحساسات</string>

@@ -22,6 +22,7 @@
     <string name="module_hitber">ХИТБЕР</string>
     <string name="module_statistics">Статистика</string>
     <string name="module_settings">Настройки</string>
+    <string name="module_market">Market</string>
 
     <string name="module_new_report">Новый отчёт</string>
     <string name="module_sensors">Датчики</string>

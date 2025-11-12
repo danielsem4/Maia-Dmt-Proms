@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="cogTest_market_part_one_title">משימת הסופר</string>
+
+    <string name="cogTest_market_welcome_title">ברוכים הבאים</string>
+    <string name="cogTest_market_welcome_button_text">לחצו לקריאת ההוראות</string>
+
+    <string name="cogTest_market_intro_title">שלב 1 - משימת המסוע</string>
+    <string name="cogTest_market_intro_description">.במשימה זו תראו מצרכים עוברים על מסוע\n\nיש לבחור רק את המצרכים שמתאימים למנה שבחרת, לפי הרשימה שמופיעה בצד המסך</string>
+    <string name="cogTest_market_intro_button_text">לחצו להתחלת המשחק</string>
+
+    <string name="cogTest_market_cake">עוגה</string>
+    <string name="cogTest_market_pie">פשטידה</string>
+    <string name="cogTest_market_salad">סלט</string>
+    <string name="cogTest_market_recipe_title">מתכונים</string>
+    <string name="cogTest_market_recipe_instructions">יש לבחור המנה שברצונך להכין על ידי לחיצה על אחד הכפתורים</string>
+
+    <string name="cogTest_market_groceries_title">מצרכים</string>
+    <string name="cogTest_market_groceries_body">מצרכים להכנה:</string>
+    <string name="cogTest_market_groceries_list">סל קניות</string>
+    <string name="cogTest_market_to_start_press_here">לחץ להתחלת קנייה</string>
+
+    <string name="cogTest_market_tomato">עגבנייה</string>
+    <string name="cogTest_market_onion">בצל</string>
+    <string name="cogTest_market_egg">ביצה</string>
+    <string name="cogTest_market_cucumber">מלפפון</string>
+    <string name="cogTest_market_salt">מלח</string>
+    <string name="cogTest_market_bulgarian_cheese">גבינה בולגרית</string>
+    <string name="cogTest_market_lemon">לימון</string>
+    <string name="cogTest_market_baguette">באגט</string>
+    <string name="cogTest_market_olives">זיתים</string>
+    <string name="cogTest_market_olive_oil">שמן זית</string>
+    <string name="cogTest_market_flour">קמח</string>
+    <string name="cogTest_market_eggs">ביצים</string>
+    <string name="cogTest_market_white_cheese">גבינה לבנה</string>
+    <string name="cogTest_market_yellow_cheese">גבינה צהובה</string>
+    <string name="cogTest_market_broccoli">ברוקולי</string>
+    <string name="cogTest_market_black_pepper">פלפל שחור</string>
+    <string name="cogTest_market_cocoa">קקאו</string>
+    <string name="cogTest_market_sugar">סוכר</string>
+    <string name="cogTest_market_canola_oil">שמן קנולה</string>
+    <string name="cogTest_market_baking_powder">אבקת אפייה</string>
+    <string name="cogTest_market_vanilla_extract">תמצית וניל</string>
+    <string name="cogTest_market_chocolate">שוקולד</string>
+</resources>

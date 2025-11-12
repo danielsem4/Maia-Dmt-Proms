@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="cogTest_market_part_one_title">Тест рынка</string>
+
+    <string name="cogTest_market_welcome_title">Добро пожаловать</string>
+    <string name="cogTest_market_welcome_button_text">Нажмите, чтобы прочитать инструкции</string>
+
+    <string name="cogTest_market_intro_title">Этап 1 - Задание с конвейером</string>
+    <string name="cogTest_market_intro_description">В этом задании вы увидите продукты, движущиеся по конвейеру.\n\nВыберите только те продукты, которые подходят к выбранному блюду, согласно списку на стороне экрана.</string>
+    <string name="cogTest_market_intro_button_text">Нажмите, чтобы начать игру</string>
+
+    <string name="cogTest_market_cake">Торт</string>
+    <string name="cogTest_market_pie">Пирог</string>
+    <string name="cogTest_market_salad">Салат</string>
+    <string name="cogTest_market_recipe_title">Рецепты</string>
+    <string name="cogTest_market_recipe_instructions">Пожалуйста, выберите блюдо, которое хотите приготовить, нажав одну из кнопок</string>
+
+    <string name="cogTest_market_groceries_title">Продукты</string>
+    <string name="cogTest_market_groceries_body">Ингредиенты для приготовления:</string>
+    <string name="cogTest_market_groceries_list">Корзина покупок</string>
+    <string name="cogTest_market_to_start_press_here">Нажмите, чтобы начать покупки</string>
+
+    <string name="cogTest_market_tomato">Помидор</string>
+    <string name="cogTest_market_onion">Лук</string>
+    <string name="cogTest_market_egg">Яйцо</string>
+    <string name="cogTest_market_cucumber">Огурец</string>
+    <string name="cogTest_market_salt">Соль</string>
+    <string name="cogTest_market_bulgarian_cheese">Болгарский сыр</string>
+    <string name="cogTest_market_lemon">Лимон</string>
+    <string name="cogTest_market_baguette">Багет</string>
+    <string name="cogTest_market_olives">Оливки</string>
+    <string name="cogTest_market_olive_oil">Оливковое масло</string>
+    <string name="cogTest_market_flour">Мука</string>
+    <string name="cogTest_market_eggs">Яйца</string>
+    <string name="cogTest_market_white_cheese">Творожный сыр</string>
+    <string name="cogTest_market_yellow_cheese">Жёлтый сыр</string>
+    <string name="cogTest_market_broccoli">Брокколи</string>
+    <string name="cogTest_market_black_pepper">Чёрный перец</string>
+    <string name="cogTest_market_cocoa">Какао</string>
+    <string name="cogTest_market_sugar">Сахар</string>
+    <string name="cogTest_market_canola_oil">Каноловое масло</string>
+    <string name="cogTest_market_baking_powder">Разрыхлитель</string>
+    <string name="cogTest_market_vanilla_extract">Ванильный экстракт</string>
+    <string name="cogTest_market_chocolate">Шоколад</string>
+</resources>

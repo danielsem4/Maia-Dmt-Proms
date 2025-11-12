@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="statistics_headline">סטטיסטיקות</string>
+    <string name="statistics_all_instruction">אנא בחר הערכה כדי להציג את הסטטיסטיקות שלה</string>
+    <string name="statistics_search">חיפוש</string>
+    <string name="statistics_no_statistics_found">לא נמצאו מדידות</string>
+    <string name="statistics_selected_evaluation_statistics">בחר סטטיסטיקות של הערכה</string>
+    <string name="statistics_select_graph">אנא בחר גרף</string>
+
+    <string name="statistics_times_done">מספר הפעמים שבוצע ההערכה: </string>
+    <string name="statistics_last_date_done">תאריך אחרון שבו בוצעה ההערכה: </string>
+
+    <string name="statistics_line_chart">תרשים קווי</string>
+    <string name="statistics_bar_chart">תרשים עמודות</string>
+
+    <string name="statistics_trend">מגמה</string>
+    <string name="statistics_trend_increasing">עולה</string>
+    <string name="statistics_trend_decreasing">יורדת</string>
+    <string name="statistics_trend_stable">יציבה</string>
+    <string name="statistics_category_labels">קטגוריות</string>
+
+    <string name="statistics_summery">סיכום</string>
+    <string name="statistics_total_points">סך הנקודות</string>
+    <string name="statistics_average">ממוצע</string>
+    <string name="statistics_range">טווח</string>
+
+
+</resources>

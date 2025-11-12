@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="error_disk_full">אופס, נראה שהאחסון שלך מלא!</string>
+    <string name="error_not_found">לא ניתן למצוא את הפריט המבוקש</string>
+    <string name="error_unknown">אירעה שגיאה לא ידועה</string>
+    <string name="error_bad_request">בקשה לא תקינה</string>
+    <string name="error_request_timeout">הבקשה שלך פגה בזמן</string>
+    <string name="error_unauthorized">פרטי ההתחברות שגויים</string>
+    <string name="error_forbidden">אין לך הרשאה לבצע פעולה זו</string>
+    <string name="error_conflict">אירעה התנגשות</string>
+    <string name="error_too_many_requests">חרגת ממספר הבקשות המותר</string>
+    <string name="error_no_internet">לא ניתן להתחבר. אנא בדוק את חיבור האינטרנט שלך.</string>
+    <string name="error_payload_too_large">הקובץ שצירפת גדול מדי</string>
+    <string name="error_server">אופס, אירעה שגיאה בצד השרת</string>
+    <string name="error_service_unavailable">השירות אינו זמין, נסה שוב מאוחר יותר</string>
+    <string name="error_serialization">שגיאת סריאליזציה</string>
+</resources>

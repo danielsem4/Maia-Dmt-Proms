@@ -6,12 +6,14 @@ import dmtproms.feature.home.presentation.generated.resources.clock_icon
 import dmtproms.feature.home.presentation.generated.resources.evaluation_icon
 import dmtproms.feature.home.presentation.generated.resources.file_upload_icon
 import dmtproms.feature.home.presentation.generated.resources.hitber_icon
+import dmtproms.feature.home.presentation.generated.resources.market_icon
 import dmtproms.feature.home.presentation.generated.resources.medications_icon
 import dmtproms.feature.home.presentation.generated.resources.memory_icon
 import dmtproms.feature.home.presentation.generated.resources.module_activities
 import dmtproms.feature.home.presentation.generated.resources.module_cdt
 import dmtproms.feature.home.presentation.generated.resources.module_document_share
 import dmtproms.feature.home.presentation.generated.resources.module_hitber
+import dmtproms.feature.home.presentation.generated.resources.module_market
 import dmtproms.feature.home.presentation.generated.resources.module_measurements
 import dmtproms.feature.home.presentation.generated.resources.module_medications
 import dmtproms.feature.home.presentation.generated.resources.module_memory
@@ -40,6 +42,7 @@ fun mapModuleIcon(moduleName: String): DrawableResource {
         "settings" -> Res.drawable.settings_icon
         "parkinson sensors" -> Res.drawable.statistics_icon
         "parkinson report" -> Res.drawable.file_upload_icon
+        "market test" -> Res.drawable.market_icon
         else -> Res.drawable.hitber_icon
     }
 }
@@ -58,6 +61,7 @@ fun mapModuleNameResource(moduleName: String): StringResource {
         "settings" -> Res.string.module_settings
         "parkinson sensors" -> Res.string.module_sensors
         "parkinson report" -> Res.string.module_new_report
+        "market test" -> Res.string.module_market
         else -> Res.string.module_hitber
     }
 }

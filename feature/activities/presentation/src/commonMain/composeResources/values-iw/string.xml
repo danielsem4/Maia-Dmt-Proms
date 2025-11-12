@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="activities_title">פעילויות</string>
+    <string name="activities_instruction">אנא בחר את הפעילות שלך</string>
+
+    <string name="activities_dialog_body">ביצעתי את הפעילות</string>
+    <string name="activities_dialog_body_date">בתאריך:</string>
+
+    <string name="activities_report">דיווח</string>
+    <string name="activities_date_and_time">תאריך ושעה</string>
+
+    <string name="activities_activity_walk">הליכה</string>
+    <string name="activities_activity_yoga">יוגה</string>
+    <string name="activities_activity_treadmill">הליכון</string>
+    <string name="activities_activity_swim">שחייה</string>
+    <string name="activities_activity_stand">עמידה</string>
+    <string name="activities_activity_run">ריצה</string>
+    <string name="activities_activity_racket_game">משחק מחבט</string>
+    <string name="activities_activity_gym_workout">אימון בחדר כושר</string>
+    <string name="activities_activity_ball_game">משחק כדור</string>
+
+</resources>

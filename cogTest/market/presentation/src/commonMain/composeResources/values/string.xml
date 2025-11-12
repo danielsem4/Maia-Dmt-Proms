@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="cogTest_market_part_one_title">Market test</string>
+
+    <string name="cogTest_market_welcome_title">Welcome</string>
+    <string name="cogTest_market_welcome_button_text">Tap to read instructions</string>
+
+    <string name="cogTest_market_intro_title">Stage 1 - Conveyor Task</string>
+    <string name="cogTest_market_intro_description">In this task, you will see items moving on a conveyor belt.\n\nChoose only the items that match the selected dish, according to the list on the side of the screen.</string>
+    <string name="cogTest_market_intro_button_text">Tap to start the game</string>
+
+    <string name="cogTest_market_cake">Cake</string>
+    <string name="cogTest_market_pie">Pie</string>
+    <string name="cogTest_market_salad">Salad</string>
+    <string name="cogTest_market_recipe_title">Recipes</string>
+    <string name="cogTest_market_recipe_instructions">please select the dish you would like to make by pressing one of the buttons</string>
+
+    <string name="cogTest_market_groceries_title">Groceries</string>
+    <string name="cogTest_market_groceries_body">Ingredients to prepare:</string>
+    <string name="cogTest_market_groceries_list">Shopping cart</string>
+    <string name="cogTest_market_to_start_press_here">Press to start shopping</string>
+
+    <string name="cogTest_market_tomato">Tomato</string>
+    <string name="cogTest_market_onion">Onion</string>
+    <string name="cogTest_market_egg">Egg</string>
+    <string name="cogTest_market_cucumber">Cucumber</string>
+    <string name="cogTest_market_salt">Salt</string>
+    <string name="cogTest_market_bulgarian_cheese">Bulgarian cheese</string>
+    <string name="cogTest_market_lemon">Lemon</string>
+    <string name="cogTest_market_baguette">Baguette</string>
+    <string name="cogTest_market_olives">Olives</string>
+    <string name="cogTest_market_olive_oil">Olive oil</string>
+    <string name="cogTest_market_flour">Flour</string>
+    <string name="cogTest_market_eggs">Eggs</string>
+    <string name="cogTest_market_white_cheese">White cheese</string>
+    <string name="cogTest_market_yellow_cheese">Yellow cheese</string>
+    <string name="cogTest_market_broccoli">Broccoli</string>
+    <string name="cogTest_market_black_pepper">Black pepper</string>
+    <string name="cogTest_market_cocoa">Cocoa</string>
+    <string name="cogTest_market_sugar">Sugar</string>
+    <string name="cogTest_market_canola_oil">Canola oil</string>
+    <string name="cogTest_market_baking_powder">Baking powder</string>
+    <string name="cogTest_market_vanilla_extract">Vanilla extract</string>
+    <string name="cogTest_market_chocolate">Chocolate</string>
+
+
+
+
+</resources>

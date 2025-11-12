@@ -10,4 +10,10 @@
     <string name="cogTest_market_intro_description">.במשימה זו תראו מצרכים עוברים על מסוע\n\nיש לבחור רק את המצרכים שמתאימים למנה שבחרת, לפי הרשימה שמופיעה בצד המסך</string>
     <string name="cogTest_market_intro_button_text">לחצו להתחלת המשחק</string>
 
+    <string name="cogTest_market_cake">עוגה</string>
+    <string name="cogTest_market_pie">פשטידה</string>
+    <string name="cogTest_market_salad">סלט</string>
+    <string name="cogTest_market_recipe_title">מתכונים</string>
+    <string name="cogTest_market_recipe_instructions">יש לבחור המנה שברצונך להכין על ידי לחיצה על אחד הכפתורים</string>
+
 </resources>

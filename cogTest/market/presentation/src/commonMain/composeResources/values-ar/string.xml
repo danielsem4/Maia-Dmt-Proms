@@ -10,4 +10,10 @@
     <string name="cogTest_market_intro_description">في هذه المهمة سترى المكونات تتحرك على سير ناقل.\n\nاختر فقط المكونات المناسبة للطبق الذي اخترته وفقًا للقائمة الموجودة على جانب الشاشة.</string>
     <string name="cogTest_market_intro_button_text">اضغط لبدء اللعبة</string>
 
+    <string name="cogTest_market_cake">كعكة</string>
+    <string name="cogTest_market_pie">فطيرة</string>
+    <string name="cogTest_market_salad">سلطة</string>
+    <string name="cogTest_market_recipe_title">وصفات</string>
+    <string name="cogTest_market_recipe_instructions">يرجى اختيار الطبق الذي ترغب في تحضيره بالضغط على أحد الأزرار</string>
+
 </resources>

@@ -20,6 +20,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
@@ -31,6 +32,8 @@ import maia.dmt.core.designsystem.components.buttons.DmtButton
 import maia.dmt.core.designsystem.components.buttons.DmtButtonStyle
 import maia.dmt.core.designsystem.theme.DmtTheme
 import maia.dmt.core.designsystem.theme.extended
+import maia.dmt.core.presentation.util.DeviceConfiguration
+import maia.dmt.core.presentation.util.currentDeviceConfiguration
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.resources.vectorResource
@@ -51,6 +54,81 @@ fun DmtCustomDialog(
     secondaryButtonStyle: DmtButtonStyle = DmtButtonStyle.SECONDARY,
     showCloseButton: Boolean = true
 ) {
+    val deviceConfig = currentDeviceConfiguration()
+
+    val dialogSizing = when(deviceConfig) {
+        DeviceConfiguration.MOBILE_PORTRAIT -> CustomDialogSizing(
+            maxWidth = 340.dp,
+            horizontalPadding = 16.dp,
+            verticalPadding = 12.dp,
+            contentPadding = 12.dp,
+            topPadding = 8.dp,
+            cornerRadius = 12.dp,
+            spaceBetweenElements = 12.dp,
+            buttonSpacing = 8.dp,
+            topButtonPadding = 8.dp,
+            iconSize = 40.dp,
+            titleStyle = MaterialTheme.typography.titleSmall,
+            descriptionStyle = MaterialTheme.typography.bodySmall
+        )
+        DeviceConfiguration.MOBILE_LANDSCAPE -> CustomDialogSizing(
+            maxWidth = 400.dp,
+            horizontalPadding = 20.dp,
+            verticalPadding = 14.dp,
+            contentPadding = 14.dp,
+            topPadding = 8.dp,
+            cornerRadius = 14.dp,
+            spaceBetweenElements = 14.dp,
+            buttonSpacing = 10.dp,
+            topButtonPadding = 10.dp,
+            iconSize = 44.dp,
+            titleStyle = MaterialTheme.typography.titleMedium,
+            descriptionStyle = MaterialTheme.typography.bodyMedium
+        )
+        DeviceConfiguration.TABLET_PORTRAIT -> CustomDialogSizing(
+            maxWidth = 480.dp,
+            horizontalPadding = 24.dp,
+            verticalPadding = 16.dp,
+            contentPadding = 16.dp,
+            topPadding = 8.dp,
+            cornerRadius = 16.dp,
+            spaceBetweenElements = 16.dp,
+            buttonSpacing = 12.dp,
+            topButtonPadding = 12.dp,
+            iconSize = 48.dp,
+            titleStyle = MaterialTheme.typography.headlineLarge,
+            descriptionStyle = MaterialTheme.typography.bodyMedium
+        )
+        DeviceConfiguration.TABLET_LANDSCAPE -> CustomDialogSizing(
+            maxWidth = 560.dp,
+            horizontalPadding = 28.dp,
+            verticalPadding = 18.dp,
+            contentPadding = 20.dp,
+            topPadding = 10.dp,
+            cornerRadius = 18.dp,
+            spaceBetweenElements = 18.dp,
+            buttonSpacing = 14.dp,
+            topButtonPadding = 14.dp,
+            iconSize = 56.dp,
+            titleStyle = MaterialTheme.typography.headlineLarge,
+            descriptionStyle = MaterialTheme.typography.bodyLarge
+        )
+        DeviceConfiguration.DESKTOP -> CustomDialogSizing(
+            maxWidth = 640.dp,
+            horizontalPadding = 32.dp,
+            verticalPadding = 20.dp,
+            contentPadding = 24.dp,
+            topPadding = 12.dp,
+            cornerRadius = 20.dp,
+            spaceBetweenElements = 20.dp,
+            buttonSpacing = 16.dp,
+            topButtonPadding = 16.dp,
+            iconSize = 64.dp,
+            titleStyle = MaterialTheme.typography.headlineLarge,
+            descriptionStyle = MaterialTheme.typography.bodyLarge
+        )
+    }
+
     Dialog(
         onDismissRequest = onDismiss,
         properties = DialogProperties(
@@ -60,40 +138,40 @@ fun DmtCustomDialog(
         Box(
             modifier = Modifier
                 .padding(
-                    horizontal = 24.dp,
-                    vertical = 16.dp
+                    horizontal = dialogSizing.horizontalPadding,
+                    vertical = dialogSizing.verticalPadding
                 )
-                .widthIn(max = 480.dp)
+                .widthIn(max = dialogSizing.maxWidth)
                 .background(
                     color = MaterialTheme.colorScheme.surface,
-                    shape = RoundedCornerShape(16.dp)
+                    shape = RoundedCornerShape(dialogSizing.cornerRadius)
                 )
         ) {
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(12.dp)
-                    .padding(top = if (showCloseButton) 8.dp else 0.dp),
-                verticalArrangement = Arrangement.spacedBy(16.dp),
+                    .padding(dialogSizing.contentPadding)
+                    .padding(top = if (showCloseButton) dialogSizing.topPadding else 0.dp),
+                verticalArrangement = Arrangement.spacedBy(dialogSizing.spaceBetweenElements),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Icon(
                     imageVector = vectorResource(icon),
                     contentDescription = null,
                     tint = iconTint,
-                    modifier = Modifier.size(48.dp)
+                    modifier = Modifier.size(dialogSizing.iconSize)
                 )
 
                 Text(
                     text = title,
-                    style = MaterialTheme.typography.titleMedium,
+                    style = dialogSizing.titleStyle,
                     color = MaterialTheme.colorScheme.extended.textPrimary,
                     textAlign = TextAlign.Center
                 )
 
                 Text(
                     text = description,
-                    style = MaterialTheme.typography.bodySmall,
+                    style = dialogSizing.descriptionStyle,
                     color = MaterialTheme.colorScheme.extended.textSecondary,
                     textAlign = TextAlign.Center
                 )
@@ -101,8 +179,8 @@ fun DmtCustomDialog(
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(top = 8.dp),
-                    horizontalArrangement = Arrangement.spacedBy(12.dp),
+                        .padding(top = dialogSizing.topButtonPadding),
+                    horizontalArrangement = Arrangement.spacedBy(dialogSizing.buttonSpacing),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     DmtButton(
@@ -136,6 +214,21 @@ fun DmtCustomDialog(
         }
     }
 }
+
+private data class CustomDialogSizing(
+    val maxWidth: androidx.compose.ui.unit.Dp,
+    val horizontalPadding: androidx.compose.ui.unit.Dp,
+    val verticalPadding: androidx.compose.ui.unit.Dp,
+    val contentPadding: androidx.compose.ui.unit.Dp,
+    val topPadding: androidx.compose.ui.unit.Dp,
+    val cornerRadius: androidx.compose.ui.unit.Dp,
+    val spaceBetweenElements: androidx.compose.ui.unit.Dp,
+    val buttonSpacing: androidx.compose.ui.unit.Dp,
+    val topButtonPadding: androidx.compose.ui.unit.Dp,
+    val iconSize: androidx.compose.ui.unit.Dp,
+    val titleStyle: TextStyle,
+    val descriptionStyle: TextStyle
+)
 
 @Composable
 @Preview

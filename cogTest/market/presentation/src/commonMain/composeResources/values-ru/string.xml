@@ -9,5 +9,9 @@
     <string name="cogTest_market_intro_description">В этом задании вы увидите продукты, движущиеся по конвейеру.\n\nВыберите только те продукты, которые подходят к выбранному блюду, согласно списку на стороне экрана.</string>
     <string name="cogTest_market_intro_button_text">Нажмите, чтобы начать игру</string>
 
-
+    <string name="cogTest_market_cake">Торт</string>
+    <string name="cogTest_market_pie">Пирог</string>
+    <string name="cogTest_market_salad">Салат</string>
+    <string name="cogTest_market_recipe_title">Рецепты</string>
+    <string name="cogTest_market_recipe_instructions">Пожалуйста, выберите блюдо, которое хотите приготовить, нажав одну из кнопок</string>
 </resources>

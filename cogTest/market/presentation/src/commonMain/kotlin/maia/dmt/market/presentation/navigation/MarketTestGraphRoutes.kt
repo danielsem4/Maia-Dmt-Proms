@@ -10,4 +10,6 @@ interface MarketTestGraphRoutes {
     @Serializable
     data object MarketEntryInstructions: MarketTestGraphRoutes
 
+    @Serializable
+    data object MarketAllRecipes: MarketTestGraphRoutes
 }

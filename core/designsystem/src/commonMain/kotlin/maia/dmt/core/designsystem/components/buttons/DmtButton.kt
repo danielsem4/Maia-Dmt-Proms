@@ -24,6 +24,7 @@ import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import maia.dmt.core.designsystem.theme.DmtTheme
 import maia.dmt.core.designsystem.theme.extended
 import maia.dmt.core.presentation.util.DeviceConfiguration
@@ -58,7 +59,8 @@ fun DmtButton(
             verticalPadding = 6.dp,
             horizontalPadding = 6.dp,
             iconSpacing = 8.dp,
-            iconSize = 20.dp
+            iconSize = 20.dp,
+            textSize = 14.sp
         )
         DeviceConfiguration.MOBILE_LANDSCAPE -> ButtonSizing(
             minWidth = 140.dp,
@@ -66,7 +68,8 @@ fun DmtButton(
             verticalPadding = 8.dp,
             horizontalPadding = 8.dp,
             iconSpacing = 10.dp,
-            iconSize = 22.dp
+            iconSize = 22.dp,
+            textSize = 15.sp
         )
         DeviceConfiguration.TABLET_PORTRAIT -> ButtonSizing(
             minWidth = 160.dp,
@@ -74,7 +77,8 @@ fun DmtButton(
             verticalPadding = 10.dp,
             horizontalPadding = 12.dp,
             iconSpacing = 12.dp,
-            iconSize = 24.dp
+            iconSize = 24.dp,
+            textSize = 20.sp
         )
         DeviceConfiguration.TABLET_LANDSCAPE -> ButtonSizing(
             minWidth = 180.dp,
@@ -82,7 +86,8 @@ fun DmtButton(
             verticalPadding = 12.dp,
             horizontalPadding = 14.dp,
             iconSpacing = 12.dp,
-            iconSize = 26.dp
+            iconSize = 26.dp,
+            textSize = 20.sp
         )
         DeviceConfiguration.DESKTOP -> ButtonSizing(
             minWidth = 200.dp,
@@ -90,7 +95,8 @@ fun DmtButton(
             verticalPadding = 14.dp,
             horizontalPadding = 16.dp,
             iconSpacing = 14.dp,
-            iconSize = 28.dp
+            iconSize = 28.dp,
+            textSize = 24.sp
         )
     }
 
@@ -188,7 +194,9 @@ fun DmtButton(
                 leadingIcon?.invoke()
                 Text(
                     text = text,
-                    style = MaterialTheme.typography.titleSmall,
+                    style = MaterialTheme.typography.titleSmall.copy(
+                        fontSize = buttonSizing.textSize
+                    ),
                     textAlign = TextAlign.Center
                 )
             }
@@ -202,7 +210,8 @@ private data class ButtonSizing(
     val verticalPadding: androidx.compose.ui.unit.Dp,
     val horizontalPadding: androidx.compose.ui.unit.Dp,
     val iconSpacing: androidx.compose.ui.unit.Dp,
-    val iconSize: androidx.compose.ui.unit.Dp
+    val iconSize: androidx.compose.ui.unit.Dp,
+    val textSize: androidx.compose.ui.unit.TextUnit
 )
 
 @Composable

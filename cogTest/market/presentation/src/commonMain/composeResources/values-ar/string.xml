@@ -43,4 +43,6 @@
     <string name="cogTest_market_baking_powder">بيكنج بودر</string>
     <string name="cogTest_market_vanilla_extract">خلاصة الفانيليا</string>
     <string name="cogTest_market_chocolate">شوكولاتة</string>
+
+    <string name="cogTest_market_to_select_grocery_press_ar">لاختيار المنتج المناسب، اضغط عليه</string>
 </resources>

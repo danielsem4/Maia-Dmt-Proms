@@ -9,6 +9,7 @@ import maia.dmt.evaluation.presentation.di.evaluationPresentationModule
 import maia.dmt.home.data.di.homeDataModule
 import maia.dmt.home.data.di.platformHomeDataModule
 import maia.dmt.home.presentation.di.homePresentationModule
+import maia.dmt.market.data.di.marketDataModule
 import maia.dmt.market.presentation.di.marketPresentationModule
 import maia.dmt.medication.data.di.medicationDataModule
 import maia.dmt.medication.presentation.di.medicationPresentationModule
@@ -38,7 +39,8 @@ fun initKoin(config: KoinAppDeclaration? = null) {
             statisticsPresentationModule,
             statisticsDataModule,
             settingsPresentationModule,
-            marketPresentationModule
+            marketPresentationModule,
+            marketDataModule
         )
     }
 

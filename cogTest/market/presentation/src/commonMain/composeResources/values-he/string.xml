@@ -43,4 +43,6 @@
     <string name="cogTest_market_baking_powder">אבקת אפייה</string>
     <string name="cogTest_market_vanilla_extract">תמצית וניל</string>
     <string name="cogTest_market_chocolate">שוקולד</string>
+
+    <string name="cogTest_market_to_select_grocery_press">לבחירת המוצר המתאים יש ללחוץ עליו</string>
 </resources>

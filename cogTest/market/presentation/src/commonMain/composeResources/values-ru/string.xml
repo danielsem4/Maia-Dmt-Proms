@@ -42,4 +42,7 @@
     <string name="cogTest_market_baking_powder">Разрыхлитель</string>
     <string name="cogTest_market_vanilla_extract">Ванильный экстракт</string>
     <string name="cogTest_market_chocolate">Шоколад</string>
+
+    <string name="cogTest_market_to_select_grocery_press_ru">Чтобы выбрать подходящий продукт, нажмите на него</string>
+
 </resources>

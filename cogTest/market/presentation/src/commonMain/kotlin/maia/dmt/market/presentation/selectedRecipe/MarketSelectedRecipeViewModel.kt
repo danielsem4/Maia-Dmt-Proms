@@ -4,7 +4,6 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.toRoute
-import dmtproms.cogtest.market.presentation.generated.resources.*
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -12,11 +11,14 @@ import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
-import maia.dmt.market.presentation.model.Recipe
+import maia.dmt.market.domain.usecase.GetRecipeByIdUseCase
+import maia.dmt.market.presentation.mapper.RecipePresentationMapper
 import maia.dmt.market.presentation.navigation.MarketTestGraphRoutes
 
 class MarketSelectedRecipeViewModel(
-    savedStateHandle: SavedStateHandle
+    savedStateHandle: SavedStateHandle,
+    private val getRecipeByIdUseCase: GetRecipeByIdUseCase,
+    private val mapper: RecipePresentationMapper
 ) : ViewModel() {
 
     private val recipeId = savedStateHandle.toRoute<MarketTestGraphRoutes.MarketSelectedRecipe>().recipeId
@@ -40,54 +42,8 @@ class MarketSelectedRecipeViewModel(
         )
 
     private fun loadRecipe() {
-        val recipe = when (recipeId) {
-            "pie" -> Recipe(
-                id = "pie",
-                titleRes = Res.string.cogTest_market_pie,
-                imageRes = Res.drawable.pie_image,
-                groceries = listOf(
-                    Res.string.cogTest_market_flour,
-                    Res.string.cogTest_market_eggs,
-                    Res.string.cogTest_market_white_cheese,
-                    Res.string.cogTest_market_yellow_cheese,
-                    Res.string.cogTest_market_broccoli,
-                    Res.string.cogTest_market_olive_oil,
-                    Res.string.cogTest_market_salt,
-                    Res.string.cogTest_market_black_pepper
-                )
-            )
-            "salad" -> Recipe(
-                id = "salad",
-                titleRes = Res.string.cogTest_market_salad,
-                imageRes = Res.drawable.salad_image,
-                groceries = listOf(
-                    Res.string.cogTest_market_tomato,
-                    Res.string.cogTest_market_cucumber,
-                    Res.string.cogTest_market_salt,
-                    Res.string.cogTest_market_bulgarian_cheese,
-                    Res.string.cogTest_market_lemon,
-                    Res.string.cogTest_market_baguette,
-                    Res.string.cogTest_market_olives,
-                    Res.string.cogTest_market_olive_oil
-                )
-            )
-            "cake" -> Recipe(
-                id = "cake",
-                titleRes = Res.string.cogTest_market_cake,
-                imageRes = Res.drawable.cake_image,
-                groceries = listOf(
-                    Res.string.cogTest_market_cocoa,
-                    Res.string.cogTest_market_flour,
-                    Res.string.cogTest_market_sugar,
-                    Res.string.cogTest_market_eggs,
-                    Res.string.cogTest_market_canola_oil,
-                    Res.string.cogTest_market_baking_powder,
-                    Res.string.cogTest_market_vanilla_extract,
-                    Res.string.cogTest_market_chocolate
-                )
-            )
-            else -> null
-        }
+        val recipeData = getRecipeByIdUseCase(recipeId)
+        val recipe = recipeData?.let { mapper.toPresentation(it) }
         _state.value = _state.value.copy(selectedRecipe = recipe)
     }
 

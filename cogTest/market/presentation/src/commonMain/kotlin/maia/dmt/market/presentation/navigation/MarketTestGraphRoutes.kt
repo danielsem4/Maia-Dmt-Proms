@@ -14,4 +14,7 @@ sealed interface MarketTestGraphRoutes {
 
     @Serializable
     data class MarketSelectedRecipe(val recipeId: String) : MarketTestGraphRoutes
+
+    @Serializable
+    data class MarketConveyor(val recipeId: String) : MarketTestGraphRoutes
 }

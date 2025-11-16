@@ -1,6 +1,8 @@
 package maia.dmt.evaluation.presentation.evaluation
 
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -15,6 +17,7 @@ import maia.dmt.core.designsystem.components.toast.ToastDuration
 import maia.dmt.core.designsystem.components.toast.ToastType
 import maia.dmt.core.designsystem.theme.DmtTheme
 import maia.dmt.core.domain.dto.evaluation.EvaluationObject
+import maia.dmt.core.domain.dto.evaluation.EvaluationObjectType
 import maia.dmt.core.presentation.util.ObserveAsEvents
 import maia.dmt.core.presentation.util.UiText
 import maia.dmt.evaluation.presentation.components.layout.DmtEvaluationLayout
@@ -126,11 +129,36 @@ fun RenderQuestion(
     currentAnswer: String,
     onAnswerChange: (String) -> Unit
 ) {
-    QuestionRendererProvider.RenderQuestion(
-        question = question,
-        currentAnswer = currentAnswer,
-        onAnswerChange = onAnswerChange
-    )
+    val isBodyType = EvaluationObjectType.fromInt(question.object_type) == EvaluationObjectType.BODY
+
+    if (isBodyType) {
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+        ) {
+            QuestionRendererProvider.RenderQuestion(
+                question = question,
+                currentAnswer = currentAnswer,
+                onAnswerChange = onAnswerChange
+            )
+        }
+    } else {
+        val scrollState = rememberScrollState()
+
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .heightIn(max = 400.dp)
+                .verticalScroll(scrollState)
+                .padding(6.dp)
+        ) {
+            QuestionRendererProvider.RenderQuestion(
+                question = question,
+                currentAnswer = currentAnswer,
+                onAnswerChange = onAnswerChange
+            )
+        }
+    }
 }
 
 @Composable

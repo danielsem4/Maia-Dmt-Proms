@@ -16,7 +16,10 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.layout.onGloballyPositioned
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.IntSize
 import dmtproms.core.designsystem.generated.resources.Res
 import dmtproms.core.designsystem.generated.resources.body_back_img
 import dmtproms.core.designsystem.generated.resources.body_front_img
@@ -31,7 +34,6 @@ import kotlin.math.sqrt
 data class BodyArea(
     val id: String,
     val position: Offset,
-    val radius: Float = 30f,
     val painOptions: List<String>
 )
 
@@ -50,6 +52,9 @@ fun DmtHumanBodyLayout(
             putAll(initialSelections)
         }
     }
+
+    var containerSize by remember { mutableStateOf(IntSize.Zero) }
+    val density = LocalDensity.current
 
     fun parseAreaValues(values: List<String>, predefinedAreas: List<BodyArea>): List<BodyArea> {
         return predefinedAreas.map { area ->
@@ -72,13 +77,13 @@ fun DmtHumanBodyLayout(
     }
 
     val frontAreaDefaults = listOf(
-        BodyArea("Head", Offset(0.5f, 0.12f), painOptions = emptyList()),
+        BodyArea("Head", Offset(0.5f, 0.08f), painOptions = emptyList()),
         BodyArea("Chest", Offset(0.5f, 0.32f), painOptions = emptyList()),
         BodyArea("Belly", Offset(0.5f, 0.45f), painOptions = emptyList()),
-        BodyArea("Left Shoulder", Offset(0.35f, 0.25f), painOptions = emptyList()),
-        BodyArea("Right Shoulder", Offset(0.65f, 0.25f), painOptions = emptyList()),
-        BodyArea("Left Arm", Offset(0.25f, 0.40f), painOptions = emptyList()),
-        BodyArea("Right Arm", Offset(0.75f, 0.40f), painOptions = emptyList()),
+        BodyArea("Left Shoulder", Offset(0.28f, 0.25f), painOptions = emptyList()),
+        BodyArea("Right Shoulder", Offset(0.72f, 0.25f), painOptions = emptyList()),
+        BodyArea("Left Arm", Offset(0.18f, 0.40f), painOptions = emptyList()),
+        BodyArea("Right Arm", Offset(0.82f, 0.40f), painOptions = emptyList()),
         BodyArea("Left Knee", Offset(0.43f, 0.72f), painOptions = emptyList()),
         BodyArea("Right Knee", Offset(0.57f, 0.72f), painOptions = emptyList()),
         BodyArea("Left Foot", Offset(0.42f, 0.92f), painOptions = emptyList()),
@@ -120,7 +125,7 @@ fun DmtHumanBodyLayout(
                 )
             }
 
-            BoxWithConstraints(
+            Box(
                 modifier = Modifier
                     .fillMaxWidth()
                     .weight(1f)
@@ -129,59 +134,93 @@ fun DmtHumanBodyLayout(
                         color = extendedColors.surfaceHigher,
                         shape = RoundedCornerShape(16.dp)
                     )
-                    .padding(16.dp),
+                    .padding(16.dp)
+                    .onGloballyPositioned { coordinates ->
+                        containerSize = coordinates.size
+                    },
                 contentAlignment = Alignment.Center
             ) {
-                val imageWidth = constraints.maxWidth.toFloat()
-                val imageHeight = constraints.maxHeight.toFloat()
+                if (containerSize != IntSize.Zero) {
+                    val imageAspectRatio = 0.42f
 
-                Image(
-                    painter = painterResource(if (showingBack) Res.drawable.body_back_img else Res.drawable.body_front_img),
-                    contentDescription = if (showingBack) "Back of body" else "Front of body",
-                    modifier = Modifier.fillMaxSize(),
-                    contentScale = ContentScale.Fit
-                )
+                    val containerWidth = with(density) { containerSize.width.toDp().value }
+                    val containerHeight = with(density) { containerSize.height.toDp().value }
+                    val containerAspectRatio = containerWidth / containerHeight
 
-                // Dots Layer
-                Canvas(modifier = Modifier.fillMaxSize()) {
-                    val primaryColor = Color(0xFF4CAF50)
-                    val selectedColor = Color(0xFF2196F3)
+                    val (imageWidth, imageHeight, offsetX, offsetY) = if (containerAspectRatio > imageAspectRatio) {
+                        val width = containerHeight * imageAspectRatio
+                        val height = containerHeight
+                        val xOffset = (containerWidth - width) / 2f
+                        ImageBounds(width, height, xOffset, 0f)
+                    } else {
+                        val width = containerWidth
+                        val height = containerWidth / imageAspectRatio
+                        val yOffset = (containerHeight - height) / 2f
+                        ImageBounds(width, height, 0f, yOffset)
+                    }
 
-                    currentAreas.forEach { area ->
-                        if (area.painOptions.isNotEmpty()) {
-                            val position = Offset(
-                                area.position.x * size.width,
-                                area.position.y * size.height
-                            )
+                    val dotRadius = imageHeight * 0.02f
 
-                            val hasSelection = painSelections[area.id]?.isNotEmpty() == true
-                            val color = if (hasSelection) selectedColor else primaryColor
+                    Box(
+                        modifier = Modifier.fillMaxSize(),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Image(
+                            painter = painterResource(
+                                if (showingBack) Res.drawable.body_back_img
+                                else Res.drawable.body_front_img
+                            ),
+                            contentDescription = if (showingBack) "Back of body" else "Front of body",
+                            modifier = Modifier.fillMaxSize(),
+                            contentScale = ContentScale.Fit
+                        )
 
-                            drawCircle(color.copy(alpha = 0.4f), area.radius, position)
-                            drawCircle(color.copy(alpha = 0.9f), area.radius * 0.6f, position)
+                        Canvas(
+                            modifier = Modifier
+                                .fillMaxSize()
+                                .pointerInput(currentAreas, imageWidth, imageHeight, offsetX, offsetY, dotRadius) {
+                                    detectTapGestures { tapOffset ->
+                                        val tapX = tapOffset.x / density.density
+                                        val tapY = tapOffset.y / density.density
+
+                                        val clickedArea = currentAreas.find { area ->
+                                            val actualX = offsetX + (area.position.x * imageWidth)
+                                            val actualY = offsetY + (area.position.y * imageHeight)
+
+                                            val distance = sqrt(
+                                                (tapX - actualX).pow(2) +
+                                                        (tapY - actualY).pow(2)
+                                            )
+                                            distance <= dotRadius
+                                        }
+                                        if (clickedArea != null) selectedArea = clickedArea
+                                    }
+                                }
+                        ) {
+                            val primaryColor = Color(0xFF4CAF50)
+                            val selectedColor = Color(0xFF2196F3)
+
+                            currentAreas.forEach { area ->
+                                if (area.painOptions.isNotEmpty()) {
+                                    val x = offsetX + (area.position.x * imageWidth)
+                                    val y = offsetY + (area.position.y * imageHeight)
+
+                                    val position = Offset(
+                                        x * density.density,
+                                        y * density.density
+                                    )
+
+                                    val hasSelection = painSelections[area.id]?.isNotEmpty() == true
+                                    val color = if (hasSelection) selectedColor else primaryColor
+
+                                    val radiusPx = dotRadius * density.density
+                                    drawCircle(color.copy(alpha = 0.4f), radiusPx, position)
+                                    drawCircle(color.copy(alpha = 0.9f), radiusPx * 0.6f, position)
+                                }
+                            }
                         }
                     }
                 }
-
-                Box(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .pointerInput(currentAreas, imageWidth, imageHeight) {
-                            detectTapGestures { tapOffset ->
-                                val clickedArea = currentAreas.find { area ->
-                                    val actualPos = Offset(
-                                        area.position.x * imageWidth,
-                                        area.position.y * imageHeight
-                                    )
-                                    val distance = sqrt(
-                                        (tapOffset.x - actualPos.x).pow(2) + (tapOffset.y - actualPos.y).pow(2)
-                                    )
-                                    distance <= area.radius
-                                }
-                                if (clickedArea != null) selectedArea = clickedArea
-                            }
-                        }
-                )
             }
         }
 
@@ -213,12 +252,50 @@ fun DmtHumanBodyLayout(
     }
 }
 
+// Helper data class for image bounds
+private data class ImageBounds(
+    val width: Float,
+    val height: Float,
+    val offsetX: Float,
+    val offsetY: Float
+)
+
 @Preview
 @Composable
 fun DmtHumanBodyLayoutPreview() {
     DmtTheme {
-        DmtHumanBodyLayout(
+        // Create sample data with all areas having pain options
+        val frontAreasWithOptions = listOf(
+            "Head (?) Headache, Migraine, Tension",
+            "Chest (?) Sharp Pain, Burning, Pressure",
+            "Belly (?) Cramping, Bloating, Sharp Pain",
+            "Left Shoulder (?) Aching, Stiffness, Sharp Pain",
+            "Right Shoulder (?) Aching, Stiffness, Sharp Pain",
+            "Left Arm (?) Numbness, Tingling, Weakness",
+            "Right Arm (?) Numbness, Tingling, Weakness",
+            "Left Knee (?) Swelling, Stiffness, Aching",
+            "Right Knee (?) Swelling, Stiffness, Aching",
+            "Left Foot (?) Sharp Pain, Burning, Numbness",
+            "Right Foot (?) Sharp Pain, Burning, Numbness"
+        )
 
+        val backAreasWithOptions = listOf(
+            "Neck (?) Stiffness, Sharp Pain, Aching",
+            "Upper Back (?) Tension, Sharp Pain, Burning",
+            "Lower Back (?) Aching, Sharp Pain, Radiating Pain",
+            "Buttocks (?) Aching, Numbness, Sharp Pain"
+        )
+
+        DmtHumanBodyLayout(
+            frontAreasValues = frontAreasWithOptions,
+            backAreasValues = backAreasWithOptions,
+            initialSelections = mapOf(
+                "Chest" to listOf("Sharp Pain"),
+                "Lower Back" to listOf("Aching", "Sharp Pain")
+            ),
+            onPainAreasChanged = { selections ->
+                println("Pain areas changed: $selections")
+            }
         )
     }
 }

@@ -1,19 +1,22 @@
-package maia.dmt.market.presentation.entryInstructions
+package maia.dmt.market.presentation.secondPartInstructions
 
-import androidx.compose.foundation.layout.*
-import androidx.compose.material3.*
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import dmtproms.cogtest.market.presentation.generated.resources.Res
+import dmtproms.cogtest.market.presentation.generated.resources.cogTest_market_first_mission_done_body
+import dmtproms.cogtest.market.presentation.generated.resources.cogTest_market_first_mission_done_title
 import dmtproms.cogtest.market.presentation.generated.resources.cogTest_market_intro_button_text
-import dmtproms.cogtest.market.presentation.generated.resources.cogTest_market_intro_description
-import dmtproms.cogtest.market.presentation.generated.resources.cogTest_market_intro_title
 import dmtproms.cogtest.market.presentation.generated.resources.cogTest_market_part_one_title
 import maia.dmt.core.designsystem.components.buttons.DmtButton
 import maia.dmt.core.designsystem.components.cards.DmtCardStyle
@@ -22,41 +25,41 @@ import maia.dmt.core.designsystem.components.layouts.DmtBaseScreen
 import maia.dmt.core.designsystem.theme.DmtTheme
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
-import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
-fun MarketEntryInstructionsRoot(
+fun MarketSecondPartInstructionsRoot(
     onNavigateBack: () -> Unit = {},
-    onStartMarketTest: () -> Unit = {}
+    onStartMarketSecondTest: () -> Unit = {}
 ) {
-    MarketEntryInstructionsScreen(
+
+    MarketSecondPartInstructionsScreen(
         onAction = { action ->
             when (action) {
-                is MarketEntryInstructionsAction.OnNavigateBack -> onNavigateBack()
-                is MarketEntryInstructionsAction.OnStartMarketTest -> onStartMarketTest()
+                is MarketSecondPartInstructionsAction.OnNavigateBack -> onNavigateBack()
+                is MarketSecondPartInstructionsAction.OnStartMarketSecondPartTest -> onStartMarketSecondTest()
             }
         }
     )
+
 }
 
 @Composable
-fun MarketEntryInstructionsScreen(
-    onAction: (MarketEntryInstructionsAction) -> Unit,
+fun MarketSecondPartInstructionsScreen(
+    onAction: (MarketSecondPartInstructionsAction) -> Unit,
 ) {
-
     DmtBaseScreen(
         titleText = stringResource(Res.string.cogTest_market_part_one_title),
-        onIconClick = { onAction(MarketEntryInstructionsAction.OnNavigateBack) },
+        onIconClick = { onAction(MarketSecondPartInstructionsAction.OnNavigateBack) },
         content = {
             Column(
                 modifier = Modifier
                     .fillMaxSize(),
                 horizontalAlignment = Alignment.CenterHorizontally,
 
-            ) {
+                ) {
                 Spacer(modifier = Modifier.padding(16.dp))
                 Text(
-                    text = stringResource(Res.string.cogTest_market_intro_title),
+                    text = stringResource(Res.string.cogTest_market_first_mission_done_title),
                     textAlign = TextAlign.Center,
                     fontWeight = FontWeight.Bold,
                     style = MaterialTheme.typography.headlineLarge,
@@ -67,7 +70,7 @@ fun MarketEntryInstructionsScreen(
                     modifier = Modifier
                         .padding(12.dp)
                         .wrapContentSize(),
-                    text = stringResource(Res.string.cogTest_market_intro_description),
+                    text = stringResource(Res.string.cogTest_market_first_mission_done_body),
                     style = DmtCardStyle.ELEVATED,
                     textSize = MaterialTheme.typography.titleLarge
                 )
@@ -78,7 +81,7 @@ fun MarketEntryInstructionsScreen(
                     modifier = Modifier
                         .padding(),
                     text = stringResource(Res.string.cogTest_market_intro_button_text),
-                    onClick = { onAction(MarketEntryInstructionsAction.OnStartMarketTest) },
+                    onClick = { onAction(MarketSecondPartInstructionsAction.OnStartMarketSecondPartTest) },
                 )
                 Spacer(modifier = Modifier.padding(8.dp))
             }
@@ -88,9 +91,9 @@ fun MarketEntryInstructionsScreen(
 
 @Composable
 @Preview
-fun MarketEntryInstructionsPreview() {
+fun MarketSecondPartInstructionsPreview() {
     DmtTheme {
-        MarketEntryInstructionsScreen(
+        MarketSecondPartInstructionsScreen(
             onAction = {}
         )
     }

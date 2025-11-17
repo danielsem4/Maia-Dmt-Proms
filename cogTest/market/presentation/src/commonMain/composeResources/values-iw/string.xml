@@ -46,4 +46,23 @@
     <string name="cogTest_market_chocolate">שוקולד</string>
 
     <string name="cogTest_market_to_select_grocery_press">לבחירת המוצר המתאים יש ללחוץ עליו</string>
+
+    <string name="cogTest_market_first_mission_done_title">המשימה הראשונה הסתיימה</string>
+    <string name="cogTest_market_first_mission_done_body">כדי להתחיל את המשימה השנייה יש ללחוץ על הכפתור "לחצו להתחלת המשחק".</string>
+
+    <string name="cogTest_market_second_mission_welcome_title">ברוכים הבאים לסופר-מרקט איזי אונליין</string>
+    <string name="cogTest_market_second_mission_intro">במשימה זו יש לבחור מצרכים שונים, להוסיף אותם לסל הקניות ולאחר מכן ללחוץ על כפתור סיום.</string>
+
+    <string name="cogTest_market_second_mission_follow_instructions">יש לעקוב אחר ההוראות שיתקבלו בהמשך.</string>
+    <string name="cogTest_market_second_mission_quiet_env">יש לבצע את המשימה בסביבה שקטה ככל האפשר.</string>
+
+    <string name="cogTest_market_second_mission_read_instructions">לחצו לקריאת ההוראות</string>
+    <string name="cogTest_market_second_mission_start_shopping">לחצו להתחלת הקנייה</string>
+
+    <string name="cogTest_market_second_mission_title_instructions">הוראות</string>
+    <string name="cogTest_market_second_mission_shopping_task">עליך לבצע קנייה שבועית למשפחה לפי רשימת הקניות שמופיעה על המסך. יש לבחור רק את המצרכים שמופיעים ברשימה!</string>
+    <string name="cogTest_market_second_mission_find_items">ניתן למצוא את המצרכים דרך הקטגוריות או באמצעות שורת החיפוש.</string>
+    <string name="cogTest_market_second_mission_donation_items">בנוסף, יש לאסוף את כל המצרכים שמופיעים ברשימת התרומה המסומנים בכחול.</string>
+
+
 </resources>

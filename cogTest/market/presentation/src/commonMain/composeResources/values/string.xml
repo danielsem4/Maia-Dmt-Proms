@@ -46,5 +46,23 @@
 
     <string name="cogTest_market_to_select_grocery_press">To select the appropriate product, press on it</string>
 
+    <string name="cogTest_market_first_mission_done_title">The first mission is complete</string>
+    <string name="cogTest_market_first_mission_done_body">To start the second mission, press the “Start the game” button.</string>
+
+    <string name="cogTest_market_second_mission_welcome_title">Welcome to Easy Online Supermarket</string>
+    <string name="cogTest_market_second_mission_intro">In this mission, you must select various groceries, add them to the shopping cart, and then press the Finish button.</string>
+
+    <string name="cogTest_market_second_mission_follow_instructions">Follow the instructions that will appear next.</string>
+    <string name="cogTest_market_second_mission_quiet_env">Perform this task in the quietest environment possible.</string>
+
+    <string name="cogTest_market_second_mission_read_instructions">Press to read the instructions</string>
+    <string name="cogTest_market_second_mission_start_shopping">Press to start shopping</string>
+
+    <string name="cogTest_market_second_mission_title_instructions">Instructions</string>
+    <string name="cogTest_market_second_mission_shopping_task">You must complete a weekly grocery shopping for your family according to the list on the screen. Select only the items that appear on the list!</string>
+    <string name="cogTest_market_second_mission_find_items">You can find the items through the categories or by using the search bar.</string>
+    <string name="cogTest_market_second_mission_donation_items">Additionally, collect all the donation items marked in blue.</string>
+
+
 
 </resources>

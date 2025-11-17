@@ -45,4 +45,22 @@
     <string name="cogTest_market_chocolate">شوكولاتة</string>
 
     <string name="cogTest_market_to_select_grocery_press_ar">لاختيار المنتج المناسب، اضغط عليه</string>
+
+    <string name="cogTest_market_first_mission_done_title">تم إنهاء المهمة الأولى</string>
+    <string name="cogTest_market_first_mission_done_body">لبدء المهمة الثانية، اضغط على زر "ابدأ اللعبة".</string>
+
+    <string name="cogTest_market_second_mission_welcome_title">مرحبًا بكم في سوبرماركت إيزي أونلاين</string>
+    <string name="cogTest_market_second_mission_intro">في هذه المهمة يجب اختيار مواد غذائية مختلفة، إضافتها إلى سلة التسوق، ثم الضغط على زر الإنهاء.</string>
+
+    <string name="cogTest_market_second_mission_follow_instructions">يرجى اتباع التعليمات التي ستظهر لاحقًا.</string>
+    <string name="cogTest_market_second_mission_quiet_env">يُفضّل تنفيذ المهمة في مكان هادئ قدر الإمكان.</string>
+
+    <string name="cogTest_market_second_mission_read_instructions">اضغط لقراءة التعليمات</string>
+    <string name="cogTest_market_second_mission_start_shopping">اضغط لبدء التسوق</string>
+
+    <string name="cogTest_market_second_mission_title_instructions">التعليمات</string>
+    <string name="cogTest_market_second_mission_shopping_task">عليك القيام بمشتريات أسبوعية للعائلة وفقًا لقائمة التسوق التي تظهر على الشاشة. اختر فقط المواد الموجودة في القائمة!</string>
+    <string name="cogTest_market_second_mission_find_items">يمكنك العثور على المواد عبر الفئات أو من خلال شريط البحث.</string>
+    <string name="cogTest_market_second_mission_donation_items">بالإضافة إلى ذلك، اجمع جميع مواد التبرع المعلّمة باللون الأزرق.</string>
+
 </resources>

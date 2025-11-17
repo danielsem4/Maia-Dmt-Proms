@@ -45,4 +45,22 @@
 
     <string name="cogTest_market_to_select_grocery_press_ru">Чтобы выбрать подходящий продукт, нажмите на него</string>
 
+    <string name="cogTest_market_first_mission_done_title">Первое задание выполнено</string>
+    <string name="cogTest_market_first_mission_done_body">Чтобы начать второе задание, нажмите кнопку «Начать игру».</string>
+
+    <string name="cogTest_market_second_mission_welcome_title">Добро пожаловать в супермаркет Изи Онлайн</string>
+    <string name="cogTest_market_second_mission_intro">В этом задании нужно выбрать разные продукты, добавить их в корзину и затем нажать кнопку «Завершить».</string>
+
+    <string name="cogTest_market_second_mission_follow_instructions">Следуйте инструкциям, которые появятся дальше.</string>
+    <string name="cogTest_market_second_mission_quiet_env">Выполняйте задание в максимально тихой обстановке.</string>
+
+    <string name="cogTest_market_second_mission_read_instructions">Нажмите, чтобы прочитать инструкции</string>
+    <string name="cogTest_market_second_mission_start_shopping">Нажмите, чтобы начать покупки</string>
+
+    <string name="cogTest_market_second_mission_title_instructions">Инструкции</string>
+    <string name="cogTest_market_second_mission_shopping_task">Вам нужно сделать недельные покупки для семьи согласно списку на экране. Выбирайте только те продукты, которые есть в списке!</string>
+    <string name="cogTest_market_second_mission_find_items">Вы можете найти продукты через категории или с помощью строки поиска.</string>
+    <string name="cogTest_market_second_mission_donation_items">Кроме того, соберите все товары для пожертвований, отмеченные синим цветом.</string>
+
+
 </resources>

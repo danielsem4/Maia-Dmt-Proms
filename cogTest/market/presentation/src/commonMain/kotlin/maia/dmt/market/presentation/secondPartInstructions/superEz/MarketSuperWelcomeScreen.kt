@@ -1,42 +1,49 @@
-package maia.dmt.market.presentation.secondPartInstructions
+package maia.dmt.market.presentation.secondPartInstructions.superEz
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import dmtproms.cogtest.market.presentation.generated.resources.Res
-import dmtproms.cogtest.market.presentation.generated.resources.cogTest_market_first_mission_done_body
-import dmtproms.cogtest.market.presentation.generated.resources.cogTest_market_first_mission_done_title
 import dmtproms.cogtest.market.presentation.generated.resources.cogTest_market_intro_button_text
 import dmtproms.cogtest.market.presentation.generated.resources.cogTest_market_part_one_title
+import dmtproms.cogtest.market.presentation.generated.resources.cogTest_market_second_mission_follow_instructions
+import dmtproms.cogtest.market.presentation.generated.resources.cogTest_market_second_mission_quiet_env
+import dmtproms.cogtest.market.presentation.generated.resources.cogTest_market_second_mission_welcome_title
+import dmtproms.cogtest.market.presentation.generated.resources.logo_super_easy
 import maia.dmt.core.designsystem.components.buttons.DmtButton
 import maia.dmt.core.designsystem.components.cards.DmtCardStyle
 import maia.dmt.core.designsystem.components.cards.DmtParagraphCard
 import maia.dmt.core.designsystem.components.layouts.DmtBaseScreen
 import maia.dmt.core.designsystem.theme.DmtTheme
+import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
-fun MarketSecondPartInstructionsRoot(
+fun MarketSuperWelcomeRoot(
     onNavigateBack: () -> Unit = {},
-    onStartMarketSecondTest: () -> Unit = {}
+    onNavigateToInstructions: () -> Unit = {}
 ) {
 
-    MarketSecondPartInstructionsScreen(
+    MarketSuperWelcomeScreen(
         onAction = { action ->
             when (action) {
-                is MarketSecondPartInstructionsAction.OnNavigateBack -> onNavigateBack()
-                is MarketSecondPartInstructionsAction.OnStartMarketSecondPartTest -> onStartMarketSecondTest()
+                is MarketSuperWelcomeAction.OnNavigateBack -> onNavigateBack()
+                is MarketSuperWelcomeAction.OnNavigateToSecondPartTestInstructions -> onNavigateToInstructions()
             }
         }
     )
@@ -44,12 +51,21 @@ fun MarketSecondPartInstructionsRoot(
 }
 
 @Composable
-fun MarketSecondPartInstructionsScreen(
-    onAction: (MarketSecondPartInstructionsAction) -> Unit,
+fun MarketSuperWelcomeScreen(
+    onAction: (MarketSuperWelcomeAction) -> Unit = {}
 ) {
+
+    val instructionsText = buildString {
+        append("• ")
+        append(stringResource(Res.string.cogTest_market_second_mission_follow_instructions))
+        append("\n\n")
+        append("• ")
+        append(stringResource(Res.string.cogTest_market_second_mission_quiet_env))
+    }
+
     DmtBaseScreen(
         titleText = stringResource(Res.string.cogTest_market_part_one_title),
-        onIconClick = { onAction(MarketSecondPartInstructionsAction.OnNavigateBack) },
+        onIconClick = { onAction(MarketSuperWelcomeAction.OnNavigateBack) },
         content = {
             Column(
                 modifier = Modifier
@@ -59,10 +75,21 @@ fun MarketSecondPartInstructionsScreen(
                 ) {
                 Spacer(modifier = Modifier.padding(16.dp))
                 Text(
-                    text = stringResource(Res.string.cogTest_market_first_mission_done_title),
+                    text = stringResource(Res.string.cogTest_market_second_mission_welcome_title),
                     textAlign = TextAlign.Center,
                     fontWeight = FontWeight.Bold,
                     style = MaterialTheme.typography.displayMedium,
+                )
+                Spacer(modifier = Modifier.padding(8.dp))
+
+                Image(
+                    painter = painterResource(Res.drawable.logo_super_easy),
+                    contentDescription = "Super image",
+                    modifier = Modifier
+                        .wrapContentSize()
+                        .clip(RoundedCornerShape(8.dp))
+                        .weight(1f),
+                    contentScale = ContentScale.Crop
                 )
 
                 Spacer(modifier = Modifier.weight(1f))
@@ -71,7 +98,7 @@ fun MarketSecondPartInstructionsScreen(
                     modifier = Modifier
                         .padding(12.dp)
                         .wrapContentSize(),
-                    text = stringResource(Res.string.cogTest_market_first_mission_done_body),
+                    text = instructionsText,
                     style = DmtCardStyle.ELEVATED,
                     textSize = MaterialTheme.typography.titleLarge
                 )
@@ -82,7 +109,7 @@ fun MarketSecondPartInstructionsScreen(
                     modifier = Modifier
                         .padding(),
                     text = stringResource(Res.string.cogTest_market_intro_button_text),
-                    onClick = { onAction(MarketSecondPartInstructionsAction.OnStartMarketSecondPartTest) },
+                    onClick = { onAction(MarketSuperWelcomeAction.OnNavigateToSecondPartTestInstructions) },
                 )
                 Spacer(modifier = Modifier.padding(8.dp))
             }
@@ -92,10 +119,8 @@ fun MarketSecondPartInstructionsScreen(
 
 @Composable
 @Preview
-fun MarketSecondPartInstructionsPreview() {
+fun MarketSuperWelcomePreview() {
     DmtTheme {
-        MarketSecondPartInstructionsScreen(
-            onAction = {}
-        )
+        MarketSuperWelcomeScreen()
     }
 }

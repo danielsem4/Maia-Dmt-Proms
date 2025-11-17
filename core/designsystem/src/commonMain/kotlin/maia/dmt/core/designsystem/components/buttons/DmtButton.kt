@@ -51,7 +51,6 @@ fun DmtButton(
 ) {
     val deviceConfig = currentDeviceConfiguration()
 
-    // Determine size based on device configuration
     val buttonSizing = when(deviceConfig) {
         DeviceConfiguration.MOBILE_PORTRAIT -> ButtonSizing(
             minWidth = 120.dp,

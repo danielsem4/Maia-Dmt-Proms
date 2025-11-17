@@ -2,7 +2,7 @@
 <resources>
 
     <string name="cogTest_market_part_one_title">Market test</string>
-
+    <string name="cogTest_market_instructions">Instructions</string>
     <string name="cogTest_market_welcome_title">Welcome</string>
     <string name="cogTest_market_welcome_button_text">Tap to read instructions</string>
 
@@ -63,6 +63,15 @@
     <string name="cogTest_market_second_mission_find_items">You can find the items through the categories or by using the search bar.</string>
     <string name="cogTest_market_second_mission_donation_items">Additionally, collect all the donation items marked in blue.</string>
 
+    <string name="cogTest_market_super_ez_title">Super "EZ"</string>
+    <string name="cogTest_market_view_list">View List</string>
+    <string name="cogTest_market_view_donation_list">View Donation List</string>
+    <string name="cogTest_market_categories">Categories</string>
+    <string name="cogTest_market_search">Search</string>
+    <string name="cogTest_market_cart">Shopping Cart</string>
+    <string name="cogTest_market_instruction_categories">To view categories, press "Categories"</string>
+    <string name="cogTest_market_instruction_search">To search for a product, press "Search"</string>
+    <string name="cogTest_market_instruction_cart">To view the shopping cart, press "Shopping Cart"</string>
 
 
 </resources>

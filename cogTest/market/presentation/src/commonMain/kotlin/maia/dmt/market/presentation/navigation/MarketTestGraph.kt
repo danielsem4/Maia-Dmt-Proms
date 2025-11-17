@@ -7,7 +7,10 @@ import androidx.navigation.navigation
 import maia.dmt.market.presentation.allRecipes.MarketAllRecipesRoot
 import maia.dmt.market.presentation.entryInstructions.MarketEntryInstructionsRoot
 import maia.dmt.market.presentation.marketConveyor.MarketConveyorRoot
+import maia.dmt.market.presentation.marketLand.MarketMainNavigationRoot
 import maia.dmt.market.presentation.secondPartInstructions.MarketSecondPartInstructionsRoot
+import maia.dmt.market.presentation.secondPartInstructions.secondPartTestInstructions.MarketSecondPartTestInstructionsRoot
+import maia.dmt.market.presentation.secondPartInstructions.superEz.MarketSuperWelcomeRoot
 import maia.dmt.market.presentation.selectedRecipe.MarketSelectedRecipeRoot
 
 fun NavGraphBuilder.marketTestGraph(
@@ -64,8 +67,37 @@ fun NavGraphBuilder.marketTestGraph(
                     navController.navigateUp()
                 },
                 onStartMarketSecondTest = {
+                    navController.navigate(MarketTestGraphRoutes.MarketSuperWelcome)
                 }
             )
         }
+
+        composable<MarketTestGraphRoutes.MarketSuperWelcome> {
+            MarketSuperWelcomeRoot(
+                onNavigateBack = {
+                    navController.navigateUp()
+                },
+                onNavigateToInstructions = {
+                    navController.navigate(MarketTestGraphRoutes.MarketSecondPartTestInstructions)
+                }
+            )
+        }
+
+        composable<MarketTestGraphRoutes.MarketSecondPartTestInstructions> {
+            MarketSecondPartTestInstructionsRoot(
+                onNavigateBack = {
+                    navController.navigateUp()
+                },
+                onStartSecondPartTest = {
+                    navController.navigate(MarketTestGraphRoutes.MarketMainNavigation)
+                }
+            )
+        }
+
+        composable<MarketTestGraphRoutes.MarketMainNavigation> {
+            MarketMainNavigationRoot()
+        }
+
+
     }
 }

@@ -2,6 +2,7 @@
 <resources>
 
     <string name="cogTest_market_part_one_title">اختبار السوق</string>
+    <string name="cogTest_market_instructions">Instructions</string>
 
     <string name="cogTest_market_welcome_title">مرحبًا بكم</string>
     <string name="cogTest_market_welcome_button_text">اضغط لقراءة التعليمات</string>
@@ -62,5 +63,15 @@
     <string name="cogTest_market_second_mission_shopping_task">عليك القيام بمشتريات أسبوعية للعائلة وفقًا لقائمة التسوق التي تظهر على الشاشة. اختر فقط المواد الموجودة في القائمة!</string>
     <string name="cogTest_market_second_mission_find_items">يمكنك العثور على المواد عبر الفئات أو من خلال شريط البحث.</string>
     <string name="cogTest_market_second_mission_donation_items">بالإضافة إلى ذلك، اجمع جميع مواد التبرع المعلّمة باللون الأزرق.</string>
+
+    <string name="cogTest_market_super_ez_title">سوبر "إيزي"</string>
+    <string name="cogTest_market_view_list">عرض القائمة</string>
+    <string name="cogTest_market_view_donation_list">عرض قائمة التبرعات</string>
+    <string name="cogTest_market_categories">الفئات</string>
+    <string name="cogTest_market_search">بحث</string>
+    <string name="cogTest_market_cart">سلة التسوق</string>
+    <string name="cogTest_market_instruction_categories">لعرض الفئات اضغط على "الفئات"</string>
+    <string name="cogTest_market_instruction_search">للبحث عن منتج اضغط على "بحث"</string>
+    <string name="cogTest_market_instruction_cart">لعرض سلة التسوق اضغط على "سلة التسوق"</string>
 
 </resources>

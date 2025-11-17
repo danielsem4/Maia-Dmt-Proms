@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="cogTest_market_part_one_title">Тест рынка</string>
+    <string name="cogTest_market_instructions">Instructions</string>
 
     <string name="cogTest_market_welcome_title">Добро пожаловать</string>
     <string name="cogTest_market_welcome_button_text">Нажмите, чтобы прочитать инструкции</string>
@@ -62,5 +63,14 @@
     <string name="cogTest_market_second_mission_find_items">Вы можете найти продукты через категории или с помощью строки поиска.</string>
     <string name="cogTest_market_second_mission_donation_items">Кроме того, соберите все товары для пожертвований, отмеченные синим цветом.</string>
 
+    <string name="cogTest_market_super_ez_title">Супер «Иззи»</string>
+    <string name="cogTest_market_view_list">Просмотр списка</string>
+    <string name="cogTest_market_view_donation_list">Просмотр списка пожертвований</string>
+    <string name="cogTest_market_categories">Категории</string>
+    <string name="cogTest_market_search">Поиск</string>
+    <string name="cogTest_market_cart">Корзина</string>
+    <string name="cogTest_market_instruction_categories">Чтобы просмотреть категории, нажмите «Категории»</string>
+    <string name="cogTest_market_instruction_search">Чтобы найти продукт, нажмите «Поиск»</string>
+    <string name="cogTest_market_instruction_cart">Чтобы просмотреть корзину, нажмите «Корзина»</string>
 
 </resources>

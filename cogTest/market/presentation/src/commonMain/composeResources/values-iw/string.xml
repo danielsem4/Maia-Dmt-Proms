@@ -2,7 +2,7 @@
 <resources>
 
     <string name="cogTest_market_part_one_title">משימת הסופר</string>
-
+    <string name="cogTest_market_instructions">הוראות</string>
     <string name="cogTest_market_welcome_title">ברוכים הבאים</string>
     <string name="cogTest_market_welcome_button_text">לחצו לקריאת ההוראות</string>
 
@@ -63,6 +63,16 @@
     <string name="cogTest_market_second_mission_shopping_task">עליך לבצע קנייה שבועית למשפחה לפי רשימת הקניות שמופיעה על המסך. יש לבחור רק את המצרכים שמופיעים ברשימה!</string>
     <string name="cogTest_market_second_mission_find_items">ניתן למצוא את המצרכים דרך הקטגוריות או באמצעות שורת החיפוש.</string>
     <string name="cogTest_market_second_mission_donation_items">בנוסף, יש לאסוף את כל המצרכים שמופיעים ברשימת התרומה המסומנים בכחול.</string>
+
+    <string name="cogTest_market_super_ez_title">סופר "איזי"</string>
+    <string name="cogTest_market_view_list">לצפייה ברשימה</string>
+    <string name="cogTest_market_view_donation_list">לצפייה ברשימת תרומה</string>
+    <string name="cogTest_market_categories">קטגוריות</string>
+    <string name="cogTest_market_search">חיפוש</string>
+    <string name="cogTest_market_cart">סל קניות</string>
+    <string name="cogTest_market_instruction_categories">לעיון בקטגוריות לחצו על "קטגוריות"</string>
+    <string name="cogTest_market_instruction_search">לחיפוש מוצר לחצו על "חיפוש"</string>
+    <string name="cogTest_market_instruction_cart">לעיון בסל הקניות לחצו על "סל קניות"</string>
 
 
 </resources>

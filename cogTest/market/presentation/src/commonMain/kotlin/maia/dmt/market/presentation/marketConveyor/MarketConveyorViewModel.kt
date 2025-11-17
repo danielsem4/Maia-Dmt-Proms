@@ -84,7 +84,7 @@ class MarketConveyorViewModel(
             movingItems = initial,
             offset = 0f,
             stride = 260f,
-            timeLeft = 100,
+            timeLeft = 10,
             isFinished = false
         )
 

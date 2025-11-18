@@ -74,4 +74,50 @@
     <string name="cogTest_market_instruction_search">للبحث عن منتج اضغط على "بحث"</string>
     <string name="cogTest_market_instruction_cart">لعرض سلة التسوق اضغط على "سلة التسوق"</string>
 
+    <string name="cogTest_market_cat_vegetables">الخضروات</string>
+    <string name="cogTest_market_item_tomatoes_kg">1 كغم طماطم</string>
+    <string name="cogTest_market_item_cucumber_half_kg">0.5 كغم خيار</string>
+    <string name="cogTest_market_item_broccoli_fresh">بروكلي طازج</string>
+
+    <string name="cogTest_market_cat_bakery">المخبوزات</string>
+    <string name="cogTest_market_item_bread_whole_low_sugar">رغيف خبز قمح كامل قليل السكر</string>
+    <string name="cogTest_market_item_gluten_free_cookies">بسكويت خالٍ من الغلوتين</string>
+
+    <string name="cogTest_market_cat_dry_spices">البقوليات والتوابل</string>
+    <string name="cogTest_market_item_olive_oil">زيت زيتون</string>
+    <string name="cogTest_market_item_sunflower_oil">زيت دوار الشمس</string>
+    <string name="cogTest_market_item_corn_cans_3">ذرة معلبة – 3 عبوات</string>
+    <string name="cogTest_market_item_pickles_250">مخلل خيار بالخل – 250 غرام</string>
+    <string name="cogTest_market_item_tuna">تونة</string>
+
+    <string name="cogTest_market_cat_meat">منتجات اللحوم</string>
+    <string name="cogTest_market_item_schnitzel_kg">1 كغم شنيتسل</string>
+    <string name="cogTest_market_item_chicken_legs_4">أفخاذ دجاج – 4 قطع</string>
+
+    <string name="cogTest_market_cat_fruits">الفواكه</string>
+    <string name="cogTest_market_item_apricots_10">10 حبات مشمش</string>
+    <string name="cogTest_market_item_bananas_700g">عنقود موز حتى 700 غ</string>
+    <string name="cogTest_market_item_apples_5_smith">5 تفاح غرين سميث</string>
+    <string name="cogTest_market_item_melon_1">حبة بطيخ (شمّام)</string>
+
+    <string name="cogTest_market_cat_dairy">منتجات الألبان</string>
+    <string name="cogTest_market_item_milk_1_percent">حليب 1% دسم – 1 لتر</string>
+    <string name="cogTest_market_item_cream_cheese_28">جبنة كريمية 28%</string>
+    <string name="cogTest_market_item_white_cheese_250">جبنة بيضاء – 250 غ</string>
+    <string name="cogTest_market_item_tzefatit_5">جبنة صفطيت 5% – 250 غ</string>
+
+    <string name="cogTest_market_donation_cat_food">منتجات غذائية</string>
+    <string name="cogTest_market_donation_item_challah">خبز شله (حلا)</string>
+    <string name="cogTest_market_donation_item_tomato_paste">معجون طماطم</string>
+    <string name="cogTest_market_donation_item_canola_oil">زيت كانولا</string>
+    <string name="cogTest_market_donation_item_milk_3_percent">حليب 3% دسم</string>
+    <string name="cogTest_market_donation_item_olives">زيتون</string>
+    <string name="cogTest_market_donation_item_chickpeas">حمص حب</string>
+    <string name="cogTest_market_donation_item_disposable_cups">عبوة أكواب للاستعمال مرة واحدة</string>
+    <string name="cogTest_market_donation_item_dish_soap">سائل جلي</string>
+
+    <string name="cogTest_market_shopping_list_title">قائمة التسوق</string>
+    <string name="cogTest_market_close_list">إغلاق القائمة</string>
+
+
 </resources>

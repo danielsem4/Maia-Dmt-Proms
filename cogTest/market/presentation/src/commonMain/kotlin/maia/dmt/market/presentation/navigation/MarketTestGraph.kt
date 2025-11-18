@@ -4,6 +4,7 @@ import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
+import androidx.navigation.toRoute
 import maia.dmt.market.presentation.allRecipes.MarketAllRecipesRoot
 import maia.dmt.market.presentation.entryInstructions.MarketEntryInstructionsRoot
 import maia.dmt.market.presentation.marketConveyor.MarketConveyorRoot
@@ -12,6 +13,7 @@ import maia.dmt.market.presentation.secondPartInstructions.MarketSecondPartInstr
 import maia.dmt.market.presentation.secondPartInstructions.secondPartTestInstructions.MarketSecondPartTestInstructionsRoot
 import maia.dmt.market.presentation.secondPartInstructions.superEz.MarketSuperWelcomeRoot
 import maia.dmt.market.presentation.selectedRecipe.MarketSelectedRecipeRoot
+import maia.dmt.market.presentation.shoppingList.MarketShoppingListRoot
 
 fun NavGraphBuilder.marketTestGraph(
     navController: NavController,
@@ -95,9 +97,24 @@ fun NavGraphBuilder.marketTestGraph(
         }
 
         composable<MarketTestGraphRoutes.MarketMainNavigation> {
-            MarketMainNavigationRoot()
+            MarketMainNavigationRoot(
+                onNavigateBack = {
+                    navController.navigateUp()
+                },
+                onNavigateToShoppingList = { listType ->
+                    navController.navigate(MarketTestGraphRoutes.MarketShoppingList(listType))
+                }
+            )
         }
 
-
+        composable<MarketTestGraphRoutes.MarketShoppingList> { backStackEntry ->
+            val route = backStackEntry.toRoute<MarketTestGraphRoutes.MarketShoppingList>()
+            MarketShoppingListRoot(
+                listType = route.listType,
+                onNavigateBack = {
+                    navController.navigateUp()
+                }
+            )
+        }
     }
 }

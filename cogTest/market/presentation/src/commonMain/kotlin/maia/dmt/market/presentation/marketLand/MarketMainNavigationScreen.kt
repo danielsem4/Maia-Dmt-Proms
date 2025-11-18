@@ -18,6 +18,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -25,6 +26,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import dmtproms.cogtest.market.presentation.generated.resources.Res
 import dmtproms.cogtest.market.presentation.generated.resources.cogTest_market_cart
 import dmtproms.cogtest.market.presentation.generated.resources.cogTest_market_categories
@@ -44,23 +46,37 @@ import dmtproms.cogtest.market.presentation.generated.resources.market_donation_
 import maia.dmt.core.designsystem.components.buttons.DmtButton
 import maia.dmt.core.designsystem.components.layouts.DmtBaseScreen
 import maia.dmt.core.designsystem.theme.DmtTheme
+import maia.dmt.core.presentation.util.ObserveAsEvents
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.resources.vectorResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
+import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
 fun MarketMainNavigationRoot(
-
+    viewModel: MarketMainNavigationViewModel = koinViewModel(),
+    onNavigateBack: () -> Unit,
+    onNavigateToShoppingList: (String) -> Unit,
 ) {
+    val state by viewModel.state.collectAsStateWithLifecycle()
+
+    ObserveAsEvents(viewModel.events) { event ->
+        when (event) {
+            is MarketMainNavigationEvent.NavigateBack -> {
+                onNavigateBack()
+            }
+            is MarketMainNavigationEvent.NavigateToShoppingList -> {
+                onNavigateToShoppingList(event.listType)
+            }
+        }
+    }
 
     MarketMainNavigationScreen(
-        state = MarketMainNavigationState(),
-        onAction = {}
+        state = state,
+        onAction = viewModel::onAction
     )
-
 }
-
 @Composable
 fun MarketMainNavigationScreen(
     state: MarketMainNavigationState,
@@ -111,7 +127,7 @@ fun MarketMainNavigationScreen(
                                 modifier = Modifier.size(35.dp)
                             )
                         },
-                        onClick = { },
+                        onClick = { onAction(MarketMainNavigationAction.OnShoppingListClick) },
                         modifier = Modifier.wrapContentSize(),
                     )
 
@@ -124,7 +140,7 @@ fun MarketMainNavigationScreen(
                                 modifier = Modifier.size(35.dp)
                             )
                         },
-                        onClick = { },
+                        onClick = { onAction(MarketMainNavigationAction.OnDonationListClick) },
                         modifier = Modifier.wrapContentSize(),
                     )
                 }
@@ -187,7 +203,7 @@ fun MarketMainNavigationScreen(
                                     modifier = Modifier.size(35.dp)
                                 )
                             },
-                            onClick = { },
+                            onClick = { onAction(MarketMainNavigationAction.OnCategoriesClick) },
                             modifier = Modifier.weight(1f).padding(horizontal = 4.dp),
                         )
                         DmtButton(
@@ -199,7 +215,7 @@ fun MarketMainNavigationScreen(
                                     modifier = Modifier.size(35.dp)
                                 )
                             },
-                            onClick = { },
+                            onClick = { onAction(MarketMainNavigationAction.OnSearchClick) },
                             modifier = Modifier.weight(1f).padding(horizontal = 4.dp),
                         )
                         DmtButton(
@@ -211,7 +227,7 @@ fun MarketMainNavigationScreen(
                                     modifier = Modifier.size(35.dp)
                                 )
                             },
-                            onClick = { },
+                            onClick = { onAction(MarketMainNavigationAction.OnShoppingCartClick) },
                             modifier = Modifier.weight(1f).padding(horizontal = 4.dp),
                         )
                     }

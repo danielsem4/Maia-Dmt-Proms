@@ -1,7 +1,6 @@
 package maia.dmt.market.presentation.marketLand
 
-
-interface MarketMainNavigationEvent {
-    data object NavigateBack: MarketMainNavigationEvent
-
+sealed interface MarketMainNavigationEvent {
+    data object NavigateBack : MarketMainNavigationEvent
+    data class NavigateToShoppingList(val listType: String) : MarketMainNavigationEvent
 }

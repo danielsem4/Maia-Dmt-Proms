@@ -3,12 +3,14 @@ package maia.dmt.market.presentation.components
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -80,34 +82,34 @@ fun RecipeCategoryItemLandscape(
 ) {
     Card(
         modifier = modifier
-            .padding(2.dp),
+            .padding(2.dp)
+            .wrapContentSize(),
         elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
         shape = RoundedCornerShape(16.dp)
     ) {
         Column(
             modifier = Modifier
                 .fillMaxSize(),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(16.dp, Alignment.CenterVertically)
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Image(
                 painter = painterResource(imageRes),
                 contentDescription = title,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .weight(1f)
-                    .aspectRatio(1f)
+                    .weight(3f)
                     .clip(RoundedCornerShape(12.dp)),
                 contentScale = ContentScale.Crop
             )
+
+            Spacer(modifier = Modifier.weight(1f))
 
             DmtButton(
                 text = title,
                 onClick = { onCategoryClick(recipeId) },
                 modifier = Modifier
                     .fillMaxWidth()
-                    .defaultMinSize(minHeight = 56.dp)
-                    .padding(2.dp)
+                    .padding(6.dp)
             )
         }
     }

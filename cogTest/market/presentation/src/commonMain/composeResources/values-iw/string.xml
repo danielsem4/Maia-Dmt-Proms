@@ -119,5 +119,19 @@
     <string name="cogTest_market_shopping_list_title">רשימת קניות</string>
     <string name="cogTest_market_close_list">סגירת רשימה</string>
 
+    <string name="cogTest_market_donation_shopping_list_title">רשימת תרומה</string>
+
+    <string name="cogTest_market_category_frozen">קפואים</string>
+    <string name="cogTest_market_category_dairy">מוצרי חלב</string>
+    <string name="cogTest_market_category_fruits">פירות</string>
+    <string name="cogTest_market_category_dry_spices">יבשים ותבלינים</string>
+    <string name="cogTest_market_category_vegetables">ירקות</string>
+    <string name="cogTest_market_category_bakery">מאפים</string>
+    <string name="cogTest_market_category_meat">מוצרי בשר</string>
+    <string name="cogTest_market_category_cleaning_disposable">ניקיון וחד״פ</string>
+
+    <string name="cogTest_market_category_select_instruction">לחצו על הקטגוריה הרצויה</string>
+
+
 
 </resources>

@@ -1,5 +1,6 @@
-package maia.dmt.market.presentation.groceries
+package maia.dmt.market.presentation.groceriesCategory
 
-interface MarketGroceriesEvent {
-
+sealed interface MarketGroceriesEvent {
+    data object NavigateBack : MarketGroceriesEvent
+    data class NavigateToCategory(val categoryId: String) : MarketGroceriesEvent
 }

@@ -2,7 +2,7 @@ package maia.dmt.market.presentation.di
 
 import maia.dmt.market.presentation.allRecipes.MarketAllRecipesViewModel
 import maia.dmt.market.presentation.categories.MarketGroceriesCategoryViewModel
-import maia.dmt.market.presentation.groceries.MarketGroceriesViewModel
+import maia.dmt.market.presentation.groceriesCategory.MarketGroceriesViewModel
 import maia.dmt.market.presentation.mapper.RecipePresentationMapper
 import maia.dmt.market.presentation.marketConveyor.MarketConveyorViewModel
 import maia.dmt.market.presentation.marketLand.MarketMainNavigationViewModel

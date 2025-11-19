@@ -34,8 +34,7 @@ sealed interface MarketTestGraphRoutes {
     data class MarketShoppingList(
         val listType: String
     ) : MarketTestGraphRoutes
+
+    @Serializable
+    data object MarketGroceries : MarketTestGraphRoutes
 }
-
-
-
-

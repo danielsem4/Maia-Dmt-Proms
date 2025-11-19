@@ -5,6 +5,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
@@ -14,6 +15,9 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -44,6 +48,7 @@ import maia.dmt.core.designsystem.theme.DmtTheme
 import maia.dmt.core.presentation.util.DeviceConfiguration
 import maia.dmt.core.presentation.util.ObserveAsEvents
 import maia.dmt.core.presentation.util.currentDeviceConfiguration
+import maia.dmt.market.presentation.components.DmtGroceryItemCard
 import maia.dmt.market.presentation.model.Recipe
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
@@ -283,6 +288,17 @@ private fun LandscapeLayout(
                     textAlign = TextAlign.Start
                 )
 
+//                LazyVerticalGrid(
+//                    columns = GridCells.Fixed(3),
+//                    contentPadding = PaddingValues(8.dp),
+//                    horizontalArrangement = Arrangement.spacedBy(12.dp),
+//                    verticalArrangement = Arrangement.spacedBy(12.dp),
+//                    modifier = Modifier.fillMaxSize()
+//                ) {
+//                    recipe.groceries.forEach { item ->
+//                        DmtGroceryItemCard(item = item)
+//                    }
+//                }
                 Column(
                     modifier = Modifier.fillMaxWidth(),
                     verticalArrangement = Arrangement.spacedBy(12.dp)

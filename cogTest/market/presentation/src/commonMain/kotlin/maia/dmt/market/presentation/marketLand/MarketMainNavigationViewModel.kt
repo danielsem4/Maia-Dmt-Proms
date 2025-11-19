@@ -35,7 +35,7 @@ class MarketMainNavigationViewModel : ViewModel() {
                 navigateToShoppingList("donation")
             }
             is MarketMainNavigationAction.OnCategoriesClick -> {
-
+                navigateToCategories()
             }
             is MarketMainNavigationAction.OnSearchClick -> {
 
@@ -55,6 +55,12 @@ class MarketMainNavigationViewModel : ViewModel() {
     private fun navigateToShoppingList(listType: String) {
         viewModelScope.launch {
             eventChannel.send(MarketMainNavigationEvent.NavigateToShoppingList(listType))
+        }
+    }
+
+    private fun navigateToCategories() {
+        viewModelScope.launch {
+            eventChannel.send(MarketMainNavigationEvent.NavigateToCategories)
         }
     }
 }

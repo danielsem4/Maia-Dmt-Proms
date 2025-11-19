@@ -1,4 +1,7 @@
-package maia.dmt.market.presentation.groceries
+package maia.dmt.market.presentation.groceriesCategory
 
-interface MarketGroceriesAction {
+sealed interface MarketGroceriesAction {
+    data object OnNavigateBack : MarketGroceriesAction
+    data class OnCategoryClick(val categoryId: String) : MarketGroceriesAction
+    data class OnSearchQueryChange(val query: String) : MarketGroceriesAction
 }

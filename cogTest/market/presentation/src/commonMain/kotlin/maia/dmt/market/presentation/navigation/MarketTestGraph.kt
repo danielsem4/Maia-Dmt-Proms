@@ -7,6 +7,7 @@ import androidx.navigation.navigation
 import androidx.navigation.toRoute
 import maia.dmt.market.presentation.allRecipes.MarketAllRecipesRoot
 import maia.dmt.market.presentation.entryInstructions.MarketEntryInstructionsRoot
+import maia.dmt.market.presentation.groceriesCategory.MarketGroceriesRoot
 import maia.dmt.market.presentation.marketConveyor.MarketConveyorRoot
 import maia.dmt.market.presentation.marketLand.MarketMainNavigationRoot
 import maia.dmt.market.presentation.secondPartInstructions.MarketSecondPartInstructionsRoot
@@ -103,6 +104,9 @@ fun NavGraphBuilder.marketTestGraph(
                 },
                 onNavigateToShoppingList = { listType ->
                     navController.navigate(MarketTestGraphRoutes.MarketShoppingList(listType))
+                },
+                onNavigateToCategories = {
+                    navController.navigate(MarketTestGraphRoutes.MarketGroceries)
                 }
             )
         }
@@ -113,6 +117,18 @@ fun NavGraphBuilder.marketTestGraph(
                 listType = route.listType,
                 onNavigateBack = {
                     navController.navigateUp()
+                }
+            )
+        }
+
+        composable<MarketTestGraphRoutes.MarketGroceries> {
+            MarketGroceriesRoot(
+                onNavigateBack = {
+                    navController.navigateUp()
+                },
+                onNavigateToCategory = { categoryId ->
+                    // TODO: Navigate to category items screen
+                    // navController.navigate(MarketTestGraphRoutes.MarketCategoryItems(categoryId))
                 }
             )
         }

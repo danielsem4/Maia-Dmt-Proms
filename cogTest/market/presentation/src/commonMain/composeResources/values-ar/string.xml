@@ -119,5 +119,18 @@
     <string name="cogTest_market_shopping_list_title">قائمة التسوق</string>
     <string name="cogTest_market_close_list">إغلاق القائمة</string>
 
+    <string name="cogTest_market_donation_shopping_list_title">قائمة التبرعات</string>
+
+    <string name="cogTest_market_category_frozen">مجمدات</string>
+    <string name="cogTest_market_category_dairy">منتجات الحليب</string>
+    <string name="cogTest_market_category_fruits">فواكه</string>
+    <string name="cogTest_market_category_dry_spices">المواد الجافة والتوابل</string>
+    <string name="cogTest_market_category_vegetables">خضار</string>
+    <string name="cogTest_market_category_bakery">مخبوزات</string>
+    <string name="cogTest_market_category_meat">منتجات اللحوم</string>
+    <string name="cogTest_market_category_cleaning_disposable">مواد تنظيف ومواد للاستعمال مرة واحدة</string>
+
+    <string name="cogTest_market_category_select_instruction">اضغط على الفئة المطلوبة</string>
+
 
 </resources>

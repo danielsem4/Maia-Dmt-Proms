@@ -120,4 +120,20 @@ Choose only the items that match the selected dish, according to the list on the
     <string name="cogTest_market_shopping_list_title">Shopping List</string>
     <string name="cogTest_market_close_list">Close List</string>
 
+    <string name="cogTest_market_donation_shopping_list_title">Donation List</string>
+
+    <string name="cogTest_market_category_frozen">Frozen</string>
+    <string name="cogTest_market_category_dairy">Dairy Products</string>
+    <string name="cogTest_market_category_fruits">Fruits</string>
+    <string name="cogTest_market_category_dry_spices">Dry Goods &amp; Spices</string>
+    <string name="cogTest_market_category_vegetables">Vegetables</string>
+    <string name="cogTest_market_category_bakery">Bakery</string>
+    <string name="cogTest_market_category_meat">Meat Products</string>
+    <string name="cogTest_market_category_cleaning_disposable">Cleaning &amp; Disposable Items</string>
+
+    <string name="cogTest_market_category_select_instruction">
+Press the desired category
+</string>
+
+
 </resources>

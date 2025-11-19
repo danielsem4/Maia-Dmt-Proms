@@ -28,15 +28,12 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import dmtproms.cogtest.market.presentation.generated.resources.Res
 import dmtproms.cogtest.market.presentation.generated.resources.cogTest_market_close_list
-import dmtproms.cogtest.market.presentation.generated.resources.cogTest_market_groceries_title
-import dmtproms.cogtest.market.presentation.generated.resources.cogTest_market_intro_button_text
-import dmtproms.cogtest.market.presentation.generated.resources.cogTest_market_intro_title
 import dmtproms.cogtest.market.presentation.generated.resources.cogTest_market_shopping_list_title
-import dmtproms.cogtest.market.presentation.generated.resources.cogTest_market_welcome_title
 import maia.dmt.core.designsystem.components.buttons.DmtButton
 import maia.dmt.core.designsystem.components.layouts.DmtBaseScreen
 import maia.dmt.core.designsystem.theme.DmtTheme
 import maia.dmt.core.presentation.util.ObserveAsEvents
+import maia.dmt.market.presentation.components.DmtGroceryItemCard
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.koin.compose.viewmodel.koinViewModel
@@ -131,7 +128,7 @@ fun MarketShoppingListScreen(
                                 modifier = Modifier.fillMaxSize()
                             ) {
                                 items(state.groceries) { item ->
-                                    GroceryItemCard(item = item)
+                                    DmtGroceryItemCard(item = item)
                                 }
                             }
                         }
@@ -148,35 +145,6 @@ fun MarketShoppingListScreen(
             }
         }
     )
-}
-
-@Composable
-private fun GroceryItemCard(
-    item: GroceryItem,
-    modifier: Modifier = Modifier
-) {
-    Box(
-        modifier = modifier
-            .fillMaxWidth()
-            .background(
-                color = MaterialTheme.colorScheme.surfaceVariant,
-                shape = RoundedCornerShape(12.dp)
-            )
-            .border(
-                width = 1.dp,
-                color = MaterialTheme.colorScheme.outline.copy(alpha = 0.5f),
-                shape = RoundedCornerShape(12.dp)
-            )
-            .padding(16.dp),
-        contentAlignment = Alignment.Center
-    ) {
-        Text(
-            text = "• ${stringResource(item.stringRes.resourceId)}",
-            style = MaterialTheme.typography.bodyLarge,
-            textAlign = TextAlign.Center,
-            color = MaterialTheme.colorScheme.onSurface
-        )
-    }
 }
 
 @Composable

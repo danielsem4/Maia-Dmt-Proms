@@ -3,6 +3,7 @@ package maia.dmt.market.presentation.marketLand
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -10,6 +11,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -58,6 +60,7 @@ fun MarketMainNavigationRoot(
     viewModel: MarketMainNavigationViewModel = koinViewModel(),
     onNavigateBack: () -> Unit,
     onNavigateToShoppingList: (String) -> Unit,
+    onNavigateToCategories: () -> Unit,
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
 
@@ -69,6 +72,9 @@ fun MarketMainNavigationRoot(
             is MarketMainNavigationEvent.NavigateToShoppingList -> {
                 onNavigateToShoppingList(event.listType)
             }
+            is MarketMainNavigationEvent.NavigateToCategories -> {
+                onNavigateToCategories()
+            }
         }
     }
 
@@ -77,80 +83,98 @@ fun MarketMainNavigationRoot(
         onAction = viewModel::onAction
     )
 }
+
 @Composable
 fun MarketMainNavigationScreen(
     state: MarketMainNavigationState,
     onAction: (MarketMainNavigationAction) -> Unit,
 ) {
     DmtBaseScreen(
-        titleText = stringResource(Res.string.cogTest_market_recipe_title),
+        titleText = stringResource(Res.string.cogTest_market_super_ez_title),
         onIconClick = { onAction(MarketMainNavigationAction.OnNavigateBack) },
         content = {
             Column(
                 modifier = Modifier
-                    .fillMaxWidth(),
+                    .fillMaxWidth()
+                    .padding(8.dp),
                 horizontalAlignment = Alignment.CenterHorizontally,
             ) {
                 Spacer(modifier = Modifier.padding(12.dp))
-                Text(
-                    text = stringResource(Res.string.cogTest_market_super_ez_title),
-                    textAlign = TextAlign.Center,
-                    fontWeight = FontWeight.Bold,
-                    style = MaterialTheme.typography.displayMedium,
-                )
-
-                Spacer(modifier = Modifier.padding(8.dp))
-
-                Image(
-                    painter = painterResource(Res.drawable.logo_super_easy),
-                    contentDescription = "Super image",
-                    modifier = Modifier
-                        .size(150.dp)
-                        .clip(RoundedCornerShape(8.dp)),
-                    contentScale = ContentScale.Fit
-                )
-
-                Spacer(modifier = Modifier.padding(8.dp))
 
                 Row(
                     modifier = Modifier
-                        .wrapContentSize()
+                        .fillMaxWidth()
                         .padding(start = 8.dp),
-                    horizontalArrangement = Arrangement.spacedBy(12.dp)
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically
                 ) {
-                    DmtButton(
-                        text = stringResource(Res.string.cogTest_market_view_list),
-                        leadingIcon = {
-                            Icon(
-                                imageVector = vectorResource(Res.drawable.market_basket_icon),
-                                contentDescription = null,
-                                modifier = Modifier.size(35.dp)
-                            )
-                        },
-                        onClick = { onAction(MarketMainNavigationAction.OnShoppingListClick) },
-                        modifier = Modifier.wrapContentSize(),
+                    Spacer(modifier = Modifier.weight(1f))
+
+                    Image(
+                        painter = painterResource(Res.drawable.logo_super_easy),
+                        contentDescription = "Super image",
+                        modifier = Modifier
+                            .size(180.dp)
+                            .clip(RoundedCornerShape(8.dp)),
+                        contentScale = ContentScale.Fit
                     )
 
-                    DmtButton(
-                        text = stringResource(Res.string.cogTest_market_view_donation_list),
-                        leadingIcon = {
-                            Icon(
-                                imageVector = vectorResource(Res.drawable.market_donation_icon),
-                                contentDescription = null,
-                                modifier = Modifier.size(35.dp)
+                    Box(
+                        modifier = Modifier.weight(1f),
+                        contentAlignment = Alignment.CenterEnd
+                    ) {
+                        Column(
+                            modifier = Modifier
+                                .wrapContentSize()
+                                .padding(start = 8.dp),
+                        ) {
+                            DmtButton(
+                                text = stringResource(Res.string.cogTest_market_view_list),
+                                leadingIcon = {
+                                    Icon(
+                                        imageVector = vectorResource(Res.drawable.market_basket_icon),
+                                        contentDescription = null,
+                                        modifier = Modifier.size(28.dp)
+                                    )
+                                },
+                                style = maia.dmt.core.designsystem.components.buttons.DmtButtonStyle.SECONDARY,
+                                modifier = Modifier
+                                    .widthIn(min = 100.dp, max = 320.dp),
+                                onClick = { onAction(MarketMainNavigationAction.OnShoppingListClick) },
                             )
-                        },
-                        onClick = { onAction(MarketMainNavigationAction.OnDonationListClick) },
-                        modifier = Modifier.wrapContentSize(),
-                    )
+                            Spacer(modifier = Modifier.padding(8.dp))
+                            DmtButton(
+                                text = stringResource(Res.string.cogTest_market_view_donation_list),
+                                leadingIcon = {
+                                    Icon(
+                                        imageVector = vectorResource(Res.drawable.market_donation_icon),
+                                        contentDescription = null,
+                                        modifier = Modifier.size(28.dp)
+                                    )
+                                },
+                                style = maia.dmt.core.designsystem.components.buttons.DmtButtonStyle.SECONDARY,
+                                modifier = Modifier
+                                    .widthIn(min = 100.dp, max = 300.dp),
+                                onClick = { onAction(MarketMainNavigationAction.OnDonationListClick) },
+                            )
+                        }
+                    }
                 }
-
                 Spacer(modifier = Modifier.padding(24.dp))
 
                 Column(
                     modifier = Modifier
                         .fillMaxWidth()
                         .weight(0.5f)
+                        .fillMaxSize()
+                        .padding(horizontal = 12.dp, vertical = 8.dp)
+                        .background(
+                            color = MaterialTheme.colorScheme.surface,
+                            shape = RoundedCornerShape(16.dp)
+                        )
+                        .padding(16.dp),
+                    verticalArrangement = Arrangement.SpaceEvenly,
+                    horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     Row(
                         modifier = Modifier
@@ -183,14 +207,6 @@ fun MarketMainNavigationScreen(
                     }
 
                     Row(
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .padding(horizontal = 12.dp, vertical = 8.dp)
-                            .background(
-                                color = MaterialTheme.colorScheme.surface,
-                                shape = RoundedCornerShape(16.dp)
-                            )
-                            .padding(16.dp),
                         verticalAlignment = Alignment.CenterVertically,
                         horizontalArrangement = Arrangement.SpaceEvenly
                     ) {

@@ -13,15 +13,16 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import dmtproms.cogtest.market.presentation.generated.resources.Res
+import dmtproms.cogtest.market.presentation.generated.resources.cogTest_market_cocoa
 import maia.dmt.core.designsystem.theme.DmtTheme
-import maia.dmt.market.presentation.shoppingList.GroceryItem
-import maia.dmt.market.presentation.shoppingList.GroceryStringRes
+import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
 fun DmtGroceryItemCard(
-    item: GroceryItem,
+    item: StringResource,
     modifier: Modifier = Modifier
 ) {
     Box(
@@ -40,7 +41,7 @@ fun DmtGroceryItemCard(
         contentAlignment = Alignment.Center
     ) {
         Text(
-            text = "• ${stringResource(item.stringRes.resourceId)}",
+            text = "• ${stringResource(item)}",
             style = MaterialTheme.typography.bodyLarge,
             textAlign = TextAlign.Center,
             color = MaterialTheme.colorScheme.onSurface
@@ -50,11 +51,10 @@ fun DmtGroceryItemCard(
 
 @Composable
 @Preview
-
 fun DmtGroceryItemCardPreview() {
     DmtTheme {
-         DmtGroceryItemCard(
-             item = GroceryItem(GroceryStringRes.TomatoesKg)
-         )
-     }
+        DmtGroceryItemCard(
+            item = Res.string.cogTest_market_cocoa
+        )
+    }
 }

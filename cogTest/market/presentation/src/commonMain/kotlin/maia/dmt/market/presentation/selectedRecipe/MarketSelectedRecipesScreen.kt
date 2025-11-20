@@ -288,42 +288,15 @@ private fun LandscapeLayout(
                     textAlign = TextAlign.Start
                 )
 
-//                LazyVerticalGrid(
-//                    columns = GridCells.Fixed(3),
-//                    contentPadding = PaddingValues(8.dp),
-//                    horizontalArrangement = Arrangement.spacedBy(12.dp),
-//                    verticalArrangement = Arrangement.spacedBy(12.dp),
-//                    modifier = Modifier.fillMaxSize()
-//                ) {
-//                    recipe.groceries.forEach { item ->
-//                        DmtGroceryItemCard(item = item)
-//                    }
-//                }
-                Column(
-                    modifier = Modifier.fillMaxWidth(),
-                    verticalArrangement = Arrangement.spacedBy(12.dp)
+                LazyVerticalGrid(
+                    columns = GridCells.Fixed(3),
+                    contentPadding = PaddingValues(8.dp),
+                    horizontalArrangement = Arrangement.spacedBy(12.dp),
+                    verticalArrangement = Arrangement.spacedBy(12.dp),
+                    modifier = Modifier.fillMaxSize()
                 ) {
-                    recipe.groceries.forEach { groceryRes ->
-                        Row(
-                            modifier = Modifier.fillMaxWidth(),
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            Box(
-                                modifier = Modifier
-                                    .width(8.dp)
-                                    .height(8.dp)
-                                    .background(
-                                        color = MaterialTheme.colorScheme.primary,
-                                        shape = RoundedCornerShape(4.dp)
-                                    )
-                            )
-                            Spacer(modifier = Modifier.width(16.dp))
-                            Text(
-                                text = stringResource(groceryRes),
-                                style = MaterialTheme.typography.titleMedium,
-                                color = MaterialTheme.colorScheme.onSurface
-                            )
-                        }
+                    items(recipe.groceries) { item ->
+                        DmtGroceryItemCard(item = item)
                     }
                 }
             }

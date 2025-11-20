@@ -28,6 +28,10 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import dmtproms.cogtest.market.presentation.generated.resources.Res
 import dmtproms.cogtest.market.presentation.generated.resources.cogTest_market_close_list
+import dmtproms.cogtest.market.presentation.generated.resources.cogTest_market_item_broccoli_fresh
+import dmtproms.cogtest.market.presentation.generated.resources.cogTest_market_item_gluten_free_cookies
+import dmtproms.cogtest.market.presentation.generated.resources.cogTest_market_item_sunflower_oil
+import dmtproms.cogtest.market.presentation.generated.resources.cogTest_market_item_tomatoes_kg
 import dmtproms.cogtest.market.presentation.generated.resources.cogTest_market_shopping_list_title
 import maia.dmt.core.designsystem.components.buttons.DmtButton
 import maia.dmt.core.designsystem.components.layouts.DmtBaseScreen
@@ -155,10 +159,10 @@ fun MarketShoppingListPreview() {
             state = MarketShoppingListState(
                 listType = "regular",
                 groceries = listOf(
-                    GroceryItem(GroceryStringRes.TomatoesKg),
-                    GroceryItem(GroceryStringRes.BroccoliFresh),
-                    GroceryItem(GroceryStringRes.GlutenFreeCookies),
-                    GroceryItem(GroceryStringRes.SunflowerOil),
+                    Res.string.cogTest_market_item_tomatoes_kg,
+                    Res.string.cogTest_market_item_broccoli_fresh,
+                    Res.string.cogTest_market_item_gluten_free_cookies,
+                    Res.string.cogTest_market_item_sunflower_oil,
                 )
             ),
             onAction = {}

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="cogTest_market_part_one_title">Тест рынка</string>
+    <string name="cogTest_market_instructions">Instructions</string>
 
     <string name="cogTest_market_welcome_title">Добро пожаловать</string>
     <string name="cogTest_market_welcome_button_text">Нажмите, чтобы прочитать инструкции</string>
@@ -44,5 +45,91 @@
     <string name="cogTest_market_chocolate">Шоколад</string>
 
     <string name="cogTest_market_to_select_grocery_press_ru">Чтобы выбрать подходящий продукт, нажмите на него</string>
+
+    <string name="cogTest_market_first_mission_done_title">Первое задание выполнено</string>
+    <string name="cogTest_market_first_mission_done_body">Чтобы начать второе задание, нажмите кнопку «Начать игру».</string>
+
+    <string name="cogTest_market_second_mission_welcome_title">Добро пожаловать в супермаркет Изи Онлайн</string>
+    <string name="cogTest_market_second_mission_intro">В этом задании нужно выбрать разные продукты, добавить их в корзину и затем нажать кнопку «Завершить».</string>
+
+    <string name="cogTest_market_second_mission_follow_instructions">Следуйте инструкциям, которые появятся дальше.</string>
+    <string name="cogTest_market_second_mission_quiet_env">Выполняйте задание в максимально тихой обстановке.</string>
+
+    <string name="cogTest_market_second_mission_read_instructions">Нажмите, чтобы прочитать инструкции</string>
+    <string name="cogTest_market_second_mission_start_shopping">Нажмите, чтобы начать покупки</string>
+
+    <string name="cogTest_market_second_mission_title_instructions">Инструкции</string>
+    <string name="cogTest_market_second_mission_shopping_task">Вам нужно сделать недельные покупки для семьи согласно списку на экране. Выбирайте только те продукты, которые есть в списке!</string>
+    <string name="cogTest_market_second_mission_find_items">Вы можете найти продукты через категории или с помощью строки поиска.</string>
+    <string name="cogTest_market_second_mission_donation_items">Кроме того, соберите все товары для пожертвований, отмеченные синим цветом.</string>
+
+    <string name="cogTest_market_super_ez_title">Супер «Иззи»</string>
+    <string name="cogTest_market_view_list">Просмотр списка</string>
+    <string name="cogTest_market_view_donation_list">Просмотр списка пожертвований</string>
+    <string name="cogTest_market_categories">Категории</string>
+    <string name="cogTest_market_search">Поиск</string>
+    <string name="cogTest_market_cart">Корзина</string>
+    <string name="cogTest_market_instruction_categories">Чтобы просмотреть категории, нажмите «Категории»</string>
+    <string name="cogTest_market_instruction_search">Чтобы найти продукт, нажмите «Поиск»</string>
+    <string name="cogTest_market_instruction_cart">Чтобы просмотреть корзину, нажмите «Корзина»</string>
+
+    <string name="cogTest_market_cat_vegetables">Овощи</string>
+    <string name="cogTest_market_item_tomatoes_kg">1 кг помидоров</string>
+    <string name="cogTest_market_item_cucumber_half_kg">0.5 кг огурца</string>
+    <string name="cogTest_market_item_broccoli_fresh">Свежая брокколи</string>
+
+    <string name="cogTest_market_cat_bakery">Выпечка</string>
+    <string name="cogTest_market_item_bread_whole_low_sugar">Цельнозерновой хлеб с пониженным содержанием сахара</string>
+    <string name="cogTest_market_item_gluten_free_cookies">Печенье без глютена</string>
+
+    <string name="cogTest_market_cat_dry_spices">Бакалея и специи</string>
+    <string name="cogTest_market_item_olive_oil">Оливковое масло</string>
+    <string name="cogTest_market_item_sunflower_oil">Подсолнечное масло</string>
+    <string name="cogTest_market_item_corn_cans_3">Консервированная кукуруза – 3 шт.</string>
+    <string name="cogTest_market_item_pickles_250">Маринованные огурцы – 250 г</string>
+    <string name="cogTest_market_item_tuna">Тунец</string>
+
+    <string name="cogTest_market_cat_meat">Мясные продукты</string>
+    <string name="cogTest_market_item_schnitzel_kg">1 кг шницелей</string>
+    <string name="cogTest_market_item_chicken_legs_4">Куриные голени – 4 шт.</string>
+
+    <string name="cogTest_market_cat_fruits">Фрукты</string>
+    <string name="cogTest_market_item_apricots_10">10 абрикосов</string>
+    <string name="cogTest_market_item_bananas_700g">Связка бананов до 700 г</string>
+    <string name="cogTest_market_item_apples_5_smith">5 яблок Грэнни Смит</string>
+    <string name="cogTest_market_item_melon_1">1 дыня</string>
+
+    <string name="cogTest_market_cat_dairy">Молочные продукты</string>
+    <string name="cogTest_market_item_milk_1_percent">Молоко 1% – 1 литр</string>
+    <string name="cogTest_market_item_cream_cheese_28">Сливочный сыр 28%</string>
+    <string name="cogTest_market_item_white_cheese_250">Белый сыр – 250 г</string>
+    <string name="cogTest_market_item_tzefatit_5">Сыр Цфатит 5% – 250 г</string>
+
+    <string name="cogTest_market_donation_cat_food">Продукты питания</string>
+    <string name="cogTest_market_donation_item_challah">Хала</string>
+    <string name="cogTest_market_donation_item_tomato_paste">Томатная паста</string>
+    <string name="cogTest_market_donation_item_canola_oil">Масло канолы</string>
+    <string name="cogTest_market_donation_item_milk_3_percent">Молоко 3% жирности</string>
+    <string name="cogTest_market_donation_item_olives">Оливки</string>
+    <string name="cogTest_market_donation_item_chickpeas">Нут</string>
+    <string name="cogTest_market_donation_item_disposable_cups">Упаковка одноразовых стаканов</string>
+    <string name="cogTest_market_donation_item_dish_soap">Средство для мытья посуды</string>
+
+    <string name="cogTest_market_shopping_list_title">Список покупок</string>
+    <string name="cogTest_market_close_list">Закрыть список</string>
+
+    <string name="cogTest_market_donation_shopping_list_title">Список пожертвований</string>
+
+    <string name="cogTest_market_category_frozen">Замороженные продукты</string>
+    <string name="cogTest_market_category_dairy">Молочные продукты</string>
+    <string name="cogTest_market_category_fruits">Фрукты</string>
+    <string name="cogTest_market_category_dry_spices">Бакалея и специи</string>
+    <string name="cogTest_market_category_vegetables">Овощи</string>
+    <string name="cogTest_market_category_bakery">Выпечка</string>
+    <string name="cogTest_market_category_meat">Мясные продукты</string>
+    <string name="cogTest_market_category_cleaning_disposable">Чистящие и одноразовые товары</string>
+
+    <string name="cogTest_market_category_select_instruction">Выберите нужную категорию</string>
+
 
 </resources>

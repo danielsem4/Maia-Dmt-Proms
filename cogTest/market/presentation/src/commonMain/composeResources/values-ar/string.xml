@@ -2,6 +2,7 @@
 <resources>
 
     <string name="cogTest_market_part_one_title">اختبار السوق</string>
+    <string name="cogTest_market_instructions">Instructions</string>
 
     <string name="cogTest_market_welcome_title">مرحبًا بكم</string>
     <string name="cogTest_market_welcome_button_text">اضغط لقراءة التعليمات</string>
@@ -45,4 +46,91 @@
     <string name="cogTest_market_chocolate">شوكولاتة</string>
 
     <string name="cogTest_market_to_select_grocery_press_ar">لاختيار المنتج المناسب، اضغط عليه</string>
+
+    <string name="cogTest_market_first_mission_done_title">تم إنهاء المهمة الأولى</string>
+    <string name="cogTest_market_first_mission_done_body">لبدء المهمة الثانية، اضغط على زر "ابدأ اللعبة".</string>
+
+    <string name="cogTest_market_second_mission_welcome_title">مرحبًا بكم في سوبرماركت إيزي أونلاين</string>
+    <string name="cogTest_market_second_mission_intro">في هذه المهمة يجب اختيار مواد غذائية مختلفة، إضافتها إلى سلة التسوق، ثم الضغط على زر الإنهاء.</string>
+
+    <string name="cogTest_market_second_mission_follow_instructions">يرجى اتباع التعليمات التي ستظهر لاحقًا.</string>
+    <string name="cogTest_market_second_mission_quiet_env">يُفضّل تنفيذ المهمة في مكان هادئ قدر الإمكان.</string>
+
+    <string name="cogTest_market_second_mission_read_instructions">اضغط لقراءة التعليمات</string>
+    <string name="cogTest_market_second_mission_start_shopping">اضغط لبدء التسوق</string>
+
+    <string name="cogTest_market_second_mission_title_instructions">التعليمات</string>
+    <string name="cogTest_market_second_mission_shopping_task">عليك القيام بمشتريات أسبوعية للعائلة وفقًا لقائمة التسوق التي تظهر على الشاشة. اختر فقط المواد الموجودة في القائمة!</string>
+    <string name="cogTest_market_second_mission_find_items">يمكنك العثور على المواد عبر الفئات أو من خلال شريط البحث.</string>
+    <string name="cogTest_market_second_mission_donation_items">بالإضافة إلى ذلك، اجمع جميع مواد التبرع المعلّمة باللون الأزرق.</string>
+
+    <string name="cogTest_market_super_ez_title">سوبر "إيزي"</string>
+    <string name="cogTest_market_view_list">عرض القائمة</string>
+    <string name="cogTest_market_view_donation_list">عرض قائمة التبرعات</string>
+    <string name="cogTest_market_categories">الفئات</string>
+    <string name="cogTest_market_search">بحث</string>
+    <string name="cogTest_market_cart">سلة التسوق</string>
+    <string name="cogTest_market_instruction_categories">لعرض الفئات اضغط على "الفئات"</string>
+    <string name="cogTest_market_instruction_search">للبحث عن منتج اضغط على "بحث"</string>
+    <string name="cogTest_market_instruction_cart">لعرض سلة التسوق اضغط على "سلة التسوق"</string>
+
+    <string name="cogTest_market_cat_vegetables">الخضروات</string>
+    <string name="cogTest_market_item_tomatoes_kg">1 كغم طماطم</string>
+    <string name="cogTest_market_item_cucumber_half_kg">0.5 كغم خيار</string>
+    <string name="cogTest_market_item_broccoli_fresh">بروكلي طازج</string>
+
+    <string name="cogTest_market_cat_bakery">المخبوزات</string>
+    <string name="cogTest_market_item_bread_whole_low_sugar">رغيف خبز قمح كامل قليل السكر</string>
+    <string name="cogTest_market_item_gluten_free_cookies">بسكويت خالٍ من الغلوتين</string>
+
+    <string name="cogTest_market_cat_dry_spices">البقوليات والتوابل</string>
+    <string name="cogTest_market_item_olive_oil">زيت زيتون</string>
+    <string name="cogTest_market_item_sunflower_oil">زيت دوار الشمس</string>
+    <string name="cogTest_market_item_corn_cans_3">ذرة معلبة – 3 عبوات</string>
+    <string name="cogTest_market_item_pickles_250">مخلل خيار بالخل – 250 غرام</string>
+    <string name="cogTest_market_item_tuna">تونة</string>
+
+    <string name="cogTest_market_cat_meat">منتجات اللحوم</string>
+    <string name="cogTest_market_item_schnitzel_kg">1 كغم شنيتسل</string>
+    <string name="cogTest_market_item_chicken_legs_4">أفخاذ دجاج – 4 قطع</string>
+
+    <string name="cogTest_market_cat_fruits">الفواكه</string>
+    <string name="cogTest_market_item_apricots_10">10 حبات مشمش</string>
+    <string name="cogTest_market_item_bananas_700g">عنقود موز حتى 700 غ</string>
+    <string name="cogTest_market_item_apples_5_smith">5 تفاح غرين سميث</string>
+    <string name="cogTest_market_item_melon_1">حبة بطيخ (شمّام)</string>
+
+    <string name="cogTest_market_cat_dairy">منتجات الألبان</string>
+    <string name="cogTest_market_item_milk_1_percent">حليب 1% دسم – 1 لتر</string>
+    <string name="cogTest_market_item_cream_cheese_28">جبنة كريمية 28%</string>
+    <string name="cogTest_market_item_white_cheese_250">جبنة بيضاء – 250 غ</string>
+    <string name="cogTest_market_item_tzefatit_5">جبنة صفطيت 5% – 250 غ</string>
+
+    <string name="cogTest_market_donation_cat_food">منتجات غذائية</string>
+    <string name="cogTest_market_donation_item_challah">خبز شله (حلا)</string>
+    <string name="cogTest_market_donation_item_tomato_paste">معجون طماطم</string>
+    <string name="cogTest_market_donation_item_canola_oil">زيت كانولا</string>
+    <string name="cogTest_market_donation_item_milk_3_percent">حليب 3% دسم</string>
+    <string name="cogTest_market_donation_item_olives">زيتون</string>
+    <string name="cogTest_market_donation_item_chickpeas">حمص حب</string>
+    <string name="cogTest_market_donation_item_disposable_cups">عبوة أكواب للاستعمال مرة واحدة</string>
+    <string name="cogTest_market_donation_item_dish_soap">سائل جلي</string>
+
+    <string name="cogTest_market_shopping_list_title">قائمة التسوق</string>
+    <string name="cogTest_market_close_list">إغلاق القائمة</string>
+
+    <string name="cogTest_market_donation_shopping_list_title">قائمة التبرعات</string>
+
+    <string name="cogTest_market_category_frozen">مجمدات</string>
+    <string name="cogTest_market_category_dairy">منتجات الحليب</string>
+    <string name="cogTest_market_category_fruits">فواكه</string>
+    <string name="cogTest_market_category_dry_spices">المواد الجافة والتوابل</string>
+    <string name="cogTest_market_category_vegetables">خضار</string>
+    <string name="cogTest_market_category_bakery">مخبوزات</string>
+    <string name="cogTest_market_category_meat">منتجات اللحوم</string>
+    <string name="cogTest_market_category_cleaning_disposable">مواد تنظيف ومواد للاستعمال مرة واحدة</string>
+
+    <string name="cogTest_market_category_select_instruction">اضغط على الفئة المطلوبة</string>
+
+
 </resources>

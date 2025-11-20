@@ -4,7 +4,6 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.widthIn
@@ -51,7 +50,6 @@ fun DmtButton(
 ) {
     val deviceConfig = currentDeviceConfiguration()
 
-    // Determine size based on device configuration
     val buttonSizing = when(deviceConfig) {
         DeviceConfiguration.MOBILE_PORTRAIT -> ButtonSizing(
             minWidth = 120.dp,
@@ -114,7 +112,7 @@ fun DmtButton(
             disabledContentColor = MaterialTheme.colorScheme.extended.textDisabled
         )
         DmtButtonStyle.SECONDARY -> ButtonDefaults.buttonColors(
-            containerColor = Color.Transparent,
+            containerColor = MaterialTheme.colorScheme.extended.disabledOutline.copy(alpha = 0.3f),
             contentColor = MaterialTheme.colorScheme.extended.textSecondary,
             disabledContainerColor = Color.Transparent,
             disabledContentColor = MaterialTheme.colorScheme.extended.textDisabled
@@ -135,7 +133,7 @@ fun DmtButton(
 
     val defaultBorderStroke = BorderStroke(
         width = 1.dp,
-        color = MaterialTheme.colorScheme.extended.disabledOutline
+        color = MaterialTheme.colorScheme.extended.primaryHover
     )
     val border = when {
         style == DmtButtonStyle.PRIMARY && !enabled -> defaultBorderStroke
@@ -143,7 +141,7 @@ fun DmtButton(
         style == DmtButtonStyle.DESTRUCTIVE_PRIMARY && !enabled -> defaultBorderStroke
         style == DmtButtonStyle.DESTRUCTIVE_SECONDARY -> {
             val borderColor = if(enabled) {
-                MaterialTheme.colorScheme.extended.destructiveSecondaryOutline
+                MaterialTheme.colorScheme.extended.primaryHover
             } else {
                 MaterialTheme.colorScheme.extended.disabledOutline
             }
@@ -230,20 +228,6 @@ fun DmtPrimaryButtonPreview() {
 
 @Composable
 @Preview
-fun DmtSecondaryButtonPreview() {
-    DmtTheme(
-        darkTheme = true
-    ) {
-        DmtButton(
-            text = "Hello world!",
-            onClick = {},
-            style = DmtButtonStyle.SECONDARY
-        )
-    }
-}
-
-@Composable
-@Preview
 fun DmtDestructivePrimaryButtonPreview() {
     DmtTheme(
         darkTheme = true
@@ -280,6 +264,20 @@ fun DmtTextButtonPreview() {
             text = "Hello world!",
             onClick = {},
             style = DmtButtonStyle.TEXT
+        )
+    }
+}
+
+@Composable
+@Preview
+fun DmtSecondaryButtonPreview() {
+    DmtTheme(
+
+    ) {
+        DmtButton(
+            text = "Hello world!",
+            onClick = {},
+            style = DmtButtonStyle.SECONDARY
         )
     }
 }

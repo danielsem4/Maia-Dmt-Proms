@@ -29,11 +29,14 @@ fun DmtIconCard(
     modifier: Modifier = Modifier,
     icon: DrawableResource,
     text: String,
+    iconSizeMultiplier: Float = 1f,
+    textSizeMultiplier: Float = 1f,
+    tint: androidx.compose.ui.graphics.Color? = MaterialTheme.colorScheme.primary,
     onClick: () -> Unit = {}
 ) {
     val configuration = currentDeviceConfiguration()
 
-    val cardSize = when (configuration) {
+    val baseCardSize = when (configuration) {
         DeviceConfiguration.MOBILE_PORTRAIT -> 110.dp
         DeviceConfiguration.MOBILE_LANDSCAPE -> 90.dp
         DeviceConfiguration.TABLET_PORTRAIT -> 120.dp
@@ -41,7 +44,7 @@ fun DmtIconCard(
         DeviceConfiguration.DESKTOP -> 140.dp
     }
 
-    val iconSize = when (configuration) {
+    val baseIconSize = when (configuration) {
         DeviceConfiguration.MOBILE_PORTRAIT -> 40.dp
         DeviceConfiguration.MOBILE_LANDSCAPE -> 36.dp
         DeviceConfiguration.TABLET_PORTRAIT -> 48.dp
@@ -49,13 +52,21 @@ fun DmtIconCard(
         DeviceConfiguration.DESKTOP -> 56.dp
     }
 
-    val textStyle = when (configuration) {
+    val cardSize = baseCardSize * iconSizeMultiplier
+    val iconSize = baseIconSize * iconSizeMultiplier
+
+    val baseTextStyle = when (configuration) {
         DeviceConfiguration.MOBILE_PORTRAIT -> MaterialTheme.typography.bodySmall
         DeviceConfiguration.MOBILE_LANDSCAPE -> MaterialTheme.typography.bodySmall
         DeviceConfiguration.TABLET_PORTRAIT -> MaterialTheme.typography.bodyMedium
         DeviceConfiguration.TABLET_LANDSCAPE -> MaterialTheme.typography.bodyMedium
         DeviceConfiguration.DESKTOP -> MaterialTheme.typography.bodyLarge
     }
+
+    val textStyle = baseTextStyle.copy(
+        fontSize = baseTextStyle.fontSize * textSizeMultiplier
+    )
+
 
     Card(
         modifier = modifier
@@ -79,7 +90,7 @@ fun DmtIconCard(
                 imageVector = vectorResource(icon),
                 contentDescription = text,
                 modifier = Modifier.size(iconSize),
-                tint = MaterialTheme.colorScheme.primary
+                tint = tint ?: androidx.compose.ui.graphics.Color.Unspecified // Use provided tint or Unspecified
             )
 
             Spacer(modifier = Modifier.height(8.dp))

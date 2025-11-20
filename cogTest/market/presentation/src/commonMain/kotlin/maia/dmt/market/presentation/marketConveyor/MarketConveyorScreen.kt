@@ -50,7 +50,7 @@ fun MarketConveyorRoot(
                 onNavigateToMarketSecondPart()
             }
             is MarketConveyorEvent.PressGrocery -> {
-                // Handle if needed
+
             }
         }
     }

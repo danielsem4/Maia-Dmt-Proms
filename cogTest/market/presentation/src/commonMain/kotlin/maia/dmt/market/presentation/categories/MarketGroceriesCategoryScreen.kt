@@ -1,23 +1,23 @@
-package maia.dmt.market.presentation.groceries
+package maia.dmt.market.presentation.categories
 
 import androidx.compose.runtime.Composable
 import maia.dmt.core.designsystem.theme.DmtTheme
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
-fun MarketGroceriesRoot() {
+fun MarketGroceriesCategoryRoot() {
 
 }
 
 @Composable
-fun MarketGroceriesScreen() {
+fun MarketGroceriesCategoryScreen() {
 
 }
 
 @Composable
 @Preview
-fun MarketGroceriesPreview() {
+fun MarketGroceriesCategoryPreview() {
     DmtTheme {
-        MarketGroceriesRoot()
+        MarketGroceriesCategoryScreen()
     }
 }

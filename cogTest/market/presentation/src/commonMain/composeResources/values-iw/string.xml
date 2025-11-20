@@ -2,7 +2,7 @@
 <resources>
 
     <string name="cogTest_market_part_one_title">משימת הסופר</string>
-
+    <string name="cogTest_market_instructions">הוראות</string>
     <string name="cogTest_market_welcome_title">ברוכים הבאים</string>
     <string name="cogTest_market_welcome_button_text">לחצו לקריאת ההוראות</string>
 
@@ -46,4 +46,92 @@
     <string name="cogTest_market_chocolate">שוקולד</string>
 
     <string name="cogTest_market_to_select_grocery_press">לבחירת המוצר המתאים יש ללחוץ עליו</string>
+
+    <string name="cogTest_market_first_mission_done_title">המשימה הראשונה הסתיימה</string>
+    <string name="cogTest_market_first_mission_done_body">כדי להתחיל את המשימה השנייה יש ללחוץ על הכפתור "לחצו להתחלת המשחק".</string>
+
+    <string name="cogTest_market_second_mission_welcome_title">ברוכים הבאים לסופר-מרקט איזי אונליין</string>
+    <string name="cogTest_market_second_mission_intro">במשימה זו יש לבחור מצרכים שונים, להוסיף אותם לסל הקניות ולאחר מכן ללחוץ על כפתור סיום.</string>
+
+    <string name="cogTest_market_second_mission_follow_instructions">יש לעקוב אחר ההוראות שיתקבלו בהמשך.</string>
+    <string name="cogTest_market_second_mission_quiet_env">יש לבצע את המשימה בסביבה שקטה ככל האפשר.</string>
+
+    <string name="cogTest_market_second_mission_read_instructions">לחצו לקריאת ההוראות</string>
+    <string name="cogTest_market_second_mission_start_shopping">לחצו להתחלת הקנייה</string>
+
+    <string name="cogTest_market_second_mission_title_instructions">הוראות</string>
+    <string name="cogTest_market_second_mission_shopping_task">עליך לבצע קנייה שבועית למשפחה לפי רשימת הקניות שמופיעה על המסך. יש לבחור רק את המצרכים שמופיעים ברשימה!</string>
+    <string name="cogTest_market_second_mission_find_items">ניתן למצוא את המצרכים דרך הקטגוריות או באמצעות שורת החיפוש.</string>
+    <string name="cogTest_market_second_mission_donation_items">בנוסף, יש לאסוף את כל המצרכים שמופיעים ברשימת התרומה המסומנים בכחול.</string>
+
+    <string name="cogTest_market_super_ez_title">סופר "איזי"</string>
+    <string name="cogTest_market_view_list">לצפייה ברשימה</string>
+    <string name="cogTest_market_view_donation_list">לצפייה ברשימת תרומה</string>
+    <string name="cogTest_market_categories">קטגוריות</string>
+    <string name="cogTest_market_search">חיפוש</string>
+    <string name="cogTest_market_cart">סל קניות</string>
+    <string name="cogTest_market_instruction_categories">לעיון בקטגוריות לחצו על "קטגוריות"</string>
+    <string name="cogTest_market_instruction_search">לחיפוש מוצר לחצו על "חיפוש"</string>
+    <string name="cogTest_market_instruction_cart">לעיון בסל הקניות לחצו על "סל קניות"</string>
+
+    <string name="cogTest_market_cat_vegetables">ירקות</string>
+    <string name="cogTest_market_item_tomatoes_kg">קילו עגבניות</string>
+    <string name="cogTest_market_item_cucumber_half_kg">חצי קילו מלפפון</string>
+    <string name="cogTest_market_item_broccoli_fresh">ברוקולי טרי</string>
+
+    <string name="cogTest_market_cat_bakery">מאפים</string>
+    <string name="cogTest_market_item_bread_whole_low_sugar">כיכר לחם מקמח מלא דל סוכר</string>
+    <string name="cogTest_market_item_gluten_free_cookies">חבילת עוגיות ללא גלוטן</string>
+
+    <string name="cogTest_market_cat_dry_spices">יבשים ותבלינים</string>
+    <string name="cogTest_market_item_olive_oil">שמן זית</string>
+    <string name="cogTest_market_item_sunflower_oil">שמן חמניות</string>
+    <string name="cogTest_market_item_corn_cans_3">תירס שימורים 3 יחידות</string>
+    <string name="cogTest_market_item_pickles_250">מלפפון חמוץ בחומץ 250 גר'</string>
+    <string name="cogTest_market_item_tuna">טונה</string>
+
+    <string name="cogTest_market_cat_meat">מוצרי בשר</string>
+    <string name="cogTest_market_item_schnitzel_kg">קילו שניצלים</string>
+    <string name="cogTest_market_item_chicken_legs_4">כרעיים 4 יחידות</string>
+
+    <string name="cogTest_market_cat_fruits">פירות</string>
+    <string name="cogTest_market_item_apricots_10">10 יחידות משמשים</string>
+    <string name="cogTest_market_item_bananas_700g">אשכול בננות עד 700 גר'</string>
+    <string name="cogTest_market_item_apples_5_smith">5 תפוחים סמיט</string>
+    <string name="cogTest_market_item_melon_1">מלון 1 יחידה</string>
+
+    <string name="cogTest_market_cat_dairy">מוצרי חלב</string>
+    <string name="cogTest_market_item_milk_1_percent">ליטר חלב 1% שומן</string>
+    <string name="cogTest_market_item_cream_cheese_28">גבינת שמנת 28%</string>
+    <string name="cogTest_market_item_white_cheese_250">250 גר גבינה לבנה</string>
+    <string name="cogTest_market_item_tzefatit_5">250 גר צפתית מעודנת 5%</string>
+
+    <string name="cogTest_market_donation_cat_food">מוצרי מזון</string>
+    <string name="cogTest_market_donation_item_challah">חלה</string>
+    <string name="cogTest_market_donation_item_tomato_paste">רסק עגבניות</string>
+    <string name="cogTest_market_donation_item_canola_oil">שמן קנולה</string>
+    <string name="cogTest_market_donation_item_milk_3_percent">חלב 3% שומן</string>
+    <string name="cogTest_market_donation_item_olives">זיתים</string>
+    <string name="cogTest_market_donation_item_chickpeas">חומוס גרגרים</string>
+    <string name="cogTest_market_donation_item_disposable_cups">חבילת כוסות חד פעמי</string>
+    <string name="cogTest_market_donation_item_dish_soap">סבון כלים</string>
+
+    <string name="cogTest_market_shopping_list_title">רשימת קניות</string>
+    <string name="cogTest_market_close_list">סגירת רשימה</string>
+
+    <string name="cogTest_market_donation_shopping_list_title">רשימת תרומה</string>
+
+    <string name="cogTest_market_category_frozen">קפואים</string>
+    <string name="cogTest_market_category_dairy">מוצרי חלב</string>
+    <string name="cogTest_market_category_fruits">פירות</string>
+    <string name="cogTest_market_category_dry_spices">יבשים ותבלינים</string>
+    <string name="cogTest_market_category_vegetables">ירקות</string>
+    <string name="cogTest_market_category_bakery">מאפים</string>
+    <string name="cogTest_market_category_meat">מוצרי בשר</string>
+    <string name="cogTest_market_category_cleaning_disposable">ניקיון וחד״פ</string>
+
+    <string name="cogTest_market_category_select_instruction">לחצו על הקטגוריה הרצויה</string>
+
+
+
 </resources>

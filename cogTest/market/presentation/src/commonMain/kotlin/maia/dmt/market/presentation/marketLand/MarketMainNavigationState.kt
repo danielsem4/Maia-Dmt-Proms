@@ -1,6 +1,7 @@
-package maia.dmt.market.presentation.groceries
+package maia.dmt.market.presentation.marketLand
 
-data class MarketGroceriesState(
+data class MarketMainNavigationState(
     val selectedRecipe: String? = null,
     val selectedGroceries: List<String> = emptyList()
+
 )

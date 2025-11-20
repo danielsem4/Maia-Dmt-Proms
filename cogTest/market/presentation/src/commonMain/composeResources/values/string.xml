@@ -2,12 +2,14 @@
 <resources>
 
     <string name="cogTest_market_part_one_title">Market test</string>
-
+    <string name="cogTest_market_instructions">Instructions</string>
     <string name="cogTest_market_welcome_title">Welcome</string>
     <string name="cogTest_market_welcome_button_text">Tap to read instructions</string>
 
     <string name="cogTest_market_intro_title">Stage 1 - Conveyor Task</string>
-    <string name="cogTest_market_intro_description">In this task, you will see items moving on a conveyor belt.\n\nChoose only the items that match the selected dish, according to the list on the side of the screen.</string>
+    <string name="cogTest_market_intro_description">In this task, you will see items moving on a conveyor belt.
+
+Choose only the items that match the selected dish, according to the list on the side of the screen.</string>
     <string name="cogTest_market_intro_button_text">Tap to start the game</string>
 
     <string name="cogTest_market_cake">Cake</string>
@@ -45,6 +47,93 @@
     <string name="cogTest_market_chocolate">Chocolate</string>
 
     <string name="cogTest_market_to_select_grocery_press">To select the appropriate product, press on it</string>
+
+    <string name="cogTest_market_first_mission_done_title">The first mission is complete</string>
+    <string name="cogTest_market_first_mission_done_body">To start the second mission, press the &quot;Start the game&quot; button.</string>
+
+    <string name="cogTest_market_second_mission_welcome_title">Welcome to Easy Online Supermarket</string>
+    <string name="cogTest_market_second_mission_intro">In this mission, you must select various groceries, add them to the shopping cart, and then press the Finish button.</string>
+
+    <string name="cogTest_market_second_mission_follow_instructions">Follow the instructions that will appear next.</string>
+    <string name="cogTest_market_second_mission_quiet_env">Perform this task in the quietest environment possible.</string>
+
+    <string name="cogTest_market_second_mission_read_instructions">Press to read the instructions</string>
+    <string name="cogTest_market_second_mission_start_shopping">Press to start shopping</string>
+
+    <string name="cogTest_market_second_mission_title_instructions">Instructions</string>
+    <string name="cogTest_market_second_mission_shopping_task">You must complete a weekly grocery shopping for your family according to the list on the screen. Select only the items that appear on the list!</string>
+    <string name="cogTest_market_second_mission_find_items">You can find the items through the categories or by using the search bar.</string>
+    <string name="cogTest_market_second_mission_donation_items">Additionally, collect all the donation items marked in blue.</string>
+
+    <string name="cogTest_market_super_ez_title">Super &quot;EZ&quot;</string>
+    <string name="cogTest_market_view_list">View List</string>
+    <string name="cogTest_market_view_donation_list">View Donation List</string>
+    <string name="cogTest_market_categories">Categories</string>
+    <string name="cogTest_market_search">Search</string>
+    <string name="cogTest_market_cart">Shopping Cart</string>
+    <string name="cogTest_market_instruction_categories">To view categories, press &quot;Categories&quot;</string>
+    <string name="cogTest_market_instruction_search">To search for a product, press &quot;Search&quot;</string>
+    <string name="cogTest_market_instruction_cart">To view the shopping cart, press &quot;Shopping Cart&quot;</string>
+
+    <string name="cogTest_market_cat_vegetables">Vegetables</string>
+    <string name="cogTest_market_item_tomatoes_kg">1 kg Tomatoes</string>
+    <string name="cogTest_market_item_cucumber_half_kg">0.5 kg Cucumber</string>
+    <string name="cogTest_market_item_broccoli_fresh">Fresh Broccoli</string>
+
+    <string name="cogTest_market_cat_bakery">Bakery</string>
+    <string name="cogTest_market_item_bread_whole_low_sugar">Whole wheat low-sugar bread loaf</string>
+    <string name="cogTest_market_item_gluten_free_cookies">Gluten-free cookies pack</string>
+
+    <string name="cogTest_market_cat_dry_spices">Dry Goods &amp; Spices</string>
+    <string name="cogTest_market_item_olive_oil">Olive Oil</string>
+    <string name="cogTest_market_item_sunflower_oil">Sunflower Oil</string>
+    <string name="cogTest_market_item_corn_cans_3">Canned corn – 3 units</string>
+    <string name="cogTest_market_item_pickles_250">Pickles in vinegar – 250 g</string>
+    <string name="cogTest_market_item_tuna">Tuna</string>
+
+    <string name="cogTest_market_cat_meat">Meat Products</string>
+    <string name="cogTest_market_item_schnitzel_kg">1 kg Schnitzels</string>
+    <string name="cogTest_market_item_chicken_legs_4">Chicken legs – 4 units</string>
+
+    <string name="cogTest_market_cat_fruits">Fruits</string>
+    <string name="cogTest_market_item_apricots_10">10 Apricots</string>
+    <string name="cogTest_market_item_bananas_700g">Banana bunch up to 700 g</string>
+    <string name="cogTest_market_item_apples_5_smith">5 Granny Smith apples</string>
+    <string name="cogTest_market_item_melon_1">1 Melon</string>
+
+    <string name="cogTest_market_cat_dairy">Dairy Products</string>
+    <string name="cogTest_market_item_milk_1_percent">1% Fat Milk – 1 Liter</string>
+    <string name="cogTest_market_item_cream_cheese_28">Cream cheese 28%</string>
+    <string name="cogTest_market_item_white_cheese_250">White cheese – 250 g</string>
+    <string name="cogTest_market_item_tzefatit_5">Tzefatit cheese 5% – 250 g</string>
+
+    <string name="cogTest_market_donation_cat_food">Food Products</string>
+    <string name="cogTest_market_donation_item_challah">Challah</string>
+    <string name="cogTest_market_donation_item_tomato_paste">Tomato Paste</string>
+    <string name="cogTest_market_donation_item_canola_oil">Canola Oil</string>
+    <string name="cogTest_market_donation_item_milk_3_percent">Milk 3% Fat</string>
+    <string name="cogTest_market_donation_item_olives">Olives</string>
+    <string name="cogTest_market_donation_item_chickpeas">Chickpeas</string>
+    <string name="cogTest_market_donation_item_disposable_cups">Pack of disposable cups</string>
+    <string name="cogTest_market_donation_item_dish_soap">Dish Soap</string>
+
+    <string name="cogTest_market_shopping_list_title">Shopping List</string>
+    <string name="cogTest_market_close_list">Close List</string>
+
+    <string name="cogTest_market_donation_shopping_list_title">Donation List</string>
+
+    <string name="cogTest_market_category_frozen">Frozen</string>
+    <string name="cogTest_market_category_dairy">Dairy Products</string>
+    <string name="cogTest_market_category_fruits">Fruits</string>
+    <string name="cogTest_market_category_dry_spices">Dry Goods &amp; Spices</string>
+    <string name="cogTest_market_category_vegetables">Vegetables</string>
+    <string name="cogTest_market_category_bakery">Bakery</string>
+    <string name="cogTest_market_category_meat">Meat Products</string>
+    <string name="cogTest_market_category_cleaning_disposable">Cleaning &amp; Disposable Items</string>
+
+    <string name="cogTest_market_category_select_instruction">
+Press the desired category
+</string>
 
 
 </resources>

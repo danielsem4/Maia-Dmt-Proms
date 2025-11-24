@@ -10,6 +10,7 @@ import maia.dmt.market.presentation.entryInstructions.MarketEntryInstructionsRoo
 import maia.dmt.market.presentation.groceriesCategory.MarketGroceriesRoot
 import maia.dmt.market.presentation.marketConveyor.MarketConveyorRoot
 import maia.dmt.market.presentation.marketLand.MarketMainNavigationRoot
+import maia.dmt.market.presentation.marketSelectedCategory.MarketSelectedCategoryRoot
 import maia.dmt.market.presentation.secondPartInstructions.MarketSecondPartInstructionsRoot
 import maia.dmt.market.presentation.secondPartInstructions.secondPartTestInstructions.MarketSecondPartTestInstructionsRoot
 import maia.dmt.market.presentation.secondPartInstructions.superEz.MarketSuperWelcomeRoot
@@ -127,8 +128,28 @@ fun NavGraphBuilder.marketTestGraph(
                     navController.navigateUp()
                 },
                 onNavigateToCategory = { categoryId ->
-                    // TODO: Navigate to category items screen
-                    // navController.navigate(MarketTestGraphRoutes.MarketCategoryItems(categoryId))
+                    navController.navigate(MarketTestGraphRoutes.MarketSelectedCategory(categoryId))
+                },
+                onNavigateToShoppingList = { listType ->
+                    navController.navigate(MarketTestGraphRoutes.MarketShoppingList(listType))
+                }
+            )
+        }
+
+        composable<MarketTestGraphRoutes.MarketSelectedCategory> { backStackEntry ->
+            val route = backStackEntry.toRoute<MarketTestGraphRoutes.MarketSelectedCategory>()
+            MarketSelectedCategoryRoot(
+                onNavigateBack = {
+                    navController.navigateUp()
+                },
+                onNavigateToShoppingList = { listType ->
+                    navController.navigate(MarketTestGraphRoutes.MarketShoppingList(listType))
+                },
+                onNavigationSearch = {
+                    navController.navigate(MarketTestGraphRoutes.MarketSearch)
+                },
+                onNavigationCart = {
+                    navController.navigate(MarketTestGraphRoutes.MarketCart)
                 }
             )
         }

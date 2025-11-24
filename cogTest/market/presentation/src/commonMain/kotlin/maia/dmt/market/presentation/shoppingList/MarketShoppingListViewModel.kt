@@ -15,7 +15,7 @@ import dmtproms.cogtest.market.presentation.generated.resources.cogTest_market_i
 import dmtproms.cogtest.market.presentation.generated.resources.cogTest_market_item_apricots_10
 import dmtproms.cogtest.market.presentation.generated.resources.cogTest_market_item_bananas_700g
 import dmtproms.cogtest.market.presentation.generated.resources.cogTest_market_item_bread_whole_low_sugar
-import dmtproms.cogtest.market.presentation.generated.resources.cogTest_market_item_broccoli_fresh
+import dmtproms.cogtest.market.presentation.generated.resources.cogTest_market_item_broccoli_fresh_out
 import dmtproms.cogtest.market.presentation.generated.resources.cogTest_market_item_chicken_legs_4
 import dmtproms.cogtest.market.presentation.generated.resources.cogTest_market_item_corn_cans_3
 import dmtproms.cogtest.market.presentation.generated.resources.cogTest_market_item_cream_cheese_28
@@ -28,7 +28,7 @@ import dmtproms.cogtest.market.presentation.generated.resources.cogTest_market_i
 import dmtproms.cogtest.market.presentation.generated.resources.cogTest_market_item_schnitzel_kg
 import dmtproms.cogtest.market.presentation.generated.resources.cogTest_market_item_sunflower_oil
 import dmtproms.cogtest.market.presentation.generated.resources.cogTest_market_item_tomatoes_kg
-import dmtproms.cogtest.market.presentation.generated.resources.cogTest_market_item_tuna
+import dmtproms.cogtest.market.presentation.generated.resources.cogTest_market_item_tuna_can
 import dmtproms.cogtest.market.presentation.generated.resources.cogTest_market_item_tzefatit_5
 import dmtproms.cogtest.market.presentation.generated.resources.cogTest_market_item_white_cheese_250
 import kotlinx.coroutines.channels.Channel
@@ -94,7 +94,7 @@ class MarketShoppingListViewModel : ViewModel() {
     private fun getRegularGroceries(): List<StringResource> {
         return listOf(
             Res.string.cogTest_market_item_tomatoes_kg,
-            Res.string.cogTest_market_item_broccoli_fresh,
+            Res.string.cogTest_market_item_broccoli_fresh_out,
             Res.string.cogTest_market_item_gluten_free_cookies,
             Res.string.cogTest_market_item_sunflower_oil,
             Res.string.cogTest_market_item_pickles_250,
@@ -107,7 +107,7 @@ class MarketShoppingListViewModel : ViewModel() {
             Res.string.cogTest_market_item_bread_whole_low_sugar,
             Res.string.cogTest_market_item_olive_oil,
             Res.string.cogTest_market_item_corn_cans_3,
-            Res.string.cogTest_market_item_tuna,
+            Res.string.cogTest_market_item_tuna_can,
             Res.string.cogTest_market_item_chicken_legs_4,
             Res.string.cogTest_market_item_bananas_700g,
             Res.string.cogTest_market_item_melon_1,

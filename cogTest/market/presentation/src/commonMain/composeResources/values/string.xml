@@ -77,8 +77,6 @@ Choose only the items that match the selected dish, according to the list on the
 
     <string name="cogTest_market_cat_vegetables">Vegetables</string>
     <string name="cogTest_market_item_tomatoes_kg">1 kg Tomatoes</string>
-    <string name="cogTest_market_item_cucumber_half_kg">0.5 kg Cucumber</string>
-    <string name="cogTest_market_item_broccoli_fresh">Fresh Broccoli</string>
 
     <string name="cogTest_market_cat_bakery">Bakery</string>
     <string name="cogTest_market_item_bread_whole_low_sugar">Whole wheat low-sugar bread loaf</string>
@@ -86,10 +84,8 @@ Choose only the items that match the selected dish, according to the list on the
 
     <string name="cogTest_market_cat_dry_spices">Dry Goods &amp; Spices</string>
     <string name="cogTest_market_item_olive_oil">Olive Oil</string>
-    <string name="cogTest_market_item_sunflower_oil">Sunflower Oil</string>
     <string name="cogTest_market_item_corn_cans_3">Canned corn – 3 units</string>
     <string name="cogTest_market_item_pickles_250">Pickles in vinegar – 250 g</string>
-    <string name="cogTest_market_item_tuna">Tuna</string>
 
     <string name="cogTest_market_cat_meat">Meat Products</string>
     <string name="cogTest_market_item_schnitzel_kg">1 kg Schnitzels</string>
@@ -104,7 +100,6 @@ Choose only the items that match the selected dish, according to the list on the
     <string name="cogTest_market_cat_dairy">Dairy Products</string>
     <string name="cogTest_market_item_milk_1_percent">1% Fat Milk – 1 Liter</string>
     <string name="cogTest_market_item_cream_cheese_28">Cream cheese 28%</string>
-    <string name="cogTest_market_item_white_cheese_250">White cheese – 250 g</string>
     <string name="cogTest_market_item_tzefatit_5">Tzefatit cheese 5% – 250 g</string>
 
     <string name="cogTest_market_donation_cat_food">Food Products</string>
@@ -131,9 +126,92 @@ Choose only the items that match the selected dish, according to the list on the
     <string name="cogTest_market_category_meat">Meat Products</string>
     <string name="cogTest_market_category_cleaning_disposable">Cleaning &amp; Disposable Items</string>
 
-    <string name="cogTest_market_category_select_instruction">
-Press the desired category
-</string>
+    <string name="cogTest_market_category_select_instruction">Press the desired category</string>
 
+    <string name="cogTest_market_instruction_start">First review the shopping list, then start shopping</string>
+    <string name="cogTest_market_action_close_list">To close the list</string>
+    <string name="cogTest_market_instruction_select">To select a product, click on it and choose the desired quantity</string>
+    <string name="cogTest_market_status_out_of_stock">Out of stock</string>
+    <string name="cogTest_market_task_aunt">Aunt Yaffa asks to buy</string>
+    <string name="cogTest_market_task_add_cleaning">Add bleach and window cleaner to the shopping list</string>
+    <string name="cogTest_market_action_close">Close</string>
+    <string name="cogTest_market_hint_search">Please type the search word, for example: cheese/cucumber etc.</string>
+    <string name="cogTest_market_label_search_product">Search by product</string>
+    <string name="cogTest_market_promo_bakery">New in the bakery department</string>
+    <string name="cogTest_market_product_yeast_cake">Fresh yeast cake</string>
+    <string name="cogTest_market_title_cart">Shopping Cart</string>
+    <string name="cogTest_market_action_finish">Click here to finish</string>
+    <string name="cogTest_market_header_product">Product</string>
+    <string name="cogTest_market_header_quantity">Quantity</string>
+    <string name="cogTest_market_action_remove">To remove</string>
+    <string name="cogTest_market_msg_thanks">Thank you for participating</string>
+
+    <string name="cogTest_market_item_white_cheese_500">White cheese 500 g</string>
+    <string name="cogTest_market_item_white_cheese_250">White cheese 250 g</string>
+    <string name="cogTest_market_item_milk_1_liter_1_percent">Milk 1 liter 1%</string>
+    <string name="cogTest_market_item_milk_1_liter_3_percent">Milk 1 liter 3%</string>
+    <string name="cogTest_market_item_sweet_cream_38">Sweet cream 38%</string>
+    <string name="cogTest_market_item_bulgarian_250">Bulgarian cheese 250 g</string>
+    <string name="cogTest_market_item_yellow_sliced_250">Sliced yellow cheese 250 g</string>
+    <string name="cogTest_market_item_yellow_grated_500">Grated yellow cheese 500 g</string>
+    <string name="cogTest_market_item_shnitzel_kg">Schnitzels (1 kg)</string>
+    <string name="cogTest_market_item_legs_4">Chicken legs (4 pcs)</string>
+    <string name="cogTest_market_item_breast_kg">Whole chicken breast (1 kg)</string>
+    <string name="cogTest_market_item_pargit">Chicken thigh fillets (Pargit)</string>
+    <string name="cogTest_market_item_beef_ground_500">Ground beef 500 g</string>
+    <string name="cogTest_market_item_tomato_half_kg">Tomatoes (0.5 kg)</string>
+    <string name="cogTest_market_item_cherry_tomato">Cherry tomatoes</string>
+    <string name="cogTest_market_item_cucumber_half_kg">Cucumbers (0.5 kg)</string>
+    <string name="cogTest_market_item_broccoli_fresh_out">Fresh broccoli</string>
+    <string name="cogTest_market_item_carrot_250">Carrots (250 g)</string>
+    <string name="cogTest_market_item_onion">Onions</string>
+    <string name="cogTest_market_item_celery">Celery</string>
+    <string name="cogTest_market_item_lemon">Lemon</string>
+    <string name="cogTest_market_item_apricot_pack">Apricot pack</string>
+    <string name="cogTest_market_item_banana_100g">Banana — approx. 100 g each</string>
+    <string name="cogTest_market_item_nectarine">Nectarine</string>
+    <string name="cogTest_market_item_green_apple">Granny Smith apple</string>
+    <string name="cogTest_market_item_red_apple">Pink Lady apple</string>
+    <string name="cogTest_market_item_melon">Melon</string>
+    <string name="cogTest_market_item_grapes_500">Grapes — 500 g</string>
+    <string name="cogTest_market_item_broccoli_frozen">Frozen broccoli</string>
+    <string name="cogTest_market_item_peas_frozen">Frozen peas</string>
+    <string name="cogTest_market_item_pea_carrot_mix">Pea &amp; carrot mix</string>
+    <string name="cogTest_market_item_cauliflower_frozen">Frozen cauliflower</string>
+    <string name="cogTest_market_item_green_beans_frozen">Frozen green beans</string>
+    <string name="cogTest_market_item_borekas_cheese">Cheese bourekas</string>
+    <string name="cogTest_market_item_borekas_potato">Potato bourekas</string>
+    <string name="cogTest_market_item_jahnun">Jachnun</string>
+    <string name="cogTest_market_item_canned_corn">Canned corn</string>
+    <string name="cogTest_market_item_pickles_vinegar_250">Pickles in vinegar (250 g)</string>
+    <string name="cogTest_market_item_pickles_salt_250">Pickles in brine (250 g)</string>
+    <string name="cogTest_market_item_tuna_can">Tuna can</string>
+    <string name="cogTest_market_item_baby_corn">Baby corn</string>
+    <string name="cogTest_market_item_sardines">Sardines</string>
+    <string name="cogTest_market_item_sunflower_oil">Sunflower oil</string>
+    <string name="cogTest_market_item_soy_oil">Soy oil</string>
+    <string name="cogTest_market_item_coconut_oil">Coconut oil</string>
+    <string name="cogTest_market_item_olives_canned">Canned olives</string>
+    <string name="cogTest_market_item_salt_basic">Salt</string>
+    <string name="cogTest_market_item_sugar_basic">Sugar</string>
+    <string name="cogTest_market_item_black_pepper_basic">Black pepper</string>
+    <string name="cogTest_market_item_flour_basic">Flour</string>
+    <string name="cogTest_market_item_cacao_basic">Cocoa</string>
+    <string name="cogTest_market_item_baking_powder_basic">Baking powder</string>
+    <string name="cogTest_market_item_vanilla_extract_basic">Vanilla extract</string>
+    <string name="cogTest_market_item_tomato_paste">Tomato paste</string>
+    <string name="cogTest_market_item_hummus_dry">Dried chickpeas</string>
+    <string name="cogTest_market_item_bread_no_sugar">Whole wheat low-sugar bread</string>
+    <string name="cogTest_market_item_bread_regular">Regular wheat bread</string>
+    <string name="cogTest_market_item_challah">Challah</string>
+    <string name="cogTest_market_item_cookies_gluten_free">Gluten-free cookies</string>
+    <string name="cogTest_market_item_yeast_cake">Yeast cake</string>
+    <string name="cogTest_market_item_bleach">Bleach</string>
+    <string name="cogTest_market_item_gloves">Gloves</string>
+    <string name="cogTest_market_item_dish_soap">Dish soap</string>
+    <string name="cogTest_market_item_window_cleaner">Window cleaner</string>
+    <string name="cogTest_market_item_garbage_bags">Garbage bags</string>
+    <string name="cogTest_market_item_scotch_pack">Pack of scotch pads</string>
+    <string name="cogTest_market_item_disposable_cups_pack">Pack of disposable cups</string>
 
 </resources>

@@ -75,8 +75,6 @@
 
     <string name="cogTest_market_cat_vegetables">Овощи</string>
     <string name="cogTest_market_item_tomatoes_kg">1 кг помидоров</string>
-    <string name="cogTest_market_item_cucumber_half_kg">0.5 кг огурца</string>
-    <string name="cogTest_market_item_broccoli_fresh">Свежая брокколи</string>
 
     <string name="cogTest_market_cat_bakery">Выпечка</string>
     <string name="cogTest_market_item_bread_whole_low_sugar">Цельнозерновой хлеб с пониженным содержанием сахара</string>
@@ -84,10 +82,8 @@
 
     <string name="cogTest_market_cat_dry_spices">Бакалея и специи</string>
     <string name="cogTest_market_item_olive_oil">Оливковое масло</string>
-    <string name="cogTest_market_item_sunflower_oil">Подсолнечное масло</string>
     <string name="cogTest_market_item_corn_cans_3">Консервированная кукуруза – 3 шт.</string>
     <string name="cogTest_market_item_pickles_250">Маринованные огурцы – 250 г</string>
-    <string name="cogTest_market_item_tuna">Тунец</string>
 
     <string name="cogTest_market_cat_meat">Мясные продукты</string>
     <string name="cogTest_market_item_schnitzel_kg">1 кг шницелей</string>
@@ -102,7 +98,6 @@
     <string name="cogTest_market_cat_dairy">Молочные продукты</string>
     <string name="cogTest_market_item_milk_1_percent">Молоко 1% – 1 литр</string>
     <string name="cogTest_market_item_cream_cheese_28">Сливочный сыр 28%</string>
-    <string name="cogTest_market_item_white_cheese_250">Белый сыр – 250 г</string>
     <string name="cogTest_market_item_tzefatit_5">Сыр Цфатит 5% – 250 г</string>
 
     <string name="cogTest_market_donation_cat_food">Продукты питания</string>
@@ -131,5 +126,90 @@
 
     <string name="cogTest_market_category_select_instruction">Выберите нужную категорию</string>
 
+    <string name="cogTest_market_instruction_start">Сначала просмотрите список покупок, затем начните делать покупки</string>
+    <string name="cogTest_market_action_close_list">Чтобы закрыть список</string>
+    <string name="cogTest_market_instruction_select">Чтобы выбрать товар, нажмите на него и выберите нужное количество</string>
+    <string name="cogTest_market_status_out_of_stock">Нет в наличии</string>
+    <string name="cogTest_market_task_aunt">Тетя Яффа просит купить</string>
+    <string name="cogTest_market_task_add_cleaning">Добавьте отбеливатель и средство для мытья окон в список</string>
+    <string name="cogTest_market_action_close">Закрыть</string>
+    <string name="cogTest_market_hint_search">Пожалуйста, введите слово для поиска, например: сыр/огурец и т.д.</string>
+    <string name="cogTest_market_label_search_product">Поиск по товару</string>
+    <string name="cogTest_market_promo_bakery">Новинка в отделе выпечки</string>
+    <string name="cogTest_market_product_yeast_cake">Свежий дрожжевой пирог</string>
+    <string name="cogTest_market_title_cart">Корзина покупок</string>
+    <string name="cogTest_market_action_finish">Нажмите здесь, чтобы закончить</string>
+    <string name="cogTest_market_header_product">Товар</string>
+    <string name="cogTest_market_header_quantity">Количество</string>
+    <string name="cogTest_market_action_remove">Удалить</string>
+    <string name="cogTest_market_msg_thanks">Спасибо за участие</string>
+
+    <string name="cogTest_market_item_white_cheese_500">Творожный сыр 500 г</string>
+    <string name="cogTest_market_item_white_cheese_250">Творожный сыр 250 г</string>
+    <string name="cogTest_market_item_milk_1_liter_1_percent">Молоко 1 л 1%</string>
+    <string name="cogTest_market_item_milk_1_liter_3_percent">Молоко 1 л 3%</string>
+    <string name="cogTest_market_item_sweet_cream_38">Сливки 38%</string>
+    <string name="cogTest_market_item_bulgarian_250">Болгарский сыр 250 г</string>
+    <string name="cogTest_market_item_yellow_sliced_250">Нарезанный жёлтый сыр 250 г</string>
+    <string name="cogTest_market_item_yellow_grated_500">Тёртый жёлтый сыр 500 г</string>
+    <string name="cogTest_market_item_shnitzel_kg">Шницели (1 кг)</string>
+    <string name="cogTest_market_item_legs_4">Куриные ножки (4 шт.)</string>
+    <string name="cogTest_market_item_breast_kg">Куриная грудка (1 кг)</string>
+    <string name="cogTest_market_item_pargit">Филе куриных бёдер</string>
+    <string name="cogTest_market_item_beef_ground_500">Говяжий фарш 500 г</string>
+    <string name="cogTest_market_item_tomato_half_kg">Помидоры (0.5 кг)</string>
+    <string name="cogTest_market_item_cherry_tomato">Помидоры черри</string>
+    <string name="cogTest_market_item_cucumber_half_kg">Огурцы (0.5 кг)</string>
+    <string name="cogTest_market_item_broccoli_fresh_out">Свежая брокколи</string>
+    <string name="cogTest_market_item_carrot_250">Морковь (250 г)</string>
+    <string name="cogTest_market_item_onion">Лук</string>
+    <string name="cogTest_market_item_celery">Сельдерей</string>
+    <string name="cogTest_market_item_lemon">Лимон</string>
+    <string name="cogTest_market_item_apricot_pack">Упаковка абрикосов</string>
+    <string name="cogTest_market_item_banana_100g">Банан — около 100 г</string>
+    <string name="cogTest_market_item_nectarine">Нектарин</string>
+    <string name="cogTest_market_item_green_apple">Яблоко Грэнни Смит</string>
+    <string name="cogTest_market_item_red_apple">Яблоко Пинк Леди</string>
+    <string name="cogTest_market_item_melon">Дыня</string>
+    <string name="cogTest_market_item_grapes_500">Виноград — 500 г</string>
+    <string name="cogTest_market_item_broccoli_frozen">Замороженная брокколи</string>
+    <string name="cogTest_market_item_peas_frozen">Замороженный горошек</string>
+    <string name="cogTest_market_item_pea_carrot_mix">Смесь гороха и моркови</string>
+    <string name="cogTest_market_item_cauliflower_frozen">Замороженная цветная капуста</string>
+    <string name="cogTest_market_item_green_beans_frozen">Замороженная зелёная фасоль</string>
+    <string name="cogTest_market_item_borekas_cheese">Бурекас с сыром</string>
+    <string name="cogTest_market_item_borekas_potato">Бурекас с картофелем</string>
+    <string name="cogTest_market_item_jahnun">Джахнун</string>
+    <string name="cogTest_market_item_canned_corn">Кукуруза консервированная</string>
+    <string name="cogTest_market_item_pickles_vinegar_250">Огурцы в уксусе (250 г)</string>
+    <string name="cogTest_market_item_pickles_salt_250">Огурцы в рассоле (250 г)</string>
+    <string name="cogTest_market_item_tuna_can">Консервы тунца</string>
+    <string name="cogTest_market_item_baby_corn">Мини-кукуруза</string>
+    <string name="cogTest_market_item_sardines">Сардины</string>
+    <string name="cogTest_market_item_sunflower_oil">Подсолнечное масло</string>
+    <string name="cogTest_market_item_soy_oil">Соевое масло</string>
+    <string name="cogTest_market_item_coconut_oil">Кокосовое масло</string>
+    <string name="cogTest_market_item_olives_canned">Консервированные оливки</string>
+    <string name="cogTest_market_item_salt_basic">Соль</string>
+    <string name="cogTest_market_item_sugar_basic">Сахар</string>
+    <string name="cogTest_market_item_black_pepper_basic">Чёрный перец</string>
+    <string name="cogTest_market_item_flour_basic">Мука</string>
+    <string name="cogTest_market_item_cacao_basic">Какао</string>
+    <string name="cogTest_market_item_baking_powder_basic">Разрыхлитель</string>
+    <string name="cogTest_market_item_vanilla_extract_basic">Ванильный экстракт</string>
+    <string name="cogTest_market_item_tomato_paste">Томатная паста</string>
+    <string name="cogTest_market_item_hummus_dry">Сухой нут</string>
+    <string name="cogTest_market_item_bread_no_sugar">Хлеб из цельной муки с пониженным сахаром</string>
+    <string name="cogTest_market_item_bread_regular">Обычный хлеб</string>
+    <string name="cogTest_market_item_challah">Хала</string>
+    <string name="cogTest_market_item_cookies_gluten_free">Безглютеновое печенье</string>
+    <string name="cogTest_market_item_yeast_cake">Дрожжевой пирог</string>
+    <string name="cogTest_market_item_bleach">Отбеливатель</string>
+    <string name="cogTest_market_item_gloves">Перчатки</string>
+    <string name="cogTest_market_item_dish_soap">Средство для посуды</string>
+    <string name="cogTest_market_item_window_cleaner">Средство для мытья окон</string>
+    <string name="cogTest_market_item_garbage_bags">Мешки для мусора</string>
+    <string name="cogTest_market_item_scotch_pack">Набор губок</string>
+    <string name="cogTest_market_item_disposable_cups_pack">Упаковка одноразовых стаканов</string>
 
 </resources>

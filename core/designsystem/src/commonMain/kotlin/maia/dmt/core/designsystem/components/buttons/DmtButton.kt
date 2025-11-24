@@ -14,9 +14,11 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
+import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
@@ -47,6 +49,7 @@ fun DmtButton(
     enabled: Boolean = true,
     isLoading: Boolean = false,
     leadingIcon: @Composable (() -> Unit)? = null,
+    iconTint: Color? = Color.Unspecified,
 ) {
     val deviceConfig = currentDeviceConfiguration()
 
@@ -189,7 +192,18 @@ fun DmtButton(
                     if(isLoading) 0f else 1f
                 )
             ) {
-                leadingIcon?.invoke()
+                val effectiveIconColor = if (iconTint == null) {
+                    Color.Unspecified
+                } else if (iconTint == Color.Unspecified) {
+                    colors.contentColor
+                } else {
+                    iconTint
+                }
+
+                CompositionLocalProvider(LocalContentColor provides effectiveIconColor) {
+                    leadingIcon?.invoke()
+                }
+
                 Text(
                     text = text,
                     style = MaterialTheme.typography.titleSmall.copy(
@@ -290,6 +304,26 @@ fun DmtPrimaryButtonIconPreview() {
             text = "Hello world!",
             onClick = {},
             style = DmtButtonStyle.SECONDARY,
+            leadingIcon = {
+                Icon(
+                    imageVector = Icons.Default.Add,
+                    contentDescription = null,
+                    modifier = Modifier.size(20.dp)
+                )
+            }
+        )
+    }
+}
+
+@Composable
+@Preview
+fun DmtPrimaryButtonOriginalColorIconPreview() {
+    DmtTheme {
+        DmtButton(
+            text = "Original Color Icon",
+            onClick = {},
+            style = DmtButtonStyle.SECONDARY,
+            iconTint = null, // This forces original color
             leadingIcon = {
                 Icon(
                     imageVector = Icons.Default.Add,

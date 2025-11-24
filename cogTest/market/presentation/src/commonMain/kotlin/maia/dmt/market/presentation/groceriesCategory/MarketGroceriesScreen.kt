@@ -74,7 +74,8 @@ import org.koin.dsl.module
 fun MarketGroceriesRoot(
     viewModel: MarketGroceriesViewModel = koinViewModel(),
     onNavigateBack: () -> Unit,
-    onNavigateToCategory: (String) -> Unit
+    onNavigateToCategory: (String) -> Unit,
+    onNavigateToShoppingList: (String) -> Unit,
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
 
@@ -85,6 +86,13 @@ fun MarketGroceriesRoot(
             }
             is MarketGroceriesEvent.NavigateToCategory -> {
                 onNavigateToCategory(event.categoryId)
+            }
+
+            is MarketGroceriesEvent.NavigateSearchScreen -> {
+
+            }
+            is MarketGroceriesEvent.NavigateToShoppingList -> {
+                onNavigateToShoppingList(event.listType)
             }
         }
     }
@@ -108,7 +116,6 @@ fun MarketGroceriesScreen(
                 modifier = Modifier
                     .padding(8.dp)
                     .fillMaxSize(),
-//                verticalArrangement = Arrangement.spacedBy(16.dp),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Row(
@@ -184,7 +191,7 @@ fun MarketGroceriesScreen(
                                         modifier = Modifier.size(28.dp)
                                     )
                                 },
-                                onClick = {  },
+                                onClick = { onAction(MarketGroceriesAction.OnShoppingListClick) },
                                 style = maia.dmt.core.designsystem.components.buttons.DmtButtonStyle.SECONDARY,
                                 modifier = Modifier
                                     .widthIn(min = 100.dp, max = 300.dp)
@@ -199,7 +206,7 @@ fun MarketGroceriesScreen(
                                         modifier = Modifier.size(28.dp)
                                     )
                                 },
-                                onClick = {  },
+                                onClick = { onAction(MarketGroceriesAction.OnDonationListClick) },
                                 style = maia.dmt.core.designsystem.components.buttons.DmtButtonStyle.SECONDARY,
                                 modifier = Modifier
                                     .widthIn(min = 100.dp, max = 320.dp)
@@ -207,35 +214,44 @@ fun MarketGroceriesScreen(
                         }
                     }
                 }
-
-                Text(
-                    text = stringResource(Res.string.cogTest_market_category_select_instruction),
-                    style = MaterialTheme.typography.titleLarge,
-                    textAlign = TextAlign.Center,
-                    modifier = Modifier.fillMaxWidth()
-                )
-
-                LazyVerticalGrid(
-                    columns = GridCells.Fixed(4),
-                    contentPadding = PaddingValues(8.dp),
-                    horizontalArrangement = Arrangement.spacedBy(12.dp),
-                    verticalArrangement = Arrangement.spacedBy(12.dp),
+                Column(
                     modifier = Modifier
                         .fillMaxSize()
-                        .weight(1f)
+                        .weight(1f),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.Center
                 ) {
-                    items(state.categoryList) { category ->
-                        DmtIconCard(
-                            modifier =  Modifier.size(140.dp),
-                            icon = getCategoryIcon(category.iconResId),
-                            text = getCategoryName(category.nameResId),
-                            tint = null,
-                            iconSizeMultiplier = 1.4f,
-                            textSizeMultiplier = 1.3f,
-                            onClick = {
-                                onAction(MarketGroceriesAction.OnCategoryClick(category.id))
-                            }
-                        )
+
+                    Text(
+                        text = stringResource(Res.string.cogTest_market_category_select_instruction),
+                        style = MaterialTheme.typography.titleLarge,
+                        textAlign = TextAlign.Center,
+                        modifier = Modifier.fillMaxWidth()
+                    )
+
+                    Spacer(modifier = Modifier.padding(12.dp))
+
+                    LazyVerticalGrid(
+                        columns = GridCells.Fixed(4),
+                        contentPadding = PaddingValues(8.dp),
+                        horizontalArrangement = Arrangement.spacedBy(12.dp),
+                        verticalArrangement = Arrangement.spacedBy(12.dp),
+                        modifier = Modifier
+                            .fillMaxWidth()
+                    ) {
+                        items(state.categoryList) { category ->
+                            DmtIconCard(
+                                modifier =  Modifier.size(140.dp),
+                                icon = getCategoryIcon(category.iconResId),
+                                text = getCategoryName(category.nameResId),
+                                tint = null,
+                                iconSizeMultiplier = 1.4f,
+                                textSizeMultiplier = 1.3f,
+                                onClick = {
+                                    onAction(MarketGroceriesAction.OnCategoryClick(category.id))
+                                }
+                            )
+                        }
                     }
                 }
             }

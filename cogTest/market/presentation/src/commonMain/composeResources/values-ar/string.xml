@@ -76,8 +76,6 @@
 
     <string name="cogTest_market_cat_vegetables">الخضروات</string>
     <string name="cogTest_market_item_tomatoes_kg">1 كغم طماطم</string>
-    <string name="cogTest_market_item_cucumber_half_kg">0.5 كغم خيار</string>
-    <string name="cogTest_market_item_broccoli_fresh">بروكلي طازج</string>
 
     <string name="cogTest_market_cat_bakery">المخبوزات</string>
     <string name="cogTest_market_item_bread_whole_low_sugar">رغيف خبز قمح كامل قليل السكر</string>
@@ -85,10 +83,8 @@
 
     <string name="cogTest_market_cat_dry_spices">البقوليات والتوابل</string>
     <string name="cogTest_market_item_olive_oil">زيت زيتون</string>
-    <string name="cogTest_market_item_sunflower_oil">زيت دوار الشمس</string>
     <string name="cogTest_market_item_corn_cans_3">ذرة معلبة – 3 عبوات</string>
     <string name="cogTest_market_item_pickles_250">مخلل خيار بالخل – 250 غرام</string>
-    <string name="cogTest_market_item_tuna">تونة</string>
 
     <string name="cogTest_market_cat_meat">منتجات اللحوم</string>
     <string name="cogTest_market_item_schnitzel_kg">1 كغم شنيتسل</string>
@@ -103,7 +99,6 @@
     <string name="cogTest_market_cat_dairy">منتجات الألبان</string>
     <string name="cogTest_market_item_milk_1_percent">حليب 1% دسم – 1 لتر</string>
     <string name="cogTest_market_item_cream_cheese_28">جبنة كريمية 28%</string>
-    <string name="cogTest_market_item_white_cheese_250">جبنة بيضاء – 250 غ</string>
     <string name="cogTest_market_item_tzefatit_5">جبنة صفطيت 5% – 250 غ</string>
 
     <string name="cogTest_market_donation_cat_food">منتجات غذائية</string>
@@ -132,5 +127,90 @@
 
     <string name="cogTest_market_category_select_instruction">اضغط على الفئة المطلوبة</string>
 
+    <string name="cogTest_market_instruction_start">أولاً راجع قائمة التسوق، ثم ابدأ التسوق</string>
+    <string name="cogTest_market_action_close_list">لإغلاق القائمة</string>
+    <string name="cogTest_market_instruction_select">لاختيار منتج اضغط عليه واختر الكمية المطلوبة</string>
+    <string name="cogTest_market_status_out_of_stock">نفد من المخزون</string>
+    <string name="cogTest_market_task_aunt">العمة يافا تطلب شراء</string>
+    <string name="cogTest_market_task_add_cleaning">أضف مبيض ومنظف نوافذ إلى قائمة التسوق</string>
+    <string name="cogTest_market_action_close">إغلاق</string>
+    <string name="cogTest_market_hint_search">يرجى كتابة كلمة البحث، مثال: جبن/خيار وما إلى ذلك.</string>
+    <string name="cogTest_market_label_search_product">بحث حسب المنتج</string>
+    <string name="cogTest_market_promo_bakery">جديد في قسم المخبوزات</string>
+    <string name="cogTest_market_product_yeast_cake">كعكة خميرة طازجة</string>
+    <string name="cogTest_market_title_cart">سلة التسوق</string>
+    <string name="cogTest_market_action_finish">لإنهاء اضغط هنا</string>
+    <string name="cogTest_market_header_product">المنتج</string>
+    <string name="cogTest_market_header_quantity">الكمية</string>
+    <string name="cogTest_market_action_remove">للإزالة</string>
+    <string name="cogTest_market_msg_thanks">شكراً للمشاركة</string>
+
+    <string name="cogTest_market_item_white_cheese_500">جبنة بيضاء 500 غرام</string>
+    <string name="cogTest_market_item_white_cheese_250">جبنة بيضاء 250 غرام</string>
+    <string name="cogTest_market_item_milk_1_liter_1_percent">حليب 1 لتر 1٪</string>
+    <string name="cogTest_market_item_milk_1_liter_3_percent">حليب 1 لتر 3٪</string>
+    <string name="cogTest_market_item_sweet_cream_38">كريمة حلوة 38٪</string>
+    <string name="cogTest_market_item_bulgarian_250">جبنة بلغارية 250 غرام</string>
+    <string name="cogTest_market_item_yellow_sliced_250">جبنة صفراء مقطعة 250 غرام</string>
+    <string name="cogTest_market_item_yellow_grated_500">جبنة صفراء مبشورة 500 غرام</string>
+    <string name="cogTest_market_item_shnitzel_kg">شناتزل (1 كغم)</string>
+    <string name="cogTest_market_item_legs_4">أفخاذ دجاج (4 قطع)</string>
+    <string name="cogTest_market_item_breast_kg">صدر دجاج كامل (1 كغم)</string>
+    <string name="cogTest_market_item_pargit">فخاد دجاج بدون عظم</string>
+    <string name="cogTest_market_item_beef_ground_500">لحم بقري مفروم 500 غرام</string>
+    <string name="cogTest_market_item_tomato_half_kg">طماطم (نصف كغم)</string>
+    <string name="cogTest_market_item_cherry_tomato">طماطم كرزية</string>
+    <string name="cogTest_market_item_cucumber_half_kg">خيار (نصف كغم)</string>
+    <string name="cogTest_market_item_broccoli_fresh_out">بروكلي طازج</string>
+    <string name="cogTest_market_item_carrot_250">جزر (250 غرام)</string>
+    <string name="cogTest_market_item_onion">بصل</string>
+    <string name="cogTest_market_item_celery">كرفس</string>
+    <string name="cogTest_market_item_lemon">ليمون</string>
+    <string name="cogTest_market_item_apricot_pack">عبوة مشمش</string>
+    <string name="cogTest_market_item_banana_100g">موزة — حوالي 100 غرام</string>
+    <string name="cogTest_market_item_nectarine">نيكتارين</string>
+    <string name="cogTest_market_item_green_apple">تفاح أخضر (غرين سميت)</string>
+    <string name="cogTest_market_item_red_apple">تفاح بينك ليدي</string>
+    <string name="cogTest_market_item_melon">شمام</string>
+    <string name="cogTest_market_item_grapes_500">عنب — 500 غرام</string>
+    <string name="cogTest_market_item_broccoli_frozen">بروكلي مجمّد</string>
+    <string name="cogTest_market_item_peas_frozen">بازيلا مجمّدة</string>
+    <string name="cogTest_market_item_pea_carrot_mix">خليط بازيلا وجزر</string>
+    <string name="cogTest_market_item_cauliflower_frozen">قرنبيط مجمّد</string>
+    <string name="cogTest_market_item_green_beans_frozen">فاصولياء خضراء مجمّدة</string>
+    <string name="cogTest_market_item_borekas_cheese">بوركاس جبنة</string>
+    <string name="cogTest_market_item_borekas_potato">بوركاس بطاطا</string>
+    <string name="cogTest_market_item_jahnun">جحنون</string>
+    <string name="cogTest_market_item_canned_corn">ذرة معلبة</string>
+    <string name="cogTest_market_item_pickles_vinegar_250">مخلل بالخَل (250 غرام)</string>
+    <string name="cogTest_market_item_pickles_salt_250">مخلل بالملح (250 غرام)</string>
+    <string name="cogTest_market_item_tuna_can">علبة تونة</string>
+    <string name="cogTest_market_item_baby_corn">ذرة صغيرة</string>
+    <string name="cogTest_market_item_sardines">سردين</string>
+    <string name="cogTest_market_item_sunflower_oil">زيت دوار الشمس</string>
+    <string name="cogTest_market_item_soy_oil">زيت صويا</string>
+    <string name="cogTest_market_item_coconut_oil">زيت جوز الهند</string>
+    <string name="cogTest_market_item_olives_canned">زيتون معلب</string>
+    <string name="cogTest_market_item_salt_basic">ملح</string>
+    <string name="cogTest_market_item_sugar_basic">سكر</string>
+    <string name="cogTest_market_item_black_pepper_basic">فلفل أسود</string>
+    <string name="cogTest_market_item_flour_basic">طحين</string>
+    <string name="cogTest_market_item_cacao_basic">كاكاو</string>
+    <string name="cogTest_market_item_baking_powder_basic">بيكنغ باودر</string>
+    <string name="cogTest_market_item_vanilla_extract_basic">خلاصة الفانيلا</string>
+    <string name="cogTest_market_item_tomato_paste">معجون طماطم</string>
+    <string name="cogTest_market_item_hummus_dry">حمص حب مجفف</string>
+    <string name="cogTest_market_item_bread_no_sugar">خبز قمح كامل قليل السكر</string>
+    <string name="cogTest_market_item_bread_regular">خبز عادي</string>
+    <string name="cogTest_market_item_challah">حلا (خبز شبات)</string>
+    <string name="cogTest_market_item_cookies_gluten_free">بسكويت خالٍ من الغلوتين</string>
+    <string name="cogTest_market_item_yeast_cake">كعكة خميرة</string>
+    <string name="cogTest_market_item_bleach">كلور</string>
+    <string name="cogTest_market_item_gloves">قفازات</string>
+    <string name="cogTest_market_item_dish_soap">سائل جلي</string>
+    <string name="cogTest_market_item_window_cleaner">منظف نوافذ</string>
+    <string name="cogTest_market_item_garbage_bags">أكياس نفايات</string>
+    <string name="cogTest_market_item_scotch_pack">عبوة إسفنج جلي</string>
+    <string name="cogTest_market_item_disposable_cups_pack">عبوة أكواب للاستعمال مرة واحدة</string>
 
 </resources>

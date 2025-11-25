@@ -44,6 +44,7 @@ import dmtproms.cogtest.market.presentation.generated.resources.cogTest_market_c
 import dmtproms.cogtest.market.presentation.generated.resources.cogTest_market_category_meat
 import dmtproms.cogtest.market.presentation.generated.resources.cogTest_market_category_select_instruction
 import dmtproms.cogtest.market.presentation.generated.resources.cogTest_market_category_vegetables
+import dmtproms.cogtest.market.presentation.generated.resources.cogTest_market_groceries_list
 import dmtproms.cogtest.market.presentation.generated.resources.cogTest_market_search
 import dmtproms.cogtest.market.presentation.generated.resources.cogTest_market_to_select_grocery_press
 import dmtproms.cogtest.market.presentation.generated.resources.cogTest_market_to_select_grocery_press_ar
@@ -151,7 +152,7 @@ fun MarketGroceriesScreen(
                             Spacer(modifier = Modifier.padding(8.dp))
 
                             DmtButton(
-                                text = stringResource(Res.string.cogTest_market_search),
+                                text = stringResource(Res.string.cogTest_market_groceries_list),
                                 leadingIcon = {
                                     Icon(
                                         imageVector = vectorResource(Res.drawable.market_basket_icon),

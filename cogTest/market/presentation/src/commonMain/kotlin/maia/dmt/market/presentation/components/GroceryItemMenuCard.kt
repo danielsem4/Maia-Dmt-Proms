@@ -1,6 +1,7 @@
 package maia.dmt.market.presentation.components
 
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -16,7 +17,6 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
-import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.IconButtonDefaults
@@ -29,15 +29,17 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import dmtproms.cogtest.market.presentation.generated.resources.Res
+import dmtproms.cogtest.market.presentation.generated.resources.market_frozen_beans
 import dmtproms.cogtest.market.presentation.generated.resources.market_minus_icon
 import maia.dmt.core.designsystem.theme.DmtTheme
+import org.jetbrains.compose.resources.DrawableResource
+import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.vectorResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
@@ -46,7 +48,7 @@ fun DmtGroceryItemMenuCard(
     modifier: Modifier = Modifier,
     text: String,
     quantity: Int = 0,
-    imageVector: ImageVector = Icons.Default.ShoppingCart,
+    painter: Painter = painterResource(Res.drawable.market_frozen_beans),
     isOutOfStock: Boolean = false,
     isDonation: Boolean = false,
     onIncrement: () -> Unit = {},
@@ -54,7 +56,7 @@ fun DmtGroceryItemMenuCard(
     onClick: () -> Unit,
 ) {
     val shape = RoundedCornerShape(16.dp)
-    // Define colors based on state
+
     val backgroundColor = if (isDonation) Color(0xFFE3F2FD) else MaterialTheme.colorScheme.surface
     val contentAlpha = if (isOutOfStock) 0.4f else 1f
 
@@ -72,19 +74,19 @@ fun DmtGroceryItemMenuCard(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
-            // Out of stock Text Overlay (Always visible if true, pushed to top)
+
             if (isOutOfStock) {
                 Text(
                     text = "אזל מהמלאי",
                     style = MaterialTheme.typography.titleLarge,
-                    color = Color(0xFFD32F2F), // Red color
+                    color = Color(0xFFD32F2F),
                     fontWeight = FontWeight.ExtraBold,
                     textAlign = TextAlign.Center,
                     modifier = Modifier.padding(bottom = 8.dp)
                 )
             }
 
-            // Wrapper for main content to apply alpha when disabled
+
             Column(
                 modifier = Modifier.alpha(contentAlpha),
                 horizontalAlignment = Alignment.CenterHorizontally
@@ -95,11 +97,10 @@ fun DmtGroceryItemMenuCard(
                         .padding(8.dp),
                     contentAlignment = Alignment.Center
                 ) {
-                    Icon(
-                        imageVector = imageVector,
+                    Image(
+                        painter = painter,
                         contentDescription = null,
                         modifier = Modifier.size(80.dp),
-                        tint = MaterialTheme.colorScheme.primary
                     )
                 }
 

@@ -12,6 +12,10 @@ kotlin {
                 implementation(compose.components.resources)
                 implementation(libs.kotlinx.datetime)
                 implementation(libs.material3.adaptive)
+
+                implementation(libs.coil.compose)
+                implementation(libs.coil.network.ktor)
+
             }
 
             val mobileMain by creating {

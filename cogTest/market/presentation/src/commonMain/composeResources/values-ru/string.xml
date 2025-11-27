@@ -21,6 +21,12 @@
     <string name="cogTest_market_groceries_list">Корзина покупок</string>
     <string name="cogTest_market_to_start_press_here">Нажмите, чтобы начать покупки</string>
 
+    <string name="cogTest_market_product">Товар</string>
+    <string name="cogTest_market_amount">Количество</string>
+    <string name="cogTest_market_remove">Удалить</string>
+    <string name="cogTest_market_to_finish_press_here">Нажмите здесь, чтобы завершить</string>
+    <string name="cogTest_market_are_you_sure_you_want_to_remove_item">Вы уверены, что хотите удалить этот товар?</string>
+
     <string name="cogTest_market_tomato">Помидор</string>
     <string name="cogTest_market_onion">Лук</string>
     <string name="cogTest_market_egg">Яйцо</string>

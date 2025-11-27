@@ -8,8 +8,10 @@ import androidx.navigation.toRoute
 import maia.dmt.market.presentation.allRecipes.MarketAllRecipesRoot
 import maia.dmt.market.presentation.entryInstructions.MarketEntryInstructionsRoot
 import maia.dmt.market.presentation.groceriesCategory.MarketGroceriesRoot
+import maia.dmt.market.presentation.marketCart.MarketCartRoot
 import maia.dmt.market.presentation.marketConveyor.MarketConveyorRoot
 import maia.dmt.market.presentation.marketLand.MarketMainNavigationRoot
+import maia.dmt.market.presentation.marketSearch.MarketSearchRoot
 import maia.dmt.market.presentation.marketSelectedCategory.MarketSelectedCategoryRoot
 import maia.dmt.market.presentation.secondPartInstructions.MarketSecondPartInstructionsRoot
 import maia.dmt.market.presentation.secondPartInstructions.secondPartTestInstructions.MarketSecondPartTestInstructionsRoot
@@ -153,5 +155,27 @@ fun NavGraphBuilder.marketTestGraph(
                 }
             )
         }
+
+        composable<MarketTestGraphRoutes.MarketSearch> {
+            MarketSearchRoot(
+                onNavigateBack = {
+                    navController.navigateUp()
+                },
+
+            )
+        }
+
+        composable<MarketTestGraphRoutes.MarketCart> {
+            MarketCartRoot(
+                onNavigateBack = {
+                    navController.navigateUp()
+                },
+                onFinish = {
+
+                }
+            )
+        }
+
+
     }
 }

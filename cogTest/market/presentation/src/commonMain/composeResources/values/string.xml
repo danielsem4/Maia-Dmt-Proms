@@ -23,6 +23,14 @@ Choose only the items that match the selected dish, according to the list on the
     <string name="cogTest_market_groceries_list">Shopping cart</string>
     <string name="cogTest_market_to_start_press_here">Press to start shopping</string>
 
+    <string name="cogTest_market_product">Product</string>
+    <string name="cogTest_market_amount">Amount</string>
+    <string name="cogTest_market_remove">Remove</string>
+    <string name="cogTest_market_to_finish_press_here">To finish press here</string>
+
+    <string name="cogTest_market_are_you_sure_you_want_to_remove_item">Are you sure you want to remove the item</string>
+
+
     <string name="cogTest_market_tomato">Tomato</string>
     <string name="cogTest_market_onion">Onion</string>
     <string name="cogTest_market_egg">Egg</string>

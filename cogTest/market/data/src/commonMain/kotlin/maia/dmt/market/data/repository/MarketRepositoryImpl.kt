@@ -1,11 +1,38 @@
 package maia.dmt.market.data.repository
 
-import maia.dmt.market.data.mapper.MarketProductImageResMapper
+import kotlinx.serialization.json.Json
+import maia.dmt.market.data.mapper.ProductMapper
+import maia.dmt.market.data.model.ProductsResponse
 import maia.dmt.market.domain.model.MarketCategory
 import maia.dmt.market.domain.model.MarketProduct
 import maia.dmt.market.domain.repository.MarketRepository
 
 class MarketRepositoryImpl : MarketRepository {
+
+    private val json = Json {
+        ignoreUnknownKeys = true
+        isLenient = true
+    }
+
+    // Static JSON data for now - replace with actual API call later
+    private val staticJsonData = """
+    {
+      "products": [
+        {
+          "id": 1,
+          "name": "cogTest_market_item_white_cheese_500",
+          "isDonation": false,
+          "price": 0.0,
+          "inStock": true,
+          "category": "dairy",
+          "amount": 0,
+          "imageUrl": "https://generic2dev.hitheal.org.il/static/measurements/market%20test/images/market_white_cheese.png"
+        }
+      ]
+    }
+    """.trimIndent()
+
+    private var cachedProducts: List<MarketProduct> = emptyList()
 
     private val categories = listOf(
         MarketCategory(
@@ -50,541 +77,723 @@ class MarketRepositoryImpl : MarketRepository {
         )
     )
 
-    private val allProducts = buildList {
-        // Dairy Products
-        val dairyCategory = categories.first { it.id == "dairy" }
-        addAll(
-            listOf(
-                MarketProduct(
-                    id = "white_cheese_500",
-                    categoryId = dairyCategory.id,
-                    titleResId = "cogTest_market_item_white_cheese_500",
-                    iconRes = MarketProductImageResMapper.getProductImageResId("cogTest_market_item_white_cheese_500"),
-                    isDonation = MarketProductImageResMapper.isDonationProduct("cogTest_market_item_white_cheese_500")
-                ),
-                MarketProduct(
-                    id = "white_cheese_250",
-                    categoryId = dairyCategory.id,
-                    titleResId = "cogTest_market_item_white_cheese_250",
-                    iconRes = MarketProductImageResMapper.getProductImageResId("cogTest_market_item_white_cheese_250"),
-                    isDonation = MarketProductImageResMapper.isDonationProduct("cogTest_market_item_white_cheese_250")
-                ),
-                MarketProduct(
-                    id = "milk_1l_1",
-                    categoryId = dairyCategory.id,
-                    titleResId = "cogTest_market_item_milk_1_liter_1_percent",
-                    iconRes = MarketProductImageResMapper.getProductImageResId("cogTest_market_item_milk_1_liter_1_percent"),
-                    isDonation = MarketProductImageResMapper.isDonationProduct("cogTest_market_item_milk_1_liter_1_percent")
-                ),
-                MarketProduct(
-                    id = "milk_1l_3",
-                    categoryId = dairyCategory.id,
-                    titleResId = "cogTest_market_item_milk_1_liter_3_percent",
-                    iconRes = MarketProductImageResMapper.getProductImageResId("cogTest_market_item_milk_1_liter_3_percent"),
-                    isDonation = MarketProductImageResMapper.isDonationProduct("cogTest_market_item_milk_1_liter_3_percent")
-                ),
-                MarketProduct(
-                    id = "sweet_cream",
-                    categoryId = dairyCategory.id,
-                    titleResId = "cogTest_market_item_sweet_cream_38",
-                    iconRes = MarketProductImageResMapper.getProductImageResId("cogTest_market_item_sweet_cream_38"),
-                    isDonation = MarketProductImageResMapper.isDonationProduct("cogTest_market_item_sweet_cream_38")
-                ),
-                MarketProduct(
-                    id = "bulgarian",
-                    categoryId = dairyCategory.id,
-                    titleResId = "cogTest_market_item_bulgarian_250",
-                    iconRes = MarketProductImageResMapper.getProductImageResId("cogTest_market_item_bulgarian_250"),
-                    isDonation = MarketProductImageResMapper.isDonationProduct("cogTest_market_item_bulgarian_250")
-                ),
-                MarketProduct(
-                    id = "yellow_sliced",
-                    categoryId = dairyCategory.id,
-                    titleResId = "cogTest_market_item_yellow_sliced_250",
-                    iconRes = MarketProductImageResMapper.getProductImageResId("cogTest_market_item_yellow_sliced_250"),
-                    isDonation = MarketProductImageResMapper.isDonationProduct("cogTest_market_item_yellow_sliced_250")
-                ),
-                MarketProduct(
-                    id = "yellow_grated",
-                    categoryId = dairyCategory.id,
-                    titleResId = "cogTest_market_item_yellow_grated_500",
-                    iconRes = MarketProductImageResMapper.getProductImageResId("cogTest_market_item_yellow_grated_500"),
-                    isDonation = MarketProductImageResMapper.isDonationProduct("cogTest_market_item_yellow_grated_500")
-                )
-            )
-        )
+    override suspend fun getAllCategories(): List<MarketCategory> = categories
 
-        // Meat Products
-        val meatCategory = categories.first { it.id == "meat" }
-        addAll(
-            listOf(
-                MarketProduct(
-                    id = "shnitzel",
-                    categoryId = meatCategory.id,
-                    titleResId = "cogTest_market_item_shnitzel_kg",
-                    iconRes = MarketProductImageResMapper.getProductImageResId("cogTest_market_item_shnitzel_kg"),
-                    isDonation = MarketProductImageResMapper.isDonationProduct("cogTest_market_item_shnitzel_kg")
-                ),
-                MarketProduct(
-                    id = "legs",
-                    categoryId = meatCategory.id,
-                    titleResId = "cogTest_market_item_legs_4",
-                    iconRes = MarketProductImageResMapper.getProductImageResId("cogTest_market_item_legs_4"),
-                    isDonation = MarketProductImageResMapper.isDonationProduct("cogTest_market_item_legs_4")
-                ),
-                MarketProduct(
-                    id = "breast",
-                    categoryId = meatCategory.id,
-                    titleResId = "cogTest_market_item_breast_kg",
-                    iconRes = MarketProductImageResMapper.getProductImageResId("cogTest_market_item_breast_kg"),
-                    isDonation = MarketProductImageResMapper.isDonationProduct("cogTest_market_item_breast_kg")
-                ),
-                MarketProduct(
-                    id = "pargit",
-                    categoryId = meatCategory.id,
-                    titleResId = "cogTest_market_item_pargit",
-                    iconRes = MarketProductImageResMapper.getProductImageResId("cogTest_market_item_pargit"),
-                    isDonation = MarketProductImageResMapper.isDonationProduct("cogTest_market_item_pargit")
-                ),
-                MarketProduct(
-                    id = "beef_ground",
-                    categoryId = meatCategory.id,
-                    titleResId = "cogTest_market_item_beef_ground_500",
-                    iconRes = MarketProductImageResMapper.getProductImageResId("cogTest_market_item_beef_ground_500"),
-                    isDonation = MarketProductImageResMapper.isDonationProduct("cogTest_market_item_beef_ground_500")
-                )
-            )
-        )
-
-        // Vegetables Products
-        val vegetablesCategory = categories.first { it.id == "vegetables" }
-        addAll(
-            listOf(
-                MarketProduct(
-                    id = "tomato",
-                    categoryId = vegetablesCategory.id,
-                    titleResId = "cogTest_market_item_tomato_half_kg",
-                    iconRes = MarketProductImageResMapper.getProductImageResId("cogTest_market_item_tomato_half_kg"),
-                    isDonation = MarketProductImageResMapper.isDonationProduct("cogTest_market_item_tomato_half_kg")
-                ),
-                MarketProduct(
-                    id = "cherry_tomato",
-                    categoryId = vegetablesCategory.id,
-                    titleResId = "cogTest_market_item_cherry_tomato",
-                    iconRes = MarketProductImageResMapper.getProductImageResId("cogTest_market_item_cherry_tomato"),
-                    isDonation = MarketProductImageResMapper.isDonationProduct("cogTest_market_item_cherry_tomato")
-                ),
-                MarketProduct(
-                    id = "cucumber",
-                    categoryId = vegetablesCategory.id,
-                    titleResId = "cogTest_market_item_cucumber_half_kg",
-                    iconRes = MarketProductImageResMapper.getProductImageResId("cogTest_market_item_cucumber_half_kg"),
-                    isDonation = MarketProductImageResMapper.isDonationProduct("cogTest_market_item_cucumber_half_kg")
-                ),
-                MarketProduct(
-                    id = "broccoli_fresh",
-                    categoryId = vegetablesCategory.id,
-                    titleResId = "cogTest_market_item_broccoli_fresh_out",
-                    iconRes = MarketProductImageResMapper.getProductImageResId("cogTest_market_item_broccoli_fresh_out"),
-                    isInStock = false,
-                    isDonation = MarketProductImageResMapper.isDonationProduct("cogTest_market_item_broccoli_fresh_out")
-                ),
-                MarketProduct(
-                    id = "carrot",
-                    categoryId = vegetablesCategory.id,
-                    titleResId = "cogTest_market_item_carrot_250",
-                    iconRes = MarketProductImageResMapper.getProductImageResId("cogTest_market_item_carrot_250"),
-                    isDonation = MarketProductImageResMapper.isDonationProduct("cogTest_market_item_carrot_250")
-                ),
-                MarketProduct(
-                    id = "onion",
-                    categoryId = vegetablesCategory.id,
-                    titleResId = "cogTest_market_item_onion",
-                    iconRes = MarketProductImageResMapper.getProductImageResId("cogTest_market_item_onion"),
-                    isDonation = MarketProductImageResMapper.isDonationProduct("cogTest_market_item_onion")
-                ),
-                MarketProduct(
-                    id = "celery",
-                    categoryId = vegetablesCategory.id,
-                    titleResId = "cogTest_market_item_celery",
-                    iconRes = MarketProductImageResMapper.getProductImageResId("cogTest_market_item_celery"),
-                    isDonation = MarketProductImageResMapper.isDonationProduct("cogTest_market_item_celery")
-                ),
-                MarketProduct(
-                    id = "lemon",
-                    categoryId = vegetablesCategory.id,
-                    titleResId = "cogTest_market_item_lemon",
-                    iconRes = MarketProductImageResMapper.getProductImageResId("cogTest_market_item_lemon"),
-                    isDonation = MarketProductImageResMapper.isDonationProduct("cogTest_market_item_lemon")
-                )
-            )
-        )
-
-        // Fruits Products
-        val fruitsCategory = categories.first { it.id == "fruits" }
-        addAll(
-            listOf(
-                MarketProduct(
-                    id = "apricot",
-                    categoryId = fruitsCategory.id,
-                    titleResId = "cogTest_market_item_apricot_pack",
-                    iconRes = MarketProductImageResMapper.getProductImageResId("cogTest_market_item_apricot_pack"),
-                    isDonation = MarketProductImageResMapper.isDonationProduct("cogTest_market_item_apricot_pack")
-                ),
-                MarketProduct(
-                    id = "banana",
-                    categoryId = fruitsCategory.id,
-                    titleResId = "cogTest_market_item_banana_100g",
-                    iconRes = MarketProductImageResMapper.getProductImageResId("cogTest_market_item_banana_100g"),
-                    isDonation = MarketProductImageResMapper.isDonationProduct("cogTest_market_item_banana_100g")
-                ),
-                MarketProduct(
-                    id = "nectarine",
-                    categoryId = fruitsCategory.id,
-                    titleResId = "cogTest_market_item_nectarine",
-                    iconRes = MarketProductImageResMapper.getProductImageResId("cogTest_market_item_nectarine"),
-                    isDonation = MarketProductImageResMapper.isDonationProduct("cogTest_market_item_nectarine")
-                ),
-                MarketProduct(
-                    id = "green_apple",
-                    categoryId = fruitsCategory.id,
-                    titleResId = "cogTest_market_item_green_apple",
-                    iconRes = MarketProductImageResMapper.getProductImageResId("cogTest_market_item_green_apple"),
-                    isDonation = MarketProductImageResMapper.isDonationProduct("cogTest_market_item_green_apple")
-                ),
-                MarketProduct(
-                    id = "red_apple",
-                    categoryId = fruitsCategory.id,
-                    titleResId = "cogTest_market_item_red_apple",
-                    iconRes = MarketProductImageResMapper.getProductImageResId("cogTest_market_item_red_apple"),
-                    isDonation = MarketProductImageResMapper.isDonationProduct("cogTest_market_item_red_apple")
-                ),
-                MarketProduct(
-                    id = "melon",
-                    categoryId = fruitsCategory.id,
-                    titleResId = "cogTest_market_item_melon",
-                    iconRes = MarketProductImageResMapper.getProductImageResId("cogTest_market_item_melon"),
-                    isDonation = MarketProductImageResMapper.isDonationProduct("cogTest_market_item_melon")
-                ),
-                MarketProduct(
-                    id = "grapes",
-                    categoryId = fruitsCategory.id,
-                    titleResId = "cogTest_market_item_grapes_500",
-                    iconRes = MarketProductImageResMapper.getProductImageResId("cogTest_market_item_grapes_500"),
-                    isDonation = MarketProductImageResMapper.isDonationProduct("cogTest_market_item_grapes_500")
-                )
-            )
-        )
-
-        // Frozen Products
-        val frozenCategory = categories.first { it.id == "frozen" }
-        addAll(
-            listOf(
-                MarketProduct(
-                    id = "broccoli_frozen",
-                    categoryId = frozenCategory.id,
-                    titleResId = "cogTest_market_item_broccoli_frozen",
-                    iconRes = MarketProductImageResMapper.getProductImageResId("cogTest_market_item_broccoli_frozen"),
-                    isDonation = MarketProductImageResMapper.isDonationProduct("cogTest_market_item_broccoli_frozen")
-                ),
-                MarketProduct(
-                    id = "peas_frozen",
-                    categoryId = frozenCategory.id,
-                    titleResId = "cogTest_market_item_peas_frozen",
-                    iconRes = MarketProductImageResMapper.getProductImageResId("cogTest_market_item_peas_frozen"),
-                    isDonation = MarketProductImageResMapper.isDonationProduct("cogTest_market_item_peas_frozen")
-                ),
-                MarketProduct(
-                    id = "pea_carrot",
-                    categoryId = frozenCategory.id,
-                    titleResId = "cogTest_market_item_pea_carrot_mix",
-                    iconRes = MarketProductImageResMapper.getProductImageResId("cogTest_market_item_pea_carrot_mix"),
-                    isDonation = MarketProductImageResMapper.isDonationProduct("cogTest_market_item_pea_carrot_mix")
-                ),
-                MarketProduct(
-                    id = "cauliflower",
-                    categoryId = frozenCategory.id,
-                    titleResId = "cogTest_market_item_cauliflower_frozen",
-                    iconRes = MarketProductImageResMapper.getProductImageResId("cogTest_market_item_cauliflower_frozen"),
-                    isDonation = MarketProductImageResMapper.isDonationProduct("cogTest_market_item_cauliflower_frozen")
-                ),
-                MarketProduct(
-                    id = "green_beans",
-                    categoryId = frozenCategory.id,
-                    titleResId = "cogTest_market_item_green_beans_frozen",
-                    iconRes = MarketProductImageResMapper.getProductImageResId("cogTest_market_item_green_beans_frozen"),
-                    isDonation = MarketProductImageResMapper.isDonationProduct("cogTest_market_item_green_beans_frozen")
-                ),
-                MarketProduct(
-                    id = "borekas_cheese",
-                    categoryId = frozenCategory.id,
-                    titleResId = "cogTest_market_item_borekas_cheese",
-                    iconRes = MarketProductImageResMapper.getProductImageResId("cogTest_market_item_borekas_cheese"),
-                    isDonation = MarketProductImageResMapper.isDonationProduct("cogTest_market_item_borekas_cheese")
-                ),
-                MarketProduct(
-                    id = "borekas_potato",
-                    categoryId = frozenCategory.id,
-                    titleResId = "cogTest_market_item_borekas_potato",
-                    iconRes = MarketProductImageResMapper.getProductImageResId("cogTest_market_item_borekas_potato"),
-                    isDonation = MarketProductImageResMapper.isDonationProduct("cogTest_market_item_borekas_potato")
-                ),
-                MarketProduct(
-                    id = "jahnun",
-                    categoryId = frozenCategory.id,
-                    titleResId = "cogTest_market_item_jahnun",
-                    iconRes = MarketProductImageResMapper.getProductImageResId("cogTest_market_item_jahnun"),
-                    isDonation = MarketProductImageResMapper.isDonationProduct("cogTest_market_item_jahnun")
-                )
-            )
-        )
-
-        // Dry & Spices Products
-        val drySpicesCategory = categories.first { it.id == "dry_spices" }
-        addAll(
-            listOf(
-                MarketProduct(
-                    id = "canned_corn",
-                    categoryId = drySpicesCategory.id,
-                    titleResId = "cogTest_market_item_canned_corn",
-                    iconRes = MarketProductImageResMapper.getProductImageResId("cogTest_market_item_canned_corn"),
-                    isDonation = MarketProductImageResMapper.isDonationProduct("cogTest_market_item_canned_corn")
-                ),
-                MarketProduct(
-                    id = "pickles_vinegar",
-                    categoryId = drySpicesCategory.id,
-                    titleResId = "cogTest_market_item_pickles_vinegar_250",
-                    iconRes = MarketProductImageResMapper.getProductImageResId("cogTest_market_item_pickles_vinegar_250"),
-                    isDonation = MarketProductImageResMapper.isDonationProduct("cogTest_market_item_pickles_vinegar_250")
-                ),
-                MarketProduct(
-                    id = "pickles_salt",
-                    categoryId = drySpicesCategory.id,
-                    titleResId = "cogTest_market_item_pickles_salt_250",
-                    iconRes = MarketProductImageResMapper.getProductImageResId("cogTest_market_item_pickles_salt_250"),
-                    isDonation = MarketProductImageResMapper.isDonationProduct("cogTest_market_item_pickles_salt_250")
-                ),
-                MarketProduct(
-                    id = "tuna",
-                    categoryId = drySpicesCategory.id,
-                    titleResId = "cogTest_market_item_tuna_can",
-                    iconRes = MarketProductImageResMapper.getProductImageResId("cogTest_market_item_tuna_can"),
-                    isDonation = MarketProductImageResMapper.isDonationProduct("cogTest_market_item_tuna_can")
-                ),
-                MarketProduct(
-                    id = "baby_corn",
-                    categoryId = drySpicesCategory.id,
-                    titleResId = "cogTest_market_item_baby_corn",
-                    iconRes = MarketProductImageResMapper.getProductImageResId("cogTest_market_item_baby_corn"),
-                    isDonation = MarketProductImageResMapper.isDonationProduct("cogTest_market_item_baby_corn")
-                ),
-                MarketProduct(
-                    id = "sardines",
-                    categoryId = drySpicesCategory.id,
-                    titleResId = "cogTest_market_item_sardines",
-                    iconRes = MarketProductImageResMapper.getProductImageResId("cogTest_market_item_sardines"),
-                    isDonation = MarketProductImageResMapper.isDonationProduct("cogTest_market_item_sardines")
-                ),
-                MarketProduct(
-                    id = "sunflower_oil",
-                    categoryId = drySpicesCategory.id,
-                    titleResId = "cogTest_market_item_sunflower_oil",
-                    iconRes = MarketProductImageResMapper.getProductImageResId("cogTest_market_item_sunflower_oil"),
-                    isDonation = MarketProductImageResMapper.isDonationProduct("cogTest_market_item_sunflower_oil")
-                ),
-                MarketProduct(
-                    id = "soy_oil",
-                    categoryId = drySpicesCategory.id,
-                    titleResId = "cogTest_market_item_soy_oil",
-                    iconRes = MarketProductImageResMapper.getProductImageResId("cogTest_market_item_soy_oil"),
-                    isDonation = MarketProductImageResMapper.isDonationProduct("cogTest_market_item_soy_oil")
-                ),
-                MarketProduct(
-                    id = "coconut_oil",
-                    categoryId = drySpicesCategory.id,
-                    titleResId = "cogTest_market_item_coconut_oil",
-                    iconRes = MarketProductImageResMapper.getProductImageResId("cogTest_market_item_coconut_oil"),
-                    isDonation = MarketProductImageResMapper.isDonationProduct("cogTest_market_item_coconut_oil")
-                ),
-                MarketProduct(
-                    id = "olives",
-                    categoryId = drySpicesCategory.id,
-                    titleResId = "cogTest_market_item_olives_canned",
-                    iconRes = MarketProductImageResMapper.getProductImageResId("cogTest_market_item_olives_canned"),
-                    isDonation = MarketProductImageResMapper.isDonationProduct("cogTest_market_item_olives_canned")
-                ),
-                MarketProduct(
-                    id = "salt",
-                    categoryId = drySpicesCategory.id,
-                    titleResId = "cogTest_market_item_salt_basic",
-                    iconRes = MarketProductImageResMapper.getProductImageResId("cogTest_market_item_salt_basic"),
-                    isDonation = MarketProductImageResMapper.isDonationProduct("cogTest_market_item_salt_basic")
-                ),
-                MarketProduct(
-                    id = "sugar",
-                    categoryId = drySpicesCategory.id,
-                    titleResId = "cogTest_market_item_sugar_basic",
-                    iconRes = MarketProductImageResMapper.getProductImageResId("cogTest_market_item_sugar_basic"),
-                    isDonation = MarketProductImageResMapper.isDonationProduct("cogTest_market_item_sugar_basic")
-                ),
-                MarketProduct(
-                    id = "black_pepper",
-                    categoryId = drySpicesCategory.id,
-                    titleResId = "cogTest_market_item_black_pepper_basic",
-                    iconRes = MarketProductImageResMapper.getProductImageResId("cogTest_market_item_black_pepper_basic"),
-                    isDonation = MarketProductImageResMapper.isDonationProduct("cogTest_market_item_black_pepper_basic")
-                ),
-                MarketProduct(
-                    id = "flour",
-                    categoryId = drySpicesCategory.id,
-                    titleResId = "cogTest_market_item_flour_basic",
-                    iconRes = MarketProductImageResMapper.getProductImageResId("cogTest_market_item_flour_basic"),
-                    isDonation = MarketProductImageResMapper.isDonationProduct("cogTest_market_item_flour_basic")
-                ),
-                MarketProduct(
-                    id = "cacao",
-                    categoryId = drySpicesCategory.id,
-                    titleResId = "cogTest_market_item_cacao_basic",
-                    iconRes = MarketProductImageResMapper.getProductImageResId("cogTest_market_item_cacao_basic"),
-                    isDonation = MarketProductImageResMapper.isDonationProduct("cogTest_market_item_cacao_basic")
-                ),
-                MarketProduct(
-                    id = "baking_powder",
-                    categoryId = drySpicesCategory.id,
-                    titleResId = "cogTest_market_item_baking_powder_basic",
-                    iconRes = MarketProductImageResMapper.getProductImageResId("cogTest_market_item_baking_powder_basic"),
-                    isDonation = MarketProductImageResMapper.isDonationProduct("cogTest_market_item_baking_powder_basic")
-                ),
-                MarketProduct(
-                    id = "vanilla",
-                    categoryId = drySpicesCategory.id,
-                    titleResId = "cogTest_market_item_vanilla_extract_basic",
-                    iconRes = MarketProductImageResMapper.getProductImageResId("cogTest_market_item_vanilla_extract_basic"),
-                    isDonation = MarketProductImageResMapper.isDonationProduct("cogTest_market_item_vanilla_extract_basic")
-                ),
-                MarketProduct(
-                    id = "tomato_paste",
-                    categoryId = drySpicesCategory.id,
-                    titleResId = "cogTest_market_item_tomato_paste",
-                    iconRes = MarketProductImageResMapper.getProductImageResId("cogTest_market_item_tomato_paste"),
-                    isDonation = MarketProductImageResMapper.isDonationProduct("cogTest_market_item_tomato_paste")
-                ),
-                MarketProduct(
-                    id = "hummus",
-                    categoryId = drySpicesCategory.id,
-                    titleResId = "cogTest_market_item_hummus_dry",
-                    iconRes = MarketProductImageResMapper.getProductImageResId("cogTest_market_item_hummus_dry"),
-                    isDonation = MarketProductImageResMapper.isDonationProduct("cogTest_market_item_hummus_dry")
-                )
-            )
-        )
-
-        // Bakery Products
-        val bakeryCategory = categories.first { it.id == "bakery" }
-        addAll(
-            listOf(
-                MarketProduct(
-                    id = "bread_no_sugar",
-                    categoryId = bakeryCategory.id,
-                    titleResId = "cogTest_market_item_bread_no_sugar",
-                    iconRes = MarketProductImageResMapper.getProductImageResId("cogTest_market_item_bread_no_sugar"),
-                    isDonation = MarketProductImageResMapper.isDonationProduct("cogTest_market_item_bread_no_sugar")
-                ),
-                MarketProduct(
-                    id = "bread_regular",
-                    categoryId = bakeryCategory.id,
-                    titleResId = "cogTest_market_item_bread_regular",
-                    iconRes = MarketProductImageResMapper.getProductImageResId("cogTest_market_item_bread_regular"),
-                    isDonation = MarketProductImageResMapper.isDonationProduct("cogTest_market_item_bread_regular")
-                ),
-                MarketProduct(
-                    id = "challah",
-                    categoryId = bakeryCategory.id,
-                    titleResId = "cogTest_market_item_challah",
-                    iconRes = MarketProductImageResMapper.getProductImageResId("cogTest_market_item_challah"),
-                    isDonation = MarketProductImageResMapper.isDonationProduct("cogTest_market_item_challah")
-                ),
-                MarketProduct(
-                    id = "cookies_gluten_free",
-                    categoryId = bakeryCategory.id,
-                    titleResId = "cogTest_market_item_cookies_gluten_free",
-                    iconRes = MarketProductImageResMapper.getProductImageResId("cogTest_market_item_cookies_gluten_free"),
-                    isDonation = MarketProductImageResMapper.isDonationProduct("cogTest_market_item_cookies_gluten_free")
-                ),
-                MarketProduct(
-                    id = "yeast_cake",
-                    categoryId = bakeryCategory.id,
-                    titleResId = "cogTest_market_item_yeast_cake",
-                    iconRes = MarketProductImageResMapper.getProductImageResId("cogTest_market_item_yeast_cake"),
-                    isDonation = MarketProductImageResMapper.isDonationProduct("cogTest_market_item_yeast_cake")
-                )
-            )
-        )
-
-        // Cleaning Products
-        val cleaningCategory = categories.first { it.id == "cleaning_disposable" }
-        addAll(
-            listOf(
-                MarketProduct(
-                    id = "bleach",
-                    categoryId = cleaningCategory.id,
-                    titleResId = "cogTest_market_item_bleach",
-                    iconRes = MarketProductImageResMapper.getProductImageResId("cogTest_market_item_bleach"),
-                    isDonation = MarketProductImageResMapper.isDonationProduct("cogTest_market_item_bleach")
-                ),
-                MarketProduct(
-                    id = "gloves",
-                    categoryId = cleaningCategory.id,
-                    titleResId = "cogTest_market_item_gloves",
-                    iconRes = MarketProductImageResMapper.getProductImageResId("cogTest_market_item_gloves"),
-                    isDonation = MarketProductImageResMapper.isDonationProduct("cogTest_market_item_gloves")
-                ),
-                MarketProduct(
-                    id = "dish_soap",
-                    categoryId = cleaningCategory.id,
-                    titleResId = "cogTest_market_item_dish_soap",
-                    iconRes = MarketProductImageResMapper.getProductImageResId("cogTest_market_item_dish_soap"),
-                    isDonation = MarketProductImageResMapper.isDonationProduct("cogTest_market_item_dish_soap")
-                ),
-                MarketProduct(
-                    id = "window_cleaner",
-                    categoryId = cleaningCategory.id,
-                    titleResId = "cogTest_market_item_window_cleaner",
-                    iconRes = MarketProductImageResMapper.getProductImageResId("cogTest_market_item_window_cleaner"),
-                    isDonation = MarketProductImageResMapper.isDonationProduct("cogTest_market_item_window_cleaner")
-                ),
-                MarketProduct(
-                    id = "garbage_bags",
-                    categoryId = cleaningCategory.id,
-                    titleResId = "cogTest_market_item_garbage_bags",
-                    iconRes = MarketProductImageResMapper.getProductImageResId("cogTest_market_item_garbage_bags"),
-                    isDonation = MarketProductImageResMapper.isDonationProduct("cogTest_market_item_garbage_bags")
-                ),
-                MarketProduct(
-                    id = "scotch_pack",
-                    categoryId = cleaningCategory.id,
-                    titleResId = "cogTest_market_item_scotch_pack",
-                    iconRes = MarketProductImageResMapper.getProductImageResId("cogTest_market_item_scotch_pack"),
-                    isDonation = MarketProductImageResMapper.isDonationProduct("cogTest_market_item_scotch_pack")
-                ),
-                MarketProduct(
-                    id = "disposable_cups",
-                    categoryId = cleaningCategory.id,
-                    titleResId = "cogTest_market_item_disposable_cups_pack",
-                    iconRes = MarketProductImageResMapper.getProductImageResId("cogTest_market_item_disposable_cups_pack"),
-                    isDonation = MarketProductImageResMapper.isDonationProduct("cogTest_market_item_disposable_cups_pack")
-                )
-            )
-        )
+    override suspend fun getProductsByCategory(categoryId: String): List<MarketProduct> {
+        if (cachedProducts.isEmpty()) {
+            cachedProducts = fetchProductsFromApi()
+        }
+        return cachedProducts.filter { it.categoryId == categoryId }
     }
 
-    override fun getAllCategories(): List<MarketCategory> = categories
-
-    override fun getProductsByCategory(categoryId: String): List<MarketProduct> {
-        return allProducts.filter { it.categoryId == categoryId }
-    }
-
-    override fun getCategoryById(categoryId: String): MarketCategory? {
+    override suspend fun getCategoryById(categoryId: String): MarketCategory? {
         return categories.firstOrNull { it.id == categoryId }
+    }
+
+    override suspend fun getProductById(productId: String): MarketProduct? {
+        if (cachedProducts.isEmpty()) {
+            cachedProducts = fetchProductsFromApi()
+        }
+        return cachedProducts.firstOrNull { it.id == productId }
+    }
+
+    override suspend fun getAllProducts(): List<MarketProduct> {
+        if (cachedProducts.isEmpty()) {
+            cachedProducts = fetchProductsFromApi()
+        }
+        return cachedProducts
+    }
+
+    override suspend fun fetchProductsFromApi(): List<MarketProduct> {
+        return try {
+            // For now, parse the static JSON
+            // TODO: Replace with actual API call using Ktor
+            val response = json.decodeFromString<ProductsResponse>(getStaticProductsJson())
+            ProductMapper.toDomainList(response.products)
+        } catch (e: Exception) {
+            e.printStackTrace()
+            emptyList()
+        }
+    }
+
+    // This method contains the full static JSON data
+    // In production, this will be replaced with an actual API call
+    private fun getStaticProductsJson(): String {
+        return """
+{
+  "products": [
+    {
+      "id": 1,
+      "name": "cogTest_market_item_white_cheese_500",
+      "isDonation": false,
+      "price": 0.0,
+      "inStock": true,
+      "category": "dairy",
+      "amount": 0,
+      "imageUrl": "https://generic2dev.hitheal.org.il/static/measurements/market%20test/images/market_white_cheese.png"
+    },
+    {
+      "id": 2,
+      "name": "cogTest_market_item_white_cheese_250",
+      "isDonation": false,
+      "price": 0.0,
+      "inStock": true,
+      "category": "dairy",
+      "amount": 0,
+      "imageUrl": "https://generic2dev.hitheal.org.il/static/measurements/market%20test/images/market_white_cheese.png"
+    },
+    {
+      "id": 3,
+      "name": "cogTest_market_item_milk_1_liter_1_percent",
+      "isDonation": false,
+      "price": 0.0,
+      "inStock": true,
+      "category": "dairy",
+      "amount": 0,
+      "imageUrl": "https://generic2dev.hitheal.org.il/static/measurements/market%20test/images/market_milk1precent.png"
+    },
+    {
+      "id": 4,
+      "name": "cogTest_market_item_milk_1_liter_3_percent",
+      "isDonation": true,
+      "price": 0.0,
+      "inStock": true,
+      "category": "dairy",
+      "amount": 0,
+      "imageUrl": "https://generic2dev.hitheal.org.il/static/measurements/market%20test/images/market_milk3precent.png"
+    },
+    {
+      "id": 5,
+      "name": "cogTest_market_item_sweet_cream_38",
+      "isDonation": false,
+      "price": 0.0,
+      "inStock": true,
+      "category": "dairy",
+      "amount": 0,
+      "imageUrl": "https://generic2dev.hitheal.org.il/static/measurements/market%20test/images/market_milk_sweet_shamenet.png"
+    },
+    {
+      "id": 6,
+      "name": "cogTest_market_item_bulgarian_250",
+      "isDonation": false,
+      "price": 0.0,
+      "inStock": true,
+      "category": "dairy",
+      "amount": 0,
+      "imageUrl": "https://generic2dev.hitheal.org.il/static/measurements/market%20test/images/market_bulgarian_cheese.png"
+    },
+    {
+      "id": 7,
+      "name": "cogTest_market_item_yellow_sliced_250",
+      "isDonation": false,
+      "price": 0.0,
+      "inStock": true,
+      "category": "dairy",
+      "amount": 0,
+      "imageUrl": "https://generic2dev.hitheal.org.il/static/measurements/market%20test/images/market_yellow_cheese.png"
+    },
+    {
+      "id": 8,
+      "name": "cogTest_market_item_yellow_grated_500",
+      "isDonation": false,
+      "price": 0.0,
+      "inStock": true,
+      "category": "dairy",
+      "amount": 0,
+      "imageUrl": "https://generic2dev.hitheal.org.il/static/measurements/market%20test/images/market_yellowcheese_megurad.png"
+    },
+    {
+      "id": 9,
+      "name": "cogTest_market_item_shnitzel_kg",
+      "isDonation": false,
+      "price": 0.0,
+      "inStock": true,
+      "category": "meat",
+      "amount": 0,
+      "imageUrl": "https://generic2dev.hitheal.org.il/static/measurements/market%20test/images/market_meat_shnitzel.png"
+    },
+    {
+      "id": 10,
+      "name": "cogTest_market_item_legs_4",
+      "isDonation": false,
+      "price": 0.0,
+      "inStock": true,
+      "category": "meat",
+      "amount": 0,
+      "imageUrl": "https://generic2dev.hitheal.org.il/static/measurements/market%20test/images/market_meat_chickenshok.png"
+    },
+    {
+      "id": 11,
+      "name": "cogTest_market_item_breast_kg",
+      "isDonation": false,
+      "price": 0.0,
+      "inStock": true,
+      "category": "meat",
+      "amount": 0,
+      "imageUrl": "https://generic2dev.hitheal.org.il/static/measurements/market%20test/images/market_meat_chickenbreast.png"
+    },
+    {
+      "id": 12,
+      "name": "cogTest_market_item_pargit",
+      "isDonation": false,
+      "price": 0.0,
+      "inStock": true,
+      "category": "meat",
+      "amount": 0,
+      "imageUrl": "https://generic2dev.hitheal.org.il/static/measurements/market%20test/images/market_meat_pargit.png"
+    },
+    {
+      "id": 13,
+      "name": "cogTest_market_item_beef_ground_500",
+      "isDonation": false,
+      "price": 0.0,
+      "inStock": true,
+      "category": "meat",
+      "amount": 0,
+      "imageUrl": "https://generic2dev.hitheal.org.il/static/measurements/market%20test/images/market_meat_tahun.png"
+    },
+    {
+      "id": 14,
+      "name": "cogTest_market_item_tomato_half_kg",
+      "isDonation": false,
+      "price": 0.0,
+      "inStock": true,
+      "category": "vegetables",
+      "amount": 0,
+      "imageUrl": "https://generic2dev.hitheal.org.il/static/measurements/market%20test/images/market_tomato.png"
+    },
+    {
+      "id": 15,
+      "name": "cogTest_market_item_cherry_tomato",
+      "isDonation": false,
+      "price": 0.0,
+      "inStock": true,
+      "category": "vegetables",
+      "amount": 0,
+      "imageUrl": "https://generic2dev.hitheal.org.il/static/measurements/market%20test/images/market_vegetables_cherrytomato.png"
+    },
+    {
+      "id": 16,
+      "name": "cogTest_market_item_cucumber_half_kg",
+      "isDonation": false,
+      "price": 0.0,
+      "inStock": true,
+      "category": "vegetables",
+      "amount": 0,
+      "imageUrl": "https://generic2dev.hitheal.org.il/static/measurements/market%20test/images/market_cucumber.png"
+    },
+    {
+      "id": 17,
+      "name": "cogTest_market_item_broccoli_fresh_out",
+      "isDonation": false,
+      "price": 0.0,
+      "inStock": false,
+      "category": "vegetables",
+      "amount": 0,
+      "imageUrl": "https://generic2dev.hitheal.org.il/static/measurements/market%20test/images/market_broccoli.png"
+    },
+    {
+      "id": 18,
+      "name": "cogTest_market_item_carrot_250",
+      "isDonation": false,
+      "price": 0.0,
+      "inStock": true,
+      "category": "vegetables",
+      "amount": 0,
+      "imageUrl": "https://generic2dev.hitheal.org.il/static/measurements/market%20test/images/market_vegetables_carrot.png"
+    },
+    {
+      "id": 19,
+      "name": "cogTest_market_item_onion",
+      "isDonation": false,
+      "price": 0.0,
+      "inStock": true,
+      "category": "vegetables",
+      "amount": 0,
+      "imageUrl": "https://generic2dev.hitheal.org.il/static/measurements/market%20test/images/market_vegetables_onion.png"
+    },
+    {
+      "id": 20,
+      "name": "cogTest_market_item_celery",
+      "isDonation": false,
+      "price": 0.0,
+      "inStock": true,
+      "category": "vegetables",
+      "amount": 0,
+      "imageUrl": "https://generic2dev.hitheal.org.il/static/measurements/market%20test/images/market_vegetables_cellery.png"
+    },
+    {
+      "id": 21,
+      "name": "cogTest_market_item_lemon",
+      "isDonation": false,
+      "price": 0.0,
+      "inStock": true,
+      "category": "vegetables",
+      "amount": 0,
+      "imageUrl": "https://generic2dev.hitheal.org.il/static/measurements/market%20test/images/market_lemon.png"
+    },
+    {
+      "id": 22,
+      "name": "cogTest_market_item_apricot_pack",
+      "isDonation": false,
+      "price": 0.0,
+      "inStock": true,
+      "category": "fruits",
+      "amount": 0,
+      "imageUrl": "https://generic2dev.hitheal.org.il/static/measurements/market%20test/images/market_fruits_mishmish.png"
+    },
+    {
+      "id": 23,
+      "name": "cogTest_market_item_banana_100g",
+      "isDonation": false,
+      "price": 0.0,
+      "inStock": true,
+      "category": "fruits",
+      "amount": 0,
+      "imageUrl": "https://generic2dev.hitheal.org.il/static/measurements/market%20test/images/market_fruits_banana.png"
+    },
+    {
+      "id": 24,
+      "name": "cogTest_market_item_nectarine",
+      "isDonation": false,
+      "price": 0.0,
+      "inStock": true,
+      "category": "fruits",
+      "amount": 0,
+      "imageUrl": "https://generic2dev.hitheal.org.il/static/measurements/market%20test/images/market_fruits_peach.png"
+    },
+    {
+      "id": 25,
+      "name": "cogTest_market_item_green_apple",
+      "isDonation": false,
+      "price": 0.0,
+      "inStock": true,
+      "category": "fruits",
+      "amount": 0,
+      "imageUrl": "https://generic2dev.hitheal.org.il/static/measurements/market%20test/images/market_fruits_greenapple.png"
+    },
+    {
+      "id": 26,
+      "name": "cogTest_market_item_red_apple",
+      "isDonation": false,
+      "price": 0.0,
+      "inStock": true,
+      "category": "fruits",
+      "amount": 0,
+      "imageUrl": "https://generic2dev.hitheal.org.il/static/measurements/market%20test/images/market_fruits_redapple.png"
+    },
+    {
+      "id": 27,
+      "name": "cogTest_market_item_melon",
+      "isDonation": false,
+      "price": 0.0,
+      "inStock": true,
+      "category": "fruits",
+      "amount": 0,
+      "imageUrl": "https://generic2dev.hitheal.org.il/static/measurements/market%20test/images/market_fruits_melon.png"
+    },
+    {
+      "id": 28,
+      "name": "cogTest_market_item_grapes_500",
+      "isDonation": false,
+      "price": 0.0,
+      "inStock": true,
+      "category": "fruits",
+      "amount": 0,
+      "imageUrl": "https://generic2dev.hitheal.org.il/static/measurements/market%20test/images/market_fruits_grapes.png"
+    },
+    {
+      "id": 29,
+      "name": "cogTest_market_item_broccoli_frozen",
+      "isDonation": false,
+      "price": 0.0,
+      "inStock": true,
+      "category": "frozen",
+      "amount": 0,
+      "imageUrl": "https://generic2dev.hitheal.org.il/static/measurements/market%20test/images/market_frozen_brocoli.png"
+    },
+    {
+      "id": 30,
+      "name": "cogTest_market_item_peas_frozen",
+      "isDonation": false,
+      "price": 0.0,
+      "inStock": true,
+      "category": "frozen",
+      "amount": 0,
+      "imageUrl": "https://generic2dev.hitheal.org.il/static/measurements/market%20test/images/market_frozen_afuna.png"
+    },
+    {
+      "id": 31,
+      "name": "cogTest_market_item_pea_carrot_mix",
+      "isDonation": false,
+      "price": 0.0,
+      "inStock": true,
+      "category": "frozen",
+      "amount": 0,
+      "imageUrl": "https://generic2dev.hitheal.org.il/static/measurements/market%20test/images/market_frozen_carrotafuna.png"
+    },
+    {
+      "id": 32,
+      "name": "cogTest_market_item_cauliflower_frozen",
+      "isDonation": false,
+      "price": 0.0,
+      "inStock": true,
+      "category": "frozen",
+      "amount": 0,
+      "imageUrl": "https://generic2dev.hitheal.org.il/static/measurements/market%20test/images/market_frozen_kruvit.png"
+    },
+    {
+      "id": 33,
+      "name": "cogTest_market_item_green_beans_frozen",
+      "isDonation": false,
+      "price": 0.0,
+      "inStock": true,
+      "category": "frozen",
+      "amount": 0,
+      "imageUrl": "https://generic2dev.hitheal.org.il/static/measurements/market%20test/images/market_frozen_beans.png"
+    },
+    {
+      "id": 34,
+      "name": "cogTest_market_item_borekas_cheese",
+      "isDonation": false,
+      "price": 0.0,
+      "inStock": true,
+      "category": "frozen",
+      "amount": 0,
+      "imageUrl": "https://generic2dev.hitheal.org.il/static/measurements/market%20test/images/market_frozen_borekascheese.png"
+    },
+    {
+      "id": 35,
+      "name": "cogTest_market_item_borekas_potato",
+      "isDonation": false,
+      "price": 0.0,
+      "inStock": true,
+      "category": "frozen",
+      "amount": 0,
+      "imageUrl": "https://generic2dev.hitheal.org.il/static/measurements/market%20test/images/market_frozen_borekastapha.png"
+    },
+    {
+      "id": 36,
+      "name": "cogTest_market_item_jahnun",
+      "isDonation": false,
+      "price": 0.0,
+      "inStock": true,
+      "category": "frozen",
+      "amount": 0,
+      "imageUrl": "https://generic2dev.hitheal.org.il/static/measurements/market%20test/images/market_frozen_jahnun.png"
+    },
+    {
+      "id": 37,
+      "name": "cogTest_market_item_canned_corn",
+      "isDonation": false,
+      "price": 0.0,
+      "inStock": true,
+      "category": "dry_spices",
+      "amount": 0,
+      "imageUrl": "https://generic2dev.hitheal.org.il/static/measurements/market%20test/images/market_dry_cannedcorn.png"
+    },
+    {
+      "id": 38,
+      "name": "cogTest_market_item_pickles_vinegar_250",
+      "isDonation": false,
+      "price": 0.0,
+      "inStock": true,
+      "category": "dry_spices",
+      "amount": 0,
+      "imageUrl": "https://generic2dev.hitheal.org.il/static/measurements/market%20test/images/market_dry_pickle.png"
+    },
+    {
+      "id": 39,
+      "name": "cogTest_market_item_pickles_salt_250",
+      "isDonation": false,
+      "price": 0.0,
+      "inStock": true,
+      "category": "dry_spices",
+      "amount": 0,
+      "imageUrl": "https://generic2dev.hitheal.org.il/static/measurements/market%20test/images/market_dry_pickle.png"
+    },
+    {
+      "id": 40,
+      "name": "cogTest_market_item_tuna_can",
+      "isDonation": false,
+      "price": 0.0,
+      "inStock": true,
+      "category": "dry_spices",
+      "amount": 0,
+      "imageUrl": "https://generic2dev.hitheal.org.il/static/measurements/market%20test/images/market_dry_tuna.png"
+    },
+    {
+      "id": 41,
+      "name": "cogTest_market_item_baby_corn",
+      "isDonation": false,
+      "price": 0.0,
+      "inStock": true,
+      "category": "dry_spices",
+      "amount": 0,
+      "imageUrl": "https://generic2dev.hitheal.org.il/static/measurements/market%20test/images/market_dry_littlecorn.png"
+    },
+    {
+      "id": 42,
+      "name": "cogTest_market_item_sardines",
+      "isDonation": false,
+      "price": 0.0,
+      "inStock": true,
+      "category": "dry_spices",
+      "amount": 0,
+      "imageUrl": "https://generic2dev.hitheal.org.il/static/measurements/market%20test/images/market_dry_sardine.png"
+    },
+    {
+      "id": 43,
+      "name": "cogTest_market_item_sunflower_oil",
+      "isDonation": true,
+      "price": 0.0,
+      "inStock": true,
+      "category": "dry_spices",
+      "amount": 0,
+      "imageUrl": "https://generic2dev.hitheal.org.il/static/measurements/market%20test/images/market_dry_oilhamania.png"
+    },
+    {
+      "id": 44,
+      "name": "cogTest_market_item_soy_oil",
+      "isDonation": false,
+      "price": 0.0,
+      "inStock": true,
+      "category": "dry_spices",
+      "amount": 0,
+      "imageUrl": "https://generic2dev.hitheal.org.il/static/measurements/market%20test/images/market_dry_oilsoya.png"
+    },
+    {
+      "id": 45,
+      "name": "cogTest_market_item_coconut_oil",
+      "isDonation": false,
+      "price": 0.0,
+      "inStock": true,
+      "category": "dry_spices",
+      "amount": 0,
+      "imageUrl": "https://generic2dev.hitheal.org.il/static/measurements/market%20test/images/market_dry_oilcoconut.png"
+    },
+    {
+      "id": 46,
+      "name": "cogTest_market_item_olives_canned",
+      "isDonation": true,
+      "price": 0.0,
+      "inStock": true,
+      "category": "dry_spices",
+      "amount": 0,
+      "imageUrl": "https://generic2dev.hitheal.org.il/static/measurements/market%20test/images/market_olives.png"
+    },
+    {
+      "id": 47,
+      "name": "cogTest_market_item_salt_basic",
+      "isDonation": false,
+      "price": 0.0,
+      "inStock": true,
+      "category": "dry_spices",
+      "amount": 0,
+      "imageUrl": "https://generic2dev.hitheal.org.il/static/measurements/market%20test/images/market_salt.png"
+    },
+    {
+      "id": 48,
+      "name": "cogTest_market_item_sugar_basic",
+      "isDonation": false,
+      "price": 0.0,
+      "inStock": true,
+      "category": "dry_spices",
+      "amount": 0,
+      "imageUrl": "https://generic2dev.hitheal.org.il/static/measurements/market%20test/images/market_suger.png"
+    },
+    {
+      "id": 49,
+      "name": "cogTest_market_item_black_pepper_basic",
+      "isDonation": false,
+      "price": 0.0,
+      "inStock": true,
+      "category": "dry_spices",
+      "amount": 0,
+      "imageUrl": "https://generic2dev.hitheal.org.il/static/measurements/market%20test/images/market_black_pepper.png"
+    },
+    {
+      "id": 50,
+      "name": "cogTest_market_item_flour_basic",
+      "isDonation": false,
+      "price": 0.0,
+      "inStock": true,
+      "category": "dry_spices",
+      "amount": 0,
+      "imageUrl": "cogTest_market_item_flour_basic"
+    },
+    {
+      "id": 51,
+      "name": "cogTest_market_item_cacao_basic",
+      "isDonation": false,
+      "price": 0.0,
+      "inStock": true,
+      "category": "dry_spices",
+      "amount": 0,
+      "imageUrl": "https://generic2dev.hitheal.org.il/static/measurements/market%20test/images/market_cacao.png"
+    },
+    {
+      "id": 52,
+      "name": "cogTest_market_item_baking_powder_basic",
+      "isDonation": false,
+      "price": 0.0,
+      "inStock": true,
+      "category": "dry_spices",
+      "amount": 0,
+      "imageUrl": "https://generic2dev.hitheal.org.il/static/measurements/market%20test/images/market_baking_powder.png"
+    },
+    {
+      "id": 53,
+      "name": "cogTest_market_item_vanilla_extract_basic",
+      "isDonation": false,
+      "price": 0.0,
+      "inStock": true,
+      "category": "dry_spices",
+      "amount": 0,
+      "imageUrl": "https://generic2dev.hitheal.org.il/static/measurements/market%20test/images/market_vanil.png"
+    },
+    {
+      "id": 54,
+      "name": "cogTest_market_item_tomato_paste",
+      "isDonation": true,
+      "price": 0.0,
+      "inStock": true,
+      "category": "dry_spices",
+      "amount": 0,
+      "imageUrl": "https://generic2dev.hitheal.org.il/static/measurements/market%20test/images/market_dry_tomatopaste.png"
+    },
+    {
+      "id": 55,
+      "name": "cogTest_market_item_hummus_dry",
+      "isDonation": true,
+      "price": 0.0,
+      "inStock": true,
+      "category": "dry_spices",
+      "amount": 0,
+      "imageUrl": "https://generic2dev.hitheal.org.il/static/measurements/market%20test/images/market_dry_hummus.png"
+    },
+    {
+      "id": 56,
+      "name": "cogTest_market_item_bread_no_sugar",
+      "isDonation": false,
+      "price": 0.0,
+      "inStock": true,
+      "category": "bakery",
+      "amount": 0,
+      "imageUrl": "cogTest_market_item_bread_no_sugar"
+    },
+    {
+      "id": 57,
+      "name": "cogTest_market_item_bread_regular",
+      "isDonation": false,
+      "price": 0.0,
+      "inStock": true,
+      "category": "bakery",
+      "amount": 0,
+      "imageUrl": "cogTest_market_item_bread_regular"
+    },
+    {
+      "id": 58,
+      "name": "cogTest_market_item_challah",
+      "isDonation": true,
+      "price": 0.0,
+      "inStock": true,
+      "category": "bakery",
+      "amount": 0,
+      "imageUrl": "https://generic2dev.hitheal.org.il/static/measurements/market%20test/images/market_bakery_halla.png"
+    },
+    {
+      "id": 59,
+      "name": "cogTest_market_item_cookies_gluten_free",
+      "isDonation": false,
+      "price": 0.0,
+      "inStock": true,
+      "category": "bakery",
+      "amount": 0,
+      "imageUrl": "https://generic2dev.hitheal.org.il/static/measurements/market%20test/images/market_bakery_cookies.png"
+    },
+    {
+      "id": 60,
+      "name": "cogTest_market_item_yeast_cake",
+      "isDonation": false,
+      "price": 0.0,
+      "inStock": true,
+      "category": "bakery",
+      "amount": 0,
+      "imageUrl": "https://generic2dev.hitheal.org.il/static/measurements/market%20test/images/market_bakery_cake.png"
+    },
+    {
+      "id": 61,
+      "name": "cogTest_market_item_bleach",
+      "isDonation": false,
+      "price": 0.0,
+      "inStock": true,
+      "category": "cleaning_disposable",
+      "amount": 0,
+      "imageUrl": "https://generic2dev.hitheal.org.il/static/measurements/market%20test/images/market_clean_economica.png"
+    },
+    {
+      "id": 62,
+      "name": "cogTest_market_item_gloves",
+      "isDonation": false,
+      "price": 0.0,
+      "inStock": true,
+      "category": "cleaning_disposable",
+      "amount": 0,
+      "imageUrl": "https://generic2dev.hitheal.org.il/static/measurements/market%20test/images/market_clean_gloves.png"
+    },
+    {
+      "id": 63,
+      "name": "cogTest_market_item_dish_soap",
+      "isDonation": true,
+      "price": 0.0,
+      "inStock": true,
+      "category": "cleaning_disposable",
+      "amount": 0,
+      "imageUrl": "https://generic2dev.hitheal.org.il/static/measurements/market%20test/images/market_clean_dishsabon.png"
+    },
+    {
+      "id": 64,
+      "name": "cogTest_market_item_window_cleaner",
+      "isDonation": false,
+      "price": 0.0,
+      "inStock": true,
+      "category": "cleaning_disposable",
+      "amount": 0,
+      "imageUrl": "https://generic2dev.hitheal.org.il/static/measurements/market%20test/images/market_clean_forwindows.png"
+    },
+    {
+      "id": 65,
+      "name": "cogTest_market_item_garbage_bags",
+      "isDonation": false,
+      "price": 0.0,
+      "inStock": true,
+      "category": "cleaning_disposable",
+      "amount": 0,
+      "imageUrl": "https://generic2dev.hitheal.org.il/static/measurements/market%20test/images/market_clean_garbagebag.png"
+    },
+    {
+      "id": 66,
+      "name": "cogTest_market_item_scotch_pack",
+      "isDonation": false,
+      "price": 0.0,
+      "inStock": true,
+      "category": "cleaning_disposable",
+      "amount": 0,
+      "imageUrl": "https://generic2dev.hitheal.org.il/static/measurements/market%20test/images/market_clean_scotch.png"
+    },
+    {
+      "id": 67,
+      "name": "cogTest_market_item_disposable_cups_pack",
+      "isDonation": true,
+      "price": 0.0,
+      "inStock": true,
+      "category": "cleaning_disposable",
+      "amount": 0,
+      "imageUrl": "https://generic2dev.hitheal.org.il/static/measurements/market%20test/images/market_clean_cups.png"
+    }
+  ]
+}
+        """.trimIndent()
     }
 }

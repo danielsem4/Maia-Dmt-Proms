@@ -6,7 +6,7 @@ import maia.dmt.market.domain.repository.MarketRepository
 class GetAllCategoriesUseCase(
     private val repository: MarketRepository
 ) {
-    operator fun invoke(): List<MarketCategory> {
+    suspend operator fun invoke(): List<MarketCategory> {
         return repository.getAllCategories()
     }
 }

@@ -22,6 +22,12 @@
     <string name="cogTest_market_groceries_list">סל קניות</string>
     <string name="cogTest_market_to_start_press_here">לחץ להתחלת קנייה</string>
 
+    <string name="cogTest_market_product">מוצר</string>
+    <string name="cogTest_market_amount">כמות</string>
+    <string name="cogTest_market_remove">הסר</string>
+    <string name="cogTest_market_to_finish_press_here">לסיום לחץ כאן</string>
+    <string name="cogTest_market_are_you_sure_you_want_to_remove_item">האם אתה בטוח שברצונך להסיר את הפריט?</string>
+
     <string name="cogTest_market_tomato">עגבנייה</string>
     <string name="cogTest_market_onion">בצל</string>
     <string name="cogTest_market_egg">ביצה</string>

@@ -22,6 +22,12 @@
     <string name="cogTest_market_groceries_list">سلة التسوق</string>
     <string name="cogTest_market_to_start_press_here">اضغط لبدء التسوق</string>
 
+    <string name="cogTest_market_product">منتج</string>
+    <string name="cogTest_market_amount">الكمية</string>
+    <string name="cogTest_market_remove">إزالة</string>
+    <string name="cogTest_market_to_finish_press_here">للإنهاء اضغط هنا</string>
+    <string name="cogTest_market_are_you_sure_you_want_to_remove_item">هل أنت متأكد أنك تريد إزالة العنصر؟</string>
+
     <string name="cogTest_market_tomato">طماطم</string>
     <string name="cogTest_market_onion">بصل</string>
     <string name="cogTest_market_egg">بيضة</string>

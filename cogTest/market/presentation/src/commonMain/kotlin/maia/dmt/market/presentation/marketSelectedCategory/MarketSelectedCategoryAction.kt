@@ -6,4 +6,10 @@ interface MarketSelectedCategoryAction {
     data class OnProductDecrement(val productId: String) : MarketSelectedCategoryAction
     data class OnProductClick(val productId: String) : MarketSelectedCategoryAction
     data class OnCategoryClick(val categoryId: String) : MarketSelectedCategoryAction
+
+    data class OnShoppingListClicked(val listType: String) : MarketSelectedCategoryAction
+
+    data object OnSearchClick : MarketSelectedCategoryAction
+    data object OnCartClick : MarketSelectedCategoryAction
+
 }

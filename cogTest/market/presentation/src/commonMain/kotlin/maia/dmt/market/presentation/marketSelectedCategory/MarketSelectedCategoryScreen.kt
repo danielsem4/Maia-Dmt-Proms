@@ -34,7 +34,6 @@ import dmtproms.cogtest.market.presentation.generated.resources.Res
 import dmtproms.cogtest.market.presentation.generated.resources.bread_category
 import dmtproms.cogtest.market.presentation.generated.resources.cheese_category
 import dmtproms.cogtest.market.presentation.generated.resources.clean_category
-import dmtproms.cogtest.market.presentation.generated.resources.cogTest_market_cart
 import dmtproms.cogtest.market.presentation.generated.resources.cogTest_market_groceries_list
 import dmtproms.cogtest.market.presentation.generated.resources.cogTest_market_instruction_select
 import dmtproms.cogtest.market.presentation.generated.resources.cogTest_market_search
@@ -51,15 +50,12 @@ import dmtproms.cogtest.market.presentation.generated.resources.vegetables_categ
 import maia.dmt.core.designsystem.components.buttons.DmtButton
 import maia.dmt.core.designsystem.components.buttons.DmtButtonStyle
 import maia.dmt.core.designsystem.components.layouts.DmtBaseScreen
-import maia.dmt.core.designsystem.theme.DmtTheme
 import maia.dmt.core.presentation.util.ObserveAsEvents
 import maia.dmt.market.presentation.components.DmtGroceryItemMenuCard
-import maia.dmt.market.presentation.util.MarketProductImageMapper
 import maia.dmt.market.presentation.util.MarketStringResourceMapper
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.resources.vectorResource
-import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
@@ -76,6 +72,15 @@ fun MarketSelectedCategoryRoot(
         when (event) {
             is MarketSelectedCategoryEvent.NavigateBack -> {
                 onNavigateBack()
+            }
+            is MarketSelectedCategoryEvent.NavigateToShoppingList -> {
+                onNavigateToShoppingList(event.listType)
+            }
+            is MarketSelectedCategoryEvent.NavigateToSearch -> {
+                onNavigationSearch()
+            }
+            is MarketSelectedCategoryEvent.NavigateToCart -> {
+                onNavigationCart()
             }
         }
     }
@@ -102,6 +107,7 @@ fun MarketSelectedCategoryScreen(
                     .fillMaxSize()
                     .padding(16.dp)
             ) {
+                // Left Side: Categories List & Search
                 LazyColumn(
                     modifier = Modifier
                         .weight(0.25f)
@@ -119,7 +125,7 @@ fun MarketSelectedCategoryScreen(
                                     modifier = Modifier.size(28.dp)
                                 )
                             },
-                            onClick = { },
+                            onClick = { onAction(MarketSelectedCategoryAction.OnSearchClick) },
                             style = DmtButtonStyle.SECONDARY,
                             modifier = Modifier.fillMaxWidth()
                         )
@@ -148,6 +154,7 @@ fun MarketSelectedCategoryScreen(
                     }
                 }
 
+                // Right Side: Products Grid & Bottom Buttons
                 Column(
                     modifier = Modifier
                         .weight(0.75f)
@@ -176,7 +183,7 @@ fun MarketSelectedCategoryScreen(
                             DmtGroceryItemMenuCard(
                                 text = MarketStringResourceMapper.getProductName(product.titleResId),
                                 quantity = product.amount,
-                                painter = MarketProductImageMapper.getPainter(product.iconRes),
+                                imageUrl = product.iconRes, // Now passing URL directly
                                 isOutOfStock = !product.isInStock,
                                 isDonation = product.isDonation,
                                 onIncrement = {
@@ -194,6 +201,7 @@ fun MarketSelectedCategoryScreen(
 
                     Spacer(modifier = Modifier.height(8.dp))
 
+                    // Bottom Buttons
                     Row(
                         modifier = Modifier
                             .fillMaxWidth(),
@@ -209,7 +217,7 @@ fun MarketSelectedCategoryScreen(
                                     modifier = Modifier.size(28.dp)
                                 )
                             },
-                            onClick = { },
+                            onClick = { onAction(MarketSelectedCategoryAction.OnShoppingListClicked("regular")) },
                             style = DmtButtonStyle.SECONDARY,
                             modifier = Modifier
                                 .widthIn(min = 100.dp, max = 320.dp)
@@ -223,7 +231,7 @@ fun MarketSelectedCategoryScreen(
                                     modifier = Modifier.size(28.dp)
                                 )
                             },
-                            onClick = { },
+                            onClick = { onAction(MarketSelectedCategoryAction.OnShoppingListClicked("donation")) },
                             style = DmtButtonStyle.SECONDARY,
                             modifier = Modifier
                                 .widthIn(min = 100.dp, max = 320.dp)
@@ -237,7 +245,7 @@ fun MarketSelectedCategoryScreen(
                                     modifier = Modifier.size(28.dp)
                                 )
                             },
-                            onClick = {  },
+                            onClick = { onAction(MarketSelectedCategoryAction.OnCartClick) },
                             style = DmtButtonStyle.SECONDARY,
                             modifier = Modifier
                                 .widthIn(min = 100.dp, max = 320.dp)
@@ -261,16 +269,5 @@ private fun getCategoryIcon(iconResId: String): DrawableResource {
         "market_meat_icon" -> Res.drawable.meat_category
         "market_cleaning_icon" -> Res.drawable.clean_category
         else -> Res.drawable.cheese_category
-    }
-}
-
-@Composable
-@Preview
-fun MarketSelectedCategoryPreview() {
-    DmtTheme {
-        MarketSelectedCategoryScreen(
-            state = MarketSelectedCategoryState(),
-            onAction = {}
-        )
     }
 }

@@ -6,7 +6,5 @@ import maia.dmt.market.domain.repository.MarketRepository
 class GetCategoryByIdUseCase(
     private val repository: MarketRepository
 ) {
-    operator fun invoke(categoryId: String): MarketCategory? {
-        return repository.getCategoryById(categoryId)
-    }
+    suspend operator fun invoke(categoryId: String) = repository.getCategoryById(categoryId)
 }

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="cogTest_cdt_title">اختبار الساعة</string>
+    <string name="cogTest_cdt_drawing_test_title">اختبار رسم الساعة</string>
+    <string name="cogTest_cdt_the_clock_test">اختبار الساعة</string>
+    <string name="cogTest_cdt_gender_disclaimer">التعليمات بصيغة المذكر، ولكنها موجهة لجميع الجنسين</string>
+    <string name="cogTest_cdt_start">ابدأ</string>
+    <string name="cogTest_cdt_instruction_draw_1110">ارسم ساعة بجميع الأرقام تشير إلى الوقت 11:10</string>
+    <string name="cogTest_cdt_touch_warning">ملاحظة: عند الرسم، تأكد من أن إصبعك أو القلم فقط يلمس الجهاز اللوحي</string>
+    <string name="cogTest_cdt_erase">مسح</string>
+    <string name="cogTest_cdt_clear_all">مسح الكل</string>
+    <string name="cogTest_cdt_next_question">السؤال التالي</string>
+    <string name="cogTest_cdt_stage_one_complete">لقد أنهيت المرحلة الأولى، سننتقل الآن إلى المرحلة التالية</string>
+    <string name="cogTest_cdt_instruction_set_hands">أمامك ساعة تشير إلى الساعة الثانية عشرة، عليك ضبط الساعة عن طريق تحريك العقارب</string>
+    <string name="cogTest_cdt_continue">متابعة</string>
+    <string name="cogTest_cdt_reset">إعادة تعيين</string>
+    <string name="cogTest_cdt_now">الآن</string>
+    <string name="cogTest_cdt_press_continue_hint">بعد ذلك، اضغط على زر المتابعة.</string>
+    <string name="cogTest_cdt_completion_msg">انتهى الاختبار، شكرًا لتعاونك</string>
+    <string name="cogTest_cdt_finish">إنهاء</string>
+    <string name="cogTest_cdt_score">النتيجة</string>
+    <string name="cogTest_cdt_score_instruction">يرجى تقييم اختبار الساعة المعروض أمامك</string>
+    <string name="cogTest_cdt_confirm">تأكيد</string>
+</resources>

@@ -1,0 +1,18 @@
+package maia.dmt.cdt.presentation.navigation
+
+import kotlinx.serialization.Serializable
+
+interface CdtGraphRoutes {
+
+    @Serializable
+    data object Graph: CdtGraphRoutes
+
+    @Serializable
+    data object CdtLand: CdtGraphRoutes
+
+    @Serializable
+    data object CdtDraw: CdtGraphRoutes
+
+
+
+}

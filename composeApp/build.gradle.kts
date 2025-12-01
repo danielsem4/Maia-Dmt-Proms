@@ -46,9 +46,11 @@ kotlin {
             implementation(projects.cogTest.market.domain)
             implementation(projects.cogTest.market.data)
 
+            implementation(projects.cogTest.cdt.presentation)
+            implementation(projects.cogTest.cdt.domain)
+            implementation(projects.cogTest.cdt.data)
+
             implementation(projects.feature.settings.presentation)
-
-
 
             implementation(libs.jetbrains.compose.navigation)
             implementation(libs.bundles.koin.common)

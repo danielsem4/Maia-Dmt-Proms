@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="cogTest_cdt_title">מבחן השעון</string>
+    <string name="cogTest_cdt_drawing_test_title">מבחן ציור שעון</string>
+    <string name="cogTest_cdt_the_clock_test">מבחן השעון</string>
+    <string name="cogTest_cdt_gender_disclaimer">הוראות מנוסחות בלשון זכר, אך פונות לכלל המינים</string>
+    <string name="cogTest_cdt_start">התחל</string>
+    <string name="cogTest_cdt_instruction_draw_1110">צייר שעון עם כל המספרים שמראה את השעה 11:10</string>
+    <string name="cogTest_cdt_touch_warning">הערה: בעת הציור חשוב לוודא שרק האצבע או העט מונח על הטאבלט</string>
+    <string name="cogTest_cdt_erase">מחק</string>
+    <string name="cogTest_cdt_clear_all">מחק הכל</string>
+    <string name="cogTest_cdt_next_question">לשאלה הבאה</string>
+    <string name="cogTest_cdt_stage_one_complete">סיימת את השלב הראשון, כעת נעבור לשלב הבא</string>
+    <string name="cogTest_cdt_instruction_set_hands">לפניך שעון שמראה את השעה שתיים עשרה, עליך לכוון את השעון באמצעות הזזת המחוגים</string>
+    <string name="cogTest_cdt_continue">המשך</string>
+    <string name="cogTest_cdt_reset">אתחול</string>
+    <string name="cogTest_cdt_now">כעת</string>
+    <string name="cogTest_cdt_press_continue_hint">לאחר מכן יש ללחוץ על כפתור ההמשך.</string>
+    <string name="cogTest_cdt_completion_msg">המבחן הגיע לסיומו, תודה רבה על שיתוף הפעולה</string>
+    <string name="cogTest_cdt_finish">סיום</string>
+    <string name="cogTest_cdt_score">ציון</string>
+    <string name="cogTest_cdt_score_instruction">יש לנקד את המבחן שעון שמוצג בפניך</string>
+    <string name="cogTest_cdt_confirm">אישור</string>
+</resources>

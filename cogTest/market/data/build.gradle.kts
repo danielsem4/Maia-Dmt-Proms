@@ -13,6 +13,9 @@ kotlin {
                 implementation(projects.core.data)
                 implementation(projects.cogTest.market.domain)
 
+                implementation(libs.bundles.ktor.common)
+                implementation(libs.koin.core)
+
             }
         }
 

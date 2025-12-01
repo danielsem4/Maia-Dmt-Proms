@@ -27,12 +27,15 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import dmtproms.cogtest.market.presentation.generated.resources.Res
+import dmtproms.cogtest.market.presentation.generated.resources.cogTest_market_action_close_list
 import dmtproms.cogtest.market.presentation.generated.resources.cogTest_market_close_list
-import dmtproms.cogtest.market.presentation.generated.resources.cogTest_market_item_broccoli_fresh
+import dmtproms.cogtest.market.presentation.generated.resources.cogTest_market_donation_shopping_list_title
+import dmtproms.cogtest.market.presentation.generated.resources.cogTest_market_item_broccoli_fresh_out
 import dmtproms.cogtest.market.presentation.generated.resources.cogTest_market_item_gluten_free_cookies
 import dmtproms.cogtest.market.presentation.generated.resources.cogTest_market_item_sunflower_oil
 import dmtproms.cogtest.market.presentation.generated.resources.cogTest_market_item_tomatoes_kg
 import dmtproms.cogtest.market.presentation.generated.resources.cogTest_market_shopping_list_title
+import dmtproms.cogtest.market.presentation.generated.resources.cogTest_market_view_donation_list
 import maia.dmt.core.designsystem.components.buttons.DmtButton
 import maia.dmt.core.designsystem.components.layouts.DmtBaseScreen
 import maia.dmt.core.designsystem.theme.DmtTheme
@@ -63,16 +66,21 @@ fun MarketShoppingListRoot(
     }
 
     MarketShoppingListScreen(
+        listType = listType,
         state = state,
         onAction = viewModel::onAction,
     )
 }
 @Composable
 fun MarketShoppingListScreen(
+    listType: String = "regular",
     state: MarketShoppingListState,
     onAction: (MarketShoppingListAction) -> Unit,
 ) {
-    val title = stringResource(Res.string.cogTest_market_shopping_list_title)
+    val title = stringResource(
+        if (listType == "regular") Res.string.cogTest_market_shopping_list_title
+        else Res.string.cogTest_market_donation_shopping_list_title
+    )
 
     DmtBaseScreen(
         titleText = title,
@@ -144,7 +152,7 @@ fun MarketShoppingListScreen(
                 DmtButton(
                     modifier = Modifier.fillMaxWidth(),
                     onClick = { onAction(MarketShoppingListAction.OnNavigateBack) },
-                    text = stringResource(Res.string.cogTest_market_close_list)
+                    text = stringResource(Res.string.cogTest_market_action_close_list)
                 )
             }
         }
@@ -160,7 +168,7 @@ fun MarketShoppingListPreview() {
                 listType = "regular",
                 groceries = listOf(
                     Res.string.cogTest_market_item_tomatoes_kg,
-                    Res.string.cogTest_market_item_broccoli_fresh,
+                    Res.string.cogTest_market_item_broccoli_fresh_out,
                     Res.string.cogTest_market_item_gluten_free_cookies,
                     Res.string.cogTest_market_item_sunflower_oil,
                 )

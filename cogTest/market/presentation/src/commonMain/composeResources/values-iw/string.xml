@@ -3,6 +3,7 @@
 
     <string name="cogTest_market_part_one_title">משימת הסופר</string>
     <string name="cogTest_market_instructions">הוראות</string>
+
     <string name="cogTest_market_welcome_title">ברוכים הבאים</string>
     <string name="cogTest_market_welcome_button_text">לחצו לקריאת ההוראות</string>
 
@@ -21,6 +22,11 @@
     <string name="cogTest_market_groceries_list">סל קניות</string>
     <string name="cogTest_market_to_start_press_here">לחץ להתחלת קנייה</string>
 
+    <string name="cogTest_market_product">מוצר</string>
+    <string name="cogTest_market_amount">כמות</string>
+    <string name="cogTest_market_remove">הסר</string>
+    <string name="cogTest_market_to_finish_press_here">לסיום לחץ כאן</string>
+    <string name="cogTest_market_are_you_sure_you_want_to_remove_item">האם אתה בטוח שברצונך להסיר את הפריט?</string>
 
     <string name="cogTest_market_tomato">עגבנייה</string>
     <string name="cogTest_market_onion">בצל</string>
@@ -76,8 +82,6 @@
 
     <string name="cogTest_market_cat_vegetables">ירקות</string>
     <string name="cogTest_market_item_tomatoes_kg">קילו עגבניות</string>
-    <string name="cogTest_market_item_cucumber_half_kg">חצי קילו מלפפון</string>
-    <string name="cogTest_market_item_broccoli_fresh">ברוקולי טרי</string>
 
     <string name="cogTest_market_cat_bakery">מאפים</string>
     <string name="cogTest_market_item_bread_whole_low_sugar">כיכר לחם מקמח מלא דל סוכר</string>
@@ -85,10 +89,8 @@
 
     <string name="cogTest_market_cat_dry_spices">יבשים ותבלינים</string>
     <string name="cogTest_market_item_olive_oil">שמן זית</string>
-    <string name="cogTest_market_item_sunflower_oil">שמן חמניות</string>
     <string name="cogTest_market_item_corn_cans_3">תירס שימורים 3 יחידות</string>
     <string name="cogTest_market_item_pickles_250">מלפפון חמוץ בחומץ 250 גר'</string>
-    <string name="cogTest_market_item_tuna">טונה</string>
 
     <string name="cogTest_market_cat_meat">מוצרי בשר</string>
     <string name="cogTest_market_item_schnitzel_kg">קילו שניצלים</string>
@@ -103,7 +105,6 @@
     <string name="cogTest_market_cat_dairy">מוצרי חלב</string>
     <string name="cogTest_market_item_milk_1_percent">ליטר חלב 1% שומן</string>
     <string name="cogTest_market_item_cream_cheese_28">גבינת שמנת 28%</string>
-    <string name="cogTest_market_item_white_cheese_250">250 גר גבינה לבנה</string>
     <string name="cogTest_market_item_tzefatit_5">250 גר צפתית מעודנת 5%</string>
 
     <string name="cogTest_market_donation_cat_food">מוצרי מזון</string>
@@ -132,6 +133,97 @@
 
     <string name="cogTest_market_category_select_instruction">לחצו על הקטגוריה הרצויה</string>
 
+    <string name="cogTest_market_instruction_start">תחילה תעיינו ברשימת הקניות, ולאחר מכן התחילו את הקניות</string>
+    <string name="cogTest_market_action_close_list">לסגירת הרשימה</string>
+    <string name="cogTest_market_instruction_select">לבחירת מוצר לחצו עליו ובחרו כמות רצויה</string>
+    <string name="cogTest_market_status_out_of_stock">אזל מהמלאי</string>
+    <string name="cogTest_market_task_aunt">דודה יפה מבקשת לקנות</string>
+    <string name="cogTest_market_task_add_cleaning">יש להוסיף לרשימת הקניות אקונומיקה ומנקה חלונות</string>
+    <string name="cogTest_market_action_close">סגירה</string>
+    <string name="cogTest_market_hint_search">נא לרשום את מילת החיפוש, לדוגמה:גבינה/מלפפון וכדומה.</string>
+    <string name="cogTest_market_label_search_product">חיפוש לפי מוצר</string>
+    <string name="cogTest_market_promo_bakery">חדש במחלקת המאפים</string>
+    <string name="cogTest_market_product_yeast_cake">עוגת שמרים טרייה</string>
+    <string name="cogTest_market_title_cart">סל הקניות</string>
+    <string name="cogTest_market_action_finish">לסיום לחצו כאן</string>
+    <string name="cogTest_market_header_product">מוצר</string>
+    <string name="cogTest_market_header_quantity">כמות</string>
+    <string name="cogTest_market_action_remove">להסרה</string>
+    <string name="cogTest_market_msg_thanks">תודה על ההשתתפות</string>
 
+    <string name="cogTest_market_item_white_cheese_500">גבינה לבנה 500 גרם</string>
+    <string name="cogTest_market_item_white_cheese_250">גבינה לבנה 250 גרם</string>
+    <string name="cogTest_market_item_milk_1_liter_1_percent">חלב 1 ליטר 1%</string>
+    <string name="cogTest_market_item_milk_1_liter_3_percent">חלב 1 ליטר 3%</string>
+    <string name="cogTest_market_item_sweet_cream_38">שמנת מתוקה 38%</string>
+    <string name="cogTest_market_item_bulgarian_250">גבינה בולגרית 250 גרם</string>
+    <string name="cogTest_market_item_yellow_sliced_250">גבינה צהובה פרוסה 250 גרם</string>
+    <string name="cogTest_market_item_yellow_grated_500">גבינה צהובה מגורדת 500 גרם</string>
+
+    <string name="cogTest_market_item_shnitzel_kg">שניצלים (קילו)</string>
+    <string name="cogTest_market_item_legs_4">כרעיים (4 יחידות)</string>
+    <string name="cogTest_market_item_breast_kg">חזה עוף שלם (קילו)</string>
+    <string name="cogTest_market_item_pargit">פרגיות</string>
+    <string name="cogTest_market_item_beef_ground_500">בשר טחון (500 גרם)</string>
+
+    <string name="cogTest_market_item_tomato_half_kg">עגבניות (חצי קילו)</string>
+    <string name="cogTest_market_item_cherry_tomato">עגבניות שרי</string>
+    <string name="cogTest_market_item_cucumber_half_kg">מלפפון (חצי קילו)</string>
+    <string name="cogTest_market_item_broccoli_fresh_out">ברוקולי טרי</string>
+    <string name="cogTest_market_item_carrot_250">גזר (250 גרם)</string>
+    <string name="cogTest_market_item_onion">בצלים</string>
+    <string name="cogTest_market_item_celery">סלרי</string>
+    <string name="cogTest_market_item_lemon">לימון</string>
+
+    <string name="cogTest_market_item_apricot_pack">חבילת משמשים</string>
+    <string name="cogTest_market_item_banana_100g">בננה — 100 גרם לבננה</string>
+    <string name="cogTest_market_item_nectarine">נקטרינה</string>
+    <string name="cogTest_market_item_green_apple">תפוח סמיט</string>
+    <string name="cogTest_market_item_red_apple">תפוח פינק ליידי</string>
+    <string name="cogTest_market_item_melon">מלון</string>
+    <string name="cogTest_market_item_grapes_500">ענבים — 500 גרם</string>
+
+    <string name="cogTest_market_item_broccoli_frozen">ברוקולי קפוא</string>
+    <string name="cogTest_market_item_peas_frozen">אפונה קפואה</string>
+    <string name="cogTest_market_item_pea_carrot_mix">לקט אפונה וגזר</string>
+    <string name="cogTest_market_item_cauliflower_frozen">כרובית קפואה</string>
+    <string name="cogTest_market_item_green_beans_frozen">שעועית ירוקה קפואה</string>
+    <string name="cogTest_market_item_borekas_cheese">בורקס גבינה</string>
+    <string name="cogTest_market_item_borekas_potato">בורקס תפוח אדמה</string>
+    <string name="cogTest_market_item_jahnun">ג׳חנון</string>
+
+    <string name="cogTest_market_item_canned_corn">תירס שימורים</string>
+    <string name="cogTest_market_item_pickles_vinegar_250">מלפפון חמוץ בחומץ (250 גרם)</string>
+    <string name="cogTest_market_item_pickles_salt_250">מלפפון חמוץ במלח (250 גרם)</string>
+    <string name="cogTest_market_item_tuna_can">טונה</string>
+    <string name="cogTest_market_item_baby_corn">תירס גמדי</string>
+    <string name="cogTest_market_item_sardines">סרדינים</string>
+    <string name="cogTest_market_item_sunflower_oil">שמן חמניות</string>
+    <string name="cogTest_market_item_soy_oil">שמן סויה</string>
+    <string name="cogTest_market_item_coconut_oil">שמן קוקוס</string>
+    <string name="cogTest_market_item_olives_canned">שימורי זיתים</string>
+    <string name="cogTest_market_item_salt_basic">מלח</string>
+    <string name="cogTest_market_item_sugar_basic">סוכר</string>
+    <string name="cogTest_market_item_black_pepper_basic">פלפל שחור</string>
+    <string name="cogTest_market_item_flour_basic">קמח</string>
+    <string name="cogTest_market_item_cacao_basic">קקאו</string>
+    <string name="cogTest_market_item_baking_powder_basic">אבקת אפייה</string>
+    <string name="cogTest_market_item_vanilla_extract_basic">תמצית וניל</string>
+    <string name="cogTest_market_item_tomato_paste">רסק עגבניות</string>
+    <string name="cogTest_market_item_hummus_dry">חומוס גרגרים</string>
+
+    <string name="cogTest_market_item_bread_no_sugar">לחם מקמח מלא דל סוכר</string>
+    <string name="cogTest_market_item_bread_regular">לחם מקמח רגיל</string>
+    <string name="cogTest_market_item_challah">חלה</string>
+    <string name="cogTest_market_item_cookies_gluten_free">עוגיות ללא גלוטן</string>
+    <string name="cogTest_market_item_yeast_cake">עוגת שמרים</string>
+
+    <string name="cogTest_market_item_bleach">אקונומיקה</string>
+    <string name="cogTest_market_item_gloves">כפפות</string>
+    <string name="cogTest_market_item_dish_soap">סבון כלים</string>
+    <string name="cogTest_market_item_window_cleaner">מנקה חלונות</string>
+    <string name="cogTest_market_item_garbage_bags">שקיות זבל</string>
+    <string name="cogTest_market_item_scotch_pack">חבילת סקוצ׳ים</string>
+    <string name="cogTest_market_item_disposable_cups_pack">חבילת כוסות חד''פ</string>
 
 </resources>

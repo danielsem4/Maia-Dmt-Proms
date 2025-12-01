@@ -37,4 +37,17 @@ sealed interface MarketTestGraphRoutes {
 
     @Serializable
     data object MarketGroceries : MarketTestGraphRoutes
+
+    @Serializable
+    data class MarketSelectedCategory(val categoryId: String) : MarketTestGraphRoutes
+
+    @Serializable
+    data object MarketSearch : MarketTestGraphRoutes
+
+    @Serializable
+    data object MarketCart : MarketTestGraphRoutes
+
+    @Serializable
+    data object MarketSecondPartEnd: MarketTestGraphRoutes
+
 }

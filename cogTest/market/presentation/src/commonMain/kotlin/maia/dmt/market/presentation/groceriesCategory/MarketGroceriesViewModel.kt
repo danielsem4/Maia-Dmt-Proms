@@ -9,6 +9,7 @@ import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import maia.dmt.market.presentation.marketLand.MarketMainNavigationEvent
 
 class MarketGroceriesViewModel : ViewModel() {
 
@@ -36,14 +37,23 @@ class MarketGroceriesViewModel : ViewModel() {
             is MarketGroceriesAction.OnCategoryClick -> {
                 navigateToCategory(action.categoryId)
             }
-            is MarketGroceriesAction.OnSearchQueryChange -> {
-                updateSearchQuery(action.query)
+            is MarketGroceriesAction.OnSearchClick -> {
+
+            }
+
+            is MarketGroceriesAction.OnDonationListClick -> {
+                navigateToShoppingList("donation")
+            }
+            is MarketGroceriesAction.OnShoppingListClick -> {
+                navigateToShoppingList("regular")
+            }
+            is MarketGroceriesAction.OnShoppingCartClick -> {
+
             }
         }
     }
 
     private fun loadCategories() {
-        // Initialize with all categories
         val categories = listOf(
             CategoryItem(
                 id = "frozen",
@@ -90,11 +100,6 @@ class MarketGroceriesViewModel : ViewModel() {
         _state.update { it.copy(categoryList = categories) }
     }
 
-    private fun updateSearchQuery(query: String) {
-        _state.update { it.copy(searchQuery = query) }
-        // TODO: Implement filtering logic based on search query if needed
-    }
-
     private fun navigateBack() {
         viewModelScope.launch {
             eventChannel.send(MarketGroceriesEvent.NavigateBack)
@@ -104,6 +109,12 @@ class MarketGroceriesViewModel : ViewModel() {
     private fun navigateToCategory(categoryId: String) {
         viewModelScope.launch {
             eventChannel.send(MarketGroceriesEvent.NavigateToCategory(categoryId))
+        }
+    }
+
+    private fun navigateToShoppingList(listType: String) {
+        viewModelScope.launch {
+            eventChannel.send(MarketGroceriesEvent.NavigateToShoppingList(listType))
         }
     }
 }

@@ -75,7 +75,7 @@ class RecipePresentationMapper {
             "yellow_cheese" -> Res.drawable.market_yellow_cheese
             "flour" -> Res.drawable.market_flour
             "sugar" -> Res.drawable.market_suger
-            "cocoa" -> Res.drawable.market_chocolate
+            "cocoa" -> Res.drawable.market_cacao
             "baking_powder" -> Res.drawable.market_baking_powder
             "chocolate" -> Res.drawable.market_chocolate
             "baguette" -> Res.drawable.market_baguette
@@ -84,7 +84,7 @@ class RecipePresentationMapper {
             "canola_oil" -> Res.drawable.market_kanola_oil
             "black_pepper" -> Res.drawable.market_baguette
             "vanilla_extract" -> Res.drawable.market_vanil
-            "onion" -> Res.drawable.cake_image
+            "onion" -> Res.drawable.market_vegetables_onion
             else -> null
         }
     }

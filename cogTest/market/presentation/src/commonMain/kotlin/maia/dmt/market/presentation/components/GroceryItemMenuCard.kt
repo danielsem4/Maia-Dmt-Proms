@@ -16,15 +16,19 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import dmtproms.cogtest.market.presentation.generated.resources.Res
+import dmtproms.cogtest.market.presentation.generated.resources.cogTest_market_status_out_of_stock
 import dmtproms.cogtest.market.presentation.generated.resources.market_minus_icon
+import maia.dmt.core.designsystem.theme.DmtTheme
 import maia.dmt.core.presentation.components.NetworkImage
+import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.resources.vectorResource
+import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
 fun DmtGroceryItemMenuCard(
     text: String,
     quantity: Int,
-    imageUrl: String,  // Changed from painter to imageUrl
+    imageUrl: String,
     isOutOfStock: Boolean = false,
     isDonation: Boolean = false,
     onIncrement: () -> Unit,
@@ -33,8 +37,8 @@ fun DmtGroceryItemMenuCard(
     modifier: Modifier = Modifier
 ) {
     val backgroundColor = when {
-        isOutOfStock -> Color.Gray.copy(alpha = 0.3f)
-        isDonation -> MaterialTheme.colorScheme.secondary.copy(alpha = 0.2f)
+        isOutOfStock -> Color.Gray.copy(alpha = 0.5f)
+        isDonation -> MaterialTheme.colorScheme.secondary.copy(alpha = 0.8f)
         else -> MaterialTheme.colorScheme.surface
     }
 
@@ -76,11 +80,10 @@ fun DmtGroceryItemMenuCard(
                     contentScale = ContentScale.Fit
                 )
             }
-
-            // Text Section
+            
             Text(
                 text = text,
-                style = MaterialTheme.typography.bodyMedium,
+                style = MaterialTheme.typography.bodyLarge,
                 fontWeight = FontWeight.Bold,
                 textAlign = TextAlign.Center,
                 maxLines = 2,
@@ -90,7 +93,6 @@ fun DmtGroceryItemMenuCard(
                     .padding(vertical = 4.dp)
             )
 
-            // Quantity Controls
             if (!isOutOfStock) {
                 Row(
                     modifier = Modifier.fillMaxWidth(),
@@ -130,11 +132,72 @@ fun DmtGroceryItemMenuCard(
                 }
             } else {
                 Text(
-                    text = "Out of Stock",
+                    text = stringResource(Res.string.cogTest_market_status_out_of_stock),
                     style = MaterialTheme.typography.bodySmall,
                     color = Color.Red,
                     fontWeight = FontWeight.Bold,
                     modifier = Modifier.padding(vertical = 4.dp)
+                )
+            }
+        }
+    }
+}
+
+@Composable
+@Preview
+fun DmtGroceryItemMenuCardPreview() {
+    DmtTheme {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp),
+            horizontalArrangement = Arrangement.spacedBy(8.dp)
+        ) {
+            Column(
+                modifier = Modifier.weight(1f),
+                verticalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
+                DmtGroceryItemMenuCard(
+                    text = "עגבניות שרי",
+                    quantity = 0,
+                    imageUrl = "http://generic2dev.hitheal.org.il/static/measurements/market%20test/images/market_tomato.png",
+                    onIncrement = {},
+                    onDecrement = {},
+                    onClick = {}
+                )
+
+                DmtGroceryItemMenuCard(
+                    text = "קמח לבן",
+                    quantity = 3,
+                    imageUrl = "http://generic2dev.hitheal.org.il/static/measurements/market%20test/images/market_flour.png",
+                    onIncrement = {},
+                    onDecrement = {},
+                    onClick = {}
+                )
+            }
+
+            Column(
+                modifier = Modifier.weight(1f),
+                verticalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
+                DmtGroceryItemMenuCard(
+                    text = "לחם אחיד",
+                    quantity = 0,
+                    imageUrl = "http://generic2dev.hitheal.org.il/static/measurements/market%20test/images/market_bread.png",
+                    isOutOfStock = true,
+                    onIncrement = {},
+                    onDecrement = {},
+                    onClick = {}
+                )
+
+                DmtGroceryItemMenuCard(
+                    text = "תרומה לקהילה",
+                    quantity = 1,
+                    imageUrl = "",
+                    isDonation = true,
+                    onIncrement = {},
+                    onDecrement = {},
+                    onClick = {}
                 )
             }
         }

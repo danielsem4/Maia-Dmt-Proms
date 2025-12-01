@@ -107,7 +107,6 @@ fun MarketSelectedCategoryScreen(
                     .fillMaxSize()
                     .padding(16.dp)
             ) {
-                // Left Side: Categories List & Search
                 LazyColumn(
                     modifier = Modifier
                         .weight(0.25f)
@@ -154,7 +153,6 @@ fun MarketSelectedCategoryScreen(
                     }
                 }
 
-                // Right Side: Products Grid & Bottom Buttons
                 Column(
                     modifier = Modifier
                         .weight(0.75f)
@@ -201,7 +199,6 @@ fun MarketSelectedCategoryScreen(
 
                     Spacer(modifier = Modifier.height(8.dp))
 
-                    // Bottom Buttons
                     Row(
                         modifier = Modifier
                             .fillMaxWidth(),

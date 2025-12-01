@@ -1,6 +1,19 @@
 package maia.dmt.market.data.model
 
+import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+
+
+@Serializable
+data class MarketResponseContainer(
+    @SerialName("measurement_json")
+    val data: MarketDataDto
+)
+
+@Serializable
+data class MarketDataDto(
+    val products: List<MarketProductDto>
+)
 
 
 @Serializable
@@ -13,9 +26,4 @@ data class MarketProductDto(
     val category: String,
     val amount: Int,
     val imageUrl: String
-)
-
-@Serializable
-data class ProductsResponse(
-    val products: List<MarketProductDto>
 )

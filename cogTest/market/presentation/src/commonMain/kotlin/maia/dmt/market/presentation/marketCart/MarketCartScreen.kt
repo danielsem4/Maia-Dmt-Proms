@@ -28,6 +28,7 @@ import dmtproms.cogtest.market.presentation.generated.resources.cogTest_market_g
 import dmtproms.cogtest.market.presentation.generated.resources.cogTest_market_product
 import dmtproms.cogtest.market.presentation.generated.resources.cogTest_market_remove
 import dmtproms.cogtest.market.presentation.generated.resources.cogTest_market_title_cart
+import dmtproms.cogtest.market.presentation.generated.resources.cogTest_market_to_finish_press_here
 import dmtproms.cogtest.market.presentation.generated.resources.cogTest_market_view_donation_list
 import dmtproms.cogtest.market.presentation.generated.resources.cogTest_market_view_list
 import dmtproms.cogtest.market.presentation.generated.resources.market_basket_icon
@@ -87,7 +88,6 @@ fun MarketCartScreen(
                     modifier = Modifier.padding(8.dp)
                 )
 
-                // Header Row
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -142,7 +142,6 @@ fun MarketCartScreen(
 
                 Spacer(modifier = Modifier.padding(8.dp))
 
-                // Bottom Buttons
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -164,6 +163,12 @@ fun MarketCartScreen(
                         modifier = Modifier.widthIn(min = 100.dp, max = 320.dp)
                     )
                     DmtButton(
+                        text = stringResource(Res.string.cogTest_market_to_finish_press_here),
+                        onClick = {  },
+                        style = DmtButtonStyle.SECONDARY,
+                        modifier = Modifier.widthIn(min = 100.dp, max = 320.dp)
+                    )
+                    DmtButton(
                         text = stringResource(Res.string.cogTest_market_view_donation_list),
                         leadingIcon = {
                             Icon(
@@ -173,19 +178,6 @@ fun MarketCartScreen(
                             )
                         },
                         onClick = { /* Navigate to donation list */ },
-                        style = DmtButtonStyle.SECONDARY,
-                        modifier = Modifier.widthIn(min = 100.dp, max = 320.dp)
-                    )
-                    DmtButton(
-                        text = stringResource(Res.string.cogTest_market_groceries_list),
-                        leadingIcon = {
-                            Icon(
-                                imageVector = vectorResource(Res.drawable.market_cart_shopping_icon),
-                                contentDescription = null,
-                                modifier = Modifier.size(28.dp)
-                            )
-                        },
-                        onClick = { /* Already in cart */ },
                         style = DmtButtonStyle.SECONDARY,
                         modifier = Modifier.widthIn(min = 100.dp, max = 320.dp)
                     )

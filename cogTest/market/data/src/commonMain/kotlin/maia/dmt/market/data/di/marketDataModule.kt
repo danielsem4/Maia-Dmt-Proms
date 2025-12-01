@@ -4,10 +4,12 @@ import maia.dmt.market.data.mapper.RecipeDataMapper
 import maia.dmt.market.data.repository.CartRepositoryImpl
 import maia.dmt.market.data.repository.MarketRepositoryImpl
 import maia.dmt.market.data.repository.RecipeRepositoryImpl
+import maia.dmt.market.data.service.KtorMarketService
 import maia.dmt.market.data.source.RecipeLocalDataSource
 import maia.dmt.market.domain.repository.CartRepository
 import maia.dmt.market.domain.repository.MarketRepository
 import maia.dmt.market.domain.repository.RecipeRepository
+import maia.dmt.market.domain.service.MarketService
 import maia.dmt.market.domain.usecase.GetAllCategoriesUseCase
 import maia.dmt.market.domain.usecase.GetAllGroceriesUseCase
 import maia.dmt.market.domain.usecase.GetAllProductsUseCase
@@ -24,9 +26,14 @@ import org.koin.dsl.module
 val marketDataModule = module {
     singleOf(::RecipeLocalDataSource)
     singleOf(::RecipeDataMapper)
+    singleOf(::KtorMarketService) bind MarketService::class
 
     single<RecipeRepository> { RecipeRepositoryImpl(get(), get()) }
+
     singleOf(::MarketRepositoryImpl) bind MarketRepository::class
+
+    singleOf(::CartRepositoryImpl) bind CartRepository::class
+
 
     singleOf(::GetAllRecipesUseCase)
     singleOf(::GetRecipeByIdUseCase)
@@ -37,8 +44,4 @@ val marketDataModule = module {
     singleOf(::GetProductsByCategoryUseCase)
     singleOf(::GetCategoryByIdUseCase)
     singleOf(::GetAllProductsUseCase)
-
-    single<CartRepository> { CartRepositoryImpl() }
-
-
 }

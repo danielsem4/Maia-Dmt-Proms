@@ -3,40 +3,35 @@ package maia.dmt.market.presentation.marketSearch
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.FlowPreview
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.debounce
-import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.receiveAsFlow
-import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import maia.dmt.market.domain.repository.CartRepository
 import maia.dmt.market.domain.usecase.GetAllProductsUseCase
+import maia.dmt.market.presentation.util.MarketStringResourceMapper
+// IMPORTANT IMPORT:
+import org.jetbrains.compose.resources.getString
 
-@OptIn(FlowPreview::class)
 class MarketSearchViewModel(
     private val getAllProductsUseCase: GetAllProductsUseCase,
     private val cartRepository: CartRepository
-): ViewModel() {
+) : ViewModel() {
 
     private val _events = Channel<MarketSearchEvent>()
     val events = _events.receiveAsFlow()
 
     private val _state = MutableStateFlow(MarketSearchState())
-    val state = _state
-        .onEach { state ->
-            if (state.searchQuery.isNotEmpty()) {
+    val state = _state.asStateFlow()
 
-            }
-        }
-        .debounce(300)
-        .stateIn(
-            viewModelScope,
-            SharingStarted.WhileSubscribed(5000),
-            MarketSearchState()
-        )
+    // Cache: Product ID -> Localized Name (e.g. "1" -> "גבינה לבנה")
+    private val productNameCache = mutableMapOf<String, String>()
+
+    private var searchJob: Job? = null
 
     init {
         loadAllItems()
@@ -47,14 +42,10 @@ class MarketSearchViewModel(
         when (action) {
             is MarketSearchAction.OnSearchQueryChange -> {
                 _state.update { it.copy(searchQuery = action.query) }
-                if (action.query.isEmpty()) {
-                    _state.update { it.copy(searchResults = emptyList()) }
-                }
+                performSearch(action.query)
             }
             is MarketSearchAction.OnBackClick -> {
-                viewModelScope.launch {
-                    _events.send(MarketSearchEvent.NavigateBack)
-                }
+                viewModelScope.launch { _events.send(MarketSearchEvent.NavigateBack) }
             }
             is MarketSearchAction.OnProductIncrement -> {
                 cartRepository.addToCart(action.productId)
@@ -62,9 +53,7 @@ class MarketSearchViewModel(
             is MarketSearchAction.OnProductDecrement -> {
                 cartRepository.removeFromCart(action.productId)
             }
-            is MarketSearchAction.OnProductClick -> {
-                // Handle product click if needed
-            }
+            is MarketSearchAction.OnProductClick -> { }
         }
     }
 
@@ -73,6 +62,13 @@ class MarketSearchViewModel(
             _state.update { it.copy(isLoading = true) }
             try {
                 val allProducts = getAllProductsUseCase()
+
+                allProducts.forEach { product ->
+                    val resource = MarketStringResourceMapper.getProductResource(product.titleResId)
+                    val localizedName = getString(resource)
+                    productNameCache[product.id] = localizedName
+                }
+
                 _state.update {
                     it.copy(
                         allItems = allProducts,
@@ -80,33 +76,47 @@ class MarketSearchViewModel(
                     )
                 }
             } catch (e: Exception) {
+                e.printStackTrace()
                 _state.update {
-                    it.copy(
-                        isLoading = false,
-                        errorMessage = e.message
-                    )
+                    it.copy(isLoading = false, errorMessage = e.message)
                 }
             }
+        }
+    }
+
+    private fun performSearch(query: String) {
+        searchJob?.cancel()
+        searchJob = viewModelScope.launch {
+            delay(300) // Debounce
+
+            if (query.isBlank()) {
+                _state.update { it.copy(searchResults = emptyList()) }
+                return@launch
+            }
+
+            val currentItems = _state.value.allItems
+
+            val filteredList = currentItems.filter { product ->
+                val name = productNameCache[product.id] ?: ""
+                name.contains(query, ignoreCase = true)
+            }
+
+            _state.update { it.copy(searchResults = filteredList) }
         }
     }
 
     private fun observeCart() {
         viewModelScope.launch {
             cartRepository.cartQuantities.collect { cartMap ->
-                val currentItems = _state.value.allItems
-                val currentSearchResults = _state.value.searchResults
-
-                val updatedItems = currentItems.map { product ->
-                    product.copy(amount = cartMap[product.id] ?: 0)
-                }
-
-                val updatedSearchResults = currentSearchResults.map { product ->
-                    product.copy(amount = cartMap[product.id] ?: 0)
-                }
-
-                _state.update {
-                    it.copy(
-                        allItems = updatedItems,
+                _state.update { currentState ->
+                    val updatedAllItems = currentState.allItems.map { product ->
+                        product.copy(amount = cartMap[product.id] ?: 0)
+                    }
+                    val updatedSearchResults = currentState.searchResults.map { product ->
+                        product.copy(amount = cartMap[product.id] ?: 0)
+                    }
+                    currentState.copy(
+                        allItems = updatedAllItems,
                         searchResults = updatedSearchResults
                     )
                 }

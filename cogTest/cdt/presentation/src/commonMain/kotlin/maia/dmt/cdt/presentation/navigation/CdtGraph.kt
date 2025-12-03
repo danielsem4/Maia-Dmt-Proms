@@ -5,6 +5,7 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
 import maia.dmt.cdt.presentation.cdtDraw.CdtDrawRoot
+import maia.dmt.cdt.presentation.cdtFirstMissionDone.CdtFirstMissionDoneRoot
 import maia.dmt.cdt.presentation.cdtLand.CdtLandRoot
 
 fun NavGraphBuilder.cdtGraph(
@@ -25,8 +26,15 @@ fun NavGraphBuilder.cdtGraph(
         composable<CdtGraphRoutes.CdtDraw> {
             CdtDrawRoot(
                 onNavigateToNextQuestion = {
-
+                    navController.navigate(CdtGraphRoutes.CdtFirstMissionDone)
                 },
+                onNavigateBack = { navController.popBackStack() }
+            )
+        }
+
+        composable<CdtGraphRoutes.CdtFirstMissionDone> {
+            CdtFirstMissionDoneRoot(
+                onNavigateToNextScreen = {  },
                 onNavigateBack = { navController.popBackStack() }
             )
         }

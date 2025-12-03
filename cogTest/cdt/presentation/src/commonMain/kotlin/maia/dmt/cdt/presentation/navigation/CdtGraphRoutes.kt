@@ -13,6 +13,8 @@ interface CdtGraphRoutes {
     @Serializable
     data object CdtDraw: CdtGraphRoutes
 
+    @Serializable
+    data object CdtFirstMissionDone: CdtGraphRoutes
 
 
 }

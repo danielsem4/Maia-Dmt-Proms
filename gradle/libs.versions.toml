@@ -49,6 +49,8 @@ moko = "0.19.1"
 buildkonfig = "0.17.1"
 kermit = "2.0.6"
 settings = "1.2.0"
+compottie = "2.0.0-rc01"
+
 
 
 projectApplicationId = "maia.dmt.proms"
@@ -141,6 +143,10 @@ moko-permissions-notifications = { module = "dev.icerock.moko:permissions-notifi
 
 # Logging
 touchlab-kermit = { module = "co.touchlab:kermit", version.ref = "kermit" }
+
+compottie = { module = "io.github.alexzhirkevich:compottie", version.ref = "compottie" }
+compottie-resources = { module = "io.github.alexzhirkevich:compottie-resources", version.ref = "compottie" }
+
 
 multiplatform-settings = { module = "com.russhwolf:multiplatform-settings", version.ref = "settings" }
 multiplatform-settings-coroutines = { module = "com.russhwolf:multiplatform-settings-coroutines", version.ref = "settings" }

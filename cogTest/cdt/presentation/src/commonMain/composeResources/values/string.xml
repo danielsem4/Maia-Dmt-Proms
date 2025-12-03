@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="cogTest_cdt_title">Clock test</string>
+    <string name="cogTest_cdt_drawing_test_title">Clock drawing test</string>
+    <string name="cogTest_cdt_the_clock_test">The clock test</string>
+    <string name="cogTest_cdt_gender_disclaimer">Instructions are phrased in the masculine but address all genders</string>
+    <string name="cogTest_cdt_start">Start</string>
+    <string name="cogTest_cdt_instruction_draw_1110">Draw a clock with all the numbers showing the time 11:10</string>
+    <string name="cogTest_cdt_touch_warning">Note: When drawing, make sure only your finger or pen is touching the tablet</string>
+    <string name="cogTest_cdt_erase">Erase</string>
+    <string name="cogTest_cdt_clear_all">Clear all</string>
+    <string name="cogTest_cdt_next_question">Next question</string>
+    <string name="cogTest_cdt_stage_one_complete">You finished the first stage, now we move to the next stage</string>
+    <string name="cogTest_cdt_instruction_set_hands">Before you is a clock showing twelve o\'clock, you need to set the clock by moving the hands</string>
+    <string name="cogTest_cdt_continue">Continue</string>
+    <string name="cogTest_cdt_reset">Reset</string>
+    <string name="cogTest_cdt_now">Now</string>
+    <string name="cogTest_cdt_press_continue_hint">Afterwards, press the continue button.</string>
+    <string name="cogTest_cdt_completion_msg">The test has ended, thank you for your cooperation</string>
+    <string name="cogTest_cdt_finish">Finish</string>
+    <string name="cogTest_cdt_score">Score</string>
+    <string name="cogTest_cdt_score_instruction">Please score the clock test displayed before you</string>
+    <string name="cogTest_cdt_confirm">Confirm</string>
+
+    <string name="cogTest_cdt_clear_drawing_title">Clear Drawing?</string>
+    <string name="cogTest_cdt_clear_drawing_description">This will erase everything you've drawn. This action cannot be undone.</string>
+    <string name="cogTest_cdt_cancel">Cancel</string>
+    <string name="cogTest_cdt_draw">Draw</string>
+
+</resources>

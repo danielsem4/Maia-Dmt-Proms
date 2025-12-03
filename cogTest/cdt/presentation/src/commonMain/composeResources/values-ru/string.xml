@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="cogTest_cdt_title">Тест с часами</string>
+    <string name="cogTest_cdt_drawing_test_title">Тест рисования часов</string>
+    <string name="cogTest_cdt_the_clock_test">Тест с часами</string>
+    <string name="cogTest_cdt_gender_disclaimer">Инструкции написаны в мужском роде, но обращены ко всем полам</string>
+    <string name="cogTest_cdt_start">Начать</string>
+    <string name="cogTest_cdt_instruction_draw_1110">Нарисуйте часы со всеми цифрами, показывающими время 11:10</string>
+    <string name="cogTest_cdt_touch_warning">Примечание: При рисовании убедитесь, что планшета касается только палец или стилус</string>
+    <string name="cogTest_cdt_erase">Стереть</string>
+    <string name="cogTest_cdt_clear_all">Очистить все</string>
+    <string name="cogTest_cdt_next_question">Следующий вопрос</string>
+    <string name="cogTest_cdt_stage_one_complete">Вы закончили первый этап, переходим к следующему</string>
+    <string name="cogTest_cdt_instruction_set_hands">Перед вами часы, показывающие двенадцать часов. Вам нужно установить время, перемещая стрелки</string>
+    <string name="cogTest_cdt_continue">Продолжить</string>
+    <string name="cogTest_cdt_reset">Сброс</string>
+    <string name="cogTest_cdt_now">Сейчас</string>
+    <string name="cogTest_cdt_press_continue_hint">Затем нажмите кнопку продолжить.</string>
+    <string name="cogTest_cdt_completion_msg">Тест завершен, спасибо за сотрудничество</string>
+    <string name="cogTest_cdt_finish">Завершить</string>
+    <string name="cogTest_cdt_score">Оценка</string>
+    <string name="cogTest_cdt_score_instruction">Пожалуйста, оцените тест с часами, представленный перед вами</string>
+    <string name="cogTest_cdt_confirm">Подтвердить</string>
+
+    <string name="cogTest_cdt_clear_drawing_title">Очистить рисунок?</string>
+    <string name="cogTest_cdt_clear_drawing_description">Это сотрет все, что вы нарисовали. Это действие отменить невозможно.</string>
+    <string name="cogTest_cdt_cancel">Отмена</string>
+    <string name="cogTest_cdt_draw">Рисовать</string>
+</resources>

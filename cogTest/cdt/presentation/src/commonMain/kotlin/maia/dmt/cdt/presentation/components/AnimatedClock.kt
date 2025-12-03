@@ -14,11 +14,12 @@ import io.github.alexzhirkevich.compottie.rememberLottiePainter
 import io.github.alexzhirkevich.compottie.animateLottieCompositionAsState
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 
+
 @OptIn(ExperimentalResourceApi::class)
 @Composable
 fun AnimatedClock(
     modifier: Modifier = Modifier,
-    speed: Float = 0.5f
+    speed: Float = 0.25f
 ) {
     val composition by rememberLottieComposition {
         LottieCompositionSpec.JsonString(

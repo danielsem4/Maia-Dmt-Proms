@@ -3,6 +3,7 @@ package maia.dmt.proms.di
 import maia.dmt.activities.data.di.activitiesDataModule
 import maia.dmt.activities.presentation.di.activitiesPresentationModule
 import maia.dmt.auth.presentation.di.authPresentationModule
+import maia.dmt.cdt.presentation.di.cdtPresentationModule
 import maia.dmt.core.data.di.coreDataModule
 import maia.dmt.core.domain.di.coreDomainModule
 import maia.dmt.evaluation.presentation.di.evaluationPresentationModule
@@ -40,7 +41,8 @@ fun initKoin(config: KoinAppDeclaration? = null) {
             statisticsDataModule,
             settingsPresentationModule,
             marketPresentationModule,
-            marketDataModule
+            marketDataModule,
+            cdtPresentationModule
         )
     }
 

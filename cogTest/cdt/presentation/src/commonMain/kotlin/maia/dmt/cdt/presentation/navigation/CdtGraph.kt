@@ -14,6 +14,8 @@ fun NavGraphBuilder.cdtGraph(
     ) {
         composable<CdtGraphRoutes.CdtLand> {
             CdtLandRoot(
+                onNavigateToTest = {  },
+                onNavigateBack = { navController.popBackStack() }
 
             )
         }

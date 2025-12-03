@@ -21,4 +21,10 @@
     <string name="cogTest_cdt_score">Score</string>
     <string name="cogTest_cdt_score_instruction">Please score the clock test displayed before you</string>
     <string name="cogTest_cdt_confirm">Confirm</string>
+
+    <string name="cogTest_cdt_clear_drawing_title">Clear Drawing?</string>
+    <string name="cogTest_cdt_clear_drawing_description">This will erase everything you've drawn. This action cannot be undone.</string>
+    <string name="cogTest_cdt_cancel">Cancel</string>
+    <string name="cogTest_cdt_draw">Draw</string>
+
 </resources>

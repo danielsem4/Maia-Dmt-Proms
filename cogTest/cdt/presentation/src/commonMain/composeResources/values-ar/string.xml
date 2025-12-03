@@ -21,4 +21,9 @@
     <string name="cogTest_cdt_score">النتيجة</string>
     <string name="cogTest_cdt_score_instruction">يرجى تقييم اختبار الساعة المعروض أمامك</string>
     <string name="cogTest_cdt_confirm">تأكيد</string>
+
+    <string name="cogTest_cdt_clear_drawing_title">مسح الرسم؟</string>
+    <string name="cogTest_cdt_clear_drawing_description">سيؤدي هذا إلى مسح كل ما رسمته. لا يمكن التراجع عن هذا الإجراء.</string>
+    <string name="cogTest_cdt_cancel">إلغاء</string>
+    <string name="cogTest_cdt_draw">ارسم</string>
 </resources>

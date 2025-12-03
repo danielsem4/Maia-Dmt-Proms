@@ -21,4 +21,9 @@
     <string name="cogTest_cdt_score">Оценка</string>
     <string name="cogTest_cdt_score_instruction">Пожалуйста, оцените тест с часами, представленный перед вами</string>
     <string name="cogTest_cdt_confirm">Подтвердить</string>
+
+    <string name="cogTest_cdt_clear_drawing_title">Очистить рисунок?</string>
+    <string name="cogTest_cdt_clear_drawing_description">Это сотрет все, что вы нарисовали. Это действие отменить невозможно.</string>
+    <string name="cogTest_cdt_cancel">Отмена</string>
+    <string name="cogTest_cdt_draw">Рисовать</string>
 </resources>

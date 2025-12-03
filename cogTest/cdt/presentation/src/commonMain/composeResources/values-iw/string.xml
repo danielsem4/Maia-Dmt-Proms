@@ -21,4 +21,9 @@
     <string name="cogTest_cdt_score">ציון</string>
     <string name="cogTest_cdt_score_instruction">יש לנקד את המבחן שעון שמוצג בפניך</string>
     <string name="cogTest_cdt_confirm">אישור</string>
+
+    <string name="cogTest_cdt_clear_drawing_title">לנקות את הציור?</string>
+    <string name="cogTest_cdt_clear_drawing_description">פעולה זו תמחק את כל מה שציירת. לא ניתן לבטל פעולה זו.</string>
+    <string name="cogTest_cdt_cancel">ביטול</string>
+    <string name="cogTest_cdt_draw">צייר</string>
 </resources>

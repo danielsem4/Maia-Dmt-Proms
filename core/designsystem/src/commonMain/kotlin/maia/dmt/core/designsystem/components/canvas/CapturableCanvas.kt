@@ -8,6 +8,7 @@ import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.platform.LocalDensity
 import maia.dmt.core.designsystem.components.canvas.controller.CanvasCaptureController
 
+
 @Composable
 fun CapturableCanvas(
     controller: CanvasCaptureController,

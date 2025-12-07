@@ -26,4 +26,59 @@
     <string name="cogTest_cdt_clear_drawing_description">سيؤدي هذا إلى مسح كل ما رسمته. لا يمكن التراجع عن هذا الإجراء.</string>
     <string name="cogTest_cdt_cancel">إلغاء</string>
     <string name="cogTest_cdt_draw">ارسم</string>
+
+    <!-- circle_grades -->
+    <string-array name="circle_grades">
+        <item>2 - شكل كامل</item>
+        <item>1 - شكل غير مكتمل أو مع امتداد خط</item>
+        <item>0 - لا يوجد دائرة أو تشويه شديد</item>
+    </string-array>
+
+    <!-- numbers_grades -->
+    <string-array name="numbers_grades">
+        <item>4 - جميع الأرقام بترتيب صحيح وتباعد متسق</item>
+        <item>3 - أخطاء طفيفة</item>
+        <item>2 - أرقام مفقودة/زائدة أو مرتبة بعكس اتجاه عقارب الساعة</item>
+        <item>1 - نصف الأرقام تقريبًا مفقود</item>
+        <item>0 - معظم الأرقام مفقودة</item>
+    </string-array>
+
+    <!-- hands_grades -->
+    <string-array name="hands_grades">
+        <item>4 - العقارب في المكان الصحيح وبالحجم الصحيح</item>
+        <item>3 - انحراف بسيط أو بدون فرق في الحجم</item>
+        <item>2 - أخطاء كبيرة</item>
+        <item>1 - عقرب واحد فقط أو تمثيل ضعيف</item>
+        <item>0 - لا يوجد عقارب</item>
+    </string-array>
+
+    <!-- missions_v_1 -->
+    <string-array name="missions_v_1">
+        <item>أمامك ساعة تشير إلى الساعة الثانية عشرة، اضبط الساعة بتحريك العقارب ساعتين وثلاثين دقيقة إلى الأمام.</item>
+        <item>اضبط الساعة ساعتين وخمسين دقيقة إلى الخلف.</item>
+    </string-array>
+
+    <!-- missions_v_2 -->
+    <string-array name="missions_v_2">
+        <item>الساعة تشير إلى الثانية عشرة، حرّك العقارب ثلاث ساعات وعشرين دقيقة إلى الأمام.</item>
+        <item>حرّك الساعة ساعة وأربعين دقيقة إلى الخلف.</item>
+    </string-array>
+
+    <!-- missions_v_3 -->
+    <string-array name="missions_v_3">
+        <item>الساعة تشير إلى الثانية عشرة، حرّك العقارب ساعة وثلاثين دقيقة إلى الأمام.</item>
+        <item>حرّك الساعة خمسين دقيقة إلى الخلف.</item>
+    </string-array>
+
+    <!-- missions_v_4 -->
+    <string-array name="missions_v_4">
+        <item>الساعة تشير إلى الثانية عشرة، حرّك العقارب ساعة وخمسين دقيقة إلى الخلف.</item>
+        <item>حرّك الساعة ساعتين وأربعين دقيقة إلى الأمام.</item>
+    </string-array>
+
+    <!-- missions_v_5 -->
+    <string-array name="missions_v_5">
+        <item>الساعة تشير إلى الثانية عشرة، حرّك العقارب أربعين دقيقة إلى الأمام.</item>
+        <item>حرّك الساعة ساعة وخمسًا وعشرين دقيقة إلى الأمام.</item>
+    </string-array>
 </resources>

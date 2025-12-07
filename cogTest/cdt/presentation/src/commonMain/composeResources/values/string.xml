@@ -27,4 +27,59 @@
     <string name="cogTest_cdt_cancel">Cancel</string>
     <string name="cogTest_cdt_draw">Draw</string>
 
+    <!-- circle_grades -->
+    <string-array name="circle_grades">
+        <item>2 - Complete shape</item>
+        <item>1 - Incomplete shape or with line continuation</item>
+        <item>0 - No circle or extreme distortion</item>
+    </string-array>
+
+    <!-- numbers_grades -->
+    <string-array name="numbers_grades">
+        <item>4 - All numbers in correct order with consistent spacing</item>
+        <item>3 - Minor mistakes</item>
+        <item>2 - Missing/extra numbers or arranged counterclockwise</item>
+        <item>1 - About half of the numbers are missing</item>
+        <item>0 - Most numbers are missing</item>
+    </string-array>
+
+    <!-- hands_grades -->
+    <string-array name="hands_grades">
+        <item>4 - Hands in correct position and size</item>
+        <item>3 - Slight deviation or no size difference</item>
+        <item>2 - Significant errors</item>
+        <item>1 - Only one hand or poor display</item>
+        <item>0 - No hands</item>
+    </string-array>
+
+    <!-- missions_v_1 -->
+    <string-array name="missions_v_1">
+        <item>The clock shows twelve o'clock. Adjust the clock by moving the hands two hours and thirty minutes forward.</item>
+        <item>Adjust the clock two hours and fifty minutes backward.</item>
+    </string-array>
+
+    <!-- missions_v_2 -->
+    <string-array name="missions_v_2">
+        <item>The clock shows twelve o'clock. Adjust the clock by moving the hands three hours and twenty minutes forward.</item>
+        <item>Adjust the clock one hour and forty minutes backward.</item>
+    </string-array>
+
+    <!-- missions_v_3 -->
+    <string-array name="missions_v_3">
+        <item>The clock shows twelve o'clock. Move the hands one hour and thirty minutes forward.</item>
+        <item>Move the clock fifty minutes backward.</item>
+    </string-array>
+
+    <!-- missions_v_4 -->
+    <string-array name="missions_v_4">
+        <item>The clock shows twelve o'clock. Move the hands one hour and fifty minutes backward.</item>
+        <item>Move the clock two hours and forty minutes forward.</item>
+    </string-array>
+
+    <!-- missions_v_5 -->
+    <string-array name="missions_v_5">
+        <item>The clock shows twelve o'clock. Move the hands forty minutes forward.</item>
+        <item>Move the clock one hour and twenty-five minutes forward.</item>
+    </string-array>
+
 </resources>

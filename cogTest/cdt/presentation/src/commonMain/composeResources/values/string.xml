@@ -31,6 +31,8 @@
     <string name="cogTest_cdt_end_message">Thank you for completing the Clock Drawing Test. Press Exit to submit your results.</string>
     <string name="cogTest_cdt_exit">Exit</string>
 
+    <string name="cogTest_cdt_grade">Grade</string>
+
     <!-- circle_grades -->
     <string-array name="circle_grades">
         <item>2 - Complete shape</item>

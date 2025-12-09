@@ -11,9 +11,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import dmtproms.cogtest.cdt.presentation.generated.resources.Res
+import dmtproms.cogtest.cdt.presentation.generated.resources.cogTest_cdt_confirm
 import dmtproms.cogtest.cdt.presentation.generated.resources.cogTest_cdt_end_message
 import dmtproms.cogtest.cdt.presentation.generated.resources.cogTest_cdt_end_title
 import dmtproms.cogtest.cdt.presentation.generated.resources.cogTest_cdt_exit
+import dmtproms.cogtest.cdt.presentation.generated.resources.cogTest_cdt_grade
 import maia.dmt.core.designsystem.components.buttons.DmtButton
 import maia.dmt.core.designsystem.components.cards.DmtParagraphCard
 import maia.dmt.core.designsystem.components.layouts.DmtBaseScreen
@@ -24,6 +26,7 @@ import org.koin.compose.viewmodel.koinViewModel
 fun CdtEndRoot(
     onNavigateToNextScreen: () -> Unit,
     onNavigateBack: () -> Unit,
+    onNavigateToGradeScreen: () -> Unit,
     viewModel: CdtEndViewModel = koinViewModel()
 ) {
     val state by viewModel.state.collectAsState()
@@ -38,21 +41,23 @@ fun CdtEndRoot(
                     println("Error: ${event.message}")
                 }
 
-                CdtEndEvent.UploadSuccess -> TODO()
+                CdtEndEvent.NavigateToGrade -> {
+                    onNavigateToGradeScreen()
+                }
             }
         }
     }
 
     CdtEndScreen(
         state = state,
-        onExitClick = { viewModel.onAction(CdtEndAction.OnExitClick) }
+        onAction = viewModel::onAction
     )
 }
 
 @Composable
 fun CdtEndScreen(
     state: CdtEndState,
-    onExitClick: () -> Unit
+    onAction: (CdtEndAction) -> Unit
 ) {
     DmtBaseScreen(
         titleText = stringResource(Res.string.cogTest_cdt_end_title),
@@ -85,11 +90,11 @@ fun CdtEndScreen(
                     ) {
                         DmtButton(
                             text = stringResource(Res.string.cogTest_cdt_exit),
-                            onClick = onExitClick
+                            onClick = { onAction(CdtEndAction.OnExitClick) }
                         )
                         DmtButton(
-                            text = "Grade",
-                            onClick = {  }
+                            text = stringResource(Res.string.cogTest_cdt_grade),
+                            onClick = { onAction(CdtEndAction.OnGradeClick) }
                         )
                     }
                 }

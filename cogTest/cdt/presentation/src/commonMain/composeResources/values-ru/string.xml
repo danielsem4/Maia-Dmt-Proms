@@ -85,4 +85,12 @@
         <item>Часы показывают двенадцать. Переместите стрелки на сорок минут вперёд.</item>
         <item>Переместите стрелки на один час и двадцать пять минут вперёд.</item>
     </string-array>
+
+    <string name="cogTest_cdt_instruction">Необходимо оценить тест рисования часов, представленный перед вами</string>
+    <string name="cogTest_cdt_circle_completeness">Целостность круга часов</string>
+    <string name="cogTest_cdt_numbers_presence_sequence">Наличие и последовательность цифр</string>
+    <string name="cogTest_cdt_hands_presence_position">Наличие и расположение стрелок</string>
+
+    <string name="cogTest_cdt_grade">Оценка</string>
+
 </resources>

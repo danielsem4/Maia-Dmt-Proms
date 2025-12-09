@@ -39,16 +39,23 @@ class CdtEndViewModel(
     val events = eventChannel.receiveAsFlow()
 
     private val requestedTimesByVersion: Map<Int, List<String>> = mapOf(
-        0 to listOf("02:30", "11:40"),
-        1 to listOf("03:20", "01:40"),
-        2 to listOf("01:30", "12:40"),
-        3 to listOf("10:10", "12:50"),
-        4 to listOf("12:40", "01:05")
+        0 to listOf("02:30", "11:10"),
+        1 to listOf("03:20", "10:20"),
+        2 to listOf("01:30", "11:10"),
+        3 to listOf("10:10", "02:40"),
+        4 to listOf("12:40", "01:25")
     )
 
     fun onAction(action: CdtEndAction) {
         when (action) {
             is CdtEndAction.OnExitClick -> uploadAndSubmitResults()
+            is CdtEndAction.OnGradeClick -> navigateToGrade()
+        }
+    }
+
+    private fun navigateToGrade() {
+        viewModelScope.launch {
+            eventChannel.send(CdtEndEvent.NavigateToGrade)
         }
     }
 
@@ -58,7 +65,6 @@ class CdtEndViewModel(
 
             val authInfo = sessionStorage.observeAuthInfo().firstOrNull()
             val evaluation = cdtSessionManager.evaluation.value
-
             val clinicId = authInfo?.user?.clinicId
             val patientId = authInfo?.user?.id
             val evaluationId = evaluation?.id
@@ -76,7 +82,6 @@ class CdtEndViewModel(
             val currentDateTime = getCurrentFormattedDateTime()
             val accumulatedResults = ArrayList<MeasurementDetailString>()
 
-            // Helper function (Same as before)
             suspend fun uploadAndAddResult(
                 bitmapSource: Any?,
                 labelKey: String,
@@ -90,7 +95,6 @@ class CdtEndViewModel(
                 }
 
                 val targetId = dynamicIds[labelKey] ?: defaultId
-
                 val imageBytes = try {
                     (bitmapSource as androidx.compose.ui.graphics.ImageBitmap).toByteArray()
                 } catch (e: Exception) {
@@ -109,14 +113,7 @@ class CdtEndViewModel(
 
                 when (val result = uploadImageUseCase.execute(imageBytes, params)) {
                     is Result.Success -> {
-                        println("DEBUG: Upload Success for $labelKey. Path: ${result.data}")
-                        accumulatedResults.add(
-                            MeasurementDetailString(
-                                dateTime = currentDateTime,
-                                measureObject = targetId,
-                                value = result.data
-                            )
-                        )
+                        accumulatedResults.add(MeasurementDetailString(currentDateTime, targetId, result.data))
                     }
                     is Result.Failure -> {
                         println("DEBUG: Upload Failed for $labelKey: ${result.error}")
@@ -124,60 +121,19 @@ class CdtEndViewModel(
                 }
             }
 
-            // ---------------------------------------------------------
-            // 1. FIX: Find the Main Drawing by LABEL, not by Index 0
-            // ---------------------------------------------------------
             val drawings = cdtSessionManager.getAllDrawingBitmaps()
-
-            // Find which index in the list corresponds to "imageUrl"
-            val mainDrawingIndex = evaluation.measurement_objects.indexOfFirst {
-                it.object_label == "imageUrl"
-            }
-
-            // If found, get that specific index. If not found, try 0 as a fallback.
-            val mainDrawingBitmap = if (mainDrawingIndex != -1) {
+            val mainDrawingIndex = evaluation.measurement_objects.indexOfFirst { it.object_label == "imageUrl" }
+            val mainDrawingBitmap = if (mainDrawingIndex != -1 && drawings.containsKey(mainDrawingIndex)) {
                 drawings[mainDrawingIndex]
             } else {
                 drawings[0]
             }
+            uploadAndAddResult(mainDrawingBitmap, "imageUrl", 186, "cdt_main", "main_drawing")
 
-            // Debug log to see what's happening
-            println("DEBUG: Main Drawing Index: $mainDrawingIndex, Available Keys: ${drawings.keys}")
-
-            uploadAndAddResult(
-                bitmapSource = mainDrawingBitmap,
-                labelKey = "imageUrl",
-                defaultId = 186,
-                fileNamePrefix = "cdt_main",
-                extraData = "main_drawing"
-            )
-
-            // ---------------------------------------------------------
-            // 2. Upload Clock Set Bitmaps
-            // Note: These usually work with 0 and 1 because the ClockTimeViewModel
-            // has its own internal index starting at 0.
-            // ---------------------------------------------------------
             val clockBitmaps = cdtSessionManager.getAllClockBitmaps()
+            uploadAndAddResult(clockBitmaps[0], "Time1 imageUrl", 585, "cdt_time1", "time1_image")
+            uploadAndAddResult(clockBitmaps[1], "Time2 imageUrl", 586, "cdt_time2", "time2_image")
 
-            uploadAndAddResult(
-                bitmapSource = clockBitmaps[0],
-                labelKey = "Time1 imageUrl",
-                defaultId = 585,
-                fileNamePrefix = "cdt_time1",
-                extraData = "time1_image"
-            )
-
-            uploadAndAddResult(
-                bitmapSource = clockBitmaps[1],
-                labelKey = "Time2 imageUrl",
-                defaultId = 586,
-                fileNamePrefix = "cdt_time2",
-                extraData = "time2_image"
-            )
-
-            // ---------------------------------------------------------
-            // 3. Text Results
-            // ---------------------------------------------------------
             val userTimes = cdtSessionManager.getAllClockTimes()
             val examVersion = cdtSessionManager.getClockExamVersion()
             val requestedTimeStrings = requestedTimesByVersion[examVersion] ?: listOf("00:00", "00:00")
@@ -185,26 +141,38 @@ class CdtEndViewModel(
             if (userTimes.containsKey(0)) {
                 val userTime = userTimes[0]!!
                 val actualId = dynamicIds["Actual time 1"] ?: 193
-                val userTimeString = "${formatTime(userTime.hours)}:${formatTime(userTime.minutes)}"
-                accumulatedResults.add(MeasurementDetailString(currentDateTime, actualId, userTimeString))
+                accumulatedResults.add(MeasurementDetailString(currentDateTime, actualId, "${formatTime(userTime.hours)}:${formatTime(userTime.minutes)}"))
 
                 val requestedId = dynamicIds["Requested time 1"] ?: 190
-                val expectedString = requestedTimeStrings.getOrElse(0) { "00:00" }
-                accumulatedResults.add(MeasurementDetailString(currentDateTime, requestedId, expectedString))
+                accumulatedResults.add(MeasurementDetailString(currentDateTime, requestedId, requestedTimeStrings.getOrElse(0) { "00:00" }))
             }
 
             if (userTimes.containsKey(1)) {
                 val userTime = userTimes[1]!!
                 val actualId = dynamicIds["Actual time 2"] ?: 194
-                val userTimeString = "${formatTime(userTime.hours)}:${formatTime(userTime.minutes)}"
-                accumulatedResults.add(MeasurementDetailString(currentDateTime, actualId, userTimeString))
+                accumulatedResults.add(MeasurementDetailString(currentDateTime, actualId, "${formatTime(userTime.hours)}:${formatTime(userTime.minutes)}"))
 
                 val requestedId = dynamicIds["Requested time 2"] ?: 191
-                val expectedString = requestedTimeStrings.getOrElse(1) { "00:00" }
-                accumulatedResults.add(MeasurementDetailString(currentDateTime, requestedId, expectedString))
+                accumulatedResults.add(MeasurementDetailString(currentDateTime, requestedId, requestedTimeStrings.getOrElse(1) { "00:00" }))
             }
 
-            // Submit
+            val grades = cdtSessionManager.grades.value
+
+            if (grades.circle.isNotEmpty()) {
+                val id = dynamicIds["circle_perfection"] ?: 89
+                accumulatedResults.add(MeasurementDetailString(currentDateTime, id, grades.circle))
+            }
+
+            if (grades.numbers.isNotEmpty()) {
+                val id = dynamicIds["numbers_sequence"] ?: 90
+                accumulatedResults.add(MeasurementDetailString(currentDateTime, id, grades.numbers))
+            }
+
+            if (grades.hands.isNotEmpty()) {
+                val id = dynamicIds["hands_position"] ?: 91
+                accumulatedResults.add(MeasurementDetailString(currentDateTime, id, grades.hands))
+            }
+
             if (accumulatedResults.isNotEmpty()) {
                 val finalMeasurementResult = MeasurementResult(
                     clinicId = clinicId,
@@ -220,9 +188,7 @@ class CdtEndViewModel(
                         _state.update { it.copy(isUploading = false) }
                         eventChannel.send(CdtEndEvent.NavigateToHome)
                     }
-                    is Result.Failure -> {
-                        handleError("Failed to submit results: ${result.error}")
-                    }
+                    is Result.Failure -> handleError("Failed to submit: ${result.error}")
                 }
             } else {
                 handleError("No data gathered to submit.")
@@ -230,10 +196,7 @@ class CdtEndViewModel(
         }
     }
 
-    private fun formatTime(value: Int): String {
-        return value.toString().padStart(2, '0')
-    }
-
+    private fun formatTime(value: Int) = value.toString().padStart(2, '0')
     private suspend fun handleError(message: String) {
         _state.update { it.copy(isUploading = false, error = message) }
         eventChannel.send(CdtEndEvent.ShowError(message))

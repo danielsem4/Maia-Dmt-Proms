@@ -8,6 +8,7 @@ import maia.dmt.cdt.presentation.cdtClockTimeSet.CdtClockTimeSetRoot
 import maia.dmt.cdt.presentation.cdtDraw.CdtDrawRoot
 import maia.dmt.cdt.presentation.cdtEnd.CdtEndRoot
 import maia.dmt.cdt.presentation.cdtFirstMissionDone.CdtFirstMissionDoneRoot
+import maia.dmt.cdt.presentation.cdtGrade.CdtGradeRoot
 import maia.dmt.cdt.presentation.cdtLand.CdtLandRoot
 
 fun NavGraphBuilder.cdtGraph(
@@ -50,7 +51,20 @@ fun NavGraphBuilder.cdtGraph(
 
         composable<CdtGraphRoutes.CdtEnd> {
             CdtEndRoot(
-                onNavigateToNextScreen = {  },
+                onNavigateToNextScreen = {
+                    // This typically navigates out of the CDT graph entirely (e.g. to Home)
+                    // Depending on your root nav setup, you might pop the graph or navigate to a specific route
+                    navController.popBackStack(CdtGraphRoutes.Graph, inclusive = true)
+                },
+                onNavigateBack = { navController.popBackStack() },
+                onNavigateToGradeScreen = {
+                    navController.navigate(CdtGraphRoutes.CdtGrade)
+                }
+            )
+        }
+
+        composable<CdtGraphRoutes.CdtGrade> {
+            CdtGradeRoot(
                 onNavigateBack = { navController.popBackStack() }
             )
         }

@@ -85,4 +85,12 @@
         <item>الساعة تشير إلى الثانية عشرة، حرّك العقارب أربعين دقيقة إلى الأمام.</item>
         <item>حرّك الساعة ساعة وخمسًا وعشرين دقيقة إلى الأمام.</item>
     </string-array>
+
+    <string name="cogTest_cdt_instruction">يجب تقييم اختبار رسم الساعة المعروض أمامك</string>
+    <string name="cogTest_cdt_circle_completeness">اكتمال دائرة الساعة</string>
+    <string name="cogTest_cdt_numbers_presence_sequence">وجود وترتيب الأرقام</string>
+    <string name="cogTest_cdt_hands_presence_position">وجود ووضع عقارب الساعة</string>
+
+    <string name="cogTest_cdt_grade">علامة</string>
+
 </resources>

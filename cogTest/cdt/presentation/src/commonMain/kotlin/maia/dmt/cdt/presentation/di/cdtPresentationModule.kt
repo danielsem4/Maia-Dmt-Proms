@@ -5,8 +5,10 @@ import maia.dmt.cdt.presentation.cdtClockTimeSet.CdtClockTimeSetViewModel
 import maia.dmt.cdt.presentation.cdtDraw.CdtDrawViewModel
 import maia.dmt.cdt.presentation.cdtEnd.CdtEndViewModel
 import maia.dmt.cdt.presentation.cdtFirstMissionDone.CdtFirstMissionDoneViewModel
+import maia.dmt.cdt.presentation.cdtGrade.CdtGradeViewModel
 import maia.dmt.cdt.presentation.cdtLand.CdtLandViewModel
 import maia.dmt.cdt.presentation.session.CdtSessionManager
+import maia.dmt.cdt.presentation.util.CdtGradeResourceProvider
 import maia.dmt.cdt.presentation.util.ClockMissionsProvider
 import org.koin.core.module.dsl.factoryOf
 import org.koin.core.module.dsl.singleOf
@@ -19,8 +21,11 @@ val cdtPresentationModule = module {
     viewModelOf(::CdtFirstMissionDoneViewModel)
     viewModelOf(::CdtClockTimeSetViewModel)
     viewModelOf(::CdtEndViewModel)
+    viewModelOf(::CdtGradeViewModel)
 
     factoryOf(::GetRandomClockExamUseCase)
     singleOf(::ClockMissionsProvider)
+    singleOf(::CdtGradeResourceProvider)
+
     single { CdtSessionManager() }
 }

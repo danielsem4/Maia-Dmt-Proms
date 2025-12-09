@@ -85,4 +85,12 @@
         <item>לפניך שעון שמראה את השעה שתיים עשרה, עליך לכוון את השעון באמצעות הזזת המחוגים ארבעים דקות קדימה</item>
         <item>כוון את השעון שעה ועשרים וחמש דקות קדימה</item>
     </string-array>
+
+    <string name="cogTest_cdt_instruction">יש לנקד את מבחן השעון שמוצג בפניך</string>
+    <string name="cogTest_cdt_circle_completeness">שלמות העיגול של השעון</string>
+    <string name="cogTest_cdt_numbers_presence_sequence">נוכחות ורצף המספרים</string>
+    <string name="cogTest_cdt_hands_presence_position">נוכחות ומיקום המחוגים</string>
+
+    <string name="cogTest_cdt_grade">ציון</string>
+
 </resources>

@@ -8,10 +8,14 @@ import kotlinx.coroutines.flow.update
 import maia.dmt.cdt.domain.model.ClockTime
 import maia.dmt.core.domain.dto.evaluation.Evaluation
 
+data class CdtGrades(
+    val circle: String = "",
+    val numbers: String = "",
+    val hands: String = ""
+)
 
 class CdtSessionManager {
 
-    // Evaluation
     private val _evaluation = MutableStateFlow<Evaluation?>(null)
     val evaluation: StateFlow<Evaluation?> = _evaluation.asStateFlow()
 
@@ -25,7 +29,6 @@ class CdtSessionManager {
     fun setLoading(isLoading: Boolean) { _isLoading.update { isLoading } }
     fun setError(error: String?) { _error.update { error } }
 
-    // Drawing
     private val _drawingBitmaps = MutableStateFlow<Map<Int, ImageBitmap>>(emptyMap())
     val drawingBitmaps: StateFlow<Map<Int, ImageBitmap>> = _drawingBitmaps.asStateFlow()
 
@@ -38,7 +41,6 @@ class CdtSessionManager {
     fun setCurrentQuestionIndex(index: Int) { _currentQuestionIndex.update { index } }
     fun incrementQuestionIndex() { _currentQuestionIndex.update { it + 1 } }
 
-    // Clock Time Set
     private val _clockBitmaps = MutableStateFlow<Map<Int, ImageBitmap>>(emptyMap())
     val clockBitmaps: StateFlow<Map<Int, ImageBitmap>> = _clockBitmaps.asStateFlow()
 
@@ -55,7 +57,6 @@ class CdtSessionManager {
         _clockBitmaps.update { it + (questionIndex to bitmap) }
     }
 
-    fun getClockBitmap(questionIndex: Int): ImageBitmap? = _clockBitmaps.value[questionIndex]
     fun getAllClockBitmaps(): Map<Int, ImageBitmap> = _clockBitmaps.value
 
     fun saveClockTime(questionIndex: Int, userTime: ClockTime, expectedTime: ClockTime) {
@@ -63,10 +64,7 @@ class CdtSessionManager {
         _expectedClockTimes.update { it + (questionIndex to expectedTime) }
     }
 
-    fun getClockTime(questionIndex: Int): ClockTime? = _clockTimes.value[questionIndex]
     fun getAllClockTimes(): Map<Int, ClockTime> = _clockTimes.value
-
-    fun getExpectedClockTime(questionIndex: Int): ClockTime? = _expectedClockTimes.value[questionIndex]
     fun getAllExpectedClockTimes(): Map<Int, ClockTime> = _expectedClockTimes.value
 
     fun saveClockExamVersion(version: Int) {
@@ -75,7 +73,19 @@ class CdtSessionManager {
 
     fun getClockExamVersion(): Int = _clockExamVersion.value
 
-    // Clear
+    private val _grades = MutableStateFlow(CdtGrades())
+    val grades: StateFlow<CdtGrades> = _grades.asStateFlow()
+
+    fun saveGrades(circle: String, numbers: String, hands: String) {
+        _grades.update {
+            CdtGrades(
+                circle = circle,
+                numbers = numbers,
+                hands = hands
+            )
+        }
+    }
+
     fun clear() {
         _evaluation.update { null }
         _isLoading.update { false }
@@ -86,5 +96,6 @@ class CdtSessionManager {
         _clockTimes.update { emptyMap() }
         _expectedClockTimes.update { emptyMap() }
         _clockExamVersion.update { 0 }
+        _grades.update { CdtGrades() }
     }
 }

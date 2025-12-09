@@ -66,6 +66,7 @@ desktopPackageVersion = "1.0.0"
 runner = "1.7.0"
 junit = "1.3.0"
 lifecycleProcess = "2.9.4"
+uiGraphics = "1.10.0"
 
 [libraries]
 # Kotlin
@@ -182,6 +183,7 @@ jetbrains-bundle = { module = "org.jetbrains.androidx.core:core-bundle", version
 androidx-runner = { group = "androidx.test", name = "runner", version.ref = "runner" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junit" }
 androidx-lifecycle-process = { group = "androidx.lifecycle", name = "lifecycle-process", version.ref = "lifecycleProcess" }
+androidx-compose-ui-graphics = { group = "androidx.compose.ui", name = "ui-graphics", version.ref = "uiGraphics" }
 
 [plugins]
 convention-android-application = { id = "com.maia.dmt.convention.android.application", version = "unspecified" }

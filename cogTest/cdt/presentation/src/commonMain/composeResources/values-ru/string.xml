@@ -26,4 +26,71 @@
     <string name="cogTest_cdt_clear_drawing_description">Это сотрет все, что вы нарисовали. Это действие отменить невозможно.</string>
     <string name="cogTest_cdt_cancel">Отмена</string>
     <string name="cogTest_cdt_draw">Рисовать</string>
+
+    <string name="cogTest_cdt_end_title">Тест завершён</string>
+    <string name="cogTest_cdt_end_message">Спасибо за прохождение теста рисования часов. Нажмите «Выход», чтобы отправить результаты.</string>
+    <string name="cogTest_cdt_exit">Выход</string>
+
+    <!-- circle_grades -->
+    <string-array name="circle_grades">
+        <item>2 - Форма полностью правильная</item>
+        <item>1 - Форма неполная или с продолжением линии</item>
+        <item>0 - Нет круга или сильное искажение</item>
+    </string-array>
+
+    <!-- numbers_grades -->
+    <string-array name="numbers_grades">
+        <item>4 - Все числа в правильном порядке и с равными интервалами</item>
+        <item>3 - Небольшие ошибки</item>
+        <item>2 - Пропущены/лишние числа или расположены против часовой стрелки</item>
+        <item>1 - Отсутствует примерно половина чисел</item>
+        <item>0 - Отсутствует большинство чисел</item>
+    </string-array>
+
+    <!-- hands_grades -->
+    <string-array name="hands_grades">
+        <item>4 - Стрелки в правильном положении и размерах</item>
+        <item>3 - Незначительное отклонение или одинаковые размеры</item>
+        <item>2 - Значительные ошибки</item>
+        <item>1 - Только одна стрелка или плохое отображение</item>
+        <item>0 - Нет стрелок</item>
+    </string-array>
+
+    <!-- missions_v_1 -->
+    <string-array name="missions_v_1">
+        <item>Перед вами часы, показывающие двенадцать. Настройте часы, переместив стрелки на два часа и тридцать минут вперёд.</item>
+        <item>Переведите часы на два часа и пятьдесят минут назад.</item>
+    </string-array>
+
+    <!-- missions_v_2 -->
+    <string-array name="missions_v_2">
+        <item>Часы показывают двенадцать. Переместите стрелки на три часа и двадцать минут вперёд.</item>
+        <item>Переведите часы на один час и сорок минут назад.</item>
+    </string-array>
+
+    <!-- missions_v_3 -->
+    <string-array name="missions_v_3">
+        <item>Часы показывают двенадцать. Переместите стрелки на один час и тридцать минут вперёд.</item>
+        <item>Переведите часы на пятьдесят минут назад.</item>
+    </string-array>
+
+    <!-- missions_v_4 -->
+    <string-array name="missions_v_4">
+        <item>Часы показывают двенадцать. Переведите стрелки на один час и пятьдесят минут назад.</item>
+        <item>Переместите стрелки на два часа и сорок минут вперёд.</item>
+    </string-array>
+
+    <!-- missions_v_5 -->
+    <string-array name="missions_v_5">
+        <item>Часы показывают двенадцать. Переместите стрелки на сорок минут вперёд.</item>
+        <item>Переместите стрелки на один час и двадцать пять минут вперёд.</item>
+    </string-array>
+
+    <string name="cogTest_cdt_instruction">Необходимо оценить тест рисования часов, представленный перед вами</string>
+    <string name="cogTest_cdt_circle_completeness">Целостность круга часов</string>
+    <string name="cogTest_cdt_numbers_presence_sequence">Наличие и последовательность цифр</string>
+    <string name="cogTest_cdt_hands_presence_position">Наличие и расположение стрелок</string>
+
+    <string name="cogTest_cdt_grade">Оценка</string>
+
 </resources>

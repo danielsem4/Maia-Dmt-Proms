@@ -26,4 +26,71 @@
     <string name="cogTest_cdt_clear_drawing_description">פעולה זו תמחק את כל מה שציירת. לא ניתן לבטל פעולה זו.</string>
     <string name="cogTest_cdt_cancel">ביטול</string>
     <string name="cogTest_cdt_draw">צייר</string>
+
+    <string name="cogTest_cdt_end_title">הבדיקה הושלמה</string>
+    <string name="cogTest_cdt_end_message">תודה על השלמת מבחן ציור השעון. לחץ על יציאה כדי לשלוח את התוצאות.</string>
+    <string name="cogTest_cdt_exit">יציאה</string>
+
+    <!-- circle_grades -->
+    <string-array name="circle_grades">
+        <item>2 - צורה שלמה</item>
+        <item>1 - צורה לא שלמה או עם המשך קו</item>
+        <item>0 - אין עיגול או עיוות קיצוני</item>
+    </string-array>
+
+    <!-- numbers_grades -->
+    <string-array name="numbers_grades">
+        <item>4 - כל המספרים בסדר נכון ורווחים עקביים</item>
+        <item>3 - שגיאות קלות</item>
+        <item>2 - מספרים חסרים/מיותרים/מסודרים נגד כיוון השעון</item>
+        <item>1 - חסרים כמחצית מהמספרים</item>
+        <item>0 - חסרים רוב המספרים</item>
+    </string-array>
+
+    <!-- hands_grades -->
+    <string-array name="hands_grades">
+        <item>4 - מחוגים במיקום וגודל נכון</item>
+        <item>3 - סטייה קלה או ללא הבדל בגודל</item>
+        <item>2 - שגיאות משמעותיות</item>
+        <item>1 - רק מחוג אחד או תצוגה דלה</item>
+        <item>0 - אין מחוגים</item>
+    </string-array>
+
+    <!-- missions_v_1 -->
+    <string-array name="missions_v_1">
+        <item>לפניך שעון שמראה את השעה שתיים עשרה, עליך לכוון את השעון באמצעות הזזת המחוגים שעתיים ו-שלושים דקות קדימה</item>
+        <item>כוון את השעון שעתיים וחמישים דקות אחורה</item>
+    </string-array>
+
+    <!-- missions_v_2 -->
+    <string-array name="missions_v_2">
+        <item>לפניך שעון שמראה את השעה שתיים עשרה, עליך לכוון את השעון באמצעות הזזת המחוגים שלוש שעות ועשרים דקות קדימה</item>
+        <item>כוון את השעון שעה וארבעים דקות אחורה</item>
+    </string-array>
+
+    <!-- missions_v_3 -->
+    <string-array name="missions_v_3">
+        <item>לפניך שעון שמראה את השעה שתיים עשרה, עליך לכוון את השעון באמצעות הזזת המחוגים שעה ושלושים דקות קדימה</item>
+        <item>כוון את השעון חמישים דקות אחורה</item>
+    </string-array>
+
+    <!-- missions_v_4 -->
+    <string-array name="missions_v_4">
+        <item>לפניך שעון שמראה את השעה שתיים עשרה, עליך לכוון את השעון באמצעות הזזת המחוגים שעה וחמישים דקות אחורה</item>
+        <item>כוון את השעון שעתיים וארבעים דקות קדימה</item>
+    </string-array>
+
+    <!-- missions_v_5 -->
+    <string-array name="missions_v_5">
+        <item>לפניך שעון שמראה את השעה שתיים עשרה, עליך לכוון את השעון באמצעות הזזת המחוגים ארבעים דקות קדימה</item>
+        <item>כוון את השעון שעה ועשרים וחמש דקות קדימה</item>
+    </string-array>
+
+    <string name="cogTest_cdt_instruction">יש לנקד את מבחן השעון שמוצג בפניך</string>
+    <string name="cogTest_cdt_circle_completeness">שלמות העיגול של השעון</string>
+    <string name="cogTest_cdt_numbers_presence_sequence">נוכחות ורצף המספרים</string>
+    <string name="cogTest_cdt_hands_presence_position">נוכחות ומיקום המחוגים</string>
+
+    <string name="cogTest_cdt_grade">ציון</string>
+
 </resources>

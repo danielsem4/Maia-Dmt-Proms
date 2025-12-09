@@ -16,5 +16,12 @@ interface CdtGraphRoutes {
     @Serializable
     data object CdtFirstMissionDone: CdtGraphRoutes
 
+    @Serializable
+    data object CdtClockTimeSet: CdtGraphRoutes
 
+    @Serializable
+    data object CdtEnd: CdtGraphRoutes
+
+    @Serializable
+    data object CdtGrade: CdtGraphRoutes
 }

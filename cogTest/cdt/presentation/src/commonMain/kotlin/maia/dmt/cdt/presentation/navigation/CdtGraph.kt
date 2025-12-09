@@ -6,6 +6,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navigation
 import maia.dmt.cdt.presentation.cdtClockTimeSet.CdtClockTimeSetRoot
 import maia.dmt.cdt.presentation.cdtDraw.CdtDrawRoot
+import maia.dmt.cdt.presentation.cdtEnd.CdtEndRoot
 import maia.dmt.cdt.presentation.cdtFirstMissionDone.CdtFirstMissionDoneRoot
 import maia.dmt.cdt.presentation.cdtLand.CdtLandRoot
 
@@ -42,6 +43,13 @@ fun NavGraphBuilder.cdtGraph(
 
         composable<CdtGraphRoutes.CdtClockTimeSet> {
             CdtClockTimeSetRoot(
+                onNavigateToNextScreen = { navController.navigate(CdtGraphRoutes.CdtEnd) },
+                onNavigateBack = { navController.popBackStack() }
+            )
+        }
+
+        composable<CdtGraphRoutes.CdtEnd> {
+            CdtEndRoot(
                 onNavigateToNextScreen = {  },
                 onNavigateBack = { navController.popBackStack() }
             )

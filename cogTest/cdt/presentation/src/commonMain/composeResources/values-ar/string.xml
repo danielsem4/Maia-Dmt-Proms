@@ -27,6 +27,10 @@
     <string name="cogTest_cdt_cancel">إلغاء</string>
     <string name="cogTest_cdt_draw">ارسم</string>
 
+    <string name="cogTest_cdt_end_title">اكتملت الاختبار</string>
+    <string name="cogTest_cdt_end_message">شكرًا لك على إكمال اختبار رسم الساعة. اضغط خروج لإرسال النتائج.</string>
+    <string name="cogTest_cdt_exit">خروج</string>
+
     <!-- circle_grades -->
     <string-array name="circle_grades">
         <item>2 - شكل كامل</item>

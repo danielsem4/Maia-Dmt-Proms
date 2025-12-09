@@ -7,20 +7,25 @@ import kotlin.random.Random
 
 class GetRandomClockExamUseCase {
 
-    operator fun invoke(missions: Map<Int, List<String>>): ClockExam {
-        val versions = missions.keys.toList()
+    operator fun invoke(allMissions: Map<Int, List<String>>): ClockExam {
+        val versions = allMissions.keys.toList()
         val selectedVersion = versions[Random.nextInt(versions.size)]
-        val missionTexts = missions[selectedVersion] ?: emptyList()
+        val missionTexts = allMissions[selectedVersion] ?: emptyList()
 
-        val parsedMissions = missionTexts.mapIndexed { index, text ->
+        val parsedMissions = mutableListOf<ClockMission>()
+
+        missionTexts.forEachIndexed { index, text ->
             val expectedTime = if (index == 0) {
                 calculateExpectedTime(12, 0, text)
             } else {
-
-                val previousTime = calculateExpectedTime(12, 0, missionTexts[0])
-                calculateExpectedTime(previousTime.hours, previousTime.minutes, text)
+                val previousMission = parsedMissions[index - 1]
+                calculateExpectedTime(
+                    previousMission.expectedTime.hours,
+                    previousMission.expectedTime.minutes,
+                    text
+                )
             }
-            ClockMission(instruction = text, expectedTime = expectedTime)
+            parsedMissions.add(ClockMission(instruction = text, expectedTime = expectedTime))
         }
 
         return ClockExam(version = selectedVersion, missions = parsedMissions)

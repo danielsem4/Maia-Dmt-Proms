@@ -27,6 +27,10 @@
     <string name="cogTest_cdt_cancel">Отмена</string>
     <string name="cogTest_cdt_draw">Рисовать</string>
 
+    <string name="cogTest_cdt_end_title">Тест завершён</string>
+    <string name="cogTest_cdt_end_message">Спасибо за прохождение теста рисования часов. Нажмите «Выход», чтобы отправить результаты.</string>
+    <string name="cogTest_cdt_exit">Выход</string>
+
     <!-- circle_grades -->
     <string-array name="circle_grades">
         <item>2 - Форма полностью правильная</item>

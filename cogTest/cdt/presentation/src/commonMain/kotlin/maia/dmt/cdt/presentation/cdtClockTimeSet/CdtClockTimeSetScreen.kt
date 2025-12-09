@@ -11,9 +11,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -22,19 +20,20 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import dmtproms.cogtest.cdt.presentation.generated.resources.Res
 import dmtproms.cogtest.cdt.presentation.generated.resources.cogTest_cdt_drawing_test_title
 import dmtproms.cogtest.cdt.presentation.generated.resources.cogTest_cdt_next_question
-import dmtproms.cogtest.cdt.presentation.generated.resources.cogTest_cdt_reset
 import kotlinx.coroutines.launch
 import maia.dmt.cdt.presentation.components.CapturableInteractiveClock
 import maia.dmt.cdt.presentation.components.rememberClockCaptureController
-import maia.dmt.cdt.presentation.components.InteractiveClockConfig
 import maia.dmt.core.designsystem.components.buttons.DmtButton
-import maia.dmt.core.designsystem.components.buttons.DmtButtonStyle
+import maia.dmt.core.designsystem.components.cards.DmtCard
+import maia.dmt.core.designsystem.components.cards.DmtCardStyle
+import maia.dmt.core.designsystem.components.cards.DmtParagraphCard
 import maia.dmt.core.designsystem.components.layouts.DmtBaseScreen
 import maia.dmt.core.designsystem.theme.DmtTheme
 import maia.dmt.core.presentation.capture.ViewCaptureController
@@ -102,10 +101,19 @@ fun CdtClockTimeSetScreen(
         titleText = stringResource(Res.string.cogTest_cdt_drawing_test_title),
         onIconClick = { onAction(CdtClockTimeSetAction.OnBackClick) },
         content = {
-            if (isLandscape) {
-                LandscapeLayout(state, captureController, onAction)
+            if (state.isLoading) {
+                Box(
+                    modifier = Modifier.fillMaxSize(),
+                    contentAlignment = Alignment.Center
+                ) {
+                    CircularProgressIndicator()
+                }
             } else {
-                PortraitLayout(state, captureController, onAction)
+                if (isLandscape) {
+                    LandscapeLayout(state, captureController, onAction)
+                } else {
+                    PortraitLayout(state, captureController, onAction)
+                }
             }
         }
     )
@@ -122,6 +130,10 @@ private fun PortraitLayout(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.SpaceBetween
     ) {
+        InstructionCard(state.instructionText, Modifier.fillMaxWidth())
+
+        Spacer(modifier = Modifier.height(16.dp))
+
         Box(
             modifier = Modifier.weight(1f).fillMaxWidth(),
             contentAlignment = Alignment.Center
@@ -137,9 +149,12 @@ private fun PortraitLayout(
         }
 
         Spacer(modifier = Modifier.height(16.dp))
-        InstructionCard(state.instructionText, Modifier.fillMaxWidth())
-        Spacer(modifier = Modifier.height(16.dp))
-        ButtonsRow(onAction, Modifier.fillMaxWidth())
+
+        DmtButton(
+            text = stringResource(Res.string.cogTest_cdt_next_question),
+            onClick = { onAction(CdtClockTimeSetAction.OnNextClick) },
+            modifier = Modifier.fillMaxWidth()
+        )
     }
 }
 
@@ -176,51 +191,24 @@ private fun LandscapeLayout(
             verticalArrangement = Arrangement.Center
         ) {
             InstructionCard(state.instructionText, Modifier.fillMaxWidth())
-            Spacer(modifier = Modifier.height(24.dp))
-            ButtonsRow(onAction)
+            Spacer(modifier = Modifier.weight(0.5f))
+            DmtButton(
+                text = stringResource(Res.string.cogTest_cdt_next_question),
+                onClick = { onAction(CdtClockTimeSetAction.OnNextClick) },
+                modifier = Modifier.fillMaxWidth()
+            )
         }
     }
 }
 
 @Composable
 private fun InstructionCard(text: String, modifier: Modifier = Modifier) {
-    Card(
+    DmtParagraphCard(
+        text = text,
         modifier = modifier,
-        shape = RoundedCornerShape(12.dp),
-        colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f)
-        )
-    ) {
-        Text(
-            text = text,
-            style = MaterialTheme.typography.bodyLarge,
-            textAlign = TextAlign.Center,
-            color = MaterialTheme.colorScheme.onSurfaceVariant,
-            modifier = Modifier.fillMaxWidth().padding(16.dp)
-        )
-    }
-}
-
-@Composable
-private fun ButtonsRow(
-    onAction: (CdtClockTimeSetAction) -> Unit,
-    modifier: Modifier = Modifier
-) {
-    Row(
-        modifier = modifier,
-        horizontalArrangement = Arrangement.SpaceEvenly,
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        DmtButton(
-            text = stringResource(Res.string.cogTest_cdt_reset),
-            onClick = { onAction(CdtClockTimeSetAction.OnResetClick) },
-            style = DmtButtonStyle.SECONDARY
-        )
-        DmtButton(
-            text = stringResource(Res.string.cogTest_cdt_next_question),
-            onClick = { onAction(CdtClockTimeSetAction.OnNextClick) }
-        )
-    }
+        style = DmtCardStyle.ELEVATED,
+        textSize = MaterialTheme.typography.titleLarge
+    )
 }
 
 @Composable
@@ -228,7 +216,7 @@ private fun ButtonsRow(
 fun CdtClockTimeSetPreview() {
     DmtTheme {
         CdtClockTimeSetScreen(
-            state = CdtClockTimeSetState(instructionText = "Set the time to 10:30"),
+            state = CdtClockTimeSetState(instructionText = "The clock shows twelve o'clock. Adjust the clock by moving the hands two hours and thirty minutes forward."),
             captureController = rememberClockCaptureController(),
             onAction = {}
         )

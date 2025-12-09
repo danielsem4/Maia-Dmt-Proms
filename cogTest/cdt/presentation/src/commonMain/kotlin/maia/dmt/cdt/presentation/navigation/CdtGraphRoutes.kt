@@ -20,4 +20,8 @@ interface CdtGraphRoutes {
     @Serializable
     data object CdtClockTimeSet: CdtGraphRoutes
 
+    @Serializable
+    data object CdtEnd: CdtGraphRoutes
+
+
 }

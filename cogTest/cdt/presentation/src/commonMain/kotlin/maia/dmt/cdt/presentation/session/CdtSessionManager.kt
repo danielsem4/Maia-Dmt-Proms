@@ -45,13 +45,35 @@ class CdtSessionManager {
     private val _clockTimes = MutableStateFlow<Map<Int, ClockTime>>(emptyMap())
     val clockTimes: StateFlow<Map<Int, ClockTime>> = _clockTimes.asStateFlow()
 
-    fun saveClockBitmap(questionIndex: Int, bitmap: ImageBitmap) { _clockBitmaps.update { it + (questionIndex to bitmap) } }
+    private val _expectedClockTimes = MutableStateFlow<Map<Int, ClockTime>>(emptyMap())
+    val expectedClockTimes: StateFlow<Map<Int, ClockTime>> = _expectedClockTimes.asStateFlow()
+
+    private val _clockExamVersion = MutableStateFlow(0)
+    val clockExamVersion: StateFlow<Int> = _clockExamVersion.asStateFlow()
+
+    fun saveClockBitmap(questionIndex: Int, bitmap: ImageBitmap) {
+        _clockBitmaps.update { it + (questionIndex to bitmap) }
+    }
+
     fun getClockBitmap(questionIndex: Int): ImageBitmap? = _clockBitmaps.value[questionIndex]
     fun getAllClockBitmaps(): Map<Int, ImageBitmap> = _clockBitmaps.value
 
-    fun saveClockTime(questionIndex: Int, time: ClockTime) { _clockTimes.update { it + (questionIndex to time) } }
+    fun saveClockTime(questionIndex: Int, userTime: ClockTime, expectedTime: ClockTime) {
+        _clockTimes.update { it + (questionIndex to userTime) }
+        _expectedClockTimes.update { it + (questionIndex to expectedTime) }
+    }
+
     fun getClockTime(questionIndex: Int): ClockTime? = _clockTimes.value[questionIndex]
     fun getAllClockTimes(): Map<Int, ClockTime> = _clockTimes.value
+
+    fun getExpectedClockTime(questionIndex: Int): ClockTime? = _expectedClockTimes.value[questionIndex]
+    fun getAllExpectedClockTimes(): Map<Int, ClockTime> = _expectedClockTimes.value
+
+    fun saveClockExamVersion(version: Int) {
+        _clockExamVersion.update { version }
+    }
+
+    fun getClockExamVersion(): Int = _clockExamVersion.value
 
     // Clear
     fun clear() {
@@ -62,5 +84,7 @@ class CdtSessionManager {
         _currentQuestionIndex.update { 0 }
         _clockBitmaps.update { emptyMap() }
         _clockTimes.update { emptyMap() }
+        _expectedClockTimes.update { emptyMap() }
+        _clockExamVersion.update { 0 }
     }
 }

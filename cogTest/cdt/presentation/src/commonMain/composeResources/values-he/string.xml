@@ -27,6 +27,10 @@
     <string name="cogTest_cdt_cancel">ביטול</string>
     <string name="cogTest_cdt_draw">צייר</string>
 
+    <string name="cogTest_cdt_end_title">הבדיקה הושלמה</string>
+    <string name="cogTest_cdt_end_message">תודה על השלמת מבחן ציור השעון. לחץ על יציאה כדי לשלוח את התוצאות.</string>
+    <string name="cogTest_cdt_exit">יציאה</string>
+
     <!-- circle_grades -->
     <string-array name="circle_grades">
         <item>2 - צורה שלמה</item>

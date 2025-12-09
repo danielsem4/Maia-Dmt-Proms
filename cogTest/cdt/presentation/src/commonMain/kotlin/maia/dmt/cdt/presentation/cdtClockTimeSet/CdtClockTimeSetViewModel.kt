@@ -10,11 +10,16 @@ import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import maia.dmt.cdt.domain.model.ClockExam
 import maia.dmt.cdt.domain.model.ClockTime
+import maia.dmt.cdt.domain.usecase.GetRandomClockExamUseCase
 import maia.dmt.cdt.presentation.session.CdtSessionManager
+import maia.dmt.cdt.presentation.util.ClockMissionsProvider
 
 class CdtClockTimeSetViewModel(
-    private val cdtSessionManager: CdtSessionManager
+    private val cdtSessionManager: CdtSessionManager,
+    private val getRandomClockExam: GetRandomClockExamUseCase,
+    private val missionsProvider: ClockMissionsProvider
 ) : ViewModel() {
 
     private val _state = MutableStateFlow(CdtClockTimeSetState())
@@ -27,34 +32,63 @@ class CdtClockTimeSetViewModel(
         initialValue = _state.value
     )
 
-    private val instructions = listOf(
-        "first_instruction_key",
-        "second_instruction_key"
-    )
+    private lateinit var currentExam: ClockExam
 
     init {
-        updateInstruction()
+        initializeExam()
+    }
+
+    private fun initializeExam() {
+        viewModelScope.launch {
+            _state.update { it.copy(isLoading = true) }
+
+            val allMissions = missionsProvider.getAllMissions()
+            currentExam = getRandomClockExam(allMissions)
+
+            // Save exam version to session
+            cdtSessionManager.saveClockExamVersion(currentExam.version)
+
+            _state.update {
+                it.copy(
+                    totalQuestions = currentExam.missions.size,
+                    selectedExamVersion = currentExam.version,
+                    isLoading = false
+                )
+            }
+            updateInstruction()
+        }
     }
 
     fun onAction(action: CdtClockTimeSetAction) {
         when (action) {
-            is CdtClockTimeSetAction.OnHourHandRotated -> _state.update { it.copy(hourHandAngle = action.angle) }
-            is CdtClockTimeSetAction.OnMinuteHandRotated -> _state.update { it.copy(minuteHandAngle = action.angle) }
+            is CdtClockTimeSetAction.OnHourHandRotated -> {
+                _state.update { it.copy(hourHandAngle = action.angle) }
+            }
+            is CdtClockTimeSetAction.OnMinuteHandRotated -> {
+                _state.update { it.copy(minuteHandAngle = action.angle) }
+            }
             is CdtClockTimeSetAction.OnNextClick -> onNextClick()
-            is CdtClockTimeSetAction.OnResetClick -> _state.update { it.copy(hourHandAngle = 0f, minuteHandAngle = 0f) }
-            is CdtClockTimeSetAction.OnBackClick -> viewModelScope.launch { eventChannel.send(CdtClockTimeSetEvent.NavigateBack) }
+            is CdtClockTimeSetAction.OnResetClick -> {
+                _state.update { it.copy(hourHandAngle = 0f, minuteHandAngle = 0f) }
+            }
+            is CdtClockTimeSetAction.OnBackClick -> {
+                viewModelScope.launch {
+                    eventChannel.send(CdtClockTimeSetEvent.NavigateBack)
+                }
+            }
         }
     }
 
     private fun onNextClick() {
         viewModelScope.launch {
             val currentState = _state.value
-            _state.update { it.copy(savedTimes = it.savedTimes + currentState.getCurrentTime()) }
 
             if (currentState.isLastQuestion) {
                 eventChannel.send(CdtClockTimeSetEvent.NavigateToNextScreen)
             } else {
-                _state.update { it.copy(currentQuestionIndex = it.currentQuestionIndex + 1) }
+                _state.update {
+                    it.copy(currentQuestionIndex = it.currentQuestionIndex + 1)
+                }
                 updateInstruction()
             }
         }
@@ -65,13 +99,21 @@ class CdtClockTimeSetViewModel(
     }
 
     fun saveClockTime(time: ClockTime) {
-        cdtSessionManager.saveClockTime(_state.value.currentQuestionIndex, time)
+        val currentState = _state.value
+        val currentMission = currentExam.missions[currentState.currentQuestionIndex]
+        cdtSessionManager.saveClockTime(
+            questionIndex = currentState.currentQuestionIndex,
+            userTime = time,
+            expectedTime = currentMission.expectedTime
+        )
     }
 
     private fun updateInstruction() {
         val index = _state.value.currentQuestionIndex
-        if (index < instructions.size) {
-            _state.update { it.copy(instructionText = instructions[index]) }
+        if (index < currentExam.missions.size) {
+            _state.update {
+                it.copy(instructionText = currentExam.missions[index].instruction)
+            }
         }
     }
 }

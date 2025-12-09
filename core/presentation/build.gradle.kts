@@ -16,6 +16,9 @@ kotlin {
                 implementation(libs.coil.compose)
                 implementation(libs.coil.network.ktor)
 
+                implementation(compose.ui)
+                implementation(compose.foundation)
+
             }
 
             val mobileMain by creating {

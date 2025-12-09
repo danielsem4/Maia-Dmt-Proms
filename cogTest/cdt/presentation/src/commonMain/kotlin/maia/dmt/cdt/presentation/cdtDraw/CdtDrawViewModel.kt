@@ -51,7 +51,6 @@ class CdtDrawViewModel(
 
     private fun confirmClearAll() {
         _state.update { it.copy(showClearAllDialog = false) }
-        // The actual clearing is done via DrawingController in the UI
     }
 
     fun saveDrawingBitmap(bitmap: ImageBitmap) {

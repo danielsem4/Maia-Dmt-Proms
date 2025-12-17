@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="cog_orientation_entry_instructions_app_trial">أمامك تجربة قصيرة لاستخدام الجهاز اللوحي. يرجى محاولة اتباع التعليمات وتنفيذها.</string>
+    <string name="cog_orientation_dropdown_instructions_app_trial">الآن، يرجى اختيار الرقم 4 ثم الضغط على زر "التالي".</string>
+    <string name="cog_orientation_seasons_instructions_app_trial">أمامك 4 أزرار تعرض فصول السنة، نحن الآن في فصل الخريف، يرجى تغيير الفصل إلى الصيف.</string>
+    <string name="cog_orientation_trial_drag_instructions">أمامك عدة أشكال، عليك سحب المثلث إلى داخل المربع الأحمر الموجود على اليسار.</string>
+    <string name="cog_orientation_trial_pinch_instructions">الآن، عليك تكبير المثلث عن طريق مباعدة إصبعين على الشكل.</string>
+    <string name="cog_orientation_seasons_instructions_app_trial2">الآن، يجب تغيير الفصل إلى الشتاء.</string>
+    <string name="cog_orientation_trial_draw_instructions">يرجى رسم شكل إكس (X).</string>
+    <string name="cog_orientation_trial_end_test_instructions">انتهت التجربة، شكراً جزيلاً على تعاونك.</string>
+    <string name="cog_orientation_edit_text_dialog_instruction">يرجى كتابة رأيك في المهمة في المربع أدناه. لإغلاق لوحة المفاتيح، اضغط على صورة لوحة المفاتيح. عند الانتهاء اضغط على زر X.</string>
+    <string name="cog_orientation_you_in_the_summer">نحن حالياً في فصل الصيف</string>
+    <string name="cog_orientation_you_in_the_winter">نحن حالياً في فصل الشتاء</string>
+    <string name="cog_orientation_you_in_the_spring">نحن حالياً في فصل الربيع</string>
+    <string name="cog_orientation_you_in_the_autumn">نحن حالياً في فصل الخريف</string>
+    <string name="cog_orientation_vocal_instructions">تعليمات صوتية</string>
+
+    <string name="cog_orientation_dropdown_selected_number">الرقم المختار حالياً هو:</string>
+
+    <string name="cog_orientation_set_health_rate"><![CDATA[https://firebasestorage.googleapis.com/v0/b/generic-project-heal.appspot.com/o/hitbear%2Fvocal_instruction_trial.mp3?alt=media&token=ede5447f-bd0b-4411-9bfb-09f6bbdf2e27]]></string>
+</resources>

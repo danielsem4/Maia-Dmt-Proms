@@ -12,6 +12,8 @@ kotlin {
                 implementation(projects.core.designsystem)
                 implementation(projects.core.presentation)
 
+                implementation(projects.cogTest.orientation.domain)
+
                 implementation(compose.components.resources)
                 implementation(compose.components.uiToolingPreview)
 

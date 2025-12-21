@@ -50,6 +50,10 @@ kotlin {
             implementation(projects.cogTest.cdt.domain)
             implementation(projects.cogTest.cdt.data)
 
+            implementation(projects.cogTest.orientation.presentation)
+            implementation(projects.cogTest.orientation.domain)
+            implementation(projects.cogTest.orientation.data)
+
             implementation(projects.feature.settings.presentation)
 
             implementation(libs.jetbrains.compose.navigation)

@@ -17,6 +17,8 @@ import maia.dmt.market.presentation.navigation.MarketTestGraphRoutes
 import maia.dmt.market.presentation.navigation.marketTestGraph
 import maia.dmt.medication.presentation.navigation.MedicationsGraphRoutes
 import maia.dmt.medication.presentation.navigation.medicationGraph
+import maia.dmt.orientation.presentation.navigation.OrientationTestGraphRoutes
+import maia.dmt.orientation.presentation.navigation.orientationTestGraph
 import maia.dmt.settings.presentation.navigation.SettingsGraphRoutes
 import maia.dmt.settings.presentation.navigation.settingsGraph
 import maia.dmt.statistics.presentation.navigation.StatisticsGraphRoutes
@@ -59,6 +61,7 @@ fun NavigationRoot(
                     "settings" -> navController.navigate(SettingsGraphRoutes.Graph)
                     "market test" -> navController.navigate(MarketTestGraphRoutes.Graph)
                     "cdt" -> navController.navigate(CdtGraphRoutes.Graph)
+                    "orientation" -> navController.navigate(OrientationTestGraphRoutes.Graph)
                     else -> {}
                 }
             },
@@ -82,6 +85,9 @@ fun NavigationRoot(
             navController = navController
         )
         cdtGraph(
+            navController = navController
+        )
+        orientationTestGraph(
             navController = navController
         )
     }

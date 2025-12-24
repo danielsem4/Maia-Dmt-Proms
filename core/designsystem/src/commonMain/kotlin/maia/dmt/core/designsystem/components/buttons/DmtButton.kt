@@ -323,7 +323,7 @@ fun DmtPrimaryButtonOriginalColorIconPreview() {
             text = "Original Color Icon",
             onClick = {},
             style = DmtButtonStyle.SECONDARY,
-            iconTint = null, // This forces original color
+            iconTint = null,
             leadingIcon = {
                 Icon(
                     imageVector = Icons.Default.Add,

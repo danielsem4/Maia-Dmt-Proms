@@ -14,6 +14,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.layout.onSizeChanged
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.dp
@@ -39,8 +41,13 @@ fun <T> DmtDropDown(
     contentPadding: PaddingValues = PaddingValues(horizontal = 16.dp, vertical = 12.dp)
 ) {
     var expanded by remember { mutableStateOf(false) }
+    var parentWidth by remember { mutableIntStateOf(0) }
+    val density = LocalDensity.current
 
-    Box(modifier = modifier) {
+    Box(
+        modifier = modifier
+            .onSizeChanged { parentWidth = it.width }
+    ) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
@@ -99,7 +106,11 @@ fun <T> DmtDropDown(
         DropdownMenu(
             expanded = expanded,
             onDismissRequest = { expanded = false },
-            modifier = dropdownWidth?.let { Modifier.width(it) } ?: Modifier,
+            modifier = Modifier.width(
+                with(density) {
+                    dropdownWidth ?: parentWidth.toDp()
+                }
+            ),
             offset = DpOffset(0.dp, 4.dp)
         ) {
             items.forEach { item ->

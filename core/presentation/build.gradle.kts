@@ -19,6 +19,10 @@ kotlin {
                 implementation(compose.ui)
                 implementation(compose.foundation)
 
+                implementation(libs.jetbrains.lifecycle.viewmodel)
+                implementation(libs.jetbrains.lifecycle.compose)
+                implementation(libs.kotlinx.coroutines.core)
+
             }
 
             val mobileMain by creating {

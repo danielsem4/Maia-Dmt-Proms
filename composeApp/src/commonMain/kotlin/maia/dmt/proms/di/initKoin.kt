@@ -14,6 +14,7 @@ import maia.dmt.market.data.di.marketDataModule
 import maia.dmt.market.presentation.di.marketPresentationModule
 import maia.dmt.medication.data.di.medicationDataModule
 import maia.dmt.medication.presentation.di.medicationPresentationModule
+import maia.dmt.orientation.presentation.di.orientationPresentationModule
 import maia.dmt.settings.presentation.di.settingsPresentationModule
 import maia.dmt.statistics.data.di.statisticsDataModule
 import maia.dmt.statistics.presentation.di.statisticsPresentationModule
@@ -42,7 +43,8 @@ fun initKoin(config: KoinAppDeclaration? = null) {
             settingsPresentationModule,
             marketPresentationModule,
             marketDataModule,
-            cdtPresentationModule
+            cdtPresentationModule,
+            orientationPresentationModule
         )
     }
 

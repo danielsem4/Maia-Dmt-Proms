@@ -17,6 +17,11 @@
 
     <string name="cog_orientation_dropdown_selected_number">الرقم المختار حالياً هو:</string>
 
+    <string name="cog_orientation_spring">الربيع</string>
+    <string name="cog_orientation_summer">الصيف</string>
+    <string name="cog_orientation_autumn">الخريف</string>
+    <string name="cog_orientation_winter">الشتاء</string>
+
     <string name="cog_orientation_welcome">أهلاً بك</string>
     <string name="cog_orientation_listen">استمع</string>
     <string name="cog_orientation_next">التالي</string>

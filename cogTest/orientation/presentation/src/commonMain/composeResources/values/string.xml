@@ -16,6 +16,11 @@
     <string name="cog_orientation_vocal_instructions">Voice instructions</string>
     <string name="cog_orientation_dropdown_selected_number">The currently selected number is:</string>
 
+    <string name="cog_orientation_spring">Spring</string>
+    <string name="cog_orientation_summer">Summer</string>
+    <string name="cog_orientation_autumn">Autumn</string>
+    <string name="cog_orientation_winter">Winter</string>
+
     <string name="cog_orientation_welcome">Welcome</string>
     <string name="cog_orientation_listen">Listen</string>
     <string name="cog_orientation_next">Next</string>

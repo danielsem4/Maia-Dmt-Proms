@@ -17,6 +17,11 @@
 
     <string name="cog_orientation_dropdown_selected_number">Текущий выбранный номер:</string>
 
+    <string name="cog_orientation_spring">Весна</string>
+    <string name="cog_orientation_summer">Лето</string>
+    <string name="cog_orientation_autumn">Осень</string>
+    <string name="cog_orientation_winter">Зима</string>
+
     <string name="cog_orientation_welcome">Добро пожаловать</string>
     <string name="cog_orientation_listen">Слушать</string>
     <string name="cog_orientation_next">Далее</string>

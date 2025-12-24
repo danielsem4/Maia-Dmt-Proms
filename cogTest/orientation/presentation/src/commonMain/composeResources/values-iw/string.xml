@@ -17,6 +17,11 @@
 
     <string name="cog_orientation_dropdown_selected_number">המספר שנבחר כרגע הוא:</string>
 
+    <string name="cog_orientation_spring">אביב</string>
+    <string name="cog_orientation_summer">קיץ</string>
+    <string name="cog_orientation_autumn">סתיו</string>
+    <string name="cog_orientation_winter">חורף</string>
+
     <string name="cog_orientation_welcome">ברוכים הבאים</string>
     <string name="cog_orientation_listen">הקשב</string>
     <string name="cog_orientation_next">הבא</string>

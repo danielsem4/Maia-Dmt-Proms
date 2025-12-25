@@ -47,22 +47,18 @@ import maia.dmt.core.designsystem.components.cards.DmtCard
 import maia.dmt.core.designsystem.components.cards.DmtCardStyle
 import maia.dmt.core.designsystem.components.dialogs.DmtCustomDialog
 import maia.dmt.core.designsystem.components.dialogs.DmtDatePickerDialog
-import maia.dmt.core.designsystem.components.dialogs.DmtTimePickerDialog
+import maia.dmt.core.designsystem.components.dialogs.time.DmtWheelTimePicker
 import maia.dmt.core.designsystem.components.layouts.DmtBaseScreen
 import maia.dmt.core.designsystem.components.textFields.DmtSearchTextField
 import maia.dmt.core.designsystem.components.toast.DmtToastMessage
 import maia.dmt.core.designsystem.components.toast.ToastDuration
 import maia.dmt.core.designsystem.components.toast.ToastType
-import maia.dmt.core.designsystem.theme.DmtTheme
 import maia.dmt.core.presentation.util.ObserveAsEvents
 import maia.dmt.core.presentation.util.getCurrentDate
 import maia.dmt.core.presentation.util.getCurrentTime
-import maia.dmt.medication.presentation.model.MedicationUiModel
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.resources.vectorResource
-import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.koin.compose.viewmodel.koinViewModel
-import kotlin.time.Clock
 import kotlin.time.Instant
 
 @Composable
@@ -244,26 +240,17 @@ fun AllMedicationScreen(
     }
 
     if (state.showTimePicker) {
-        val instant = Instant.fromEpochMilliseconds(state.selectedDateTime)
-        val localDateTime = instant.toLocalDateTime(TimeZone.currentSystemDefault())
-
-        val timePickerState = rememberTimePickerState(
-            initialHour = localDateTime.hour,
-            initialMinute = localDateTime.minute,
-            is24Hour = true
-        )
-
-        DmtTimePickerDialog(
-            state = timePickerState,
+        DmtWheelTimePicker(
             title = stringResource(Res.string.date_and_time),
+            is24Hour = true,
             onDismiss = {
                 onAction(AllMedicationAction.OnDismissTimePicker)
             },
-            onConfirm = {
+            onConfirm = { hour, minute ->
                 onAction(
                     AllMedicationAction.OnTimeSelected(
-                        hour = timePickerState.hour,
-                        minute = timePickerState.minute
+                        hour = hour,
+                        minute = minute
                     )
                 )
             }

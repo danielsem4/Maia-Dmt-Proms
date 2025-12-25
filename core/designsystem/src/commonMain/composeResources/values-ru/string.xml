@@ -5,4 +5,14 @@
     <string name="show_password">Показать пароль</string>
     <string name="dismiss_dialog">Закрыть диалог</string>
 
+    <string name="generic_ok">ОК</string>
+    <string name="generic_cancel">Отмена</string>
+    <string name="generic_yes">Да</string>
+    <string name="generic_no">Нет</string>
+    <string name="generic_retry">Повторить</string>
+    <string name="generic_close">Закрыть</string>
+    <string name="generic_delete">Удалить</string>
+    <string name="generic_edit">Редактировать</string>
+    <string name="generic_save">Сохранить</string>
+
 </resources>

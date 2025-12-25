@@ -5,4 +5,15 @@
     <string name="show_password">Show password</string>
     <string name="dismiss_dialog">Dismiss dialog</string>
 
+    <string name="generic_ok">Ok</string>
+    <string name="generic_cancel">Cancel</string>
+    <string name="generic_yes">Yes</string>
+    <string name="generic_no">No</string>
+    <string name="generic_retry">Retry</string>
+    <string name="generic_close">Close</string>
+    <string name="generic_delete">Delete</string>
+    <string name="generic_edit">Edit</string>
+    <string name="generic_save">Save</string>
+
+
 </resources>

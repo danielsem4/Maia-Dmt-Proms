@@ -8,7 +8,6 @@ import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
-import androidx.compose.material3.rememberTimePickerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -25,15 +24,14 @@ import dmtproms.feature.activities.presentation.generated.resources.activities_d
 import dmtproms.feature.activities.presentation.generated.resources.activities_instruction
 import dmtproms.feature.activities.presentation.generated.resources.activities_report
 import dmtproms.feature.activities.presentation.generated.resources.activities_title
-import dmtproms.feature.activities.presentation.generated.resources.gym_workout_icon
+import kotlinx.datetime.Instant
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toLocalDateTime
 import maia.dmt.activities.presentation.components.DmtActivitiesSection
 import maia.dmt.core.designsystem.components.buttons.DmtButtonStyle
-import maia.dmt.core.designsystem.components.cards.DmtIconCard
 import maia.dmt.core.designsystem.components.dialogs.DmtCustomDialog
 import maia.dmt.core.designsystem.components.dialogs.DmtDatePickerDialog
-import maia.dmt.core.designsystem.components.dialogs.DmtTimePickerDialog
+import maia.dmt.core.designsystem.components.dialogs.time.DmtWheelTimePicker
 import maia.dmt.core.designsystem.components.layouts.DmtBaseScreen
 import maia.dmt.core.designsystem.components.toast.DmtToastMessage
 import maia.dmt.core.designsystem.components.toast.ToastDuration
@@ -45,7 +43,6 @@ import maia.dmt.core.presentation.util.getCurrentTime
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.koin.compose.viewmodel.koinViewModel
-import kotlin.time.Instant
 
 @Composable
 fun ActivitiesRoot(
@@ -142,7 +139,7 @@ fun ActivitiesScreen(
                 stringResource(
                     Res.string.activities_dialog_body_date
                 )
-            }$dateString at $timeString",
+            }$dateString $timeString",
             primaryButtonText = stringResource(Res.string.activities_report),
             secondaryButtonText = stringResource(Res.string.activities_date_and_time),
             onPrimaryClick = {
@@ -175,26 +172,17 @@ fun ActivitiesScreen(
     }
 
     if (state.showTimePicker) {
-        val instant = Instant.fromEpochMilliseconds(state.selectedDateTime)
-        val localDateTime = instant.toLocalDateTime(TimeZone.currentSystemDefault())
-
-        val timePickerState = rememberTimePickerState(
-            initialHour = localDateTime.hour,
-            initialMinute = localDateTime.minute,
-            is24Hour = true
-        )
-
-        DmtTimePickerDialog(
-            state = timePickerState,
+        DmtWheelTimePicker(
             title = stringResource(Res.string.activities_date_and_time),
+            is24Hour = true,
             onDismiss = {
                 onAction(ActivitiesAction.OnDismissTimePicker)
             },
-            onConfirm = {
+            onConfirm = { hour, minute ->
                 onAction(
                     ActivitiesAction.OnTimeSelected(
-                        hour = timePickerState.hour,
-                        minute = timePickerState.minute
+                        hour = hour,
+                        minute = minute
                     )
                 )
             }

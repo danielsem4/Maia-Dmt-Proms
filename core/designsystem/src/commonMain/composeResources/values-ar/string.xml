@@ -5,4 +5,14 @@
     <string name="show_password">إظهار كلمة المرور</string>
     <string name="dismiss_dialog">إغلاق النافذة</string>
 
+    <string name="generic_ok">موافق</string>
+    <string name="generic_cancel">إلغاء</string>
+    <string name="generic_yes">نعم</string>
+    <string name="generic_no">لا</string>
+    <string name="generic_retry">إعادة المحاولة</string>
+    <string name="generic_close">إغلاق</string>
+    <string name="generic_delete">حذف</string>
+    <string name="generic_edit">تعديل</string>
+    <string name="generic_save">حفظ</string>
+
 </resources>

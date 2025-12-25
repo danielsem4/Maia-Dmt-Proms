@@ -14,5 +14,23 @@
     <string name="generic_delete">Удалить</string>
     <string name="generic_edit">Редактировать</string>
     <string name="generic_save">Сохранить</string>
+    <string name="label_area">Область</string>
+
+    <string name="body_part_head">Голова</string>
+    <string name="body_part_chest">Грудь</string>
+    <string name="body_part_belly">Живот</string>
+    <string name="body_part_left_shoulder">Левое плечо</string>
+    <string name="body_part_right_shoulder">Правое плечо</string>
+    <string name="body_part_left_arm">Левая рука</string>
+    <string name="body_part_right_arm">Правая рука</string>
+    <string name="body_part_left_knee">Левое колено</string>
+    <string name="body_part_right_knee">Правое колено</string>
+    <string name="body_part_left_foot">Левая стопа</string>
+    <string name="body_part_right_foot">Правая стопа</string>
+
+    <string name="body_part_neck">Шея</string>
+    <string name="body_part_upper_back">Верх спины</string>
+    <string name="body_part_lower_back">Поясница</string>
+    <string name="body_part_buttocks">Ягодицы</string>
 
 </resources>

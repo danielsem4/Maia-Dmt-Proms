@@ -5,4 +5,32 @@
     <string name="show_password">إظهار كلمة المرور</string>
     <string name="dismiss_dialog">إغلاق النافذة</string>
 
+    <string name="generic_ok">موافق</string>
+    <string name="generic_cancel">إلغاء</string>
+    <string name="generic_yes">نعم</string>
+    <string name="generic_no">لا</string>
+    <string name="generic_retry">إعادة المحاولة</string>
+    <string name="generic_close">إغلاق</string>
+    <string name="generic_delete">حذف</string>
+    <string name="generic_edit">تعديل</string>
+    <string name="generic_save">حفظ</string>
+    <string name="label_area">منطقة</string>
+
+    <string name="body_part_head">الرأس</string>
+    <string name="body_part_chest">الصدر</string>
+    <string name="body_part_belly">البطن</string>
+    <string name="body_part_left_shoulder">الكتف الأيسر</string>
+    <string name="body_part_right_shoulder">الكتف الأيمن</string>
+    <string name="body_part_left_arm">الذراع اليسرى</string>
+    <string name="body_part_right_arm">الذراع اليمنى</string>
+    <string name="body_part_left_knee">الركبة اليسرى</string>
+    <string name="body_part_right_knee">الركبة اليمنى</string>
+    <string name="body_part_left_foot">القدم اليسرى</string>
+    <string name="body_part_right_foot">القدم اليمنى</string>
+
+    <string name="body_part_neck">الرقبة</string>
+    <string name="body_part_upper_back">أعلى الظهر</string>
+    <string name="body_part_lower_back">أسفل الظهر</string>
+    <string name="body_part_buttocks">الأرداف</string>
+
 </resources>

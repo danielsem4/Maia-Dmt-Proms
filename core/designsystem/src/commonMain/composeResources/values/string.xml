@@ -5,4 +5,34 @@
     <string name="show_password">Show password</string>
     <string name="dismiss_dialog">Dismiss dialog</string>
 
+    <string name="generic_ok">Ok</string>
+    <string name="generic_cancel">Cancel</string>
+    <string name="generic_yes">Yes</string>
+    <string name="generic_no">No</string>
+    <string name="generic_retry">Retry</string>
+    <string name="generic_close">Close</string>
+    <string name="generic_delete">Delete</string>
+    <string name="generic_edit">Edit</string>
+    <string name="generic_save">Save</string>
+
+    <string name="label_area">Area</string>
+
+    <string name="body_part_head">Head</string>
+    <string name="body_part_chest">Chest</string>
+    <string name="body_part_belly">Belly</string>
+    <string name="body_part_left_shoulder">Left Shoulder</string>
+    <string name="body_part_right_shoulder">Right Shoulder</string>
+    <string name="body_part_left_arm">Left Arm</string>
+    <string name="body_part_right_arm">Right Arm</string>
+    <string name="body_part_left_knee">Left Knee</string>
+    <string name="body_part_right_knee">Right Knee</string>
+    <string name="body_part_left_foot">Left Foot</string>
+    <string name="body_part_right_foot">Right Foot</string>
+
+    <string name="body_part_neck">Neck</string>
+    <string name="body_part_upper_back">Upper Back</string>
+    <string name="body_part_lower_back">Lower Back</string>
+    <string name="body_part_buttocks">Buttocks</string>
+
+
 </resources>

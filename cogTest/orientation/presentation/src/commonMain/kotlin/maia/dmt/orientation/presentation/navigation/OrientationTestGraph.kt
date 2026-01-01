@@ -5,8 +5,10 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
 import maia.dmt.orientation.presentation.drag.DragShapeOrientationRoot
+import maia.dmt.orientation.presentation.draw.DrawOrientationRoot
 import maia.dmt.orientation.presentation.entry.EntryScreenOrientationRoot
 import maia.dmt.orientation.presentation.numberSelection.NumberSelectionOrientationRoot
+import maia.dmt.orientation.presentation.resize.ShapeResizeOrientationRoot
 import maia.dmt.orientation.presentation.seasons.SeasonsSelectionOrientationRoot
 
 fun NavGraphBuilder.orientationTestGraph(
@@ -58,5 +60,36 @@ fun NavGraphBuilder.orientationTestGraph(
                 },
             )
         }
+
+        composable<OrientationTestGraphRoutes.OrientationShapeResize> {
+            ShapeResizeOrientationRoot(
+                onNavigateToNext = {
+                    navController.navigate(OrientationTestGraphRoutes.OrientationShapeDraw)
+                },
+                onNavigateBack = {
+                    navController.popBackStack()
+                },
+            )
+        }
+
+        composable<OrientationTestGraphRoutes.OrientationShapeDraw> {
+            DrawOrientationRoot(
+                onNavigateToNext = {
+                    navController.navigate(OrientationTestGraphRoutes.OrientationPainLevel)
+                },
+                onNavigateBack = {
+                    navController.popBackStack()
+                },
+            )
+        }
+
+        composable<OrientationTestGraphRoutes.OrientationPainLevel> {
+
+        }
+
+        composable<OrientationTestGraphRoutes.OrientationEndTest> {
+
+        }
     }
+
 }

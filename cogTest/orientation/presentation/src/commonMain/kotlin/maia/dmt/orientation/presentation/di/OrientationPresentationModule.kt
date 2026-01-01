@@ -1,7 +1,9 @@
 package maia.dmt.orientation.presentation.di
 
 import maia.dmt.orientation.presentation.drag.DragShapeOrientationViewModel
+import maia.dmt.orientation.presentation.draw.DrawOrientationViewModel
 import maia.dmt.orientation.presentation.numberSelection.NumberSelectionOrientationViewModel
+import maia.dmt.orientation.presentation.resize.ShapeResizeOrientationViewModel
 import maia.dmt.orientation.presentation.seasons.SeasonsSelectionOrientationViewModel
 import maia.dmt.orientation.presentation.session.OrientationSessionManager
 import org.koin.core.module.dsl.viewModelOf
@@ -12,5 +14,7 @@ val orientationPresentationModule = module {
     viewModelOf(::NumberSelectionOrientationViewModel)
     viewModelOf(::SeasonsSelectionOrientationViewModel)
     viewModelOf(::DragShapeOrientationViewModel)
+    viewModelOf(::ShapeResizeOrientationViewModel)
+    viewModelOf(::DrawOrientationViewModel)
     single { OrientationSessionManager() }
 }

@@ -1,14 +1,18 @@
 package maia.dmt.orientation.presentation.session
 
+import androidx.compose.ui.graphics.ImageBitmap
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import maia.dmt.core.domain.dto.InactivityEvent
 import maia.dmt.orientation.domain.model.DragShape
 import maia.dmt.orientation.domain.model.DragShapeResult
+import maia.dmt.orientation.domain.model.DrawOrientationResult
 import maia.dmt.orientation.domain.model.NumberSelectionResult
 import maia.dmt.orientation.domain.model.Season
 import maia.dmt.orientation.domain.model.SeasonsSelectionResult
+import maia.dmt.orientation.domain.model.ShapeResizeResult
+import maia.dmt.orientation.presentation.resize.ResizeType
 import kotlin.time.Instant
 
 class OrientationSessionManager {
@@ -20,6 +24,12 @@ class OrientationSessionManager {
 
     private val _dragShapeResult = MutableStateFlow<DragShapeResult?>(null)
     val dragShapeResult = _dragShapeResult.asStateFlow()
+
+    private val _shapeResizeResult = MutableStateFlow<ShapeResizeResult?>(null)
+    val shapeResizeResult = _shapeResizeResult.asStateFlow()
+
+    private val _drawOrientationResult = MutableStateFlow<DrawOrientationResult?>(null)
+    val drawOrientationResult = _drawOrientationResult.asStateFlow()
 
     fun saveNumberSelectionResult(
         targetNumber: Int,
@@ -94,11 +104,77 @@ class OrientationSessionManager {
         )
     }
 
-    fun reset() {
-        _numberSelectionResult.value = null
+    fun saveShapeResizeResult(
+        targetShape: DragShape,
+        finalScale: Float,
+        hasResized: Boolean,
+        startTime: Instant,
+        firstResizeTime: Instant?,
+        nextTime: Instant,
+        inactivityEvents: List<InactivityEvent>
+    ) {
+        val score = if (hasResized) 1 else 0
+
+        val reactionTimeMs = if (firstResizeTime != null) {
+            firstResizeTime.toEpochMilliseconds() - startTime.toEpochMilliseconds()
+        } else {
+            null
+        }
+
+        _shapeResizeResult.value = ShapeResizeResult(
+            targetShape = targetShape,
+            finalScale = finalScale,
+            hasResized = hasResized,
+            score = score,
+            startTime = startTime,
+            firstResizeTime = firstResizeTime,
+            nextTime = nextTime,
+            reactionTimeMs = reactionTimeMs,
+            inactivityEvents = inactivityEvents
+        )
     }
 
-    fun getResultsForUpload(): NumberSelectionResult? {
-        return _numberSelectionResult.value
+    fun saveDrawOrientationResult(
+        drawingBitmap: ImageBitmap?,
+        hasDrawn: Boolean,
+        startTime: Instant,
+        firstDrawTime: Instant?,
+        nextTime: Instant,
+        inactivityEvents: List<InactivityEvent>
+    ) {
+        val score = if (hasDrawn) 1 else 0
+
+        val reactionTimeMs = if (firstDrawTime != null) {
+            firstDrawTime.toEpochMilliseconds() - startTime.toEpochMilliseconds()
+        } else {
+            null
+        }
+
+        _drawOrientationResult.value = DrawOrientationResult(
+            drawingBitmap = drawingBitmap,
+            hasDrawn = hasDrawn,
+            score = score,
+            startTime = startTime,
+            firstDrawTime = firstDrawTime,
+            nextTime = nextTime,
+            reactionTimeMs = reactionTimeMs,
+            inactivityEvents = inactivityEvents
+        )
+    }
+
+    fun reset() {
+        _numberSelectionResult.value = null
+        _seasonsSelectionResult.value = null
+        _dragShapeResult.value = null
+        _shapeResizeResult.value = null
+    }
+
+    fun getResultsForUpload(): Map<String, Any?> {
+        return mapOf(
+            "numberSelection" to _numberSelectionResult.value,
+            "seasonsSelection" to _seasonsSelectionResult.value,
+            "dragShape" to _dragShapeResult.value,
+            "shapeResize" to _shapeResizeResult.value
+        )
     }
 }

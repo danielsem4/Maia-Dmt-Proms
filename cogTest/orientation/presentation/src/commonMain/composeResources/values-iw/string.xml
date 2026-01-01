@@ -34,5 +34,14 @@
     <string name="cog_orientation_draw_title">צייר</string>
     <string name="cog_orientation_health_level_title">רמת בריאות</string>
     <string name="cog_orientation_back_to_task">חזרה למשימה</string>
+
+    <string name="cog_orientation_clear_all">נקה הכל</string>
+    <string name="cog_orientation_clear_drawing_title">נקה ציור</string>
+    <string name="cog_orientation_clear_drawing_description">האם אתה בטוח שברצונך לנקות את הציור?</string>
+    <string name="cog_orientation_draw_cancel">ביטול</string>
+    <string name="cog_orientation_draw">צייר</string>
+    <string name="cog_orientation_erase">מחק</string>
+    <string name="cog_orientation_touch_warning">גע במסך כדי להתחיל לצייר</string>
+
     <string name="cog_orientation_set_health_rate"><![CDATA[https://firebasestorage.googleapis.com/v0/b/generic-project-heal.appspot.com/o/hitbear%2Fvocal_instruction_trial.mp3?alt=media&token=ede5447f-bd0b-4411-9bfb-09f6bbdf2e27]]></string>
 </resources>

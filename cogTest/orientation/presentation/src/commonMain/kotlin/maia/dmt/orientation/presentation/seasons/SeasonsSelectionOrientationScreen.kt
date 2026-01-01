@@ -62,7 +62,7 @@ fun SeasonsSelectionOrientationRoot(
                 is SeasonsSelectionOrientationEvent.NavigateToNext -> onNavigateToNext()
                 is SeasonsSelectionOrientationEvent.NavigateBack -> onNavigateBack()
                 is SeasonsSelectionOrientationEvent.ShowError -> {
-                    // Handle error if needed
+
                 }
             }
         }
@@ -143,7 +143,6 @@ fun SeasonsSelectionOrientationScreen(
                                 onAction = onAction
                             )
                         }
-
                         Image(
                             modifier = Modifier
                                 .fillMaxSize()

@@ -4,6 +4,7 @@ import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
+import maia.dmt.orientation.presentation.drag.DragShapeOrientationRoot
 import maia.dmt.orientation.presentation.entry.EntryScreenOrientationRoot
 import maia.dmt.orientation.presentation.numberSelection.NumberSelectionOrientationRoot
 import maia.dmt.orientation.presentation.seasons.SeasonsSelectionOrientationRoot
@@ -47,5 +48,15 @@ fun NavGraphBuilder.orientationTestGraph(
             )
         }
 
+        composable<OrientationTestGraphRoutes.OrientationShapeDrag> {
+            DragShapeOrientationRoot(
+                onNavigateToNext = {
+                    navController.navigate(OrientationTestGraphRoutes.OrientationShapeResize)
+                },
+                onNavigateBack = {
+                    navController.popBackStack()
+                },
+            )
+        }
     }
 }

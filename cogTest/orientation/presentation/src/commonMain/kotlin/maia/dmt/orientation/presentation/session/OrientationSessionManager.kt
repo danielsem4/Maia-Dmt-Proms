@@ -4,6 +4,8 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import maia.dmt.core.domain.dto.InactivityEvent
+import maia.dmt.orientation.domain.model.DragShape
+import maia.dmt.orientation.domain.model.DragShapeResult
 import maia.dmt.orientation.domain.model.NumberSelectionResult
 import maia.dmt.orientation.domain.model.Season
 import maia.dmt.orientation.domain.model.SeasonsSelectionResult
@@ -16,6 +18,8 @@ class OrientationSessionManager {
     private val _seasonsSelectionResult = MutableStateFlow<SeasonsSelectionResult?>(null)
     val seasonsSelectionResult: StateFlow<SeasonsSelectionResult?> = _seasonsSelectionResult.asStateFlow()
 
+    private val _dragShapeResult = MutableStateFlow<DragShapeResult?>(null)
+    val dragShapeResult = _dragShapeResult.asStateFlow()
 
     fun saveNumberSelectionResult(
         targetNumber: Int,
@@ -63,6 +67,29 @@ class OrientationSessionManager {
             startTime = startTime,
             endTime = endTime,
             reactionTimeMs = reactionTimeMs,
+            inactivityEvents = inactivityEvents
+        )
+    }
+
+    fun saveDragShapeResult(
+        targetShape: DragShape,
+        shapeInFrame: DragShape,
+        startTime: Instant,
+        firstDropTime: Instant?,
+        nextTime: Instant,
+        inactivityEvents: List<InactivityEvent>
+    ) {
+        val isSuccess = shapeInFrame == targetShape
+        val score = if (isSuccess) 1 else 0
+
+        _dragShapeResult.value = DragShapeResult(
+            targetShape = targetShape,
+            shapeInFrame = shapeInFrame,
+            success = isSuccess,
+            score = score,
+            startTime = startTime,
+            firstDropTime = firstDropTime,
+            nextTime = nextTime,
             inactivityEvents = inactivityEvents
         )
     }

@@ -1,5 +1,6 @@
 package maia.dmt.orientation.presentation.di
 
+import maia.dmt.orientation.presentation.drag.DragShapeOrientationViewModel
 import maia.dmt.orientation.presentation.numberSelection.NumberSelectionOrientationViewModel
 import maia.dmt.orientation.presentation.seasons.SeasonsSelectionOrientationViewModel
 import maia.dmt.orientation.presentation.session.OrientationSessionManager
@@ -10,5 +11,6 @@ val orientationPresentationModule = module {
 
     viewModelOf(::NumberSelectionOrientationViewModel)
     viewModelOf(::SeasonsSelectionOrientationViewModel)
+    viewModelOf(::DragShapeOrientationViewModel)
     single { OrientationSessionManager() }
 }

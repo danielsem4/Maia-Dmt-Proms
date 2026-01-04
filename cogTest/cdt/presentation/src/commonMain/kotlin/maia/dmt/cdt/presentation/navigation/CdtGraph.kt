@@ -52,8 +52,6 @@ fun NavGraphBuilder.cdtGraph(
         composable<CdtGraphRoutes.CdtEnd> {
             CdtEndRoot(
                 onNavigateToNextScreen = {
-                    // This typically navigates out of the CDT graph entirely (e.g. to Home)
-                    // Depending on your root nav setup, you might pop the graph or navigate to a specific route
                     navController.popBackStack(CdtGraphRoutes.Graph, inclusive = true)
                 },
                 onNavigateBack = { navController.popBackStack() },

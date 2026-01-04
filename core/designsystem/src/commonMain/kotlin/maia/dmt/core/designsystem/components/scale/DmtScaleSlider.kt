@@ -5,7 +5,9 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Slider
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -55,31 +57,31 @@ fun DmtScaleSlider(
             Column(
                 horizontalAlignment = Alignment.Start
             ) {
-                androidx.compose.material3.Text(
+                Text(
                     text = startValue.toString(),
-                    style = androidx.compose.material3.MaterialTheme.typography.titleLarge
+                    style = MaterialTheme.typography.titleLarge
                 )
-                androidx.compose.material3.Text(
+                Text(
                     text = startText,
-                    style = androidx.compose.material3.MaterialTheme.typography.bodyMedium
+                    style = MaterialTheme.typography.bodyMedium
                 )
             }
 
-            androidx.compose.material3.Text(
+            Text(
                 text = currentValue.toString(),
-                style = androidx.compose.material3.MaterialTheme.typography.displayMedium
+                style = MaterialTheme.typography.displayMedium
             )
 
             Column(
                 horizontalAlignment = Alignment.End
             ) {
-                androidx.compose.material3.Text(
+                Text(
                     text = endValue.toString(),
-                    style = androidx.compose.material3.MaterialTheme.typography.titleLarge
+                    style = MaterialTheme.typography.titleLarge
                 )
-                androidx.compose.material3.Text(
+                Text(
                     text = endText,
-                    style = androidx.compose.material3.MaterialTheme.typography.bodyMedium
+                    style = MaterialTheme.typography.bodyMedium
                 )
             }
         }

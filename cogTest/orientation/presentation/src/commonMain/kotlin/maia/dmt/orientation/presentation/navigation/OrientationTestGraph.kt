@@ -6,6 +6,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navigation
 import maia.dmt.orientation.presentation.drag.DragShapeOrientationRoot
 import maia.dmt.orientation.presentation.draw.DrawOrientationRoot
+import maia.dmt.orientation.presentation.end.EndOrientationRoot
 import maia.dmt.orientation.presentation.entry.EntryScreenOrientationRoot
 import maia.dmt.orientation.presentation.numberSelection.NumberSelectionOrientationRoot
 import maia.dmt.orientation.presentation.painValue.PainScaleOrientationRoot
@@ -96,7 +97,11 @@ fun NavGraphBuilder.orientationTestGraph(
         }
 
         composable<OrientationTestGraphRoutes.OrientationEndTest> {
-
+            EndOrientationRoot(
+                onNavigateToHome = {
+                    navController.popBackStack(OrientationTestGraphRoutes.Graph, inclusive = true)
+                }
+            )
         }
     }
 

@@ -19,4 +19,10 @@
     <string name="activities_activity_racket_game">Racket game</string>
     <string name="activities_activity_gym_workout">Gym workout</string>
     <string name="activities_activity_ball_game">Ball game</string>
+
+    <string name="activities_activity_sit">Sit</string>
+    <string name="activities_activity_walk_room">Walk in the room</string>
+    <string name="activities_activity_walk_hallway">Walk in the hallway</string>
+    <string name="activities_activity_walk_department">Walk in the department</string>
+
 </resources>

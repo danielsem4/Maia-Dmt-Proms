@@ -31,15 +31,20 @@ import dmtproms.feature.activities.presentation.generated.resources.activities_a
 import dmtproms.feature.activities.presentation.generated.resources.activities_activity_gym_workout
 import dmtproms.feature.activities.presentation.generated.resources.activities_activity_racket_game
 import dmtproms.feature.activities.presentation.generated.resources.activities_activity_run
+import dmtproms.feature.activities.presentation.generated.resources.activities_activity_sit
 import dmtproms.feature.activities.presentation.generated.resources.activities_activity_stand
 import dmtproms.feature.activities.presentation.generated.resources.activities_activity_swim
 import dmtproms.feature.activities.presentation.generated.resources.activities_activity_treadmill
 import dmtproms.feature.activities.presentation.generated.resources.activities_activity_walk
+import dmtproms.feature.activities.presentation.generated.resources.activities_activity_walk_department
+import dmtproms.feature.activities.presentation.generated.resources.activities_activity_walk_hallway
+import dmtproms.feature.activities.presentation.generated.resources.activities_activity_walk_room
 import dmtproms.feature.activities.presentation.generated.resources.activities_activity_yoga
 import dmtproms.feature.activities.presentation.generated.resources.ball_game_icon
 import dmtproms.feature.activities.presentation.generated.resources.gym_workout_icon
 import dmtproms.feature.activities.presentation.generated.resources.racket_game_icon
 import dmtproms.feature.activities.presentation.generated.resources.run_icon
+import dmtproms.feature.activities.presentation.generated.resources.sitting_icon
 import dmtproms.feature.activities.presentation.generated.resources.stand_icon
 import dmtproms.feature.activities.presentation.generated.resources.swim_icon
 import dmtproms.feature.activities.presentation.generated.resources.treadmill_icon
@@ -242,6 +247,10 @@ class ActivitiesViewModel(
     private fun mapActivityIcon(activityName: String): DrawableResource {
         return when (activityName.lowercase().trim()) {
             "walk" -> Res.drawable.walk_icon
+            "sit" -> Res.drawable.sitting_icon
+            "walk in the room" -> Res.drawable.walk_icon
+            "walk in the hallway" -> Res.drawable.walk_icon
+            "walk in the department" -> Res.drawable.walk_icon
             "yoga" -> Res.drawable.yoga_icon
             "treadmill" -> Res.drawable.treadmill_icon
             "swim" -> Res.drawable.swim_icon
@@ -257,6 +266,10 @@ class ActivitiesViewModel(
     private suspend fun mapActivityName(activityName: String): String {
         return when (activityName.lowercase().trim()) {
             "walk" -> getString(Res.string.activities_activity_walk)
+            "sit" -> getString(Res.string.activities_activity_sit)
+            "walk in the room" -> getString(Res.string.activities_activity_walk_room)
+            "walk in the hallway" -> getString(Res.string.activities_activity_walk_hallway)
+            "walk in the department" -> getString(Res.string.activities_activity_walk_department)
             "yoga" -> getString(Res.string.activities_activity_yoga)
             "treadmill" -> getString(Res.string.activities_activity_treadmill)
             "swim" -> getString(Res.string.activities_activity_swim)

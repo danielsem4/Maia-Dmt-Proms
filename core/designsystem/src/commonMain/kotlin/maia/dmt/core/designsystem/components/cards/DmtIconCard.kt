@@ -90,7 +90,7 @@ fun DmtIconCard(
                 imageVector = vectorResource(icon),
                 contentDescription = text,
                 modifier = Modifier.size(iconSize),
-                tint = tint ?: androidx.compose.ui.graphics.Color.Unspecified // Use provided tint or Unspecified
+                tint = tint ?: androidx.compose.ui.graphics.Color.Unspecified
             )
 
             Spacer(modifier = Modifier.height(8.dp))

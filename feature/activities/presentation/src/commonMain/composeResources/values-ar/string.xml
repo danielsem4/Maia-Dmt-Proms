@@ -20,4 +20,9 @@
     <string name="activities_activity_gym_workout">تمارين النادي الرياضي</string>
     <string name="activities_activity_ball_game">لعبة الكرة</string>
 
+    <string name="activities_activity_sit">الجلوس</string>
+    <string name="activities_activity_walk_room">المشي في الغرفة</string>
+    <string name="activities_activity_walk_hallway">المشي في الممر</string>
+    <string name="activities_activity_walk_department">المشي في القسم</string>
+
 </resources>

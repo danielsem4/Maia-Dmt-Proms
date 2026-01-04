@@ -46,19 +46,22 @@ class DrawOrientationViewModel(
         _state.update { it.copy(inactivityTimeoutCount = currentCount + 1) }
 
         if (currentCount + 1 >= 2) {
-            saveAndNavigateToNext()
+            saveResults()
         }
     }
 
     fun onAction(action: DrawOrientationAction) {
         when (action) {
-            is DrawOrientationAction.OnToggleDrawMode -> { /* Handled by DrawingController */ }
+            is DrawOrientationAction.OnToggleDrawMode -> {  }
             is DrawOrientationAction.OnClearAllClick -> showClearAllDialog()
             is DrawOrientationAction.OnConfirmClearAll -> confirmClearAll()
             is DrawOrientationAction.OnDismissClearAllDialog -> dismissClearAllDialog()
-            is DrawOrientationAction.OnUndoClick -> { /* Handled by DrawingController */ }
+            is DrawOrientationAction.OnUndoClick -> {  }
             is DrawOrientationAction.OnDrawingStarted -> onDrawingStarted()
-            is DrawOrientationAction.OnNextClick -> onNextClick()
+
+            // CHANGE: Receive the bitmap from the action
+            is DrawOrientationAction.OnNextClick -> onNextClick(action.bitmap)
+
             is DrawOrientationAction.OnBackClick -> navigateBack()
             is DrawOrientationAction.OnBackToTask -> onBackToTask()
             is DrawOrientationAction.OnDismissInactivityDialog -> onDismissDialog()
@@ -109,15 +112,13 @@ class DrawOrientationViewModel(
         }
     }
 
-    fun saveDrawingBitmap(bitmap: ImageBitmap) {
+    // CHANGE: This method now saves the bitmap to state FIRST, then saves results
+    private fun onNextClick(bitmap: ImageBitmap?) {
         _state.update { it.copy(drawingBitmap = bitmap) }
-    }
-
-    private fun onNextClick() {
         saveAndNavigateToNext()
     }
 
-    private fun saveAndNavigateToNext() {
+    private fun saveResults() {
         val currentState = _state.value
         val startTime = currentState.startTime ?: Clock.System.now()
         val nextTime = Clock.System.now()
@@ -130,6 +131,10 @@ class DrawOrientationViewModel(
             nextTime = nextTime,
             inactivityEvents = inactivityEvents
         )
+    }
+
+    private fun saveAndNavigateToNext() {
+        saveResults()
 
         viewModelScope.launch {
             cancelInactivityTimer()

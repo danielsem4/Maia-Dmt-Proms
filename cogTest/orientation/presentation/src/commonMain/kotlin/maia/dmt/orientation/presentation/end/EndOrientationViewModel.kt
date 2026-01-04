@@ -184,7 +184,7 @@ class EndOrientationViewModel(
                     MeasurementDetailString(
                         currentDateTime,
                         xDrawingId,
-                        if (result.hasDrawn) "Drawn" else "Not drawn"
+                        if (result.hasDrawn) "true" else "false"
                     )
                 )
             }

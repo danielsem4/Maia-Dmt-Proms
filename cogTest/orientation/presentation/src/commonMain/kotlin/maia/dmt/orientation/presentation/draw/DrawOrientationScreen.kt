@@ -45,7 +45,6 @@ fun DrawOrientationRoot(
     val state by viewModel.state.collectAsStateWithLifecycle()
     val drawingController = rememberDrawingController()
 
-    // Track drawing interactions
     LaunchedEffect(drawingController.hasDrawings()) {
         if (drawingController.hasDrawings()) {
             viewModel.onAction(DrawOrientationAction.OnDrawingStarted)
@@ -56,9 +55,7 @@ fun DrawOrientationRoot(
         viewModel.events.collect { event ->
             when (event) {
                 is DrawOrientationEvent.NavigateToNext -> {
-                    drawingController.captureBitmap()?.let { bitmap ->
-                        viewModel.saveDrawingBitmap(bitmap)
-                    }
+                    // CHANGE: Removed captureBitmap() here. It is now done in the button click.
                     onNavigateToNext()
                 }
                 is DrawOrientationEvent.NavigateBack -> onNavigateBack()
@@ -159,9 +156,13 @@ fun DrawOrientationScreen(
                         enabled = drawingController.hasDrawings()
                     )
 
+                    // CHANGE: Capture happens here immediately on click
                     DmtButton(
                         text = stringResource(Res.string.cog_orientation_next),
-                        onClick = { onAction(DrawOrientationAction.OnNextClick) },
+                        onClick = {
+                            val bitmap = drawingController.captureBitmap()
+                            onAction(DrawOrientationAction.OnNextClick(bitmap))
+                        },
                         enabled = true
                     )
 

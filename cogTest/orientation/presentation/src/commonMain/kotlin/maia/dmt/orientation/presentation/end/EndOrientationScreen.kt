@@ -16,6 +16,9 @@ import dmtproms.cogtest.orientation.presentation.generated.resources.cog_orienta
 import maia.dmt.core.designsystem.components.buttons.DmtButton
 import maia.dmt.core.designsystem.components.cards.DmtParagraphCard
 import maia.dmt.core.designsystem.components.layouts.DmtBaseScreen
+import maia.dmt.core.designsystem.components.toast.DmtToastMessage
+import maia.dmt.core.designsystem.components.toast.ToastDuration
+import maia.dmt.core.designsystem.components.toast.ToastType
 import maia.dmt.core.designsystem.theme.DmtTheme
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
@@ -28,15 +31,20 @@ fun EndOrientationRoot(
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
 
+    var toastMessage by remember { mutableStateOf<String?>(null) }
+    var toastType by remember { mutableStateOf(ToastType.Success) }
+
     LaunchedEffect(viewModel.events) {
         viewModel.events.collect { event ->
             when (event) {
                 is EndOrientationEvent.NavigateToHome -> onNavigateToHome()
                 is EndOrientationEvent.ShowError -> {
-                    println("Error: ${event.message}")
+                    toastType = ToastType.Error
+                    toastMessage = event.message
                 }
                 is EndOrientationEvent.ShowSuccess -> {
-                    println("Success: ${event.message}")
+                    toastType = ToastType.Success
+                    toastMessage = event.message
                 }
             }
         }
@@ -46,6 +54,15 @@ fun EndOrientationRoot(
         state = state,
         onAction = viewModel::onAction
     )
+
+    toastMessage?.let { message ->
+        DmtToastMessage(
+            message = message,
+            type = toastType,
+            duration = ToastDuration.MEDIUM,
+            onDismiss = { toastMessage = null }
+        )
+    }
 }
 
 @Composable

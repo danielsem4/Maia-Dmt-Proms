@@ -19,6 +19,9 @@ import maia.dmt.core.designsystem.components.buttons.DmtButton
 import maia.dmt.core.designsystem.components.cards.DmtCardStyle
 import maia.dmt.core.designsystem.components.cards.DmtParagraphCard
 import maia.dmt.core.designsystem.components.layouts.DmtBaseScreen
+import maia.dmt.core.designsystem.components.toast.DmtToastMessage
+import maia.dmt.core.designsystem.components.toast.ToastDuration
+import maia.dmt.core.designsystem.components.toast.ToastType
 import maia.dmt.core.designsystem.theme.DmtTheme
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
@@ -32,13 +35,17 @@ fun EntryScreenOrientationRoot(
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
 
+    var toastMessage by remember { mutableStateOf<String?>(null) }
+    var toastType by remember { mutableStateOf(ToastType.Error) }
+
     LaunchedEffect(viewModel.events) {
         viewModel.events.collect { event ->
             when (event) {
                 is EntryOrientationEvent.NavigateToTest -> onStartOrientationTest()
                 is EntryOrientationEvent.NavigateBack -> onNavigateBack()
                 is EntryOrientationEvent.ShowError -> {
-                    println("Error: ${event.message}")
+                    toastType = ToastType.Error
+                    toastMessage = event.message
                 }
             }
         }
@@ -48,6 +55,15 @@ fun EntryScreenOrientationRoot(
         state = state,
         onAction = viewModel::onAction
     )
+
+    toastMessage?.let { message ->
+        DmtToastMessage(
+            message = message,
+            type = toastType,
+            duration = ToastDuration.MEDIUM,
+            onDismiss = { toastMessage = null }
+        )
+    }
 }
 
 @Composable

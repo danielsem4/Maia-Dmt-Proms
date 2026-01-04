@@ -1,5 +1,7 @@
 package maia.dmt.orientation.presentation.draw
 
+import androidx.compose.ui.graphics.ImageBitmap
+
 sealed interface DrawOrientationAction {
     data object OnToggleDrawMode : DrawOrientationAction
     data object OnClearAllClick : DrawOrientationAction
@@ -8,7 +10,8 @@ sealed interface DrawOrientationAction {
     data object OnUndoClick : DrawOrientationAction
     data object OnDrawingStarted : DrawOrientationAction
 
-    data object OnNextClick : DrawOrientationAction
+    data class OnNextClick(val bitmap: ImageBitmap?) : DrawOrientationAction
+
     data object OnBackClick : DrawOrientationAction
     data object OnBackToTask : DrawOrientationAction
     data object OnDismissInactivityDialog : DrawOrientationAction

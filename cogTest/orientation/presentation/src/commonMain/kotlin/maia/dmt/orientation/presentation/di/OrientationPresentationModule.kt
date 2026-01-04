@@ -3,6 +3,7 @@ package maia.dmt.orientation.presentation.di
 import maia.dmt.orientation.presentation.drag.DragShapeOrientationViewModel
 import maia.dmt.orientation.presentation.draw.DrawOrientationViewModel
 import maia.dmt.orientation.presentation.numberSelection.NumberSelectionOrientationViewModel
+import maia.dmt.orientation.presentation.painValue.PainScaleOrientationViewModel
 import maia.dmt.orientation.presentation.resize.ShapeResizeOrientationViewModel
 import maia.dmt.orientation.presentation.seasons.SeasonsSelectionOrientationViewModel
 import maia.dmt.orientation.presentation.session.OrientationSessionManager
@@ -16,5 +17,6 @@ val orientationPresentationModule = module {
     viewModelOf(::DragShapeOrientationViewModel)
     viewModelOf(::ShapeResizeOrientationViewModel)
     viewModelOf(::DrawOrientationViewModel)
+    viewModelOf(::PainScaleOrientationViewModel)
     single { OrientationSessionManager() }
 }

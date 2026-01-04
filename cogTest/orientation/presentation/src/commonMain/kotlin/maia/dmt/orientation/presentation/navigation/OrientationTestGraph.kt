@@ -8,6 +8,7 @@ import maia.dmt.orientation.presentation.drag.DragShapeOrientationRoot
 import maia.dmt.orientation.presentation.draw.DrawOrientationRoot
 import maia.dmt.orientation.presentation.entry.EntryScreenOrientationRoot
 import maia.dmt.orientation.presentation.numberSelection.NumberSelectionOrientationRoot
+import maia.dmt.orientation.presentation.painValue.PainScaleOrientationRoot
 import maia.dmt.orientation.presentation.resize.ShapeResizeOrientationRoot
 import maia.dmt.orientation.presentation.seasons.SeasonsSelectionOrientationRoot
 
@@ -84,7 +85,14 @@ fun NavGraphBuilder.orientationTestGraph(
         }
 
         composable<OrientationTestGraphRoutes.OrientationPainLevel> {
-
+            PainScaleOrientationRoot(
+                onNavigateToNext = {
+                    navController.navigate(OrientationTestGraphRoutes.OrientationEndTest)
+                },
+                onNavigateBack = {
+                    navController.popBackStack()
+                },
+            )
         }
 
         composable<OrientationTestGraphRoutes.OrientationEndTest> {

@@ -9,6 +9,7 @@ import maia.dmt.orientation.domain.model.DragShape
 import maia.dmt.orientation.domain.model.DragShapeResult
 import maia.dmt.orientation.domain.model.DrawOrientationResult
 import maia.dmt.orientation.domain.model.NumberSelectionResult
+import maia.dmt.orientation.domain.model.PainScaleResult
 import maia.dmt.orientation.domain.model.Season
 import maia.dmt.orientation.domain.model.SeasonsSelectionResult
 import maia.dmt.orientation.domain.model.ShapeResizeResult
@@ -30,6 +31,9 @@ class OrientationSessionManager {
 
     private val _drawOrientationResult = MutableStateFlow<DrawOrientationResult?>(null)
     val drawOrientationResult = _drawOrientationResult.asStateFlow()
+
+    private val _painScaleResult = MutableStateFlow<PainScaleResult?>(null)
+    val painScaleResult = _painScaleResult.asStateFlow()
 
     fun saveNumberSelectionResult(
         targetNumber: Int,
@@ -156,6 +160,34 @@ class OrientationSessionManager {
             score = score,
             startTime = startTime,
             firstDrawTime = firstDrawTime,
+            nextTime = nextTime,
+            reactionTimeMs = reactionTimeMs,
+            inactivityEvents = inactivityEvents
+        )
+    }
+
+    fun savePainScaleResult(
+        painLevel: Int,
+        hasSetPainLevel: Boolean,
+        startTime: Instant,
+        firstInteractionTime: Instant?,
+        nextTime: Instant,
+        inactivityEvents: List<InactivityEvent>
+    ) {
+        val score = if (hasSetPainLevel) 1 else 0
+
+        val reactionTimeMs = if (firstInteractionTime != null) {
+            firstInteractionTime.toEpochMilliseconds() - startTime.toEpochMilliseconds()
+        } else {
+            null
+        }
+
+        _painScaleResult.value = PainScaleResult(
+            painLevel = painLevel,
+            hasSetPainLevel = hasSetPainLevel,
+            score = score,
+            startTime = startTime,
+            firstInteractionTime = firstInteractionTime,
             nextTime = nextTime,
             reactionTimeMs = reactionTimeMs,
             inactivityEvents = inactivityEvents

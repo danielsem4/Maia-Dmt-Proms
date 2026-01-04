@@ -19,4 +19,9 @@
     <string name="activities_activity_racket_game">Игра с ракеткой</string>
     <string name="activities_activity_gym_workout">Тренировка в зале</string>
     <string name="activities_activity_ball_game">Игра с мячом</string>
+
+    <string name="activities_activity_sit">Сидение</string>
+    <string name="activities_activity_walk_room">Ходьба по комнате</string>
+    <string name="activities_activity_walk_hallway">Ходьба по коридору</string>
+    <string name="activities_activity_walk_department">Ходьба по отделению</string>
 </resources>

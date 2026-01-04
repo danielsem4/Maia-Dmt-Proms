@@ -20,4 +20,9 @@
     <string name="activities_activity_gym_workout">אימון בחדר כושר</string>
     <string name="activities_activity_ball_game">משחק כדור</string>
 
+    <string name="activities_activity_sit">ישיבה</string>
+    <string name="activities_activity_walk_room">הליכה בחדר</string>
+    <string name="activities_activity_walk_hallway">הליכה במסדרון</string>
+    <string name="activities_activity_walk_department">הליכה במחלקה</string>
+
 </resources>

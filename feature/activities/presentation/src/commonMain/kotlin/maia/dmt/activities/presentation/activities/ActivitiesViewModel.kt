@@ -247,10 +247,10 @@ class ActivitiesViewModel(
     private fun mapActivityIcon(activityName: String): DrawableResource {
         return when (activityName.lowercase().trim()) {
             "walk" -> Res.drawable.walk_icon
-            "sit" -> Res.drawable.sitting_icon
-            "walk in the room" -> Res.drawable.walk_icon
-            "walk in the hallway" -> Res.drawable.walk_icon
-            "walk in the department" -> Res.drawable.walk_icon
+            "sitting" -> Res.drawable.sitting_icon
+            "walking at room" -> Res.drawable.walk_icon
+            "walking at hallway" -> Res.drawable.walk_icon
+            "walking at department" -> Res.drawable.walk_icon
             "yoga" -> Res.drawable.yoga_icon
             "treadmill" -> Res.drawable.treadmill_icon
             "swim" -> Res.drawable.swim_icon
@@ -266,10 +266,10 @@ class ActivitiesViewModel(
     private suspend fun mapActivityName(activityName: String): String {
         return when (activityName.lowercase().trim()) {
             "walk" -> getString(Res.string.activities_activity_walk)
-            "sit" -> getString(Res.string.activities_activity_sit)
-            "walk in the room" -> getString(Res.string.activities_activity_walk_room)
-            "walk in the hallway" -> getString(Res.string.activities_activity_walk_hallway)
-            "walk in the department" -> getString(Res.string.activities_activity_walk_department)
+            "sitting" -> getString(Res.string.activities_activity_sit)
+            "walking at room" -> getString(Res.string.activities_activity_walk_room)
+            "walking at hallway" -> getString(Res.string.activities_activity_walk_hallway)
+            "walking at department" -> getString(Res.string.activities_activity_walk_department)
             "yoga" -> getString(Res.string.activities_activity_yoga)
             "treadmill" -> getString(Res.string.activities_activity_treadmill)
             "swim" -> getString(Res.string.activities_activity_swim)

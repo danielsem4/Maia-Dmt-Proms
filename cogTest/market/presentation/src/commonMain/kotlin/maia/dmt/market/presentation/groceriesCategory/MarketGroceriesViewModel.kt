@@ -9,7 +9,6 @@ import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import maia.dmt.market.presentation.marketLand.MarketMainNavigationEvent
 
 class MarketGroceriesViewModel : ViewModel() {
 
@@ -38,9 +37,8 @@ class MarketGroceriesViewModel : ViewModel() {
                 navigateToCategory(action.categoryId)
             }
             is MarketGroceriesAction.OnSearchClick -> {
-
+                navigateToSearch()
             }
-
             is MarketGroceriesAction.OnDonationListClick -> {
                 navigateToShoppingList("donation")
             }
@@ -48,7 +46,7 @@ class MarketGroceriesViewModel : ViewModel() {
                 navigateToShoppingList("regular")
             }
             is MarketGroceriesAction.OnShoppingCartClick -> {
-
+                navigateToCart()
             }
         }
     }
@@ -120,6 +118,18 @@ class MarketGroceriesViewModel : ViewModel() {
     private fun navigateToShoppingList(listType: String) {
         viewModelScope.launch {
             eventChannel.send(MarketGroceriesEvent.NavigateToShoppingList(listType))
+        }
+    }
+
+    private fun navigateToSearch() {
+        viewModelScope.launch {
+            eventChannel.send(MarketGroceriesEvent.NavigateToSearch)
+        }
+    }
+
+    private fun navigateToCart() {
+        viewModelScope.launch {
+            eventChannel.send(MarketGroceriesEvent.NavigateToCart)
         }
     }
 }

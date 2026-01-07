@@ -72,6 +72,8 @@ fun MarketGroceriesRoot(
     onNavigateBack: () -> Unit,
     onNavigateToCategory: (String) -> Unit,
     onNavigateToShoppingList: (String) -> Unit,
+    onNavigateToSearch: () -> Unit,
+    onNavigateToCart: () -> Unit
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
 
@@ -80,17 +82,17 @@ fun MarketGroceriesRoot(
             is MarketGroceriesEvent.NavigateBack -> {
                 onNavigateBack()
             }
-
             is MarketGroceriesEvent.NavigateToCategory -> {
                 onNavigateToCategory(event.categoryId)
             }
-
-            is MarketGroceriesEvent.NavigateSearchScreen -> {
-
+            is MarketGroceriesEvent.NavigateToSearch -> {
+                onNavigateToSearch()
             }
-
             is MarketGroceriesEvent.NavigateToShoppingList -> {
                 onNavigateToShoppingList(event.listType)
+            }
+            is MarketGroceriesEvent.NavigateToCart -> {
+                onNavigateToCart()
             }
         }
     }
@@ -141,7 +143,7 @@ fun MarketGroceriesScreen(
                                         modifier = Modifier.size(28.dp)
                                     )
                                 },
-                                onClick = { },
+                                onClick = { onAction(MarketGroceriesAction.OnSearchClick) },  // Updated
                                 style = maia.dmt.core.designsystem.components.buttons.DmtButtonStyle.SECONDARY,
                                 modifier = Modifier
                                     .widthIn(min = 100.dp, max = 320.dp)
@@ -157,7 +159,7 @@ fun MarketGroceriesScreen(
                                         modifier = Modifier.size(28.dp)
                                     )
                                 },
-                                onClick = { },
+                                onClick = { onAction(MarketGroceriesAction.OnShoppingCartClick) },  // Updated
                                 style = maia.dmt.core.designsystem.components.buttons.DmtButtonStyle.SECONDARY,
                                 modifier = Modifier
                                     .widthIn(min = 100.dp, max = 320.dp)

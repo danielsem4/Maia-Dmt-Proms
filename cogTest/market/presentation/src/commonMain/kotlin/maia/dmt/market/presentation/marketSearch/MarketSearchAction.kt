@@ -6,4 +6,7 @@ interface MarketSearchAction {
     data class OnProductIncrement(val productId: String) : MarketSearchAction
     data class OnProductDecrement(val productId: String) : MarketSearchAction
     data class OnProductClick(val productId: String) : MarketSearchAction
+    data object OnViewShoppingList : MarketSearchAction
+    data object OnViewDonationList : MarketSearchAction
+    data object OnViewCart : MarketSearchAction
 }

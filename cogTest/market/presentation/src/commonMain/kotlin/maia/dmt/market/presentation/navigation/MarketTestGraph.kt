@@ -135,6 +135,12 @@ fun NavGraphBuilder.marketTestGraph(
                 },
                 onNavigateToShoppingList = { listType ->
                     navController.navigate(MarketTestGraphRoutes.MarketShoppingList(listType))
+                },
+                onNavigateToSearch = {
+                    navController.navigate(MarketTestGraphRoutes.MarketSearch)
+                },
+                onNavigateToCart = {
+                    navController.navigate(MarketTestGraphRoutes.MarketCart)
                 }
             )
         }
@@ -162,7 +168,12 @@ fun NavGraphBuilder.marketTestGraph(
                 onNavigateBack = {
                     navController.navigateUp()
                 },
-
+                onNavigateToShoppingList = { listType ->
+                    navController.navigate(MarketTestGraphRoutes.MarketShoppingList(listType))
+                },
+                onNavigateToCart = {
+                    navController.navigate(MarketTestGraphRoutes.MarketCart)
+                }
             )
         }
 
@@ -172,11 +183,13 @@ fun NavGraphBuilder.marketTestGraph(
                     navController.navigateUp()
                 },
                 onFinish = {
-
+                    // Navigate to next screen after shopping is complete
+                    navController.navigate(MarketTestGraphRoutes.MarketSecondPartInstructions)
+                },
+                onNavigateToShoppingList = { listType ->
+                    navController.navigate(MarketTestGraphRoutes.MarketShoppingList(listType))
                 }
             )
         }
-
-
     }
 }

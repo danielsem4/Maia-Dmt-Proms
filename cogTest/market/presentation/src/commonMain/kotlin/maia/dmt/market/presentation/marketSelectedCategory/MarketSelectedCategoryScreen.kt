@@ -185,6 +185,7 @@ fun MarketSelectedCategoryScreen(
                                 imageUrl = product.iconRes,
                                 isOutOfStock = !product.isInStock,
                                 isDonation = product.isDonation,
+                                price = product.price,
                                 onIncrement = {
                                     onAction(MarketSelectedCategoryAction.OnProductIncrement(product.id))
                                 },

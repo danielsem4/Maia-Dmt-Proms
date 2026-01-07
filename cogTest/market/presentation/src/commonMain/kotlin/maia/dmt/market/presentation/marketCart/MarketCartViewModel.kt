@@ -11,10 +11,12 @@ import kotlinx.coroutines.launch
 import maia.dmt.market.domain.model.CartItem
 import maia.dmt.market.domain.repository.CartRepository
 import maia.dmt.market.domain.usecase.GetProductByIdUseCase
+import maia.dmt.market.presentation.session.MarketSessionManager
 
 class MarketCartViewModel(
     private val cartRepository: CartRepository,
-    private val getProductByIdUseCase: GetProductByIdUseCase
+    private val getProductByIdUseCase: GetProductByIdUseCase,
+    private val marketSessionManager: MarketSessionManager
 ) : ViewModel() {
 
     private val _events = Channel<MarketCartEvent>()
@@ -62,14 +64,16 @@ class MarketCartViewModel(
                 cartRepository.removeFromCart(action.itemId)
             }
             is MarketCartAction.OnRemoveItem -> {
-                // Remove all quantities of this item
                 val currentQuantity = cartRepository.getQuantity(action.itemId)
                 repeat(currentQuantity) {
                     cartRepository.removeFromCart(action.itemId)
                 }
             }
             is MarketCartAction.OnFinishShopping -> {
+                val currentCartItems = _state.value.cartItems
+                marketSessionManager.saveCartResults(currentCartItems)
                 cartRepository.clearCart()
+
                 viewModelScope.launch {
                     _events.send(MarketCartEvent.CartCompleted)
                 }
@@ -77,6 +81,16 @@ class MarketCartViewModel(
             is MarketCartAction.OnNavigateBack -> {
                 viewModelScope.launch {
                     _events.send(MarketCartEvent.NavigateBack)
+                }
+            }
+            is MarketCartAction.OnViewShoppingList -> {
+                viewModelScope.launch {
+                    _events.send(MarketCartEvent.NavigateToShoppingList("regular"))
+                }
+            }
+            is MarketCartAction.OnViewDonationList -> {
+                viewModelScope.launch {
+                    _events.send(MarketCartEvent.NavigateToShoppingList("donation"))
                 }
             }
         }

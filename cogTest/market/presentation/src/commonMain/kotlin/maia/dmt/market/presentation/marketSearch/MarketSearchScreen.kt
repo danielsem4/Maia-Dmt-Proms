@@ -33,12 +33,20 @@ import org.koin.compose.viewmodel.koinViewModel
 fun MarketSearchRoot(
     viewModel: MarketSearchViewModel = koinViewModel(),
     onNavigateBack: () -> Unit,
+    onNavigateToShoppingList: (String) -> Unit,
+    onNavigateToCart: () -> Unit
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
 
     ObserveAsEvents(viewModel.events) { event ->
         when (event) {
             is MarketSearchEvent.NavigateBack -> onNavigateBack()
+            is MarketSearchEvent.NavigateToShoppingList -> {
+                onNavigateToShoppingList(event.listType)
+            }
+            is MarketSearchEvent.NavigateToCart -> {
+                onNavigateToCart()
+            }
         }
     }
 
@@ -186,7 +194,7 @@ fun MarketSearchScreen(
                                 modifier = Modifier.size(28.dp)
                             )
                         },
-                        onClick = { /* Navigate to shopping list */ },
+                        onClick = { onAction(MarketSearchAction.OnViewShoppingList) },
                         style = DmtButtonStyle.SECONDARY,
                         modifier = Modifier.widthIn(min = 100.dp, max = 320.dp)
                     )
@@ -199,7 +207,7 @@ fun MarketSearchScreen(
                                 modifier = Modifier.size(28.dp)
                             )
                         },
-                        onClick = { /* Navigate to donation list */ },
+                        onClick = { onAction(MarketSearchAction.OnViewDonationList) },
                         style = DmtButtonStyle.SECONDARY,
                         modifier = Modifier.widthIn(min = 100.dp, max = 320.dp)
                     )
@@ -212,7 +220,7 @@ fun MarketSearchScreen(
                                 modifier = Modifier.size(28.dp)
                             )
                         },
-                        onClick = { /* Navigate to cart */ },
+                        onClick = { onAction(MarketSearchAction.OnViewCart) },
                         style = DmtButtonStyle.SECONDARY,
                         modifier = Modifier.widthIn(min = 100.dp, max = 320.dp)
                     )

@@ -51,6 +51,7 @@ fun MarketCartRoot(
     viewModel: MarketCartViewModel = koinViewModel(),
     onNavigateBack: () -> Unit,
     onFinish: () -> Unit,
+    onNavigateToShoppingList: (String) -> Unit
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
 
@@ -58,6 +59,9 @@ fun MarketCartRoot(
         when (event) {
             is MarketCartEvent.NavigateBack -> onNavigateBack()
             is MarketCartEvent.CartCompleted -> onFinish()
+            is MarketCartEvent.NavigateToShoppingList -> {
+                onNavigateToShoppingList(event.listType)
+            }
         }
     }
 
@@ -158,13 +162,15 @@ fun MarketCartScreen(
                                 modifier = Modifier.size(28.dp)
                             )
                         },
-                        onClick = { /* Navigate to shopping list */ },
+                        onClick = { onAction(MarketCartAction.OnViewShoppingList) },
                         style = DmtButtonStyle.SECONDARY,
                         modifier = Modifier.widthIn(min = 100.dp, max = 320.dp)
                     )
                     DmtButton(
                         text = stringResource(Res.string.cogTest_market_to_finish_press_here),
-                        onClick = {  },
+                        onClick = {
+                            onAction(MarketCartAction.OnFinishShopping)
+                        },
                         style = DmtButtonStyle.SECONDARY,
                         modifier = Modifier.widthIn(min = 100.dp, max = 320.dp)
                     )
@@ -177,7 +183,7 @@ fun MarketCartScreen(
                                 modifier = Modifier.size(28.dp)
                             )
                         },
-                        onClick = { /* Navigate to donation list */ },
+                        onClick = { onAction(MarketCartAction.OnViewDonationList) },
                         style = DmtButtonStyle.SECONDARY,
                         modifier = Modifier.widthIn(min = 100.dp, max = 320.dp)
                     )

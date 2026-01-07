@@ -163,7 +163,7 @@ private fun LandscapeLayout(
         modifier = Modifier
             .fillMaxSize()
             .background(MaterialTheme.colorScheme.background)
-            .padding(horizontal = 24.dp, vertical = 16.dp)
+            .padding(horizontal = 16.dp, vertical = 8.dp)
     ) {
         Row(
             modifier = Modifier
@@ -193,7 +193,7 @@ private fun LandscapeLayout(
                     color = MaterialTheme.colorScheme.primary,
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(bottom = 16.dp),
+                        .padding(bottom = 12.dp),
                     textAlign = TextAlign.Right
                 )
 
@@ -208,11 +208,11 @@ private fun LandscapeLayout(
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.colorScheme.error,
                 modifier = Modifier
-                    .padding(bottom = 16.dp)
+                    .padding(bottom = 12.dp)
             )
         }
 
-        Spacer(Modifier.height(12.dp))
+        Spacer(Modifier.height(8.dp))
 
         ConveyorSection(
             state = state,

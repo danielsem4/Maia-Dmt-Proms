@@ -124,11 +124,12 @@
     <string name="cogTest_market_category_frozen">Замороженные продукты</string>
     <string name="cogTest_market_category_dairy">Молочные продукты</string>
     <string name="cogTest_market_category_fruits">Фрукты</string>
-    <string name="cogTest_market_category_dry_spices">Бакалея и специи</string>
+    <string name="cogTest_market_category_conserves">Консервы</string>
     <string name="cogTest_market_category_vegetables">Овощи</string>
     <string name="cogTest_market_category_bakery">Выпечка</string>
     <string name="cogTest_market_category_meat">Мясные продукты</string>
-    <string name="cogTest_market_category_cleaning_disposable">Чистящие и одноразовые товары</string>
+    <string name="cogTest_market_category_cleaning_disposable">Бытовая химия и одноразовая посуда</string>
+    <string name="cogTest_market_category_oils">Масла</string>
 
     <string name="cogTest_market_category_select_instruction">Выберите нужную категорию</string>
 

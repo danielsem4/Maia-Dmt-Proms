@@ -40,7 +40,7 @@ import org.koin.compose.viewmodel.koinViewModel
 fun MarketAllRecipesRoot(
     viewModel: MarketAllRecipesViewModel = koinViewModel(),
     onNavigateBack: () -> Unit,
-    onNavigateToSelectedRecipe: (String) -> Unit
+    onNavigateToSelectedRecipe: () -> Unit
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
 
@@ -50,7 +50,7 @@ fun MarketAllRecipesRoot(
                 onNavigateBack()
             }
             is MarketAllRecipesEvent.NavigateToSelectedRecipe -> {
-                onNavigateToSelectedRecipe(event.selectedRecipe)
+                onNavigateToSelectedRecipe()
             }
         }
     }

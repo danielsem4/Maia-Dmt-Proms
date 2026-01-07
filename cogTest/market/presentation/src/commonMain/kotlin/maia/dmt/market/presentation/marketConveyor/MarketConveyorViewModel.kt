@@ -19,16 +19,15 @@ import maia.dmt.market.domain.usecase.GetAllGroceriesUseCase
 import maia.dmt.market.domain.usecase.GetRecipeByIdUseCase
 import maia.dmt.market.presentation.mapper.RecipePresentationMapper
 import maia.dmt.market.presentation.navigation.MarketTestGraphRoutes
+import maia.dmt.market.presentation.session.MarketSessionManager
 import kotlin.random.Random
 
 class MarketConveyorViewModel(
-    savedStateHandle: SavedStateHandle,
     private val getRecipeByIdUseCase: GetRecipeByIdUseCase,
     private val getAllGroceriesUseCase: GetAllGroceriesUseCase,
-    private val mapper: RecipePresentationMapper
+    private val mapper: RecipePresentationMapper,
+    private val marketSessionManager: MarketSessionManager
 ) : ViewModel() {
-
-    private val recipeId = savedStateHandle.toRoute<MarketTestGraphRoutes.MarketConveyor>().recipeId
 
     private val _state = MutableStateFlow(MarketConveyorState())
     private val eventChannel = Channel<MarketConveyorEvent>()
@@ -46,6 +45,8 @@ class MarketConveyorViewModel(
     private var timerJob: Job? = null
 
     private lateinit var correctGroceryIds: Set<String>
+    private lateinit var recipeId: String
+    private var initialTime: Int = 0
 
     private var hasLoadedInitialData = false
     val state = _state
@@ -62,6 +63,8 @@ class MarketConveyorViewModel(
         )
 
     private fun loadRecipeAndStartGame() {
+        recipeId = marketSessionManager.getSelectedRecipe()
+
         val recipeData = getRecipeByIdUseCase(recipeId) ?: return
         val groceries = recipeData.groceryIds.map { mapper.getGroceryStringResource(it) }
         val allGroceryIds = getAllGroceriesUseCase().map { it.id }
@@ -75,7 +78,7 @@ class MarketConveyorViewModel(
             val forbidden = initial.take(minGapRecent).map { it.name }.toSet()
             initial.add(drawNext(forbidden, emptySet(), recipeData.groceryIds, allGroceryIds))
         }
-
+        initialTime = 100
         _state.value = MarketConveyorState(
             recipeId = recipeId,
             requiredGroceries = groceries,
@@ -84,7 +87,7 @@ class MarketConveyorViewModel(
             movingItems = initial,
             offset = 0f,
             stride = 260f,
-            timeLeft = 10,
+            timeLeft = initialTime,
             isFinished = false
         )
 
@@ -102,7 +105,6 @@ class MarketConveyorViewModel(
         val pickCorrect = if (mustPickWrong) false else rng.nextDouble() < 0.6
 
         val wrongPool = allGroceryIds.filter { it !in correctGroceryIds }
-
         val availableCorrectPool = correctGroceryIds.filter { it !in correctlySelected }
 
         val poolBase = if (pickCorrect && availableCorrectPool.isNotEmpty())
@@ -145,7 +147,6 @@ class MarketConveyorViewModel(
                         val allGroceryIds = getAllGroceriesUseCase().map { it.id }
                         val recentForbidden = mutable.take(minGapRecent).map { it.name }.toSet()
 
-                        // Get correctly selected groceries
                         val correctlySelected = s.selectedGroceries.filter { it in correctGroceryIds }
 
                         val next = drawNext(
@@ -229,7 +230,24 @@ class MarketConveyorViewModel(
         beltJob?.cancel()
         timerJob?.cancel()
 
-        _state.value = _state.value.copy(isFinished = true)
+        val finalState = _state.value
+        val timeElapsed = initialTime - finalState.timeLeft
+        val completedAll = finalState.checkedGroceries.all { it }
+
+        // Save results to session manager
+        marketSessionManager.saveConveyorResults(
+            selectedGroceries = finalState.selectedGroceries,
+            correctClicks = finalState.correctClicks,
+            wrongClicks = finalState.wrongClicks,
+            timeElapsed = timeElapsed,
+            completedAllGroceries = completedAll
+        )
+
+        println(
+            "the data we saved so far: ${marketSessionManager.getConveyorResults()} ${marketSessionManager.getSelectedRecipe()}"
+        )
+
+        _state.value = finalState.copy(isFinished = true)
 
         viewModelScope.launch {
             eventChannel.send(MarketConveyorEvent.NavigateToMarketSecondPart)

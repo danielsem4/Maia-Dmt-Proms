@@ -123,13 +123,14 @@
     <string name="cogTest_market_donation_shopping_list_title">قائمة التبرعات</string>
 
     <string name="cogTest_market_category_frozen">مجمدات</string>
-    <string name="cogTest_market_category_dairy">منتجات الحليب</string>
+    <string name="cogTest_market_category_dairy">منتجات الألبان</string>
     <string name="cogTest_market_category_fruits">فواكه</string>
-    <string name="cogTest_market_category_dry_spices">المواد الجافة والتوابل</string>
-    <string name="cogTest_market_category_vegetables">خضار</string>
+    <string name="cogTest_market_category_conserves">معلبات</string>
+    <string name="cogTest_market_category_vegetables">خضروات</string>
     <string name="cogTest_market_category_bakery">مخبوزات</string>
     <string name="cogTest_market_category_meat">منتجات اللحوم</string>
-    <string name="cogTest_market_category_cleaning_disposable">مواد تنظيف ومواد للاستعمال مرة واحدة</string>
+    <string name="cogTest_market_category_cleaning_disposable">منظفات وأدوات أحادية الاستخدام</string>
+    <string name="cogTest_market_category_oils">زيوت</string>
 
     <string name="cogTest_market_category_select_instruction">اضغط على الفئة المطلوبة</string>
 

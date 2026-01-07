@@ -6,4 +6,6 @@ interface MarketCartAction {
     data class OnRemoveItem(val itemId: String) : MarketCartAction
     data object OnFinishShopping : MarketCartAction
     data object OnNavigateBack : MarketCartAction
+    data object OnViewShoppingList : MarketCartAction
+    data object OnViewDonationList : MarketCartAction
 }

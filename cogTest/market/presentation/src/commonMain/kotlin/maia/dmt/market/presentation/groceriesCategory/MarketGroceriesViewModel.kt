@@ -9,7 +9,6 @@ import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import maia.dmt.market.presentation.marketLand.MarketMainNavigationEvent
 
 class MarketGroceriesViewModel : ViewModel() {
 
@@ -38,9 +37,8 @@ class MarketGroceriesViewModel : ViewModel() {
                 navigateToCategory(action.categoryId)
             }
             is MarketGroceriesAction.OnSearchClick -> {
-
+                navigateToSearch()
             }
-
             is MarketGroceriesAction.OnDonationListClick -> {
                 navigateToShoppingList("donation")
             }
@@ -48,7 +46,7 @@ class MarketGroceriesViewModel : ViewModel() {
                 navigateToShoppingList("regular")
             }
             is MarketGroceriesAction.OnShoppingCartClick -> {
-
+                navigateToCart()
             }
         }
     }
@@ -71,8 +69,8 @@ class MarketGroceriesViewModel : ViewModel() {
                 iconResId = "market_fruits_icon"
             ),
             CategoryItem(
-                id = "dry_spices",
-                nameResId = "cogTest_market_category_dry_spices",
+                id = "conserves",
+                nameResId = "cogTest_market_category_conserves",
                 iconResId = "market_dry_spices_icon"
             ),
             CategoryItem(
@@ -94,6 +92,11 @@ class MarketGroceriesViewModel : ViewModel() {
                 id = "cleaning_disposable",
                 nameResId = "cogTest_market_category_cleaning_disposable",
                 iconResId = "market_cleaning_icon"
+            ),
+            CategoryItem(
+                id = "oils",
+                nameResId = "cogTest_market_category_oils",
+                iconResId = "market_oils_icon"
             )
         )
 
@@ -115,6 +118,18 @@ class MarketGroceriesViewModel : ViewModel() {
     private fun navigateToShoppingList(listType: String) {
         viewModelScope.launch {
             eventChannel.send(MarketGroceriesEvent.NavigateToShoppingList(listType))
+        }
+    }
+
+    private fun navigateToSearch() {
+        viewModelScope.launch {
+            eventChannel.send(MarketGroceriesEvent.NavigateToSearch)
+        }
+    }
+
+    private fun navigateToCart() {
+        viewModelScope.launch {
+            eventChannel.send(MarketGroceriesEvent.NavigateToCart)
         }
     }
 }

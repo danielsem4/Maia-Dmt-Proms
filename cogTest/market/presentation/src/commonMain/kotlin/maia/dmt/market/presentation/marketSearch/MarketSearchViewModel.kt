@@ -2,7 +2,6 @@ package maia.dmt.market.presentation.marketSearch
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.delay
@@ -14,7 +13,6 @@ import kotlinx.coroutines.launch
 import maia.dmt.market.domain.repository.CartRepository
 import maia.dmt.market.domain.usecase.GetAllProductsUseCase
 import maia.dmt.market.presentation.util.MarketStringResourceMapper
-// IMPORTANT IMPORT:
 import org.jetbrains.compose.resources.getString
 
 class MarketSearchViewModel(
@@ -28,9 +26,7 @@ class MarketSearchViewModel(
     private val _state = MutableStateFlow(MarketSearchState())
     val state = _state.asStateFlow()
 
-    // Cache: Product ID -> Localized Name (e.g. "1" -> "גבינה לבנה")
     private val productNameCache = mutableMapOf<String, String>()
-
     private var searchJob: Job? = null
 
     init {
@@ -54,6 +50,21 @@ class MarketSearchViewModel(
                 cartRepository.removeFromCart(action.productId)
             }
             is MarketSearchAction.OnProductClick -> { }
+            is MarketSearchAction.OnViewShoppingList -> {
+                viewModelScope.launch {
+                    _events.send(MarketSearchEvent.NavigateToShoppingList("regular"))
+                }
+            }
+            is MarketSearchAction.OnViewDonationList -> {
+                viewModelScope.launch {
+                    _events.send(MarketSearchEvent.NavigateToShoppingList("donation"))
+                }
+            }
+            is MarketSearchAction.OnViewCart -> {
+                viewModelScope.launch {
+                    _events.send(MarketSearchEvent.NavigateToCart)
+                }
+            }
         }
     }
 
@@ -87,7 +98,7 @@ class MarketSearchViewModel(
     private fun performSearch(query: String) {
         searchJob?.cancel()
         searchJob = viewModelScope.launch {
-            delay(300) // Debounce
+            delay(300)
 
             if (query.isBlank()) {
                 _state.update { it.copy(searchResults = emptyList()) }

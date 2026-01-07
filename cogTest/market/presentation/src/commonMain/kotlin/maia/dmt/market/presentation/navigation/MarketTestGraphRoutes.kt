@@ -13,10 +13,10 @@ sealed interface MarketTestGraphRoutes {
     data object MarketAllRecipes : MarketTestGraphRoutes
 
     @Serializable
-    data class MarketSelectedRecipe(val recipeId: String) : MarketTestGraphRoutes
+    data object MarketSelectedRecipe : MarketTestGraphRoutes
 
     @Serializable
-    data class MarketConveyor(val recipeId: String) : MarketTestGraphRoutes
+    data object MarketConveyor : MarketTestGraphRoutes
 
     @Serializable
     data object MarketSecondPartInstructions : MarketTestGraphRoutes

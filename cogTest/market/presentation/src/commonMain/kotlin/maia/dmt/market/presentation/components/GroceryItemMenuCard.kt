@@ -31,6 +31,7 @@ fun DmtGroceryItemMenuCard(
     imageUrl: String,
     isOutOfStock: Boolean = false,
     isDonation: Boolean = false,
+    price: Double = 0.0,
     onIncrement: () -> Unit,
     onDecrement: () -> Unit,
     onClick: () -> Unit,
@@ -82,7 +83,7 @@ fun DmtGroceryItemMenuCard(
             }
             
             Text(
-                text = text,
+                text = "$text  ₪$price",
                 style = MaterialTheme.typography.bodyLarge,
                 fontWeight = FontWeight.Bold,
                 textAlign = TextAlign.Center,

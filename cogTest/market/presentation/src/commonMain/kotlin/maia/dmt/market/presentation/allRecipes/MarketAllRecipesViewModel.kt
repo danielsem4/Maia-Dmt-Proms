@@ -11,10 +11,12 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import maia.dmt.market.domain.usecase.GetAllRecipesUseCase
 import maia.dmt.market.presentation.mapper.RecipePresentationMapper
+import maia.dmt.market.presentation.session.MarketSessionManager
 
 class MarketAllRecipesViewModel(
     private val getAllRecipesUseCase: GetAllRecipesUseCase,
-    private val mapper: RecipePresentationMapper
+    private val mapper: RecipePresentationMapper,
+    private val marketSessionManager: MarketSessionManager
 ) : ViewModel() {
 
     private val _state = MutableStateFlow(MarketAllRecipesState())
@@ -53,8 +55,9 @@ class MarketAllRecipesViewModel(
 
     private fun handleRecipeClick(recipe: String) {
         viewModelScope.launch {
+            marketSessionManager.saveSelectedRecipe(recipe)
             _state.value = _state.value.copy(selectedRecipe = recipe)
-            eventChannel.send(MarketAllRecipesEvent.NavigateToSelectedRecipe(recipe))
+            eventChannel.send(MarketAllRecipesEvent.NavigateToSelectedRecipe)
         }
     }
 

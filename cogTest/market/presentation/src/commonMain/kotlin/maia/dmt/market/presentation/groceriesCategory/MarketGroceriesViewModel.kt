@@ -71,8 +71,8 @@ class MarketGroceriesViewModel : ViewModel() {
                 iconResId = "market_fruits_icon"
             ),
             CategoryItem(
-                id = "dry_spices",
-                nameResId = "cogTest_market_category_dry_spices",
+                id = "conserves",
+                nameResId = "cogTest_market_category_conserves",
                 iconResId = "market_dry_spices_icon"
             ),
             CategoryItem(
@@ -94,6 +94,11 @@ class MarketGroceriesViewModel : ViewModel() {
                 id = "cleaning_disposable",
                 nameResId = "cogTest_market_category_cleaning_disposable",
                 iconResId = "market_cleaning_icon"
+            ),
+            CategoryItem(
+                id = "oils",
+                nameResId = "cogTest_market_category_oils",
+                iconResId = "market_oils_icon"
             )
         )
 

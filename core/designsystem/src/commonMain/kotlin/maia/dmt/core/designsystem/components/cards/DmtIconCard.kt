@@ -48,7 +48,7 @@ fun DmtIconCard(
         DeviceConfiguration.MOBILE_PORTRAIT -> 40.dp
         DeviceConfiguration.MOBILE_LANDSCAPE -> 36.dp
         DeviceConfiguration.TABLET_PORTRAIT -> 48.dp
-        DeviceConfiguration.TABLET_LANDSCAPE -> 44.dp
+        DeviceConfiguration.TABLET_LANDSCAPE -> 48.dp
         DeviceConfiguration.DESKTOP -> 56.dp
     }
 
@@ -59,7 +59,7 @@ fun DmtIconCard(
         DeviceConfiguration.MOBILE_PORTRAIT -> MaterialTheme.typography.bodySmall
         DeviceConfiguration.MOBILE_LANDSCAPE -> MaterialTheme.typography.bodySmall
         DeviceConfiguration.TABLET_PORTRAIT -> MaterialTheme.typography.bodyMedium
-        DeviceConfiguration.TABLET_LANDSCAPE -> MaterialTheme.typography.bodyMedium
+        DeviceConfiguration.TABLET_LANDSCAPE -> MaterialTheme.typography.bodyLarge
         DeviceConfiguration.DESKTOP -> MaterialTheme.typography.bodyLarge
     }
 

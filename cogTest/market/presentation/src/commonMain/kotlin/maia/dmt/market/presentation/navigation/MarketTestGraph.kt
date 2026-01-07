@@ -40,18 +40,19 @@ fun NavGraphBuilder.marketTestGraph(
                 onNavigateBack = {
                     navController.navigateUp()
                 },
-                onNavigateToSelectedRecipe = { recipeId ->
-                    navController.navigate(MarketTestGraphRoutes.MarketSelectedRecipe(recipeId))
+                onNavigateToSelectedRecipe = {
+                    navController.navigate(MarketTestGraphRoutes.MarketSelectedRecipe)
                 }
             )
         }
+
         composable<MarketTestGraphRoutes.MarketSelectedRecipe> {
             MarketSelectedRecipeRoot(
                 onNavigateBack = {
                     navController.navigateUp()
                 },
-                onStartRecipe = { recipeId ->
-                    navController.navigate(MarketTestGraphRoutes.MarketConveyor(recipeId))
+                onStartRecipe = {
+                    navController.navigate(MarketTestGraphRoutes.MarketConveyor)
                 }
             )
         }

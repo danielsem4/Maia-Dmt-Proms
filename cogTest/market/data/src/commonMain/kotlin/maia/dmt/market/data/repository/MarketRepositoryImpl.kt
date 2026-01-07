@@ -20,11 +20,12 @@ class MarketRepositoryImpl(
         MarketCategory(id = "frozen", nameResId = "cogTest_market_category_frozen", iconResId = "market_frozen_icon"),
         MarketCategory(id = "dairy", nameResId = "cogTest_market_category_dairy", iconResId = "market_dairy_icon"),
         MarketCategory(id = "fruits", nameResId = "cogTest_market_category_fruits", iconResId = "market_fruits_icon"),
-        MarketCategory(id = "dry_spices", nameResId = "cogTest_market_category_dry_spices", iconResId = "market_dry_spices_icon"),
+        MarketCategory(id = "conserves", nameResId = "cogTest_market_category_conserves", iconResId = "market_dry_spices_icon"),
         MarketCategory(id = "vegetables", nameResId = "cogTest_market_category_vegetables", iconResId = "market_vegetables_icon"),
         MarketCategory(id = "bakery", nameResId = "cogTest_market_category_bakery", iconResId = "market_bakery_icon"),
         MarketCategory(id = "meat", nameResId = "cogTest_market_category_meat", iconResId = "market_meat_icon"),
-        MarketCategory(id = "cleaning_disposable", nameResId = "cogTest_market_category_cleaning_disposable", iconResId = "market_cleaning_icon")
+        MarketCategory(id = "cleaning_disposable", nameResId = "cogTest_market_category_cleaning_disposable", iconResId = "market_cleaning_icon"),
+        MarketCategory(id = "oils", nameResId = "cogTest_market_category_oils", iconResId = "market_oils_icon")
     )
 
     override suspend fun getAllCategories(): List<MarketCategory> = categories

@@ -14,14 +14,14 @@ import kotlinx.coroutines.launch
 import maia.dmt.market.domain.usecase.GetRecipeByIdUseCase
 import maia.dmt.market.presentation.mapper.RecipePresentationMapper
 import maia.dmt.market.presentation.navigation.MarketTestGraphRoutes
+import maia.dmt.market.presentation.session.MarketSessionManager
 
 class MarketSelectedRecipeViewModel(
     savedStateHandle: SavedStateHandle,
     private val getRecipeByIdUseCase: GetRecipeByIdUseCase,
-    private val mapper: RecipePresentationMapper
+    private val mapper: RecipePresentationMapper,
+    private val marketSessionManager: MarketSessionManager
 ) : ViewModel() {
-
-    private val recipeId = savedStateHandle.toRoute<MarketTestGraphRoutes.MarketSelectedRecipe>().recipeId
 
     private val _state = MutableStateFlow(MarketSelectedRecipeState())
     private val eventChannel = Channel<MarketSelectedRecipeEvent>()
@@ -42,6 +42,7 @@ class MarketSelectedRecipeViewModel(
         )
 
     private fun loadRecipe() {
+        val recipeId = marketSessionManager.getSelectedRecipe()
         val recipeData = getRecipeByIdUseCase(recipeId)
         val recipe = recipeData?.let { mapper.toPresentation(it) }
         _state.value = _state.value.copy(selectedRecipe = recipe)

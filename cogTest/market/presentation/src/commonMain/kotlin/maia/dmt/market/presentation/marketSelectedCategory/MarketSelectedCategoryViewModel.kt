@@ -100,8 +100,8 @@ class MarketSelectedCategoryViewModel(
                 }
 
                 _state.update {
-                    it.copy(
-                        categoryList = categories,
+                    it.copy(categoryList
+                         = categories,
                         selectedCategory = currentCategory,
                         products = products,
                         isLoading = false

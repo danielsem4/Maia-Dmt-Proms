@@ -68,6 +68,7 @@ object MarketStringResourceMapper {
             "cogTest_market_item_sunflower_oil" -> Res.string.cogTest_market_item_sunflower_oil
             "cogTest_market_item_soy_oil" -> Res.string.cogTest_market_item_soy_oil
             "cogTest_market_item_coconut_oil" -> Res.string.cogTest_market_item_coconut_oil
+            "cogTest_market_item_olive_oil" -> Res.string.cogTest_market_item_olive_oil
             "cogTest_market_item_olives_canned" -> Res.string.cogTest_market_item_olives_canned
             "cogTest_market_item_salt_basic" -> Res.string.cogTest_market_item_salt_basic
             "cogTest_market_item_sugar_basic" -> Res.string.cogTest_market_item_sugar_basic
@@ -118,11 +119,12 @@ object MarketStringResourceMapper {
             "cogTest_market_category_frozen" -> Res.string.cogTest_market_category_frozen
             "cogTest_market_category_dairy" -> Res.string.cogTest_market_category_dairy
             "cogTest_market_category_fruits" -> Res.string.cogTest_market_category_fruits
-            "cogTest_market_category_dry_spices" -> Res.string.cogTest_market_category_dry_spices
+            "cogTest_market_category_conserves" -> Res.string.cogTest_market_category_conserves
             "cogTest_market_category_vegetables" -> Res.string.cogTest_market_category_vegetables
             "cogTest_market_category_bakery" -> Res.string.cogTest_market_category_bakery
             "cogTest_market_category_meat" -> Res.string.cogTest_market_category_meat
             "cogTest_market_category_cleaning_disposable" -> Res.string.cogTest_market_category_cleaning_disposable
+            "cogTest_market_category_oils" -> Res.string.cogTest_market_category_oils
             else -> Res.string.cogTest_market_category_dairy // Fallback
         }
     }

@@ -46,6 +46,7 @@ import dmtproms.cogtest.market.presentation.generated.resources.market_basket_ic
 import dmtproms.cogtest.market.presentation.generated.resources.market_cart_shopping_icon
 import dmtproms.cogtest.market.presentation.generated.resources.market_donation_icon
 import dmtproms.cogtest.market.presentation.generated.resources.meat_category
+import dmtproms.cogtest.market.presentation.generated.resources.olive_oil_icon
 import dmtproms.cogtest.market.presentation.generated.resources.vegetables_category
 import maia.dmt.core.designsystem.components.buttons.DmtButton
 import maia.dmt.core.designsystem.components.buttons.DmtButtonStyle
@@ -181,7 +182,7 @@ fun MarketSelectedCategoryScreen(
                             DmtGroceryItemMenuCard(
                                 text = MarketStringResourceMapper.getProductName(product.titleResId),
                                 quantity = product.amount,
-                                imageUrl = product.iconRes, // Now passing URL directly
+                                imageUrl = product.iconRes,
                                 isOutOfStock = !product.isInStock,
                                 isDonation = product.isDonation,
                                 onIncrement = {
@@ -265,6 +266,7 @@ private fun getCategoryIcon(iconResId: String): DrawableResource {
         "market_bakery_icon" -> Res.drawable.bread_category
         "market_meat_icon" -> Res.drawable.meat_category
         "market_cleaning_icon" -> Res.drawable.clean_category
+        "market_oils_icon" -> Res.drawable.olive_oil_icon
         else -> Res.drawable.cheese_category
     }
 }

@@ -78,7 +78,7 @@ class MarketConveyorViewModel(
             val forbidden = initial.take(minGapRecent).map { it.name }.toSet()
             initial.add(drawNext(forbidden, emptySet(), recipeData.groceryIds, allGroceryIds))
         }
-        initialTime = 100
+        initialTime = 10
         _state.value = MarketConveyorState(
             recipeId = recipeId,
             requiredGroceries = groceries,

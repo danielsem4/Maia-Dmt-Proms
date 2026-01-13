@@ -142,6 +142,7 @@ Choose only the items that match the selected dish, according to the list on the
     <string name="cogTest_market_action_close_list">To close the list</string>
     <string name="cogTest_market_instruction_select">To select a product, click on it and choose the desired quantity</string>
     <string name="cogTest_market_status_out_of_stock">Out of stock</string>
+    <string name="cogTest_market_aunt_yafa">Yafa</string>
     <string name="cogTest_market_task_aunt">Aunt Yaffa asks to buy</string>
     <string name="cogTest_market_task_add_cleaning">Add bleach and window cleaner to the shopping list</string>
     <string name="cogTest_market_action_close">Close</string>

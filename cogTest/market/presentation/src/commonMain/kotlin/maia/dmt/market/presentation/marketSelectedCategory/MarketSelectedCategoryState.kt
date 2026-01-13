@@ -10,5 +10,7 @@ data class MarketSelectedCategoryState(
     val categoryList: List<MarketCategory> = emptyList(),
     val isLoading: Boolean = false,
     val error: UiText? = null,
-    val searchQuery: String = ""
+    val searchQuery: String = "",
+    val showCorrectProductsDialog: Boolean = false,
+    val showBakeryDialog: Boolean = false
 )

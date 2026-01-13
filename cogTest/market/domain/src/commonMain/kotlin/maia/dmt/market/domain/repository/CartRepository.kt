@@ -9,4 +9,7 @@ interface CartRepository {
     fun removeFromCart(productId: String)
     fun getQuantity(productId: String): Int
     fun clearCart()
+
+    fun isProductFromRecipe(productId: String): Boolean
+    fun setRecipeProducts(productIds: List<String>)
 }

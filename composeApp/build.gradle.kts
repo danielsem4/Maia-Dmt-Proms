@@ -58,6 +58,10 @@ kotlin {
             implementation(projects.sensors.core.domain)
             implementation(projects.sensors.core.data)
 
+            implementation(projects.sensors.fallandshake.presentation)
+            implementation(projects.sensors.fallandshake.domain)
+            implementation(projects.sensors.fallandshake.data)
+
             implementation(projects.feature.settings.presentation)
 
             implementation(libs.jetbrains.compose.navigation)

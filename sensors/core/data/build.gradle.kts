@@ -19,7 +19,7 @@ kotlin {
 
         androidMain {
             dependencies {
-
+                implementation(libs.jtransforms)
             }
         }
 

@@ -13,9 +13,9 @@ class TremorAnalysisUseCase {
     private val MIN_FREQUENCY_AMPLITUDE = 1.5f
     private val MIN_TREMOR_COUNT = 3
     private val SAMPLE_RATE = 50f
-    private val BUFFER_SIZE = 240
+    private val BUFFER_SIZE = 150
     private val THRESHOLD = 0.5f
-    private val MIN_TREMOR_DURATION = 15000L
+    private val MIN_TREMOR_DURATION = 5000L
 
     private val frequencyData = mutableListOf<Float>()
     private var lastDetectionTime: Long = 0L

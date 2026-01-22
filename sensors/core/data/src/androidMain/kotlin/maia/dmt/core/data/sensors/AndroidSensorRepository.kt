@@ -110,7 +110,8 @@ class AndroidSensorRepository(
                 data = dto
             )
 
-            sensorsService.uploadSensorsAggResults(request)
+            val upload = sensorsService.uploadSensorsAggResults(request)
+            println(upload)
 
         } catch (e: Exception) {
             e.printStackTrace()

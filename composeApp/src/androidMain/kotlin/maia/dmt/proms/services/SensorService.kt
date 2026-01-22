@@ -97,7 +97,7 @@ class SensorService : Service(), KoinComponent {
             val fallDetected = detectFallUseCase.execute(newRawData)
             if (fallDetected) {
                 withContext(Dispatchers.Main) {
-                    Toast.makeText(applicationContext, "Fall Detected!", Toast.LENGTH_LONG).show()
+//                    Toast.makeText(applicationContext, "Fall Detected!", Toast.LENGTH_LONG).show()
                 }
             }
 

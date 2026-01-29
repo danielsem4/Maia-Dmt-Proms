@@ -5,8 +5,10 @@ import maia.dmt.activities.presentation.di.activitiesPresentationModule
 import maia.dmt.auth.presentation.di.authPresentationModule
 import maia.dmt.cdt.presentation.di.cdtPresentationModule
 import maia.dmt.core.data.di.coreDataModule
+import maia.dmt.core.data.sensors.di.sensorsCoreDataModule
 import maia.dmt.core.domain.di.coreDomainModule
 import maia.dmt.evaluation.presentation.di.evaluationPresentationModule
+import maia.dmt.fallandshake.data.di.fallShakeDataModule
 import maia.dmt.home.data.di.homeDataModule
 import maia.dmt.home.data.di.platformHomeDataModule
 import maia.dmt.home.presentation.di.homePresentationModule
@@ -44,7 +46,9 @@ fun initKoin(config: KoinAppDeclaration? = null) {
             marketPresentationModule,
             marketDataModule,
             cdtPresentationModule,
-            orientationPresentationModule
+            orientationPresentationModule,
+            fallShakeDataModule,
+            sensorsCoreDataModule
         )
     }
 

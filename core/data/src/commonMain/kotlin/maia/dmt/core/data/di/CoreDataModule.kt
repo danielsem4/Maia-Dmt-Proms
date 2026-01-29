@@ -11,11 +11,13 @@ import maia.dmt.core.data.evaluation.KtorEvaluationsService
 import maia.dmt.core.data.file.KtorFileUploadService
 import maia.dmt.core.data.logging.KermitLogger
 import maia.dmt.core.data.networking.HttpClientFactory
+import maia.dmt.core.data.sensors.KtorSensorsService
 import maia.dmt.core.domain.auth.AuthService
 import maia.dmt.core.domain.auth.SessionStorage
 import maia.dmt.core.domain.evaluation.EvaluationService
 import maia.dmt.core.domain.file.FileUploadService
 import maia.dmt.core.domain.logger.DmtLogger
+import maia.dmt.core.domain.sensors.SensorsService
 import org.koin.core.module.Module
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.bind
@@ -36,6 +38,8 @@ val coreDataModule = module {
     singleOf(::KtorAuthService) bind AuthService::class
     singleOf(::DataStoreSessionStorage) bind SessionStorage::class
     singleOf(::KtorEvaluationsService) bind EvaluationService::class
+    singleOf(::KtorSensorsService) bind SensorsService::class
+    
 
     single<FlowSettings> {
         get<ObservableSettings>().toFlowSettings()

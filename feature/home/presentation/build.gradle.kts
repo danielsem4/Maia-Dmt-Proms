@@ -14,6 +14,10 @@ kotlin {
                 implementation(projects.core.presentation)
                 implementation(projects.feature.home.domain)
 
+                implementation(projects.sensors.core.domain)
+//                implementation(projects.sensors.core.data)
+                implementation(projects.sensors.core.presentation)
+
                 implementation(compose.components.resources)
                 implementation(compose.components.uiToolingPreview)
 

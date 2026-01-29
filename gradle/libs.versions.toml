@@ -67,6 +67,8 @@ runner = "1.7.0"
 junit = "1.3.0"
 lifecycleProcess = "2.9.4"
 uiGraphics = "1.10.0"
+jtransforms = "3.1"
+
 
 [libraries]
 # Kotlin
@@ -174,6 +176,7 @@ jetbrains-compose-material-icons-extended = { module = "org.jetbrains.compose.ma
 jetbrains-compose-ui = { module = "org.jetbrains.compose.ui:ui", version.ref="compose-jetbrains"}
 jetbrains-compose-foundation = { module = "org.jetbrains.compose.foundation:foundation", version.ref="compose-jetbrains"}
 
+jtransforms = { module = "com.github.wendykierp:JTransforms", version.ref = "jtransforms" }
 
 jetbrains-lifecycle-viewmodel = { module = "org.jetbrains.androidx.lifecycle:lifecycle-viewmodel", version.ref = "compose-lifecycle" }
 jetbrains-lifecycle-compose = { group = "org.jetbrains.androidx.lifecycle", name = "lifecycle-runtime-compose", version.ref = "compose-lifecycle" }

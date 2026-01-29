@@ -25,10 +25,12 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import dmtproms.cogtest.market.presentation.generated.resources.Res
 import dmtproms.cogtest.market.presentation.generated.resources.cogTest_market_amount
 import dmtproms.cogtest.market.presentation.generated.resources.cogTest_market_groceries_list
+import dmtproms.cogtest.market.presentation.generated.resources.cogTest_market_price
 import dmtproms.cogtest.market.presentation.generated.resources.cogTest_market_product
 import dmtproms.cogtest.market.presentation.generated.resources.cogTest_market_remove
 import dmtproms.cogtest.market.presentation.generated.resources.cogTest_market_title_cart
 import dmtproms.cogtest.market.presentation.generated.resources.cogTest_market_to_finish_press_here
+import dmtproms.cogtest.market.presentation.generated.resources.cogTest_market_total
 import dmtproms.cogtest.market.presentation.generated.resources.cogTest_market_view_donation_list
 import dmtproms.cogtest.market.presentation.generated.resources.cogTest_market_view_list
 import dmtproms.cogtest.market.presentation.generated.resources.market_basket_icon
@@ -86,35 +88,53 @@ fun MarketCartScreen(
                     .fillMaxSize(),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                Text(
-                    text = stringResource(Res.string.cogTest_market_title_cart),
-                    style = MaterialTheme.typography.titleLarge,
-                    modifier = Modifier.padding(8.dp)
-                )
+                Column(
+                    modifier = Modifier.padding(16.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    Text(
+                        text = stringResource(Res.string.cogTest_market_total),
+                        style = MaterialTheme.typography.labelMedium,
+                        color = MaterialTheme.colorScheme.secondary
+                    )
+                    Text(
+                        text = "₪${state.totalCartPrice}",
+                        style = MaterialTheme.typography.headlineLarge,
+                        color = MaterialTheme.colorScheme.primary
+                    )
+                }
 
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(horizontal = 16.dp, vertical = 12.dp),
-                    horizontalArrangement = Arrangement.SpaceBetween
+                    verticalAlignment = Alignment.CenterVertically
                 ) {
                     Text(
                         stringResource(Res.string.cogTest_market_remove),
-                        style = MaterialTheme.typography.titleSmall
+                        style = MaterialTheme.typography.titleSmall,
+                        modifier = Modifier.weight(1f)
                     )
                     Text(
                         stringResource(Res.string.cogTest_market_amount),
-                        style = MaterialTheme.typography.titleSmall
+                        style = MaterialTheme.typography.titleSmall,
+                        modifier = Modifier.weight(1f),
+                        textAlign = androidx.compose.ui.text.style.TextAlign.Center
+                    )
+                    Text(
+                        stringResource(Res.string.cogTest_market_price),
+                        style = MaterialTheme.typography.titleSmall,
+                        modifier = Modifier.weight(1f),
+                        textAlign = androidx.compose.ui.text.style.TextAlign.Center
                     )
                     Text(
                         stringResource(Res.string.cogTest_market_product),
-                        style = MaterialTheme.typography.titleSmall
+                        style = MaterialTheme.typography.titleSmall,
+                        modifier = Modifier.weight(1.5f),
+                        textAlign = androidx.compose.ui.text.style.TextAlign.End
                     )
                 }
-
                 HorizontalDivider()
-
-                // Cart Items List
                 LazyColumn(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -130,6 +150,7 @@ fun MarketCartScreen(
                             itemName = MarketStringResourceMapper.getProductName(item.name),
                             itemImageUrl = item.imageUrl,
                             quantity = item.quantity,
+                            itemPrice = "₪${item.price * item.quantity}",
                             isDonation = item.isDonation,
                             onQuantityIncrease = {
                                 onAction(MarketCartAction.OnQuantityIncrease(item.productId))
@@ -143,9 +164,7 @@ fun MarketCartScreen(
                         )
                     }
                 }
-
                 Spacer(modifier = Modifier.padding(8.dp))
-
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -164,16 +183,16 @@ fun MarketCartScreen(
                         },
                         onClick = { onAction(MarketCartAction.OnViewShoppingList) },
                         style = DmtButtonStyle.SECONDARY,
-                        modifier = Modifier.widthIn(min = 100.dp, max = 320.dp)
+                        modifier = Modifier.weight(1f).padding(horizontal = 4.dp)
                     )
+
                     DmtButton(
                         text = stringResource(Res.string.cogTest_market_to_finish_press_here),
-                        onClick = {
-                            onAction(MarketCartAction.OnFinishShopping)
-                        },
+                        onClick = { onAction(MarketCartAction.OnFinishShopping) },
                         style = DmtButtonStyle.SECONDARY,
-                        modifier = Modifier.widthIn(min = 100.dp, max = 320.dp)
+                        modifier = Modifier.weight(1f).padding(horizontal = 4.dp)
                     )
+
                     DmtButton(
                         text = stringResource(Res.string.cogTest_market_view_donation_list),
                         leadingIcon = {
@@ -185,14 +204,13 @@ fun MarketCartScreen(
                         },
                         onClick = { onAction(MarketCartAction.OnViewDonationList) },
                         style = DmtButtonStyle.SECONDARY,
-                        modifier = Modifier.widthIn(min = 100.dp, max = 320.dp)
+                        modifier = Modifier.weight(1f).padding(horizontal = 4.dp)
                     )
                 }
             }
         }
     )
 }
-
 @Composable
 @Preview
 fun MarketCartPreview() {

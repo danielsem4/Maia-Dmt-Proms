@@ -69,6 +69,7 @@
     <string name="cogTest_market_second_mission_shopping_task">Вам нужно сделать недельные покупки для семьи согласно списку на экране. Выбирайте только те продукты, которые есть в списке!</string>
     <string name="cogTest_market_second_mission_find_items">Вы можете найти продукты через категории или с помощью строки поиска.</string>
     <string name="cogTest_market_second_mission_donation_items">Кроме того, соберите все товары для пожертвований, отмеченные синим цветом.</string>
+    <string name="cogTest_market_second_mission_budget">Кроме того, имеющийся в вашем распоряжении бюджет составляет 370 шекелей. По окончании покупок вы должны вернуть сдачу (13,5 шек.).</string>
 
     <string name="cogTest_market_super_ez_title">Супер «Иззи»</string>
     <string name="cogTest_market_view_list">Просмотр списка</string>
@@ -219,5 +220,8 @@
     <string name="cogTest_market_item_garbage_bags">Мешки для мусора</string>
     <string name="cogTest_market_item_scotch_pack">Набор губок</string>
     <string name="cogTest_market_item_disposable_cups_pack">Упаковка одноразовых стаканов</string>
+
+    <string name="cogTest_market_total">סה״כ</string>
+    <string name="cogTest_market_price">מחיר</string>
 
 </resources>

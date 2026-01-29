@@ -22,8 +22,9 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 @Composable
 fun DmtCartItemCard(
     itemName: String,
-    itemImageUrl: String, // Changed from DrawableResource to String
+    itemImageUrl: String,
     quantity: Int,
+    itemPrice: String = "10",
     isDonation: Boolean = false,
     onQuantityIncrease: () -> Unit,
     onQuantityDecrease: () -> Unit,
@@ -34,77 +35,57 @@ fun DmtCartItemCard(
         modifier = modifier.fillMaxWidth(),
         shape = RoundedCornerShape(8.dp),
         colors = if (!isDonation) {
-            CardDefaults.cardColors(
-                containerColor = MaterialTheme.colorScheme.surface
-            )
+            CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface)
         } else {
-            CardDefaults.cardColors(
-                containerColor = MaterialTheme.colorScheme.primaryContainer
-            )
+            CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primaryContainer)
         },
-        elevation = CardDefaults.cardElevation(
-            defaultElevation = 1.dp
-        )
+        elevation = CardDefaults.cardElevation(defaultElevation = 1.dp)
     ) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(16.dp),
-            horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {
-            // Remove button
-            IconButton(
-                onClick = onRemove,
-                modifier = Modifier.size(32.dp)
+            Box(
+                modifier = Modifier.weight(1f),
+                contentAlignment = Alignment.CenterStart
             ) {
-                Icon(
-                    imageVector = Icons.Default.Clear,
-                    contentDescription = "הסרה",
-                    tint = Color.Red
-                )
-            }
-
-            Spacer(modifier = Modifier.width(12.dp))
-
-            // Quantity controls
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.spacedBy(8.dp)
-            ) {
-                // Plus button
                 IconButton(
-                    onClick = onQuantityIncrease,
-                    modifier = Modifier
-                        .size(40.dp)
-                        .clip(CircleShape),
-                    colors = IconButtonDefaults.iconButtonColors(
-                        containerColor = Color(0xFFE8E4F3)
-                    )
+                    onClick = onRemove,
+                    modifier = Modifier.size(32.dp)
                 ) {
                     Icon(
-                        imageVector = Icons.Default.Add,
-                        contentDescription = "הוסף",
-                        tint = Color(0xFF6750A4)
+                        imageVector = Icons.Default.Clear,
+                        contentDescription = "הסרה",
+                        tint = Color.Red
                     )
+                }
+            }
+
+            Row(
+                modifier = Modifier.weight(1f),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.Center
+            ) {
+                IconButton(
+                    onClick = onQuantityIncrease,
+                    modifier = Modifier.size(32.dp).clip(CircleShape),
+                    colors = IconButtonDefaults.iconButtonColors(containerColor = Color(0xFFE8E4F3))
+                ) {
+                    Icon(imageVector = Icons.Default.Add, contentDescription = "הוסף", tint = Color(0xFF6750A4), modifier = Modifier.size(18.dp))
                 }
 
                 Text(
                     text = quantity.toString(),
                     style = MaterialTheme.typography.titleMedium,
-                    textAlign = TextAlign.Center,
-                    modifier = Modifier.widthIn(min = 24.dp)
+                    modifier = Modifier.padding(horizontal = 8.dp)
                 )
 
-                // Minus button
                 IconButton(
                     onClick = onQuantityDecrease,
-                    modifier = Modifier
-                        .size(40.dp)
-                        .clip(CircleShape),
-                    colors = IconButtonDefaults.iconButtonColors(
-                        containerColor = Color(0xFFE8E8E8)
-                    ),
+                    modifier = Modifier.size(32.dp).clip(CircleShape),
+                    colors = IconButtonDefaults.iconButtonColors(containerColor = Color(0xFFE8E8E8)),
                     enabled = quantity > 1
                 ) {
                     Text(
@@ -114,35 +95,37 @@ fun DmtCartItemCard(
                     )
                 }
             }
-
-            Spacer(modifier = Modifier.width(16.dp))
-
-            // Product info (name and image)
+            Text(
+                text = itemPrice,
+                style = MaterialTheme.typography.bodyLarge,
+                textAlign = TextAlign.Center,
+                modifier = Modifier.weight(1f)
+            )
             Row(
                 verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.spacedBy(12.dp),
-                modifier = Modifier.weight(1f)
+                horizontalArrangement = Arrangement.spacedBy(8.dp),
+                modifier = Modifier.weight(1.5f)
             ) {
                 Text(
                     text = itemName,
-                    style = MaterialTheme.typography.bodyLarge,
+                    style = MaterialTheme.typography.bodyMedium,
                     textAlign = TextAlign.End,
-                    modifier = Modifier.weight(1f)
+                    modifier = Modifier.weight(1f),
+                    maxLines = 2
                 )
 
                 NetworkImage(
                     imageUrl = itemImageUrl,
                     contentDescription = itemName,
                     modifier = Modifier
-                        .size(60.dp)
-                        .clip(RoundedCornerShape(8.dp)),
+                        .size(45.dp)
+                        .clip(RoundedCornerShape(4.dp)),
                     contentScale = ContentScale.Crop
                 )
             }
         }
     }
 }
-
 @Composable
 @Preview
 fun DmtCartItemCardPreview() {

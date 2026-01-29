@@ -72,6 +72,7 @@ Choose only the items that match the selected dish, according to the list on the
     <string name="cogTest_market_second_mission_shopping_task">You must complete a weekly grocery shopping for your family according to the list on the screen. Select only the items that appear on the list!</string>
     <string name="cogTest_market_second_mission_find_items">You can find the items through the categories or by using the search bar.</string>
     <string name="cogTest_market_second_mission_donation_items">Additionally, collect all the donation items marked in blue.</string>
+    <string name="cogTest_market_second_mission_budget">Additionally, you have a budget of 370 ILS. At the end of the shopping, you must return the change (13.5 ILS).</string>
 
     <string name="cogTest_market_super_ez_title">Super &quot;EZ&quot;</string>
     <string name="cogTest_market_view_list">View List</string>
@@ -225,5 +226,7 @@ Choose only the items that match the selected dish, according to the list on the
     <string name="cogTest_market_item_scotch_pack">Pack of scotch pads</string>
     <string name="cogTest_market_item_disposable_cups_pack">Pack of disposable cups</string>
 
+    <string name="cogTest_market_total">Total</string>
+    <string name="cogTest_market_price">Price</string>
 
 </resources>

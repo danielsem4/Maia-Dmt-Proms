@@ -70,6 +70,7 @@
     <string name="cogTest_market_second_mission_shopping_task">عليك القيام بمشتريات أسبوعية للعائلة وفقًا لقائمة التسوق التي تظهر على الشاشة. اختر فقط المواد الموجودة في القائمة!</string>
     <string name="cogTest_market_second_mission_find_items">يمكنك العثور على المواد عبر الفئات أو من خلال شريط البحث.</string>
     <string name="cogTest_market_second_mission_donation_items">بالإضافة إلى ذلك، اجمع جميع مواد التبرع المعلّمة باللون الأزرق.</string>
+    <string name="cogTest_market_second_mission_budget">بالإضافة إلى ذلك، الميزانية المتاحة لك هي 370 شيكل. عند الانتهاء من التسوق، يجب عليك إعادة الباقي (13.5 شيكل).</string>
 
     <string name="cogTest_market_super_ez_title">سوبر "إيزي"</string>
     <string name="cogTest_market_view_list">عرض القائمة</string>
@@ -220,5 +221,8 @@
     <string name="cogTest_market_item_garbage_bags">أكياس نفايات</string>
     <string name="cogTest_market_item_scotch_pack">عبوة إسفنج جلي</string>
     <string name="cogTest_market_item_disposable_cups_pack">عبوة أكواب للاستعمال مرة واحدة</string>
+
+    <string name="cogTest_market_total">סה״כ</string>
+    <string name="cogTest_market_price">Price</string>
 
 </resources>

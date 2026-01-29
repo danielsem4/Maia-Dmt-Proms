@@ -4,5 +4,5 @@ import maia.dmt.market.domain.model.CartItem
 
 data class MarketCartState(
     val cartItems: List<CartItem> = emptyList(),
-
+    val totalCartPrice: Double = 0.0
 )

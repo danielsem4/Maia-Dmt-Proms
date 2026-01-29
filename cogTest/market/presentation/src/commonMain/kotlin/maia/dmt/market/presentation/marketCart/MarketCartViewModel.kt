@@ -45,12 +45,17 @@ class MarketCartViewModel(
                                 name = it.titleResId,
                                 imageUrl = it.iconRes,
                                 quantity = quantity,
+                                price = it.price,
                                 isDonation = it.isDonation
                             )
                         }
                     } else null
                 }
-                _state.value = MarketCartState(cartItems = items)
+                val total = items.sumOf { it.totalPrice }
+                _state.value = MarketCartState(
+                    cartItems = items,
+                    totalCartPrice = total
+                )
             }
         }
     }

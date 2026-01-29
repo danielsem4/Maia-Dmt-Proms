@@ -16,6 +16,7 @@ import androidx.compose.ui.unit.dp
 import dmtproms.cogtest.market.presentation.generated.resources.Res
 import dmtproms.cogtest.market.presentation.generated.resources.cogTest_market_intro_button_text
 import dmtproms.cogtest.market.presentation.generated.resources.cogTest_market_part_one_title
+import dmtproms.cogtest.market.presentation.generated.resources.cogTest_market_second_mission_budget
 import dmtproms.cogtest.market.presentation.generated.resources.cogTest_market_second_mission_donation_items
 import dmtproms.cogtest.market.presentation.generated.resources.cogTest_market_second_mission_find_items
 import dmtproms.cogtest.market.presentation.generated.resources.cogTest_market_second_mission_shopping_task
@@ -57,6 +58,9 @@ fun MarketSecondPartTestInstructionsScreen(
         append("\n\n")
         append("• ")
         append(stringResource(Res.string.cogTest_market_second_mission_donation_items))
+        append("\n\n")
+        append("• ")
+        append(stringResource(Res.string.cogTest_market_second_mission_budget))
     }
 
     DmtBaseScreen(

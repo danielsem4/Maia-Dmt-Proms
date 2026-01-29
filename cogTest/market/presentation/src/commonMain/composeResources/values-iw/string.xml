@@ -7,15 +7,15 @@
     <string name="cogTest_market_welcome_title">ברוכים הבאים</string>
     <string name="cogTest_market_welcome_button_text">לחצו לקריאת ההוראות</string>
 
-    <string name="cogTest_market_intro_title">שלב 1 - משימת המסוע</string>
-    <string name="cogTest_market_intro_description">.במשימה זו תראו מצרכים עוברים על מסוע\n\nיש לבחור רק את המצרכים שמתאימים למנה שבחרת, לפי הרשימה שמופיעה בצד המסך</string>
-    <string name="cogTest_market_intro_button_text">לחצו להתחלת המשחק</string>
+    <string name="cogTest_market_intro_title">ברוכים הבאים לסל הבית – סופרמרקט אונליין</string>
+    <string name="cogTest_market_intro_description">בפעילות זו תוכלו לבחור מוצרים שונים, להוסיף אותם לסל הקניות ולהמשיך לתשלום. אנא בצעו את המשימה לפי ההנחיות שתקבלו בהמשך</string>
+    <string name="cogTest_market_intro_button_text">לחצו להתחלה</string>
 
     <string name="cogTest_market_cake">עוגה</string>
     <string name="cogTest_market_pie">פשטידה</string>
     <string name="cogTest_market_salad">סלט</string>
     <string name="cogTest_market_recipe_title">מתכונים</string>
-    <string name="cogTest_market_recipe_instructions">יש לבחור המנה שברצונך להכין על ידי לחיצה על אחד הכפתורים</string>
+    <string name="cogTest_market_recipe_instructions">בחר את המנה שהכי מתחשק לך להכין – עוגה, סלט או פשטידה. לחץ על התמונה של המנה שברצונך לבחור</string>
 
     <string name="cogTest_market_groceries_title">מצרכים</string>
     <string name="cogTest_market_groceries_body">מצרכים להכנה:</string>
@@ -69,6 +69,7 @@
     <string name="cogTest_market_second_mission_shopping_task">עליך לבצע קנייה שבועית למשפחה לפי רשימת הקניות שמופיעה על המסך. יש לבחור רק את המצרכים שמופיעים ברשימה!</string>
     <string name="cogTest_market_second_mission_find_items">ניתן למצוא את המצרכים דרך הקטגוריות או באמצעות שורת החיפוש.</string>
     <string name="cogTest_market_second_mission_donation_items">בנוסף, יש לאסוף את כל המצרכים שמופיעים ברשימת התרומה המסומנים בכחול.</string>
+    <string name="cogTest_market_second_mission_budget">בנוסף התקציב שעומד לרשותך הוא 370 ₪. בסיום הקניה עליך להחזיר את העודף. (13.5 ש"ח)</string>
 
     <string name="cogTest_market_aunt_yafa">יפה</string>
     <string name="cogTest_market_super_ez_title">סופר "איזי"</string>
@@ -228,4 +229,6 @@
     <string name="cogTest_market_item_scotch_pack">חבילת סקוצ׳ים</string>
     <string name="cogTest_market_item_disposable_cups_pack">חבילת כוסות חד''פ</string>
 
+    <string name="cogTest_market_total">סה״כ</string>
+    <string name="cogTest_market_price">מחיר</string>
 </resources>

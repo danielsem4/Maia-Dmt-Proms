@@ -24,5 +24,5 @@ data class SensorsDataDto(
     val steps: List<Float>,
     val stdDevSteps: Float,
     val stdDevDeletions: Float,
-    val rangeDeletions: Float
+    val rangeDeletions: List<Float>
 )

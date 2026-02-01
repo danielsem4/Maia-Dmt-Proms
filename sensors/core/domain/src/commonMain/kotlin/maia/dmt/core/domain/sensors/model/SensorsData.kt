@@ -11,6 +11,6 @@ data class SensorsData(
     val rangeGyroZ: Float,
     val steps: List<Float>,
     val stdDevSteps: Float,
-    val stdDevDeletions: Float = 0F,
-    val rangeDeletions: Float = 0F
+    val stdDevDeletions: Float,
+    val rangeDeletions: List<Float>
 )

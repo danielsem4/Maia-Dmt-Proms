@@ -3,19 +3,14 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <uses-permission android:name="android.permission.INTERNET" />
-
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE"
         tools:ignore="ForegroundServicesPolicy" />
-
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_HEALTH" />
-
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission android:name="android.permission.ACTIVITY_RECOGNITION" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
-
     <uses-permission android:name="android.permission.HIGH_SAMPLING_RATE_SENSORS"
         tools:ignore="HighSamplingRate" />
-
 
     <application
         android:name=".DmtApplication"
@@ -44,6 +39,17 @@
                 <action android:name="maia.dmt.ACTION_START_SENSOR_SERVICE" />
             </intent-filter>
         </service>
+
+        <service
+            android:name=".keyboard.SensorCustomKeyboardService"
+            android:label="@string/keyboard_name"
+            android:permission="android.permission.BIND_INPUT_METHOD"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.view.InputMethod" />
+            </intent-filter>
+        </service>
+
     </application>
 
 </manifest>

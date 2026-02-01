@@ -12,7 +12,12 @@ kotlin {
             implementation(libs.core.splashscreen)
 
             implementation(libs.koin.android)
+
+            implementation(libs.androidx.lifecycle.runtime.ktx)
+            implementation(libs.jetbrains.lifecycle.viewmodel)
+            implementation(libs.jetbrains.savedstate)
         }
+
         commonMain.dependencies {
             implementation(projects.core.presentation)
             implementation(projects.core.data)

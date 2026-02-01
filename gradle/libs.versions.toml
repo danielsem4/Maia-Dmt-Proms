@@ -54,15 +54,12 @@ kmpDateTimePicker = "1.1.1"
 
 
 projectApplicationId = "maia.dmt.proms"
-projectVersionName = "1.0.2"
+projectVersionName = "1.1.1"
 projectMinSdkVersion = "26"
 projectTargetSdkVersion = "36"
 projectCompileSdkVersion = "36"
-projectVersionCode = "3"
+projectVersionCode = "6"
 
-# Desktop Version
-desktopPackageName = "Chirp"
-desktopPackageVersion = "1.0.0"
 runner = "1.7.0"
 junit = "1.3.0"
 lifecycleProcess = "2.9.4"

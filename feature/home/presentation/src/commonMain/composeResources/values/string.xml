@@ -27,5 +27,6 @@
     <string name="module_new_report">New Report</string>
     <string name="module_sensors">Sensors</string>
 
+    <string name="module_fmpt">FMPT</string>
 
 </resources>

@@ -15,6 +15,9 @@ kotlin {
 
                 api(libs.kotlinx.datetime)
                 implementation(libs.kmp.date.time.picker)
+
+                implementation(libs.compottie)
+                implementation(libs.compottie.resources)
             }
         }
         androidMain {

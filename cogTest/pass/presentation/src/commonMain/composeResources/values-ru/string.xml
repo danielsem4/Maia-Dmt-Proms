@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="cogTest_Pass_intro_text">Здравствуйте, эрготерапевт хочет проверить ваши функциональные способности пользоваться телефоном. В ближайшие несколько минут на планшете, который используется как телефон, появятся два задания, связанные с использованием телефона. Следуйте инструкциям. Начинаем.</string>
+    <string name="cogTest_Pass_hana_cohen">Хана Коэн</string>
+
+    <string name="cogTest_Pass_start">Начать</string>
+    <string name="cogTest_Pass_quit">Выход</string>
+    <string name="cogTest_Pass_next">Далее</string>
+
+    <string-array name="cogTest_Pass_person_names">
+        <item>Элинор Соломон</item>
+        <item>Авнер Гавни</item>
+        <item>Эмиль Зармон</item>
+        <item>Адель Бадаш</item>
+        <item>Боб Сасон</item>
+        <item>Бен Гибри</item>
+        <item>Батья Коэн</item>
+        <item>Гили Рид</item>
+        <item>Галь Шир</item>
+        <item>Дуду Леви</item>
+        <item>Давид Коэн</item>
+        <item>Дени Авдия</item>
+        <item>Одайя Леви</item>
+        <item>Хаим Кан</item>
+        <item>Хана Коэн</item>
+        <item>Хана Яир</item>
+        <item>Ханан Дор</item>
+        <item>Йосси Шитрит</item>
+        <item>Йосси Коэн</item>
+        <item>Леонард Сушард</item>
+        <item>Лиад Леви</item>
+        <item>Лиор Боршан</item>
+        <item>Мани Хамам</item>
+        <item>Мор Шалем</item>
+        <item>Ноа Наркис</item>
+        <item>Мэй Мизрахи</item>
+        <item>Нерая Каплан</item>
+        <item>Нава Барда</item>
+        <item>Сами Битман</item>
+        <item>Сима Лав</item>
+        <item>Амит Дигми</item>
+        <item>Эден Лема</item>
+        <item>Омер Бахар</item>
+        <item>Пери Исраэли</item>
+        <item>Шоши Шалев</item>
+        <item>Шауль Галь</item>
+        <item>Шир Голомб</item>
+        <item>Сара Коэн</item>
+        <item>Томер Асор</item>
+        <item>Тамар Хершковиц</item>
+        <item>Амит Леви</item>
+        <item>Ноа Коэн</item>
+        <item>Йонатан Мизрахи</item>
+        <item>Майя Шимшон</item>
+        <item>Давид Бен Ами</item>
+        <item>Лиор Азулай</item>
+        <item>Шира Хазан</item>
+        <item>Омер Нахмиас</item>
+        <item>Авив Кляйн</item>
+        <item>Даниэла Малка</item>
+        <item>Эрез Гольдберг</item>
+        <item>Нета Шошан</item>
+        <item>Идан Замир</item>
+        <item>Яэль Пелед</item>
+        <item>Рони Яаков</item>
+        <item>Гай Бар Ам</item>
+        <item>Таль Ярон</item>
+        <item>Сиван Мояль</item>
+        <item>Гилад Новик</item>
+        <item>Ронит Раз</item>
+        <item>Авраам Леви</item>
+        <item>Хадас Шани</item>
+        <item>Элиэзер Дрор</item>
+        <item>Нога Сабаг</item>
+        <item>Мейталь Нахари</item>
+        <item>Йоав Сассон</item>
+        <item>Талия Амит</item>
+        <item>Ицхак Дахан</item>
+        <item>Михаль Беркович</item>
+    </string-array>
+
+    <string name="cogTest_Pass_phone_number">052–538–1648</string>
+    <string name="cogTest_Pass_thanks_coffe">Большое спасибо за сотрудничество</string>
+    <string name="cogTest_Pass_fmpt" translatable="false">FMPT</string>
+    <string name="cogTest_Pass_fmpt_meaning">Функциональный тест мобильного телефона</string>
+
+    <string name="cogTest_Pass_dentist_pass">Стоматолог: 052–258–1194</string>
+    <string name="cogTest_Pass_family_doctor_pass">Семейный врач: 054–228–6972</string>
+    <string name="cogTest_Pass_paint_clinic_pass">Клиника боли: 050–333–1528</string>
+    <string name="cogTest_Pass_dermatologist_pass">Дерматолог: 052–260–1048</string>
+    <string name="cogTest_Pass_orthopedist_pass">Ортопед: 053–128–8891</string>
+    <string name="cogTest_Pass_neurologist_pass">Невролог: 050–001–6390</string>
+    <string name="cogTest_Pass_ophthalmologist_pass">Офтальмолог: 052–246–7628</string>
+    <string name="cogTest_Pass_psychiatrist_pass">Психиатр: 054–187–2399</string>
+
+    <string name="cogTest_Pass_first_mission_pass">У вас есть телефонное задание, вам нужно позвонить Хане Коэн</string>
+    <string name="cogTest_Pass_call_to_hana_cohen_instruction_pass">Первое задание, нужно позвонить Хане Коэн</string>
+    <string name="cogTest_Pass_call_to_dentist">Вы выполнили первое задание; вот еще одно. Отображается список телефонных номеров, пожалуйста, позвоните в стоматологическую клинику.</string>
+    <string name="cogTest_Pass_call_to_dentist_second_part">Отображается номер телефона стоматологической клиники. Пожалуйста, позвоните в стоматологическую клинику.</string>
+    <string name="cogTest_Pass_the_app_you_entered">Приложение, в которое вы вошли:</string>
+    <string name="cogTest_Pass_what_you_need_to_do">Что вам нужно сделать сейчас?</string>
+    <string name="cogTest_Pass_press_the_dial_btn">Нажмите кнопку вызова</string>
+    <string name="cogTest_Pass_dialer_opened">Набор номера открыт</string>
+
+    <string name="cogTest_Pass_apps_page_second_assist">Ищите список контактов в телефоне</string>
+    <string name="cogTest_Pass_wrong_app_second_assist">Кнопка «Назад» находится в левом верхнем углу экрана</string>
+    <string name="cogTest_Pass_wrong_app_thired_assist">Возврат к экрану приложений</string>
+    <string name="cogTest_Pass_contacts_page_first_assist">Какой контакт вы ищете?</string>
+    <string name="cogTest_Pass_contacts_page_second_assist">Найдите Хану Коэн в контактах</string>
+    <string name="cogTest_Pass_contacts_page_thired_assist">Ищите под буквой H</string>
+    <string name="cogTest_Pass_contact_page_first_assist">Нажмите на сам номер или на кнопку вызова.</string>
+    <string name="cogTest_Pass_dialer_page_second_assist">Найдите номер телефона стоматологической клиники</string>
+    <string name="cogTest_Pass_diale_to_dentist">Наберите номер стоматологической клиники</string>
+    <string name="cogTest_Pass_dialer_page_thired_assist">Нажмите кнопку набора номера, показанную в левой части экрана.</string>
+    <string name="cogTest_Pass_dialer_page_fourth_assist">Позвоните в стоматологическую клинику.</string>
+
+    <string name="cogTest_Pass_dialer_page_wrong_action_one">Вы набрали неправильный номер, пожалуйста, наберите номер стоматологической клиники</string>
+    <string name="cogTest_Pass_dialer_page_invalid_number">Вы набрали неверный номер, попробуйте еще раз</string>
+    <string name="cogTest_Pass_dialer_page_dentis_number_appeared">Отображается номер телефона стоматологической клиники. Пожалуйста, позвоните в клинику</string>
+    <string name="cogTest_Pass_you_moved_to_the_contacts_page">Перешли на страницу контактов</string>
+    <string name="cogTest_Pass_here_persons_number">Вот номер Ханы Коэн, пожалуйста, позвоните ей</string>
+    <string name="cogTest_Pass_dialed_to_the_wrong_number">Вы набрали неправильный номер, пожалуйста, наберите номер стоматологической клиники.</string>
+    <string name="cogTest_Pass_the_mediation_will_close_in">Медиация закроется через:</string>
+    <string name="cogTest_Pass_the_pass_test_about">Тест Pass создан для использования терапевтами</string>
+    <string name="cogTest_Pass_the_pass_test">Основано на тесте PASS</string>
+
+    <string-array name="cogTest_Pass_subtask_verbal_grade">
+        <item>Не требуется помощь для начала, продолжения или завершения задачи</item>
+        <item>Требуется косвенное словесное руководство</item>
+        <item>Требуется прямое словесное руководство</item>
+        <item>Требуется практическая помощь - переключить на правильный экран и т.д.</item>
+    </string-array>
+
+    <string name="cogTest_Pass_test_record_pass"><![CDATA[https://firebasestorage.googleapis.com/v0/b/generic-project-heal.appspot.com/o/minimental%20instructions%2F%D7%A9%D7%90%D7%9C%D7%94%20%D7%A9%D7%A9%20%D7%96%D7%94%D7%91.mp4?alt=media&token=70a7006d-f076-4f71-8e8d-79b2d5ee45be]]></string>
+    <string name="cogTest_Pass_first_instructions_pass"><![CDATA[https://firebasestorage.googleapis.com/v0/b/generic-project-heal.appspot.com/o/COFFE%2Fentry_instructions%20(online-audio-converter.com).mp3?alt=media&token=a359ae4f-4460-4830-a683-c7b6a435ad6a]]></string>
+    <string name="cogTest_Pass_call_hana_cohen_pass"><![CDATA[https://firebasestorage.googleapis.com/v0/b/generic-project-heal.appspot.com/o/COFFE%2Fcall_hana_choen%20(online-audio-converter.com).mp3?alt=media&token=4eb8faac-ccf7-44ca-981c-6fd98914a747]]></string>
+    <string name="cogTest_Pass_second_part_of_test_instructions_pass"><![CDATA[https://firebasestorage.googleapis.com/v0/b/generic-project-heal.appspot.com/o/COFFE%2Fsecond_mission_instructions.mp3?alt=media&token=b68f80ad-3f0c-408c-aa13-b70dce1a23ce]]></string>
+    <string name="cogTest_Pass_thanks_vocal_pass"><![CDATA[https://firebasestorage.googleapis.com/v0/b/generic-project-heal.appspot.com/o/COFFE%2Fthanks.mp3?alt=media&token=ad0e82dc-3de5-4633-8823-d6beb27b5b42]]></string>
+    <string name="cogTest_Pass_what_do_you_need_to_do_pass"><![CDATA[https://firebasestorage.googleapis.com/v0/b/generic-project-heal.appspot.com/o/COFFE%2Fwhat_do_you_need_to_do.mp3?alt=media&token=ac12daaf-1dfb-4e28-9fa9-b70741362aa2]]></string>
+    <string name="cogTest_Pass_call_hana_pass"><![CDATA[]]></string>
+    <string name="cogTest_Pass_call_to_detist_pass"><![CDATA[https://firebasestorage.googleapis.com/v0/b/generic-project-heal.appspot.com/o/COFFE%2Fcall_to_dentist.mp3?alt=media&token=3106e225-52fe-4cfa-910d-c04cf587a860]]></string>
+    <string name="cogTest_Pass_dentist_number_showen_call_him_pass"><![CDATA[https://firebasestorage.googleapis.com/v0/b/generic-project-heal.appspot.com/o/COFFE%2Fdentist_number_showen_call_him.mp3?alt=media&token=cc01a3c7-1ae3-4218-94c5-65d4498376f6]]></string>
+    <string name="cogTest_Pass_dialer_opened_pass"><![CDATA[https://firebasestorage.googleapis.com/v0/b/generic-project-heal.appspot.com/o/COFFE%2Fdialer_opened.mp3?alt=media&token=bd5e97d6-5155-44e3-bc40-6e0f3c2db077]]></string>
+    <string name="cogTest_Pass_going_back_to_apss_screen_pass"><![CDATA[https://firebasestorage.googleapis.com/v0/b/generic-project-heal.appspot.com/o/COFFE%2Fgoing_back_to_apps_screen.mp3?alt=media&token=1f2cbcc7-696a-4584-afa6-396b49979d4e]]></string>
+    <string name="cogTest_Pass_press_the_diale_button_pass"><![CDATA[https://firebasestorage.googleapis.com/v0/b/generic-project-heal.appspot.com/o/COFFE%2Fpress_the_dialer_button.mp3?alt=media&token=64180c8b-cee8-4dc3-836c-c52bf52774d5]]></string>
+    <string name="cogTest_Pass_press_the_dial_button_that_showen_down_pass"><![CDATA[https://firebasestorage.googleapis.com/v0/b/generic-project-heal.appspot.com/o/COFFE%2Fpress_the_dialer_button_bot_left.mp3?alt=media&token=0470ee29-d479-4100-b9bc-657c1c376be3]]></string>
+    <string name="cogTest_Pass_press_the_number_or_the_dial_button_pass"><![CDATA[https://firebasestorage.googleapis.com/v0/b/generic-project-heal.appspot.com/o/COFFE%2Fpress_the_number_or_the_call_button.mp3?alt=media&token=73a32eb4-d298-46bf-8251-cd1094cc801b]]></string>
+    <string name="cogTest_Pass_search_at_latter_h_pass"><![CDATA[https://firebasestorage.googleapis.com/v0/b/generic-project-heal.appspot.com/o/COFFE%2Fsearch_at_latter_h.mp3?alt=media&token=86442245-328d-455a-8f60-c9b16a23588f]]></string>
+    <string name="cogTest_Pass_search_dentist_number_pass"><![CDATA[https://firebasestorage.googleapis.com/v0/b/generic-project-heal.appspot.com/o/COFFE%2Fsearch_dentist_number.mp3?alt=media&token=cfda0521-5733-4703-b0d7-cb75d232a63b]]></string>
+    <string name="cogTest_Pass_search_for_hana_choen_in_contacts_pass"><![CDATA[https://firebasestorage.googleapis.com/v0/b/generic-project-heal.appspot.com/o/COFFE%2Fsearch_hana_choen.mp3?alt=media&token=cef8c350-3fa7-47fb-8f35-039e5a04f0c0]]></string>
+    <string name="cogTest_Pass_search_contacts_list_in_the_phone_pass"><![CDATA[https://firebasestorage.googleapis.com/v0/b/generic-project-heal.appspot.com/o/COFFE%2Fsearch_the_contacts_on_phone.mp3?alt=media&token=4aae204c-dddd-423a-80de-b52f1f3e44db]]></string>
+    <string name="cogTest_Pass_now_the_contacts_list_will_be_opened_pass"><![CDATA[https://firebasestorage.googleapis.com/v0/b/generic-project-heal.appspot.com/o/COFFE%2Fthe_contact_list_will_be_opend_now.mp3?alt=media&token=e0874654-db3d-4ae0-af46-d2dffa584fc3]]></string>
+    <string name="cogTest_Pass_return_button_on_top_left_pass"><![CDATA[https://firebasestorage.googleapis.com/v0/b/generic-project-heal.appspot.com/o/COFFE%2Fthe_exit_button_top_left.mp3?alt=media&token=bedd62b4-cf36-4e9d-985f-63b887159c5c]]></string>
+    <string name="cogTest_Pass_witch_contact_are_we_looking_for_pass"><![CDATA[https://firebasestorage.googleapis.com/v0/b/generic-project-heal.appspot.com/o/COFFE%2Fwhat_contact_are_you_searching.mp3?alt=media&token=87e10d59-51f4-4373-a110-934472c61499]]></string>
+    <string name="cogTest_Pass_wrong_number_dialed_please_try_again_pass"><![CDATA[https://firebasestorage.googleapis.com/v0/b/generic-project-heal.appspot.com/o/COFFE%2Fwrong_number_dialed_try_again.mp3?alt=media&token=f3b84ffa-25c7-4101-8082-e2839f79ce86]]></string>
+    <string name="cogTest_Pass_first_mission_done_vocal_pass"><![CDATA[https://firebasestorage.googleapis.com/v0/b/generic-project-heal.appspot.com/o/COFFE%2Ffirst_mission_done.mp3?alt=media&token=db691c6a-2379-4f19-903e-fd5ec2baf854]]></string>
+</resources>

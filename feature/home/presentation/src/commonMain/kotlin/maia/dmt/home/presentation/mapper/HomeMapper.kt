@@ -12,6 +12,7 @@ import dmtproms.feature.home.presentation.generated.resources.memory_icon
 import dmtproms.feature.home.presentation.generated.resources.module_activities
 import dmtproms.feature.home.presentation.generated.resources.module_cdt
 import dmtproms.feature.home.presentation.generated.resources.module_document_share
+import dmtproms.feature.home.presentation.generated.resources.module_fmpt
 import dmtproms.feature.home.presentation.generated.resources.module_hitber
 import dmtproms.feature.home.presentation.generated.resources.module_market
 import dmtproms.feature.home.presentation.generated.resources.module_measurements
@@ -23,6 +24,7 @@ import dmtproms.feature.home.presentation.generated.resources.module_sensors
 import dmtproms.feature.home.presentation.generated.resources.module_settings
 import dmtproms.feature.home.presentation.generated.resources.module_statistics
 import dmtproms.feature.home.presentation.generated.resources.orientation_icon
+import dmtproms.feature.home.presentation.generated.resources.phone
 import dmtproms.feature.home.presentation.generated.resources.settings_icon
 import dmtproms.feature.home.presentation.generated.resources.statistics_icon
 import org.jetbrains.compose.resources.DrawableResource
@@ -39,6 +41,7 @@ fun mapModuleIcon(moduleName: String): DrawableResource {
         "orientation" -> Res.drawable.orientation_icon
         "hitber" -> Res.drawable.hitber_icon
         "statistics" -> Res.drawable.statistics_icon
+        "pass" -> Res.drawable.phone
         "settings" -> Res.drawable.settings_icon
         "parkinson sensors" -> Res.drawable.statistics_icon
         "parkinson report" -> Res.drawable.file_upload_icon
@@ -60,6 +63,7 @@ fun mapModuleNameResource(moduleName: String): StringResource {
         "statistics" -> Res.string.module_statistics
         "settings" -> Res.string.module_settings
         "parkinson sensors" -> Res.string.module_sensors
+        "pass" -> Res.string.module_fmpt
         "parkinson report" -> Res.string.module_new_report
         "market test" -> Res.string.module_market
         else -> Res.string.module_hitber

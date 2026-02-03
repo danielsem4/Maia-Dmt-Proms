@@ -27,4 +27,5 @@
     <string name="module_new_report">تقرير جديد</string>
     <string name="module_sensors">الحساسات</string>
 
+    <string name="module_fmpt">FMPT</string>
 </resources>

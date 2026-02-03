@@ -27,5 +27,7 @@
     <string name="module_new_report">Новый отчёт</string>
     <string name="module_sensors">Датчики</string>
 
+    <string name="module_fmpt">FMPT</string>
+
 
 </resources>

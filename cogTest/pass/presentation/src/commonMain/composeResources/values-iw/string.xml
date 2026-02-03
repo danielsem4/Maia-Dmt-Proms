@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="cogTest_Pass_intro_text">שלום, המרפאה בעיסוק רוצה לבדוק את היכולת התפקודית בשימוש בטלפון. בדקות הקרובות יופיעו בטאבלט, שמשמש כמכשיר הטלפון, שתי משימות הקשורות לשימוש בטלפון. פעלו על פי ההוראות. מתחילים.</string>
+    <string name="cogTest_Pass_hana_cohen">חנה כהן</string>
+
+    <string name="cogTest_Pass_start">התחל</string>
+    <string name="cogTest_Pass_quit">יציאה</string>
+    <string name="cogTest_Pass_next">הבא</string>
+
+    <string-array name="cogTest_Pass_person_names">
+        <item>אלינור סולומון</item>
+        <item>אבנר גבני</item>
+        <item>אמיל זרמון</item>
+        <item>עדי באדש</item>
+        <item>בוב ששון</item>
+        <item>בן גברי</item>
+        <item>בתיה כהן</item>
+        <item>גילי ריד</item>
+        <item>גל שיר</item>
+        <item>דודו לוי</item>
+        <item>דוד כהן</item>
+        <item>דני אבדיה</item>
+        <item>הודיה לוי</item>
+        <item>חיים כאן</item>
+        <item>חנה כהן</item>
+        <item>חנה יאיר</item>
+        <item>חנן דור</item>
+        <item>יוסי שטרית</item>
+        <item>יוסי כהן</item>
+        <item>לאונרד סושארד</item>
+        <item>ליעד לוי</item>
+        <item>ליאור בורשן</item>
+        <item>מני חמם</item>
+        <item>מור שלם</item>
+        <item>נועה נרקיס</item>
+        <item>מאי מזרחי</item>
+        <item>נריה קפלן</item>
+        <item>נאוה ברדה</item>
+        <item>סמי ביטמן</item>
+        <item>סימה לב</item>
+        <item>עמית דיגמי</item>
+        <item>עדן למה</item>
+        <item>עומר בכר</item>
+        <item>פרי ישראלי</item>
+        <item>שושי שלו</item>
+        <item>שאול גל</item>
+        <item>שיר גולומב</item>
+        <item>שרה כהן</item>
+        <item>תומר אסור</item>
+        <item>תמר הרשקוביץ</item>
+        <item>עמית לוי</item>
+        <item>נועה כהן</item>
+        <item>יונתן מזרחי</item>
+        <item>מאיה שמשון</item>
+        <item>דוד בן עמי</item>
+        <item>ליאור אזולאי</item>
+        <item>שירה חזן</item>
+        <item>עומר נחמיאס</item>
+        <item>אביב קליין</item>
+        <item>דניאלה מלכה</item>
+        <item>ארז גולדברג</item>
+        <item>נטע שושן</item>
+        <item>עידן זמיר</item>
+        <item>יעל פלד</item>
+        <item>רוני יעקב</item>
+        <item>גיא בר עם</item>
+        <item>טל ירון</item>
+        <item>סיון מויאל</item>
+        <item>גלעד נוביק</item>
+        <item>רונית רז</item>
+        <item>אברהם לוי</item>
+        <item>הדס שני</item>
+        <item>אליעזר דרור</item>
+        <item>נגה סבג</item>
+        <item>מיטל נהרי</item>
+        <item>יואב ששון</item>
+        <item>טליה עמית</item>
+        <item>יצחק דהן</item>
+        <item>מיכל ברקוביץ\'</item>
+    </string-array>
+
+    <string name="cogTest_Pass_phone_number">052–538–1648</string>
+    <string name="cogTest_Pass_thanks_coffe">תודה רבה על שיתוף הפעולה</string>
+    <string name="cogTest_Pass_fmpt" translatable="false">FMPT</string>
+    <string name="cogTest_Pass_fmpt_meaning">מבחן טלפון נייד פונקציונלי (Functional Mobile Phone Test)</string>
+
+    <string name="cogTest_Pass_dentist_pass">רופא שיניים: 052–258–1194</string>
+    <string name="cogTest_Pass_family_doctor_pass">רופא משפחה: 054–228–6972</string>
+    <string name="cogTest_Pass_paint_clinic_pass">מרפאת כאב: 050–333–1528</string>
+    <string name="cogTest_Pass_dermatologist_pass">רופא עור: 052–260–1048</string>
+    <string name="cogTest_Pass_orthopedist_pass">אורתופד: 053–128–8891</string>
+    <string name="cogTest_Pass_neurologist_pass">נוירולוג: 050–001–6390</string>
+    <string name="cogTest_Pass_ophthalmologist_pass">רופא עיניים: 052–246–7628</string>
+    <string name="cogTest_Pass_psychiatrist_pass">פסיכיאטר: 054–187–2399</string>
+
+    <string name="cogTest_Pass_first_mission_pass">יש לך משימה טלפונית, עליך להתקשר לחנה כהן</string>
+    <string name="cogTest_Pass_call_to_hana_cohen_instruction_pass">משימה ראשונה, יש להתקשר לחנה כהן</string>
+    <string name="cogTest_Pass_call_to_dentist">סיימת את המשימה הראשונה; הנה משימה נוספת. רשימת מספרי טלפון מוצגת, נא להתקשר למרפאת השיניים.</string>
+    <string name="cogTest_Pass_call_to_dentist_second_part">מספר הטלפון של מרפאת השיניים מוצג. נא להתקשר למרפאת השיניים.</string>
+    <string name="cogTest_Pass_the_app_you_entered">האפליקציה שנכנסת אליה:</string>
+    <string name="cogTest_Pass_what_you_need_to_do">מה עליך לעשות עכשיו?</string>
+    <string name="cogTest_Pass_press_the_dial_btn">לחץ על כפתור החיוג</string>
+    <string name="cogTest_Pass_dialer_opened">החייגן נפתח</string>
+
+    <string name="cogTest_Pass_apps_page_second_assist">חפש את רשימת אנשי הקשר בטלפון</string>
+    <string name="cogTest_Pass_wrong_app_second_assist">כפתור החזרה נמצא בפינה השמאלית העליונה של המסך</string>
+    <string name="cogTest_Pass_wrong_app_thired_assist">חזרה למסך האפליקציות</string>
+    <string name="cogTest_Pass_contacts_page_first_assist">את מי אתה מחפש באנשי הקשר?</string>
+    <string name="cogTest_Pass_contacts_page_second_assist">חפש את חנה כהן באנשי הקשר</string>
+    <string name="cogTest_Pass_contacts_page_thired_assist">חפש תחת האות ח\'</string>
+    <string name="cogTest_Pass_contact_page_first_assist">לחץ על המספר עצמו או על כפתור החיוג.</string>
+    <string name="cogTest_Pass_dialer_page_second_assist">חפש את מספר הטלפון של מרפאת השיניים</string>
+    <string name="cogTest_Pass_diale_to_dentist">חייג את המספר של מרפאת השיניים</string>
+    <string name="cogTest_Pass_dialer_page_thired_assist">לחץ על כפתור החייגן המוצג בצד שמאל של המסך.</string>
+    <string name="cogTest_Pass_dialer_page_fourth_assist">התקשר למרפאת השיניים.</string>
+
+    <string name="cogTest_Pass_dialer_page_wrong_action_one">חייגת מספר שגוי, נא לחייג את מספר מרפאת השיניים</string>
+    <string name="cogTest_Pass_dialer_page_invalid_number">חייגת מספר לא חוקי, נא לנסות שוב</string>
+    <string name="cogTest_Pass_dialer_page_dentis_number_appeared">מספר הטלפון של מרפאת השיניים מוצג. נא להתקשר למרפאה</string>
+    <string name="cogTest_Pass_you_moved_to_the_contacts_page">הועברת לדף אנשי הקשר</string>
+    <string name="cogTest_Pass_here_persons_number">הנה המספר של חנה כהן, נא להתקשר אליה</string>
+    <string name="cogTest_Pass_dialed_to_the_wrong_number">חייגת מספר שגוי, נא לחייג את מספר מרפאת השיניים.</string>
+    <string name="cogTest_Pass_the_mediation_will_close_in">הגישור ייסגר בעוד:</string>
+    <string name="cogTest_Pass_the_pass_test_about">מבחן ה-Pass נועד לשימוש על ידי מטפלים</string>
+    <string name="cogTest_Pass_the_pass_test">מבוסס על מבחן PASS</string>
+
+    <string-array name="cogTest_Pass_subtask_verbal_grade">
+        <item>לא נדרש סיוע כדי להתחיל את המשימה, להמשיך או להשלים אותה</item>
+        <item>זקוק להכוונה מילולית עקיפה</item>
+        <item>זקוק להכוונה מילולית ישירה</item>
+        <item>זקוק לתיווך מעשי - הזזה למסך הנכון וכו\'</item>
+    </string-array>
+
+    <string name="cogTest_Pass_test_record_pass"><![CDATA[https://firebasestorage.googleapis.com/v0/b/generic-project-heal.appspot.com/o/minimental%20instructions%2F%D7%A9%D7%90%D7%9C%D7%94%20%D7%A9%D7%A9%20%D7%96%D7%94%D7%91.mp4?alt=media&token=70a7006d-f076-4f71-8e8d-79b2d5ee45be]]></string>
+    <string name="cogTest_Pass_first_instructions_pass"><![CDATA[https://firebasestorage.googleapis.com/v0/b/generic-project-heal.appspot.com/o/COFFE%2Fentry_instructions%20(online-audio-converter.com).mp3?alt=media&token=a359ae4f-4460-4830-a683-c7b6a435ad6a]]></string>
+    <string name="cogTest_Pass_call_hana_cohen_pass"><![CDATA[https://firebasestorage.googleapis.com/v0/b/generic-project-heal.appspot.com/o/COFFE%2Fcall_hana_choen%20(online-audio-converter.com).mp3?alt=media&token=4eb8faac-ccf7-44ca-981c-6fd98914a747]]></string>
+    <string name="cogTest_Pass_second_part_of_test_instructions_pass"><![CDATA[https://firebasestorage.googleapis.com/v0/b/generic-project-heal.appspot.com/o/COFFE%2Fsecond_mission_instructions.mp3?alt=media&token=b68f80ad-3f0c-408c-aa13-b70dce1a23ce]]></string>
+    <string name="cogTest_Pass_thanks_vocal_pass"><![CDATA[https://firebasestorage.googleapis.com/v0/b/generic-project-heal.appspot.com/o/COFFE%2Fthanks.mp3?alt=media&token=ad0e82dc-3de5-4633-8823-d6beb27b5b42]]></string>
+    <string name="cogTest_Pass_what_do_you_need_to_do_pass"><![CDATA[https://firebasestorage.googleapis.com/v0/b/generic-project-heal.appspot.com/o/COFFE%2Fwhat_do_you_need_to_do.mp3?alt=media&token=ac12daaf-1dfb-4e28-9fa9-b70741362aa2]]></string>
+    <string name="cogTest_Pass_call_hana_pass"><![CDATA[]]></string>
+    <string name="cogTest_Pass_call_to_detist_pass"><![CDATA[https://firebasestorage.googleapis.com/v0/b/generic-project-heal.appspot.com/o/COFFE%2Fcall_to_dentist.mp3?alt=media&token=3106e225-52fe-4cfa-910d-c04cf587a860]]></string>
+    <string name="cogTest_Pass_dentist_number_showen_call_him_pass"><![CDATA[https://firebasestorage.googleapis.com/v0/b/generic-project-heal.appspot.com/o/COFFE%2Fdentist_number_showen_call_him.mp3?alt=media&token=cc01a3c7-1ae3-4218-94c5-65d4498376f6]]></string>
+    <string name="cogTest_Pass_dialer_opened_pass"><![CDATA[https://firebasestorage.googleapis.com/v0/b/generic-project-heal.appspot.com/o/COFFE%2Fdialer_opened.mp3?alt=media&token=bd5e97d6-5155-44e3-bc40-6e0f3c2db077]]></string>
+    <string name="cogTest_Pass_going_back_to_apss_screen_pass"><![CDATA[https://firebasestorage.googleapis.com/v0/b/generic-project-heal.appspot.com/o/COFFE%2Fgoing_back_to_apps_screen.mp3?alt=media&token=1f2cbcc7-696a-4584-afa6-396b49979d4e]]></string>
+    <string name="cogTest_Pass_press_the_diale_button_pass"><![CDATA[https://firebasestorage.googleapis.com/v0/b/generic-project-heal.appspot.com/o/COFFE%2Fpress_the_dialer_button.mp3?alt=media&token=64180c8b-cee8-4dc3-836c-c52bf52774d5]]></string>
+    <string name="cogTest_Pass_press_the_dial_button_that_showen_down_pass"><![CDATA[https://firebasestorage.googleapis.com/v0/b/generic-project-heal.appspot.com/o/COFFE%2Fpress_the_dialer_button_bot_left.mp3?alt=media&token=0470ee29-d479-4100-b9bc-657c1c376be3]]></string>
+    <string name="cogTest_Pass_press_the_number_or_the_dial_button_pass"><![CDATA[https://firebasestorage.googleapis.com/v0/b/generic-project-heal.appspot.com/o/COFFE%2Fpress_the_number_or_the_call_button.mp3?alt=media&token=73a32eb4-d298-46bf-8251-cd1094cc801b]]></string>
+    <string name="cogTest_Pass_search_at_latter_h_pass"><![CDATA[https://firebasestorage.googleapis.com/v0/b/generic-project-heal.appspot.com/o/COFFE%2Fsearch_at_latter_h.mp3?alt=media&token=86442245-328d-455a-8f60-c9b16a23588f]]></string>
+    <string name="cogTest_Pass_search_dentist_number_pass"><![CDATA[https://firebasestorage.googleapis.com/v0/b/generic-project-heal.appspot.com/o/COFFE%2Fsearch_dentist_number.mp3?alt=media&token=cfda0521-5733-4703-b0d7-cb75d232a63b]]></string>
+    <string name="cogTest_Pass_search_for_hana_choen_in_contacts_pass"><![CDATA[https://firebasestorage.googleapis.com/v0/b/generic-project-heal.appspot.com/o/COFFE%2Fsearch_hana_choen.mp3?alt=media&token=cef8c350-3fa7-47fb-8f35-039e5a04f0c0]]></string>
+    <string name="cogTest_Pass_search_contacts_list_in_the_phone_pass"><![CDATA[https://firebasestorage.googleapis.com/v0/b/generic-project-heal.appspot.com/o/COFFE%2Fsearch_the_contacts_on_phone.mp3?alt=media&token=4aae204c-dddd-423a-80de-b52f1f3e44db]]></string>
+    <string name="cogTest_Pass_now_the_contacts_list_will_be_opened_pass"><![CDATA[https://firebasestorage.googleapis.com/v0/b/generic-project-heal.appspot.com/o/COFFE%2Fthe_contact_list_will_be_opend_now.mp3?alt=media&token=e0874654-db3d-4ae0-af46-d2dffa584fc3]]></string>
+    <string name="cogTest_Pass_return_button_on_top_left_pass"><![CDATA[https://firebasestorage.googleapis.com/v0/b/generic-project-heal.appspot.com/o/COFFE%2Fthe_exit_button_top_left.mp3?alt=media&token=bedd62b4-cf36-4e9d-985f-63b887159c5c]]></string>
+    <string name="cogTest_Pass_witch_contact_are_we_looking_for_pass"><![CDATA[https://firebasestorage.googleapis.com/v0/b/generic-project-heal.appspot.com/o/COFFE%2Fwhat_contact_are_you_searching.mp3?alt=media&token=87e10d59-51f4-4373-a110-934472c61499]]></string>
+    <string name="cogTest_Pass_wrong_number_dialed_please_try_again_pass"><![CDATA[https://firebasestorage.googleapis.com/v0/b/generic-project-heal.appspot.com/o/COFFE%2Fwrong_number_dialed_try_again.mp3?alt=media&token=f3b84ffa-25c7-4101-8082-e2839f79ce86]]></string>
+    <string name="cogTest_Pass_first_mission_done_vocal_pass"><![CDATA[https://firebasestorage.googleapis.com/v0/b/generic-project-heal.appspot.com/o/COFFE%2Ffirst_mission_done.mp3?alt=media&token=db691c6a-2379-4f19-903e-fd5ec2baf854]]></string>
+</resources>

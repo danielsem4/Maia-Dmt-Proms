@@ -27,4 +27,6 @@
     <string name="module_new_report">דיווח חדש</string>
     <string name="module_sensors">חיישנים</string>
 
+    <string name="module_fmpt">FMPT</string>
+
 </resources>

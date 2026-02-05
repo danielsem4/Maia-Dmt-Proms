@@ -7,6 +7,20 @@
     <string name="cogTest_Pass_quit">Выход</string>
     <string name="cogTest_Pass_next">Далее</string>
 
+    <string name="cogTest_Pass_contacts">Контакты</string>
+    <string name="cogTest_Pass_call">Звонок</string>
+    <string name="cogTest_Pass_settings">Настройки</string>
+    <string name="cogTest_Pass_weather">Погода</string>
+    <string name="cogTest_Pass_store">Магазин</string>
+    <string name="cogTest_Pass_calculator">Калькулятор</string>
+    <string name="cogTest_Pass_camera">Камера</string>
+    <string name="cogTest_Pass_wallet">Кошелёк</string>
+    <string name="cogTest_Pass_email">Электронная почта</string>
+    <string name="cogTest_Pass_message">Сообщение</string>
+    <string name="cogTest_Pass_clock">Часы</string>
+    <string name="cogTest_Pass_files">Файлы</string>
+
+
     <string-array name="cogTest_Pass_person_names">
         <item>Элинор Соломон</item>
         <item>Авнер Гавни</item>
@@ -80,49 +94,58 @@
     </string-array>
 
     <string name="cogTest_Pass_phone_number">052–538–1648</string>
-    <string name="cogTest_Pass_thanks_coffe">Большое спасибо за сотрудничество</string>
     <string name="cogTest_Pass_fmpt" translatable="false">FMPT</string>
     <string name="cogTest_Pass_fmpt_meaning">Функциональный тест мобильного телефона</string>
+    <string name="cogTest_Pass_yes">Да</string>
+    <string name="cogTest_Pass_no">Нет</string>
+    <string name="cogTest_Pass_test">Основано на тесте PASS</string>
 
-    <string name="cogTest_Pass_dentist_pass">Стоматолог: 052–258–1194</string>
-    <string name="cogTest_Pass_family_doctor_pass">Семейный врач: 054–228–6972</string>
-    <string name="cogTest_Pass_paint_clinic_pass">Клиника боли: 050–333–1528</string>
-    <string name="cogTest_Pass_dermatologist_pass">Дерматолог: 052–260–1048</string>
-    <string name="cogTest_Pass_orthopedist_pass">Ортопед: 053–128–8891</string>
-    <string name="cogTest_Pass_neurologist_pass">Невролог: 050–001–6390</string>
-    <string name="cogTest_Pass_ophthalmologist_pass">Офтальмолог: 052–246–7628</string>
-    <string name="cogTest_Pass_psychiatrist_pass">Психиатр: 054–187–2399</string>
 
-    <string name="cogTest_Pass_first_mission_pass">У вас есть телефонное задание, вам нужно позвонить Хане Коэн</string>
+    <string name="cogTest_Pass_applications_screen">Приложения</string>
+    <string name="cogTest_Pass_contacts_screen">Контакты</string>
+    <string name="cogTest_Pass_contact_screen">Контакт</string>
+    <string name="cogTest_Pass_dialer_screen">Набор номера</string>
+    <string name="cogTest_Pass_does_instructions_clear">Были ли инструкции понятны?</string>
+
+
+
+    <!-- PASS Test Instructions -->
     <string name="cogTest_Pass_call_to_hana_cohen_instruction_pass">Первое задание, нужно позвонить Хане Коэн</string>
-    <string name="cogTest_Pass_call_to_dentist">Вы выполнили первое задание; вот еще одно. Отображается список телефонных номеров, пожалуйста, позвоните в стоматологическую клинику.</string>
-    <string name="cogTest_Pass_call_to_dentist_second_part">Отображается номер телефона стоматологической клиники. Пожалуйста, позвоните в стоматологическую клинику.</string>
+    <string name="cogTest_Pass_call_to_dentist">А теперь второе задание, отображается список телефонных номеров, нужно позвонить в стоматологическую клинику.</string>
+    <string name="cogTest_Pass_call_to_dentist_second_part">Перед вами отображается номер телефона стоматологической клиники. Пожалуйста, наберите стоматологическую клинику</string>
     <string name="cogTest_Pass_the_app_you_entered">Приложение, в которое вы вошли:</string>
-    <string name="cogTest_Pass_what_you_need_to_do">Что вам нужно сделать сейчас?</string>
-    <string name="cogTest_Pass_press_the_dial_btn">Нажмите кнопку вызова</string>
-    <string name="cogTest_Pass_dialer_opened">Набор номера открыт</string>
-
-    <string name="cogTest_Pass_apps_page_second_assist">Ищите список контактов в телефоне</string>
-    <string name="cogTest_Pass_wrong_app_second_assist">Кнопка «Назад» находится в левом верхнем углу экрана</string>
-    <string name="cogTest_Pass_wrong_app_thired_assist">Возврат к экрану приложений</string>
+    <string name="cogTest_Pass_what_you_need_to_do">Что нужно сделать?</string>
+    <string name="cogTest_Pass_press_the_dial_btn">Нажмите кнопку набора</string>
+    <string name="cogTest_Pass_dialer_opened">Номеронабиратель открыт</string>
+    <string name="cogTest_Pass_apps_page_second_assist">Нужно найти список контактов на телефоне</string>
+    <string name="cogTest_Pass_wrong_app_second_assist">Кнопка возврата находится в верхней части экрана с левой стороны</string>
+    <string name="cogTest_Pass_wrong_app_thired_assist">Возвращаемся на экран приложений</string>
     <string name="cogTest_Pass_contacts_page_first_assist">Какой контакт вы ищете?</string>
-    <string name="cogTest_Pass_contacts_page_second_assist">Найдите Хану Коэн в контактах</string>
-    <string name="cogTest_Pass_contacts_page_thired_assist">Ищите под буквой H</string>
-    <string name="cogTest_Pass_contact_page_first_assist">Нажмите на сам номер или на кнопку вызова.</string>
-    <string name="cogTest_Pass_dialer_page_second_assist">Найдите номер телефона стоматологической клиники</string>
-    <string name="cogTest_Pass_diale_to_dentist">Наберите номер стоматологической клиники</string>
-    <string name="cogTest_Pass_dialer_page_thired_assist">Нажмите кнопку набора номера, показанную в левой части экрана.</string>
-    <string name="cogTest_Pass_dialer_page_fourth_assist">Позвоните в стоматологическую клинику.</string>
-
-    <string name="cogTest_Pass_dialer_page_wrong_action_one">Вы набрали неправильный номер, пожалуйста, наберите номер стоматологической клиники</string>
-    <string name="cogTest_Pass_dialer_page_invalid_number">Вы набрали неверный номер, попробуйте еще раз</string>
-    <string name="cogTest_Pass_dialer_page_dentis_number_appeared">Отображается номер телефона стоматологической клиники. Пожалуйста, позвоните в клинику</string>
+    <string name="cogTest_Pass_contacts_page_second_assist">Нужно найти Хану Коэн в контактах</string>
+    <string name="cogTest_Pass_contacts_page_thired_assist">Нужно искать на букву Х</string>
+    <string name="cogTest_Pass_contact_page_first_assist">Нужно нажать на сам номер и/или на кнопку набора.</string>
+    <string name="cogTest_Pass_dialer_page_second_assist">Нужно найти номер стоматологической клиники</string>
+    <string name="cogTest_Pass_diale_to_dentist">Нужно набрать номер стоматологической клиники</string>
+    <string name="cogTest_Pass_dialer_page_thired_assist">Нужно нажать кнопку набора, расположенную с левой стороны экрана</string>
+    <string name="cogTest_Pass_dialer_page_fourth_assist">Нужно позвонить в стоматологическую клинику.</string>
+    <string name="cogTest_Pass_dialer_page_wrong_action_one">Набран неправильный номер, нужно снова набрать номер стоматологической клиники</string>
+    <string name="cogTest_Pass_dialer_page_invalid_number">Набран недействительный номер, нужно набрать стоматологическую клинику</string>
+    <string name="cogTest_Pass_dialer_page_dentis_number_appeared">Отображается номер телефона стоматологической клиники, нужно позвонить в клинику</string>
     <string name="cogTest_Pass_you_moved_to_the_contacts_page">Перешли на страницу контактов</string>
-    <string name="cogTest_Pass_here_persons_number">Вот номер Ханы Коэн, пожалуйста, позвоните ей</string>
+    <string name="cogTest_Pass_here_persons_number">Сейчас откроется список контактов</string>
     <string name="cogTest_Pass_dialed_to_the_wrong_number">Вы набрали неправильный номер, пожалуйста, наберите номер стоматологической клиники.</string>
-    <string name="cogTest_Pass_the_mediation_will_close_in">Медиация закроется через:</string>
-    <string name="cogTest_Pass_the_pass_test_about">Тест Pass создан для использования терапевтами</string>
-    <string name="cogTest_Pass_the_pass_test">Основано на тесте PASS</string>
+    <string name="cogTest_Pass_the_mediation_will_close_in">Посредничество закроется автоматически через:</string>
+    <string name="cogTest_Pass_thanks_coffe">Задание выполнено, большое спасибо за сотрудничество</string>
+
+    <!-- Phone Numbers -->
+    <string name="cogTest_Pass_dentist_pass">Стоматологическая клиника: 052-258-1194</string>
+    <string name="cogTest_Pass_family_doctor_pass">Семейный врач: 054-228-6972</string>
+    <string name="cogTest_Pass_paint_clinic_pass">Клиника боли: 050-333-1528</string>
+    <string name="cogTest_Pass_dermatologist_pass">Дерматолог: 052-260-1048</string>
+    <string name="cogTest_Pass_orthopedist_pass">Ортопед: 053-128-8891</string>
+    <string name="cogTest_Pass_neurologist_pass">Невролог: 050-501-6390</string>
+    <string name="cogTest_Pass_ophthalmologist_pass">Глазная клиника: 052-246-7628</string>
+    <string name="cogTest_Pass_psychiatrist_pass">Психиатр: 054-187-2399</string>
 
     <string-array name="cogTest_Pass_subtask_verbal_grade">
         <item>Не требуется помощь для начала, продолжения или завершения задачи</item>

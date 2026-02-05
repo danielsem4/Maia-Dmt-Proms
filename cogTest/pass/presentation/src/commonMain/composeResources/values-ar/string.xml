@@ -7,6 +7,20 @@
     <string name="cogTest_Pass_quit">خروج</string>
     <string name="cogTest_Pass_next">التالي</string>
 
+    <string name="cogTest_Pass_contacts">جهات الاتصال</string>
+    <string name="cogTest_Pass_call">اتصال</string>
+    <string name="cogTest_Pass_settings">الإعدادات</string>
+    <string name="cogTest_Pass_weather">الطقس</string>
+    <string name="cogTest_Pass_store">المتجر</string>
+    <string name="cogTest_Pass_calculator">آلة حاسبة</string>
+    <string name="cogTest_Pass_camera">الكاميرا</string>
+    <string name="cogTest_Pass_wallet">المحفظة</string>
+    <string name="cogTest_Pass_email">البريد الإلكتروني</string>
+    <string name="cogTest_Pass_message">رسالة</string>
+    <string name="cogTest_Pass_clock">الساعة</string>
+    <string name="cogTest_Pass_files">الملفات</string>
+
+
     <string-array name="cogTest_Pass_person_names">
         <item>إلينور سولومون</item>
         <item>أفنر جافني</item>
@@ -80,49 +94,57 @@
     </string-array>
 
     <string name="cogTest_Pass_phone_number">052–538–1648</string>
-    <string name="cogTest_Pass_thanks_coffe">شكراً جزيلاً لتعاونكم</string>
     <string name="cogTest_Pass_fmpt" translatable="false">FMPT</string>
     <string name="cogTest_Pass_fmpt_meaning">اختبار الهاتف المحمول الوظيفي (Functional Mobile Phone Test)</string>
+    <string name="cogTest_Pass_yes">نعم</string>
+    <string name="cogTest_Pass_no">لا</string>
+    <string name="cogTest_Pass_test">مبني على اختبار PASS</string>
 
-    <string name="cogTest_Pass_dentist_pass">طبيب أسنان: 052–258–1194</string>
-    <string name="cogTest_Pass_family_doctor_pass">طبيب العائلة: 054–228–6972</string>
-    <string name="cogTest_Pass_paint_clinic_pass">عيادة الألم: 050–333–1528</string>
-    <string name="cogTest_Pass_dermatologist_pass">طبيب جلدية: 052–260–1048</string>
-    <string name="cogTest_Pass_orthopedist_pass">جراح عظام: 053–128–8891</string>
-    <string name="cogTest_Pass_neurologist_pass">طبيب أعصاب: 050–001–6390</string>
-    <string name="cogTest_Pass_ophthalmologist_pass">طبيب عيون: 052–246–7628</string>
-    <string name="cogTest_Pass_psychiatrist_pass">طبيب نفسي: 054–187–2399</string>
 
-    <string name="cogTest_Pass_first_mission_pass">لديك مهمة هاتفية، عليك الاتصال بـ هانا كوهين</string>
-    <string name="cogTest_Pass_call_to_hana_cohen_instruction_pass">المهمة الأولى، يجب الاتصال بـ هانا كوهين</string>
-    <string name="cogTest_Pass_call_to_dentist">لقد أكملت المهمة الأولى؛ إليك واحدة أخرى. قائمة أرقام الهواتف معروضة، يرجى الاتصال بعيادة الأسنان.</string>
-    <string name="cogTest_Pass_call_to_dentist_second_part">رقم هاتف عيادة الأسنان معروض. يرجى الاتصال بعيادة الأسنان.</string>
+    <string name="cogTest_Pass_applications_screen">التطبيقات</string>
+    <string name="cogTest_Pass_contacts_screen">جهات الاتصال</string>
+    <string name="cogTest_Pass_contact_screen">جهة اتصال</string>
+    <string name="cogTest_Pass_dialer_screen">لوحة الاتصال</string>
+    <string name="cogTest_Pass_does_instructions_clear">هل كانت التعليمات واضحة؟</string>
+
+
+    <!-- PASS Test Instructions -->
+    <string name="cogTest_Pass_call_to_hana_cohen_instruction_pass">المهمة الأولى، يجب الاتصال بحنا كوهين</string>
+    <string name="cogTest_Pass_call_to_dentist">والآن للمهمة الثانية، يتم عرض قائمة أرقام الهواتف، يجب الاتصال بعيادة الأسنان.</string>
+    <string name="cogTest_Pass_call_to_dentist_second_part">يتم عرض رقم هاتف عيادة الأسنان أمامك. يرجى الاتصال بعيادة الأسنان</string>
     <string name="cogTest_Pass_the_app_you_entered">التطبيق الذي دخلت إليه:</string>
-    <string name="cogTest_Pass_what_you_need_to_do">ماذا عليك أن تفعل الآن؟</string>
+    <string name="cogTest_Pass_what_you_need_to_do">ما الذي يجب فعله؟</string>
     <string name="cogTest_Pass_press_the_dial_btn">اضغط على زر الاتصال</string>
     <string name="cogTest_Pass_dialer_opened">تم فتح لوحة الاتصال</string>
-
-    <string name="cogTest_Pass_apps_page_second_assist">ابحث عن قائمة جهات الاتصال في الهاتف</string>
-    <string name="cogTest_Pass_wrong_app_second_assist">يوجد زر الرجوع في الجزء العلوي الأيسر من الشاشة</string>
+    <string name="cogTest_Pass_apps_page_second_assist">يجب البحث عن قائمة جهات الاتصال في الهاتف</string>
+    <string name="cogTest_Pass_wrong_app_second_assist">يقع زر الرجوع في الجزء العلوي من الشاشة على الجانب الأيسر</string>
     <string name="cogTest_Pass_wrong_app_thired_assist">العودة إلى شاشة التطبيقات</string>
-    <string name="cogTest_Pass_contacts_page_first_assist">عن أي جهة اتصال تبحث؟</string>
-    <string name="cogTest_Pass_contacts_page_second_assist">ابحث عن هانا كوهين في جهات الاتصال</string>
-    <string name="cogTest_Pass_contacts_page_thired_assist">ابحث تحت الحرف H</string>
-    <string name="cogTest_Pass_contact_page_first_assist">اضغط على الرقم نفسه أو على زر الاتصال.</string>
-    <string name="cogTest_Pass_dialer_page_second_assist">ابحث عن رقم هاتف عيادة الأسنان</string>
-    <string name="cogTest_Pass_diale_to_dentist">اتصل برقم عيادة الأسنان</string>
-    <string name="cogTest_Pass_dialer_page_thired_assist">اضغط على زر الاتصال الموجود على الجانب الأيسر من الشاشة.</string>
-    <string name="cogTest_Pass_dialer_page_fourth_assist">اتصل بعيادة الأسنان.</string>
-
-    <string name="cogTest_Pass_dialer_page_wrong_action_one">لقد طلبت رقماً خاطئاً، يرجى الاتصال برقم عيادة الأسنان</string>
-    <string name="cogTest_Pass_dialer_page_invalid_number">لقد طلبت رقماً غير صالح، يرجى المحاولة مرة أخرى</string>
-    <string name="cogTest_Pass_dialer_page_dentis_number_appeared">رقم هاتف عيادة الأسنان معروض. يرجى الاتصال بالعيادة</string>
+    <string name="cogTest_Pass_contacts_page_first_assist">أي جهة اتصال تبحث عنها؟</string>
+    <string name="cogTest_Pass_contacts_page_second_assist">يجب البحث عن حنا كوهين في جهات الاتصال</string>
+    <string name="cogTest_Pass_contacts_page_thired_assist">يجب البحث تحت حرف ح</string>
+    <string name="cogTest_Pass_contact_page_first_assist">يجب الضغط على الرقم نفسه و/أو على زر الاتصال.</string>
+    <string name="cogTest_Pass_dialer_page_second_assist">يجب البحث عن رقم عيادة الأسنان</string>
+    <string name="cogTest_Pass_diale_to_dentist">يجب الاتصال برقم عيادة الأسنان</string>
+    <string name="cogTest_Pass_dialer_page_thired_assist">يجب الضغط على زر الاتصال الموجود على الجانب الأيسر من الشاشة</string>
+    <string name="cogTest_Pass_dialer_page_fourth_assist">يجب الاتصال بعيادة الأسنان.</string>
+    <string name="cogTest_Pass_dialer_page_wrong_action_one">تم الاتصال برقم خاطئ، يجب الاتصال برقم عيادة الأسنان مرة أخرى</string>
+    <string name="cogTest_Pass_dialer_page_invalid_number">تم الاتصال برقم غير صالح، يجب الاتصال بعيادة الأسنان</string>
+    <string name="cogTest_Pass_dialer_page_dentis_number_appeared">يتم عرض رقم هاتف عيادة الأسنان، يجب الاتصال بالعيادة</string>
     <string name="cogTest_Pass_you_moved_to_the_contacts_page">انتقلت إلى صفحة جهات الاتصال</string>
-    <string name="cogTest_Pass_here_persons_number">هنا رقم هانا كوهين، يرجى الاتصال بها</string>
-    <string name="cogTest_Pass_dialed_to_the_wrong_number">لقد طلبت رقماً خاطئاً، يرجى الاتصال برقم عيادة الأسنان.</string>
-    <string name="cogTest_Pass_the_mediation_will_close_in">سيتم إغلاق الوساطة خلال:</string>
-    <string name="cogTest_Pass_the_pass_test_about">تم إنشاء اختبار Pass ليستخدمه المعالجون</string>
-    <string name="cogTest_Pass_the_pass_test">بناءً على اختبار PASS</string>
+    <string name="cogTest_Pass_here_persons_number">سيتم فتح قائمة جهات الاتصال الآن</string>
+    <string name="cogTest_Pass_dialed_to_the_wrong_number">اتصلت برقم خاطئ، يرجى الاتصال برقم عيادة الأسنان.</string>
+    <string name="cogTest_Pass_the_mediation_will_close_in">سيتم إغلاق الوساطة تلقائياً خلال:</string>
+    <string name="cogTest_Pass_thanks_coffe">اكتملت المهمة، شكراً جزيلاً على تعاونك</string>
+
+    <!-- Phone Numbers -->
+    <string name="cogTest_Pass_dentist_pass">عيادة الأسنان: 052-258-1194</string>
+    <string name="cogTest_Pass_family_doctor_pass">طبيب العائلة: 054-228-6972</string>
+    <string name="cogTest_Pass_paint_clinic_pass">عيادة الألم: 050-333-1528</string>
+    <string name="cogTest_Pass_dermatologist_pass">طبيب الجلدية: 052-260-1048</string>
+    <string name="cogTest_Pass_orthopedist_pass">طبيب العظام: 053-128-8891</string>
+    <string name="cogTest_Pass_neurologist_pass">طبيب الأعصاب: 050-501-6390</string>
+    <string name="cogTest_Pass_ophthalmologist_pass">عيادة العيون: 052-246-7628</string>
+    <string name="cogTest_Pass_psychiatrist_pass">طبيب نفسي: 054-187-2399</string>
 
     <string-array name="cogTest_Pass_subtask_verbal_grade">
         <item>لا توجد حاجة للمساعدة لبدء المهمة أو المتابعة أو إكمالها</item>

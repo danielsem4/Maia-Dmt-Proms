@@ -7,6 +7,20 @@
     <string name="cogTest_Pass_quit">יציאה</string>
     <string name="cogTest_Pass_next">הבא</string>
 
+    <string name="cogTest_Pass_contacts">אנשי קשר</string>
+    <string name="cogTest_Pass_call">שיחה</string>
+    <string name="cogTest_Pass_settings">הגדרות</string>
+    <string name="cogTest_Pass_weather">מזג אוויר</string>
+    <string name="cogTest_Pass_store">חנות</string>
+    <string name="cogTest_Pass_calculator">מחשבון</string>
+    <string name="cogTest_Pass_camera">מצלמה</string>
+    <string name="cogTest_Pass_wallet">ארנק</string>
+    <string name="cogTest_Pass_email">אימייל</string>
+    <string name="cogTest_Pass_message">הודעה</string>
+    <string name="cogTest_Pass_clock">שעון</string>
+    <string name="cogTest_Pass_files">קבצים</string>
+
+
     <string-array name="cogTest_Pass_person_names">
         <item>אלינור סולומון</item>
         <item>אבנר גבני</item>
@@ -79,50 +93,58 @@
         <item>מיכל ברקוביץ\'</item>
     </string-array>
 
+
     <string name="cogTest_Pass_phone_number">052–538–1648</string>
-    <string name="cogTest_Pass_thanks_coffe">תודה רבה על שיתוף הפעולה</string>
     <string name="cogTest_Pass_fmpt" translatable="false">FMPT</string>
     <string name="cogTest_Pass_fmpt_meaning">מבחן טלפון נייד פונקציונלי (Functional Mobile Phone Test)</string>
+    <string name="cogTest_Pass_test">מבוסס על מבחן הPASS</string>
 
-    <string name="cogTest_Pass_dentist_pass">רופא שיניים: 052–258–1194</string>
-    <string name="cogTest_Pass_family_doctor_pass">רופא משפחה: 054–228–6972</string>
-    <string name="cogTest_Pass_paint_clinic_pass">מרפאת כאב: 050–333–1528</string>
-    <string name="cogTest_Pass_dermatologist_pass">רופא עור: 052–260–1048</string>
-    <string name="cogTest_Pass_orthopedist_pass">אורתופד: 053–128–8891</string>
-    <string name="cogTest_Pass_neurologist_pass">נוירולוג: 050–001–6390</string>
-    <string name="cogTest_Pass_ophthalmologist_pass">רופא עיניים: 052–246–7628</string>
-    <string name="cogTest_Pass_psychiatrist_pass">פסיכיאטר: 054–187–2399</string>
+    <string name="cogTest_Pass_applications_screen">יישומים</string>
+    <string name="cogTest_Pass_contacts_screen">אנשי קשר</string>
+    <string name="cogTest_Pass_contact_screen">איש קשר</string>
+    <string name="cogTest_Pass_dialer_screen">חייגן</string>
+    <string name="cogTest_Pass_does_instructions_clear">האם ההוראה הייתה מובנת?</string>
+    <string name="cogTest_Pass_yes">כן</string>
+    <string name="cogTest_Pass_no">לא</string>
 
-    <string name="cogTest_Pass_first_mission_pass">יש לך משימה טלפונית, עליך להתקשר לחנה כהן</string>
+
+    <!-- PASS Test Instructions -->
     <string name="cogTest_Pass_call_to_hana_cohen_instruction_pass">משימה ראשונה, יש להתקשר לחנה כהן</string>
-    <string name="cogTest_Pass_call_to_dentist">סיימת את המשימה הראשונה; הנה משימה נוספת. רשימת מספרי טלפון מוצגת, נא להתקשר למרפאת השיניים.</string>
-    <string name="cogTest_Pass_call_to_dentist_second_part">מספר הטלפון של מרפאת השיניים מוצג. נא להתקשר למרפאת השיניים.</string>
+    <string name="cogTest_Pass_call_to_dentist">ועכשיו למשימה השנייה, מוצגת רשימת מספרי טלפון, יש להתקשר למרפאת השיניים.</string>
+    <string name="cogTest_Pass_call_to_dentist_second_part">מוצג לפניך מספר הטלפון של מרפאת השיניים. אנא חייג למרפאת שיניים</string>
     <string name="cogTest_Pass_the_app_you_entered">האפליקציה שנכנסת אליה:</string>
-    <string name="cogTest_Pass_what_you_need_to_do">מה עליך לעשות עכשיו?</string>
+    <string name="cogTest_Pass_what_you_need_to_do">מה יש לעשות?</string>
     <string name="cogTest_Pass_press_the_dial_btn">לחץ על כפתור החיוג</string>
-    <string name="cogTest_Pass_dialer_opened">החייגן נפתח</string>
+    <string name="cogTest_Pass_dialer_opened">נפתח החייגן</string>
+    <string name="cogTest_Pass_apps_page_second_assist">יש לחפש את רשימת אנשי הקשר בפלאפון</string>
+    <string name="cogTest_Pass_wrong_app_second_assist">כפתור החזרה ממוקם בחלק העליון של המסך בצד שמאל</string>
+    <string name="cogTest_Pass_wrong_app_thired_assist">חוזרים למסך האפליקציות</string>
+    <string name="cogTest_Pass_contacts_page_first_assist">איזה איש קשר מחפשים?</string>
+    <string name="cogTest_Pass_contacts_page_second_assist">יש לחפש את חנה כהן באנשי הקשר</string>
+    <string name="cogTest_Pass_contacts_page_thired_assist">יש לחפש באות ח</string>
+    <string name="cogTest_Pass_contact_page_first_assist">יש ללחוץ על המספר עצמו ו/או על כפתור החיוג.</string>
+    <string name="cogTest_Pass_dialer_page_second_assist">יש לחפש את המספר של מרפאת השיניים</string>
+    <string name="cogTest_Pass_diale_to_dentist">יש לחייג את המספר של מרפאת השיניים</string>
+    <string name="cogTest_Pass_dialer_page_thired_assist">יש ללחוץ על כפתור החיוג שנמצא בצד שמאל של המסך</string>
+    <string name="cogTest_Pass_dialer_page_fourth_assist">יש חייג למרפאת השיניים.</string>
+    <string name="cogTest_Pass_dialer_page_wrong_action_one">חיוג מספר לא נכון, יש לחייג שוב למספר של מרפאת השיניים</string>
+    <string name="cogTest_Pass_dialer_page_invalid_number">חויג מספר לא תקין, יש לחייג למרפאת השיניים</string>
+    <string name="cogTest_Pass_dialer_page_dentis_number_appeared">מוצג מספר הטלפון של מרפאת השיניים, יש לחייג למרפאה</string>
+    <string name="cogTest_Pass_you_moved_to_the_contacts_page">עבר לעמוד אנשי הקשר</string>
+    <string name="cogTest_Pass_here_persons_number">כעת רשימת אנשי הקשר תפתח</string>
+    <string name="cogTest_Pass_dialed_to_the_wrong_number">חייגת מספר לא נכון אנא חייג למספר של מרפאת השיניים.</string>
+    <string name="cogTest_Pass_the_mediation_will_close_in">התיווך יסגר לבד בעוד:</string>
+    <string name="cogTest_Pass_thanks_coffe">המשימה הסתיימה, תודה רבה על שיתוף הפעולה</string>
 
-    <string name="cogTest_Pass_apps_page_second_assist">חפש את רשימת אנשי הקשר בטלפון</string>
-    <string name="cogTest_Pass_wrong_app_second_assist">כפתור החזרה נמצא בפינה השמאלית העליונה של המסך</string>
-    <string name="cogTest_Pass_wrong_app_thired_assist">חזרה למסך האפליקציות</string>
-    <string name="cogTest_Pass_contacts_page_first_assist">את מי אתה מחפש באנשי הקשר?</string>
-    <string name="cogTest_Pass_contacts_page_second_assist">חפש את חנה כהן באנשי הקשר</string>
-    <string name="cogTest_Pass_contacts_page_thired_assist">חפש תחת האות ח\'</string>
-    <string name="cogTest_Pass_contact_page_first_assist">לחץ על המספר עצמו או על כפתור החיוג.</string>
-    <string name="cogTest_Pass_dialer_page_second_assist">חפש את מספר הטלפון של מרפאת השיניים</string>
-    <string name="cogTest_Pass_diale_to_dentist">חייג את המספר של מרפאת השיניים</string>
-    <string name="cogTest_Pass_dialer_page_thired_assist">לחץ על כפתור החייגן המוצג בצד שמאל של המסך.</string>
-    <string name="cogTest_Pass_dialer_page_fourth_assist">התקשר למרפאת השיניים.</string>
-
-    <string name="cogTest_Pass_dialer_page_wrong_action_one">חייגת מספר שגוי, נא לחייג את מספר מרפאת השיניים</string>
-    <string name="cogTest_Pass_dialer_page_invalid_number">חייגת מספר לא חוקי, נא לנסות שוב</string>
-    <string name="cogTest_Pass_dialer_page_dentis_number_appeared">מספר הטלפון של מרפאת השיניים מוצג. נא להתקשר למרפאה</string>
-    <string name="cogTest_Pass_you_moved_to_the_contacts_page">הועברת לדף אנשי הקשר</string>
-    <string name="cogTest_Pass_here_persons_number">הנה המספר של חנה כהן, נא להתקשר אליה</string>
-    <string name="cogTest_Pass_dialed_to_the_wrong_number">חייגת מספר שגוי, נא לחייג את מספר מרפאת השיניים.</string>
-    <string name="cogTest_Pass_the_mediation_will_close_in">הגישור ייסגר בעוד:</string>
-    <string name="cogTest_Pass_the_pass_test_about">מבחן ה-Pass נועד לשימוש על ידי מטפלים</string>
-    <string name="cogTest_Pass_the_pass_test">מבוסס על מבחן PASS</string>
+    <!-- Phone Numbers -->
+    <string name="cogTest_Pass_dentist_pass">מרפאת שיניים: 052-258-1194</string>
+    <string name="cogTest_Pass_family_doctor_pass">רופא משפחה: 054-228-6972</string>
+    <string name="cogTest_Pass_paint_clinic_pass">מרפאת כאב: 050-333-1528</string>
+    <string name="cogTest_Pass_dermatologist_pass">רופא עור: 052-260-1048</string>
+    <string name="cogTest_Pass_orthopedist_pass">אורתופד: 053-128-8891</string>
+    <string name="cogTest_Pass_neurologist_pass">נוירולוג: 050-501-6390</string>
+    <string name="cogTest_Pass_ophthalmologist_pass">מרפאת עיניים: 052-246-7628</string>
+    <string name="cogTest_Pass_psychiatrist_pass">פסיכיאטר: 054-187-2399</string>
 
     <string-array name="cogTest_Pass_subtask_verbal_grade">
         <item>לא נדרש סיוע כדי להתחיל את המשימה, להמשיך או להשלים אותה</item>

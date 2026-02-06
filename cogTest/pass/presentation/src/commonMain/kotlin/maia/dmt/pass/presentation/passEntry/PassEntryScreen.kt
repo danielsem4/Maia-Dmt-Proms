@@ -26,7 +26,7 @@ import dmtproms.cogtest.pass.presentation.generated.resources.cogTest_Pass_fmpt
 import dmtproms.cogtest.pass.presentation.generated.resources.cogTest_Pass_fmpt_meaning
 import dmtproms.cogtest.pass.presentation.generated.resources.cogTest_Pass_intro_text
 import dmtproms.cogtest.pass.presentation.generated.resources.cogTest_Pass_start
-import dmtproms.cogtest.pass.presentation.generated.resources.cogTest_Pass_the_pass_test
+import dmtproms.cogtest.pass.presentation.generated.resources.cogTest_Pass_test
 import dmtproms.cogtest.pass.presentation.generated.resources.herzfald_logo
 import dmtproms.cogtest.pass.presentation.generated.resources.hit_logo
 import dmtproms.cogtest.pass.presentation.generated.resources.ono_logo
@@ -112,7 +112,7 @@ fun PassEntryScreen(
                     textSize = MaterialTheme.typography.titleLarge
                 )
                 Text(
-                    text = stringResource(Res.string.cogTest_Pass_the_pass_test),
+                    text = stringResource(Res.string.cogTest_Pass_test),
                     style = MaterialTheme.typography.labelSmall,
                 )
                 Spacer(modifier = Modifier.weight(1f))

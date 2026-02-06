@@ -29,7 +29,7 @@ import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toLocalDateTime
 import maia.dmt.activities.presentation.components.DmtActivitiesSection
 import maia.dmt.core.designsystem.components.buttons.DmtButtonStyle
-import maia.dmt.core.designsystem.components.dialogs.DmtCustomDialog
+import maia.dmt.core.designsystem.components.dialogs.DmtActionDialog
 import maia.dmt.core.designsystem.components.dialogs.DmtDatePickerDialog
 import maia.dmt.core.designsystem.components.dialogs.time.DmtWheelTimePicker
 import maia.dmt.core.designsystem.components.layouts.DmtBaseScreen
@@ -132,7 +132,7 @@ fun ActivitiesScreen(
         val dateString = getCurrentDate(localDateTime)
         val timeString = getCurrentTime(localDateTime)
 
-        DmtCustomDialog(
+        DmtActionDialog(
             title = state.selectedActivity?.text ?: "",
             icon = state.selectedActivity!!.icon,
             description = "${stringResource(Res.string.activities_dialog_body)}\n${

@@ -99,6 +99,7 @@
     <string name="cogTest_Pass_yes">Да</string>
     <string name="cogTest_Pass_no">Нет</string>
     <string name="cogTest_Pass_test">Основано на тесте PASS</string>
+    <string name="cogTest_Pass_search">Поиск</string>
 
 
     <string name="cogTest_Pass_applications_screen">Приложения</string>

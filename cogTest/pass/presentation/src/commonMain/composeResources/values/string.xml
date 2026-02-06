@@ -24,6 +24,7 @@
     <string name="cogTest_Pass_contacts_screen">Contacts</string>
     <string name="cogTest_Pass_contact_screen">Contact</string>
     <string name="cogTest_Pass_dialer_screen">Dialer</string>
+    <string name="cogTest_Pass_search">Search</string>
 
     <string name="cogTest_Pass_does_instructions_clear">Were the instructions clear?</string>
     <string name="cogTest_Pass_yes">Yes</string>

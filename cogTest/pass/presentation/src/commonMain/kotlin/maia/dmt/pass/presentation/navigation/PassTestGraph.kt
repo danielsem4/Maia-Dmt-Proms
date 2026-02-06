@@ -6,6 +6,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navigation
 import maia.dmt.pass.presentation.passApps.PassApplicationsRoot
 import maia.dmt.pass.presentation.passApps.PassApplicationsScreen
+import maia.dmt.pass.presentation.passContacts.PassContactsRoot
 import maia.dmt.pass.presentation.passEntry.PassEntryRoot
 
 fun NavGraphBuilder.passTestGraph(
@@ -23,9 +24,15 @@ fun NavGraphBuilder.passTestGraph(
 
         composable<PassTestGraphRoutes.PassEntryApplications> {
             PassApplicationsRoot(
-                onNavigateToNext = { },
-                onNavigateToContacts = { },
+                onNavigateToNext = { navController.navigate(PassTestGraphRoutes.PassContacts) },
+                onNavigateToContacts = { navController.navigate(PassTestGraphRoutes.PassContacts) },
                 onNavigateToCall = { }
+            )
+        }
+
+        composable<PassTestGraphRoutes.PassContacts> {
+            PassContactsRoot(
+                onNavigateToNext = {  }
             )
         }
     }

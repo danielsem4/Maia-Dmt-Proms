@@ -19,6 +19,8 @@
     <string name="cogTest_Pass_message">הודעה</string>
     <string name="cogTest_Pass_clock">שעון</string>
     <string name="cogTest_Pass_files">קבצים</string>
+    <string name="cogTest_Pass_search">חיפוש</string>
+
 
 
     <string-array name="cogTest_Pass_person_names">

@@ -106,6 +106,7 @@
     <string name="cogTest_Pass_contact_screen">جهة اتصال</string>
     <string name="cogTest_Pass_dialer_screen">لوحة الاتصال</string>
     <string name="cogTest_Pass_does_instructions_clear">هل كانت التعليمات واضحة؟</string>
+    <string name="cogTest_Pass_search">بحث</string>
 
 
     <!-- PASS Test Instructions -->

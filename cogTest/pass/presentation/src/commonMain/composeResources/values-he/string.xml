@@ -137,6 +137,10 @@
     <string name="cogTest_Pass_the_mediation_will_close_in">התיווך יסגר לבד בעוד:</string>
     <string name="cogTest_Pass_thanks_coffe">המשימה הסתיימה, תודה רבה על שיתוף הפעולה</string>
 
+    <string name="cogTest_Pass_wrong_app">אפליקציה שגויה</string>
+    <string name="cogTest_Pass_wrong_app_instruction">נכנסת לאפליקציה שגויה, אנא חזור למסך האפליקציות ולחץ על אפליקציית אנשי הקשר או הטלפון</string>
+
+
     <!-- Phone Numbers -->
     <string name="cogTest_Pass_dentist_pass">מרפאת שיניים: 052-258-1194</string>
     <string name="cogTest_Pass_family_doctor_pass">רופא משפחה: 054-228-6972</string>

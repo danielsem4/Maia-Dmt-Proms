@@ -108,6 +108,9 @@
     <string name="cogTest_Pass_does_instructions_clear">هل كانت التعليمات واضحة؟</string>
     <string name="cogTest_Pass_search">بحث</string>
 
+    <string name="cogTest_Pass_wrong_app">تطبيق خاطئ</string>
+    <string name="cogTest_Pass_wrong_app_instruction">لقد دخلت إلى تطبيق خاطئ، يرجى العودة إلى شاشة التطبيقات والضغط على تطبيق جهات الاتصال أو الهاتف</string>
+
 
     <!-- PASS Test Instructions -->
     <string name="cogTest_Pass_call_to_hana_cohen_instruction_pass">المهمة الأولى، يجب الاتصال بحنا كوهين</string>

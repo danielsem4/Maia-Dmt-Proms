@@ -9,8 +9,12 @@ import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import maia.dmt.pass.domain.model.ApplicationsScreenResult
+import maia.dmt.pass.presentation.session.PassSessionManager
 
-class PassApplicationsViewModel : ViewModel() {
+class PassApplicationsViewModel(
+    private val sessionManager: PassSessionManager
+) : ViewModel() {
 
     private val _state = MutableStateFlow(PassApplicationsState())
     val state = _state.stateIn(
@@ -21,6 +25,28 @@ class PassApplicationsViewModel : ViewModel() {
 
     private val _events = Channel<PassApplicationsEvent>()
     val events = _events.receiveAsFlow()
+
+    init {
+        restoreSessionState()
+    }
+
+    private fun restoreSessionState() {
+        val snapshot = sessionManager.getAppsSnapshot()
+
+        if (snapshot.wrongAppPressCount > 0 || snapshot.inactivityCount > 0 || snapshot.appsPressed.isNotEmpty()) {
+            _state.update {
+                it.copy(
+                    wrongAppPressCount = snapshot.wrongAppPressCount,
+                    inactiveCount = snapshot.inactivityCount,
+                    appsPressed = snapshot.appsPressed,
+                    showInstructionDialog = false,
+                    showConfirmationDialog = false,
+                    isRetryMode = false,
+                    isTestActive = true
+                )
+            }
+        }
+    }
 
     fun onAction(action: PassApplicationsAction) {
         when (action) {
@@ -43,7 +69,12 @@ class PassApplicationsViewModel : ViewModel() {
                 }
             }
             PassApplicationsAction.OnConfirmationYes -> {
-                _state.update { it.copy(showConfirmationDialog = false, isTestActive = true) }
+                _state.update {
+                    it.copy(
+                        showConfirmationDialog = false,
+                        isTestActive = true
+                    )
+                }
             }
             PassApplicationsAction.OnConfirmationNo -> {
                 _state.update {
@@ -61,7 +92,7 @@ class PassApplicationsViewModel : ViewModel() {
             PassApplicationsAction.OnTimeoutDialogDismiss -> {
                 if (_state.value.inactiveCount >= 3) {
                     _state.update { it.copy(showTimeoutDialog = false) }
-                    sendEvent(PassApplicationsEvent.NavigateToNextScreen)
+                    saveResultsAndNavigate(PassApplicationsEvent.NavigateToContacts)
                 } else {
                     _state.update { it.copy(showTimeoutDialog = false) }
                 }
@@ -73,14 +104,28 @@ class PassApplicationsViewModel : ViewModel() {
         if (!_state.value.isTestActive || _state.value.showTimeoutDialog) return
 
         when (appType) {
-            AppType.CONTACTS -> sendEvent(PassApplicationsEvent.NavigateToContacts)
-            AppType.CALL -> sendEvent(PassApplicationsEvent.NavigateToCall)
+            // Success Cases
+            AppType.CONTACTS -> saveResultsAndNavigate(PassApplicationsEvent.NavigateToContacts)
+            AppType.CALL -> saveResultsAndNavigate(PassApplicationsEvent.NavigateToCall)
+
+            // Wrong App Case
             else -> {
+                val currentList = _state.value.appsPressed.toMutableList()
+                currentList.add(appType.name)
+
                 val newCount = _state.value.wrongAppPressCount + 1
+
+                _state.update {
+                    it.copy(
+                        appsPressed = currentList,
+                        wrongAppPressCount = newCount
+                    )
+                }
+
                 if (newCount >= 3) {
-                    sendEvent(PassApplicationsEvent.NavigateToNextScreen)
+                    saveResultsAndNavigate(PassApplicationsEvent.NavigateToContacts)
                 } else {
-                    _state.update { it.copy(wrongAppPressCount = newCount) }
+                    saveSnapshotAndNavigateToWrongApp()
                 }
             }
         }
@@ -90,7 +135,6 @@ class PassApplicationsViewModel : ViewModel() {
         if (!_state.value.isTestActive) return
 
         val newCount = _state.value.inactiveCount + 1
-
         _state.update {
             it.copy(
                 inactiveCount = newCount,
@@ -99,7 +143,36 @@ class PassApplicationsViewModel : ViewModel() {
         }
     }
 
-    private fun sendEvent(event: PassApplicationsEvent) {
+    /**
+     * Saves the current state as a "Snapshot" so we can restore it when
+     * the user returns from the WrongAppScreen.
+     */
+    private fun saveSnapshotAndNavigateToWrongApp() {
+        val currentState = _state.value
+
+        sessionManager.saveAppsSnapshot(
+            ApplicationsScreenResult(
+                inactivityCount = currentState.inactiveCount,
+                wrongAppPressCount = currentState.wrongAppPressCount,
+                appsPressed = currentState.appsPressed
+            )
+        )
+
+        viewModelScope.launch {
+            _events.send(PassApplicationsEvent.NavigateToWrongApp)
+        }
+    }
+
+
+    private fun saveResultsAndNavigate(event: PassApplicationsEvent) {
+        val currentState = _state.value
+
+        sessionManager.saveApplicationsScreenResult(
+            inactivityCount = currentState.inactiveCount,
+            wrongAppPressCount = currentState.wrongAppPressCount,
+            appsPressed = currentState.appsPressed
+        )
+
         viewModelScope.launch {
             _events.send(event)
         }

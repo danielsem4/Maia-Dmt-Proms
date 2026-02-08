@@ -6,11 +6,11 @@ data class PassApplicationsState(
     val showConfirmationDialog: Boolean = false,
     val isRetryMode: Boolean = false,
 
-
     val isTestActive: Boolean = false,
 
-    
     val inactiveCount: Int = 0,
     val wrongAppPressCount: Int = 0,
-    val showTimeoutDialog: Boolean = false
+    val showTimeoutDialog: Boolean = false,
+
+    val appsPressed: List<String> = emptyList(),
 )

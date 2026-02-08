@@ -109,6 +109,8 @@
     <string name="cogTest_Pass_yes">כן</string>
     <string name="cogTest_Pass_no">לא</string>
 
+    <string name="cogTest_Pass_wrong_app">אפליקציה שגויה</string>
+    <string name="cogTest_Pass_wrong_app_instruction">נכנסת לאפליקציה שגויה, אנא חזור למסך האפליקציות ולחץ על אפליקציית אנשי הקשר או הטלפון</string>
 
 
     <!-- PASS Test Instructions -->

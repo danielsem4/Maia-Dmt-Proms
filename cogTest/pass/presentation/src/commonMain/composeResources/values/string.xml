@@ -135,6 +135,9 @@
     <string name="cogTest_Pass_the_mediation_will_close_in">The mediation will close automatically in:</string>
     <string name="cogTest_Pass_thanks_coffe">The task is complete, thank you very much for your cooperation</string>
 
+    <string name="cogTest_Pass_wrong_app">Wrong App</string>
+    <string name="cogTest_Pass_wrong_app_instruction">You have entered to wrong app, please go back to the apps screen and press the contacts or phone app</string>
+
     <!-- Phone Numbers -->
     <string name="cogTest_Pass_dentist_pass">Dental Clinic: 052-258-1194</string>
     <string name="cogTest_Pass_family_doctor_pass">Family Doctor: 054-228-6972</string>

@@ -1,6 +1,7 @@
 package maia.dmt.pass.presentation.di
 
 import maia.dmt.pass.presentation.passApps.PassApplicationsViewModel
+import maia.dmt.pass.presentation.passContact.PassContactViewModel
 import maia.dmt.pass.presentation.passContacts.PassContactsViewModel
 import maia.dmt.pass.presentation.passEntry.PassEntryViewModel
 import maia.dmt.pass.presentation.passWrongApp.PassWrongAppViewModel
@@ -13,6 +14,7 @@ val passPresentationModule = module {
     viewModelOf(::PassApplicationsViewModel)
     viewModelOf(::PassContactsViewModel)
     viewModelOf(::PassWrongAppViewModel)
+    viewModelOf(::PassContactViewModel)
 
     single { PassSessionManager() }
 }

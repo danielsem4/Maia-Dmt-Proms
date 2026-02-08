@@ -20,6 +20,10 @@
     <string name="cogTest_Pass_clock">שעון</string>
     <string name="cogTest_Pass_files">קבצים</string>
     <string name="cogTest_Pass_search">חיפוש</string>
+    <string name="cogTest_Pass_video">וידאו</string>
+    <string name="cogTest_Pass_whatsapp">וואטסאפ</string>
+    <string name="cogTest_Pass_contact_info">פרטי קשר</string>
+
 
 
 

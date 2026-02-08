@@ -25,6 +25,9 @@
     <string name="cogTest_Pass_contact_screen">Contact</string>
     <string name="cogTest_Pass_dialer_screen">Dialer</string>
     <string name="cogTest_Pass_search">Search</string>
+    <string name="cogTest_Pass_video">Video</string>
+    <string name="cogTest_Pass_whatsapp">Whatsapp</string>
+    <string name="cogTest_Pass_contact_info">Contact Info</string>
 
     <string name="cogTest_Pass_does_instructions_clear">Were the instructions clear?</string>
     <string name="cogTest_Pass_yes">Yes</string>
@@ -138,7 +141,6 @@
     <string name="cogTest_Pass_wrong_app">Wrong App</string>
     <string name="cogTest_Pass_wrong_app_instruction">You have entered to wrong app, please go back to the apps screen and press the contacts or phone app</string>
 
-    <!-- Phone Numbers -->
     <string name="cogTest_Pass_dentist_pass">Dental Clinic: 052-258-1194</string>
     <string name="cogTest_Pass_family_doctor_pass">Family Doctor: 054-228-6972</string>
     <string name="cogTest_Pass_paint_clinic_pass">Pain Clinic: 050-333-1528</string>

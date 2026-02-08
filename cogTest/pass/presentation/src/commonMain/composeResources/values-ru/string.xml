@@ -19,6 +19,10 @@
     <string name="cogTest_Pass_message">Сообщение</string>
     <string name="cogTest_Pass_clock">Часы</string>
     <string name="cogTest_Pass_files">Файлы</string>
+    <string name="cogTest_Pass_video">Видео</string>
+    <string name="cogTest_Pass_whatsapp">WhatsApp</string>
+    <string name="cogTest_Pass_contact_info">Контактная информация</string>
+
 
 
     <string-array name="cogTest_Pass_person_names">

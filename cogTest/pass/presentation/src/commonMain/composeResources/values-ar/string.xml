@@ -19,6 +19,10 @@
     <string name="cogTest_Pass_message">رسالة</string>
     <string name="cogTest_Pass_clock">الساعة</string>
     <string name="cogTest_Pass_files">الملفات</string>
+    <string name="cogTest_Pass_video">فيديو</string>
+    <string name="cogTest_Pass_whatsapp">واتساب</string>
+    <string name="cogTest_Pass_contact_info">معلومات الاتصال</string>
+
 
 
     <string-array name="cogTest_Pass_person_names">

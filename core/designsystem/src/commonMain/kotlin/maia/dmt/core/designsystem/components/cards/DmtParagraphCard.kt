@@ -27,7 +27,8 @@ fun DmtParagraphCard(
     text: String = "",
     isLoading: Boolean = false,
     style: DmtCardStyle = DmtCardStyle.ELEVATED,
-    textSize: TextStyle = MaterialTheme.typography.titleMedium
+    textSize: TextStyle = MaterialTheme.typography.titleMedium,
+    content: (@Composable () -> Unit)? = null
 ) {
     val colors = when(style) {
         DmtCardStyle.PRIMARY -> CardDefaults.cardColors(
@@ -85,23 +86,28 @@ fun DmtParagraphCard(
             CircularProgressIndicator(
                 modifier = Modifier
                     .size(24.dp)
-                    .alpha(
-                        alpha = if(isLoading) 1f else 0f
-                    ),
+                    .alpha(if(isLoading) 1f else 0f),
                 strokeWidth = 2.dp,
                 color = MaterialTheme.colorScheme.onSurface
             )
 
-            Text(
-                text = text,
-                style = textSize,
-                textAlign = TextAlign.Center,
+            Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .alpha(
-                        alpha = if(isLoading) 0f else 1f
+                    .alpha(if(isLoading) 0f else 1f),
+                contentAlignment = Alignment.Center
+            ) {
+                if (content != null) {
+                    content()
+                } else {
+                    Text(
+                        text = text,
+                        style = textSize,
+                        textAlign = TextAlign.Center,
+                        modifier = Modifier.fillMaxWidth()
                     )
-            )
+                }
+            }
         }
     }
 }
@@ -111,29 +117,17 @@ fun DmtParagraphCard(
 fun DmtParagraphCardPreview() {
     DmtTheme(darkTheme = true) {
         DmtParagraphCard(
-            text = "This is a paragraph card with centered text. It can contain multiple lines of text that will wrap naturally and remain centered."
+            text = "This is a paragraph card with centered text."
         )
     }
 }
 
 @Composable
 @Preview
-fun DmtParagraphCardLoadingPreview() {
-    DmtTheme(darkTheme = true) {
-        DmtParagraphCard(
-            text = "Loading...",
-            isLoading = true
-        )
-    }
-}
-
-@Composable
-@Preview
-fun DmtParagraphCardPrimaryPreview() {
+fun DmtParagraphCardCustomContentPreview() {
     DmtTheme(darkTheme = false) {
-        DmtParagraphCard(
-            text = "This is a primary style paragraph card with centered text.",
-            style = DmtCardStyle.PRIMARY
-        )
+        DmtParagraphCard {
+            Text("I am custom content passed as a lambda!")
+        }
     }
 }

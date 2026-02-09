@@ -1,4 +1,5 @@
 package maia.dmt.pass.presentation.passDialer
 
-interface PassDialerEvent {
+sealed interface PassDialerEvent {
+    data object NavigateToNext : PassDialerEvent
 }

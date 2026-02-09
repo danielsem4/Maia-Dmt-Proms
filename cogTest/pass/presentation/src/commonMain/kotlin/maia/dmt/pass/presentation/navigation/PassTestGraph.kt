@@ -58,7 +58,9 @@ fun NavGraphBuilder.passTestGraph(
         }
 
         composable<PassTestGraphRoutes.PassDialer> {
-            PassDialerRoot()
+            PassDialerRoot(
+                onNavigateToNext = { navController.navigate(PassTestGraphRoutes.PassEnd) }
+            )
         }
 
         composable<PassTestGraphRoutes.PassEnd> {

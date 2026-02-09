@@ -4,12 +4,12 @@ import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
-import maia.dmt.core.domain.validation.PasswordValidator
 import maia.dmt.pass.presentation.passApps.PassApplicationsRoot
-import maia.dmt.pass.presentation.passApps.PassApplicationsScreen
 import maia.dmt.pass.presentation.passContact.PassContactRoot
 import maia.dmt.pass.presentation.passContacts.PassContactsRoot
+import maia.dmt.pass.presentation.passDialer.PassDialerRoot
 import maia.dmt.pass.presentation.passEntry.PassEntryRoot
+import maia.dmt.pass.presentation.passFirstMissionDone.PassFirstMissionDoneRoot
 import maia.dmt.pass.presentation.passWrongApp.PassWrongAppRoot
 
 fun NavGraphBuilder.passTestGraph(
@@ -47,8 +47,22 @@ fun NavGraphBuilder.passTestGraph(
 
         composable<PassTestGraphRoutes.PassContact> {
             PassContactRoot(
-                onNavigateToNext = {  }
+                onNavigateToNext = { navController.navigate(PassTestGraphRoutes.PassFirstMissionDone) }
             )
+        }
+
+        composable<PassTestGraphRoutes.PassFirstMissionDone> {
+            PassFirstMissionDoneRoot(
+                onNavigateToNext = { navController.navigate(PassTestGraphRoutes.PassDialer) }
+            )
+        }
+
+        composable<PassTestGraphRoutes.PassDialer> {
+            PassDialerRoot()
+        }
+
+        composable<PassTestGraphRoutes.PassEnd> {
+
         }
 
     }

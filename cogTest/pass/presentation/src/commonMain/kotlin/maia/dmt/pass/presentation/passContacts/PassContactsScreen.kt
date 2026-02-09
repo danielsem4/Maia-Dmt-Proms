@@ -154,11 +154,12 @@ fun PassContactsScreen(
     val allContacts = stringArrayResource(Res.array.cogTest_Pass_person_names)
 
     val filteredContacts = remember(state.searchQuery, allContacts) {
-        if (state.searchQuery.isEmpty()) {
+        val list = if (state.searchQuery.isEmpty()) {
             allContacts
         } else {
             allContacts.filter { it.contains(state.searchQuery, ignoreCase = true) }
         }
+        list.sorted()
     }
 
     DmtBaseScreen(

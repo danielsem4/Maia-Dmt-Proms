@@ -24,6 +24,9 @@ interface PassTestGraphRoutes {
     data object PassContact : PassTestGraphRoutes
 
     @Serializable
+    data object PassFirstMissionDone: PassTestGraphRoutes
+
+    @Serializable
     data object PassDialer : PassTestGraphRoutes
 
     @Serializable

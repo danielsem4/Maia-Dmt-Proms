@@ -294,7 +294,7 @@ fun PassContactScreen(
                                     indication = null
                                 ) { onAction(PassContactAction.OnWrongPress("WhatsApp")) },
                             verticalAlignment = Alignment.CenterVertically,
-                            horizontalArrangement = Arrangement.End // Align to end for consistent look
+                            horizontalArrangement = Arrangement.End
                         ) {
                             Text(
                                 text = stringResource(Res.string.cogTest_Pass_whatsapp),

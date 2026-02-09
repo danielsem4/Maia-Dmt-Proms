@@ -19,6 +19,11 @@
     <string name="cogTest_Pass_message">رسالة</string>
     <string name="cogTest_Pass_clock">الساعة</string>
     <string name="cogTest_Pass_files">الملفات</string>
+    <string name="cogTest_Pass_video">فيديو</string>
+    <string name="cogTest_Pass_whatsapp">واتساب</string>
+    <string name="cogTest_Pass_contact_info">معلومات الاتصال</string>
+
+    <string name="cogTest_Pass_finished_first_part">لقد أنهيت الجزء الأول، والآن سننتقل إلى المرحلة التالية.</string>
 
 
     <string-array name="cogTest_Pass_person_names">
@@ -107,6 +112,9 @@
     <string name="cogTest_Pass_dialer_screen">لوحة الاتصال</string>
     <string name="cogTest_Pass_does_instructions_clear">هل كانت التعليمات واضحة؟</string>
     <string name="cogTest_Pass_search">بحث</string>
+
+    <string name="cogTest_Pass_wrong_app">تطبيق خاطئ</string>
+    <string name="cogTest_Pass_wrong_app_instruction">لقد دخلت إلى تطبيق خاطئ، يرجى العودة إلى شاشة التطبيقات والضغط على تطبيق جهات الاتصال أو الهاتف</string>
 
 
     <!-- PASS Test Instructions -->

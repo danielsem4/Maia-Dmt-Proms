@@ -81,7 +81,7 @@ fun AppIconItemPreview() {
                  type = AppType.CALL,
                  nameRes = Res.string.cogTest_Pass_call,
                  iconRes = Res.drawable.pass_phone,
-                 color = Color(0xFF26A69A) // Teal
+                 color = Color(0xFF26A69A)
              ),
              onClick = {}
          )

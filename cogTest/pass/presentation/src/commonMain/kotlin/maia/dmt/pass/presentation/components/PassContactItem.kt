@@ -19,6 +19,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
@@ -59,17 +60,17 @@ fun PassContactItem(
         DeviceConfiguration.TABLET_PORTRAIT -> ContactItemSizing(
             horizontalPadding = 16.dp,
             verticalPadding = 14.dp,
-            circleSize = 60.dp,
+            circleSize = 80.dp,
             cornerRadius = 12.dp,
-            nameStyle = MaterialTheme.typography.titleMedium,
+            nameStyle = MaterialTheme.typography.headlineMedium,
             initialStyle = MaterialTheme.typography.headlineMedium
         )
         DeviceConfiguration.TABLET_LANDSCAPE -> ContactItemSizing(
             horizontalPadding = 18.dp,
             verticalPadding = 16.dp,
-            circleSize = 70.dp,
+            circleSize = 90.dp,
             cornerRadius = 14.dp,
-            nameStyle = MaterialTheme.typography.titleLarge,
+            nameStyle = MaterialTheme.typography.headlineMedium,
             initialStyle = MaterialTheme.typography.headlineMedium
         )
         DeviceConfiguration.DESKTOP -> ContactItemSizing(
@@ -118,7 +119,8 @@ fun PassContactItem(
             modifier = Modifier.padding(start = 12.dp),
             text = name,
             style = sizing.nameStyle,
-            color = MaterialTheme.colorScheme.extended.textPrimary
+            color = MaterialTheme.colorScheme.extended.textPrimary,
+            fontWeight = FontWeight.Bold
         )
     }
 }

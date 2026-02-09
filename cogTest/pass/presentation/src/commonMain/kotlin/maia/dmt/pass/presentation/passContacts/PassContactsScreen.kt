@@ -35,10 +35,12 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import dmtproms.cogtest.pass.presentation.generated.resources.Res
+import dmtproms.cogtest.pass.presentation.generated.resources.cogTest_Pass_contacts
 import dmtproms.cogtest.pass.presentation.generated.resources.cogTest_Pass_contacts_page_first_assist
 import dmtproms.cogtest.pass.presentation.generated.resources.cogTest_Pass_contacts_page_second_assist
 import dmtproms.cogtest.pass.presentation.generated.resources.cogTest_Pass_contacts_page_thired_assist
 import dmtproms.cogtest.pass.presentation.generated.resources.cogTest_Pass_person_names
+import dmtproms.cogtest.pass.presentation.generated.resources.cogTest_Pass_search
 import dmtproms.cogtest.pass.presentation.generated.resources.cogTest_Pass_search_at_latter_h_pass
 import dmtproms.cogtest.pass.presentation.generated.resources.cogTest_Pass_search_for_hana_choen_in_contacts_pass
 import dmtproms.cogtest.pass.presentation.generated.resources.cogTest_Pass_witch_contact_are_we_looking_for_pass
@@ -61,7 +63,10 @@ fun PassContactsRoot(
     val state by viewModel.state.collectAsStateWithLifecycle()
     val scope = rememberCoroutineScope()
 
-    val timeoutDuration = if (state.errorCount == 0) 25_000L else 15_000L
+    // --- Dynamic Timeout Logic ---
+    // If NO errors yet (totalErrors == 0), wait 25 seconds.
+    // If user has made ANY error (totalErrors > 0), wait 15 seconds.
+    val timeoutDuration = if (state.totalErrors == 0) 25_000L else 15_000L
 
     val inactivityHandler = remember(scope, timeoutDuration) {
         InactivityHandler(
@@ -91,7 +96,7 @@ fun PassContactsRoot(
 
     LaunchedEffect(viewModel.events) {
         viewModel.events.collect { event ->
-            when(event) {
+            when (event) {
                 PassContactsEvent.NavigateToNextScreen -> onNavigateToNext()
                 PassContactsEvent.NavigateToSuccess -> onNavigateToNext()
             }
@@ -125,7 +130,7 @@ fun PassContactsRoot(
         )
 
         if (state.showTimeoutDialog) {
-            val index = (state.errorCount - 1).coerceIn(0, mediations.lastIndex)
+            val index = (state.totalErrors - 1).coerceIn(0, mediations.lastIndex)
             val currentMediation = mediations[index]
 
             PassMediationDialog(
@@ -149,15 +154,16 @@ fun PassContactsScreen(
     val allContacts = stringArrayResource(Res.array.cogTest_Pass_person_names)
 
     val filteredContacts = remember(state.searchQuery, allContacts) {
-        if (state.searchQuery.isEmpty()) {
+        val list = if (state.searchQuery.isEmpty()) {
             allContacts
         } else {
             allContacts.filter { it.contains(state.searchQuery, ignoreCase = true) }
         }
+        list.sorted()
     }
 
     DmtBaseScreen(
-        titleText = "Contacts",
+        titleText = stringResource(Res.string.cogTest_Pass_contacts),
         onIconClick = {},
         content = {
             Column(
@@ -169,7 +175,7 @@ fun PassContactsScreen(
                     value = state.searchQuery,
                     onValueChange = { onAction(PassContactsAction.OnSearchQueryChange(it)) },
                     modifier = Modifier.fillMaxWidth(),
-                    placeholder = { Text("Search") },
+                    placeholder = { Text(stringResource(Res.string.cogTest_Pass_search)) },
                     leadingIcon = {
                         Icon(Icons.Default.Search, contentDescription = null)
                     },
@@ -178,7 +184,7 @@ fun PassContactsScreen(
                     colors = OutlinedTextFieldDefaults.colors(
                         focusedContainerColor = Color.White,
                         unfocusedContainerColor = Color.White,
-                        focusedBorderColor = MaterialTheme.colorScheme.primary, // Or Color(0xFF26A69A)
+                        focusedBorderColor = MaterialTheme.colorScheme.primary,
                         unfocusedBorderColor = Color.LightGray
                     ),
                     keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done),

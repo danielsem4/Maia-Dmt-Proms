@@ -9,8 +9,11 @@ import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import maia.dmt.pass.presentation.session.PassSessionManager
 
-class PassContactsViewModel : ViewModel() {
+class PassContactsViewModel(
+    private val sessionManager: PassSessionManager
+) : ViewModel() {
 
     private val _state = MutableStateFlow(PassContactsState())
     val state = _state.stateIn(
@@ -31,13 +34,13 @@ class PassContactsViewModel : ViewModel() {
                 if (_state.value.showTimeoutDialog) return
 
                 if (action.contactName == "Hana Cohen" || action.contactName == "חנה כהן") {
-                    sendEvent(PassContactsEvent.NavigateToSuccess)
+                    saveResultsAndNavigate(PassContactsEvent.NavigateToSuccess)
                 } else {
-                    handleError()
+                    handleWrongContact(action.contactName)
                 }
             }
             PassContactsAction.OnTimeout -> {
-                handleError()
+                handleTimeout()
             }
             PassContactsAction.OnTimeoutDialogDismiss -> {
                 _state.update { it.copy(showTimeoutDialog = false) }
@@ -45,21 +48,46 @@ class PassContactsViewModel : ViewModel() {
         }
     }
 
-    private fun handleError() {
-        val newCount = _state.value.errorCount + 1
-        if (newCount >= 4) {
-            sendEvent(PassContactsEvent.NavigateToNextScreen)
+    private fun handleWrongContact(contactName: String) {
+
+        val currentList = _state.value.contactsPressed.toMutableList()
+        currentList.add(contactName)
+        val newWrongCount = _state.value.wrongContactCount + 1
+
+        _state.update {
+            it.copy(
+                contactsPressed = currentList,
+                wrongContactCount = newWrongCount
+            )
+        }
+        checkErrorsAndShowDialogOrNavigate()
+    }
+
+    private fun handleTimeout() {
+        val newInactivityCount = _state.value.inactivityCount + 1
+        _state.update { it.copy(inactivityCount = newInactivityCount) }
+        checkErrorsAndShowDialogOrNavigate()
+    }
+
+    private fun checkErrorsAndShowDialogOrNavigate() {
+        val totalErrors = _state.value.totalErrors
+
+        if (totalErrors >= 4) {
+            saveResultsAndNavigate(PassContactsEvent.NavigateToNextScreen)
         } else {
-            _state.update {
-                it.copy(
-                    errorCount = newCount,
-                    showTimeoutDialog = true
-                )
-            }
+            _state.update { it.copy(showTimeoutDialog = true) }
         }
     }
 
-    private fun sendEvent(event: PassContactsEvent) {
+    private fun saveResultsAndNavigate(event: PassContactsEvent) {
+        val currentState = _state.value
+
+        sessionManager.saveContactsScreenResult(
+            inactivityCount = currentState.inactivityCount,
+            wrongAppPressCount = currentState.wrongContactCount,
+            contactsPressed = currentState.contactsPressed
+        )
+
         viewModelScope.launch {
             _events.send(event)
         }

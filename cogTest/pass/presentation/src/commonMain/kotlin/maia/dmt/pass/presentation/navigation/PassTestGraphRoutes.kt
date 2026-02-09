@@ -14,10 +14,17 @@ interface PassTestGraphRoutes {
     data object PassEntryApplications : PassTestGraphRoutes
 
     @Serializable
+    data object PassWrongApp : PassTestGraphRoutes
+
+
+    @Serializable
     data object PassContacts : PassTestGraphRoutes
 
     @Serializable
     data object PassContact : PassTestGraphRoutes
+
+    @Serializable
+    data object PassFirstMissionDone: PassTestGraphRoutes
 
     @Serializable
     data object PassDialer : PassTestGraphRoutes

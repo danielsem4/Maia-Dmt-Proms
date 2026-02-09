@@ -20,6 +20,12 @@
     <string name="cogTest_Pass_clock">שעון</string>
     <string name="cogTest_Pass_files">קבצים</string>
     <string name="cogTest_Pass_search">חיפוש</string>
+    <string name="cogTest_Pass_video">וידאו</string>
+    <string name="cogTest_Pass_whatsapp">וואטסאפ</string>
+    <string name="cogTest_Pass_contact_info">פרטי קשר</string>
+
+    <string name="cogTest_Pass_finished_first_part">סיימת את השלב הראשון, כעת נעבור לשלב הבא.</string>
+
 
 
 
@@ -109,6 +115,8 @@
     <string name="cogTest_Pass_yes">כן</string>
     <string name="cogTest_Pass_no">לא</string>
 
+    <string name="cogTest_Pass_wrong_app">אפליקציה שגויה</string>
+    <string name="cogTest_Pass_wrong_app_instruction">נכנסת לאפליקציה שגויה, אנא חזור למסך האפליקציות ולחץ על אפליקציית אנשי הקשר או הטלפון</string>
 
 
     <!-- PASS Test Instructions -->

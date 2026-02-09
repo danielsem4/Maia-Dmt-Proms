@@ -25,6 +25,9 @@
     <string name="cogTest_Pass_contact_screen">Contact</string>
     <string name="cogTest_Pass_dialer_screen">Dialer</string>
     <string name="cogTest_Pass_search">Search</string>
+    <string name="cogTest_Pass_video">Video</string>
+    <string name="cogTest_Pass_whatsapp">Whatsapp</string>
+    <string name="cogTest_Pass_contact_info">Contact Info</string>
 
     <string name="cogTest_Pass_does_instructions_clear">Were the instructions clear?</string>
     <string name="cogTest_Pass_yes">Yes</string>
@@ -107,6 +110,9 @@
     <string name="cogTest_Pass_fmpt_meaning">Functional Mobile Phone Test</string>
     <string name="cogTest_Pass_test">Based on PASS Test</string>
 
+    <string name="cogTest_Pass_finished_first_part">You have finished the first part, now we will move to the next stage.</string>
+
+
     <!-- PASS Test Instructions -->
     <string name="cogTest_Pass_call_to_hana_cohen_instruction_pass">First task, you need to call Hana Cohen</string>
     <string name="cogTest_Pass_call_to_dentist">And now for the second task, a list of phone numbers is displayed, you need to call the dental clinic.</string>
@@ -135,7 +141,9 @@
     <string name="cogTest_Pass_the_mediation_will_close_in">The mediation will close automatically in:</string>
     <string name="cogTest_Pass_thanks_coffe">The task is complete, thank you very much for your cooperation</string>
 
-    <!-- Phone Numbers -->
+    <string name="cogTest_Pass_wrong_app">Wrong App</string>
+    <string name="cogTest_Pass_wrong_app_instruction">You have entered to wrong app, please go back to the apps screen and press the contacts or phone app</string>
+
     <string name="cogTest_Pass_dentist_pass">Dental Clinic: 052-258-1194</string>
     <string name="cogTest_Pass_family_doctor_pass">Family Doctor: 054-228-6972</string>
     <string name="cogTest_Pass_paint_clinic_pass">Pain Clinic: 050-333-1528</string>

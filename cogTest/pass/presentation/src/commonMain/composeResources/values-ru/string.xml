@@ -19,6 +19,12 @@
     <string name="cogTest_Pass_message">Сообщение</string>
     <string name="cogTest_Pass_clock">Часы</string>
     <string name="cogTest_Pass_files">Файлы</string>
+    <string name="cogTest_Pass_video">Видео</string>
+    <string name="cogTest_Pass_whatsapp">WhatsApp</string>
+    <string name="cogTest_Pass_contact_info">Контактная информация</string>
+
+    <string name="cogTest_Pass_finished_first_part">Вы завершили первую часть, теперь перейдем к следующему этапу.</string>
+
 
 
     <string-array name="cogTest_Pass_person_names">
@@ -108,6 +114,8 @@
     <string name="cogTest_Pass_dialer_screen">Набор номера</string>
     <string name="cogTest_Pass_does_instructions_clear">Были ли инструкции понятны?</string>
 
+    <string name="cogTest_Pass_wrong_app">Неверное приложение</string>
+    <string name="cogTest_Pass_wrong_app_instruction">Вы вошли в неверное приложение. Пожалуйста, вернитесь на экран приложений и нажмите «Контакты» или «Телефон»</string>
 
 
     <!-- PASS Test Instructions -->

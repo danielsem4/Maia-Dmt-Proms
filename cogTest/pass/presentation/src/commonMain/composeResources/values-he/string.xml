@@ -20,6 +20,11 @@
     <string name="cogTest_Pass_clock">שעון</string>
     <string name="cogTest_Pass_files">קבצים</string>
     <string name="cogTest_Pass_search">חיפוש</string>
+    <string name="cogTest_Pass_video">וידאו</string>
+    <string name="cogTest_Pass_whatsapp">וואטסאפ</string>
+    <string name="cogTest_Pass_contact_info">פרטי קשר</string>
+
+    <string name="cogTest_Pass_finished_first_part">סיימת את השלב הראשון, כעת נעבור לשלב הבא.</string>
 
 
     <string-array name="cogTest_Pass_person_names">
@@ -136,6 +141,10 @@
     <string name="cogTest_Pass_dialed_to_the_wrong_number">חייגת מספר לא נכון אנא חייג למספר של מרפאת השיניים.</string>
     <string name="cogTest_Pass_the_mediation_will_close_in">התיווך יסגר לבד בעוד:</string>
     <string name="cogTest_Pass_thanks_coffe">המשימה הסתיימה, תודה רבה על שיתוף הפעולה</string>
+
+    <string name="cogTest_Pass_wrong_app">אפליקציה שגויה</string>
+    <string name="cogTest_Pass_wrong_app_instruction">נכנסת לאפליקציה שגויה, אנא חזור למסך האפליקציות ולחץ על אפליקציית אנשי הקשר או הטלפון</string>
+
 
     <!-- Phone Numbers -->
     <string name="cogTest_Pass_dentist_pass">מרפאת שיניים: 052-258-1194</string>

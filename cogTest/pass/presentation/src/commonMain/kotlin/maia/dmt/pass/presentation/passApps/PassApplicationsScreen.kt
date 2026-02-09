@@ -72,9 +72,9 @@ import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
 fun PassApplicationsRoot(
-    onNavigateToNext: () -> Unit,
     onNavigateToContacts: () -> Unit,
     onNavigateToCall: () -> Unit,
+    onNavigateToWrongApp: () -> Unit,
     viewModel: PassApplicationsViewModel = koinViewModel()
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
@@ -114,7 +114,7 @@ fun PassApplicationsRoot(
             when (event) {
                 PassApplicationsEvent.NavigateToCall -> onNavigateToCall()
                 PassApplicationsEvent.NavigateToContacts -> onNavigateToContacts()
-                PassApplicationsEvent.NavigateToNextScreen -> onNavigateToNext()
+                PassApplicationsEvent.NavigateToWrongApp -> onNavigateToWrongApp()
             }
         }
     }

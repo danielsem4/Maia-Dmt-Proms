@@ -24,6 +24,10 @@ class PassSessionManager {
     private val _error = MutableStateFlow<String?>(null)
     val error: StateFlow<String?> = _error.asStateFlow()
 
+    fun setEvaluation(evaluation: Evaluation) { _evaluation.update { evaluation } }
+    fun setLoading(isLoading: Boolean) { _isLoading.update { isLoading } }
+    fun setError(error: String?) { _error.update { error } }
+
     private val _applicationsScreenResult = MutableStateFlow(ApplicationsScreenResult())
     val applicationsScreenResult: StateFlow<ApplicationsScreenResult> = _applicationsScreenResult.asStateFlow()
 
@@ -135,6 +139,9 @@ class PassSessionManager {
     }
 
     fun clear() {
+        _evaluation.update { null }
+        _isLoading.update { false }
+        _error.update { null }
         _applicationsScreenResult.value = ApplicationsScreenResult()
         _contactsScreenResult.value = ContactsScreenResult()
         _contactScreenResult.value = ContactScreenResult()
@@ -145,4 +152,3 @@ class PassSessionManager {
         )
     }
 }
-

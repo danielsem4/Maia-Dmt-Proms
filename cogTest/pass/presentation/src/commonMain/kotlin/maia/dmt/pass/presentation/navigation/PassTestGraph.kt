@@ -8,6 +8,7 @@ import maia.dmt.pass.presentation.passApps.PassApplicationsRoot
 import maia.dmt.pass.presentation.passContact.PassContactRoot
 import maia.dmt.pass.presentation.passContacts.PassContactsRoot
 import maia.dmt.pass.presentation.passDialer.PassDialerRoot
+import maia.dmt.pass.presentation.passEnd.PassEndRoot
 import maia.dmt.pass.presentation.passEntry.PassEntryRoot
 import maia.dmt.pass.presentation.passFirstMissionDone.PassFirstMissionDoneRoot
 import maia.dmt.pass.presentation.passWrongApp.PassWrongAppRoot
@@ -64,8 +65,9 @@ fun NavGraphBuilder.passTestGraph(
         }
 
         composable<PassTestGraphRoutes.PassEnd> {
-
+            PassEndRoot(
+                onNavigateHome = { navController.popBackStack(PassTestGraphRoutes.Graph, inclusive = true) }
+            )
         }
-
     }
 }

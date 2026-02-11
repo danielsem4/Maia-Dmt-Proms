@@ -88,9 +88,7 @@ fun HomeScreen(
                 onRefresh = { onAction(HomeAction.OnRefresh) },
                 modifier = Modifier.fillMaxSize()
             ) {
-                // ... (Layout Code remains the same) ...
                 if (isMobileLandscape) {
-                    // ...
                 } else {
                     Column(modifier = Modifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally) {
                         Spacer(modifier = Modifier.padding(12.dp))

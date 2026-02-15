@@ -56,6 +56,7 @@ fun PassEndRoot(
         viewModel.events.collect { event ->
             when (event) {
                 PassEndEvent.NavigateToHome -> onNavigateHome()
+                else -> {}
             }
         }
     }

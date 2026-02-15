@@ -18,7 +18,6 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -42,7 +41,6 @@ import dmtproms.cogtest.pass.presentation.generated.resources.pass_phone
 import dmtproms.cogtest.pass.presentation.generated.resources.pass_video
 import dmtproms.cogtest.pass.presentation.generated.resources.pass_whatsapp
 import maia.dmt.core.designsystem.components.layouts.DmtBaseScreen
-import maia.dmt.core.designsystem.theme.DmtTheme
 import maia.dmt.core.presentation.util.inactivity.InactivityHandler
 import maia.dmt.pass.presentation.components.ContactActionItem
 import maia.dmt.pass.presentation.components.PassMediationDialog
@@ -118,7 +116,7 @@ fun PassContactRoot(
             PassMediationDialog(
                 description = stringResource(currentMediation.descriptionRes),
                 audioUrl = stringResource(currentMediation.audioUrlRes),
-                countdownSeconds = 10,
+                countdownSeconds = 9,
                 onDismiss = {
                     viewModel.onAction(PassContactAction.OnTimeoutDialogDismiss)
                 }
@@ -131,7 +129,6 @@ fun PassContactRoot(
 fun PassContactScreen(
     onAction: (PassContactAction) -> Unit
 ) {
-
     DmtBaseScreen(
         titleText = stringResource(Res.string.cogTest_Pass_contacts),
         onIconClick = { },
@@ -146,7 +143,7 @@ fun PassContactScreen(
 
                 Box(
                     modifier = Modifier
-                        .size(100.dp)
+                        .size(140.dp)
                         .background(
                             color = MaterialTheme.colorScheme.primary.copy(alpha = 0.1f),
                             shape = CircleShape
@@ -207,16 +204,19 @@ fun PassContactScreen(
                 Card(
                     shape = RoundedCornerShape(12.dp),
                     colors = CardDefaults.cardColors(containerColor = Color(0xFFF5F5F5)),
-                    modifier = Modifier.fillMaxWidth()
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .wrapContentHeight()
+                        .padding(12.dp)
                 ) {
                     Column(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(16.dp)
+                            .padding(24.dp)
                     ) {
                         Text(
                             text = stringResource(Res.string.cogTest_Pass_contact_info),
-                            style = MaterialTheme.typography.titleMedium,
+                            style = MaterialTheme.typography.titleLarge,
                             color = Color.Gray,
                             modifier = Modifier.align(Alignment.End),
                             fontWeight = FontWeight.Bold
@@ -235,7 +235,7 @@ fun PassContactScreen(
                                     contentDescription = null,
                                     tint = Color.DarkGray,
                                     modifier = Modifier
-                                        .size(24.dp)
+                                        .size(40.dp)
                                         .clickable(
                                             interactionSource = remember { MutableInteractionSource() },
                                             indication = null
@@ -247,7 +247,7 @@ fun PassContactScreen(
                                     contentDescription = null,
                                     tint = Color.DarkGray,
                                     modifier = Modifier
-                                        .size(24.dp)
+                                        .size(40.dp)
                                         .clickable(
                                             interactionSource = remember { MutableInteractionSource() },
                                             indication = null
@@ -265,13 +265,13 @@ fun PassContactScreen(
                                 Column(horizontalAlignment = Alignment.End) {
                                     Text(
                                         text = stringResource(Res.string.cogTest_Pass_phone_number),
-                                        style = MaterialTheme.typography.bodyLarge,
+                                        style = MaterialTheme.typography.titleMedium,
                                         fontWeight = FontWeight.Bold,
                                         color = Color.DarkGray
                                     )
                                     Text(
                                         text = stringResource(Res.string.cogTest_Pass_call),
-                                        style = MaterialTheme.typography.bodySmall,
+                                        style = MaterialTheme.typography.bodyLarge,
                                         color = Color.Gray
                                     )
                                 }
@@ -280,7 +280,7 @@ fun PassContactScreen(
                                     painter = painterResource(Res.drawable.pass_phone),
                                     contentDescription = null,
                                     tint = Color.DarkGray,
-                                    modifier = Modifier.size(24.dp)
+                                    modifier = Modifier.size(40.dp)
                                 )
                             }
                         }
@@ -298,7 +298,7 @@ fun PassContactScreen(
                         ) {
                             Text(
                                 text = stringResource(Res.string.cogTest_Pass_whatsapp),
-                                style = MaterialTheme.typography.bodyLarge,
+                                style = MaterialTheme.typography.titleMedium,
                                 fontWeight = FontWeight.Bold,
                                 color = Color.DarkGray,
                                 modifier = Modifier.padding(end = 12.dp)
@@ -306,7 +306,7 @@ fun PassContactScreen(
 
                             Box(
                                 modifier = Modifier
-                                    .size(32.dp)
+                                    .size(40.dp)
                                     .background(Color(0xFF25D366), CircleShape)
                                     .padding(6.dp)
                             ) {
@@ -323,4 +323,33 @@ fun PassContactScreen(
             }
         }
     )
+}
+
+@Preview
+@Composable
+fun PassContactScreenPreview() {
+    MaterialTheme {
+        PassContactScreen(
+            onAction = { }
+        )
+    }
+}
+
+@Preview
+@Composable
+fun PassContactRootPreview() {
+    MaterialTheme {
+        Box(modifier = Modifier.fillMaxSize()) {
+            PassContactScreen(
+                onAction = { }
+            )
+
+            PassMediationDialog(
+                description = "What do you need to do?",
+                audioUrl = "",
+                countdownSeconds = 9,
+                onDismiss = { }
+            )
+        }
+    }
 }

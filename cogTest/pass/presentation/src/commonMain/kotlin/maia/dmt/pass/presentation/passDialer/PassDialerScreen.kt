@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentHeight
@@ -83,7 +82,6 @@ fun PassDialerRoot(
     val state by viewModel.state.collectAsStateWithLifecycle()
     val scope = rememberCoroutineScope()
 
-    // --- Dynamic Timeout (15s for Phase 1/3, 25s for Phase 2) ---
     val inactivityHandler = remember(scope, state.timeoutDuration) {
         InactivityHandler(
             scope = scope,
@@ -92,7 +90,6 @@ fun PassDialerRoot(
         )
     }
 
-    // Timer Logic: Only run if NO dialogs are showing AND we are not in instruction phase
     val isTimerActive = !state.showInstructionDialog &&
             !state.showConfirmationDialog &&
             !state.showTimeoutDialog &&
@@ -128,9 +125,7 @@ fun PassDialerRoot(
         }
     )
 
-    // --- DIALOGS ---
 
-    // 1. Initial Instructions
     if (state.showInstructionDialog) {
         PassMediationDialog(
             description = stringResource(Res.string.cogTest_Pass_call_to_dentist),
@@ -139,7 +134,6 @@ fun PassDialerRoot(
         )
     }
 
-    // 2. Confirmation
     if (state.showConfirmationDialog) {
         DmtConfirmationDialog(
             title = stringResource(Res.string.cogTest_Pass_does_instructions_clear),
@@ -152,7 +146,6 @@ fun PassDialerRoot(
         )
     }
 
-    // 3. Wrong Number Error
     if (state.showWrongNumberDialog) {
         PassMediationDialog(
             description = stringResource(Res.string.cogTest_Pass_dialer_page_wrong_action_one),
@@ -161,7 +154,6 @@ fun PassDialerRoot(
         )
     }
 
-    // 4. Timeout Mediations
     if (state.showTimeoutDialog) {
         val config = getTimeoutConfig(state.phase, state.inactivityCount)
 
@@ -173,9 +165,8 @@ fun PassDialerRoot(
     }
 }
 
-// Helper to select correct dialog based on Phase + Count
+
 private fun getTimeoutConfig(phase: DialerPhase, count: Int): MediationConfig {
-    // Count is 1-based (1, 2, 3)
     return when (phase) {
         DialerPhase.OPEN_DIALER -> {
             when (count) {
@@ -206,7 +197,6 @@ fun PassDialerScreen(
     state: PassDialerState,
     onAction: (PassDialerAction) -> Unit
 ) {
-    // Phase 3: Only show dentist. Phases 1 & 2: Show all.
     val doctorList = if (state.phase == DialerPhase.DIAL_NUMBER_SIMPLIFIED) {
         listOf(Res.string.cogTest_Pass_dentist_pass)
     } else {
@@ -232,7 +222,6 @@ fun PassDialerScreen(
                     .padding(16.dp),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                // Doctor List Card
                 DmtParagraphCard(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -250,7 +239,7 @@ fun PassDialerScreen(
                                     text = stringResource(resId),
                                     style = MaterialTheme.typography.titleLarge,
                                     color = MaterialTheme.colorScheme.onSurface,
-                                    textAlign = TextAlign.End,
+                                    textAlign = TextAlign.Center,
                                     fontWeight = FontWeight.Bold,
                                     modifier = Modifier.fillMaxWidth()
                                 )
@@ -258,11 +247,8 @@ fun PassDialerScreen(
                         }
                     }
                 )
-
-                // Bottom Content
                 Spacer(modifier = Modifier.weight(1f))
 
-                // Phase 1: FAB
                 if (!state.isDialerOpen) {
                     Box(
                         modifier = Modifier
@@ -286,7 +272,6 @@ fun PassDialerScreen(
                     }
                 }
 
-                // Phase 2 & 3: Keypad
                 if (state.isDialerOpen) {
                     DialerKeypad(
                         typedNumber = state.typedNumber,

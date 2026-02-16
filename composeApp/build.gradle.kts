@@ -63,6 +63,9 @@ kotlin {
             implementation(projects.cogTest.pass.domain)
             implementation(projects.cogTest.pass.data)
 
+            implementation(projects.cogTest.hitber.presentation)
+            implementation(projects.cogTest.hitber.domain)
+            implementation(projects.cogTest.hitber.data)
 
             implementation(projects.sensors.core.presentation)
             implementation(projects.sensors.core.domain)

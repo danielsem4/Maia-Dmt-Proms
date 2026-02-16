@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="cogTest_hitber_title">Hitber</string>
+    <string name="cogTest_hitber_next">הבא</string>
+    <string name="cogTest_hitber_start">התחל</string>
+    <string name="cogTest_hitber_done">בוצע</string>
+    <string name="cogTest_hitber_finish">סיום</string>
+    <string name="cogTest_hitber_good_job">כל הכבוד!</string>
+    <string name="cogTest_hitber_got_it">הבנתי</string>
+    <string name="cogTest_hitber_test_unavailable">הבדיקה לא זמינה</string>
+
+    <string name="cogTest_hitber_memory_shape_title">זיכרון צורות</string>
+    <string name="cogTest_hitber_naming_title">שימום</string>
+    <string name="cogTest_hitber_sentence_title">משפט</string>
+    <string name="cogTest_hitber_drag_and_drop_title">גרירה והנחה</string>
+    <string name="cogTest_hitber_evaluation_pick">בחירת הערכה</string>
+    <string name="cogTest_hitber_the_shape">הצורה</string>
+    <string name="cogTest_hitber_the_shapes">הצורות</string>
+
+    <string name="cogTest_hitber_pick_test">אנא לחץ על האבחון שברצונך לבצע</string>
+    <string name="cogTest_hitber_first_mission_instructions">בחר את התשובה הנכונה. כדי לבחור את התשובה הנכונה, לחץ על השאלה.</string>
+    <string name="cogTest_hitber_shape_dialog_mission_instructions">יופיעו לפניך 5 צורות. זכור אותן לחלק הבא של המשימה. כשתהיה מוכן, לחץ על \"המשך\".</string>
+    <string name="cogTest_hitber_shape_mission_instructions">יופיעו לפניך מספר צורות. בחר את 5 הצורות שראית לפני מספר דקות על ידי לחיצה עליהן. אם אינך זוכר, ניתן לנחש. כשתסיים, לחץ על \"המשך\".</string>
+    <string name="cogTest_hitber_third_mission_instructions">במהלך הדקה הקרובה, מספרים יופיעו במרכז המסך. בכל פעם שתראה את המספר 7, לחץ על המסך. כדי להתחיל במשימה, לחץ על \"התחל\". בסיום המשימה תופיע הודעת \"תודה\". לחץ על \"המשך\" כדי להתקדם.</string>
+    <string name="cogTest_hitber_fourth_mission_instructions">כתוב מה מופיע בתמונה. כדי לכתוב את תשובתך, לחץ על השאלה. כשתסיים, לחץ על \"המשך\".</string>
+    <string name="cogTest_hitber_fifth_mission_instructions">בחלק זה עליך להרכיב משפט מהמילים המוצגות לפניך. כדי למקם מילה במשפט, גרור אותה למקום שבחרת. אם ברצונך לשנות מיקום של מילה שכבר הונחה, גרור אותה שוב ממחסן המילים ומקם אותה מחדש. כשתסיים, לחץ על \"המשך\".</string>
+    <string name="cogTest_hitber_repeat_sentence">לחץ על כפתור \"האזן\", הקשב למשפט הנאמר, ולאחר מכן לחץ על כפתור \"דבר\" וחזור על המשפט.</string>
+    <string name="cogTest_hitber_fridge_mission_instructions">בחלק זה תתבקש לבצע משימה. כדי לשמוע את המשימה, לחץ על \"האזן\". כשתסיים, לחץ על \"המשך\".</string>
+    <string name="cogTest_hitber_ball_drag_question1">גרור את העיגול השחור לתוך הריבוע. כשתסיים, לחץ על \"המשך\".</string>
+    <string name="cogTest_hitber_ball_drag_question2">גרור את העיגול הצהוב לתוך הריבוע. כשתסיים, לחץ על \"המשך\".</string>
+    <string name="cogTest_hitber_ball_drag_question3">גרור את העיגול הכחול לתוך הריבוע. כשתסיים, לחץ על \"המשך\".</string>
+    <string name="cogTest_hitber_ball_drag_question4">גרור את העיגול הירוק לתוך הריבוע. כשתסיים, לחץ על \"המשך\".</string>
+    <string name="cogTest_hitber_ninth_mission_instructions">בחלק זה עליך להרכיב משפט מהמילים המוצגות לפניך. כדי למקם מילה במשפט, גרור אותה למקום שבחרת. אם ברצונך לשנות מיקום של מילה שכבר הונחה, גרור אותה שוב ממחסן המילים ומקם אותה מחדש. כשתסיים, לחץ על \"המשך\".</string>
+    <string name="cogTest_hitber_tenth_mission_instructions">העתק את התמונה המוצגת משמאל למרכז המסך. השתמש בצורות שמימין כדי להעתיק את התמונה. גרור וסדר את הצורות במרכז המסך. כשתסיים, לחץ על \"המשך\".</string>
+
+    <string name="cogTest_hitber_which_day_is_it_today">איזה יום היום?</string>
+    <string name="cogTest_hitber_what_month_is_it_now">איזה חודש עכשיו?</string>
+    <string name="cogTest_hitber_in_which_year_are_we">באיזו שנה אנחנו?</string>
+    <string name="cogTest_hitber_in_which_country_do_you_live">באיזו מדינה אתה גר?</string>
+    <string name="cogTest_hitber_in_which_area_of_israel_are_you_located">באיזה אזור בישראל אתה נמצא?</string>
+    <string name="cogTest_hitber_in_which_city_are_you_currently">באיזו עיר אתה נמצא כרגע?</string>
+    <string name="cogTest_hitber_what_is_the_name_of_this_place">מה שם המקום הזה?</string>
+    <string name="cogTest_hitber_why_are_you_answering_this_questionnaire">מדוע אתה עונה על שאלון זה?</string>
+    <string name="cogTest_hitber_you_have_to_answer_all_questions">עליך לענות על כל השאלות.</string>
+    <string name="cogTest_hitber_you_have_to_answer_this_question">עליך לענות על שאלה זו</string>
+    <string name="cogTest_hitber_observe_the_pictures_until_the_time_is_up">התבונן בתמונות עד לסיום הזמן.</string>
+    <string name="cogTest_hitber_please_select_the_5_shapes">אנא בחר את 5 הצורות שראית לפני כמה שאלות</string>
+    <string name="cogTest_hitber_Select_5_shapes">בחר 5 צורות</string>
+    <string name="cogTest_hitber_the_shapes_place">גרור את הצורות לכאן</string>
+
+    <string name="cogTest_hitber_general_instructions1">• המשימה אורכת כ-20 דקות.</string>
+    <string name="cogTest_hitber_general_instructions2">• יש להשלים את המשימה ברצף, ללא הפסקות.</string>
+    <string name="cogTest_hitber_general_instructions3">• אנא קרא את ההוראות עד הסוף.</string>
+    <string name="cogTest_hitber_general_instructions4">• יש להשלים את כל המשימות.</string>
+    <string name="cogTest_hitber_general_instructions5">• כדי לשמוע את ההוראות, ניתן ללחוץ על \"האזן\".</string>
+    <string name="cogTest_hitber_general_instructions6">• מומלץ לבצע את המשימה בחדר שקט.</string>
+
+    <string name="cogTest_hitber_nine_question_answer_version_1">אתמול אכלתי ארוחת ערב עם סבתא</string>
+    <string name="cogTest_hitber_nine_question_answer_version_2">אתמול אכלתי ארוחת ערב עם סבתא</string>
+    <string name="cogTest_hitber_nine_question_answer_version_3">אכלתי ארוחת ערב עם סבתא אתמול</string>
+    <string name="cogTest_hitber_nine_question_answer_version_4">אכלתי ארוחת ערב עם סבתא אתמול</string>
+    <string name="cogTest_hitber_gold_sentence">לא כל הנוצץ זהב הוא</string>
+    <string name="cogTest_hitber_rome_sentence">כל הדרכים מובילות לרומא</string>
+    <string name="cogTest_hitber_apple_fall_sentence">התפוח לא נופל רחוק מהעץ</string>
+    <string name="cogTest_hitber_jug_sentence">בלי אבל ובלי חבל</string>
+
+    <string name="cogTest_hitber_seventh_question_0_hitber">העברתי את החלב למפית האדומה</string>
+    <string name="cogTest_hitber_seventh_question_1_hitber">העברתי את הענב למפית הכחולה</string>
+    <string name="cogTest_hitber_seventh_question_2_hitber">העברתי את העוף למפית הירוקה</string>
+    <string name="cogTest_hitber_seventh_question_3_hitber">העברתי את הפחית למפית הצהובה</string>
+
+    <string name="cogTest_hitber_repeat_the_sentence_question_1"><![CDATA[https://firebasestorage.googleapis.com/v0/b/minimental-hit.appspot.com/o/Questions%20Instructions%2Frepitition_not_all_that_shines_is_gold.mp3?alt=media&token=0751da03-782a-456b-95d5-f52db5aaa7be]]></string>
+    <string name="cogTest_hitber_repeat_the_sentence_question_2"><![CDATA[https://firebasestorage.googleapis.com/v0/b/minimental-hit.appspot.com/o/Questions%20Instructions%2Frepitition_apple_not_far_from_tree.mp3?alt=media&token=40a7f64f-17a5-40b7-8aba-ab236e0ca63e]]></string>
+    <string name="cogTest_hitber_repeat_the_sentence_question_3"><![CDATA[https://firebasestorage.googleapis.com/v0/b/minimental-hit.appspot.com/o/Questions%20Instructions%2Fno_ifs_ands_or_buts.mp3?alt=media&token=24ed1456-b1b9-45aa-8d4a-6c34067b53cb]]></string>
+    <string name="cogTest_hitber_repeat_the_sentence_question_4"><![CDATA[https://firebasestorage.googleapis.com/v0/b/minimental-hit.appspot.com/o/Questions%20Instructions%2Fall_roads_lead_to_rome.mp3?alt=media&token=3339a756-8c71-497f-ae5c-5666fe51d420]]></string>
+    <string name="cogTest_hitber_seventh_question_default_milk_to_red_napkin"><![CDATA[https://firebasestorage.googleapis.com/v0/b/minimental-hit.appspot.com/o/Three%20Phase%20Instruction%20Versions%2Fcomprehension_milk_to_red_napkin.mp3?alt=media&token=feef793a-a83e-4b84-b9dc-96cfe9420a2d]]></string>
+    <string name="cogTest_hitber_seventh_question_grapes_to_blue_napkin"><![CDATA[https://firebasestorage.googleapis.com/v0/b/minimental-hit.appspot.com/o/Three%20Phase%20Instruction%20Versions%2Fcomprehension_grapes_to_blue_napkin.mp3?alt=media&token=fcd736eb-23be-4222-b4a0-888b4daeba34]]></string>
+    <string name="cogTest_hitber_seventh_question_can_to_yellow_napkin"><![CDATA[https://firebasestorage.googleapis.com/v0/b/minimental-hit.appspot.com/o/Three%20Phase%20Instruction%20Versions%2Fcomprehension_can_to_yellow_napkin.mp3?alt=media&token=f8b3502f-9a3c-4b19-abc1-e9c85db54124]]></string>
+    <string name="cogTest_hitber_seventh_question_chicken_to_green_napkin">" "</string>
+
+    <string-array name="cogTest_hitber_country_array">
+        <item>ישראל</item>
+        <item>מרוקו</item>
+        <item>ארצות הברית</item>
+        <item>עיראק</item>
+        <item>לבנון</item>
+        <item>תימן</item>
+        <item>רוסיה</item>
+        <item>אתיופיה</item>
+        <item>ברית המועצות</item>
+    </string-array>
+
+    <string-array name="cogTest_hitber_city_array">
+        <item>פתח תקווה</item>
+        <item>גני תקווה</item>
+        <item>חיפה</item>
+        <item>תל אביב</item>
+        <item>ראשון לציון</item>
+        <item>כפר סבא</item>
+        <item>נתניה</item>
+        <item>ראש העין</item>
+        <item>בני ברק</item>
+        <item>ירושלים</item>
+        <item>באר שבע</item>
+    </string-array>
+
+    <string-array name="cogTest_hitber_hospital_array">
+        <item>בילינסון</item>
+        <item>בית רבקה</item>
+        <item>סורוקה</item>
+        <item>השרון</item>
+        <item>אסף הרופא</item>
+        <item>רמב\"ם</item>
+        <item>תל השומר</item>
+    </string-array>
+
+    <string-array name="cogTest_hitber_area_array">
+        <item>מרכז</item>
+        <item>צפון</item>
+        <item>דרום</item>
+        <item>גליל מערבי</item>
+        <item>שרון</item>
+        <item>שפלה</item>
+        <item>שומרון</item>
+        <item>מישור החוף</item>
+    </string-array>
+
+    <string-array name="cogTest_hitber_survey_array">
+        <item>אני לא יודע</item>
+        <item>בשל מצב בריאותי</item>
+        <item>אמרו לי לבוא</item>
+        <item>פעילות שגרתית עבורי</item>
+    </string-array>
+</resources>

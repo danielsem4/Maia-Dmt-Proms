@@ -11,6 +11,8 @@ import maia.dmt.cdt.presentation.navigation.CdtGraphRoutes
 import maia.dmt.cdt.presentation.navigation.cdtGraph
 import maia.dmt.evaluation.presentation.navigation.EvaluationGraphRoutes
 import maia.dmt.evaluation.presentation.navigation.evaluationGraph
+import maia.dmt.hitber.presentation.navigation.HitberGraphRoutes
+import maia.dmt.hitber.presentation.navigation.hitberTestGraph
 import maia.dmt.home.presentation.navigation.HomeGraphRoutes
 import maia.dmt.home.presentation.navigation.homeGraph
 import maia.dmt.market.presentation.navigation.MarketTestGraphRoutes
@@ -65,6 +67,7 @@ fun NavigationRoot(
                     "cdt" -> navController.navigate(CdtGraphRoutes.Graph)
                     "orientation" -> navController.navigate(OrientationTestGraphRoutes.Graph)
                     "pass" -> navController.navigate(PassTestGraphRoutes.Graph)
+                    "hitber" -> navController.navigate(HitberGraphRoutes.Graph)
                     else -> {}
                 }
             },
@@ -94,6 +97,9 @@ fun NavigationRoot(
             navController = navController
         )
         passTestGraph(
+            navController = navController
+        )
+        hitberTestGraph(
             navController = navController
         )
     }

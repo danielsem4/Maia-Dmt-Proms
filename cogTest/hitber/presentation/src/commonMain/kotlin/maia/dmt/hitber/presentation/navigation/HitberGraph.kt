@@ -14,7 +14,8 @@ fun NavGraphBuilder.hitberTestGraph(
     ) {
         composable<HitberGraphRoutes.HitberLand> {
             HitberEntryRoot(
-
+                onNavigateToTest = {  },
+                onNavigateBack = { navController.popBackStack() }
             )
         }
     }

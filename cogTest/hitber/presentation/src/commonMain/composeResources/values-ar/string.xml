@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="cogTest_hitber_title">Hitber</string>
+    <string name="cogTest_hitber_next">التالي</string>
+    <string name="cogTest_hitber_start">ابدأ</string>
+    <string name="cogTest_hitber_done">تم</string>
+    <string name="cogTest_hitber_finish">إنهاء</string>
+    <string name="cogTest_hitber_good_job">عمل رائع!</string>
+    <string name="cogTest_hitber_got_it">فهمت</string>
+    <string name="cogTest_hitber_test_unavailable">الاختبار غير متاح</string>
+    <string name="cogTest_hitber_note">ملاحظة</string>
+
+    <string name="cogTest_hitber_memory_shape_title">ذاكرة الأشكال</string>
+    <string name="cogTest_hitber_naming_title">التسمية</string>
+    <string name="cogTest_hitber_sentence_title">الجملة</string>
+    <string name="cogTest_hitber_drag_and_drop_title">السحب والإسقاط</string>
+    <string name="cogTest_hitber_evaluation_pick">اختيار التقييم</string>
+    <string name="cogTest_hitber_the_shape">الشكل</string>
+    <string name="cogTest_hitber_the_shapes">الأشكال</string>
+
+    <string name="cogTest_hitber_pick_test">يرجى الضغط على التشخيص الذي تريد القيام به</string>
+    <string name="cogTest_hitber_first_mission_instructions">اختر الإجابة الصحيحة. لاختيار الإجابة، اضغط على السؤال.</string>
+    <string name="cogTest_hitber_shape_dialog_mission_instructions">سترى 5 أشكال. تذكرها للجزء التالي من المهمة. عندما تكون مستعداً، اضغط على \"متابعة\".</string>
+    <string name="cogTest_hitber_shape_mission_instructions">سترى عدة أشكال. اختر الأشكال الخمسة التي رأيتها قبل قليل بالضغط عليها. إذا كنت لا تتذكر، يمكنك التخمين. عندما تنتهي، اضغط على \"متابعة\".</string>
+    <string name="cogTest_hitber_third_mission_instructions">خلال الدقيقة القادمة، ستظهر أرقام في وسط الشاشة. في كل مرة ترى الرقم 7، اضغط على الشاشة. لبدء المهمة، اضغط على \"ابدأ\". في نهاية المهمة، ستظهر رسالة \"شكراً لك\". اضغط على \"متابعة\".</string>
+    <string name="cogTest_hitber_fourth_mission_instructions">اكتب ما يظهر في الصورة. لكتابة إجابتك، اضغط على السؤال. عندما تنتهي، اضغط على \"متابعة\".</string>
+    <string name="cogTest_hitber_fifth_mission_instructions">في هذا الجزء، عليك تكوين جملة من الكلمات المعروضة أمامك. لوضع كلمة في الجملة، اسحبها إلى المكان الذي تختاره. عندما تنتهي، اضغط على \"متابعة\".</string>
+    <string name="cogTest_hitber_repeat_sentence">اضغط على زر \"استماع\"، استمع إلى الجملة المنطوقة، ثم اضغط على زر \"تحدث\" وكرر الجملة.</string>
+    <string name="cogTest_hitber_fridge_mission_instructions">في هذا الجزء، سيُطلب منك إكمال مهمة. للاستماع إلى المهمة، اضغط على \"استماع\". عندما تنتهي، اضغط على \"متابعة\".</string>
+    <string name="cogTest_hitber_ball_drag_question1">اسحب الدائرة السوداء إلى المربع. عندما تنتهي، اضغط على \"متابعة\".</string>
+    <string name="cogTest_hitber_ball_drag_question2">اسحب الدائرة الصفراء إلى المربع. عندما تنتهي، اضغط على \"متابعة\".</string>
+    <string name="cogTest_hitber_ball_drag_question3">اسحب الدائرة الزرقاء إلى المربع. عندما تنتهي، اضغط على \"متابعة\".</string>
+    <string name="cogTest_hitber_ball_drag_question4">اسحب الدائرة الخضراء إلى المربع. عندما تنتهي، اضغط على \"متابعة\".</string>
+    <string name="cogTest_hitber_ninth_mission_instructions">في هذا الجزء، عليك تكوين جملة من الكلمات المعروضة أمامك. عندما تنتهي، اضغط على \"متابعة\".</string>
+    <string name="cogTest_hitber_tenth_mission_instructions">انسخ الصورة المعروضة على اليسار إلى وسط الشاشة. استخدم الأشكال الموجودة على اليمين. عندما تنتهي، اضغط على \"متابعة\".</string>
+
+    <string name="cogTest_hitber_which_day_is_it_today">أي يوم هو اليوم؟</string>
+    <string name="cogTest_hitber_what_month_is_it_now">أي شهر نحن الآن؟</string>
+    <string name="cogTest_hitber_in_which_year_are_we">في أي سنة نحن؟</string>
+    <string name="cogTest_hitber_in_which_country_do_you_live">في أي بلد تعيش؟</string>
+    <string name="cogTest_hitber_in_which_area_of_israel_are_you_located">في أي منطقة في إسرائيل تتواجد؟</string>
+    <string name="cogTest_hitber_in_which_city_are_you_currently">في أي مدينة تتواجد حالياً؟</string>
+    <string name="cogTest_hitber_what_is_the_name_of_this_place">ما اسم هذا المكان؟</string>
+    <string name="cogTest_hitber_why_are_you_answering_this_questionnaire">لماذا تجيب على هذا الاستبيان؟</string>
+    <string name="cogTest_hitber_you_have_to_answer_all_questions">يجب عليك الإجابة على جميع الأسئلة.</string>
+    <string name="cogTest_hitber_you_have_to_answer_this_question">يجب عليك الإجابة على هذا السؤال</string>
+    <string name="cogTest_hitber_observe_the_pictures_until_the_time_is_up">راقب الصور حتى ينتهي الوقت.</string>
+    <string name="cogTest_hitber_please_select_the_5_shapes">يرجى اختيار الأشكال الخمسة التي رأيتها قبل قليل</string>
+    <string name="cogTest_hitber_Select_5_shapes">اختر 5 أشكال</string>
+    <string name="cogTest_hitber_the_shapes_place">اسحب الأشكال إلى هنا</string>
+
+    <string name="cogTest_hitber_general_instructions1">• تستغرق المهمة حوالي 20 دقيقة.</string>
+    <string name="cogTest_hitber_general_instructions2">• يجب إكمال المهمة دفعة واحدة، دون فترات راحة.</string>
+    <string name="cogTest_hitber_general_instructions3">• يرجى قراءة التعليمات بالكامل.</string>
+    <string name="cogTest_hitber_general_instructions4">• يجب إكمال جميع المهام.</string>
+    <string name="cogTest_hitber_general_instructions5">• لسماع التعليمات، يمكنك الضغط على \"استماع\".</string>
+    <string name="cogTest_hitber_general_instructions6">• يوصى بأداء المهمة في غرفة هادئة.</string>
+
+    <string name="cogTest_hitber_nine_question_answer_version_1">بالأمس تناولت العشاء مع جدتي</string>
+    <string name="cogTest_hitber_nine_question_answer_version_2">بالأمس تناولت العشاء مع جدتي</string>
+    <string name="cogTest_hitber_nine_question_answer_version_3">تناولت العشاء مع جدتي بالأمس</string>
+    <string name="cogTest_hitber_nine_question_answer_version_4">تناولت العشاء مع جدتي بالأمس</string>
+    <string name="cogTest_hitber_gold_sentence">ليس كل ما يلمع ذهباً</string>
+    <string name="cogTest_hitber_rome_sentence">كل الطرق تؤدي إلى روما</string>
+    <string name="cogTest_hitber_apple_fall_sentence">تلك العصا من تلك العصية (أو: لا يسقط التفاح بعيداً عن الشجرة)</string>
+    <string name="cogTest_hitber_jug_sentence">لا أعذار ولا نقاش</string>
+
+    <string name="cogTest_hitber_seventh_question_0_hitber">نقل الحليب إلى المنديل الأحمر</string>
+    <string name="cogTest_hitber_seventh_question_1_hitber">نقل العنب إلى المنديل الأزرق</string>
+    <string name="cogTest_hitber_seventh_question_2_hitber">نقل الدجاج إلى المنديل الأخضر</string>
+    <string name="cogTest_hitber_seventh_question_3_hitber">نقل العلبة إلى المنديل الأصفر</string>
+
+    <string name="cogTest_hitber_repeat_the_sentence_question_1"><![CDATA[https://firebasestorage.googleapis.com/v0/b/minimental-hit.appspot.com/o/Questions%20Instructions%2Frepitition_not_all_that_shines_is_gold.mp3?alt=media&token=0751da03-782a-456b-95d5-f52db5aaa7be]]></string>
+    <string name="cogTest_hitber_repeat_the_sentence_question_2"><![CDATA[https://firebasestorage.googleapis.com/v0/b/minimental-hit.appspot.com/o/Questions%20Instructions%2Frepitition_apple_not_far_from_tree.mp3?alt=media&token=40a7f64f-17a5-40b7-8aba-ab236e0ca63e]]></string>
+    <string name="cogTest_hitber_repeat_the_sentence_question_3"><![CDATA[https://firebasestorage.googleapis.com/v0/b/minimental-hit.appspot.com/o/Questions%20Instructions%2Fno_ifs_ands_or_buts.mp3?alt=media&token=24ed1456-b1b9-45aa-8d4a-6c34067b53cb]]></string>
+    <string name="cogTest_hitber_repeat_the_sentence_question_4"><![CDATA[https://firebasestorage.googleapis.com/v0/b/minimental-hit.appspot.com/o/Questions%20Instructions%2Fall_roads_lead_to_rome.mp3?alt=media&token=3339a756-8c71-497f-ae5c-5666fe51d420]]></string>
+    <string name="cogTest_hitber_seventh_question_default_milk_to_red_napkin"><![CDATA[https://firebasestorage.googleapis.com/v0/b/minimental-hit.appspot.com/o/Three%20Phase%20Instruction%20Versions%2Fcomprehension_milk_to_red_napkin.mp3?alt=media&token=feef793a-a83e-4b84-b9dc-96cfe9420a2d]]></string>
+    <string name="cogTest_hitber_seventh_question_grapes_to_blue_napkin"><![CDATA[https://firebasestorage.googleapis.com/v0/b/minimental-hit.appspot.com/o/Three%20Phase%20Instruction%20Versions%2Fcomprehension_grapes_to_blue_napkin.mp3?alt=media&token=fcd736eb-23be-4222-b4a0-888b4daeba34]]></string>
+    <string name="cogTest_hitber_seventh_question_can_to_yellow_napkin"><![CDATA[https://firebasestorage.googleapis.com/v0/b/minimental-hit.appspot.com/o/Three%20Phase%20Instruction%20Versions%2Fcomprehension_can_to_yellow_napkin.mp3?alt=media&token=f8b3502f-9a3c-4b19-abc1-e9c85db54124]]></string>
+    <string name="cogTest_hitber_seventh_question_chicken_to_green_napkin">" "</string>
+
+    <string-array name="cogTest_hitber_country_array">
+        <item>إسرائيل</item>
+        <item>المغرب</item>
+        <item>الولايات المتحدة</item>
+        <item>العراق</item>
+        <item>لبنان</item>
+        <item>اليمن</item>
+        <item>روسيا</item>
+        <item>إثيوبيا</item>
+        <item>الاتحاد السوفيتي</item>
+    </string-array>
+</resources>

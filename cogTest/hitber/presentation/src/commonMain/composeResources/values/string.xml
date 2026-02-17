@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="cogTest_hitber_title">Hitber</string>
+    <string name="cogTest_hitber_next">Next</string>
+    <string name="cogTest_hitber_start">Start</string>
+    <string name="cogTest_hitber_done">Done</string>
+    <string name="cogTest_hitber_finish">Finish</string>
+    <string name="cogTest_hitber_good_job">Good Job!</string>
+    <string name="cogTest_hitber_got_it">Got it</string>
+    <string name="cogTest_hitber_test_unavailable">Test is unavailable</string>
+    <string name="cogTest_hitber_note">Note</string>
+
+    <string name="cogTest_hitber_memory_shape_title">Memory Shapes</string>
+    <string name="cogTest_hitber_naming_title">Naming</string>
+    <string name="cogTest_hitber_sentence_title">Sentence</string>
+    <string name="cogTest_hitber_drag_and_drop_title">Drag &amp; Drop</string>
+    <string name="cogTest_hitber_evaluation_pick">Evaluation pick</string>
+    <string name="cogTest_hitber_the_shape">The Shape</string>
+    <string name="cogTest_hitber_the_shapes">The Shapes</string>
+
+    <string name="cogTest_hitber_pick_test">Please tap on the diagnosis you want to perform</string>
+    <string name="cogTest_hitber_first_mission_instructions">Select the correct answer. To select the correct answer, click on the question.</string>
+    <string name="cogTest_hitber_shape_dialog_mission_instructions">You will see 5 shapes. Remember them for the next part of the mission. When you\'re ready, click \"Continue\".</string>
+    <string name="cogTest_hitber_shape_mission_instructions">You will see several shapes. Select the 5 shapes you saw a few minutes ago by clicking on them. If you don\'t remember, you can guess. When you\'re done, click \"Continue\".</string>
+    <string name="cogTest_hitber_third_mission_instructions">For the next minute, numbers will appear in the center of the screen. Every time you see the number 7, tap on the screen. To start the task, click \"Start\". At the end of the task, a \"Thank you\" message will appear. Click \"Continue\" to proceed.</string>
+    <string name="cogTest_hitber_fourth_mission_instructions">Write what is shown in the image. To write your answer, click on the question. When you\'re done, click \"Continue\".</string>
+    <string name="cogTest_hitber_fifth_mission_instructions">In this part, you need to create a sentence from the words displayed in front of you. To place a word in the sentence, drag it to the slot of your choice. If you want to change the position of a word that is already placed, drag it from the word bank and place it again. When you\'re done, click \"Continue\".</string>
+    <string name="cogTest_hitber_repeat_sentence">Press the Listen button, listen to the sentence being spoken, then press the Speak button and repeat the sentence.</string>
+    <string name="cogTest_hitber_fridge_mission_instructions">In this part, you will be asked to complete a task. To listen to the task, click \"Listen\". When you\'re done, click \"Continue\".</string>
+    <string name="cogTest_hitber_ball_drag_question1">Drag the black circle into the square. When you\'re done, click \"Continue\".</string>
+    <string name="cogTest_hitber_ball_drag_question2">Drag the yellow circle into the square. When you\'re done, click \"Continue\".</string>
+    <string name="cogTest_hitber_ball_drag_question3">Drag the blue circle into the square. When you\'re done, click \"Continue\".</string>
+    <string name="cogTest_hitber_ball_drag_question4">Drag the green circle into the square. When you\'re done, click \"Continue\".</string>
+    <string name="cogTest_hitber_ninth_mission_instructions">In this part, you need to create a sentence from the words displayed in front of you. To place a word in the sentence, drag it to the slot of your choice. If you want to change the position of a word that is already placed, drag it from the word bank and place it again. When you\'re done, click \"Continue\".</string>
+    <string name="cogTest_hitber_tenth_mission_instructions">Copy the image displayed on the left to the center of the screen. Use the shapes on the right to copy the image. Drag and arrange the shapes in the center of the screen. When you\'re done, click \"Continue\".</string>
+
+    <string name="cogTest_hitber_which_day_is_it_today">Which day is it today?</string>
+    <string name="cogTest_hitber_what_month_is_it_now">What month is it now?</string>
+    <string name="cogTest_hitber_in_which_year_are_we">In which year are we?</string>
+    <string name="cogTest_hitber_in_which_country_do_you_live">In which country do you live?</string>
+    <string name="cogTest_hitber_in_which_area_of_israel_are_you_located">In which area of Israel are you located?</string>
+    <string name="cogTest_hitber_in_which_city_are_you_currently">In which city are you currently?</string>
+    <string name="cogTest_hitber_what_is_the_name_of_this_place">What is the name of this place?</string>
+    <string name="cogTest_hitber_why_are_you_answering_this_questionnaire">Why are you answering this questionnaire?</string>
+    <string name="cogTest_hitber_you_have_to_answer_all_questions">You have to answer all the questions.</string>
+    <string name="cogTest_hitber_you_have_to_answer_this_question">You have to answer this question</string>
+    <string name="cogTest_hitber_observe_the_pictures_until_the_time_is_up">Observe the pictures until the time is up.</string>
+    <string name="cogTest_hitber_please_select_the_5_shapes">Please select the 5 shapes you saw few questions ago</string>
+    <string name="cogTest_hitber_Select_5_shapes">Select 5 shapes</string>
+    <string name="cogTest_hitber_the_shapes_place">Drag the shapes here</string>
+
+    <string name="cogTest_hitber_general_instructions1">• The task takes approximately 20 minutes.</string>
+    <string name="cogTest_hitber_general_instructions2">• The task should be completed in one go, without breaks.</string>
+    <string name="cogTest_hitber_general_instructions3">• Please read the instructions all the way through.</string>
+    <string name="cogTest_hitber_general_instructions4">• All tasks must be completed.</string>
+    <string name="cogTest_hitber_general_instructions5">• To hear the instructions, you can press Listen.</string>
+    <string name="cogTest_hitber_general_instructions6">• It is recommended to perform the task in a quiet room.</string>
+
+    <string name="cogTest_hitber_nine_question_answer_version_1">Yesterday I had dinner with grandma</string>
+    <string name="cogTest_hitber_nine_question_answer_version_2">Yesterday I had dinner with grandma</string>
+    <string name="cogTest_hitber_nine_question_answer_version_3">I had dinner with grandma yesterday</string>
+    <string name="cogTest_hitber_nine_question_answer_version_4">I had dinner with grandma yesterday</string>
+    <string name="cogTest_hitber_gold_sentence">Not all that glitters gold is</string>
+    <string name="cogTest_hitber_rome_sentence">All roads lead to Rome</string>
+    <string name="cogTest_hitber_apple_fall_sentence">The apple does not fall far from the tree</string>
+    <string name="cogTest_hitber_jug_sentence">No ifs ands or buts</string>
+
+    <string name="cogTest_hitber_seventh_question_0_hitber">moved the milk to the red napkin</string>
+    <string name="cogTest_hitber_seventh_question_1_hitber">moved the grape to the blue napkin</string>
+    <string name="cogTest_hitber_seventh_question_2_hitber">moved the chicken to the green napkin</string>
+    <string name="cogTest_hitber_seventh_question_3_hitber">moved the can to the yellow napkin</string>
+
+    <string name="cogTest_hitber_repeat_the_sentence_question_1"><![CDATA[https://firebasestorage.googleapis.com/v0/b/minimental-hit.appspot.com/o/Questions%20Instructions%2Frepitition_not_all_that_shines_is_gold.mp3?alt=media&token=0751da03-782a-456b-95d5-f52db5aaa7be]]></string>
+    <string name="cogTest_hitber_repeat_the_sentence_question_2"><![CDATA[https://firebasestorage.googleapis.com/v0/b/minimental-hit.appspot.com/o/Questions%20Instructions%2Frepitition_apple_not_far_from_tree.mp3?alt=media&token=40a7f64f-17a5-40b7-8aba-ab236e0ca63e]]></string>
+    <string name="cogTest_hitber_repeat_the_sentence_question_3"><![CDATA[https://firebasestorage.googleapis.com/v0/b/minimental-hit.appspot.com/o/Questions%20Instructions%2Fno_ifs_ands_or_buts.mp3?alt=media&token=24ed1456-b1b9-45aa-8d4a-6c34067b53cb]]></string>
+    <string name="cogTest_hitber_repeat_the_sentence_question_4"><![CDATA[https://firebasestorage.googleapis.com/v0/b/minimental-hit.appspot.com/o/Questions%20Instructions%2Fall_roads_lead_to_rome.mp3?alt=media&token=3339a756-8c71-497f-ae5c-5666fe51d420]]></string>
+    <string name="cogTest_hitber_seventh_question_default_milk_to_red_napkin"><![CDATA[https://firebasestorage.googleapis.com/v0/b/minimental-hit.appspot.com/o/Three%20Phase%20Instruction%20Versions%2Fcomprehension_milk_to_red_napkin.mp3?alt=media&token=feef793a-a83e-4b84-b9dc-96cfe9420a2d]]></string>
+    <string name="cogTest_hitber_seventh_question_grapes_to_blue_napkin"><![CDATA[https://firebasestorage.googleapis.com/v0/b/minimental-hit.appspot.com/o/Three%20Phase%20Instruction%20Versions%2Fcomprehension_grapes_to_blue_napkin.mp3?alt=media&token=fcd736eb-23be-4222-b4a0-888b4daeba34]]></string>
+    <string name="cogTest_hitber_seventh_question_can_to_yellow_napkin"><![CDATA[https://firebasestorage.googleapis.com/v0/b/minimental-hit.appspot.com/o/Three%20Phase%20Instruction%20Versions%2Fcomprehension_can_to_yellow_napkin.mp3?alt=media&token=f8b3502f-9a3c-4b19-abc1-e9c85db54124]]></string>
+    <string name="cogTest_hitber_seventh_question_chicken_to_green_napkin">" "</string>
+
+    <string-array name="cogTest_hitber_country_array">
+        <item>Israel</item>
+        <item>Morocco</item>
+        <item>United States</item>
+        <item>Iraq</item>
+        <item>Lebanon</item>
+        <item>Yemen</item>
+        <item>Russia</item>
+        <item>Ethiopia</item>
+        <item>USSR</item>
+    </string-array>
+
+    <string-array name="cogTest_hitber_city_array">
+        <item>Petah Tiqva</item>
+        <item>Ganei Tikva</item>
+        <item>Haifa</item>
+        <item>Tel Aviv</item>
+        <item>Rishon le Zion</item>
+        <item>Kfar Sava</item>
+        <item>Natanya</item>
+        <item>Rosh Haayin</item>
+        <item>Bnei Brak</item>
+        <item>Jerusalem</item>
+        <item>Beer-Sheba</item>
+    </string-array>
+
+    <string-array name="cogTest_hitber_hospital_array">
+        <item>Beilinson</item>
+        <item>Beit Rivka</item>
+        <item>Soroka</item>
+        <item>Hasharon</item>
+        <item>Assaf Harofeh</item>
+        <item>Rambam</item>
+        <item>Tel HaShomer</item>
+    </string-array>
+
+    <string-array name="cogTest_hitber_area_array">
+        <item>center</item>
+        <item>north</item>
+        <item>south</item>
+        <item>Western Galilee</item>
+        <item>Sharon</item>
+        <item>Hashfela</item>
+        <item>Hashomron</item>
+        <item>coastal plain</item>
+    </string-array>
+
+    <string-array name="cogTest_hitber_years_array">
+        <item>1994</item>
+        <item>2024</item>
+        <item>1964</item>
+        <item>2025</item>
+        <item>2000</item>
+        <item>2023</item>
+        <item>1924</item>
+        <item>1948</item>
+    </string-array>
+
+    <string-array name="cogTest_hitber_floor_array">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+    </string-array>
+
+    <string-array name="cogTest_hitber_survey_array">
+        <item>I don\'t know</item>
+        <item>Due to health conditions</item>
+        <item>Told me to come</item>
+        <item>Routine activity for me</item>
+    </string-array>
+
+</resources>

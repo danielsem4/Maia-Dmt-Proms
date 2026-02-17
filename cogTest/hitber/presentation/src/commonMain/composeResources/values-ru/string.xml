@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="cogTest_hitber_title">Hitber</string>
+    <string name="cogTest_hitber_next">Далее</string>
+    <string name="cogTest_hitber_start">Начать</string>
+    <string name="cogTest_hitber_done">Готово</string>
+    <string name="cogTest_hitber_finish">Завершить</string>
+    <string name="cogTest_hitber_good_job">Отличная работа!</string>
+    <string name="cogTest_hitber_got_it">Понятно</string>
+    <string name="cogTest_hitber_test_unavailable">Тест недоступен</string>
+    <string name="cogTest_hitber_note">Примечание</string>
+
+    <string name="cogTest_hitber_memory_shape_title">Запоминание фигур</string>
+    <string name="cogTest_hitber_naming_title">Называние</string>
+    <string name="cogTest_hitber_sentence_title">Предложение</string>
+    <string name="cogTest_hitber_drag_and_drop_title">Перетаскивание</string>
+    <string name="cogTest_hitber_evaluation_pick">Выбор оценки</string>
+    <string name="cogTest_hitber_the_shape">Фигура</string>
+    <string name="cogTest_hitber_the_shapes">Фигуры</string>
+
+    <string name="cogTest_hitber_pick_test">Пожалуйста, выберите диагностику, которую хотите провести</string>
+    <string name="cogTest_hitber_first_mission_instructions">Выберите правильный ответ. Чтобы выбрать ответ, нажмите на вопрос.</string>
+    <string name="cogTest_hitber_shape_dialog_mission_instructions">Вы увидите 5 фигур. Запомните их для следующей части задания. Когда будете готовы, нажмите \"Продолжить\".</string>
+    <string name="cogTest_hitber_shape_mission_instructions">Вы увидите несколько фигур. Выберите 5 фигур, которые вы видели несколько минут назад, нажав на них. Если не помните, можете угадать. Когда закончите, нажмите \"Продолжить\".</string>
+    <string name="cogTest_hitber_third_mission_instructions">В течение следующей минуты в центре экрана будут появляться числа. Каждый раз, когда увидите число 7, нажимайте на экран. Чтобы начать задание, нажмите \"Старт\". В конце появится сообщение \"Спасибо\". Нажмите \"Продолжить\".</string>
+    <string name="cogTest_hitber_fourth_mission_instructions">Напишите, что изображено на картинке. Чтобы написать ответ, нажмите на вопрос. Когда закончите, нажмите \"Продолжить\".</string>
+    <string name="cogTest_hitber_fifth_mission_instructions">В этой части нужно составить предложение из предложенных слов. Чтобы поставить слово, перетащите его на выбранное место. Если хотите изменить позицию, перетащите слово снова. Когда закончите, нажмите \"Продолжить\".</string>
+    <string name="cogTest_hitber_repeat_sentence">Нажмите кнопку \"Слушать\", прослушайте предложение, затем нажмите кнопку \"Говорить\" и повторите его.</string>
+    <string name="cogTest_hitber_fridge_mission_instructions">В этой части вам нужно будет выполнить задание. Чтобы прослушать задание, нажмите \"Слушать\". Когда закончите, нажмите \"Продолжить\".</string>
+    <string name="cogTest_hitber_ball_drag_question1">Перетащите черный круг в квадрат. Когда закончите, нажмите \"Продолжить\".</string>
+    <string name="cogTest_hitber_ball_drag_question2">Перетащите желтый круг в квадрат. Когда закончите, нажмите \"Продолжить\".</string>
+    <string name="cogTest_hitber_ball_drag_question3">Перетащите синий круг в квадрат. Когда закончите, нажмите \"Продолжить\".</string>
+    <string name="cogTest_hitber_ball_drag_question4">Перетащите зеленый круг в квадрат. Когда закончите, нажмите \"Продолжить\".</string>
+    <string name="cogTest_hitber_ninth_mission_instructions">В этой части нужно составить предложение из предложенных слов. Чтобы поставить слово, перетащите его на выбранное место. Когда закончите, нажмите \"Продолжить\".</string>
+    <string name="cogTest_hitber_tenth_mission_instructions">Скопируйте изображение слева в центр экрана. Используйте фигуры справа. Перетащите и расположите их. Когда закончите, нажмите \"Продолжить\".</string>
+
+    <string name="cogTest_hitber_which_day_is_it_today">Какой сегодня день?</string>
+    <string name="cogTest_hitber_what_month_is_it_now">Какой сейчас месяц?</string>
+    <string name="cogTest_hitber_in_which_year_are_we">В каком мы сейчас году?</string>
+    <string name="cogTest_hitber_in_which_country_do_you_live">В какой стране вы живете?</string>
+    <string name="cogTest_hitber_in_which_area_of_israel_are_you_located">В каком районе Израиля вы находитесь?</string>
+    <string name="cogTest_hitber_in_which_city_are_you_currently">В каком городе вы сейчас находитесь?</string>
+    <string name="cogTest_hitber_what_is_the_name_of_this_place">Как называется это место?</string>
+    <string name="cogTest_hitber_why_are_you_answering_this_questionnaire">Почему вы отвечаете на этот опросник?</string>
+    <string name="cogTest_hitber_you_have_to_answer_all_questions">Вы должны ответить на все вопросы.</string>
+    <string name="cogTest_hitber_you_have_to_answer_this_question">Вы должны ответить на этот вопрос</string>
+    <string name="cogTest_hitber_observe_the_pictures_until_the_time_is_up">Смотрите на картинки, пока не выйдет время.</string>
+    <string name="cogTest_hitber_please_select_the_5_shapes">Пожалуйста, выберите 5 фигур, которые вы видели ранее</string>
+    <string name="cogTest_hitber_Select_5_shapes">Выберите 5 фигур</string>
+    <string name="cogTest_hitber_the_shapes_place">Перетащите фигуры сюда</string>
+
+    <string name="cogTest_hitber_general_instructions1">• Задание занимает около 20 минут.</string>
+    <string name="cogTest_hitber_general_instructions2">• Задание нужно выполнить за один раз, без перерывов.</string>
+    <string name="cogTest_hitber_general_instructions3">• Пожалуйста, прочтите инструкции до конца.</string>
+    <string name="cogTest_hitber_general_instructions4">• Все задания должны быть выполнены.</string>
+    <string name="cogTest_hitber_general_instructions5">• Чтобы прослушать инструкции, нажмите \"Слушать\".</string>
+    <string name="cogTest_hitber_general_instructions6">• Рекомендуется выполнять задание в тихой комнате.</string>
+
+    <string name="cogTest_hitber_nine_question_answer_version_1">Вчера я ужинал с бабушкой</string>
+    <string name="cogTest_hitber_nine_question_answer_version_2">Вчера я ужинал с бабушкой</string>
+    <string name="cogTest_hitber_nine_question_answer_version_3">Я ужинал с бабушкой вчера</string>
+    <string name="cogTest_hitber_nine_question_answer_version_4">Я ужинал с бабушкой вчера</string>
+    <string name="cogTest_hitber_gold_sentence">Не все то золото, что блестит</string>
+    <string name="cogTest_hitber_rome_sentence">Все дороги ведут в Рим</string>
+    <string name="cogTest_hitber_apple_fall_sentence">Яблоко от яблони недалеко падает</string>
+    <string name="cogTest_hitber_jug_sentence">Никаких «если» и «но»</string>
+
+    <string name="cogTest_hitber_seventh_question_0_hitber">переставил молоко на красную салфетку</string>
+    <string name="cogTest_hitber_seventh_question_1_hitber">переставил виноград на синюю салфетку</string>
+    <string name="cogTest_hitber_seventh_question_2_hitber">переставил курицу на зеленую салфетку</string>
+    <string name="cogTest_hitber_seventh_question_3_hitber">переставил банку на желтую салфетку</string>
+
+    <string name="cogTest_hitber_repeat_the_sentence_question_1"><![CDATA[https://firebasestorage.googleapis.com/v0/b/minimental-hit.appspot.com/o/Questions%20Instructions%2Frepitition_not_all_that_shines_is_gold.mp3?alt=media&token=0751da03-782a-456b-95d5-f52db5aaa7be]]></string>
+    <string name="cogTest_hitber_repeat_the_sentence_question_2"><![CDATA[https://firebasestorage.googleapis.com/v0/b/minimental-hit.appspot.com/o/Questions%20Instructions%2Frepitition_apple_not_far_from_tree.mp3?alt=media&token=40a7f64f-17a5-40b7-8aba-ab236e0ca63e]]></string>
+    <string name="cogTest_hitber_repeat_the_sentence_question_3"><![CDATA[https://firebasestorage.googleapis.com/v0/b/minimental-hit.appspot.com/o/Questions%20Instructions%2Fno_ifs_ands_or_buts.mp3?alt=media&token=24ed1456-b1b9-45aa-8d4a-6c34067b53cb]]></string>
+    <string name="cogTest_hitber_repeat_the_sentence_question_4"><![CDATA[https://firebasestorage.googleapis.com/v0/b/minimental-hit.appspot.com/o/Questions%20Instructions%2Fall_roads_lead_to_rome.mp3?alt=media&token=3339a756-8c71-497f-ae5c-5666fe51d420]]></string>
+    <string name="cogTest_hitber_seventh_question_default_milk_to_red_napkin"><![CDATA[https://firebasestorage.googleapis.com/v0/b/minimental-hit.appspot.com/o/Three%20Phase%20Instruction%20Versions%2Fcomprehension_milk_to_red_napkin.mp3?alt=media&token=feef793a-a83e-4b84-b9dc-96cfe9420a2d]]></string>
+    <string name="cogTest_hitber_seventh_question_grapes_to_blue_napkin"><![CDATA[https://firebasestorage.googleapis.com/v0/b/minimental-hit.appspot.com/o/Three%20Phase%20Instruction%20Versions%2Fcomprehension_grapes_to_blue_napkin.mp3?alt=media&token=fcd736eb-23be-4222-b4a0-888b4daeba34]]></string>
+    <string name="cogTest_hitber_seventh_question_can_to_yellow_napkin"><![CDATA[https://firebasestorage.googleapis.com/v0/b/minimental-hit.appspot.com/o/Three%20Phase%20Instruction%20Versions%2Fcomprehension_can_to_yellow_napkin.mp3?alt=media&token=f8b3502f-9a3c-4b19-abc1-e9c85db54124]]></string>
+    <string name="cogTest_hitber_seventh_question_chicken_to_green_napkin">" "</string>
+
+    <string-array name="cogTest_hitber_country_array">
+        <item>Израиль</item>
+        <item>Марокко</item>
+        <item>США</item>
+        <item>Ирак</item>
+        <item>Ливан</item>
+        <item>Йемен</item>
+        <item>Россия</item>
+        <item>Эфиопия</item>
+        <item>СССР</item>
+    </string-array>
+
+    <string-array name="cogTest_hitber_area_array">
+        <item>Центр</item>
+        <item>Север</item>
+        <item>Юг</item>
+        <item>Западная Галилея</item>
+        <item>Шарон</item>
+        <item>Шфела</item>
+        <item>Шомрон</item>
+        <item>Прибрежная равнина</item>
+    </string-array>
+
+    <string-array name="cogTest_hitber_survey_array">
+        <item>Я не знаю</item>
+        <item>По состоянию здоровья</item>
+        <item>Мне сказали прийти</item>
+        <item>Обычное дело для меня</item>
+    </string-array>
+</resources>

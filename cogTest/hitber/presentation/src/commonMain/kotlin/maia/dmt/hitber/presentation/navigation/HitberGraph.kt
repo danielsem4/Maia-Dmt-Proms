@@ -5,6 +5,10 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
 import maia.dmt.hitber.presentation.hitberEntry.HitberEntryRoot
+import maia.dmt.hitber.presentation.hitberFirstQuestion.HitberFirstQuestionRoot
+import maia.dmt.hitber.presentation.hitberSecondQuestion.HitberSecondQuestionRoot
+import maia.dmt.hitber.presentation.hitberShapeMemoryScreen.HitberShapeShowRoot
+import maia.dmt.hitber.presentation.hitberThiredQuestion.HitberThiredQuestionRoot
 
 fun NavGraphBuilder.hitberTestGraph(
     navController: NavController,
@@ -14,9 +18,38 @@ fun NavGraphBuilder.hitberTestGraph(
     ) {
         composable<HitberGraphRoutes.HitberLand> {
             HitberEntryRoot(
-                onNavigateToTest = {  },
+                onNavigateToTest = { navController.navigate(HitberGraphRoutes.HitberFirstQuestion) },
                 onNavigateBack = { navController.popBackStack() }
             )
         }
+
+        composable<HitberGraphRoutes.HitberFirstQuestion> {
+            HitberFirstQuestionRoot(
+                onNavigateToNextScreen = { navController.navigate(HitberGraphRoutes.HitberShapeShow) },
+                onNavigateBack = { navController.popBackStack() }
+            )
+        }
+
+        composable<HitberGraphRoutes.HitberShapeShow> {
+            HitberShapeShowRoot(
+                onNavigateNext = { navController.navigate(HitberGraphRoutes.HitberSecondQuestion) },
+//                onNavigateBack = { navController.popBackStack() }
+            )
+        }
+
+        composable<HitberGraphRoutes.HitberSecondQuestion> {
+            HitberSecondQuestionRoot(
+
+            )
+        }
+
+        composable<HitberGraphRoutes.HitberThirdQuestion> {
+            HitberThiredQuestionRoot(
+
+            )
+        }
+
+
+
     }
 }

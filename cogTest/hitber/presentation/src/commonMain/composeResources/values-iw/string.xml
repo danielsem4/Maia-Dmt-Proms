@@ -20,19 +20,19 @@
 
     <string name="cogTest_hitber_pick_test">אנא לחץ על האבחון שברצונך לבצע</string>
     <string name="cogTest_hitber_first_mission_instructions">בחר את התשובה הנכונה. כדי לבחור את התשובה הנכונה, לחץ על השאלה.</string>
-    <string name="cogTest_hitber_shape_dialog_mission_instructions">יופיעו לפניך 5 צורות. זכור אותן לחלק הבא של המשימה. כשתהיה מוכן, לחץ על \"המשך\".</string>
-    <string name="cogTest_hitber_shape_mission_instructions">יופיעו לפניך מספר צורות. בחר את 5 הצורות שראית לפני מספר דקות על ידי לחיצה עליהן. אם אינך זוכר, ניתן לנחש. כשתסיים, לחץ על \"המשך\".</string>
-    <string name="cogTest_hitber_third_mission_instructions">במהלך הדקה הקרובה, מספרים יופיעו במרכז המסך. בכל פעם שתראה את המספר 7, לחץ על המסך. כדי להתחיל במשימה, לחץ על \"התחל\". בסיום המשימה תופיע הודעת \"תודה\". לחץ על \"המשך\" כדי להתקדם.</string>
-    <string name="cogTest_hitber_fourth_mission_instructions">כתוב מה מופיע בתמונה. כדי לכתוב את תשובתך, לחץ על השאלה. כשתסיים, לחץ על \"המשך\".</string>
-    <string name="cogTest_hitber_fifth_mission_instructions">בחלק זה עליך להרכיב משפט מהמילים המוצגות לפניך. כדי למקם מילה במשפט, גרור אותה למקום שבחרת. אם ברצונך לשנות מיקום של מילה שכבר הונחה, גרור אותה שוב ממחסן המילים ומקם אותה מחדש. כשתסיים, לחץ על \"המשך\".</string>
-    <string name="cogTest_hitber_repeat_sentence">לחץ על כפתור \"האזן\", הקשב למשפט הנאמר, ולאחר מכן לחץ על כפתור \"דבר\" וחזור על המשפט.</string>
-    <string name="cogTest_hitber_fridge_mission_instructions">בחלק זה תתבקש לבצע משימה. כדי לשמוע את המשימה, לחץ על \"האזן\". כשתסיים, לחץ על \"המשך\".</string>
-    <string name="cogTest_hitber_ball_drag_question1">גרור את העיגול השחור לתוך הריבוע. כשתסיים, לחץ על \"המשך\".</string>
-    <string name="cogTest_hitber_ball_drag_question2">גרור את העיגול הצהוב לתוך הריבוע. כשתסיים, לחץ על \"המשך\".</string>
-    <string name="cogTest_hitber_ball_drag_question3">גרור את העיגול הכחול לתוך הריבוע. כשתסיים, לחץ על \"המשך\".</string>
-    <string name="cogTest_hitber_ball_drag_question4">גרור את העיגול הירוק לתוך הריבוע. כשתסיים, לחץ על \"המשך\".</string>
-    <string name="cogTest_hitber_ninth_mission_instructions">בחלק זה עליך להרכיב משפט מהמילים המוצגות לפניך. כדי למקם מילה במשפט, גרור אותה למקום שבחרת. אם ברצונך לשנות מיקום של מילה שכבר הונחה, גרור אותה שוב ממחסן המילים ומקם אותה מחדש. כשתסיים, לחץ על \"המשך\".</string>
-    <string name="cogTest_hitber_tenth_mission_instructions">העתק את התמונה המוצגת משמאל למרכז המסך. השתמש בצורות שמימין כדי להעתיק את התמונה. גרור וסדר את הצורות במרכז המסך. כשתסיים, לחץ על \"המשך\".</string>
+    <string name="cogTest_hitber_shape_dialog_mission_instructions">יופיעו לפניך 5 צורות. זכור אותן לחלק הבא של המשימה. כשתהיה מוכן, לחץ על המשך.</string>
+    <string name="cogTest_hitber_shape_mission_instructions">יופיעו לפניך מספר צורות. בחר את 5 הצורות שראית לפני מספר דקות על ידי לחיצה עליהן. אם אינך זוכר, ניתן לנחש. כשתסיים, לחץ על המשך.</string>
+    <string name="cogTest_hitber_third_mission_instructions">במהלך הדקה הקרובה, מספרים יופיעו במרכז המסך. בכל פעם שתראה את המספר 7, לחץ על המסך. כדי להתחיל במשימה, לחץ על התחל. בסיום המשימה תופיע הודעת ,ודה". לחץ על המשך כדי להתקדם.</string>
+    <string name="cogTest_hitber_fourth_mission_instructions">כתוב מה מופיע בתמונה. כדי לכתוב את תשובתך, לחץ על השאלה. כשתסיים, לחץ על המשך.</string>
+    <string name="cogTest_hitber_fifth_mission_instructions">בחלק זה עליך להרכיב משפט מהמילים המוצגות לפניך. כדי למקם מילה במשפט, גרור אותה למקום שבחרת. אם ברצונך לשנות מיקום של מילה שכבר הונחה, גרור אותה שוב ממחסן המילים ומקם אותה מחדש. כשתסיים, לחץ על המשך.</string>
+    <string name="cogTest_hitber_repeat_sentence">לחץ על כפתור האזן", הקשב למשפט הנאמר, ולאחר מכן לחץ על כפתור דבר וחזור על המשפט.</string>
+    <string name="cogTest_hitber_fridge_mission_instructions">בחלק זה תתבקש לבצע משימה. כדי לשמוע את המשימה, לחץ על האזן. כשתסיים, לחץ על המשך.</string>
+    <string name="cogTest_hitber_ball_drag_question1">גרור את העיגול השחור לתוך הריבוע. כשתסיים, לחץ על המשך.</string>
+    <string name="cogTest_hitber_ball_drag_question2">גרור את העיגול הצהוב לתוך הריבוע. כשתסיים, לחץ על המשך.</string>
+    <string name="cogTest_hitber_ball_drag_question3">גרור את העיגול הכחול לתוך הריבוע. כשתסיים, לחץ על המשך.</string>
+    <string name="cogTest_hitber_ball_drag_question4">גרור את העיגול הירוק לתוך הריבוע. כשתסיים, לחץ על המשך.</string>
+    <string name="cogTest_hitber_ninth_mission_instructions">בחלק זה עליך להרכיב משפט מהמילים המוצגות לפניך. כדי למקם מילה במשפט, גרור אותה למקום שבחרת. אם ברצונך לשנות מיקום של מילה שכבר הונחה, גרור אותה שוב ממחסן המילים ומקם אותה מחדש. כשתסיים, לחץ על המשך.</string>
+    <string name="cogTest_hitber_tenth_mission_instructions">העתק את התמונה המוצגת משמאל למרכז המסך. השתמש בצורות שמימין כדי להעתיק את התמונה. גרור וסדר את הצורות במרכז המסך. כשתסיים, לחץ על המשך.</string>
 
     <string name="cogTest_hitber_which_day_is_it_today">איזה יום היום?</string>
     <string name="cogTest_hitber_what_month_is_it_now">איזה חודש עכשיו?</string>
@@ -53,7 +53,7 @@
     <string name="cogTest_hitber_general_instructions2">• יש להשלים את המשימה ברצף, ללא הפסקות.</string>
     <string name="cogTest_hitber_general_instructions3">• אנא קרא את ההוראות עד הסוף.</string>
     <string name="cogTest_hitber_general_instructions4">• יש להשלים את כל המשימות.</string>
-    <string name="cogTest_hitber_general_instructions5">• כדי לשמוע את ההוראות, ניתן ללחוץ על \"האזן\".</string>
+    <string name="cogTest_hitber_general_instructions5">• כדי לשמוע את ההוראות, ניתן ללחוץ על האזן".</string>
     <string name="cogTest_hitber_general_instructions6">• מומלץ לבצע את המשימה בחדר שקט.</string>
 
     <string name="cogTest_hitber_nine_question_answer_version_1">אתמול אכלתי ארוחת ערב עם סבתא</string>

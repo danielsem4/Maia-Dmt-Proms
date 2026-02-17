@@ -148,7 +148,6 @@ fun HitberEntryScreen(
                     }
                 }
 
-                // Loading overlay
                 if (state.isLoading) {
                     Box(
                         modifier = Modifier.fillMaxSize(),

@@ -9,6 +9,7 @@ import maia.dmt.hitber.presentation.hitberFourthQuestion.HitberFourthQuestionVie
 import maia.dmt.hitber.presentation.hitberNinthQuestion.HitberNinthQuestionViewModel
 import maia.dmt.hitber.presentation.hitberSecondQuestion.HitberSecondQuestionViewModel
 import maia.dmt.hitber.presentation.hitberSeventhQuestion.HitberSeventhQuestionViewModel
+import maia.dmt.hitber.presentation.hitberShapeMemoryScreen.HitberShapeShowViewModel
 import maia.dmt.hitber.presentation.hitberSixthQuestion.HitberSixthQuestionViewModel
 import maia.dmt.hitber.presentation.hitberTenthQuestion.HitberTenthQuestionViewModel
 import maia.dmt.hitber.presentation.hitberThiredQuestion.HitberThiredQuestionViewModel
@@ -29,6 +30,7 @@ val hitberPresentationModule = module {
     viewModelOf(::HitberNinthQuestionViewModel)
     viewModelOf(::HitberTenthQuestionViewModel)
     viewModelOf(::HitberEndViewModel)
+    viewModelOf(::HitberShapeShowViewModel)
 
     single { HitberSessionManager() }
 }

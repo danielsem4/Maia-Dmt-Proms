@@ -14,6 +14,9 @@ interface HitberGraphRoutes {
     data object HitberFirstQuestion: HitberGraphRoutes
 
     @Serializable
+    data object HitberShapeShow: HitberGraphRoutes
+
+    @Serializable
     data object HitberSecondQuestion: HitberGraphRoutes
 
     @Serializable

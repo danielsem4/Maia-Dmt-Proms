@@ -28,6 +28,7 @@ import dmtproms.cogtest.hitber.presentation.generated.resources.cogTest_hitber_g
 import dmtproms.cogtest.hitber.presentation.generated.resources.cogTest_hitber_general_instructions4
 import dmtproms.cogtest.hitber.presentation.generated.resources.cogTest_hitber_general_instructions5
 import dmtproms.cogtest.hitber.presentation.generated.resources.cogTest_hitber_general_instructions6
+import dmtproms.cogtest.hitber.presentation.generated.resources.cogTest_hitber_note
 import dmtproms.cogtest.hitber.presentation.generated.resources.cogTest_hitber_start
 import dmtproms.cogtest.hitber.presentation.generated.resources.cogTest_hitber_test_unavailable
 import dmtproms.cogtest.hitber.presentation.generated.resources.cogTest_hitber_title
@@ -89,10 +90,12 @@ fun HitberEntryScreen(
                 ) {
 
                     Text(
-                        text = "Note",
+                        text = stringResource(Res.string.cogTest_hitber_note),
                         style = MaterialTheme.typography.titleLarge,
                         textAlign = TextAlign.Center,
-                        modifier = Modifier.fillMaxWidth(),
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(16.dp),
                         fontWeight = FontWeight.Bold,
                         color = Color.Red
                     )

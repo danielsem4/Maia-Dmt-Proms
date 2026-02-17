@@ -8,6 +8,7 @@
     <string name="cogTest_hitber_good_job">Отличная работа!</string>
     <string name="cogTest_hitber_got_it">Понятно</string>
     <string name="cogTest_hitber_test_unavailable">Тест недоступен</string>
+    <string name="cogTest_hitber_note">Примечание</string>
 
     <string name="cogTest_hitber_memory_shape_title">Запоминание фигур</string>
     <string name="cogTest_hitber_naming_title">Называние</string>

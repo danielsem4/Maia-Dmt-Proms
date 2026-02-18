@@ -1,5 +1,6 @@
 package maia.dmt.hitber.presentation.hitberFourthQuestion
 
 interface HitberFourthQuestionAction {
-    data object OnBackClick: HitberFourthQuestionAction
+    data class OnWordSelected(val word: HitberWord) : HitberFourthQuestionAction
+    data object OnNextClick : HitberFourthQuestionAction
 }

@@ -49,6 +49,19 @@
     <string name="cogTest_hitber_Select_5_shapes">Выберите 5 фигур</string>
     <string name="cogTest_hitber_the_shapes_place">Перетащите фигуры сюда</string>
 
+    <string name="cogTest_hitber_word_pencil">Карандаш</string>
+    <string name="cogTest_hitber_word_ruler">Линейка</string>
+    <string name="cogTest_hitber_word_table">Стол</string>
+    <string name="cogTest_hitber_word_ball">Мяч</string>
+    <string name="cogTest_hitber_word_balloon">Воздушный шар</string>
+    <string name="cogTest_hitber_word_lemon">Лимон</string>
+    <string name="cogTest_hitber_word_key">Ключ</string>
+    <string name="cogTest_hitber_word_watch">Часы</string>
+    <string name="cogTest_hitber_word_glasses">Очки</string>
+    <string name="cogTest_hitber_word_shoe">Обувь</string>
+    <string name="cogTest_hitber_word_phone">Телефон</string>
+    <string name="cogTest_hitber_word_book">Книга</string>
+
     <string name="cogTest_hitber_general_instructions1">• Задание занимает около 20 минут.</string>
     <string name="cogTest_hitber_general_instructions2">• Задание нужно выполнить за один раз, без перерывов.</string>
     <string name="cogTest_hitber_general_instructions3">• Пожалуйста, прочтите инструкции до конца.</string>

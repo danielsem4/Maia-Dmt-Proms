@@ -1,9 +1,10 @@
 package maia.dmt.hitber.presentation.hitberFirstQuestion
 
-import maia.dmt.core.domain.dto.evaluation.Evaluation
+import maia.dmt.core.domain.dto.evaluation.EvaluationObject
 
 data class HitberFirstQuestionState(
-    val isLoading: Boolean = false,
-    val error: String? = null,
-    val evaluation: Evaluation? = null,
+    val questions: List<EvaluationObject> = emptyList(),
+    val currentBatchIndex: Int = 0,
+    val answers: Map<Int, String> = emptyMap(),
+    val hasAttemptedCurrentBatch: Boolean = false,
 )

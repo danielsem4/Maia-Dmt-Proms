@@ -1,9 +1,10 @@
 package maia.dmt.hitber.presentation.hitberSecondQuestion
 
-import maia.dmt.core.domain.dto.evaluation.Evaluation
+import maia.dmt.hitber.domain.model.HitberShape
 
 data class HitberSecondQuestionState(
-    val isLoading: Boolean = false,
-    val error: String? = null,
-    val evaluation: Evaluation? = null,
+    val visibleShapes: List<HitberShape> = HitberShape.entries.toList(),
+    val selectedShapes: Set<HitberShape> = emptySet(),
+    val attemptNumber: Int = 1,
+    val showErrorDialog: Boolean = false,
 )

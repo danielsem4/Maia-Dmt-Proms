@@ -50,6 +50,19 @@
     <string name="cogTest_hitber_Select_5_shapes">Select 5 shapes</string>
     <string name="cogTest_hitber_the_shapes_place">Drag the shapes here</string>
 
+    <string name="cogTest_hitber_word_pencil">Pencil</string>
+    <string name="cogTest_hitber_word_ruler">Ruler</string>
+    <string name="cogTest_hitber_word_table">Table</string>
+    <string name="cogTest_hitber_word_ball">Ball</string>
+    <string name="cogTest_hitber_word_balloon">Balloon</string>
+    <string name="cogTest_hitber_word_lemon">Lemon</string>
+    <string name="cogTest_hitber_word_key">Key</string>
+    <string name="cogTest_hitber_word_watch">Watch</string>
+    <string name="cogTest_hitber_word_glasses">Glasses</string>
+    <string name="cogTest_hitber_word_shoe">Shoe</string>
+    <string name="cogTest_hitber_word_phone">Phone</string>
+    <string name="cogTest_hitber_word_book">Book</string>
+
     <string name="cogTest_hitber_general_instructions1">• The task takes approximately 20 minutes.</string>
     <string name="cogTest_hitber_general_instructions2">• The task should be completed in one go, without breaks.</string>
     <string name="cogTest_hitber_general_instructions3">• Please read the instructions all the way through.</string>

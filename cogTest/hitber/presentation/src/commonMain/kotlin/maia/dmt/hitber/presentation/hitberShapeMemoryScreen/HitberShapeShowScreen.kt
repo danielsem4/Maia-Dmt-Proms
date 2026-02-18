@@ -21,7 +21,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import dmtproms.cogtest.hitber.presentation.generated.resources.Res
 import dmtproms.cogtest.hitber.presentation.generated.resources.cogTest_hitber_Select_5_shapes
 import dmtproms.cogtest.hitber.presentation.generated.resources.cogTest_hitber_memory_shape_title
@@ -39,10 +38,11 @@ import maia.dmt.core.designsystem.theme.extended
 import maia.dmt.hitber.domain.model.HitberShape
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
+import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
 fun HitberShapeShowRoot(
-    viewModel: HitberShapeShowViewModel = viewModel { HitberShapeShowViewModel() },
+    viewModel: HitberShapeShowViewModel = koinViewModel(),
     onNavigateNext: () -> Unit = {}
 ) {
     val state by viewModel.state.collectAsState()

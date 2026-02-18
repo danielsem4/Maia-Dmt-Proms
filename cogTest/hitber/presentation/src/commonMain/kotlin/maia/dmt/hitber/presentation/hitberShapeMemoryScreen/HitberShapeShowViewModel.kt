@@ -13,8 +13,11 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import maia.dmt.hitber.domain.model.HitberShape
+import maia.dmt.hitber.presentation.session.HitberSessionManager
 
-class HitberShapeShowViewModel : ViewModel() {
+class HitberShapeShowViewModel(
+    private val sessionManager: HitberSessionManager,
+) : ViewModel() {
 
     private val _state = MutableStateFlow(HitberShapeShowState())
     val state: StateFlow<HitberShapeShowState> = _state.asStateFlow()
@@ -35,6 +38,8 @@ class HitberShapeShowViewModel : ViewModel() {
             HitberShapeShowEvent.OnConfirmDialog -> dismissDialogAndStartGame()
             HitberShapeShowEvent.OnDialogDismiss -> dismissDialogAndStartGame()
             HitberShapeShowEvent.OnNextClick -> {
+                dialogTimerJob?.cancel()
+                screenTimerJob?.cancel()
                 viewModelScope.launch { _action.emit(HitberShapeShowAction.NavigateNext) }
             }
         }
@@ -45,6 +50,7 @@ class HitberShapeShowViewModel : ViewModel() {
             pair.random()
         }
         _state.update { it.copy(selectedShapes = randomShapes) }
+        sessionManager.setTargetShapes(randomShapes)
     }
 
     private fun startDialogTimer() {

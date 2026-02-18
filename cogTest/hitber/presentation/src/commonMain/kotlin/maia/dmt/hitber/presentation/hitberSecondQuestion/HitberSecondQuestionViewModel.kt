@@ -49,7 +49,7 @@ class HitberSecondQuestionViewModel(
     private fun handleNextClick() {
         val currentState = _state.value
 
-        if (currentState.selectedShapes.size < MAX_SELECTIONS) {
+        if (currentState.selectedShapes.size < MAX_SELECTIONS && currentState.attemptNumber == 1) {
             _state.update { it.copy(showErrorDialog = true) }
             return
         }
@@ -57,6 +57,7 @@ class HitberSecondQuestionViewModel(
         val targetShapes = sessionManager.sessionData.value.targetShapes.toSet()
         val selectedShapes = currentState.selectedShapes
         val wrongCount = selectedShapes.count { it !in targetShapes }
+
         val isCorrect = selectedShapes == targetShapes
 
         val attempt = HitberQ2Attempt(

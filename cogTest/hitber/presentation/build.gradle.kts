@@ -17,6 +17,9 @@ kotlin {
                 implementation(compose.components.uiToolingPreview)
 
                 implementation(libs.bundles.koin.common)
+
+                implementation(libs.coil.compose)
+                implementation(libs.coil.network.ktor)
             }
         }
 

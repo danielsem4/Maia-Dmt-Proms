@@ -11,6 +11,8 @@ import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import maia.dmt.hitber.presentation.session.HitberQ3Reaction
+import maia.dmt.hitber.presentation.session.HitberQ3Result
 import maia.dmt.hitber.presentation.session.HitberSessionManager
 import kotlin.time.TimeMark
 import kotlin.time.TimeSource
@@ -65,6 +67,15 @@ class HitberThirdQuestionViewModel(
                 _state.update { it.copy(currentNumber = null) }
                 delay(BLANK_DURATION_MS)
             }
+
+            sessionManager.recordQ3Result(
+                HitberQ3Result(
+                    numberSequence = shuffledNumbers,
+                    reactions = reactionResults.map { r ->
+                        HitberQ3Reaction(number = r.number, timeMs = r.timeMs)
+                    },
+                )
+            )
 
             _state.update { it.copy(isPlaying = false, isFinished = true) }
         }

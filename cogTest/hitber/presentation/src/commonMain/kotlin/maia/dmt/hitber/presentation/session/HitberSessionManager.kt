@@ -41,6 +41,18 @@ class HitberSessionManager {
         _sessionData.update { it.copy(q2Attempts = it.q2Attempts + attempt) }
     }
 
+    fun recordQ3Result(result: HitberQ3Result) {
+        _sessionData.update { it.copy(q3Result = result) }
+    }
+
+    fun setTestVersion(version: Int) {
+        _sessionData.update { it.copy(testVersion = version) }
+    }
+
+    fun recordQ4Result(result: HitberQ4Result) {
+        _sessionData.update { it.copy(q4Result = result) }
+    }
+
     fun clear() {
         _evaluation.update { null }
         _isLoading.update { false }

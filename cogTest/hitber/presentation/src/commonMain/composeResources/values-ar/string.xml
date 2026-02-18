@@ -49,6 +49,19 @@
     <string name="cogTest_hitber_Select_5_shapes">اختر 5 أشكال</string>
     <string name="cogTest_hitber_the_shapes_place">اسحب الأشكال إلى هنا</string>
 
+    <string name="cogTest_hitber_word_pencil">قلم رصاص</string>
+    <string name="cogTest_hitber_word_ruler">مسطرة</string>
+    <string name="cogTest_hitber_word_table">طاولة</string>
+    <string name="cogTest_hitber_word_ball">كرة</string>
+    <string name="cogTest_hitber_word_balloon">بالون</string>
+    <string name="cogTest_hitber_word_lemon">ليمون</string>
+    <string name="cogTest_hitber_word_key">مفتاح</string>
+    <string name="cogTest_hitber_word_watch">ساعة</string>
+    <string name="cogTest_hitber_word_glasses">نظارات</string>
+    <string name="cogTest_hitber_word_shoe">حذاء</string>
+    <string name="cogTest_hitber_word_phone">هاتف</string>
+    <string name="cogTest_hitber_word_book">كتاب</string>
+
     <string name="cogTest_hitber_general_instructions1">• تستغرق المهمة حوالي 20 دقيقة.</string>
     <string name="cogTest_hitber_general_instructions2">• يجب إكمال المهمة دفعة واحدة، دون فترات راحة.</string>
     <string name="cogTest_hitber_general_instructions3">• يرجى قراءة التعليمات بالكامل.</string>

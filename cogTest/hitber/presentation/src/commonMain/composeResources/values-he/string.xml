@@ -49,6 +49,19 @@
     <string name="cogTest_hitber_Select_5_shapes">בחר 5 צורות</string>
     <string name="cogTest_hitber_the_shapes_place">גרור את הצורות לכאן</string>
 
+    <string name="cogTest_hitber_word_pencil">עיפרון</string>
+    <string name="cogTest_hitber_word_ruler">סרגל</string>
+    <string name="cogTest_hitber_word_table">שולחן</string>
+    <string name="cogTest_hitber_word_ball">כדור</string>
+    <string name="cogTest_hitber_word_balloon">בלון</string>
+    <string name="cogTest_hitber_word_lemon">לימון</string>
+    <string name="cogTest_hitber_word_key">מפתח</string>
+    <string name="cogTest_hitber_word_watch">שעון</string>
+    <string name="cogTest_hitber_word_glasses">משקפיים</string>
+    <string name="cogTest_hitber_word_shoe">נעל</string>
+    <string name="cogTest_hitber_word_phone">טלפון</string>
+    <string name="cogTest_hitber_word_book">ספר</string>
+
     <string name="cogTest_hitber_general_instructions1">• המשימה אורכת כ-20 דקות.</string>
     <string name="cogTest_hitber_general_instructions2">• יש להשלים את המשימה ברצף, ללא הפסקות.</string>
     <string name="cogTest_hitber_general_instructions3">• אנא קרא את ההוראות עד הסוף.</string>

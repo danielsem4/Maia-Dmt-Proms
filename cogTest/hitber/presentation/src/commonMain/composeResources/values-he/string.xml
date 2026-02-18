@@ -22,7 +22,7 @@
     <string name="cogTest_hitber_first_mission_instructions">בחר את התשובה הנכונה. כדי לבחור את התשובה הנכונה, לחץ על השאלה.</string>
     <string name="cogTest_hitber_shape_dialog_mission_instructions">יופיעו לפניך 5 צורות. זכור אותן לחלק הבא של המשימה. כשתהיה מוכן, לחץ על המשך.</string>
     <string name="cogTest_hitber_shape_mission_instructions">יופיעו לפניך מספר צורות. בחר את 5 הצורות שראית לפני מספר דקות על ידי לחיצה עליהן. אם אינך זוכר, ניתן לנחש. כשתסיים, לחץ על המשך.</string>
-    <string name="cogTest_hitber_third_mission_instructions">במהלך הדקה הקרובה, מספרים יופיעו במרכז המסך. בכל פעם שתראה את המספר 7, לחץ על המסך. כדי להתחיל במשימה, לחץ על התחל. בסיום המשימה תופיע הודעת ,ודה". לחץ על המשך כדי להתקדם.</string>
+    <string name="cogTest_hitber_third_mission_instructions">במהלך הדקה הקרובה, מספרים יופיעו במרכז המסך. בכל פעם שתראה את המספר 7, לחץ על המסך. כדי להתחיל במשימה, לחץ על התחל. בסיום המשימה תופיע הודעת ,תודה. לחץ על המשך כדי להתקדם.</string>
     <string name="cogTest_hitber_fourth_mission_instructions">כתוב מה מופיע בתמונה. כדי לכתוב את תשובתך, לחץ על השאלה. כשתסיים, לחץ על המשך.</string>
     <string name="cogTest_hitber_fifth_mission_instructions">בחלק זה עליך להרכיב משפט מהמילים המוצגות לפניך. כדי למקם מילה במשפט, גרור אותה למקום שבחרת. אם ברצונך לשנות מיקום של מילה שכבר הונחה, גרור אותה שוב ממחסן המילים ומקם אותה מחדש. כשתסיים, לחץ על המשך.</string>
     <string name="cogTest_hitber_repeat_sentence">לחץ על כפתור האזן", הקשב למשפט הנאמר, ולאחר מכן לחץ על כפתור דבר וחזור על המשפט.</string>

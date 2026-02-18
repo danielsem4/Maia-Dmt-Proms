@@ -12,7 +12,7 @@ import maia.dmt.hitber.presentation.hitberSeventhQuestion.HitberSeventhQuestionV
 import maia.dmt.hitber.presentation.hitberShapeMemoryScreen.HitberShapeShowViewModel
 import maia.dmt.hitber.presentation.hitberSixthQuestion.HitberSixthQuestionViewModel
 import maia.dmt.hitber.presentation.hitberTenthQuestion.HitberTenthQuestionViewModel
-import maia.dmt.hitber.presentation.hitberThiredQuestion.HitberThiredQuestionViewModel
+import maia.dmt.hitber.presentation.hitberThiredQuestion.HitberThirdQuestionViewModel
 import maia.dmt.hitber.presentation.session.HitberSessionManager
 import org.koin.core.module.dsl.viewModelOf
 import org.koin.dsl.module
@@ -21,7 +21,7 @@ val hitberPresentationModule = module {
     viewModelOf(::HitberEntryViewModel)
     viewModelOf(::HitberFirstQuestionViewModel)
     viewModelOf(::HitberSecondQuestionViewModel)
-    viewModelOf(::HitberThiredQuestionViewModel)
+    viewModelOf(::HitberThirdQuestionViewModel)
     viewModelOf(::HitberFourthQuestionViewModel)
     viewModelOf(::HitberFifthQuestionViewModel)
     viewModelOf(::HitberSixthQuestionViewModel)

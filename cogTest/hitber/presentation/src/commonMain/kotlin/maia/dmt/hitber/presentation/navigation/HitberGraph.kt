@@ -8,7 +8,7 @@ import maia.dmt.hitber.presentation.hitberEntry.HitberEntryRoot
 import maia.dmt.hitber.presentation.hitberFirstQuestion.HitberFirstQuestionRoot
 import maia.dmt.hitber.presentation.hitberSecondQuestion.HitberSecondQuestionRoot
 import maia.dmt.hitber.presentation.hitberShapeMemoryScreen.HitberShapeShowRoot
-import maia.dmt.hitber.presentation.hitberThiredQuestion.HitberThiredQuestionRoot
+import maia.dmt.hitber.presentation.hitberThiredQuestion.HitberThirdQuestionRoot
 
 fun NavGraphBuilder.hitberTestGraph(
     navController: NavController,
@@ -44,8 +44,8 @@ fun NavGraphBuilder.hitberTestGraph(
         }
 
         composable<HitberGraphRoutes.HitberThirdQuestion> {
-            HitberThiredQuestionRoot(
-
+            HitberThirdQuestionRoot(
+                onNavigateToNextScreen = { navController.navigate(HitberGraphRoutes.HitberFourthQuestion) },
             )
         }
 

@@ -9,6 +9,7 @@
     <string name="cogTest_hitber_got_it">فهمت</string>
     <string name="cogTest_hitber_test_unavailable">الاختبار غير متاح</string>
     <string name="cogTest_hitber_note">ملاحظة</string>
+    <string name="cogTest_hitber_listen">הקשב/י</string>
 
     <string name="cogTest_hitber_memory_shape_title">ذاكرة الأشكال</string>
     <string name="cogTest_hitber_naming_title">التسمية</string>

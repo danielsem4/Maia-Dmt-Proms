@@ -9,6 +9,7 @@
     <string name="cogTest_hitber_got_it">הבנתי</string>
     <string name="cogTest_hitber_test_unavailable">הבדיקה לא זמינה</string>
     <string name="cogTest_hitber_note">שימו לב</string>
+    <string name="cogTest_hitber_listen">הקשב/י</string>
 
     <string name="cogTest_hitber_memory_shape_title">זיכרון צורות</string>
     <string name="cogTest_hitber_naming_title">שימום</string>

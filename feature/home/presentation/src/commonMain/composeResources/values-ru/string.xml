@@ -28,6 +28,7 @@
     <string name="module_sensors">Датчики</string>
 
     <string name="module_fmpt">FMPT</string>
+    <string name="no_messages">אין הודעות חדשות</string>
 
 
 </resources>

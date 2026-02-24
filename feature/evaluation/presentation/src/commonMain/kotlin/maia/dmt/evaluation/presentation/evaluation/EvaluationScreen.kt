@@ -1,6 +1,8 @@
 package maia.dmt.evaluation.presentation.evaluation
 
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -84,6 +86,8 @@ fun EvaluationScreen(
 ) {
     val questions = getCurrentScreenQuestions()
 
+    val scrollState = rememberScrollState()
+
     DmtBaseScreen(
         titleText = stringResource(Res.string.evaluation_headline),
         onIconClick = { onAction(EvaluationAction.OnBackClick) },
@@ -100,7 +104,8 @@ fun EvaluationScreen(
             ) {
                 Column(
                     modifier = Modifier
-                        .fillMaxWidth(),
+                        .fillMaxWidth()
+                        .verticalScroll(scrollState),
                     verticalArrangement = Arrangement.spacedBy(16.dp)
                 ) {
                     questions.forEach { question ->

@@ -100,7 +100,7 @@ fun HomeScreen(
                         DmtMessageSection(
                             modifier = Modifier.weight(0.5f),
                             title = stringResource(Res.string.messages),
-                            messages = listOf(Message("Test message", MessageType.MESSAGE))
+                            messages = emptyList()
                         )
                         Spacer(modifier = Modifier.padding(12.dp))
                         if (state.isLoadingModules) {

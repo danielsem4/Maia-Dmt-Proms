@@ -28,5 +28,6 @@
     <string name="module_sensors">Sensors</string>
 
     <string name="module_fmpt">FMPT</string>
+    <string name="no_messages">No Messages</string>
 
 </resources>

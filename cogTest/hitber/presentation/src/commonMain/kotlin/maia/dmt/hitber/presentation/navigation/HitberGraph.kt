@@ -59,7 +59,7 @@ fun NavGraphBuilder.hitberTestGraph(
 
         composable<HitberGraphRoutes.HitberFourthQuestion> {
             HitberFourthQuestionRoot(
-                onNavigateToNextScreen = { navController.navigate(HitberGraphRoutes.HitberFifthQuestion) },
+                onNavigateToNextScreen = { navController.navigate(HitberGraphRoutes.HitberSeventhQuestion) },
             )
         }
 
@@ -72,7 +72,9 @@ fun NavGraphBuilder.hitberTestGraph(
         }
 
         composable<HitberGraphRoutes.HitberSeventhQuestion> {
-            HitberSeventhQuestionRoot()
+            HitberSeventhQuestionRoot(
+                onNavigateToNextScreen = { navController.navigate(HitberGraphRoutes.HitberEighthQuestion) },
+            )
         }
 
         composable<HitberGraphRoutes.HitberEighthQuestion> {

@@ -33,6 +33,12 @@
     <string name="cogTest_hitber_ball_drag_question2">Drag the yellow circle into the square. When you\'re done, click \"Continue\".</string>
     <string name="cogTest_hitber_ball_drag_question3">Drag the blue circle into the square. When you\'re done, click \"Continue\".</string>
     <string name="cogTest_hitber_ball_drag_question4">Drag the green circle into the square. When you\'re done, click \"Continue\".</string>
+
+    <string name="cogTest_hitber_eight_ball_title">Color Balls</string>
+    <string name="cogTest_hitber_eight_ball_instruction_red">Drag the red circle into the square. When you\'re done, click \"Next\".</string>
+    <string name="cogTest_hitber_eight_ball_instruction_black">Drag the black circle into the square. When you\'re done, click \"Next\".</string>
+    <string name="cogTest_hitber_eight_ball_instruction_green">Drag the green circle into the square. When you\'re done, click \"Next\".</string>
+    <string name="cogTest_hitber_eight_ball_instruction_yellow">Drag the yellow circle into the square. When you\'re done, click \"Next\".</string>
     <string name="cogTest_hitber_ninth_mission_instructions">In this part, you need to create a sentence from the words displayed in front of you. To place a word in the sentence, drag it to the slot of your choice. If you want to change the position of a word that is already placed, drag it from the word bank and place it again. When you\'re done, click \"Continue\".</string>
     <string name="cogTest_hitber_tenth_mission_instructions">Copy the image displayed on the left to the center of the screen. Use the shapes on the right to copy the image. Drag and arrange the shapes in the center of the screen. When you\'re done, click \"Continue\".</string>
 

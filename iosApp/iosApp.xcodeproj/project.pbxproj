@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		239D022C2EAA13D9004C153C /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = 239D022B2EAA13D9004C153C /* FirebaseCore */; };
-		239D022E2EAA13D9004C153C /* FirebaseInAppMessaging-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = 239D022D2EAA13D9004C153C /* FirebaseInAppMessaging-Beta */; };
 		239D02302EAA13D9004C153C /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 239D022F2EAA13D9004C153C /* FirebaseMessaging */; };
 		239D023B2EAA39E1004C153C /* ComposeApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 239D023A2EAA39E1004C153C /* ComposeApp.framework */; };
 /* End PBXBuildFile section */
@@ -51,7 +50,6 @@
 			files = (
 				239D02302EAA13D9004C153C /* FirebaseMessaging in Frameworks */,
 				239D022C2EAA13D9004C153C /* FirebaseCore in Frameworks */,
-				239D022E2EAA13D9004C153C /* FirebaseInAppMessaging-Beta in Frameworks */,
 				239D023B2EAA39E1004C153C /* ComposeApp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -108,7 +106,6 @@
 			name = iosApp;
 			packageProductDependencies = (
 				239D022B2EAA13D9004C153C /* FirebaseCore */,
-				239D022D2EAA13D9004C153C /* FirebaseInAppMessaging-Beta */,
 				239D022F2EAA13D9004C153C /* FirebaseMessaging */,
 			);
 			productName = iosApp;
@@ -440,11 +437,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 239D022A2EAA13D9004C153C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseCore;
-		};
-		239D022D2EAA13D9004C153C /* FirebaseInAppMessaging-Beta */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 239D022A2EAA13D9004C153C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = "FirebaseInAppMessaging-Beta";
 		};
 		239D022F2EAA13D9004C153C /* FirebaseMessaging */ = {
 			isa = XCSwiftPackageProductDependency;

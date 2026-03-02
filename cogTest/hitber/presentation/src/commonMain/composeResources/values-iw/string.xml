@@ -32,6 +32,12 @@
     <string name="cogTest_hitber_ball_drag_question2">גרור את העיגול הצהוב לתוך הריבוע. כשתסיים, לחץ על המשך.</string>
     <string name="cogTest_hitber_ball_drag_question3">גרור את העיגול הכחול לתוך הריבוע. כשתסיים, לחץ על המשך.</string>
     <string name="cogTest_hitber_ball_drag_question4">גרור את העיגול הירוק לתוך הריבוע. כשתסיים, לחץ על המשך.</string>
+
+    <string name="cogTest_hitber_eight_ball_title">כדורי צבע</string>
+    <string name="cogTest_hitber_eight_ball_instruction_red">גרור את העיגול האדום לתוך הריבוע. כשתסיים, לחץ על הבא.</string>
+    <string name="cogTest_hitber_eight_ball_instruction_black">גרור את העיגול השחור לתוך הריבוע. כשתסיים, לחץ על הבא.</string>
+    <string name="cogTest_hitber_eight_ball_instruction_green">גרור את העיגול הירוק לתוך הריבוע. כשתסיים, לחץ על הבא.</string>
+    <string name="cogTest_hitber_eight_ball_instruction_yellow">גרור את העיגול הצהוב לתוך הריבוע. כשתסיים, לחץ על הבא.</string>
     <string name="cogTest_hitber_ninth_mission_instructions">בחלק זה עליך להרכיב משפט מהמילים המוצגות לפניך. כדי למקם מילה במשפט, גרור אותה למקום שבחרת. אם ברצונך לשנות מיקום של מילה שכבר הונחה, גרור אותה שוב ממחסן המילים ומקם אותה מחדש. כשתסיים, לחץ על המשך.</string>
     <string name="cogTest_hitber_tenth_mission_instructions">העתק את התמונה המוצגת משמאל למרכז המסך. השתמש בצורות שמימין כדי להעתיק את התמונה. גרור וסדר את הצורות במרכז המסך. כשתסיים, לחץ על המשך.</string>
 

@@ -8,6 +8,13 @@ data class HitberSessionData(
     val q2Attempts: List<HitberQ2Attempt> = emptyList(),
     val q3Result: HitberQ3Result? = null,
     val q4Result: HitberQ4Result? = null,
+    val q8Result: HitberQ8Result? = null,
+)
+
+data class HitberQ8Result(
+    val targetBallColor: String,
+    val droppedBallColor: String,
+    val isCorrect: Boolean,
 )
 
 data class HitberQ2Attempt(

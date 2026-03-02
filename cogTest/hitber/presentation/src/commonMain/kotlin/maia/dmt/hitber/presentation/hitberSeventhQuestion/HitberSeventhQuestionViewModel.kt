@@ -61,6 +61,7 @@ class HitberSeventhQuestionViewModel(
             }
         }
 
+        // Initialize items with zero offset; position will be set when layout is ready
         val items = FridgeItemType.entries.mapIndexed { index, type ->
             FridgeItem(id = index, type = type, currentOffset = Offset.Zero, isInFridge = true)
         }
@@ -80,9 +81,14 @@ class HitberSeventhQuestionViewModel(
             is HitberSeventhQuestionAction.OnFridgeClick -> onFridgeClick()
             is HitberSeventhQuestionAction.OnNapkinPositioned -> onNapkinPositioned(action.color, action.rect)
             is HitberSeventhQuestionAction.OnContainerPositioned -> onContainerPositioned(action.offset)
-            is HitberSeventhQuestionAction.OnLayoutReady -> onLayoutReady(action.fridgeCenterX, action.screenHeightPx)
+            is HitberSeventhQuestionAction.OnLayoutReady -> onLayoutReady(
+                action.fridgeWidthPx,
+                action.screenHeightPx,
+                action.initialPositions
+            )
             is HitberSeventhQuestionAction.OnItemDrag -> onItemDrag(action.id, action.dragAmount)
-            is HitberSeventhQuestionAction.OnItemDrop -> onItemDrop(action.id)
+            is HitberSeventhQuestionAction.OnListenClick -> onListenClick()
+            is HitberSeventhQuestionAction.OnAudioComplete -> onAudioComplete()
             is HitberSeventhQuestionAction.OnNextClick -> navigateNext()
         }
     }
@@ -101,38 +107,40 @@ class HitberSeventhQuestionViewModel(
         _state.update { it.copy(containerRootOffset = offset) }
     }
 
-    private fun onLayoutReady(fridgeCenterX: Float, screenHeightPx: Float) {
+    private fun onLayoutReady(
+        fridgeWidthPx: Float,
+        screenHeightPx: Float,
+        initialPositions: Map<FridgeItemType, Offset>
+    ) {
         if (itemsInitialized) return
         itemsInitialized = true
 
-        val spacingX = fridgeCenterX / 3.5f
-        val spacingY = screenHeightPx * 0.22f
-        val startX = fridgeCenterX * 0.05f
-        val startY = screenHeightPx * 0.08f
+        _state.update { currentState ->
+            val updatedItems = currentState.items.map { item ->
+                // Look up the specific position for this item type
+                val specificPosition = initialPositions[item.type] ?: Offset.Zero
 
-        val items = FridgeItemType.entries.mapIndexed { index, type ->
-            val col = index % 3
-            val row = index / 3
-            FridgeItem(
-                id = index,
-                type = type,
-                currentOffset = Offset(
-                    x = startX + col * spacingX,
-                    y = startY + row * spacingY,
-                ),
-                isInFridge = true,
+                item.copy(
+                    currentOffset = specificPosition,
+                    isInFridge = true
+                )
+            }
+
+            currentState.copy(
+                items = updatedItems,
+                fridgeWidthPx = fridgeWidthPx
             )
         }
-        _state.update { it.copy(items = items) }
     }
 
     private fun onItemDrag(id: Int, dragAmount: Offset) {
         _state.update { current ->
             val updatedItems = current.items.map { item ->
                 if (item.id == id) {
+                    val newOffset = item.currentOffset + dragAmount
                     item.copy(
-                        currentOffset = item.currentOffset + dragAmount,
-                        isInFridge = false,
+                        currentOffset = newOffset,
+                        isInFridge = newOffset.x < current.fridgeWidthPx,
                     )
                 } else item
             }
@@ -140,20 +148,26 @@ class HitberSeventhQuestionViewModel(
         }
     }
 
-    private fun onItemDrop(id: Int) {
-        val currentState = _state.value
-        val item = currentState.items.find { it.id == id } ?: return
-        if (item.type != currentState.targetItem) return
-        val targetBounds = currentState.napkinBounds[currentState.targetNapkin] ?: return
+    private fun onListenClick() {
+        _state.update { it.copy(isPlayingAudio = true) }
+    }
 
-        // Check if item top-left corner (in root coords) lands within the napkin bounds (with tolerance)
-        val itemPositionInRoot = currentState.containerRootOffset + item.currentOffset
-        if (targetBounds.inflate(DROP_TOLERANCE).contains(itemPositionInRoot)) {
-            _state.update { it.copy(isCompleted = true) }
-        }
+    private fun onAudioComplete() {
+        _state.update { it.copy(isPlayingAudio = false) }
     }
 
     private fun navigateNext() {
+        val currentState = _state.value
+        val targetItem = currentState.items.find { it.type == currentState.targetItem }
+        val targetBounds = currentState.napkinBounds[currentState.targetNapkin]
+
+        if (targetItem != null && targetBounds != null) {
+            val itemSizePx = currentState.fridgeWidthPx * targetItem.type.relativeSize()
+            val itemCenter = targetItem.currentOffset + Offset(itemSizePx / 2f, itemSizePx / 2f)
+            val itemCenterInRoot = currentState.containerRootOffset + itemCenter
+            val isCorrect = targetBounds.inflate(DROP_TOLERANCE).contains(itemCenterInRoot)
+        }
+
         viewModelScope.launch {
             eventChannel.send(HitberSeventhQuestionEvent.NavigateToNextScreen)
         }
@@ -168,6 +182,6 @@ class HitberSeventhQuestionViewModel(
             "https://firebasestorage.googleapis.com/v0/b/minimental-hit.appspot.com/o/Three%20Phase%20Instruction%20Versions%2Fcomprehension_grapes_to_blue_napkin.mp3?alt=media&token=fcd736eb-23be-4222-b4a0-888b4daeba34"
         private const val URL_CAN_TO_YELLOW =
             "https://firebasestorage.googleapis.com/v0/b/minimental-hit.appspot.com/o/Three%20Phase%20Instruction%20Versions%2Fcomprehension_can_to_yellow_napkin.mp3?alt=media&token=f8b3502f-9a3c-4b19-abc1-e9c85db54124"
-        private const val URL_CHICKEN_TO_GREEN = "" // Audio not yet available
+        private const val URL_CHICKEN_TO_GREEN = ""
     }
 }

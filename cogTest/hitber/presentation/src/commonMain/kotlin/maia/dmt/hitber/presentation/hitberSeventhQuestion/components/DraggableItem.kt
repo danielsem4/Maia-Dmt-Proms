@@ -30,10 +30,10 @@ fun DraggableItem(
     item: FridgeItem,
     isFridgeOpen: Boolean,
     onDrag: (dragAmount: Offset) -> Unit,
-    onDragEnd: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    val alpha = if (item.isInFridge && !isFridgeOpen) 0f else 1f
+    // Item is visible when the fridge is open OR when it has been dragged outside the fridge area
+    val isVisible = isFridgeOpen || !item.isInFridge
 
     Image(
         painter = painterResource(item.type.toDrawable()),
@@ -41,16 +41,16 @@ fun DraggableItem(
         contentScale = ContentScale.Fit,
         modifier = modifier
             .size(ITEM_SIZE_DP)
-            .alpha(alpha)
-            .pointerInput(item.id) {
-                detectDragGestures(
-                    onDrag = { change, dragAmount ->
+            .alpha(if (isVisible) 1f else 0f)
+            .then(
+                // Block gestures on invisible items so the user cannot accidentally drag them
+                if (isVisible) Modifier.pointerInput(item.id) {
+                    detectDragGestures { change, dragAmount ->
                         change.consume()
                         onDrag(dragAmount)
-                    },
-                    onDragEnd = { onDragEnd() },
-                )
-            },
+                    }
+                } else Modifier,
+            ),
     )
 }
 

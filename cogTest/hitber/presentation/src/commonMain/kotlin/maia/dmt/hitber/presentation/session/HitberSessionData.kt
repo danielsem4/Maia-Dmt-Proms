@@ -9,6 +9,13 @@ data class HitberSessionData(
     val q3Result: HitberQ3Result? = null,
     val q4Result: HitberQ4Result? = null,
     val q8Result: HitberQ8Result? = null,
+    val q9Result: HitberQ9Result? = null,
+)
+
+data class HitberQ9Result(
+    val constructedSentence: String,
+    val correctSentence: String,
+    val isCorrect: Boolean,
 )
 
 data class HitberQ8Result(

@@ -11,6 +11,7 @@ import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import maia.dmt.hitber.presentation.session.HitberQ7Result
 import maia.dmt.hitber.presentation.session.HitberSessionManager
 
 class HitberSeventhQuestionViewModel(
@@ -161,12 +162,20 @@ class HitberSeventhQuestionViewModel(
         val targetItem = currentState.items.find { it.type == currentState.targetItem }
         val targetBounds = currentState.napkinBounds[currentState.targetNapkin]
 
-        if (targetItem != null && targetBounds != null) {
+        val isCorrect = if (targetItem != null && targetBounds != null) {
             val itemSizePx = currentState.fridgeWidthPx * targetItem.type.relativeSize()
             val itemCenter = targetItem.currentOffset + Offset(itemSizePx / 2f, itemSizePx / 2f)
             val itemCenterInRoot = currentState.containerRootOffset + itemCenter
-            val isCorrect = targetBounds.inflate(DROP_TOLERANCE).contains(itemCenterInRoot)
-        }
+            targetBounds.inflate(DROP_TOLERANCE).contains(itemCenterInRoot)
+        } else false
+
+        sessionManager.recordQ7Result(
+            HitberQ7Result(
+                targetItem = currentState.targetItem.name,
+                targetNapkin = currentState.targetNapkin.name,
+                isCorrect = isCorrect,
+            )
+        )
 
         viewModelScope.launch {
             eventChannel.send(HitberSeventhQuestionEvent.NavigateToNextScreen)

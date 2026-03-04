@@ -77,10 +77,18 @@
     <string name="cogTest_hitber_general_instructions5">• To hear the instructions, you can press Listen.</string>
     <string name="cogTest_hitber_general_instructions6">• It is recommended to perform the task in a quiet room.</string>
 
-    <string name="cogTest_hitber_nine_question_answer_version_1">Yesterday I had dinner with grandma</string>
-    <string name="cogTest_hitber_nine_question_answer_version_2">Yesterday I had dinner with grandma</string>
-    <string name="cogTest_hitber_nine_question_answer_version_3">I had dinner with grandma yesterday</string>
-    <string name="cogTest_hitber_nine_question_answer_version_4">I had dinner with grandma yesterday</string>
+    <string name="cogTest_hitber_nine_question_title">Sentence Construction</string>
+    <string name="cogTest_hitber_nine_question_instruction">Arrange the words to form a sentence. When you\'re done, click \"Next\".</string>
+    <string name="cogTest_hitber_nine_question_answer_version_1">אתמול אכלתי ארוחת ערב עם סבתא</string>
+    <string name="cogTest_hitber_nine_question_answer_version_2">אתמול אכלתי ארוחת ערב עם סבתא</string>
+    <string name="cogTest_hitber_nine_question_answer_version_3">אכלתי ארוחת ערב עם סבתא אתמול</string>
+    <string name="cogTest_hitber_nine_question_answer_version_4">אכלתי ארוחת ערב עם סבתא אתמול</string>
+    <string name="cogTest_hitber_nine_word_yesterday">אתמול</string>
+    <string name="cogTest_hitber_nine_word_ate">אכלתי</string>
+    <string name="cogTest_hitber_nine_word_dinner">ארוחת</string>
+    <string name="cogTest_hitber_nine_word_evening">ערב</string>
+    <string name="cogTest_hitber_nine_word_with">עם</string>
+    <string name="cogTest_hitber_nine_word_grandma">סבתא</string>
     <string name="cogTest_hitber_gold_sentence">Not all that glitters gold is</string>
     <string name="cogTest_hitber_rome_sentence">All roads lead to Rome</string>
     <string name="cogTest_hitber_apple_fall_sentence">The apple does not fall far from the tree</string>

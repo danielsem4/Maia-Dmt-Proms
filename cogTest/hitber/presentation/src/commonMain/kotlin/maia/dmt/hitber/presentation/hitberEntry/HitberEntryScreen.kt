@@ -12,11 +12,9 @@ import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -32,11 +30,11 @@ import dmtproms.cogtest.hitber.presentation.generated.resources.cogTest_hitber_n
 import dmtproms.cogtest.hitber.presentation.generated.resources.cogTest_hitber_start
 import dmtproms.cogtest.hitber.presentation.generated.resources.cogTest_hitber_test_unavailable
 import dmtproms.cogtest.hitber.presentation.generated.resources.cogTest_hitber_title
-import kotlinx.coroutines.flow.Flow
 import maia.dmt.core.designsystem.components.buttons.DmtButton
 import maia.dmt.core.designsystem.components.cards.DmtParagraphCard
 import maia.dmt.core.designsystem.components.layouts.DmtBaseScreen
 import maia.dmt.core.designsystem.theme.DmtTheme
+import maia.dmt.core.presentation.util.ObserveAsEvents
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.koin.compose.viewmodel.koinViewModel
@@ -97,7 +95,7 @@ fun HitberEntryScreen(
                             .fillMaxWidth()
                             .padding(16.dp),
                         fontWeight = FontWeight.Bold,
-                        color = Color.Red
+                        color = MaterialTheme.colorScheme.error
                     )
 
                     Column(
@@ -159,16 +157,6 @@ fun HitberEntryScreen(
             }
         }
     )
-}
-
-@Composable
-private fun <T> ObserveAsEvents(
-    flow: Flow<T>,
-    onEvent: (T) -> Unit
-) {
-    LaunchedEffect(flow) {
-        flow.collect(onEvent)
-    }
 }
 
 @Composable

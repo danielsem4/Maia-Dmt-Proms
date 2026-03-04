@@ -1,31 +1,207 @@
 package maia.dmt.hitber.presentation.hitberNinthQuestion
 
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.absoluteOffset
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.boundsInRoot
+import androidx.compose.ui.layout.onGloballyPositioned
+import androidx.compose.ui.layout.positionInRoot
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.IntOffset
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.zIndex
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import dmtproms.cogtest.hitber.presentation.generated.resources.Res
+import dmtproms.cogtest.hitber.presentation.generated.resources.cogTest_hitber_next
+import dmtproms.cogtest.hitber.presentation.generated.resources.cogTest_hitber_nine_question_instruction
+import dmtproms.cogtest.hitber.presentation.generated.resources.cogTest_hitber_nine_question_title
+import maia.dmt.core.designsystem.components.buttons.DmtButton
 import maia.dmt.core.designsystem.components.layouts.DmtBaseScreen
 import maia.dmt.core.designsystem.theme.DmtTheme
+import maia.dmt.core.presentation.util.ObserveAsEvents
+import maia.dmt.hitber.presentation.hitberNinthQuestion.components.DraggableWordCard
+import maia.dmt.hitber.presentation.hitberNinthQuestion.components.HitberWordDropZone
+import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
+import org.koin.compose.viewmodel.koinViewModel
+import kotlin.math.roundToInt
+
+private const val WORD_CARD_FRACTION = 0.28f
+private const val DROP_ZONE_FRACTION = 0.50f
 
 @Composable
-fun HitberNinthQuestionRoot() {
+fun HitberNinthQuestionRoot(
+    onNavigateToNextScreen: () -> Unit = {},
+    viewModel: HitberNinthQuestionViewModel = koinViewModel(),
+) {
+    val state by viewModel.state.collectAsStateWithLifecycle()
 
-}
-
-@Composable
-fun HitberNinthQuestionScreen() {
-
-    DmtBaseScreen(
-        titleText = "Title",
-        onIconClick = {},
-        content = {
-
+    ObserveAsEvents(viewModel.events) { event ->
+        when (event) {
+            is HitberNinthQuestionEvent.NavigateToNextScreen -> onNavigateToNextScreen()
         }
+    }
+
+    HitberNinthQuestionScreen(
+        state = state,
+        onAction = viewModel::onAction,
     )
 }
 
 @Composable
+fun HitberNinthQuestionScreen(
+    state: HitberNinthQuestionState,
+    onAction: (HitberNinthQuestionAction) -> Unit,
+) {
+    DmtBaseScreen(
+        titleText = stringResource(Res.string.cogTest_hitber_nine_question_title),
+        onIconClick = {},
+        content = {
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(horizontal = 16.dp),
+                verticalArrangement = Arrangement.spacedBy(0.dp),
+            ) {
+                Text(
+                    text = stringResource(Res.string.cogTest_hitber_nine_question_instruction),
+                    style = MaterialTheme.typography.titleLarge,
+                    fontWeight = FontWeight.Bold,
+                    textAlign = TextAlign.Center,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(vertical = 16.dp),
+                )
+
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .weight(1f),
+                ) {
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .fillMaxHeight(DROP_ZONE_FRACTION)
+                            .align(Alignment.BottomCenter),
+                    ) {
+                        state.dropZones.forEach { zone ->
+                            val placedText = zone.placedWordId
+                                ?.let { id -> state.words.find { it.id == id }?.text }
+                            HitberWordDropZone(
+                                text = placedText,
+                                isHovered = state.hoveredZoneId == zone.id,
+                                modifier = Modifier
+                                    .weight(1f)
+                                    .fillMaxHeight()
+                                    .padding(horizontal = 2.dp)
+                                    .onGloballyPositioned { coords ->
+                                        onAction(
+                                            HitberNinthQuestionAction.OnDropZonePositioned(
+                                                zone.id,
+                                                coords.boundsInRoot(),
+                                            )
+                                        )
+                                    },
+                            )
+                        }
+                    }
+
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .fillMaxHeight(WORD_CARD_FRACTION)
+                            .align(Alignment.TopCenter),
+                    ) {
+                        state.words.forEach { word ->
+                            DraggableWordCard(
+                                word = word,
+                                onDrag = { dragAmount ->
+                                    onAction(HitberNinthQuestionAction.OnWordDrag(word.id, dragAmount))
+                                },
+                                onDragEnd = {
+                                    onAction(HitberNinthQuestionAction.OnWordDrop(word.id))
+                                },
+                                modifier = Modifier
+                                    .weight(1f)
+                                    .fillMaxHeight()
+                                    .padding(horizontal = 2.dp)
+                                    .zIndex(if (word.isDragging) 1f else 0f)
+                                    .onGloballyPositioned { coords ->
+                                        onAction(
+                                            HitberNinthQuestionAction.OnWordPositioned(
+                                                word.id,
+                                                coords.positionInRoot(),
+                                            )
+                                        )
+                                    }
+                                    .absoluteOffset {
+                                        IntOffset(
+                                            x = word.dragDelta.x.roundToInt(),
+                                            y = word.dragDelta.y.roundToInt(),
+                                        )
+                                    },
+                            )
+                        }
+                    }
+                }
+
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .weight(1f),
+                    contentAlignment = Alignment.BottomCenter,
+                ) {
+                    DmtButton(
+                        text = stringResource(Res.string.cogTest_hitber_next),
+                        onClick = { onAction(HitberNinthQuestionAction.OnNextClick) },
+                        modifier = Modifier.padding(bottom = 16.dp),
+                    )
+                }
+            }
+        },
+    )
+}
+
 @Preview
-fun HitberNinthQuestionPreview() {
+@Composable
+private fun HitberNinthQuestionPreview() {
     DmtTheme {
-        HitberNinthQuestionScreen()
+        HitberNinthQuestionScreen(
+            state = HitberNinthQuestionState(
+                words = listOf("ערב", "עם", "אכלתי", "ארוחת", "סבתא", "אתמול")
+                    .mapIndexed { i, t -> WordCard(id = i, text = t) },
+                dropZones = (0 until 6).map { DropZone(id = it) },
+            ),
+            onAction = {},
+        )
+    }
+}
+
+@Preview
+@Composable
+private fun HitberNinthQuestionPartiallyFilledPreview() {
+    DmtTheme {
+        val words = listOf("ערב", "עם", "אכלתי", "ארוחת", "סבתא", "אתמול")
+            .mapIndexed { i, t -> WordCard(id = i, text = t, placedInZoneId = if (i < 3) i else null) }
+        val zones = (0 until 6).map { id ->
+            DropZone(id = id, placedWordId = if (id < 3) id else null)
+        }
+        HitberNinthQuestionScreen(
+            state = HitberNinthQuestionState(words = words, dropZones = zones),
+            onAction = {},
+        )
     }
 }

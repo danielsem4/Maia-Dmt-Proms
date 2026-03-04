@@ -53,8 +53,16 @@ class HitberSessionManager {
         _sessionData.update { it.copy(q4Result = result) }
     }
 
+    fun recordQ7Result(result: HitberQ7Result) {
+        _sessionData.update { it.copy(q7Result = result) }
+    }
+
     fun recordQ8Result(result: HitberQ8Result) {
         _sessionData.update { it.copy(q8Result = result) }
+    }
+
+    fun recordQ9Result(result: HitberQ9Result) {
+        _sessionData.update { it.copy(q9Result = result) }
     }
 
     fun clear() {

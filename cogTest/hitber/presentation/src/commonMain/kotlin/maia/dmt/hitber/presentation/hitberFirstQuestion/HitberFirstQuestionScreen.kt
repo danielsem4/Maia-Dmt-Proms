@@ -8,7 +8,6 @@ import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -34,13 +33,13 @@ import dmtproms.cogtest.hitber.presentation.generated.resources.cogTest_hitber_t
 import dmtproms.cogtest.hitber.presentation.generated.resources.cogTest_hitber_you_have_to_answer_all_questions
 import maia.dmt.core.designsystem.components.buttons.DmtButton
 import maia.dmt.core.designsystem.components.layouts.DmtBaseScreen
-import maia.dmt.core.designsystem.components.select.DmtDropDown
 import maia.dmt.core.designsystem.components.toast.DmtToastMessage
 import maia.dmt.core.designsystem.components.toast.ToastDuration
 import maia.dmt.core.designsystem.components.toast.ToastType
 import maia.dmt.core.designsystem.theme.DmtTheme
 import maia.dmt.core.domain.dto.evaluation.EvaluationObject
 import maia.dmt.core.presentation.util.ObserveAsEvents
+import maia.dmt.hitber.presentation.hitberFirstQuestion.components.DropdownQuestion
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.koin.compose.viewmodel.koinViewModel
@@ -97,7 +96,7 @@ fun HitberFirstQuestionScreen(
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(bottom = 16.dp),
-                horizontalAlignment = Alignment.CenterHorizontally
+                horizontalAlignment = Alignment.CenterHorizontally,
             ) {
                 Text(
                     text = stringResource(Res.string.cogTest_hitber_first_mission_instructions),
@@ -106,7 +105,7 @@ fun HitberFirstQuestionScreen(
                     fontWeight = FontWeight.Medium,
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(horizontal = 16.dp, vertical = 12.dp)
+                        .padding(horizontal = 16.dp, vertical = 12.dp),
                 )
 
                 AnimatedContent(
@@ -118,7 +117,7 @@ fun HitberFirstQuestionScreen(
                     modifier = Modifier
                         .weight(1f)
                         .fillMaxWidth(),
-                    label = "batch_transition"
+                    label = "batch_transition",
                 ) { _ ->
                     Column(
                         modifier = Modifier
@@ -126,7 +125,7 @@ fun HitberFirstQuestionScreen(
                             .verticalScroll(rememberScrollState())
                             .padding(horizontal = 16.dp),
                         verticalArrangement = Arrangement.spacedBy(20.dp),
-                        horizontalAlignment = Alignment.CenterHorizontally
+                        horizontalAlignment = Alignment.CenterHorizontally,
                     ) {
                         batchQuestions.forEach { question ->
                             DropdownQuestion(
@@ -136,10 +135,10 @@ fun HitberFirstQuestionScreen(
                                     onAction(
                                         HitberFirstQuestionAction.OnAnswerSelected(
                                             questionId = question.id,
-                                            answer = answer
+                                            answer = answer,
                                         )
                                     )
-                                }
+                                },
                             )
                         }
                     }
@@ -150,55 +149,11 @@ fun HitberFirstQuestionScreen(
                         .fillMaxWidth()
                         .padding(horizontal = 16.dp),
                     text = stringResource(Res.string.cogTest_hitber_next),
-                    onClick = { onAction(HitberFirstQuestionAction.OnNextClick) }
+                    onClick = { onAction(HitberFirstQuestionAction.OnNextClick) },
                 )
             }
         }
     )
-}
-
-@Composable
-private fun DropdownQuestion(
-    question: EvaluationObject,
-    currentAnswer: String,
-    onAnswerSelected: (String) -> Unit,
-) {
-    val selectedValue = question.available_values.find { it.available_value == currentAnswer }
-
-    Column(
-        modifier = Modifier.fillMaxWidth(),
-        verticalArrangement = Arrangement.spacedBy(4.dp)
-    ) {
-        Text(
-            text = question.object_label,
-            style = MaterialTheme.typography.titleMedium,
-            fontWeight = FontWeight.Bold
-        )
-
-        DmtDropDown(
-            items = question.available_values,
-            selectedItem = selectedValue,
-            onItemSelected = { value ->
-                onAnswerSelected(value.available_value)
-            },
-            modifier = Modifier.fillMaxWidth(),
-            placeholder = question.object_label,
-            itemContent = { value ->
-                Text(
-                    text = value.available_value,
-                    style = MaterialTheme.typography.bodyMedium
-                )
-            },
-            selectedItemContent = { value ->
-                Text(
-                    text = value.available_value,
-                    style = MaterialTheme.typography.bodyMedium
-                )
-            },
-            borderColor = MaterialTheme.colorScheme.primary,
-            contentPadding = PaddingValues(20.dp),
-        )
-    }
 }
 
 @Composable
@@ -208,7 +163,7 @@ fun HitberFirstQuestionPreview() {
         HitberFirstQuestionScreen(
             state = HitberFirstQuestionState(),
             onAction = {},
-            getCurrentBatchQuestions = { emptyList() }
+            getCurrentBatchQuestions = { emptyList() },
         )
     }
 }

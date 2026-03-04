@@ -8,6 +8,7 @@ data class HitberSessionData(
     val q2Attempts: List<HitberQ2Attempt> = emptyList(),
     val q3Result: HitberQ3Result? = null,
     val q4Result: HitberQ4Result? = null,
+    val q7Result: HitberQ7Result? = null,
     val q8Result: HitberQ8Result? = null,
     val q9Result: HitberQ9Result? = null,
 )
@@ -46,4 +47,10 @@ data class HitberQ4Result(
     val selectedWord1: String,
     val originalWord2: String,
     val selectedWord2: String,
+)
+
+data class HitberQ7Result(
+    val targetItem: String,
+    val targetNapkin: String,
+    val isCorrect: Boolean,
 )

@@ -90,11 +90,15 @@ fun NavGraphBuilder.hitberTestGraph(
         }
 
         composable<HitberGraphRoutes.HitberTenthQuestion> {
-            HitberTenthQuestionRoot()
+            HitberTenthQuestionRoot(
+                onNavigateToNextScreen = { navController.navigate(HitberGraphRoutes.HitberEnd) },
+            )
         }
 
         composable<HitberGraphRoutes.HitberEnd> {
-            HitberEndRoot()
+            HitberEndRoot(
+                onNavigateBack = { navController.popBackStack() },
+            )
         }
     }
 }

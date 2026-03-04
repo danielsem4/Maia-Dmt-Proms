@@ -1,7 +1,5 @@
 package maia.dmt.hitber.presentation.hitberNinthQuestion
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -11,7 +9,6 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -23,7 +20,6 @@ import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.layout.positionInRoot
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
@@ -37,6 +33,7 @@ import maia.dmt.core.designsystem.components.layouts.DmtBaseScreen
 import maia.dmt.core.designsystem.theme.DmtTheme
 import maia.dmt.core.presentation.util.ObserveAsEvents
 import maia.dmt.hitber.presentation.hitberNinthQuestion.components.DraggableWordCard
+import maia.dmt.hitber.presentation.hitberNinthQuestion.components.HitberWordDropZone
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.koin.compose.viewmodel.koinViewModel
@@ -79,7 +76,6 @@ fun HitberNinthQuestionScreen(
                     .padding(horizontal = 16.dp),
                 verticalArrangement = Arrangement.spacedBy(0.dp),
             ) {
-                // Large bold instruction
                 Text(
                     text = stringResource(Res.string.cogTest_hitber_nine_question_instruction),
                     style = MaterialTheme.typography.titleLarge,
@@ -104,10 +100,9 @@ fun HitberNinthQuestionScreen(
                         state.dropZones.forEach { zone ->
                             val placedText = zone.placedWordId
                                 ?.let { id -> state.words.find { it.id == id }?.text }
-                            val isHovered = state.hoveredZoneId == zone.id
-                            WordDropZone(
+                            HitberWordDropZone(
                                 text = placedText,
-                                isHovered = isHovered,
+                                isHovered = state.hoveredZoneId == zone.id,
                                 modifier = Modifier
                                     .weight(1f)
                                     .fillMaxHeight()
@@ -144,7 +139,6 @@ fun HitberNinthQuestionScreen(
                                     .fillMaxHeight()
                                     .padding(horizontal = 2.dp)
                                     .zIndex(if (word.isDragging) 1f else 0f)
-                                    // 1. Measure the static home position BEFORE the offset is applied
                                     .onGloballyPositioned { coords ->
                                         onAction(
                                             HitberNinthQuestionAction.OnWordPositioned(
@@ -179,49 +173,6 @@ fun HitberNinthQuestionScreen(
             }
         },
     )
-}
-
-@Composable
-private fun WordDropZone(
-    text: String?,
-    isHovered: Boolean,
-    modifier: Modifier = Modifier,
-) {
-    val isOccupied = text != null
-    val backgroundColor = when {
-        isHovered -> MaterialTheme.colorScheme.primaryContainer
-        isOccupied -> MaterialTheme.colorScheme.secondaryContainer
-        else -> MaterialTheme.colorScheme.surface
-    }
-    val borderColor = when {
-        isHovered -> MaterialTheme.colorScheme.primary
-        isOccupied -> MaterialTheme.colorScheme.secondary
-        else -> MaterialTheme.colorScheme.outline
-    }
-    val borderWidth = if (isHovered || isOccupied) 2.5.dp else 1.5.dp
-
-    Box(
-        contentAlignment = Alignment.Center,
-        modifier = modifier
-            .background(color = backgroundColor, shape = RoundedCornerShape(8.dp))
-            .border(width = borderWidth, color = borderColor, shape = RoundedCornerShape(8.dp))
-            .padding(horizontal = 4.dp, vertical = 12.dp),
-    ) {
-        if (isOccupied) {
-            Text(
-                text = text!!,
-                style = MaterialTheme.typography.titleMedium,
-                fontWeight = FontWeight.SemiBold,
-                textAlign = TextAlign.Center,
-                maxLines = 1,
-                overflow = TextOverflow.Clip,
-                color = if (isHovered)
-                    MaterialTheme.colorScheme.onPrimaryContainer
-                else
-                    MaterialTheme.colorScheme.onSecondaryContainer,
-            )
-        }
-    }
 }
 
 @Preview

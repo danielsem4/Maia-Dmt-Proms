@@ -2,22 +2,26 @@ package maia.dmt.proms
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.russhwolf.settings.ExperimentalSettingsApi
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import maia.dmt.core.domain.auth.SessionStorage
+import maia.dmt.core.domain.localization.LanguageRepository
 import maia.dmt.core.domain.util.onFailure
 import maia.dmt.core.domain.util.onSuccess
 import maia.dmt.home.data.notificaiton.FirebasePushNotificationService
 import maia.dmt.home.domain.models.FcmTokenRequest
 import maia.dmt.home.domain.notification.DeviceTokenService
 
+@OptIn(ExperimentalSettingsApi::class)
 class MainViewModel(
     private val sessionStorage: SessionStorage,
     private val pushNotificationService: FirebasePushNotificationService,
-    private val deviceTokenService: DeviceTokenService
+    private val deviceTokenService: DeviceTokenService,
+    private val languageRepository: LanguageRepository
 ): ViewModel() {
 
     private val _state = MutableStateFlow(MainState())
@@ -37,6 +41,15 @@ class MainViewModel(
 
             observeUserAuth()
             observeDeviceToken()
+        }
+        observeLanguage()
+    }
+
+    private fun observeLanguage() {
+        viewModelScope.launch {
+            languageRepository.currentLanguageCode.collect { code ->
+                _state.update { it.copy(languageCode = code) }
+            }
         }
     }
 

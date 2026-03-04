@@ -11,6 +11,7 @@ data class HitberSessionData(
     val q7Result: HitberQ7Result? = null,
     val q8Result: HitberQ8Result? = null,
     val q9Result: HitberQ9Result? = null,
+    val q2Part2Attempts: List<HitberQ2Attempt> = emptyList(),
 )
 
 data class HitberQ9Result(

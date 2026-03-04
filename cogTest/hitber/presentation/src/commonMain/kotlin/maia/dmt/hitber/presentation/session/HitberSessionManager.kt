@@ -41,6 +41,10 @@ class HitberSessionManager {
         _sessionData.update { it.copy(q2Attempts = it.q2Attempts + attempt) }
     }
 
+    fun recordQ2Part2Attempt(attempt: HitberQ2Attempt) {
+        _sessionData.update { it.copy(q2Part2Attempts = it.q2Part2Attempts + attempt) }
+    }
+
     fun recordQ3Result(result: HitberQ3Result) {
         _sessionData.update { it.copy(q3Result = result) }
     }

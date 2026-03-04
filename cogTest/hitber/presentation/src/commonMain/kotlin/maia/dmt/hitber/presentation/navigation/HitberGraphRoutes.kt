@@ -41,6 +41,9 @@ interface HitberGraphRoutes {
     data object HitberNinthQuestion: HitberGraphRoutes
 
     @Serializable
+    data object HitberShapeMemoryPart2: HitberGraphRoutes
+
+    @Serializable
     data object HitberTenthQuestion: HitberGraphRoutes
 
     @Serializable

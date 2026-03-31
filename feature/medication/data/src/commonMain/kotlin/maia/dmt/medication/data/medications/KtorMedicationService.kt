@@ -22,8 +22,8 @@ class KtorMedicationService(
 ) : MedicationService {
 
     override suspend fun getMedications(
-        clinicId: Int,
-        patientId: Int
+        clinicId: String,
+        patientId: String
     ): Result<List<Medication>, DataError.Remote> {
         return httpClient.get<List<MedicationDto>>(
             route = "Medication_list/",
@@ -52,8 +52,8 @@ class KtorMedicationService(
     }
 
     override suspend fun getAllReportedMedications(
-        patientId: Int,
-        clinicId: Int
+        patientId: String,
+        clinicId: String
     ): Result<List<ReportedMedication>, DataError.Remote> {
         return httpClient.get<List<ReportedMedicationDto>>(
             route = "getPatientReports/$clinicId/$patientId/",

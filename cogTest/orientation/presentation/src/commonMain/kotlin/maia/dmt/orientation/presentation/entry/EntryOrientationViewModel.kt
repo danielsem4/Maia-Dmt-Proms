@@ -67,10 +67,10 @@ class EntryOrientationViewModel(
                 return@launch
             }
 
-            val clinicId = authInfo.user?.clinicId
+            val clinicId = authInfo.user?.clinics?.firstOrNull()
             val patientId = authInfo.user?.id
 
-            if (clinicId == null || clinicId == 0 || patientId == null) {
+            if (clinicId.isNullOrEmpty() || patientId == null) {
                 sessionManager.setError("No clinic ID / Patient Id found in session.")
                 sessionManager.setLoading(false)
                 return@launch

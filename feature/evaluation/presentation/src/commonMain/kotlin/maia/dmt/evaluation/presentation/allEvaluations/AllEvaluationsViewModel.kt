@@ -100,10 +100,10 @@ class AllEvaluationsViewModel(
                 }
                 return@launch
             }
-            val clinicId = authInfo.user?.clinicId
+            val clinicId = authInfo.user?.clinics?.firstOrNull()
             val patientId = authInfo.user?.id
 
-            if (clinicId == null || clinicId == 0 || patientId == null) {
+            if (clinicId.isNullOrEmpty() || patientId == null) {
                 _state.update {
                     it.copy(
                         isLoadingEvaluations = false,

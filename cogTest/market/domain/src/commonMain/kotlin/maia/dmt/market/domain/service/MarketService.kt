@@ -7,7 +7,7 @@ import maia.dmt.market.domain.model.MarketProduct
 interface MarketService {
 
     suspend fun getProducts(
-        clinicId: Int,
-        patientId: Int
+        clinicId: String,
+        patientId: String
     ): Result<List<MarketProduct>, DataError.Remote>
 }

@@ -27,8 +27,8 @@ class KtorEvaluationsService(
     }
 
     override suspend fun getEvaluations(
-        clinicId: Int,
-        patientId: Int,
+        clinicId: String,
+        patientId: String,
         all: Boolean
     ): Result<List<Evaluation>, DataError.Remote> {
         return httpClient.get<List<EvaluationDto>>(
@@ -42,8 +42,8 @@ class KtorEvaluationsService(
     }
 
     override suspend fun getEvaluation(
-        clinicId: Int,
-        patientId: Int,
+        clinicId: String,
+        patientId: String,
         evaluationName: String
     ): Result<Evaluation, DataError.Remote> {
 

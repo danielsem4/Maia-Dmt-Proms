@@ -23,8 +23,8 @@ class UploadImageUseCase(
         }
 
         val parts = listOf(
-            "clinics", params.clinicId.toString(),
-            "patients", params.patientId.toString(),
+            "clinics", params.clinicId,
+            "patients", params.patientId,
             "measurements", params.measurementId,
             formattedDate,
             params.progress,

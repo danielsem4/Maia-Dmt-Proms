@@ -17,7 +17,7 @@ import maia.dmt.home.domain.models.Module
 class KtorHomeService(
     private val httpClient: HttpClient,
 ) : HomeService {
-    override suspend fun getModules(clinicId: Int): Result<List<Module>, DataError.Remote> {
+    override suspend fun getModules(clinicId: String): Result<List<Module>, DataError.Remote> {
         return httpClient.get<List<ModuleDto>>(
             route = "getModules/",
             queryParams = mapOf(

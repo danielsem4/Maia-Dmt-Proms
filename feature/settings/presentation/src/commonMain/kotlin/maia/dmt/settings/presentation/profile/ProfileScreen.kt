@@ -35,7 +35,6 @@ import dmtproms.feature.settings.presentation.generated.resources.settings_profi
 import dmtproms.feature.settings.presentation.generated.resources.settings_profile_phone
 import maia.dmt.core.designsystem.components.layouts.DmtBaseScreen
 import maia.dmt.core.designsystem.theme.DmtTheme
-import maia.dmt.core.domain.dto.Module
 import maia.dmt.core.domain.dto.User
 import maia.dmt.core.presentation.util.ObserveAsEvents
 import maia.dmt.settings.presentation.components.DmtSettingsSection
@@ -123,14 +122,14 @@ private fun ProfileContent(
         Spacer(modifier = Modifier.height(32.dp))
 
         DmtSettingsSection {
-            if (user.email != null) {
+            if (user.email.isNotEmpty()) {
                 ProfileInfoRow(
                     label = stringResource(Res.string.settings_profile_email),
-                    value = user.email!!
+                    value = user.email
                 )
             }
 
-            if (user.email != null && user.phone_number != null) {
+            if (user.email.isNotEmpty() && user.phone_number != null) {
                 HorizontalDivider(
                     color = MaterialTheme.colorScheme.outlineVariant
                 )
@@ -143,16 +142,17 @@ private fun ProfileContent(
                 )
             }
 
-            if (user.clinicName != null && (user.email != null || user.phone_number != null)) {
+            val clinicName = user.clinics.firstOrNull()
+            if (clinicName != null && (user.email.isNotEmpty() || user.phone_number != null)) {
                 HorizontalDivider(
                     color = MaterialTheme.colorScheme.outlineVariant
                 )
             }
 
-            if (user.clinicName != null) {
+            if (clinicName != null) {
                 ProfileInfoRow(
                     label = stringResource(Res.string.settings_profile_clinic),
-                    value = user.clinicName!!
+                    value = clinicName
                 )
             }
         }
@@ -186,7 +186,7 @@ private fun ProfileHeader(
         Spacer(modifier = Modifier.height(16.dp))
 
         Text(
-            text = "${user.first_name.orEmpty()} ${user.last_name.orEmpty()}",
+            text = "${user.first_name} ${user.last_name}",
             style = MaterialTheme.typography.bodyMedium,
             color = MaterialTheme.colorScheme.onBackground,
             fontWeight = FontWeight.Bold
@@ -270,20 +270,16 @@ fun ProfilePreview() {
         ProfileScreen(
             state = ProfileState(
                 user = User(
-                    id = 123456,
+                    id = "123456",
                     email = "john.doe@example.com",
                     phone_number = "+1 234 567 8900",
                     first_name = "John",
                     last_name = "Doe",
-                    is_doctor = true,
-                    is_patient = false,
-                    is_clinic_manager = true,
-                    clinicName = "Central Medical Clinic",
-                    modules = listOf(
-                        Module(module_id = 1, module_name = "Cardiology"),
-                        Module(module_id = 2, module_name = "Radiology"),
-                        Module(module_id = 3, module_name = "Laboratory")
-                    )
+                    role = "patient",
+                    is_2fa_enabled = false,
+                    is_active = true,
+                    created_at = "2024-01-01",
+                    clinics = listOf("Central Medical Clinic")
                 )
             ),
             onAction = {}
@@ -298,18 +294,16 @@ fun ProfilePreviewDark() {
         ProfileScreen(
             state = ProfileState(
                 user = User(
-                    id = 123456,
+                    id = "123456",
                     email = "john.doe@example.com",
                     phone_number = "+1 234 567 8900",
                     first_name = "John",
                     last_name = "Doe",
-                    is_doctor = true,
-                    is_patient = false,
-                    clinicName = "Central Medical Clinic",
-                    modules = listOf(
-                        Module(module_id = 1, module_name = "Cardiology"),
-                        Module(module_id = 2, module_name = "Radiology")
-                    )
+                    role = "patient",
+                    is_2fa_enabled = false,
+                    is_active = true,
+                    created_at = "2024-01-01",
+                    clinics = listOf("Central Medical Clinic")
                 )
             ),
             onAction = {}

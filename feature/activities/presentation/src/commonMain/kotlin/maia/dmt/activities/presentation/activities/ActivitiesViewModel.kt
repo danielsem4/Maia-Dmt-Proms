@@ -113,10 +113,10 @@ class ActivitiesViewModel(
                 return@launch
             }
 
-            val clinicId = authInfo.user?.clinicId
+            val clinicId = authInfo.user?.clinics?.firstOrNull()
             val patientId = authInfo.user?.id
 
-            if (clinicId == null || clinicId == 0 || patientId == null) {
+            if (clinicId.isNullOrEmpty() || patientId == null) {
                 _state.update {
                     it.copy(
                         isLoadingActivities = false,
@@ -196,10 +196,10 @@ class ActivitiesViewModel(
             _state.update { it.copy(isReportingActivity = true) }
 
             val authInfo = sessionStorage.observeAuthInfo().firstOrNull()
-            val clinicId = authInfo?.user?.clinicId
+            val clinicId = authInfo?.user?.clinics?.firstOrNull()
             val patientId = authInfo?.user?.id
 
-            if (clinicId == null || patientId == null) {
+            if (clinicId.isNullOrEmpty() || patientId == null) {
                 _state.update {
                     it.copy(
                         isReportingActivity = false,

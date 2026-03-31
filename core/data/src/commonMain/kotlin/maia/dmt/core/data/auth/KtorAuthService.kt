@@ -22,7 +22,7 @@ class KtorAuthService(
     ): Result<LoginSuccessfulRequest, DataError.Remote> {
 
         return httpClient.post<LoginRequest, LoginSuccessfulRequestSerializable>(
-            route = "login/",
+            route = "auth/sessions/",
             body = LoginRequest(
                 email = email,
                 password = password

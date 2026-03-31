@@ -16,8 +16,8 @@ class KtorStatisticsService(
 ) : StatisticsService {
 
     override suspend fun getPatientEvaluationsGraphs(
-        clinicId: Int,
-        patientId: Int,
+        clinicId: String,
+        patientId: String,
         evaluationsIds: ArrayList<String>
     ): Result<List<PatientEvaluationGraphs>, DataError.Remote> {
         val measurementsParam = evaluationsIds.joinToString(",", prefix = "[", postfix = "]")

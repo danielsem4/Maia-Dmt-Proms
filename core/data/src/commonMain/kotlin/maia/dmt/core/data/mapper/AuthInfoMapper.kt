@@ -6,6 +6,7 @@ import maia.dmt.core.data.dto.UserSerializable
 import maia.dmt.core.domain.dto.LoginSuccessfulRequest
 import maia.dmt.core.domain.dto.Module
 import maia.dmt.core.domain.dto.User
+import kotlin.String
 
 fun LoginSuccessfulRequestSerializable.toDomain(): LoginSuccessfulRequest {
     return LoginSuccessfulRequest(
@@ -17,27 +18,15 @@ fun LoginSuccessfulRequestSerializable.toDomain(): LoginSuccessfulRequest {
 fun UserSerializable.toDomain(): User {
     return User(
         id = id,
-        password = password,
-        last_login = last_login,
-        is_superuser = is_superuser,
-        is_staff = is_staff,
-        is_active = is_active,
-        date_joined = date_joined,
         email = email,
         phone_number = phone_number,
         first_name = first_name,
         last_name = last_name,
-        is_clinic_manager = is_clinic_manager,
-        is_doctor = is_doctor,
-        is_patient = is_patient,
-        is_research_patient = is_research_patient,
-        groups = groups,
-        user_permissions = user_permissions,
-        clinicId = clinicId,
-        clinicName = clinicName,
-        modules = this.modules.map { it.toDomain() },
-        status = status,
-        server_url = server_url
+        role = role,
+        is_2fa_enabled = is_2fa_enabled,
+        is_active = is_active,
+        created_at = created_at,
+        clinics = clinics,
     )
 }
 
@@ -58,27 +47,15 @@ fun LoginSuccessfulRequest.toSerializable(): LoginSuccessfulRequestSerializable 
 fun User.toSerializable(): UserSerializable {
     return UserSerializable(
         id = id,
-        password = password,
-        last_login = last_login,
-        is_superuser = is_superuser,
-        is_staff = is_staff,
-        is_active = is_active,
-        date_joined = date_joined,
         email = email,
         phone_number = phone_number,
         first_name = first_name,
         last_name = last_name,
-        is_clinic_manager = is_clinic_manager,
-        is_doctor = is_doctor,
-        is_patient = is_patient,
-        is_research_patient = is_research_patient,
-        groups = groups,
-        user_permissions = user_permissions,
-        clinicId = clinicId,
-        clinicName = clinicName,
-        modules = this.modules.map { it.toSerializable() },
-        status = status,
-        server_url = server_url
+        role = role,
+        is_2fa_enabled = is_2fa_enabled,
+        is_active = is_active,
+        created_at = created_at,
+        clinics = clinics,
     )
 }
 

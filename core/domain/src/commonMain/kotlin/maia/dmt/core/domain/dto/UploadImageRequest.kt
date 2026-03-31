@@ -3,8 +3,8 @@ package maia.dmt.core.domain.dto
 data class UploadImageRequest(
     val bitmap: Any,
     val path: String,
-    val clinicId: Int,
-    val patientId: Int
+    val clinicId: String,
+    val patientId: String
 )
 
 data class UploadResult(

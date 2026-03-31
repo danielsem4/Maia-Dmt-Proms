@@ -7,8 +7,8 @@ import maia.dmt.statistics.domain.model.PatientEvaluationGraphs
 interface StatisticsService {
 
     suspend fun getPatientEvaluationsGraphs(
-        clinicId: Int,
-        patientId: Int,
+        clinicId: String,
+        patientId: String,
         evaluationsIds: ArrayList<String>
     ): Result<List<PatientEvaluationGraphs>, DataError.Remote>
 

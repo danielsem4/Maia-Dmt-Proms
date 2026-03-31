@@ -91,10 +91,10 @@ class EvaluationViewModel(
                 return@launch
             }
 
-            val clinicId = authInfo.user?.clinicId
+            val clinicId = authInfo.user?.clinics?.firstOrNull()
             val patientId = authInfo.user?.id
 
-            if (clinicId == null || patientId == null || selectedEvaluationName == "") {
+            if (clinicId.isNullOrEmpty() || patientId == null || selectedEvaluationName == "") {
                 _state.update {
                     it.copy(
                         isLoadingEvaluationUpload = false,
@@ -158,11 +158,11 @@ class EvaluationViewModel(
             _state.update { it.copy(isLoadingEvaluationUpload = true) }
 
             val authInfo = sessionStorage.observeAuthInfo().firstOrNull()
-            val clinicId = authInfo?.user?.clinicId
+            val clinicId = authInfo?.user?.clinics?.firstOrNull()
             val patientId = authInfo?.user?.id
             val evaluation = _state.value.evaluation
 
-            if (clinicId == null || patientId == null || evaluation == null) {
+            if (clinicId.isNullOrEmpty() || patientId == null || evaluation == null) {
                 _state.update { it.copy(isLoadingEvaluationUpload = false) }
                 eventChannel.send(EvaluationEvent.UploadError(UiText.DynamicString("Missing required information")))
                 return@launch

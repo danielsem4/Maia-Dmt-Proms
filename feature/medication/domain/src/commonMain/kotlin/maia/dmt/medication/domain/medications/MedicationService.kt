@@ -11,13 +11,13 @@ import maia.dmt.medication.domain.models.ReportedMedication
 
 interface MedicationService {
 
-    suspend fun getMedications(clinicId: Int, patientId: Int): Result<List<Medication>, DataError.Remote>
+    suspend fun getMedications(clinicId: String, patientId: String): Result<List<Medication>, DataError.Remote>
 
     suspend fun reportMedication(body: MedicationReport): EmptyResult<DataError.Remote>
 
     suspend fun setMedicationReminders(body: MedicationNotification): EmptyResult<DataError.Remote>
 
-    suspend fun getAllReportedMedications(patientId: Int, clinicId: Int): Result<List<ReportedMedication>, DataError.Remote>
+    suspend fun getAllReportedMedications(patientId: String, clinicId: String): Result<List<ReportedMedication>, DataError.Remote>
 
 }
 

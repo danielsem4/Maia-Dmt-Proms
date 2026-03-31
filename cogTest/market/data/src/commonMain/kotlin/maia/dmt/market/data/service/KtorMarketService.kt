@@ -15,8 +15,8 @@ class KtorMarketService(
 ) : MarketService {
 
     override suspend fun getProducts(
-        clinicId: Int,
-        patientId: Int
+        clinicId: String,
+        patientId: String
     ): Result<List<MarketProduct>, DataError.Remote> {
         return httpClient.get<MarketResponseContainer>(
             route = "loadMeasurementJson/$clinicId/75/"

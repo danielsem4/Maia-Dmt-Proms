@@ -18,7 +18,7 @@ class KtorActivitiesService(
     private val httpClient: HttpClient,
 ) : ActivitiesService {
 
-    override suspend fun getActivities(clinicId: Int, patientId: Int): Result<List<ActivityItem>, DataError.Remote> {
+    override suspend fun getActivities(clinicId: String, patientId: String): Result<List<ActivityItem>, DataError.Remote> {
 
         return httpClient.get<List<ActivityItemDto>>(
             route = "Activities_list/",

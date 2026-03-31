@@ -1,8 +1,8 @@
 package maia.dmt.medication.data.dto
 
 data class MedicationNotificationDto(
-    val clinic_id: Int,
-    val patient_id: Int,
+    val clinic_id: String,
+    val patient_id: String,
     val medication_id: String,
     val frequency: String,
     val start_date: String,

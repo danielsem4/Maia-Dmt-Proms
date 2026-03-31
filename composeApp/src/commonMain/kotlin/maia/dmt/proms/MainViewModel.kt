@@ -84,8 +84,8 @@ class MainViewModel(
         viewModelScope.launch {
             deviceTokenService.registerDeviceToken(
                 token = FcmTokenRequest(
-                    user_id = state.value.user!!.id.toString(),
-                    clinic_id = state.value.user!!.clinicId.toString(),
+                    user_id = state.value.user!!.id,
+                    clinic_id = state.value.user!!.clinics.firstOrNull() ?: "",
                     fcm_token = token
                 )
             )

@@ -40,8 +40,8 @@ class KtorFileUploadService(
                 formParameters = parameters {
                     append("file", base64String)
                     append("file_name", params.fileName)
-                    append("clinic_id", params.clinicId.toString())
-                    append("user_id", params.patientId.toString())
+                    append("clinic_id", params.clinicId)
+                    append("user_id", params.patientId)
                     append("path", buildPath(params))
                 }
             )
@@ -52,8 +52,8 @@ class KtorFileUploadService(
             it.replace(":", "-").replace(".", "-")
         }
         val parts = listOf(
-            "clinics", params.clinicId.toString(),
-            "patients", params.patientId.toString(),
+            "clinics", params.clinicId,
+            "patients", params.patientId,
             "measurements", params.measurementId,
             formattedDate,
             params.progress,

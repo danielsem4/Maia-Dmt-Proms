@@ -63,7 +63,7 @@ class MarketRepositoryImpl(
      */
     private suspend fun fetchProductsFromApi(): List<MarketProduct> {
         val authInfo = sessionStorage.observeAuthInfo().firstOrNull()
-        val clinicId = authInfo?.user?.clinicId
+        val clinicId = authInfo?.user?.clinics?.firstOrNull()
         val patientId = authInfo?.user?.id
 
         if (clinicId == null || patientId == null) {

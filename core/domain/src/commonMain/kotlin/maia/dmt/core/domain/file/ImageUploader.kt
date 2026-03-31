@@ -5,8 +5,8 @@ interface ImageUploader {
 }
 
 data class ImagePathParams(
-    val clinicId: Int,
-    val patientId: Int,
+    val clinicId: String,
+    val patientId: String,
     val measurementId: String,
     val pathDate: String,
     val progress: String = "",

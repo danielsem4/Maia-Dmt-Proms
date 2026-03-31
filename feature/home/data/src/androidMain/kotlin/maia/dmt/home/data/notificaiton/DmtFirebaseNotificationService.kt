@@ -24,8 +24,8 @@ class DmtFirebaseNotificationService: FirebaseMessagingService() {
             if (authInfo != null) {
                 deviceTokenService.registerDeviceToken(
                     token = FcmTokenRequest(
-                        user_id = authInfo.user!!.id.toString(),
-                        clinic_id = authInfo.user!!.clinicId.toString(),
+                        user_id = authInfo.user!!.id,
+                        clinic_id = authInfo.user!!.clinics.firstOrNull() ?: "",
                         fcm_token = token
                     )
                 )

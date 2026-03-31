@@ -5,8 +5,8 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class SensorsDataServerRequest(
-    @SerialName("patient_id") val patientId: Int,
-    @SerialName("clinic_id") val clinicId: Int,
+    @SerialName("patient_id") val patientId: String,
+    @SerialName("clinic_id") val clinicId: String,
     @SerialName("upload_date") val uploadDate: String,
     @SerialName("data") val data: SensorsDataDto
 )

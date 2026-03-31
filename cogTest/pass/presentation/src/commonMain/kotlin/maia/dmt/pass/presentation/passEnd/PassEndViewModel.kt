@@ -58,7 +58,7 @@ class PassEndViewModel(
 
             val authInfo = sessionStorage.observeAuthInfo().firstOrNull()
             val evaluation = sessionManager.evaluation.value
-            val clinicId = authInfo?.user?.clinicId
+            val clinicId = authInfo?.user?.clinics?.firstOrNull()
             val patientId = authInfo?.user?.id
             val evaluationId = evaluation?.id
 

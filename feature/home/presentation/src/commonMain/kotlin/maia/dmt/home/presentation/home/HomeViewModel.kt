@@ -68,9 +68,9 @@ class HomeViewModel(
         viewModelScope.launch {
             _state.update { it.copy(isLoadingModules = true, modulesError = null) }
             val authInfo = sessionStorage.observeAuthInfo().firstOrNull()
-            val clinicId = authInfo?.user?.clinicId
+            val clinicId = authInfo?.user?.clinics?.firstOrNull()
 
-            if (clinicId == null) {
+            if (clinicId.isNullOrEmpty()) {
                 _state.update { it.copy(isLoadingModules = false, modulesError = UiText.DynamicString("Invalid Session")) }
                 return@launch
             }

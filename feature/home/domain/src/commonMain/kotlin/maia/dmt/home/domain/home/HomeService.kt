@@ -7,7 +7,7 @@ import maia.dmt.home.domain.models.Module
 
 interface HomeService {
 
-    suspend fun getModules(clinicId: Int): Result<List<Module>, DataError.Remote>
+    suspend fun getModules(clinicId: String): Result<List<Module>, DataError.Remote>
 
     suspend fun logout(fcmToken: String): EmptyResult<DataError.Remote>
 

@@ -5,9 +5,9 @@ import maia.dmt.core.data.dto.MeasurementDetailStringDto
 
 @Serializable
 data class MeasurementResultDto(
-    val clinicId: Int,
+    val clinicId: String,
     val date: String,
     val measurement: Int,
-    val patient_id: Int,
+    val patient_id: String,
     val results: ArrayList<MeasurementDetailStringDto> = arrayListOf()
 )

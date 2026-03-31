@@ -1,12 +1,8 @@
 package maia.dmt.home.data.home
 
 import io.ktor.client.HttpClient
-import kotlinx.coroutines.flow.firstOrNull
 import maia.dmt.core.data.networking.get
-import maia.dmt.core.data.networking.post
-import maia.dmt.core.domain.auth.SessionStorage
 import maia.dmt.core.domain.util.DataError
-import maia.dmt.core.domain.util.EmptyResult
 import maia.dmt.core.domain.util.Result
 import maia.dmt.core.domain.util.map
 import maia.dmt.home.data.dto.ModuleDto
@@ -24,16 +20,5 @@ class KtorHomeService(
                 "clinic_id" to clinicId
             )
         ).map { it.map { it.toDomain() } }
-    }
-
-    override suspend fun logout(fcmToken: String): EmptyResult<DataError.Remote> {
-
-        return httpClient.post(
-            route = "logout/",
-            queryParams = mapOf(
-                "fcm_token" to fcmToken
-            ),
-            body = Unit
-        )
     }
 }

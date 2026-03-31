@@ -18,8 +18,11 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import maia.dmt.auth.domain.EmailValidator
+import maia.dmt.auth.presentation.util.toJsonString
 import maia.dmt.core.domain.auth.AuthService
 import maia.dmt.core.domain.auth.SessionStorage
+import maia.dmt.core.domain.dto.AuthResult
+import maia.dmt.core.domain.dto.LoginSuccessfulRequest
 import maia.dmt.core.domain.util.DataError
 import maia.dmt.core.domain.util.onFailure
 import maia.dmt.core.domain.util.onSuccess
@@ -35,7 +38,6 @@ class LoginViewModel(
     private val eventChanel = Channel<LoginEvent>()
     val events = eventChanel.receiveAsFlow()
     private var hasLoadedInitialData = false
-
 
     private val _state = MutableStateFlow(LoginState())
     val state = _state
@@ -88,14 +90,35 @@ class LoginViewModel(
 
             authService
                 .login(email, password)
-                .onSuccess {
-                    sessionStorage.set(it)
-                    eventChanel.send(LoginEvent.Success)
+                .onSuccess { result ->
                     _state.update {
                         it.copy(
                             isLoggingIn = false,
                             canLogin = true
                         )
+                    }
+                    when (result) {
+                        is AuthResult.Authenticated -> {
+                            sessionStorage.set(
+                                LoginSuccessfulRequest(
+                                    tokens = result.tokens,
+                                    user = result.user
+                                )
+                            )
+                            eventChanel.send(LoginEvent.Success)
+                        }
+                        is AuthResult.TwoFactorRequired -> {
+                            eventChanel.send(LoginEvent.TwoFactorRequired(result.userId))
+                        }
+                        is AuthResult.ClinicSelectionRequired -> {
+                            val clinicsJson = result.clinics.toJsonString()
+                            eventChanel.send(
+                                LoginEvent.ClinicSelectionRequired(
+                                    userId = result.userId,
+                                    clinicsJson = clinicsJson
+                                )
+                            )
+                        }
                     }
                 }
                 .onFailure { error ->

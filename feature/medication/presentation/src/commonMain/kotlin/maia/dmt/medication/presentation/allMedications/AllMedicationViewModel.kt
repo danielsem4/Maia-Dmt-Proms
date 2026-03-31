@@ -90,7 +90,7 @@ class AllMedicationViewModel(
                 return@launch
             }
 
-            val clinicId = authInfo.user?.clinics?.firstOrNull()
+            val clinicId = sessionStorage.getActiveClinicId()
             val patientId = authInfo.user?.id
 
             if (clinicId.isNullOrEmpty() || patientId == null) {
@@ -191,7 +191,7 @@ class AllMedicationViewModel(
             _state.update { it.copy(isReportingMedication = true) }
 
             val authInfo = sessionStorage.observeAuthInfo().firstOrNull()
-            val clinicId = authInfo?.user?.clinics?.firstOrNull()
+            val clinicId = sessionStorage.getActiveClinicId()
             val patientId = authInfo?.user?.id
 
             if (clinicId.isNullOrEmpty() || patientId == null) {

@@ -142,7 +142,7 @@ private fun ProfileContent(
                 )
             }
 
-            val clinicName = user.clinics.firstOrNull()
+            val clinicName = user.clinics.firstOrNull()?.clinicName
             if (clinicName != null && (user.email.isNotEmpty() || user.phone_number != null)) {
                 HorizontalDivider(
                     color = MaterialTheme.colorScheme.outlineVariant
@@ -279,7 +279,7 @@ fun ProfilePreview() {
                     is_2fa_enabled = false,
                     is_active = true,
                     created_at = "2024-01-01",
-                    clinics = listOf("Central Medical Clinic")
+                    clinics = listOf(maia.dmt.core.domain.dto.Clinic(id = "1", clinicName = "Central Medical Clinic"))
                 )
             ),
             onAction = {}
@@ -303,7 +303,7 @@ fun ProfilePreviewDark() {
                     is_2fa_enabled = false,
                     is_active = true,
                     created_at = "2024-01-01",
-                    clinics = listOf("Central Medical Clinic")
+                    clinics = listOf(maia.dmt.core.domain.dto.Clinic(id = "1", clinicName = "Central Medical Clinic"))
                 )
             ),
             onAction = {}

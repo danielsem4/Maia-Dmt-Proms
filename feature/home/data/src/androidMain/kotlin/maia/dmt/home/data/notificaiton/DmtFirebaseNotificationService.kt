@@ -22,10 +22,11 @@ class DmtFirebaseNotificationService: FirebaseMessagingService() {
         applicationScope.launch {
             val authInfo = sessionStorage.observeAuthInfo().first()
             if (authInfo != null) {
+                val clinicId = sessionStorage.getActiveClinicId()
                 deviceTokenService.registerDeviceToken(
                     token = FcmTokenRequest(
                         user_id = authInfo.user!!.id,
-                        clinic_id = authInfo.user!!.clinics.firstOrNull() ?: "",
+                        clinic_id = clinicId ?: "",
                         fcm_token = token
                     )
                 )

@@ -65,7 +65,7 @@ class CdtEndViewModel(
 
             val authInfo = sessionStorage.observeAuthInfo().firstOrNull()
             val evaluation = cdtSessionManager.evaluation.value
-            val clinicId = authInfo?.user?.clinics?.firstOrNull()
+            val clinicId = sessionStorage.getActiveClinicId()
             val patientId = authInfo?.user?.id
             val evaluationId = evaluation?.id
 

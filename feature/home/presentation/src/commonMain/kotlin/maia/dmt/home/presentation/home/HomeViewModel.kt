@@ -9,6 +9,7 @@ import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import maia.dmt.core.domain.auth.AuthService
 import maia.dmt.core.domain.auth.SessionStorage
 import maia.dmt.core.domain.sensors.SensorController
 import maia.dmt.core.domain.util.onFailure
@@ -24,6 +25,7 @@ import maia.dmt.home.presentation.module.ModuleUiModel
 class HomeViewModel(
     private val homeService: HomeService,
     private val sessionStorage: SessionStorage,
+    private val authService: AuthService,
     private val pushNotificationService: PushNotificationService,
     private val sensorController: SensorController
 ) : ViewModel() {
@@ -67,8 +69,7 @@ class HomeViewModel(
     private fun loadModules() {
         viewModelScope.launch {
             _state.update { it.copy(isLoadingModules = true, modulesError = null) }
-            val authInfo = sessionStorage.observeAuthInfo().firstOrNull()
-            val clinicId = authInfo?.user?.clinics?.firstOrNull()
+            val clinicId = sessionStorage.getActiveClinicId()
 
             if (clinicId.isNullOrEmpty()) {
                 _state.update { it.copy(isLoadingModules = false, modulesError = UiText.DynamicString("Invalid Session")) }
@@ -146,7 +147,7 @@ class HomeViewModel(
     private fun logout() {
         viewModelScope.launch {
             _state.update { it.copy(isLoggingOut = true) }
-            homeService.logout(currentFcmToken ?: "").onSuccess {
+            authService.logout().onSuccess {
                 _state.update { it.copy(showLogoutDialog = false, isLoggingOut = false) }
                 sessionStorage.set(null)
                 eventChannel.send(HomeEvent.LogoutSuccess)

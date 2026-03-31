@@ -36,7 +36,9 @@ import org.koin.compose.viewmodel.koinViewModel
 @Composable
 fun LoginRoot(
     viewModel: LoginViewModel = koinViewModel(),
-    onLoginSuccess: () -> Unit
+    onLoginSuccess: () -> Unit,
+    onTwoFactorRequired: (String) -> Unit = {},
+    onClinicSelectionRequired: (String, String) -> Unit = { _, _ -> }
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
 
@@ -44,10 +46,9 @@ fun LoginRoot(
 
     ObserveAsEvents(viewModel.events) {
         when (it) {
-            is LoginEvent.Success -> {
-                onLoginSuccess()
-            }
-
+            is LoginEvent.Success -> onLoginSuccess()
+            is LoginEvent.TwoFactorRequired -> onTwoFactorRequired(it.userId)
+            is LoginEvent.ClinicSelectionRequired -> onClinicSelectionRequired(it.userId, it.clinicsJson)
         }
     }
 

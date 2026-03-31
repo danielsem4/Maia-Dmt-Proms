@@ -5,6 +5,7 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.map
 import kotlinx.serialization.json.Json
 import maia.dmt.core.data.dto.LoginSuccessfulRequestSerializable
@@ -44,5 +45,18 @@ class DataStoreSessionStorage(
         dataStore.edit { prefs ->
             prefs[authInfoKey] = serialized
         }
+    }
+
+    override suspend fun getActiveClinicId(): String? {
+        val accessToken = getAccessToken() ?: return null
+        return JwtDecoder.getActiveClinicId(accessToken)
+    }
+
+    override suspend fun getAccessToken(): String? {
+        return observeAuthInfo().firstOrNull()?.tokens?.access
+    }
+
+    override suspend fun getRefreshToken(): String? {
+        return observeAuthInfo().firstOrNull()?.tokens?.refresh
     }
 }

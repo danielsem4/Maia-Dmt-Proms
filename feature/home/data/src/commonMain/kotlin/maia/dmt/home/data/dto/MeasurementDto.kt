@@ -3,11 +3,11 @@ package maia.dmt.home.data.dto
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class ModuleDto(
+data class MeasurementDto(
     val id: String = "",
     val clinic: String = "",
-    val module: String = "",
-    val module_name: String = "",
-    val module_description: String = "",
+    val measurement: String = "",
+    val measurement_name: String = "",
+    val measurement_type: String = "",
     val is_active: Boolean = true,
 )

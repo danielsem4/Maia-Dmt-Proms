@@ -19,6 +19,7 @@ class DataStoreSessionStorage(
 ): SessionStorage {
 
     private val authInfoKey = stringPreferencesKey("KEY_AUTH_INFO")
+    private val activeClinicIdKey = stringPreferencesKey("KEY_ACTIVE_CLINIC_ID")
 
     private val json = Json {
         ignoreUnknownKeys = true
@@ -33,10 +34,11 @@ class DataStoreSessionStorage(
         }
     }
 
-    override suspend fun set(info: LoginSuccessfulRequest?) {
+    override suspend fun set(info: LoginSuccessfulRequest?, activeClinicId: String?) {
         if(info == null) {
             dataStore.edit {
                 it.remove(authInfoKey)
+                it.remove(activeClinicIdKey)
             }
             return
         }
@@ -44,12 +46,28 @@ class DataStoreSessionStorage(
         val serialized = json.encodeToString(info.toSerializable())
         dataStore.edit { prefs ->
             prefs[authInfoKey] = serialized
+            if (!activeClinicId.isNullOrEmpty()) {
+                prefs[activeClinicIdKey] = activeClinicId
+            }
         }
     }
 
     override suspend fun getActiveClinicId(): String? {
-        val accessToken = getAccessToken() ?: return null
-        return JwtDecoder.getActiveClinicId(accessToken)
+        val storedId = dataStore.data.firstOrNull()?.get(activeClinicIdKey)
+        if (!storedId.isNullOrEmpty()) return storedId
+
+        // Fallback: read from stored auth info (handles auto-login path)
+        return observeAuthInfo().firstOrNull()?.user?.clinics?.firstOrNull()?.id
+    }
+
+    override suspend fun setActiveClinicId(clinicId: String?) {
+        dataStore.edit { prefs ->
+            if (clinicId != null) {
+                prefs[activeClinicIdKey] = clinicId
+            } else {
+                prefs.remove(activeClinicIdKey)
+            }
+        }
     }
 
     override suspend fun getAccessToken(): String? {

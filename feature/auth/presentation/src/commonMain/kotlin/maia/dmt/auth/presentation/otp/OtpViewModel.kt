@@ -50,11 +50,13 @@ class OtpViewModel(
                     _state.update { it.copy(isVerifying = false) }
                     when (result) {
                         is AuthResult.Authenticated -> {
+                            val clinicId = result.user.clinics.firstOrNull()?.id
                             sessionStorage.set(
                                 LoginSuccessfulRequest(
                                     tokens = result.tokens,
                                     user = result.user
-                                )
+                                ),
+                                activeClinicId = clinicId
                             )
                             eventChannel.send(OtpEvent.Success)
                         }

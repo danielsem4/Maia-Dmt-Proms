@@ -19,7 +19,7 @@ import maia.dmt.core.presentation.util.toUiText
 import maia.dmt.home.domain.home.HomeService
 import maia.dmt.home.domain.notification.PushNotificationService
 import maia.dmt.home.presentation.mapper.mapModuleIcon
-import maia.dmt.home.presentation.mapper.mapModuleNameResource
+import maia.dmt.home.presentation.mapper.mapModuleNameToUiText
 import maia.dmt.home.presentation.module.ModuleUiModel
 
 class HomeViewModel(
@@ -80,18 +80,18 @@ class HomeViewModel(
                 .onSuccess { modules ->
                     val uiModules = modules.map { module ->
                         ModuleUiModel(
-                            icon = mapModuleIcon(module.module_name),
-                            text = mapModuleNameResource(module.module_name),
+                            icon = mapModuleIcon(module.name),
+                            text = mapModuleNameToUiText(module.name),
                             onClick = {
-                                if (module.module_name == "Parkinson report") onAction(HomeAction.OnShowParkinsonDialog)
-                                else onAction(HomeAction.OnFeatureClicked(module.module_name))
+                                if (module.name == "Parkinson report") onAction(HomeAction.OnShowParkinsonDialog)
+                                else onAction(HomeAction.OnFeatureClicked(module.name))
                             }
                         )
                     }
 
                     val hasSensorModule = modules.any {
-                        it.module_name.contains("Sensor", ignoreCase = true) ||
-                                it.module_name.contains("Tremor", ignoreCase = true)
+                        it.name.contains("Sensor", ignoreCase = true) ||
+                                it.name.contains("Tremor", ignoreCase = true)
                     }
 
 
@@ -112,7 +112,7 @@ class HomeViewModel(
                         startSensors()
                     }
 
-                    if (modules.any { it.module_name == "Parkinson report" } && !_state.value.hasShownParkinsonOnLaunch) {
+                    if (modules.any { it.name == "Parkinson report" } && !_state.value.hasShownParkinsonOnLaunch) {
                         _state.update { it.copy(showParkinsonDialog = true, hasShownParkinsonOnLaunch = true) }
                     }
                 }

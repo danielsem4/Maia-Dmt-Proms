@@ -99,11 +99,13 @@ class LoginViewModel(
                     }
                     when (result) {
                         is AuthResult.Authenticated -> {
+                            val clinicId = result.user.clinics.firstOrNull()?.id
                             sessionStorage.set(
                                 LoginSuccessfulRequest(
                                     tokens = result.tokens,
                                     user = result.user
-                                )
+                                ),
+                                activeClinicId = clinicId
                             )
                             eventChanel.send(LoginEvent.Success)
                         }

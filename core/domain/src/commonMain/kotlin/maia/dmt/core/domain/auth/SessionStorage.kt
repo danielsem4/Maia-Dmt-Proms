@@ -6,8 +6,9 @@ import maia.dmt.core.domain.dto.LoginSuccessfulRequest
 
 interface SessionStorage {
     fun observeAuthInfo(): Flow<LoginSuccessfulRequest?>
-    suspend fun set(info: LoginSuccessfulRequest?)
+    suspend fun set(info: LoginSuccessfulRequest?, activeClinicId: String? = null)
     suspend fun getActiveClinicId(): String?
+    suspend fun setActiveClinicId(clinicId: String?)
 
     suspend fun getAccessToken(): String? {
         return observeAuthInfo().firstOrNull()?.tokens?.access

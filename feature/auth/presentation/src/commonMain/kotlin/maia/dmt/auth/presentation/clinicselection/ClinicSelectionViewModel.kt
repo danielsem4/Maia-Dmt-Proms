@@ -61,7 +61,8 @@ class ClinicSelectionViewModel(
                                 LoginSuccessfulRequest(
                                     tokens = result.tokens,
                                     user = result.user
-                                )
+                                ),
+                                activeClinicId = clinicId
                             )
                             eventChannel.send(ClinicSelectionEvent.Success)
                         }

@@ -77,7 +77,7 @@ fun DmtModuleSection(
                 items(modules) { module ->
                     DmtIconCard(
                         icon = module.icon,
-                        text = stringResource(module.text),
+                        text = module.text.asString(),
                         onClick = module.onClick
                     )
                 }

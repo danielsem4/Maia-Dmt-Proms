@@ -59,7 +59,7 @@ fun NavigationRoot(
             onModuleClicked = {
                 when (it.lowercase()) {
                     "medications" -> navController.navigate(MedicationsGraphRoutes.Graph)
-                    "measurements" -> navController.navigate(EvaluationGraphRoutes.Graph)
+                    "questionnaires", "measurements" -> navController.navigate(EvaluationGraphRoutes.Graph)
                     "activities" -> navController.navigate(ActivitiesGraphRoutes.Graph)
                     "statistics" -> navController.navigate(StatisticsGraphRoutes.Graph)
                     "settings" -> navController.navigate(SettingsGraphRoutes.Graph)

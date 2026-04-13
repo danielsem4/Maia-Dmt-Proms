@@ -1,7 +1,9 @@
 package maia.dmt.medication.data.mapper
 
+import kotlinx.serialization.json.Json
 import maia.dmt.medication.data.dto.MedicationDto
 import maia.dmt.medication.data.dto.MedicationReportDto
+import maia.dmt.medication.data.dto.FrequencyDataDto
 import maia.dmt.medication.data.dto.ReportedMedicationDto
 import maia.dmt.medication.domain.models.Medication
 import maia.dmt.medication.domain.models.MedicationReport
@@ -10,13 +12,13 @@ import maia.dmt.medication.domain.models.ReportedMedication
 fun MedicationDto.toDomain(): Medication {
     return Medication(
         id = id,
-        patient_id = patient_id,
-        medicine_id = medicine_id,
-        name = name,
-        form = form,
-        unit = unit,
+        patient_id = patient,
+        medicine_id = medication,
+        name = med_name,
+        form = med_form,
+        unit = med_unit,
         frequency = frequency,
-        frequency_data = frequency_data,
+        frequency_data = Json.encodeToString(frequency_data),
         start_date = start_date,
         end_date = end_date,
         dosage = dosage

@@ -26,11 +26,7 @@ class KtorMedicationService(
         patientId: String
     ): Result<List<Medication>, DataError.Remote> {
         return httpClient.get<List<MedicationDto>>(
-            route = "Medication_list/",
-            queryParams = mapOf(
-                "clinic_id" to clinicId,
-                "patient_id" to patientId
-            )
+            route = "clinics/$clinicId/patients/$patientId/medications/",
         ).map { it.map { it.toDomain() } }
 
     }

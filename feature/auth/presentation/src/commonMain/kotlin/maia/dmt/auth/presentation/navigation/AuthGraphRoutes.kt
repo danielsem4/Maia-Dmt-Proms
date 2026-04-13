@@ -10,11 +10,9 @@ interface AuthGraphRoutes {
     @Serializable
     data object Login: AuthGraphRoutes
 
-    /**
-     * Will soon
-     *     @Serializable
-     *     data object ForgotPassword: AuthGraphRoutes
-     */
+    @Serializable
+    data class Otp(val userId: String): AuthGraphRoutes
 
-
+    @Serializable
+    data class ClinicSelection(val userId: String, val clinicsJson: String): AuthGraphRoutes
 }

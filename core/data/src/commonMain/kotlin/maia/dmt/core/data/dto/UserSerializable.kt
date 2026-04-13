@@ -13,5 +13,5 @@ data class UserSerializable(
     val is_2fa_enabled: Boolean = false,
     val is_active: Boolean = true,
     val created_at: String = "",
-    val clinics: List<String> = emptyList(),
+    val clinics: List<ClinicSerializable> = emptyList(),
     )

@@ -10,6 +10,7 @@ import io.ktor.client.request.post
 import io.ktor.client.request.put
 import io.ktor.client.request.setBody
 import io.ktor.client.request.url
+import io.ktor.client.request.delete as ktorDelete
 import io.ktor.client.statement.HttpResponse
 import maia.dmt.core.domain.util.DataError
 import maia.dmt.core.domain.util.Result
@@ -85,6 +86,22 @@ suspend inline fun <reified Request, reified Response: Any> HttpClient.put(
 }
 
 
+suspend inline fun <reified Response: Any> HttpClient.delete(
+    route: String,
+    queryParams: Map<String, Any> = mapOf(),
+    crossinline builder: HttpRequestBuilder.() -> Unit = {}
+): Result<Response, DataError.Remote> {
+    return safeCall {
+        ktorDelete {
+            url(constructRoute(route))
+            queryParams.forEach { (key, value) ->
+                parameter(key, value)
+            }
+            builder()
+        }
+    }
+}
+
 suspend inline fun <reified T> responseToResult(response: HttpResponse): Result<T, DataError.Remote> {
     return when(response.status.value) {
         in 200..299 -> {
@@ -111,8 +128,8 @@ suspend inline fun <reified T> responseToResult(response: HttpResponse): Result<
 fun constructRoute(route: String): String {
     val route = when {
         route.contains(UrlConstants.BASE_URL_DEV_HTTP) -> route
-        route.startsWith("/") -> "${UrlConstants.BASE_URL_DEV_HTTP}$route"
-        else -> "${UrlConstants.BASE_URL_DEV_HTTP}$route"
+        route.startsWith("/") -> "${UrlConstants.BASE_URL_DEV_HTTP}api/v1$route"
+        else -> "${UrlConstants.BASE_URL_DEV_HTTP}api/v1/$route"
     }
     println("ROUTE: $route")
     return route

@@ -1,6 +1,5 @@
 package maia.dmt.core.data.networking
 
-import com.plcoding.core.data.BuildKonfig
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.HttpClientEngine
 import io.ktor.client.plugins.HttpTimeout
@@ -13,19 +12,17 @@ import io.ktor.client.plugins.logging.LogLevel
 import io.ktor.client.plugins.logging.Logger
 import io.ktor.client.plugins.logging.Logging
 import io.ktor.client.plugins.websocket.WebSockets
-import io.ktor.client.request.header
 import io.ktor.http.ContentType
 import io.ktor.http.contentType
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.coroutines.flow.firstOrNull
-import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.json.Json
+import maia.dmt.core.data.dto.AuthTokensSerializable
+import maia.dmt.core.data.dto.RefreshTokenRequest
+import maia.dmt.core.data.mapper.toDomain
 import maia.dmt.core.domain.auth.SessionStorage
+import maia.dmt.core.domain.dto.LoginSuccessfulRequest
 import maia.dmt.core.domain.logger.DmtLogger
-
-/**
- *
- */
 
 class HttpClientFactory(
     private val dmtLogger: DmtLogger,
@@ -58,16 +55,48 @@ class HttpClientFactory(
             install(WebSockets) {
                 pingIntervalMillis = 20_000L
             }
+            install(Auth) {
+                bearer {
+                    loadTokens {
+                        val accessToken = sessionStorage.getAccessToken()
+                        val refreshToken = sessionStorage.getRefreshToken()
+                        if (accessToken != null && refreshToken != null) {
+                            BearerTokens(accessToken, refreshToken)
+                        } else {
+                            null
+                        }
+                    }
+                    refreshTokens {
+                        val refreshToken = sessionStorage.getRefreshToken() ?: return@refreshTokens null
+                        try {
+                            val response = client.post<RefreshTokenRequest, AuthTokensSerializable>(
+                                route = "auth/tokens/refresh/",
+                                body = RefreshTokenRequest(refresh = refreshToken)
+                            )
+                            when (response) {
+                                is maia.dmt.core.domain.util.Result.Success -> {
+                                    val newTokens = response.data.toDomain()
+                                    val currentAuth = sessionStorage.observeAuthInfo().firstOrNull()
+                                    sessionStorage.set(
+                                        currentAuth?.copy(tokens = newTokens)
+                                            ?: LoginSuccessfulRequest(tokens = newTokens)
+                                    )
+                                    BearerTokens(newTokens.access, newTokens.refresh)
+                                }
+                                is maia.dmt.core.domain.util.Result.Failure -> {
+                                    sessionStorage.set(null)
+                                    null
+                                }
+                            }
+                        } catch (e: Exception) {
+                            sessionStorage.set(null)
+                            null
+                        }
+                    }
+                }
+            }
             defaultRequest {
                 contentType(ContentType.Application.Json)
-
-                val token = runBlocking {
-                    sessionStorage.observeAuthInfo().firstOrNull()?.token
-                }
-                token?.let {
-                    header("Authorization", "Token $it")
-                    println("Adding token to request: ${it.take(10)}...")
-                }
             }
         }
     }

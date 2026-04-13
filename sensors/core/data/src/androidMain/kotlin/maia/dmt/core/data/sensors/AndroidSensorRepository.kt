@@ -113,7 +113,7 @@ class AndroidSensorRepository(
     suspend fun uploadTremorData(domainData: SensorsData) {
         try {
             val authInfo = sessionStorage.observeAuthInfo().firstOrNull()
-            val clinicId = authInfo?.user?.clinics?.firstOrNull()
+            val clinicId = sessionStorage.getActiveClinicId()
             val uid = authInfo?.user?.id
 
             val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S", Locale.getDefault())

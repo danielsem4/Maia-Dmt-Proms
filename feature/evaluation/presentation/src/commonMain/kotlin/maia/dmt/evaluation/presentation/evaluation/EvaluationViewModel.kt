@@ -91,7 +91,7 @@ class EvaluationViewModel(
                 return@launch
             }
 
-            val clinicId = authInfo.user?.clinics?.firstOrNull()
+            val clinicId = sessionStorage.getActiveClinicId()
             val patientId = authInfo.user?.id
 
             if (clinicId.isNullOrEmpty() || patientId == null || selectedEvaluationName == "") {
@@ -158,7 +158,7 @@ class EvaluationViewModel(
             _state.update { it.copy(isLoadingEvaluationUpload = true) }
 
             val authInfo = sessionStorage.observeAuthInfo().firstOrNull()
-            val clinicId = authInfo?.user?.clinics?.firstOrNull()
+            val clinicId = sessionStorage.getActiveClinicId()
             val patientId = authInfo?.user?.id
             val evaluation = _state.value.evaluation
 

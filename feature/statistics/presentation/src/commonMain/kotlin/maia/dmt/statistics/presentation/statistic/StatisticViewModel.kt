@@ -84,7 +84,7 @@ class StatisticViewModel(
                 return@launch
             }
 
-            val clinicId = authInfo.user?.clinics?.firstOrNull()
+            val clinicId = sessionStorage.getActiveClinicId()
             val patientId = authInfo.user?.id
 
             if (clinicId.isNullOrEmpty() || patientId == null) {

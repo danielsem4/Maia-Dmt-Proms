@@ -27,13 +27,13 @@ import dmtproms.feature.home.presentation.generated.resources.orientation_icon
 import dmtproms.feature.home.presentation.generated.resources.phone
 import dmtproms.feature.home.presentation.generated.resources.settings_icon
 import dmtproms.feature.home.presentation.generated.resources.statistics_icon
+import maia.dmt.core.presentation.util.UiText
 import org.jetbrains.compose.resources.DrawableResource
-import org.jetbrains.compose.resources.StringResource
 
 fun mapModuleIcon(moduleName: String): DrawableResource {
     return when (moduleName.lowercase()) {
         "document share" -> Res.drawable.file_upload_icon
-        "measurements" -> Res.drawable.evaluation_icon
+        "questionnaires", "measurements" -> Res.drawable.evaluation_icon
         "medications" -> Res.drawable.medications_icon
         "activities" -> Res.drawable.activities_icon
         "memory" -> Res.drawable.memory_icon
@@ -50,22 +50,22 @@ fun mapModuleIcon(moduleName: String): DrawableResource {
     }
 }
 
-fun mapModuleNameResource(moduleName: String): StringResource {
+fun mapModuleNameToUiText(moduleName: String): UiText {
     return when (moduleName.lowercase()) {
-        "document share" -> Res.string.module_document_share
-        "measurements" -> Res.string.module_measurements
-        "medications" -> Res.string.module_medications
-        "activities" -> Res.string.module_activities
-        "memory" -> Res.string.module_memory
-        "cdt" -> Res.string.module_cdt
-        "orientation" -> Res.string.module_orientation
-        "hitber" -> Res.string.module_hitber
-        "statistics" -> Res.string.module_statistics
-        "settings" -> Res.string.module_settings
-        "parkinson sensors" -> Res.string.module_sensors
-        "pass" -> Res.string.module_fmpt
-        "parkinson report" -> Res.string.module_new_report
-        "market test" -> Res.string.module_market
-        else -> Res.string.module_hitber
+        "document share" -> UiText.Resource(Res.string.module_document_share)
+        "questionnaires", "measurements" -> UiText.Resource(Res.string.module_measurements)
+        "medications" -> UiText.Resource(Res.string.module_medications)
+        "activities" -> UiText.Resource(Res.string.module_activities)
+        "memory" -> UiText.Resource(Res.string.module_memory)
+        "cdt" -> UiText.Resource(Res.string.module_cdt)
+        "orientation" -> UiText.Resource(Res.string.module_orientation)
+        "hitber" -> UiText.Resource(Res.string.module_hitber)
+        "statistics" -> UiText.Resource(Res.string.module_statistics)
+        "settings" -> UiText.Resource(Res.string.module_settings)
+        "parkinson sensors" -> UiText.Resource(Res.string.module_sensors)
+        "pass" -> UiText.Resource(Res.string.module_fmpt)
+        "parkinson report" -> UiText.Resource(Res.string.module_new_report)
+        "market test" -> UiText.Resource(Res.string.module_market)
+        else -> UiText.DynamicString(moduleName)
     }
 }

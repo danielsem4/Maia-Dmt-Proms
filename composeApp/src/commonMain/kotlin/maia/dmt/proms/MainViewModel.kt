@@ -31,7 +31,7 @@ class MainViewModel(
             val authInfo = sessionStorage.observeAuthInfo().firstOrNull()
             _state.update { it.copy(
                 isCheckingAuth = false,
-                isLoggedIn = authInfo != null,
+                isLoggedIn = authInfo?.tokens != null,
                 user = authInfo?.user
             ) }
 
@@ -43,7 +43,7 @@ class MainViewModel(
     private fun observeUserAuth() {
         viewModelScope.launch {
             sessionStorage.observeAuthInfo().collect { authInfo ->
-                val isLoggedIn = authInfo != null
+                val isLoggedIn = authInfo?.tokens != null
                 _state.update {
                     it.copy(
                         isLoggedIn = isLoggedIn,
@@ -82,10 +82,11 @@ class MainViewModel(
 
     private fun registerDeviceToken(token: String, platform: String) {
         viewModelScope.launch {
+            val clinicId = sessionStorage.getActiveClinicId()
             deviceTokenService.registerDeviceToken(
                 token = FcmTokenRequest(
                     user_id = state.value.user!!.id,
-                    clinic_id = state.value.user!!.clinics.firstOrNull() ?: "",
+                    clinic_id = clinicId ?: "",
                     fcm_token = token
                 )
             )

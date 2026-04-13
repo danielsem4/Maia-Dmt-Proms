@@ -50,7 +50,7 @@ class ParkinsonReportViewModel(
                 return@launch
             }
 
-            val clinicId = authInfo.user?.clinics?.firstOrNull()
+            val clinicId = sessionStorage.getActiveClinicId()
             val patientId = authInfo.user?.id
 
             if (clinicId.isNullOrEmpty() || patientId == null) {
@@ -105,7 +105,7 @@ class ParkinsonReportViewModel(
             _state.update { it.copy(isSubmitting = true, error = null) }
 
             val authInfo = sessionStorage.observeAuthInfo().firstOrNull()
-            val clinicId = authInfo?.user?.clinics?.firstOrNull()
+            val clinicId = sessionStorage.getActiveClinicId()
             val patientId = authInfo?.user?.id
             val evaluationId = _state.value.evaluationId
 

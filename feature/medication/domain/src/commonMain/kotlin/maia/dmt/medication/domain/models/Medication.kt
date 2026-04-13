@@ -1,8 +1,8 @@
 package maia.dmt.medication.domain.models
 
 data class Medication(
-    val id: Int,
-    val patient_id: Int,
+    val id: String,
+    val patient_id: String,
     val medicine_id: String,
     val name: String,
     val form: String,

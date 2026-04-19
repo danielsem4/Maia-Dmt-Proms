@@ -21,11 +21,7 @@ class KtorActivitiesService(
     override suspend fun getActivities(clinicId: String, patientId: String): Result<List<ActivityItem>, DataError.Remote> {
 
         return httpClient.get<List<ActivityItemDto>>(
-            route = "Activities_list/",
-            queryParams = mapOf(
-                "clinic_id" to clinicId,
-                "patient_id" to patientId
-            )
+            route = "clinics/$clinicId/patients/$patientId/activities/",
         ).map { it.map { it.toDomain() } }
 
     }

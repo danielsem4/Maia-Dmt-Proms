@@ -7,7 +7,7 @@ import maia.dmt.core.domain.util.Result
 
 interface EvaluationService {
 
-    suspend fun getEvaluations(clinicId: String, patientId: String, all: Boolean = false): Result<List<Evaluation>, DataError.Remote>
+    suspend fun getEvaluations(clinicId: String, userId: String): Result<List<Evaluation>, DataError.Remote>
 
     suspend fun getEvaluation(clinicId: String, patientId: String, evaluationName: String): Result<Evaluation, DataError.Remote>
 

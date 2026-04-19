@@ -36,7 +36,8 @@ import org.koin.compose.viewmodel.koinViewModel
 fun HomeRoot(
     viewModel: HomeViewModel = koinViewModel(),
     onLogoutSuccess: () -> Unit,
-    onModuleClicked: (String) -> Unit
+    onModuleClicked: (String) -> Unit,
+    onMeasurementClicked: (String) -> Unit
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
 
@@ -44,6 +45,7 @@ fun HomeRoot(
         when (event) {
             is HomeEvent.LogoutSuccess -> onLogoutSuccess()
             is HomeEvent.ModuleClicked -> onModuleClicked(event.moduleName)
+            is HomeEvent.MeasurementClicked -> onMeasurementClicked(event.measurementSettingsId)
             HomeEvent.RefreshHomePage -> viewModel.onAction(HomeAction.OnRefresh)
         }
     }

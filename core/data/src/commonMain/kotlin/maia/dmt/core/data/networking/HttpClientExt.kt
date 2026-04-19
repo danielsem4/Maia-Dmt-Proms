@@ -128,8 +128,8 @@ suspend inline fun <reified T> responseToResult(response: HttpResponse): Result<
 fun constructRoute(route: String): String {
     val route = when {
         route.contains(UrlConstants.BASE_URL_DEV_HTTP) -> route
-        route.startsWith("/") -> "${UrlConstants.BASE_URL_DEV_HTTP}api/v1$route"
-        else -> "${UrlConstants.BASE_URL_DEV_HTTP}api/v1/$route"
+        route.startsWith("/") -> "${UrlConstants.BASE_URL_DEV_HTTP}$route"
+        else -> "${UrlConstants.BASE_URL_DEV_HTTP}$route"
     }
     println("ROUTE: $route")
     return route

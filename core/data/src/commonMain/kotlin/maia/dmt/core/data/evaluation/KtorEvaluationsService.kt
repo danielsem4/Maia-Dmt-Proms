@@ -28,15 +28,12 @@ class KtorEvaluationsService(
 
     override suspend fun getEvaluations(
         clinicId: String,
-        patientId: String,
-        all: Boolean
+        userId: String,
     ): Result<List<Evaluation>, DataError.Remote> {
         return httpClient.get<List<EvaluationDto>>(
-            route = "PatientMeasurements/",
+            route = "clinics/$clinicId/patients/$userId/measurements/",
             queryParams = mapOf(
-                "clinic_id" to clinicId,
-                "patient_id" to patientId,
-                "all" to all
+                "type" to "QUESTIONNAIRES"
             )
         ).map { it.map { it.toDomain() } }
     }

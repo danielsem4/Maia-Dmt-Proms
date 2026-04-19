@@ -6,6 +6,7 @@ sealed interface HomeAction {
     data object OnLogoutConfirm : HomeAction
     data object OnLogoutCancel : HomeAction
     data class OnFeatureClicked(val moduleName: String) : HomeAction
+    data class OnMeasurementClicked(val measurementSettingsId: String) : HomeAction
 
     data object OnShowParkinsonDialog : HomeAction
     data object OnParkinsonDialogDismiss : HomeAction

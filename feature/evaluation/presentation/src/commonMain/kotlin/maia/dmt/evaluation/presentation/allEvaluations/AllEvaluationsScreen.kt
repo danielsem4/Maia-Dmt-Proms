@@ -115,12 +115,12 @@ fun AllEvaluationsScreen(
 
                 if(state.isLoadingEvaluations) {
                     CircularProgressIndicator()
-                } else if(state.evaluations.isEmpty() && state.searchQuery.isNotBlank()) {
+                } else if(state.measurements.isEmpty() && state.searchQuery.isNotBlank()) {
                     Text(
                         text = "${stringResource(Res.string.no_evaluations_found_matching)} \"${state.searchQuery}\"",
                         style = MaterialTheme.typography.bodyMedium
                     )
-                } else if(state.evaluations.isEmpty()) {
+                } else if(state.measurements.isEmpty()) {
                     Text(
                         text = stringResource(Res.string.no_evaluations_found),
                         style = MaterialTheme.typography.bodyMedium
@@ -131,17 +131,17 @@ fun AllEvaluationsScreen(
                         verticalArrangement = Arrangement.spacedBy(8.dp)
                     ) {
                         items(
-                            count = state.evaluations.size,
-                            key = { index -> state.evaluations[index].id }
+                            count = state.measurements.size,
+                            key = { index -> state.measurements[index].id }
                         ) { index ->
-                            val evaluation = state.evaluations[index]
+                            val measurement = state.measurements[index]
 
                             DmtEvaluationCard(
-                                name = evaluation.measurement_name,
-                                date = evaluation.measurement_settings.measurement_begin_time,
-                                frequency = evaluation.measurement_settings.measurement_repeat_period,
+                                name = measurement.measurementName,
+                                date = measurement.startDate,
+                                frequency = measurement.frequency.name,
                                 isClickable = true,
-                                onClick = { onAction(AllEvaluationsAction.OnEvaluationClick(evaluation)) }
+                                onClick = { onAction(AllEvaluationsAction.OnEvaluationClick(measurement)) }
                             )
                         }
                     }

@@ -56,7 +56,7 @@ class HomeViewModel(
             HomeAction.OnLogoutConfirm -> logout()
 
             is HomeAction.OnFeatureClicked -> handleFeatureClick(action.moduleName)
-            is HomeAction.OnMeasurementClicked -> handleMeasurementClick(action.measurementSettingsId)
+            is HomeAction.OnMeasurementClicked -> handleMeasurementClick(action.measurementId)
             HomeAction.OnShowParkinsonDialog -> _state.update { it.copy(showParkinsonDialog = true) }
             HomeAction.OnParkinsonDialogDismiss -> _state.update { it.copy(showParkinsonDialog = false) }
 
@@ -109,7 +109,7 @@ class HomeViewModel(
                             icon = mapModuleIcon(measurement.name),
                             text = mapModuleNameToUiText(measurement.name),
                             onClick = {
-                                onAction(HomeAction.OnMeasurementClicked(measurement.measurementSettingsId))
+                                onAction(HomeAction.OnMeasurementClicked(measurement.measurementId))
                             }
                         )
                     }
@@ -163,8 +163,8 @@ class HomeViewModel(
         viewModelScope.launch { eventChannel.send(HomeEvent.ModuleClicked(name)) }
     }
 
-    private fun handleMeasurementClick(measurementSettingsId: String) {
-        viewModelScope.launch { eventChannel.send(HomeEvent.MeasurementClicked(measurementSettingsId)) }
+    private fun handleMeasurementClick(measurementId: String) {
+        viewModelScope.launch { eventChannel.send(HomeEvent.MeasurementClicked(measurementId)) }
     }
 
     private fun observeFcmToken() {

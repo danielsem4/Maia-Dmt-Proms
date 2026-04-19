@@ -27,7 +27,7 @@ import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
 fun EvaluationRoot(
-    evaluationString: String,
+    measurementId: String,
     viewModel: EvaluationViewModel = koinViewModel(),
     onNavigateBack: () -> Unit,
 ) {
@@ -35,7 +35,7 @@ fun EvaluationRoot(
     var toastMessage by remember { mutableStateOf<String?>(null) }
     var toastType by remember { mutableStateOf(ToastType.Success) }
 
-    viewModel.initialize(evaluationString)
+    viewModel.initialize(measurementId)
 
     ObserveAsEvents(viewModel.events) { event ->
         when(event) {

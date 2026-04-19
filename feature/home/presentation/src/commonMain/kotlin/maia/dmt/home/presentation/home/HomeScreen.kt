@@ -45,7 +45,7 @@ fun HomeRoot(
         when (event) {
             is HomeEvent.LogoutSuccess -> onLogoutSuccess()
             is HomeEvent.ModuleClicked -> onModuleClicked(event.moduleName)
-            is HomeEvent.MeasurementClicked -> onMeasurementClicked(event.measurementSettingsId)
+            is HomeEvent.MeasurementClicked -> onMeasurementClicked(event.measurementId)
             HomeEvent.RefreshHomePage -> viewModel.onAction(HomeAction.OnRefresh)
         }
     }

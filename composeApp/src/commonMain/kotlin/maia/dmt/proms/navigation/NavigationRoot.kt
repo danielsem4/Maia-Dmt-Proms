@@ -71,8 +71,8 @@ fun NavigationRoot(
                     else -> {}
                 }
             },
-            onMeasurementClicked = { measurementSettingsId ->
-                navController.navigate(EvaluationGraphRoutes.SelectedEvaluation(measurementSettingsId))
+            onMeasurementClicked = { measurementId ->
+                navController.navigate(EvaluationGraphRoutes.SelectedEvaluation(measurementId))
             },
         )
         medicationGraph(

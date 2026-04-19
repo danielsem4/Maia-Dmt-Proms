@@ -35,7 +35,7 @@ class EvaluationViewModel(
     private val eventChannel = Channel<EvaluationEvent>()
     val events = eventChannel.receiveAsFlow()
 
-    private var selectedEvaluationName: String = ""
+    private var selectedMeasurementId: String = ""
     private var hasLoadedInitialData = false
 
     val state = _state
@@ -66,9 +66,9 @@ class EvaluationViewModel(
         }
     }
 
-    fun initialize(evaluationName: String) {
-        if (selectedEvaluationName == "") {
-            selectedEvaluationName = evaluationName
+    fun initialize(measurementId: String) {
+        if (selectedMeasurementId == "") {
+            selectedMeasurementId = measurementId
             loadEvaluation()
         }
     }
@@ -94,7 +94,7 @@ class EvaluationViewModel(
             val clinicId = sessionStorage.getActiveClinicId()
             val patientId = authInfo.user?.id
 
-            if (clinicId.isNullOrEmpty() || patientId == null || selectedEvaluationName == "") {
+            if (clinicId.isNullOrEmpty() || patientId == null || selectedMeasurementId == "") {
                 _state.update {
                     it.copy(
                         isLoadingEvaluationUpload = false,
@@ -104,11 +104,11 @@ class EvaluationViewModel(
                 return@launch
             }
 
-            evaluationService.getEvaluation(clinicId, patientId, selectedEvaluationName)
-                .onSuccess { evaluation ->
+            evaluationService.getMeasurementStructure(clinicId, selectedMeasurementId)
+                .onSuccess { structure ->
                     _state.update {
                         it.copy(
-                            evaluation = evaluation,
+                            measurementStructure = structure,
                             isLoadingEvaluationUpload = false,
                             evaluationError = null
                         )

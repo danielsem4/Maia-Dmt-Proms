@@ -137,7 +137,7 @@ class AllEvaluationsViewModel(
     private fun handleMeasurementClick(measurement: MeasurementItem) {
         println("Measurement clicked! $measurement")
         viewModelScope.launch {
-            eventChannel.send(AllEvaluationsEvent.NavigateToSelectedEvaluation(measurement.measurementName))
+            eventChannel.send(AllEvaluationsEvent.NavigateToSelectedEvaluation(measurement.measurement))
         }
     }
 

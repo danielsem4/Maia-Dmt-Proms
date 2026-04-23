@@ -27,12 +27,7 @@ object SensorMathUtils {
     }
 
     fun processGyroscope(x: Float, y: Float, z: Float): Triple<Float, Float, Float> {
-        val magnitude = sqrt(x * x + y * y + z * z)
-        return if (magnitude > 0) {
-            Triple(x / magnitude, y / magnitude, z / magnitude)
-        } else {
-            Triple(0f, 0f, 0f)
-        }
+        return Triple(x, y, z)
     }
 
     fun calculateStandardDeviation(data: List<Float>): Float {
@@ -47,5 +42,15 @@ object SensorMathUtils {
         val max = data.maxOrNull() ?: 0f
         val min = data.minOrNull() ?: 0f
         return max - min
+    }
+
+    fun applyHanningWindow(data: FloatArray): FloatArray {
+        val n = data.size
+        val windowed = FloatArray(n)
+        for (i in 0 until n) {
+            val multiplier = 0.5f * (1f - kotlin.math.cos(2.0 * Math.PI * i / (n - 1)).toFloat())
+            windowed[i] = data[i] * multiplier
+        }
+        return windowed
     }
 }

@@ -1,5 +1,6 @@
 package maia.dmt.core.data.sensors.analysis
 
+import android.util.Log
 import maia.dmt.core.data.sensors.util.SensorMathUtils
 import maia.dmt.core.domain.sensors.model.Acceleration
 import maia.dmt.core.domain.sensors.model.Gyroscope
@@ -10,15 +11,40 @@ import kotlin.math.sqrt
 
 class TremorAnalysisUseCase {
 
-    private val SAMPLE_RATE = 50f
-    private val MIN_FREQUENCY_AMPLITUDE = 1.5f
-    private val THRESHOLD = 0.5f
-    private val MIN_TREMOR_DURATION = 15000L
+    companion object {
+        private const val TAG = "TremorDebug"
+        private const val SAMPLE_RATE = 50f
+
+        // Parkinson's tremor band: 3.5–7.0 Hz (wider than previous 4–6 to catch patient variation)
+        private const val TREMOR_FREQ_LOW = 3.5f
+        private const val TREMOR_FREQ_HIGH = 7.0f
+
+        // Power ratio threshold — if >18% of motion energy is in tremor band, flag it
+        private const val POWER_RATIO_THRESHOLD = 0.18f
+
+        // Minimum total power to avoid triggering on noise when phone is nearly still
+        private const val MIN_TOTAL_POWER = 0.05f
+
+        // Duration gate: tremor must be sustained for 10 seconds
+        private const val MIN_TREMOR_DURATION = 10_000L
+
+        // Allow up to 2 consecutive missed cycles before resetting the duration gate
+        private const val MAX_MISSED_CYCLES = 2
+
+        // Stability: very low acceleration magnitude = phone on table
+        private const val STABLE_ACCEL_THRESHOLD = 0.1f
+        private const val STABLE_GYRO_THRESHOLD = 0.5f
+
+        // Light threshold lowered — only filter truly dark (phone sealed in pocket)
+        private const val POCKET_LIGHT_THRESHOLD = 3.0f
+    }
+
     private var tremorStartTime: Long = 0L
+    private var missedCycles: Int = 0
 
     /**
-     * Checks if the phone is stable (on table) or in a pocket.
-     * Uses AVERAGED data to avoid noise triggering the check.
+     * Checks if the phone is on a table (both accel AND gyro very low).
+     * Light alone is no longer enough to skip analysis — dark rooms are valid.
      */
     fun isPhoneStableOrInPocket(
         accelX: Float, accelY: Float, accelZ: Float,
@@ -28,13 +54,13 @@ class TremorAnalysisUseCase {
         val accelMag = SensorMathUtils.calculateMagnitude(accelX, accelY, accelZ)
         val gyroMag = SensorMathUtils.calculateMagnitude(gyroX, gyroY, gyroZ)
 
-        // Low movement check (On Table)
-        if (accelMag < 0.1f && gyroMag < 1.0f) {
+        // Phone on table: near-zero movement AND near-zero rotation
+        if (accelMag < STABLE_ACCEL_THRESHOLD && gyroMag < STABLE_GYRO_THRESHOLD) {
             return true
         }
 
-        // Dark environment check (In Pocket)
-        if (lightLux < 10.0f) {
+        // In pocket: very dark AND no significant movement (both required)
+        if (lightLux < POCKET_LIGHT_THRESHOLD && accelMag < STABLE_ACCEL_THRESHOLD) {
             return true
         }
 
@@ -42,9 +68,9 @@ class TremorAnalysisUseCase {
     }
 
     /**
-     * Main Analysis Function
-     * @param accelBuffer: List of 30 AVERAGED items (for Stats/Stability)
-     * @param rawAccelList: List of ~128 RAW items (for Frequency/FFT)
+     * Main analysis using spectral power ratio approach.
+     * @param accelBuffer List of averaged items (for stats / stability check)
+     * @param rawAccelList List of 256+ raw items (for FFT frequency analysis)
      */
     fun analyze(
         accelBuffer: List<Acceleration>,
@@ -55,125 +81,129 @@ class TremorAnalysisUseCase {
         rawAccelList: List<Acceleration>
     ): SensorsData? {
 
-        if (accelBuffer.size < 30 || rawAccelList.size < 60) return null
-
-
-        val avgX = accelBuffer.map { it.x }.average().toFloat()
-        val avgY = accelBuffer.map { it.y }.average().toFloat()
-        val avgZ = accelBuffer.map { it.z }.average().toFloat()
-        val avgLight = lightBuffer.average().toFloat()
-
-        val avgGyroX = gyroBuffer.map { it.x }.average().toFloat()
-        val avgGyroY = gyroBuffer.map { it.y }.average().toFloat()
-        val avgGyroZ = gyroBuffer.map { it.z }.average().toFloat()
-
-        if (isPhoneStableOrInPocket(avgX, avgY, avgZ, avgGyroX, avgGyroY, avgGyroZ, avgLight)) {
+        if (accelBuffer.size < 30 || rawAccelList.size < 128) {
+            Log.d(TAG, "Skipping: accelBuffer=${accelBuffer.size}, rawAccel=${rawAccelList.size}")
             return null
         }
 
+        Log.d(TAG, "analyze() called: accelBuf=${accelBuffer.size}, rawAccel=${rawAccelList.size}, gyro=${gyroBuffer.size}")
+
+        // Stability check using average of magnitudes from raw data (not magnitude of averages)
+        // This prevents tremor oscillations from canceling out to near-zero
+        val avgAccelMag = rawAccelList.map { SensorMathUtils.calculateMagnitude(it.x, it.y, it.z) }.average().toFloat()
+        val avgGyroMag = if (gyroBuffer.isNotEmpty()) {
+            gyroBuffer.map { SensorMathUtils.calculateMagnitude(it.x, it.y, it.z) }.average().toFloat()
+        } else 0f
+        val avgLight = if (lightBuffer.isNotEmpty()) lightBuffer.average().toFloat() else 50f
+
+        Log.d(TAG, "Stability: avgAccelMag=$avgAccelMag, avgGyroMag=$avgGyroMag, light=$avgLight")
+
+        // Use raw magnitudes for stability check
+        if (avgAccelMag < STABLE_ACCEL_THRESHOLD && avgGyroMag < STABLE_GYRO_THRESHOLD) {
+            Log.d(TAG, "REJECTED: phone on table (low movement)")
+            tremorStartTime = 0L
+            return null
+        }
+        if (avgLight < POCKET_LIGHT_THRESHOLD && avgAccelMag < STABLE_ACCEL_THRESHOLD) {
+            Log.d(TAG, "REJECTED: phone in pocket (dark + low movement)")
+            tremorStartTime = 0L
+            return null
+        }
+
+        // --- Spectral Power Ratio Analysis ---
+        // Use acceleration magnitude (orientation-independent)
+        val magnitudes = rawAccelList.map { SensorMathUtils.calculateMagnitude(it.x, it.y, it.z) }
+
+        // Take last power-of-2 samples for clean FFT
+        val fftSize = Integer.highestOneBit(magnitudes.size) // e.g., 256 from 256+
+        val samples = magnitudes.takeLast(fftSize)
+
+        Log.d(TAG, "FFT: inputSize=${rawAccelList.size}, fftSize=$fftSize")
+
+        // Apply Hanning window to reduce spectral leakage
+        val windowed = SensorMathUtils.applyHanningWindow(samples.toFloatArray())
+
+        // Apply FFT
+        val fftData = applyFFT(windowed)
+
+        // Compute power spectral density and find dominant frequency
+        val analysisResult = computeSpectralPowerRatio(fftData, fftSize)
+
+        Log.d(TAG, "FFT result: powerRatio=${analysisResult.powerRatio}, dominantFreq=${analysisResult.dominantFreq}Hz, totalPower=${analysisResult.totalPower}")
+
+        val ratioOk = analysisResult.powerRatio > POWER_RATIO_THRESHOLD
+        val powerOk = analysisResult.totalPower > MIN_TOTAL_POWER
+        val freqOk = analysisResult.dominantFreq in TREMOR_FREQ_LOW..TREMOR_FREQ_HIGH
+        val isDetected = ratioOk && powerOk && freqOk
+
+        Log.d(TAG, "Detection: ratioOk=$ratioOk (${analysisResult.powerRatio}>$POWER_RATIO_THRESHOLD), powerOk=$powerOk, freqOk=$freqOk (${analysisResult.dominantFreq} in $TREMOR_FREQ_LOW..$TREMOR_FREQ_HIGH) → detected=$isDetected")
+
+        // Duration gate: must sustain detection for MIN_TREMOR_DURATION
+        val gateResult = checkDurationGate(isDetected)
+        Log.d(TAG, "Duration gate: isDetected=$isDetected, gatePassed=$gateResult, tremorStart=$tremorStartTime, missed=$missedCycles")
+
+        if (!gateResult) {
+            return null
+        }
+
+        // Compute stats for the upload payload (keeping existing data model)
         val stdDevX = SensorMathUtils.calculateStandardDeviation(accelBuffer.map { it.x })
         val stdDevZ = SensorMathUtils.calculateStandardDeviation(accelBuffer.map { it.z })
         val stdDevSteps = SensorMathUtils.calculateStandardDeviation(stepBuffer.map { it.toFloat() })
 
         val deletionsFloats = deletionBuffer.map { it.toFloat() }
         val stdDevDeletions = SensorMathUtils.calculateStandardDeviation(deletionsFloats)
-        val rangeDeletions = deletionsFloats
 
         val rangeX = SensorMathUtils.calculateRange(accelBuffer.map { it.x })
         val rangeZ = SensorMathUtils.calculateRange(accelBuffer.map { it.z })
         val rangeGyroX = SensorMathUtils.calculateRange(gyroBuffer.map { it.x })
         val rangeGyroZ = SensorMathUtils.calculateRange(gyroBuffer.map { it.z })
 
-        val steps = stepBuffer.map { it.toFloat() }
-
-
-        var avgFrequency = 0f
-
-        val fftDataX = applyFFT(rawAccelList.map { it.x })
-        val fftDataY = applyFFT(rawAccelList.map { it.y })
-        val fftDataZ = applyFFT(rawAccelList.map { it.z })
-
-        val dominantFrequenciesX = findDominantFrequencies(fftDataX)
-        val dominantFrequenciesY = findDominantFrequencies(fftDataY)
-        val dominantFrequenciesZ = findDominantFrequencies(fftDataZ)
-
-        val allDominantFrequencies = dominantFrequenciesX + dominantFrequenciesY + dominantFrequenciesZ
-
-        avgFrequency = if (allDominantFrequencies.isNotEmpty()) {
-            allDominantFrequencies.average().toFloat()
-        } else {
-            0f
-        }
-
-        if (avgFrequency !in 4.0..6.0) {
-            avgFrequency = 0f
-        }
-
-        val (isDetected, _) = isParkinsonsDetected(
-            avgFrequency = avgFrequency,
-            stdDevX = stdDevX,
-            stdDevZ = stdDevZ,
-            rangeX = rangeX,
-            rangeZ = rangeZ,
-            rangeGyroX = rangeGyroX,
-            rangeGyroZ = rangeGyroZ,
-            steps = steps,
-            stdDevSteps = stdDevSteps
-        )
-
-        if (!isDetected) {
-            return null
-        }
-
         return SensorsData(
-            avgFrequency = avgFrequency,
+            avgFrequency = analysisResult.dominantFreq,
             stdDevX = stdDevX,
             stdDevZ = stdDevZ,
-            threshold = THRESHOLD,
+            threshold = POWER_RATIO_THRESHOLD,
             rangeX = rangeX,
             rangeZ = rangeZ,
             rangeGyroX = rangeGyroX,
             rangeGyroZ = rangeGyroZ,
-            steps = steps,
+            steps = stepBuffer.map { it.toFloat() },
             stdDevSteps = stdDevSteps,
             stdDevDeletions = stdDevDeletions,
-            rangeDeletions = rangeDeletions
+            rangeDeletions = deletionsFloats
         )
     }
 
-    private fun isParkinsonsDetected(
-        avgFrequency: Float,
-        stdDevX: Float,
-        stdDevZ: Float,
-        rangeX: Float,
-        rangeZ: Float,
-        rangeGyroX: Float,
-        rangeGyroZ: Float,
-        steps: List<Float>,
-        stdDevSteps: Float,
-    ): Pair<Boolean, Long> {
-        val isDetected = avgFrequency in 4.0..6.0 &&
-                (stdDevX > THRESHOLD && stdDevZ > THRESHOLD) &&
-                (rangeX > 1.5f || rangeZ > 1.5f || rangeGyroX > 1.0f || rangeGyroZ > 1.0f) &&
-                (steps.average() > 100 && stdDevSteps > 0.2f)
-
-        if (isDetected) {
-            if (tremorStartTime == 0L) {
-                tremorStartTime = System.currentTimeMillis()
-                return true to tremorStartTime
-            } else {
-                val currentTime = System.currentTimeMillis()
-                if (currentTime - tremorStartTime >= MIN_TREMOR_DURATION) {
-                    return true to tremorStartTime
+    /**
+     * Returns false on first detection, only true after sustained detection for MIN_TREMOR_DURATION.
+     * Allows up to MAX_MISSED_CYCLES consecutive non-detections before resetting.
+     */
+    private fun checkDurationGate(isDetected: Boolean): Boolean {
+        if (!isDetected) {
+            if (tremorStartTime != 0L) {
+                missedCycles++
+                if (missedCycles > MAX_MISSED_CYCLES) {
+                    tremorStartTime = 0L
+                    missedCycles = 0
                 }
             }
-        } else {
-            tremorStartTime = 0L
+            return false
         }
-        return false to 0L
+
+        // Detection is positive — reset missed counter
+        missedCycles = 0
+
+        val now = System.currentTimeMillis()
+        if (tremorStartTime == 0L) {
+            tremorStartTime = now
+            return false // First detection — start timing, don't fire yet
+        }
+
+        return (now - tremorStartTime) >= MIN_TREMOR_DURATION
     }
 
-    private fun applyFFT(data: List<Float>): FloatArray {
+    private fun applyFFT(data: FloatArray): FloatArray {
         val fft = FloatFFT_1D(data.size.toLong())
         val fftData = FloatArray(data.size * 2)
         for (i in data.indices) {
@@ -183,21 +213,50 @@ class TremorAnalysisUseCase {
         return fftData
     }
 
-    private fun findDominantFrequencies(fftData: FloatArray): List<Float> {
-        val frequencies = mutableListOf<Float>()
+    private data class SpectralResult(
+        val powerRatio: Float,
+        val dominantFreq: Float,
+        val totalPower: Float
+    )
+
+    /**
+     * Computes the ratio of power in the tremor band (3.5–7.0 Hz) to total power (0.5–25 Hz).
+     * Also finds the dominant frequency within the tremor band.
+     */
+    private fun computeSpectralPowerRatio(fftData: FloatArray, fftSize: Int): SpectralResult {
         val n = fftData.size / 2
+        val freqResolution = SAMPLE_RATE / fftSize
+
+        var tremorBandPower = 0f
+        var totalPower = 0f
+        var peakAmplitude = 0f
+        var dominantFreq = 0f
 
         for (i in 1 until n) {
-            val frequency = i * SAMPLE_RATE / (n * 2)
+            val frequency = i * freqResolution
+            if (frequency > SAMPLE_RATE / 2) break // Nyquist
 
             val real = fftData[i * 2]
             val imag = fftData[i * 2 + 1]
-            val amplitude = sqrt(real.pow(2) + imag.pow(2))
+            val power = real.pow(2) + imag.pow(2)
 
-            if (frequency in 4.0..6.0 && amplitude > MIN_FREQUENCY_AMPLITUDE) {
-                frequencies.add(frequency)
+            // Accumulate total power (0.5–25 Hz, skip DC and very low freq)
+            if (frequency in 0.5f..25f) {
+                totalPower += power
+            }
+
+            // Accumulate tremor band power
+            if (frequency in TREMOR_FREQ_LOW..TREMOR_FREQ_HIGH) {
+                tremorBandPower += power
+                val amplitude = sqrt(power)
+                if (amplitude > peakAmplitude) {
+                    peakAmplitude = amplitude
+                    dominantFreq = frequency
+                }
             }
         }
-        return frequencies
+
+        val ratio = if (totalPower > 0f) tremorBandPower / totalPower else 0f
+        return SpectralResult(ratio, dominantFreq, totalPower)
     }
 }

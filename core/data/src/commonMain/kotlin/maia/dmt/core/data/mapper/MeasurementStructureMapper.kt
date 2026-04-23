@@ -1,9 +1,15 @@
 package maia.dmt.core.data.mapper
 
+import kotlinx.serialization.json.JsonObject
+import kotlinx.serialization.json.int
+import kotlinx.serialization.json.jsonArray
+import kotlinx.serialization.json.jsonPrimitive
 import maia.dmt.core.data.dto.measurement.MeasurementElementDto
 import maia.dmt.core.data.dto.measurement.MeasurementRowDto
 import maia.dmt.core.data.dto.measurement.MeasurementScreenDto
 import maia.dmt.core.data.dto.measurement.MeasurementStructureDto
+import maia.dmt.core.domain.measurement.ElementConfig
+import maia.dmt.core.domain.measurement.ElementType
 import maia.dmt.core.domain.measurement.MeasurementElement
 import maia.dmt.core.domain.measurement.MeasurementRow
 import maia.dmt.core.domain.measurement.MeasurementScreen
@@ -27,12 +33,56 @@ fun MeasurementRowDto.toDomain() = MeasurementRow(
     elements = elements.map { it.toDomain() }
 )
 
-fun MeasurementElementDto.toDomain() = MeasurementElement(
-    id = id,
-    elementType = elementType,
-    rowNumber = rowNumber,
-    orderInRow = orderInRow,
-    label = label,
-    isRequired = isRequired,
-    config = config.toString()
-)
+fun MeasurementElementDto.toDomain(): MeasurementElement {
+    val type = ElementType.fromString(elementType)
+    return MeasurementElement(
+        id = id,
+        elementType = type,
+        rowNumber = rowNumber,
+        orderInRow = orderInRow,
+        label = label,
+        isRequired = isRequired,
+        config = parseElementConfig(type, config)
+    )
+}
+
+private fun parseElementConfig(elementType: ElementType, config: JsonObject): ElementConfig {
+    return when (elementType) {
+        ElementType.HEADER, ElementType.PARAGRAPH, ElementType.UNKNOWN ->
+            ElementConfig.EmptyConfig
+
+        ElementType.INPUT_TEXT ->
+            ElementConfig.InputTextConfig(
+                placeholder = config["placeholder"]?.jsonPrimitive?.content ?: ""
+            )
+
+        ElementType.INPUT_RADIO ->
+            ElementConfig.InputRadioConfig(
+                options = config["options"]?.jsonArray?.map { it.jsonPrimitive.content } ?: emptyList(),
+                layout = config["layout"]?.jsonPrimitive?.content ?: "vertical",
+                displayStyle = config["display_style"]?.jsonPrimitive?.content ?: "default"
+            )
+
+        ElementType.INPUT_MULTI_SELECT ->
+            ElementConfig.InputMultiSelectConfig(
+                options = config["options"]?.jsonArray?.map { it.jsonPrimitive.content } ?: emptyList(),
+                layout = config["layout"]?.jsonPrimitive?.content ?: "vertical",
+                displayStyle = config["display_style"]?.jsonPrimitive?.content ?: "default"
+            )
+
+        ElementType.INPUT_SELECT ->
+            ElementConfig.InputSelectConfig(
+                options = config["options"]?.jsonArray?.map { it.jsonPrimitive.content } ?: emptyList(),
+                placeholder = config["placeholder"]?.jsonPrimitive?.content ?: "Select..."
+            )
+
+        ElementType.INPUT_SCALE ->
+            ElementConfig.InputScaleConfig(
+                min = config["min"]?.jsonPrimitive?.int ?: 0,
+                max = config["max"]?.jsonPrimitive?.int ?: 10,
+                step = config["step"]?.jsonPrimitive?.int ?: 1,
+                minLabel = config["min_label"]?.jsonPrimitive?.content ?: "",
+                maxLabel = config["max_label"]?.jsonPrimitive?.content ?: ""
+            )
+    }
+}

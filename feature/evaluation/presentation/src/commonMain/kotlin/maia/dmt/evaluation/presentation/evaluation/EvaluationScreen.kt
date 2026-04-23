@@ -3,6 +3,8 @@ package maia.dmt.evaluation.presentation.evaluation
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -15,12 +17,14 @@ import maia.dmt.core.designsystem.components.layouts.DmtBaseScreen
 import maia.dmt.core.designsystem.components.toast.DmtToastMessage
 import maia.dmt.core.designsystem.components.toast.ToastDuration
 import maia.dmt.core.designsystem.components.toast.ToastType
+import maia.dmt.core.designsystem.renderers.ElementRendererProvider
 import maia.dmt.core.designsystem.theme.DmtTheme
-import maia.dmt.core.domain.dto.evaluation.EvaluationObject
+import maia.dmt.core.domain.measurement.ElementType
+import maia.dmt.core.domain.measurement.MeasurementElement
+import maia.dmt.core.domain.measurement.MeasurementScreen
 import maia.dmt.core.presentation.util.ObserveAsEvents
 import maia.dmt.core.presentation.util.UiText
 import maia.dmt.evaluation.presentation.components.layout.DmtEvaluationLayout
-import maia.dmt.core.designsystem.renderers.QuestionRendererProvider
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.koin.compose.viewmodel.koinViewModel
@@ -62,7 +66,7 @@ fun EvaluationRoot(
     EvaluationScreen(
         state = state,
         onAction = viewModel::onAction,
-        getCurrentScreenQuestions = { viewModel.getCurrentScreenQuestions() }
+        getCurrentScreen = { viewModel.getCurrentScreen() }
     )
 
     toastMessage?.let { message ->
@@ -82,10 +86,9 @@ fun EvaluationRoot(
 fun EvaluationScreen(
     state: EvaluationState,
     onAction: (EvaluationAction) -> Unit,
-    getCurrentScreenQuestions: () -> List<EvaluationObject>,
+    getCurrentScreen: () -> MeasurementScreen?,
 ) {
-    val questions = getCurrentScreenQuestions()
-
+    val currentScreen = getCurrentScreen()
     val scrollState = rememberScrollState()
 
     DmtBaseScreen(
@@ -93,7 +96,7 @@ fun EvaluationScreen(
         onIconClick = { onAction(EvaluationAction.OnBackClick) },
         content = {
             DmtEvaluationLayout(
-                title = questions.firstOrNull()?.object_label ?: "",
+                title = currentScreen?.title ?: "",
                 onPrevClick = {
                     onAction(EvaluationAction.OnEvaluationPreviousClick)
                 },
@@ -108,17 +111,43 @@ fun EvaluationScreen(
                         .verticalScroll(scrollState),
                     verticalArrangement = Arrangement.spacedBy(16.dp)
                 ) {
-                    questions.forEach { question ->
-                        key(question.id) {
-                            RenderQuestion(
-                                question = question,
-                                currentAnswer = state.answers[question.id] ?: "",
-                                onAnswerChange = { answer ->
-                                    onAction(EvaluationAction.OnAnswerChanged(question.id, answer))
+                    currentScreen?.rows
+                        ?.sortedBy { it.rowNumber }
+                        ?.forEach { row ->
+                            val sortedElements = row.elements.sortedBy { it.orderInRow }
+
+                            if (sortedElements.size == 1) {
+                                val element = sortedElements.first()
+                                key(element.id) {
+                                    RenderElement(
+                                        element = element,
+                                        currentAnswer = state.answers[element.id] ?: "",
+                                        onAnswerChange = { answer ->
+                                            onAction(EvaluationAction.OnAnswerChanged(element.id, answer))
+                                        }
+                                    )
                                 }
-                            )
+                            } else {
+                                Row(
+                                    modifier = Modifier.fillMaxWidth(),
+                                    horizontalArrangement = Arrangement.spacedBy(16.dp)
+                                ) {
+                                    sortedElements.forEach { element ->
+                                        key(element.id) {
+                                            Box(modifier = Modifier.weight(1f)) {
+                                                RenderElement(
+                                                    element = element,
+                                                    currentAnswer = state.answers[element.id] ?: "",
+                                                    onAnswerChange = { answer ->
+                                                        onAction(EvaluationAction.OnAnswerChanged(element.id, answer))
+                                                    }
+                                                )
+                                            }
+                                        }
+                                    }
+                                }
+                            }
                         }
-                    }
                 }
             }
         }
@@ -126,16 +155,28 @@ fun EvaluationScreen(
 }
 
 @Composable
-fun RenderQuestion(
-    question: EvaluationObject,
+private fun RenderElement(
+    element: MeasurementElement,
     currentAnswer: String,
     onAnswerChange: (String) -> Unit
 ) {
-    QuestionRendererProvider.RenderQuestion(
-        question = question,
-        currentAnswer = currentAnswer,
-        onAnswerChange = onAnswerChange
-    )
+    Column {
+        if (element.elementType !in listOf(ElementType.HEADER, ElementType.PARAGRAPH)) {
+            if (element.label.isNotBlank()) {
+                Text(
+                    text = element.label + if (element.isRequired) " *" else "",
+                    style = MaterialTheme.typography.titleMedium,
+                    color = MaterialTheme.colorScheme.onSurface,
+                    modifier = Modifier.padding(bottom = 8.dp)
+                )
+            }
+        }
+        ElementRendererProvider.RenderElement(
+            element = element,
+            currentAnswer = currentAnswer,
+            onAnswerChange = onAnswerChange
+        )
+    }
 }
 
 @Composable
@@ -145,7 +186,7 @@ fun EvaluationScreenPreview() {
         EvaluationScreen(
             state = EvaluationState(),
             onAction = {},
-            getCurrentScreenQuestions = { emptyList() },
+            getCurrentScreen = { null },
         )
     }
 }

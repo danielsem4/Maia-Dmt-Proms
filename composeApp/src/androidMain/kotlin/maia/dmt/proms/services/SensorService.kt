@@ -6,6 +6,7 @@ import android.app.NotificationManager
 import android.app.Service
 import android.content.Intent
 import android.os.IBinder
+import android.util.Log
 import android.widget.Toast
 import androidx.core.app.NotificationCompat
 import kotlinx.coroutines.CoroutineScope
@@ -43,7 +44,7 @@ class SensorService : Service(), KoinComponent {
     private val lightDataQueue = LinkedBlockingQueue<Float>(500)
     private val stepDataQueue = LinkedBlockingQueue<Long>(500)
 
-    private val frequencyBuffer = ArrayDeque<Acceleration>(128)
+    private val frequencyBuffer = ArrayDeque<Acceleration>(256)
 
     private val tremorBuffer = ArrayDeque<Acceleration>(30)
     private val gyroBuffer = ArrayDeque<Gyroscope>(30)
@@ -124,7 +125,7 @@ class SensorService : Service(), KoinComponent {
             }
 
             for (point in rawAccel) {
-                if (frequencyBuffer.size >= 128) frequencyBuffer.removeFirst()
+                if (frequencyBuffer.size >= 256) frequencyBuffer.removeFirst()
                 frequencyBuffer.add(point)
             }
 
@@ -149,7 +150,10 @@ class SensorService : Service(), KoinComponent {
             addToDeque(stepBuffer, currentSteps, 30)
             addToDeque(deletionBuffer, currentDeletions, 30)
 
-            if (tremorBuffer.size >= 30 && frequencyBuffer.size >= 64) {
+            Log.d("TremorDebug", "Buffers: tremor=${tremorBuffer.size}/30, freq=${frequencyBuffer.size}/128")
+
+            if (tremorBuffer.size >= 30 && frequencyBuffer.size >= 128) {
+                Log.d("TremorDebug", "Running analysis...")
 
                 val resultData = tremorAnalyzer.analyze(
                     accelBuffer = tremorBuffer.toList(),
@@ -161,14 +165,22 @@ class SensorService : Service(), KoinComponent {
                 )
 
                 if (resultData != null) {
+                    Log.d("TremorDebug", "TREMOR DETECTED! freq=${resultData.avgFrequency}Hz, uploading...")
                     withContext(Dispatchers.Main) {
                         Toast.makeText(applicationContext, "Parkinson's Tremor Detected!", Toast.LENGTH_LONG).show()
                     }
-                    (sensorRepository as? AndroidSensorRepository)?.uploadTremorData(resultData)
+                    try {
+                        (sensorRepository as? AndroidSensorRepository)?.uploadTremorData(resultData)
+                        Log.d("TremorDebug", "Upload completed successfully")
+                    } catch (e: Exception) {
+                        Log.e("TremorDebug", "Upload FAILED: ${e.message}", e)
+                    }
 
                     // Clear buffers to reset detection cycle
                     tremorBuffer.clear()
                     frequencyBuffer.clear()
+                } else {
+                    Log.d("TremorDebug", "Analysis returned null (no detection)")
                 }
             }
         }

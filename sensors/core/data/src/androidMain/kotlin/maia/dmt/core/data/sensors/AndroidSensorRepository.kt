@@ -5,6 +5,7 @@ import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
+import android.util.Log
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
@@ -116,6 +117,8 @@ class AndroidSensorRepository(
             val clinicId = authInfo?.user?.clinicId
             val uid = authInfo?.user?.id
 
+            Log.d("TremorDebug", "Upload: patientId=$uid, clinicId=$clinicId, freq=${domainData.avgFrequency}Hz")
+
             val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S", Locale.getDefault())
             val formattedDate = dateFormat.format(Date())
 
@@ -141,11 +144,12 @@ class AndroidSensorRepository(
                 data = dto
             )
 
-            sensorsService.uploadSensorsAggResults(request)
+            val result = sensorsService.uploadSensorsAggResults(request)
+            Log.d("TremorDebug", "Upload result: $result")
             deletionTracker.resetDeleteCount()
 
         } catch (e: Exception) {
-            e.printStackTrace()
+            Log.e("TremorDebug", "Upload FAILED: ${e.message}", e)
         }
     }
 }

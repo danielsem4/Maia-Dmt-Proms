@@ -52,6 +52,8 @@ class SensorService : Service(), KoinComponent {
     private val lightBuffer = ArrayDeque<Float>(30)
     private val deletionBuffer = ArrayDeque<Int>(30)
 
+    private var lastStepCount: Long = 0L
+
     companion object {
         const val NOTIFICATION_ID = 1001
         const val CHANNEL_ID = "Sensor_Service_Channel"
@@ -141,13 +143,15 @@ class SensorService : Service(), KoinComponent {
             val averagedGyro = Gyroscope(avgGyroX, avgGyroY, avgGyroZ, lastTimestamp)
 
             val avgLight = if (rawLight.isNotEmpty()) rawLight.average().toFloat() else 0f
-            val currentSteps = if (rawSteps.isNotEmpty()) rawSteps.last() else 0L
+            val currentAbsoluteSteps = if (rawSteps.isNotEmpty()) rawSteps.last() else lastStepCount
+            val stepDelta = (currentAbsoluteSteps - lastStepCount).coerceAtLeast(0)
+            if (rawSteps.isNotEmpty()) lastStepCount = currentAbsoluteSteps
             val currentDeletions = deletionTracker.getDeleteCount()
 
             addToDeque(tremorBuffer, averagedAccel, 30)
             addToDeque(gyroBuffer, averagedGyro, 30)
             addToDeque(lightBuffer, avgLight, 30)
-            addToDeque(stepBuffer, currentSteps, 30)
+            addToDeque(stepBuffer, stepDelta, 30)
             addToDeque(deletionBuffer, currentDeletions, 30)
 
             Log.d("TremorDebug", "Buffers: tremor=${tremorBuffer.size}/30, freq=${frequencyBuffer.size}/128")

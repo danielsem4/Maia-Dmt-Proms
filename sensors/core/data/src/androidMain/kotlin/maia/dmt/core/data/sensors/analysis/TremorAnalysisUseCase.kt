@@ -37,6 +37,12 @@ class TremorAnalysisUseCase {
 
         // Light threshold lowered — only filter truly dark (phone sealed in pocket)
         private const val POCKET_LIGHT_THRESHOLD = 3.0f
+
+        // Walking rejection: dual-signal (step-rate + gait fundamental frequency)
+        private const val MIN_WALKING_STEPS = 5L
+        private const val GAIT_FREQ_LOW = 1.0f
+        private const val GAIT_FREQ_HIGH = 3.0f
+        private const val GAIT_POWER_RATIO_THRESHOLD = 0.15f
     }
 
     private var tremorStartTime: Long = 0L
@@ -129,7 +135,18 @@ class TremorAnalysisUseCase {
         // Compute power spectral density and find dominant frequency
         val analysisResult = computeSpectralPowerRatio(fftData, fftSize)
 
-        Log.d(TAG, "FFT result: powerRatio=${analysisResult.powerRatio}, dominantFreq=${analysisResult.dominantFreq}Hz, totalPower=${analysisResult.totalPower}")
+        Log.d(TAG, "FFT result: powerRatio=${analysisResult.powerRatio}, dominantFreq=${analysisResult.dominantFreq}Hz, totalPower=${analysisResult.totalPower}, gaitRatio=${analysisResult.gaitPowerRatio}")
+
+        // --- Walking rejection (dual-signal: step-rate + gait fundamental) ---
+        val totalSteps = stepBuffer.sumOf { it }
+        val isWalking = totalSteps > MIN_WALKING_STEPS && analysisResult.gaitPowerRatio > GAIT_POWER_RATIO_THRESHOLD
+        Log.d(TAG, "Walking check: steps=$totalSteps (threshold=$MIN_WALKING_STEPS), gaitRatio=${analysisResult.gaitPowerRatio} (threshold=$GAIT_POWER_RATIO_THRESHOLD), isWalking=$isWalking")
+
+        if (isWalking) {
+            Log.d(TAG, "REJECTED: walking detected (steps=$totalSteps, gaitRatio=${analysisResult.gaitPowerRatio})")
+            tremorStartTime = 0L
+            return null
+        }
 
         val ratioOk = analysisResult.powerRatio > POWER_RATIO_THRESHOLD
         val powerOk = analysisResult.totalPower > MIN_TOTAL_POWER
@@ -216,7 +233,8 @@ class TremorAnalysisUseCase {
     private data class SpectralResult(
         val powerRatio: Float,
         val dominantFreq: Float,
-        val totalPower: Float
+        val totalPower: Float,
+        val gaitPowerRatio: Float
     )
 
     /**
@@ -228,6 +246,7 @@ class TremorAnalysisUseCase {
         val freqResolution = SAMPLE_RATE / fftSize
 
         var tremorBandPower = 0f
+        var gaitBandPower = 0f
         var totalPower = 0f
         var peakAmplitude = 0f
         var dominantFreq = 0f
@@ -245,6 +264,11 @@ class TremorAnalysisUseCase {
                 totalPower += power
             }
 
+            // Accumulate gait fundamental band power (1.0–3.0 Hz)
+            if (frequency in GAIT_FREQ_LOW..GAIT_FREQ_HIGH) {
+                gaitBandPower += power
+            }
+
             // Accumulate tremor band power
             if (frequency in TREMOR_FREQ_LOW..TREMOR_FREQ_HIGH) {
                 tremorBandPower += power
@@ -257,6 +281,7 @@ class TremorAnalysisUseCase {
         }
 
         val ratio = if (totalPower > 0f) tremorBandPower / totalPower else 0f
-        return SpectralResult(ratio, dominantFreq, totalPower)
+        val gaitRatio = if (totalPower > 0f) gaitBandPower / totalPower else 0f
+        return SpectralResult(ratio, dominantFreq, totalPower, gaitRatio)
     }
 }

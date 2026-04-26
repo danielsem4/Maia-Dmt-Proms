@@ -11,6 +11,8 @@ import maia.dmt.cdt.presentation.navigation.CdtGraphRoutes
 import maia.dmt.cdt.presentation.navigation.cdtGraph
 import maia.dmt.evaluation.presentation.navigation.EvaluationGraphRoutes
 import maia.dmt.evaluation.presentation.navigation.evaluationGraph
+import maia.dmt.fileshare.presentation.navigation.FileShareGraphRoutes
+import maia.dmt.fileshare.presentation.navigation.fileShareGraph
 import maia.dmt.hitber.presentation.navigation.HitberGraphRoutes
 import maia.dmt.hitber.presentation.navigation.hitberTestGraph
 import maia.dmt.home.presentation.navigation.HomeGraphRoutes
@@ -68,6 +70,7 @@ fun NavigationRoot(
                     "orientation" -> navController.navigate(OrientationTestGraphRoutes.Graph)
                     "pass" -> navController.navigate(PassTestGraphRoutes.Graph)
                     "hitber" -> navController.navigate(HitberGraphRoutes.Graph)
+                    "file share" -> navController.navigate(FileShareGraphRoutes.Graph)
                     else -> {}
                 }
             },
@@ -100,6 +103,9 @@ fun NavigationRoot(
             navController = navController
         )
         hitberTestGraph(
+            navController = navController
+        )
+        fileShareGraph(
             navController = navController
         )
     }

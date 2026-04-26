@@ -75,6 +75,10 @@ kotlin {
             implementation(projects.sensors.fallandshake.domain)
             implementation(projects.sensors.fallandshake.data)
 
+            implementation(projects.feature.fileShare.presentation)
+            implementation(projects.feature.fileShare.domain)
+            implementation(projects.feature.fileShare.data)
+
             implementation(projects.feature.settings.presentation)
 
             implementation(libs.jetbrains.compose.navigation)
@@ -88,6 +92,9 @@ kotlin {
             implementation(compose.components.uiToolingPreview)
             implementation(libs.jetbrains.compose.viewmodel)
             implementation(libs.jetbrains.lifecycle.compose)
+
+            implementation(libs.coil.compose)
+            implementation(libs.coil.network.ktor)
         }
     }
 }

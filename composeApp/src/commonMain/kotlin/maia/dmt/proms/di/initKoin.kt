@@ -8,6 +8,8 @@ import maia.dmt.core.data.di.coreDataModule
 import maia.dmt.core.data.sensors.di.sensorsCoreDataModule
 import maia.dmt.core.domain.di.coreDomainModule
 import maia.dmt.evaluation.presentation.di.evaluationPresentationModule
+import maia.dmt.fileshare.data.di.fileShareDataModule
+import maia.dmt.fileshare.presentation.di.fileSharePresentationModule
 import maia.dmt.fallandshake.data.di.fallShakeDataModule
 import maia.dmt.hitber.presentation.di.hitberPresentationModule
 import maia.dmt.home.data.di.homeDataModule
@@ -52,7 +54,9 @@ fun initKoin(config: KoinAppDeclaration? = null) {
             fallShakeDataModule,
             sensorsCoreDataModule,
             passPresentationModule,
-            hitberPresentationModule
+            hitberPresentationModule,
+            fileShareDataModule,
+            fileSharePresentationModule
         )
     }
 

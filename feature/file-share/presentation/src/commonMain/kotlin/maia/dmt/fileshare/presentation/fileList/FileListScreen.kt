@@ -30,13 +30,14 @@ import maia.dmt.core.designsystem.components.layouts.DmtBaseScreen
 import maia.dmt.core.designsystem.components.textFields.DmtSearchTextField
 import maia.dmt.core.presentation.util.ObserveAsEvents
 import maia.dmt.fileshare.presentation.components.FileDocumentCard
+import maia.dmt.fileshare.presentation.components.FileUploadDialog
+import maia.dmt.fileshare.presentation.util.rememberFilePickerLauncher
 import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
 fun FileListRoot(
     viewModel: FileListViewModel = koinViewModel(),
     onNavigateBack: () -> Unit,
-    onNavigateToAddDocument: () -> Unit,
     onNavigateToFilePreview: (fileId: String, fileName: String, fileType: String) -> Unit
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
@@ -44,8 +45,8 @@ fun FileListRoot(
     ObserveAsEvents(viewModel.events) { event ->
         when (event) {
             is FileListEvent.NavigateBack -> onNavigateBack()
-            is FileListEvent.NavigateToAddDocument -> onNavigateToAddDocument()
             is FileListEvent.NavigateToFilePreview -> onNavigateToFilePreview(event.fileId, event.fileName, event.fileType)
+            is FileListEvent.UploadSuccess -> { /* Toast/snackbar could be shown here */ }
         }
     }
 
@@ -61,6 +62,12 @@ fun FileListScreen(
     onAction: (FileListAction) -> Unit
 ) {
     val searchTextState = rememberTextFieldState(initialText = state.searchQuery)
+
+    val launchFilePicker = rememberFilePickerLauncher { pickedFile ->
+        if (pickedFile != null) {
+            onAction(FileListAction.OnFilePicked(pickedFile.name, pickedFile.bytes, pickedFile.mimeType))
+        }
+    }
 
     LaunchedEffect(searchTextState.text) {
         onAction(FileListAction.OnSearchQueryChange(searchTextState.text.toString()))
@@ -146,6 +153,19 @@ fun FileListScreen(
                         contentDescription = "Add Document"
                     )
                 }
+            }
+
+            if (state.showUploadDialog) {
+                FileUploadDialog(
+                    pickedFileName = state.pickedFileName,
+                    customFileName = state.customFileName,
+                    isUploading = state.isUploading,
+                    uploadError = state.uploadError,
+                    hasFilePicked = state.pickedFileBytes != null,
+                    onPickFileClick = launchFilePicker,
+                    onAction = onAction,
+                    onDismiss = { onAction(FileListAction.OnDismissUploadDialog) }
+                )
             }
         }
     )

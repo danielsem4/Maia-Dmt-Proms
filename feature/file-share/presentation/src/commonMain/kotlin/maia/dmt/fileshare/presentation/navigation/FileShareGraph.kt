@@ -19,9 +19,6 @@ fun NavGraphBuilder.fileShareGraph(
                 onNavigateBack = {
                     navController.navigateUp()
                 },
-                onNavigateToAddDocument = {
-                    // TODO: navigate to add document screen
-                },
                 onNavigateToFilePreview = { fileId, fileName, fileType ->
                     navController.navigate(
                         FileShareGraphRoutes.FilePreview(

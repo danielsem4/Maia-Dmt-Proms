@@ -8,5 +8,12 @@ data class FileListState(
     val isLoading: Boolean = false,
     val error: UiText? = null,
     val allDocuments: List<FileDocument> = emptyList(),
-    val documents: List<FileDocument> = emptyList()
+    val documents: List<FileDocument> = emptyList(),
+    val showUploadDialog: Boolean = false,
+    val pickedFileName: String = "",
+    val pickedFileBytes: ByteArray? = null,
+    val pickedFileMimeType: String = "",
+    val customFileName: String = "",
+    val isUploading: Boolean = false,
+    val uploadError: UiText? = null
 )

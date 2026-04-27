@@ -47,7 +47,11 @@ class FileListViewModel(
             is FileListAction.OnSearchQueryChange -> handleSearchQueryChange(action.query)
             is FileListAction.OnBackClick -> navigateBack()
             is FileListAction.OnDocumentClick -> handleDocumentClick(action.fileId, action.fileName, action.fileType)
-            is FileListAction.OnAddDocumentClick -> navigateToAddDocument()
+            is FileListAction.OnAddDocumentClick -> showUploadDialog()
+            is FileListAction.OnFilePicked -> handleFilePicked(action.name, action.bytes, action.mimeType)
+            is FileListAction.OnCustomFileNameChange -> _state.update { it.copy(customFileName = action.name) }
+            is FileListAction.OnUploadClick -> uploadFile()
+            is FileListAction.OnDismissUploadDialog -> dismissUploadDialog()
         }
     }
 
@@ -142,9 +146,81 @@ class FileListViewModel(
         }
     }
 
-    private fun navigateToAddDocument() {
+    private fun showUploadDialog() {
+        _state.update { it.copy(showUploadDialog = true) }
+    }
+
+    private fun handleFilePicked(name: String, bytes: ByteArray, mimeType: String) {
+        _state.update {
+            it.copy(
+                pickedFileName = name,
+                pickedFileBytes = bytes,
+                pickedFileMimeType = mimeType,
+                customFileName = name,
+                uploadError = null
+            )
+        }
+    }
+
+    private fun dismissUploadDialog() {
+        _state.update {
+            it.copy(
+                showUploadDialog = false,
+                pickedFileName = "",
+                pickedFileBytes = null,
+                pickedFileMimeType = "",
+                customFileName = "",
+                isUploading = false,
+                uploadError = null
+            )
+        }
+    }
+
+    private fun uploadFile() {
+        val currentState = _state.value
+        val fileBytes = currentState.pickedFileBytes ?: return
+        val fileName = currentState.customFileName.ifBlank { currentState.pickedFileName }
+
         viewModelScope.launch {
-            eventChannel.send(FileListEvent.NavigateToAddDocument)
+            _state.update { it.copy(isUploading = true, uploadError = null) }
+
+            val authInfo = sessionStorage.observeAuthInfo().firstOrNull()
+            if (authInfo == null) {
+                _state.update {
+                    it.copy(isUploading = false, uploadError = UiText.DynamicString("Session not found."))
+                }
+                return@launch
+            }
+
+            val clinicId = sessionStorage.getActiveClinicId()
+            val patientId = authInfo.user?.id
+
+            if (clinicId.isNullOrEmpty() || patientId == null) {
+                _state.update {
+                    it.copy(isUploading = false, uploadError = UiText.DynamicString("No clinic or patient info."))
+                }
+                return@launch
+            }
+
+            fileShareService.uploadFile(
+                clinicId = clinicId,
+                patientId = patientId,
+                fileName = fileName,
+                fileBytes = fileBytes,
+                mimeType = currentState.pickedFileMimeType
+            )
+                .onSuccess {
+                    dismissUploadDialog()
+                    loadFiles()
+                    eventChannel.send(
+                        FileListEvent.UploadSuccess(UiText.DynamicString("File uploaded successfully"))
+                    )
+                }
+                .onFailure { error ->
+                    _state.update {
+                        it.copy(isUploading = false, uploadError = error.toUiText())
+                    }
+                }
         }
     }
 }

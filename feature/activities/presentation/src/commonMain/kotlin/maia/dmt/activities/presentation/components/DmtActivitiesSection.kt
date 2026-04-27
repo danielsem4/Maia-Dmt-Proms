@@ -15,7 +15,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import dmtproms.feature.activities.presentation.generated.resources.Res
 import dmtproms.feature.activities.presentation.generated.resources.run_icon
-import maia.dmt.activities.domain.model.ActivityItem
 import maia.dmt.activities.presentation.model.ActivityUiModel
 import maia.dmt.core.designsystem.components.cards.DmtIconCard
 import maia.dmt.core.designsystem.theme.DmtTheme

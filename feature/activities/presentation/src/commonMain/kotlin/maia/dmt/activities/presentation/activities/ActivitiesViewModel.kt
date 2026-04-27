@@ -17,29 +17,14 @@ import kotlinx.datetime.number
 import kotlinx.datetime.toInstant
 import kotlinx.datetime.toLocalDateTime
 import maia.dmt.activities.domain.activities.ActivitiesService
-import maia.dmt.activities.domain.model.ActivityItem
 import maia.dmt.activities.domain.model.ActivityItemReport
 import maia.dmt.activities.presentation.model.ActivityUiModel
 import maia.dmt.core.domain.auth.SessionStorage
 import maia.dmt.core.domain.util.onFailure
 import maia.dmt.core.domain.util.onSuccess
 import maia.dmt.core.presentation.util.UiText
-import maia.dmt.core.presentation.util.getCurrentFormattedDateTime
 import maia.dmt.core.presentation.util.toUiText
 import dmtproms.feature.activities.presentation.generated.resources.Res
-import dmtproms.feature.activities.presentation.generated.resources.activities_activity_ball_game
-import dmtproms.feature.activities.presentation.generated.resources.activities_activity_gym_workout
-import dmtproms.feature.activities.presentation.generated.resources.activities_activity_racket_game
-import dmtproms.feature.activities.presentation.generated.resources.activities_activity_run
-import dmtproms.feature.activities.presentation.generated.resources.activities_activity_sit
-import dmtproms.feature.activities.presentation.generated.resources.activities_activity_stand
-import dmtproms.feature.activities.presentation.generated.resources.activities_activity_swim
-import dmtproms.feature.activities.presentation.generated.resources.activities_activity_treadmill
-import dmtproms.feature.activities.presentation.generated.resources.activities_activity_walk
-import dmtproms.feature.activities.presentation.generated.resources.activities_activity_walk_department
-import dmtproms.feature.activities.presentation.generated.resources.activities_activity_walk_hallway
-import dmtproms.feature.activities.presentation.generated.resources.activities_activity_walk_room
-import dmtproms.feature.activities.presentation.generated.resources.activities_activity_yoga
 import dmtproms.feature.activities.presentation.generated.resources.ball_game_icon
 import dmtproms.feature.activities.presentation.generated.resources.gym_workout_icon
 import dmtproms.feature.activities.presentation.generated.resources.racket_game_icon
@@ -51,7 +36,6 @@ import dmtproms.feature.activities.presentation.generated.resources.treadmill_ic
 import dmtproms.feature.activities.presentation.generated.resources.walk_icon
 import dmtproms.feature.activities.presentation.generated.resources.yoga_icon
 import org.jetbrains.compose.resources.DrawableResource
-import org.jetbrains.compose.resources.getString
 import kotlin.time.Clock
 
 class ActivitiesViewModel(
@@ -130,10 +114,10 @@ class ActivitiesViewModel(
                 .onSuccess { activities ->
                     val activityUiModels = activities.map { activity ->
                         ActivityUiModel(
-                            text = mapActivityName(activity.name),
-                            id = activity.id.toString(),
-                            icon = mapActivityIcon(activity.name),
-                            onClick = { handleActivityClickById(activity.name) }
+                            text = activity.activityName,
+                            id = activity.id,
+                            icon = mapActivityIcon(activity.activityName),
+                            onClick = { handleActivityClickById(activity.id) }
                         )
                     }
 
@@ -158,19 +142,15 @@ class ActivitiesViewModel(
     }
 
     private fun handleActivityClickById(activityId: String) {
-        viewModelScope.launch {
-            val translatedActivity = mapActivityName(activityId)
+        val activity = _state.value.allActivities.find { it.id == activityId }
+        if (activity == null) return
 
-            val activity = _state.value.allActivities.find { it.text == translatedActivity }
-            println("Activity clicked: ${activity?.text}")
-
-            _state.update {
-                it.copy(
-                    selectedActivity = activity,
-                    showActivityReportDialog = true,
-                    selectedDateTime = Clock.System.now().toEpochMilliseconds()
-                )
-            }
+        _state.update {
+            it.copy(
+                selectedActivity = activity,
+                showActivityReportDialog = true,
+                selectedDateTime = Clock.System.now().toEpochMilliseconds()
+            )
         }
     }
 
@@ -210,17 +190,18 @@ class ActivitiesViewModel(
             }
 
             val instant = kotlin.time.Instant.fromEpochMilliseconds(currentState.selectedDateTime)
-            val localDateTime = instant.toLocalDateTime(TimeZone.currentSystemDefault())
-            val formattedTimestamp = getCurrentFormattedDateTime(localDateTime)
+            val formattedTimestamp = instant.toString()
 
             val reportBody = ActivityItemReport(
-                clinic_id = clinicId,
-                patient_id = patientId,
-                activity_id = selectedActivity.id.toIntOrNull() ?: 0,
-                date = formattedTimestamp
+                timeDone = formattedTimestamp
             )
 
-            activitiesService.reportActivity(reportBody)
+            activitiesService.reportActivity(
+                clinicId = clinicId,
+                patientId = patientId,
+                patientActivityId = selectedActivity.id,
+                body = reportBody
+            )
                 .onSuccess {
                     _state.update {
                         it.copy(
@@ -246,39 +227,22 @@ class ActivitiesViewModel(
 
     private fun mapActivityIcon(activityName: String): DrawableResource {
         return when (activityName.lowercase().trim()) {
-            "walk" -> Res.drawable.walk_icon
+            "walk", "walking" -> Res.drawable.walk_icon
             "sitting" -> Res.drawable.sitting_icon
             "walking at room" -> Res.drawable.walk_icon
             "walking at hallway" -> Res.drawable.walk_icon
             "walking at department" -> Res.drawable.walk_icon
             "yoga" -> Res.drawable.yoga_icon
             "treadmill" -> Res.drawable.treadmill_icon
-            "swim" -> Res.drawable.swim_icon
-            "stand" -> Res.drawable.stand_icon
-            "run" -> Res.drawable.run_icon
+            "swim", "swimming" -> Res.drawable.swim_icon
+            "stand", "standing" -> Res.drawable.stand_icon
+            "run", "running" -> Res.drawable.run_icon
             "racket game" -> Res.drawable.racket_game_icon
             "gym workout" -> Res.drawable.gym_workout_icon
             "ball game" -> Res.drawable.ball_game_icon
+            "cycling" -> Res.drawable.run_icon
+            "meditation" -> Res.drawable.yoga_icon
             else -> Res.drawable.run_icon
-        }
-    }
-
-    private suspend fun mapActivityName(activityName: String): String {
-        return when (activityName.lowercase().trim()) {
-            "walk" -> getString(Res.string.activities_activity_walk)
-            "sitting" -> getString(Res.string.activities_activity_sit)
-            "walking at room" -> getString(Res.string.activities_activity_walk_room)
-            "walking at hallway" -> getString(Res.string.activities_activity_walk_hallway)
-            "walking at department" -> getString(Res.string.activities_activity_walk_department)
-            "yoga" -> getString(Res.string.activities_activity_yoga)
-            "treadmill" -> getString(Res.string.activities_activity_treadmill)
-            "swim" -> getString(Res.string.activities_activity_swim)
-            "stand" -> getString(Res.string.activities_activity_stand)
-            "run" -> getString(Res.string.activities_activity_run)
-            "rackety game", "racket game" -> getString(Res.string.activities_activity_racket_game)
-            "gym workout" -> getString(Res.string.activities_activity_gym_workout)
-            "ball game" -> getString(Res.string.activities_activity_ball_game)
-            else -> getString(Res.string.activities_activity_walk)
         }
     }
 

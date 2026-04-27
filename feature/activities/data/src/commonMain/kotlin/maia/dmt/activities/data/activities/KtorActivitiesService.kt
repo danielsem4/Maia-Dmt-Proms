@@ -18,24 +18,24 @@ class KtorActivitiesService(
     private val httpClient: HttpClient,
 ) : ActivitiesService {
 
-    override suspend fun getActivities(clinicId: String, patientId: String): Result<List<ActivityItem>, DataError.Remote> {
-
+    override suspend fun getActivities(
+        clinicId: String,
+        patientId: String
+    ): Result<List<ActivityItem>, DataError.Remote> {
         return httpClient.get<List<ActivityItemDto>>(
-            route = "Activities_list/",
-            queryParams = mapOf(
-                "clinic_id" to clinicId,
-                "patient_id" to patientId
-            )
+            route = "clinics/$clinicId/patients/$patientId/activities/",
         ).map { it.map { it.toDomain() } }
-
     }
 
-    override suspend fun reportActivity(result: ActivityItemReport): EmptyResult<DataError.Remote> {
-
+    override suspend fun reportActivity(
+        clinicId: String,
+        patientId: String,
+        patientActivityId: String,
+        body: ActivityItemReport
+    ): EmptyResult<DataError.Remote> {
         return httpClient.post(
-            route = "Activity_report/",
-            body = result.toSerial()
+            route = "clinics/$clinicId/patients/$patientId/activities/$patientActivityId/logs/",
+            body = body.toSerial()
         )
     }
-
 }

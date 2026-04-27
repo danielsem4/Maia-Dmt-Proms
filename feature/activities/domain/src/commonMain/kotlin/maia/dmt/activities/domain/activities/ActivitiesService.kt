@@ -10,7 +10,12 @@ interface ActivitiesService {
 
     suspend fun getActivities(clinicId: String, patientId: String): Result<List<ActivityItem>, DataError.Remote>
 
-    suspend fun reportActivity(result: ActivityItemReport): EmptyResult<DataError.Remote>
+    suspend fun reportActivity(
+        clinicId: String,
+        patientId: String,
+        patientActivityId: String,
+        body: ActivityItemReport
+    ): EmptyResult<DataError.Remote>
 
 
 

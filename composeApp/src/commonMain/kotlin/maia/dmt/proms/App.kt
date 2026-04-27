@@ -3,6 +3,9 @@ package maia.dmt.proms
 import androidx.compose.runtime.*
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.compose.rememberNavController
+import coil3.ImageLoader
+import coil3.compose.setSingletonImageLoaderFactory
+import coil3.network.ktor3.KtorNetworkFetcherFactory
 import maia.dmt.auth.presentation.login.LoginRoot
 import maia.dmt.auth.presentation.navigation.AuthGraphRoutes
 import maia.dmt.core.designsystem.theme.DmtTheme
@@ -16,6 +19,14 @@ fun App(
     onAuthenticationChecked: () -> Unit = {},
     viewModel: MainViewModel = koinViewModel()
 ) {
+    setSingletonImageLoaderFactory { context ->
+        ImageLoader.Builder(context)
+            .components {
+                add(KtorNetworkFetcherFactory())
+            }
+            .build()
+    }
+
     val navController = rememberNavController()
     DeepLinkListener(navController)
 

@@ -13,11 +13,11 @@ interface MedicationService {
 
     suspend fun getMedications(clinicId: String, patientId: String): Result<List<Medication>, DataError.Remote>
 
-    suspend fun reportMedication(body: MedicationReport): EmptyResult<DataError.Remote>
+    suspend fun reportMedication(clinicId: String, patientId: String, medicationRecordId: String, body: MedicationReport): EmptyResult<DataError.Remote>
 
     suspend fun setMedicationReminders(body: MedicationNotification): EmptyResult<DataError.Remote>
 
-    suspend fun getAllReportedMedications(patientId: String, clinicId: String): Result<List<ReportedMedication>, DataError.Remote>
+    suspend fun getMedicationLogs(clinicId: String, patientId: String, medicationRecordId: String): Result<List<ReportedMedication>, DataError.Remote>
 
 }
 

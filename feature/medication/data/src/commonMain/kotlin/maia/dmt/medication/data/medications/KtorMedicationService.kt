@@ -26,18 +26,21 @@ class KtorMedicationService(
         patientId: String
     ): Result<List<Medication>, DataError.Remote> {
         return httpClient.get<List<MedicationDto>>(
-            route = "clinics/$clinicId/patients/$patientId/medications/",
+            route = "api/v1/clinics/$clinicId/patients/$patientId/medications/",
         ).map { it.map { it.toDomain() } }
 
     }
 
-    override suspend fun reportMedication(body: MedicationReport): EmptyResult<DataError.Remote> {
-
+    override suspend fun reportMedication(
+        clinicId: String,
+        patientId: String,
+        medicationRecordId: String,
+        body: MedicationReport
+    ): EmptyResult<DataError.Remote> {
         return httpClient.post(
-            route = "report_medication/",
+            route = "api/v1/clinics/$clinicId/patients/$patientId/medications/$medicationRecordId/logs/",
             body = body.toSerial()
         )
-
     }
 
     override suspend fun setMedicationReminders(body: MedicationNotification): EmptyResult<DataError.Remote> {
@@ -47,15 +50,13 @@ class KtorMedicationService(
         )
     }
 
-    override suspend fun getAllReportedMedications(
+    override suspend fun getMedicationLogs(
+        clinicId: String,
         patientId: String,
-        clinicId: String
+        medicationRecordId: String
     ): Result<List<ReportedMedication>, DataError.Remote> {
         return httpClient.get<List<ReportedMedicationDto>>(
-            route = "getPatientReports/$clinicId/$patientId/",
-            queryParams = mapOf(
-                "report_type" to "medications"
-            )
+            route = "api/v1/clinics/$clinicId/patients/$patientId/medications/$medicationRecordId/logs/",
         ).map { it.map { it.toDomain() } }
     }
 

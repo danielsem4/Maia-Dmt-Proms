@@ -3,6 +3,8 @@ package maia.dmt.medication.presentation.medicationStatistics
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.async
+import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.firstOrNull
@@ -12,6 +14,7 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import maia.dmt.core.domain.auth.SessionStorage
+import maia.dmt.core.domain.util.Result
 import maia.dmt.core.domain.util.onFailure
 import maia.dmt.core.domain.util.onSuccess
 import maia.dmt.core.presentation.util.UiText
@@ -80,15 +83,28 @@ class MedicationStatisticsViewModel(
                 return@launch
             }
 
-            medicationService.getAllReportedMedications(patientId, clinicId)
+            medicationService.getMedications(clinicId, patientId)
                 .onSuccess { medications ->
-                    val medicationUiModels = medications.mapIndexed { index, it ->
+                    val allLogs = medications.map { medication ->
+                        async {
+                            medicationService.getMedicationLogs(clinicId, patientId, medication.id)
+                        }
+                    }.awaitAll()
+
+                    val combinedLogs = allLogs.flatMap { result ->
+                        when (result) {
+                            is Result.Success -> result.data
+                            is Result.Failure -> emptyList()
+                        }
+                    }
+
+                    val medicationUiModels = combinedLogs.mapIndexed { index, log ->
                         ReportedMedicationUiModel(
-                            id = it.id + " $index",
-                            name = it.name,
-                            form = it.form,
-                            dosage = it.dosage,
-                            date = it.time_taken
+                            id = log.id + " $index",
+                            name = log.medName,
+                            dosage = log.dosageTaken,
+                            date = log.takenAt,
+                            status = log.status
                         )
                     }
 
@@ -121,8 +137,8 @@ class MedicationStatisticsViewModel(
                 currentState.medicationLogs.filter { medication ->
                     medication.name.contains(query, ignoreCase = true) ||
                             medication.date.contains(query, ignoreCase = true) ||
-                            medication.form.contains(query, ignoreCase = true) ||
-                            medication.dosage.contains(query, ignoreCase = true)
+                            medication.dosage.contains(query, ignoreCase = true) ||
+                            medication.status.contains(query, ignoreCase = true)
                 }
             }
 

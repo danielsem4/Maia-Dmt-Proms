@@ -4,8 +4,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class MedicationReportDto(
-    val clinic_id: String,
-    val patient_id: String,
-    val medication_id: String,
-    val timestamp: String
+    val taken_at: String,
+    val dosage_taken: String,
+    val status: String
 )

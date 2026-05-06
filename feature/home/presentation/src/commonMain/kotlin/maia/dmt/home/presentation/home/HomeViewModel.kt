@@ -17,6 +17,7 @@ import maia.dmt.core.domain.util.onSuccess
 import maia.dmt.core.presentation.util.UiText
 import maia.dmt.core.presentation.util.toUiText
 import maia.dmt.home.domain.home.HomeService
+import maia.dmt.home.domain.notification.DeviceTokenService
 import maia.dmt.home.domain.notification.PushNotificationService
 import maia.dmt.home.presentation.mapper.mapModuleIcon
 import maia.dmt.home.presentation.mapper.mapModuleNameToUiText
@@ -27,6 +28,7 @@ class HomeViewModel(
     private val sessionStorage: SessionStorage,
     private val authService: AuthService,
     private val pushNotificationService: PushNotificationService,
+    private val deviceTokenService: DeviceTokenService,
     private val sensorController: SensorController
 ) : ViewModel() {
 
@@ -176,6 +178,11 @@ class HomeViewModel(
     private fun logout() {
         viewModelScope.launch {
             _state.update { it.copy(isLoggingOut = true) }
+
+            currentFcmToken?.let { token ->
+                deviceTokenService.unregisterDeviceToken(token)
+            }
+
             authService.logout().onSuccess {
                 _state.update { it.copy(showLogoutDialog = false, isLoggingOut = false) }
                 sessionStorage.set(null)

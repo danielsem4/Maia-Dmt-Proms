@@ -2,10 +2,10 @@ package maia.dmt.home.domain.home
 
 import maia.dmt.core.domain.util.DataError
 import maia.dmt.core.domain.util.Result
-import maia.dmt.home.domain.models.Module
+import maia.dmt.home.domain.models.HomeData
 
 interface HomeService {
 
-    suspend fun getModules(clinicId: String): Result<List<Module>, DataError.Remote>
+    suspend fun getHomeData(clinicId: String, userId: String): Result<HomeData, DataError.Remote>
 
 }

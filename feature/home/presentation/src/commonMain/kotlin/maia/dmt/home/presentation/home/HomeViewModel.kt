@@ -56,6 +56,7 @@ class HomeViewModel(
             HomeAction.OnLogoutConfirm -> logout()
 
             is HomeAction.OnFeatureClicked -> handleFeatureClick(action.moduleName)
+            is HomeAction.OnMeasurementClicked -> handleMeasurementClick(action.measurementId)
             HomeAction.OnShowParkinsonDialog -> _state.update { it.copy(showParkinsonDialog = true) }
             HomeAction.OnParkinsonDialogDismiss -> _state.update { it.copy(showParkinsonDialog = false) }
 
@@ -69,16 +70,30 @@ class HomeViewModel(
     private fun loadModules() {
         viewModelScope.launch {
             _state.update { it.copy(isLoadingModules = true, modulesError = null) }
-            val clinicId = sessionStorage.getActiveClinicId()
 
-            if (clinicId.isNullOrEmpty()) {
+            val authInfo = sessionStorage.observeAuthInfo().firstOrNull()
+
+            if (authInfo == null) {
+                _state.update {
+                    it.copy(
+                        isLoadingModules = false,
+                        modulesError = UiText.DynamicString("Session not found. Please login again.")
+                    )
+                }
+                return@launch
+            }
+
+            val clinicId = sessionStorage.getActiveClinicId()
+            val userId = authInfo.user?.id
+
+            if (clinicId.isNullOrEmpty() || userId == null) {
                 _state.update { it.copy(isLoadingModules = false, modulesError = UiText.DynamicString("Invalid Session")) }
                 return@launch
             }
 
-            homeService.getModules(clinicId)
-                .onSuccess { modules ->
-                    val uiModules = modules.map { module ->
+            homeService.getHomeData(clinicId, userId)
+                .onSuccess { homeData ->
+                    val moduleUiModels = homeData.modules.map { module ->
                         ModuleUiModel(
                             icon = mapModuleIcon(module.name),
                             text = mapModuleNameToUiText(module.name),
@@ -89,11 +104,22 @@ class HomeViewModel(
                         )
                     }
 
-                    val hasSensorModule = modules.any {
+                    val measurementUiModels = homeData.measurements.map { measurement ->
+                        ModuleUiModel(
+                            icon = mapModuleIcon(measurement.name),
+                            text = mapModuleNameToUiText(measurement.name),
+                            onClick = {
+                                onAction(HomeAction.OnMeasurementClicked(measurement.measurementId))
+                            }
+                        )
+                    }
+
+                    val allUiModels = moduleUiModels + measurementUiModels
+
+                    val hasSensorModule = homeData.modules.any {
                         it.name.contains("Sensor", ignoreCase = true) ||
                                 it.name.contains("Tremor", ignoreCase = true)
                     }
-
 
                     val showPermissionDialog = hasSensorModule &&
                             !sensorController.hasSensorPermission() &&
@@ -101,18 +127,17 @@ class HomeViewModel(
 
                     _state.update {
                         it.copy(
-                            modules = uiModules,
+                            modules = allUiModels,
                             isLoadingModules = false,
                             showSensorPermissionDialog = showPermissionDialog
                         )
                     }
 
-
                     if (hasSensorModule && sensorController.hasSensorPermission() && !_state.value.isSensorsActive) {
                         startSensors()
                     }
 
-                    if (modules.any { it.name == "Parkinson report" } && !_state.value.hasShownParkinsonOnLaunch) {
+                    if (homeData.modules.any { it.name == "Parkinson report" } && !_state.value.hasShownParkinsonOnLaunch) {
                         _state.update { it.copy(showParkinsonDialog = true, hasShownParkinsonOnLaunch = true) }
                     }
                 }
@@ -136,6 +161,10 @@ class HomeViewModel(
 
     private fun handleFeatureClick(name: String) {
         viewModelScope.launch { eventChannel.send(HomeEvent.ModuleClicked(name)) }
+    }
+
+    private fun handleMeasurementClick(measurementId: String) {
+        viewModelScope.launch { eventChannel.send(HomeEvent.MeasurementClicked(measurementId)) }
     }
 
     private fun observeFcmToken() {

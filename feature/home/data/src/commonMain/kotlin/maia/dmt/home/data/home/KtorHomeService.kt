@@ -8,18 +8,22 @@ import maia.dmt.core.domain.util.map
 import maia.dmt.home.data.dto.HomeResponseDto
 import maia.dmt.home.data.mapper.toDomain
 import maia.dmt.home.domain.home.HomeService
-import maia.dmt.home.domain.models.Module
+import maia.dmt.home.domain.models.HomeData
 
 class KtorHomeService(
     private val httpClient: HttpClient,
 ) : HomeService {
-    override suspend fun getModules(clinicId: String): Result<List<Module>, DataError.Remote> {
+    override suspend fun getHomeData(
+        clinicId: String,
+        userId: String
+    ): Result<HomeData, DataError.Remote> {
         return httpClient.get<HomeResponseDto>(
-            route = "mobile/clinics/$clinicId/home/",
+            route = "api/v1/mobile/clinics/$clinicId/patients/$userId/home/",
         ).map { response ->
-            val modules = response.modules.filter { it.is_active }.map { it.toDomain() }
-            val measurements = response.measurements.filter { it.is_active }.map { it.toDomain() }
-            modules + measurements
+            HomeData(
+                modules = response.modules.filter { it.is_active }.map { it.toDomain() },
+                measurements = response.measurements.map { it.toDomain() },
+            )
         }
     }
 }

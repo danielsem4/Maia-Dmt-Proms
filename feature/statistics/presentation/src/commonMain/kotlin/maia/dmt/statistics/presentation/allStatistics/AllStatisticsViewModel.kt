@@ -113,7 +113,7 @@ class AllStatisticsViewModel(
                 return@launch
             }
 
-            statisticService.getEvaluations(clinicId, patientId, true)
+            statisticService.getEvaluations(clinicId, patientId)
                 .onSuccess { evaluations ->
                     val evaluationUiModels = evaluations.map { evaluation ->
                         Evaluation(

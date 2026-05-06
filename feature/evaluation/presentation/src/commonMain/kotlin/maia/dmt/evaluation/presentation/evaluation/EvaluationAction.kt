@@ -6,5 +6,5 @@ interface EvaluationAction {
     data object OnEvaluationNextClick: EvaluationAction
     data object OnEvaluationPreviousClick: EvaluationAction
 
-    data class OnAnswerChanged(val questionId: Int, val answer: String): EvaluationAction
+    data class OnAnswerChanged(val elementId: String, val answer: String): EvaluationAction
 }

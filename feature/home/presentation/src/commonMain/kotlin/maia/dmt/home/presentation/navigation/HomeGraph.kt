@@ -9,7 +9,8 @@ import maia.dmt.home.presentation.home.HomeRoot
 fun NavGraphBuilder.homeGraph(
     navController: NavController,
     onLogoutSuccess: () -> Unit,
-    onModuleClicked: (String) -> Unit
+    onModuleClicked: (String) -> Unit,
+    onMeasurementClicked: (String) -> Unit
 ) {
     navigation<HomeGraphRoutes.Graph>(
         startDestination = HomeGraphRoutes.Home
@@ -17,7 +18,8 @@ fun NavGraphBuilder.homeGraph(
         composable<HomeGraphRoutes.Home>{
             HomeRoot(
                 onLogoutSuccess = onLogoutSuccess,
-                onModuleClicked = onModuleClicked
+                onModuleClicked = onModuleClicked,
+                onMeasurementClicked = onMeasurementClicked
             )
         }
     }

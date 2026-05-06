@@ -20,7 +20,6 @@ import maia.dmt.core.domain.auth.SessionStorage
 import maia.dmt.core.domain.util.onFailure
 import maia.dmt.core.domain.util.onSuccess
 import maia.dmt.core.presentation.util.UiText
-import maia.dmt.core.presentation.util.getCurrentFormattedDateTime
 import maia.dmt.core.presentation.util.toUiText
 import maia.dmt.medication.domain.medications.MedicationService
 import maia.dmt.medication.domain.models.Medication
@@ -38,6 +37,7 @@ class AllMedicationViewModel(
     val events = eventChannel.receiveAsFlow()
 
     private var hasLoadedInitialData = false
+    private var rawMedications: List<Medication> = emptyList()
 
     val state = _state
         .onStart {
@@ -105,10 +105,11 @@ class AllMedicationViewModel(
 
             medicationService.getMedications(clinicId, patientId)
                 .onSuccess { medications ->
+                    rawMedications = medications
                     val medicationUiModels = medications.map { medication ->
                         MedicationUiModel(
                             text = medication.name,
-                            id = medication.medicine_id,
+                            id = medication.id,
                             onClick = { handleMedicationClick(medication) }
                         )
                     }
@@ -204,19 +205,27 @@ class AllMedicationViewModel(
                 return@launch
             }
 
-            // Convert timestamp to formatted string using kotlin.time.Instant
+            val medication = rawMedications.find { it.id == selectedMed.id }
+            if (medication == null) {
+                _state.update {
+                    it.copy(
+                        isReportingMedication = false,
+                        medicationsError = UiText.DynamicString("Medication data not found.")
+                    )
+                }
+                return@launch
+            }
+
             val instant = kotlin.time.Instant.fromEpochMilliseconds(currentState.selectedDateTime)
-            val localDateTime = instant.toLocalDateTime(TimeZone.currentSystemDefault())
-            val formattedTimestamp = getCurrentFormattedDateTime(localDateTime)
+            val takenAt = instant.toString()
 
             val reportBody = MedicationReport(
-                clinic_id = clinicId,
-                patient_id = patientId,
-                medication_id = selectedMed.id,
-                timestamp = formattedTimestamp
+                taken_at = takenAt,
+                dosage_taken = medication.dosage,
+                status = "TAKEN"
             )
 
-            medicationService.reportMedication(reportBody)
+            medicationService.reportMedication(clinicId, patientId, selectedMed.id, reportBody)
                 .onSuccess {
                     _state.update {
                         it.copy(

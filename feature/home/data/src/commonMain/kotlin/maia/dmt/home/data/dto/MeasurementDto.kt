@@ -4,10 +4,11 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class MeasurementDto(
-    val id: String = "",
-    val clinic: String = "",
-    val measurement: String = "",
+    val measurement_settings_id: String = "",
+    val measurement_id: String = "",
     val measurement_name: String = "",
     val measurement_type: String = "",
-    val is_active: Boolean = true,
+    val frequency: String = "",
+    val start_date: String = "",
+    val end_date: String? = null,
 )

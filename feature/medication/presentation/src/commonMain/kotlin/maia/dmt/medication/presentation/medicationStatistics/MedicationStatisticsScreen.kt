@@ -197,33 +197,33 @@ fun MedicationStatisticsPreview() {
                 medicationLogs = listOf(
                     ReportedMedicationUiModel(
                         id = "1",
-                        name = "CYSTEAMINE DRP 0.55% BOT 5ML",
-                        form = "DRP",
-                        dosage = "0.0055",
-                        date = "2025-10-21 09:44:45"
+                        name = "Lisinopril",
+                        dosage = "10mg",
+                        date = "2026-02-05T08:02:00Z",
+                        status = "TAKEN"
                     ),
                     ReportedMedicationUiModel(
                         id = "2",
-                        name = "ASPIRIN 100MG TAB",
-                        form = "TAB",
-                        dosage = "100",
-                        date = "2025-10-20 14:30:00"
+                        name = "Metformin",
+                        dosage = "1000mg",
+                        date = "2026-01-05T08:02:00Z",
+                        status = "DELAYED"
                     )
                 ),
                 sortedMedicationLogs = listOf(
                     ReportedMedicationUiModel(
                         id = "1",
-                        name = "CYSTEAMINE DRP 0.55% BOT 5ML",
-                        form = "DRP",
-                        dosage = "0.0055",
-                        date = "2025-10-21 09:44:45"
+                        name = "Lisinopril",
+                        dosage = "10mg",
+                        date = "2026-02-05T08:02:00Z",
+                        status = "TAKEN"
                     ),
                     ReportedMedicationUiModel(
                         id = "2",
-                        name = "ASPIRIN 100MG TAB",
-                        form = "TAB",
-                        dosage = "100",
-                        date = "2025-10-20 14:30:00"
+                        name = "Metformin",
+                        dosage = "1000mg",
+                        date = "2026-01-05T08:02:00Z",
+                        status = "DELAYED"
                     )
                 )
             ),

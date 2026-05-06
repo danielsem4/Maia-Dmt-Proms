@@ -7,6 +7,7 @@ import maia.dmt.core.domain.util.DataError
 import maia.dmt.core.domain.util.Result
 import maia.dmt.core.domain.util.map
 import maia.dmt.core.data.dto.evaluation.EvaluationDto
+import maia.dmt.core.data.dto.measurement.MeasurementStructureDto
 import maia.dmt.core.data.mapper.toDomain
 import maia.dmt.core.data.mapper.toDto
 import maia.dmt.core.data.networking.post
@@ -14,6 +15,7 @@ import maia.dmt.core.data.util.encodeValueToJson
 import maia.dmt.core.domain.dto.evaluation.Evaluation
 import maia.dmt.core.domain.dto.evaluation.MeasurementResult
 import maia.dmt.core.domain.evaluation.EvaluationService
+import maia.dmt.core.domain.measurement.MeasurementStructure
 
 class KtorEvaluationsService(
     private val httpClient: HttpClient,
@@ -28,15 +30,12 @@ class KtorEvaluationsService(
 
     override suspend fun getEvaluations(
         clinicId: String,
-        patientId: String,
-        all: Boolean
+        userId: String,
     ): Result<List<Evaluation>, DataError.Remote> {
         return httpClient.get<List<EvaluationDto>>(
-            route = "PatientMeasurements/",
+            route = "clinics/$clinicId/patients/$userId/measurements/",
             queryParams = mapOf(
-                "clinic_id" to clinicId,
-                "patient_id" to patientId,
-                "all" to all
+                "type" to "QUESTIONNAIRES"
             )
         ).map { it.map { it.toDomain() } }
     }
@@ -56,6 +55,15 @@ class KtorEvaluationsService(
             )
         ).map { it.toDomain() }
 
+    }
+
+    override suspend fun getMeasurementStructure(
+        clinicId: String,
+        measurementId: String
+    ): Result<MeasurementStructure, DataError.Remote> {
+        return httpClient.get<MeasurementStructureDto>(
+            route = "api/v1/mobile/clinics/$clinicId/measurements/$measurementId/structure/"
+        ).map { it.toDomain() }
     }
 
     override suspend fun uploadEvaluationResults(results: Any): Result<Unit, DataError.Remote> {

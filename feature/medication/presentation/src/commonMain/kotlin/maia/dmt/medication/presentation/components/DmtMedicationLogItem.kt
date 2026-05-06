@@ -51,7 +51,7 @@ fun DmtMedicationLogItem(
             )
             Spacer(modifier = Modifier.padding(2.dp))
             Text(
-                text = "${medicationLog.form} - ${medicationLog.dosage}",
+                text = "${medicationLog.dosage} - ${medicationLog.status}",
                 style = typography.bodyMedium,
                 color = colorScheme.onSurfaceVariant
             )
@@ -74,10 +74,10 @@ fun DmtMedicationLogItemPreview() {
              medicationLog =
                  ReportedMedicationUiModel(
                      id = "1",
-                     name = "CYSTEAMINE DRP 0.55% BOT 5ML",
-                     form = "DRP",
-                     dosage = "0.0055",
-                     date = "2025-10-21 09:44:45"
+                     name = "Lisinopril",
+                     dosage = "10mg",
+                     date = "2026-02-05T08:02:00Z",
+                     status = "TAKEN"
                  )
          )
      }

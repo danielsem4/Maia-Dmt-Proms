@@ -29,7 +29,7 @@ class KtorAuthService(
         password: String
     ): Result<AuthResult, DataError.Remote> {
         return httpClient.post<LoginRequest, AuthResponseSerializable>(
-            route = "mobile/auth/sessions/",
+            route = "api/v1/mobile/auth/sessions/",
             body = LoginRequest(
                 email = email,
                 password = password
@@ -42,7 +42,7 @@ class KtorAuthService(
         code: String
     ): Result<AuthResult, DataError.Remote> {
         return httpClient.post<Verify2faRequest, AuthResponseSerializable>(
-            route = "mobile/auth/2fa/verify/",
+            route = "api/v1/mobile/auth/2fa/verify/",
             body = Verify2faRequest(
                 code = code,
                 user_id = userId
@@ -55,7 +55,7 @@ class KtorAuthService(
         clinicId: String
     ): Result<AuthResult, DataError.Remote> {
         return httpClient.post<SelectClinicRequest, AuthResponseSerializable>(
-            route = "mobile/auth/sessions/select-clinic/",
+            route = "api/v1/mobile/auth/sessions/select-clinic/",
             body = SelectClinicRequest(
                 clinic_id = clinicId,
                 user_id = userId
@@ -67,14 +67,14 @@ class KtorAuthService(
         refreshToken: String
     ): Result<AuthTokens, DataError.Remote> {
         return httpClient.post<RefreshTokenRequest, AuthTokensSerializable>(
-            route = "mobile/auth/tokens/refresh/",
+            route = "api/v1/mobile/auth/tokens/refresh/",
             body = RefreshTokenRequest(refresh = refreshToken)
         ).map { it.toDomain() }
     }
 
     override suspend fun logout(): EmptyResult<DataError.Remote> {
         return httpClient.delete<Unit>(
-            route = "mobile/auth/sessions/"
+            route = "api/v1/mobile/auth/sessions/"
         ).asEmptyResult()
     }
 }

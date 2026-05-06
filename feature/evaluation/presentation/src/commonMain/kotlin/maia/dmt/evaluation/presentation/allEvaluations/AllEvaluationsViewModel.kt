@@ -16,11 +16,11 @@ import maia.dmt.core.domain.util.onFailure
 import maia.dmt.core.domain.util.onSuccess
 import maia.dmt.core.presentation.util.UiText
 import maia.dmt.core.presentation.util.toUiText
-import maia.dmt.core.domain.dto.evaluation.Evaluation
-import maia.dmt.core.domain.evaluation.EvaluationService
+import maia.dmt.evaluation.domain.measurements.MeasurementsService
+import maia.dmt.evaluation.domain.model.MeasurementItem
 
 class AllEvaluationsViewModel(
-    private val evaluationService: EvaluationService,
+    private val measurementsService: MeasurementsService,
     private val sessionStorage: SessionStorage
 ): ViewModel() {
 
@@ -32,7 +32,7 @@ class AllEvaluationsViewModel(
     val state = _state
         .onStart {
             if (!hasLoadedInitialData) {
-                loadEvaluations()
+                loadMeasurements()
                 hasLoadedInitialData = true
             }
         }
@@ -44,18 +44,17 @@ class AllEvaluationsViewModel(
 
     fun onAction(action: AllEvaluationsAction) {
         when (action) {
-
             is AllEvaluationsAction.OnBackClick -> { navigateBack() }
-            is AllEvaluationsAction.OnEvaluationClick -> { handleEvaluationClickByName(action.evaluation) }
+            is AllEvaluationsAction.OnEvaluationClick -> { handleMeasurementClick(action.measurement) }
             is AllEvaluationsAction.OnSearchQueryChange -> {
                 _state.update { currentState ->
-                    val filteredEvaluations = filterEvaluations(
-                        allEvaluations = currentState.allEvaluations,
+                    val filtered = filterMeasurements(
+                        allMeasurements = currentState.allMeasurements,
                         query = action.query
                     )
                     currentState.copy(
                         searchQuery = action.query,
-                        evaluations = filteredEvaluations
+                        measurements = filtered
                     )
                 }
             }
@@ -63,24 +62,24 @@ class AllEvaluationsViewModel(
         }
     }
 
-    private fun filterEvaluations(
-        allEvaluations: List<Evaluation>,
+    private fun filterMeasurements(
+        allMeasurements: List<MeasurementItem>,
         query: String
-    ): List<Evaluation> {
+    ): List<MeasurementItem> {
         if (query.isBlank()) {
-            return allEvaluations
+            return allMeasurements
         }
 
         val searchQuery = query.trim().lowercase()
 
-        return allEvaluations.filter { evaluation ->
-            evaluation.measurement_name.lowercase().contains(searchQuery) ||
-                    evaluation.measurement_settings.measurement_begin_time?.lowercase()?.contains(searchQuery) == true ||
-                    evaluation.measurement_settings.measurement_repeat_period?.lowercase()?.contains(searchQuery) == true
+        return allMeasurements.filter { measurement ->
+            measurement.measurementName.lowercase().contains(searchQuery) ||
+                    measurement.startDate.lowercase().contains(searchQuery) ||
+                    measurement.frequency.name.lowercase().contains(searchQuery)
         }
     }
 
-    private fun loadEvaluations() {
+    private fun loadMeasurements() {
         viewModelScope.launch {
             _state.update {
                 it.copy(
@@ -101,9 +100,9 @@ class AllEvaluationsViewModel(
                 return@launch
             }
             val clinicId = sessionStorage.getActiveClinicId()
-            val patientId = authInfo.user?.id
+            val userId = authInfo.user?.id
 
-            if (clinicId.isNullOrEmpty() || patientId == null) {
+            if (clinicId.isNullOrEmpty() || userId == null) {
                 _state.update {
                     it.copy(
                         isLoadingEvaluations = false,
@@ -113,24 +112,12 @@ class AllEvaluationsViewModel(
                 return@launch
             }
 
-            evaluationService.getEvaluations(clinicId, patientId)
-                .onSuccess { evaluations ->
-                    val medicationUiModels = evaluations.map { evaluation ->
-                        Evaluation(
-                            id = evaluation.id,
-                            measurement_name = evaluation.measurement_name,
-                            display_as_module = evaluation.display_as_module,
-                            is_multilingual = evaluation.is_multilingual,
-                            is_active = evaluation.is_active,
-                            measurement_settings = evaluation.measurement_settings,
-                            measurement_objects = evaluation.measurement_objects
-                        )
-                    }
-
+            measurementsService.getMeasurements(clinicId, userId)
+                .onSuccess { measurements ->
                     _state.update {
                         it.copy(
-                            allEvaluations = medicationUiModels,
-                            evaluations = medicationUiModels,
+                            allMeasurements = measurements,
+                            measurements = measurements,
                             isLoadingEvaluations = false,
                             evaluationsError = null
                         )
@@ -147,10 +134,10 @@ class AllEvaluationsViewModel(
         }
     }
 
-    fun handleEvaluationClickByName(evaluation: Evaluation) {
-        println("Evaluation clicked! $evaluation")
+    private fun handleMeasurementClick(measurement: MeasurementItem) {
+        println("Measurement clicked! $measurement")
         viewModelScope.launch {
-            eventChannel.send(AllEvaluationsEvent.NavigateToSelectedEvaluation(evaluation.measurement_name))
+            eventChannel.send(AllEvaluationsEvent.NavigateToSelectedEvaluation(measurement.measurement))
         }
     }
 
@@ -158,6 +145,5 @@ class AllEvaluationsViewModel(
         viewModelScope.launch {
             eventChannel.send(AllEvaluationsEvent.NavigateBack)
         }
-
     }
 }

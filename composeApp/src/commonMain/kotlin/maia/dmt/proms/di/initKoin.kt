@@ -7,6 +7,7 @@ import maia.dmt.cdt.presentation.di.cdtPresentationModule
 import maia.dmt.core.data.di.coreDataModule
 import maia.dmt.core.data.sensors.di.sensorsCoreDataModule
 import maia.dmt.core.domain.di.coreDomainModule
+import maia.dmt.evaluation.data.di.evaluationDataModule
 import maia.dmt.evaluation.presentation.di.evaluationPresentationModule
 import maia.dmt.fileshare.data.di.fileShareDataModule
 import maia.dmt.fileshare.presentation.di.fileSharePresentationModule
@@ -41,6 +42,7 @@ fun initKoin(config: KoinAppDeclaration? = null) {
             medicationDataModule,
             authPresentationModule,
             evaluationPresentationModule,
+            evaluationDataModule,
             activitiesPresentationModule,
             activitiesDataModule,
             platformHomeDataModule,

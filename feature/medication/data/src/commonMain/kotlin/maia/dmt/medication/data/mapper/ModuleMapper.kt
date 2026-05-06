@@ -27,30 +27,30 @@ fun MedicationDto.toDomain(): Medication {
 
 fun MedicationReport.toSerial(): MedicationReportDto {
     return MedicationReportDto(
-        clinic_id = clinic_id,
-        patient_id = patient_id,
-        medication_id = medication_id,
-        timestamp = timestamp
+        taken_at = taken_at,
+        dosage_taken = dosage_taken,
+        status = status
     )
 }
 
 fun ReportedMedicationDto.toDomain(): ReportedMedication {
     return ReportedMedication(
         id = id,
-        name = name,
-        form = form,
-        dosage = dosage,
-        time_taken = time_taken
+        patientMedication = patient_medication,
+        medName = med_name,
+        takenAt = taken_at,
+        dosageTaken = dosage_taken,
+        status = status
     )
 }
 
 fun ReportedMedication.toSerial(): ReportedMedicationDto {
     return ReportedMedicationDto(
         id = id,
-        name = name,
-        form = form,
-        dosage = dosage,
-        time_taken = time_taken
+        patient_medication = patientMedication,
+        med_name = medName,
+        taken_at = takenAt,
+        dosage_taken = dosageTaken,
+        status = status
     )
-
 }

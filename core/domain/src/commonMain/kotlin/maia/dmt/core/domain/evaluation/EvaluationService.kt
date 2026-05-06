@@ -2,14 +2,17 @@ package maia.dmt.core.domain.evaluation
 
 import kotlinx.serialization.json.Json
 import maia.dmt.core.domain.dto.evaluation.Evaluation
+import maia.dmt.core.domain.measurement.MeasurementStructure
 import maia.dmt.core.domain.util.DataError
 import maia.dmt.core.domain.util.Result
 
 interface EvaluationService {
 
-    suspend fun getEvaluations(clinicId: String, patientId: String, all: Boolean = false): Result<List<Evaluation>, DataError.Remote>
+    suspend fun getEvaluations(clinicId: String, userId: String): Result<List<Evaluation>, DataError.Remote>
 
     suspend fun getEvaluation(clinicId: String, patientId: String, evaluationName: String): Result<Evaluation, DataError.Remote>
+
+    suspend fun getMeasurementStructure(clinicId: String, measurementId: String): Result<MeasurementStructure, DataError.Remote>
 
     suspend fun uploadEvaluationResults(results: Any): Result<Unit, DataError.Remote>
 

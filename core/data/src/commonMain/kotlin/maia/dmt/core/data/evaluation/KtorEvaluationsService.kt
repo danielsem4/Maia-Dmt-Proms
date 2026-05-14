@@ -8,6 +8,7 @@ import maia.dmt.core.domain.util.Result
 import maia.dmt.core.domain.util.map
 import maia.dmt.core.data.dto.evaluation.EvaluationDto
 import maia.dmt.core.data.dto.measurement.MeasurementStructureDto
+import maia.dmt.core.data.mapper.buildSubmissionRequest
 import maia.dmt.core.data.mapper.toDomain
 import maia.dmt.core.data.mapper.toDto
 import maia.dmt.core.data.networking.post
@@ -87,5 +88,17 @@ class KtorEvaluationsService(
                 Result.Failure(DataError.Remote.UNKNOWN)
             }
         }
+    }
+
+    override suspend fun submitMeasurement(
+        clinicId: String,
+        structure: MeasurementStructure,
+        answers: Map<String, String>
+    ): Result<Unit, DataError.Remote> {
+        val requestDto = buildSubmissionRequest(structure, answers)
+        return httpClient.post(
+            route = "api/v1/mobile/clinics/$clinicId/measurements/${structure.measurementId}/submit/",
+            body = requestDto
+        )
     }
 }

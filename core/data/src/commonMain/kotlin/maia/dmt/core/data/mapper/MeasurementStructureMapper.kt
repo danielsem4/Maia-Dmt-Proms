@@ -84,5 +84,24 @@ private fun parseElementConfig(elementType: ElementType, config: JsonObject): El
                 minLabel = config["min_label"]?.jsonPrimitive?.content ?: "",
                 maxLabel = config["max_label"]?.jsonPrimitive?.content ?: ""
             )
+
+        ElementType.INPUT_BOOLEAN ->
+            ElementConfig.InputBooleanConfig(
+                trueLabel = config["true_label"]?.jsonPrimitive?.content ?: "Yes",
+                falseLabel = config["false_label"]?.jsonPrimitive?.content ?: "No"
+            )
+
+        ElementType.INPUT_NUMBER ->
+            ElementConfig.InputNumberConfig(
+                min = config["min"]?.jsonPrimitive?.int ?: 0,
+                max = config["max"]?.jsonPrimitive?.int ?: 100,
+                unit = config["unit"]?.jsonPrimitive?.content ?: ""
+            )
+
+        ElementType.INPUT_DATE ->
+            ElementConfig.InputDateConfig
+
+        ElementType.INPUT_TIME ->
+            ElementConfig.InputTimeConfig
     }
 }

@@ -36,6 +36,10 @@ enum class ElementType {
     INPUT_MULTI_SELECT,
     INPUT_SELECT,
     INPUT_SCALE,
+    INPUT_BOOLEAN,
+    INPUT_NUMBER,
+    INPUT_DATE,
+    INPUT_TIME,
     UNKNOWN;
 
     companion object {
@@ -76,4 +80,19 @@ sealed interface ElementConfig {
         val minLabel: String,
         val maxLabel: String
     ) : ElementConfig
+
+    data class InputBooleanConfig(
+        val trueLabel: String,
+        val falseLabel: String
+    ) : ElementConfig
+
+    data class InputNumberConfig(
+        val min: Int,
+        val max: Int,
+        val unit: String
+    ) : ElementConfig
+
+    data object InputDateConfig : ElementConfig
+
+    data object InputTimeConfig : ElementConfig
 }

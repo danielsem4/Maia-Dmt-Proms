@@ -1,6 +1,5 @@
 package maia.dmt.core.domain.evaluation
 
-import kotlinx.serialization.json.Json
 import maia.dmt.core.domain.dto.evaluation.Evaluation
 import maia.dmt.core.domain.measurement.MeasurementStructure
 import maia.dmt.core.domain.util.DataError
@@ -15,6 +14,12 @@ interface EvaluationService {
     suspend fun getMeasurementStructure(clinicId: String, measurementId: String): Result<MeasurementStructure, DataError.Remote>
 
     suspend fun uploadEvaluationResults(results: Any): Result<Unit, DataError.Remote>
+
+    suspend fun submitMeasurement(
+        clinicId: String,
+        structure: MeasurementStructure,
+        answers: Map<String, String>
+    ): Result<Unit, DataError.Remote>
 
 }
 

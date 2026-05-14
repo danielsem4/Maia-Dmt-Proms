@@ -14,6 +14,7 @@ import kotlinx.coroutines.launch
 import maia.dmt.core.domain.auth.SessionStorage
 import maia.dmt.core.domain.evaluation.EvaluationService
 import maia.dmt.core.domain.measurement.MeasurementScreen
+import maia.dmt.core.domain.measurement.MeasurementStructure
 import maia.dmt.core.domain.util.onFailure
 import maia.dmt.core.domain.util.onSuccess
 import maia.dmt.core.presentation.util.UiText
@@ -129,14 +130,45 @@ class EvaluationViewModel(
                 it.copy(currentScreenIndex = currentIndex + 1)
             }
         } else {
-            // Last screen — upload would happen here (deferred)
-            viewModelScope.launch {
+            submitMeasurement(structure)
+        }
+    }
+
+    private fun submitMeasurement(structure: MeasurementStructure) {
+        viewModelScope.launch {
+            _state.update { it.copy(isSubmitting = true) }
+
+            val clinicId = sessionStorage.getActiveClinicId()
+
+            if (clinicId.isNullOrEmpty()) {
+                _state.update { it.copy(isSubmitting = false) }
                 eventChannel.send(
-                    EvaluationEvent.UploadSuccess(
-                        UiText.DynamicString("Questionnaire completed.")
+                    EvaluationEvent.UploadError(
+                        UiText.DynamicString("No clinic ID found.")
                     )
                 )
+                return@launch
             }
+
+            evaluationService.submitMeasurement(
+                clinicId = clinicId,
+                structure = structure,
+                answers = _state.value.answers
+            )
+                .onSuccess {
+                    _state.update { it.copy(isSubmitting = false) }
+                    eventChannel.send(
+                        EvaluationEvent.UploadSuccess(
+                            UiText.DynamicString("Questionnaire completed.")
+                        )
+                    )
+                }
+                .onFailure { error ->
+                    _state.update { it.copy(isSubmitting = false) }
+                    eventChannel.send(
+                        EvaluationEvent.UploadError(error.toUiText())
+                    )
+                }
         }
     }
 

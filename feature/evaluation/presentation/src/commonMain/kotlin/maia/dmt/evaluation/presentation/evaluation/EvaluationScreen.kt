@@ -105,7 +105,8 @@ fun EvaluationScreen(
                 Column(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .verticalScroll(scrollState),
+                        .verticalScroll(scrollState)
+                        .padding(4.dp),
                     verticalArrangement = Arrangement.spacedBy(16.dp)
                 ) {
                     questions.forEach { question ->

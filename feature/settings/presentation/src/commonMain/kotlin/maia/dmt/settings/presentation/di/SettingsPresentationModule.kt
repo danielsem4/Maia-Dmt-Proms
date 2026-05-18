@@ -1,5 +1,6 @@
 package maia.dmt.settings.presentation.di
 
+import maia.dmt.settings.presentation.appearance.AppearanceViewModel
 import maia.dmt.settings.presentation.language.LanguageViewModel
 import maia.dmt.settings.presentation.profile.ProfileViewModel
 import maia.dmt.settings.presentation.settings.SettingsViewModel
@@ -13,5 +14,9 @@ val settingsPresentationModule = module {
     viewModel { LanguageViewModel(
         getCurrentLanguageUseCase = get(),
         saveLanguageUseCase = get()
+    ) }
+    viewModel { AppearanceViewModel(
+        getCurrentAppearanceUseCase = get(),
+        saveAppearanceUseCase = get()
     ) }
 }

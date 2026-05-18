@@ -12,6 +12,10 @@
     <string name="settings_light_mode">Light Mode</string>
     <string name="settings_system_default">System Default</string>
 
+    <string name="settings_choose_your_appearance_body">Please select the preferred appearance for the app</string>
+    <string name="settings_current_appearance">Current appearance</string>
+    <string name="settings_available_appearances">Available appearances</string>
+
     <string name="settings_english">English</string>
     <string name="settings_arabic">Arabic</string>
     <string name="settings_russian">Russian</string>

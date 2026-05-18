@@ -55,16 +55,11 @@ fun SettingsRoot(
     onNavigateToAppearance: () -> Unit = {}
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
-    var toastMessage by remember { mutableStateOf<String?>(null) }
-    var toastType by remember { mutableStateOf(ToastType.Success) }
 
     ObserveAsEvents(viewModel.events) { event ->
         when (event) {
             SettingsEvent.NavigateToLanguage -> onNavigateToLanguage()
-            SettingsEvent.NavigateToAppearance -> {
-                toastType = ToastType.Info
-                toastMessage = "Coming soon, use phone settings to change appearance"
-            }
+            SettingsEvent.NavigateToAppearance -> onNavigateToAppearance()
             SettingsEvent.NavigateToProfile -> onNavigateToProfile()
             SettingsEvent.NavigateBack -> onNavigateBack()
         }
@@ -74,17 +69,6 @@ fun SettingsRoot(
         state = state,
         onAction = viewModel::onAction
     )
-
-    toastMessage?.let { message ->
-        DmtToastMessage(
-            message = message,
-            type = toastType,
-            duration = ToastDuration.MEDIUM,
-            onDismiss = {
-                toastMessage = null
-            }
-        )
-    }
 }
 
 @Composable

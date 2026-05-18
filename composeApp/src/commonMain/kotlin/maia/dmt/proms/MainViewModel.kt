@@ -7,6 +7,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import maia.dmt.core.domain.appearance.AppearanceRepository
 import maia.dmt.core.domain.auth.SessionStorage
 import maia.dmt.core.domain.util.onFailure
 import maia.dmt.core.domain.util.onSuccess
@@ -17,7 +18,8 @@ import maia.dmt.home.domain.notification.DeviceTokenService
 class MainViewModel(
     private val sessionStorage: SessionStorage,
     private val pushNotificationService: FirebasePushNotificationService,
-    private val deviceTokenService: DeviceTokenService
+    private val deviceTokenService: DeviceTokenService,
+    private val appearanceRepository: AppearanceRepository
 ): ViewModel() {
 
     private val _state = MutableStateFlow(MainState())
@@ -37,6 +39,7 @@ class MainViewModel(
 
             observeUserAuth()
             observeDeviceToken()
+            observeThemePreference()
         }
     }
 
@@ -57,6 +60,14 @@ class MainViewModel(
                 if (!isLoggedIn) {
                     previousDeviceToken = null
                 }
+            }
+        }
+    }
+
+    private fun observeThemePreference() {
+        viewModelScope.launch {
+            appearanceRepository.currentAppearanceMode.collect { mode ->
+                _state.update { it.copy(themePreference = mode) }
             }
         }
     }

@@ -12,6 +12,10 @@
     <string name="settings_light_mode">Светлая тема</string>
     <string name="settings_system_default">Системная по умолчанию</string>
 
+    <string name="settings_choose_your_appearance_body">Пожалуйста, выберите предпочитаемую тему приложения</string>
+    <string name="settings_current_appearance">Текущая тема</string>
+    <string name="settings_available_appearances">Доступные темы</string>
+
     <string name="settings_english">Английский</string>
     <string name="settings_arabic">Арабский</string>
     <string name="settings_russian">Русский</string>

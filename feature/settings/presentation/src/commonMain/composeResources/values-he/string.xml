@@ -12,6 +12,10 @@
     <string name="settings_light_mode">מצב בהיר</string>
     <string name="settings_system_default">ברירת מחדל של המערכת</string>
 
+    <string name="settings_choose_your_appearance_body">יש לבחור את המראה המועדף לאפליקציה</string>
+    <string name="settings_current_appearance">המראה הנוכחי</string>
+    <string name="settings_available_appearances">מראות זמינים</string>
+
     <string name="settings_english">אנגלית</string>
     <string name="settings_arabic">ערבית</string>
     <string name="settings_russian">רוסית</string>

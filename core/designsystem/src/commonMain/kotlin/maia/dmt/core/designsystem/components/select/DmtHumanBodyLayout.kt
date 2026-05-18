@@ -124,11 +124,11 @@ fun DmtHumanBodyLayout(
 
     Box(
         modifier = modifier
-            .fillMaxSize()
+            .fillMaxWidth()
             .background(color = extendedColors.surfaceHigher, RoundedCornerShape(10.dp))
     ) {
         Column(
-            modifier = Modifier.fillMaxSize(),
+            modifier = Modifier.fillMaxWidth(),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             IconButton(
@@ -146,7 +146,7 @@ fun DmtHumanBodyLayout(
             BoxWithConstraints(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .weight(1f)
+                    .aspectRatio(0.85f)
                     .padding(horizontal = 32.dp)
                     .background(
                         color = extendedColors.surfaceHigher,

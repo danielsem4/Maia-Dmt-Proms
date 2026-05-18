@@ -119,6 +119,7 @@ fun ActivitiesScreen(
                     )
                 } else {
                     DmtActivitiesSection(
+                        modifier = Modifier.weight(1f),
                         activities = state.activities
                     )
                 }

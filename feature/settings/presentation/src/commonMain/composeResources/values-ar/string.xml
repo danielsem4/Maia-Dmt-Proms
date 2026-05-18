@@ -12,6 +12,10 @@
     <string name="settings_light_mode">الوضع الفاتح</string>
     <string name="settings_system_default">الإعدادات الافتراضية للنظام</string>
 
+    <string name="settings_choose_your_appearance_body">يرجى اختيار المظهر المفضل للتطبيق</string>
+    <string name="settings_current_appearance">المظهر الحالي</string>
+    <string name="settings_available_appearances">المظاهر المتاحة</string>
+
     <string name="settings_english">الإنجليزية</string>
     <string name="settings_arabic">العربية</string>
     <string name="settings_russian">الروسية</string>

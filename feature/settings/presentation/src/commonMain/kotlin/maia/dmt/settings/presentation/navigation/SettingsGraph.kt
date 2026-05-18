@@ -4,6 +4,7 @@ import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
+import maia.dmt.settings.presentation.appearance.AppearanceRoot
 import maia.dmt.settings.presentation.language.SettingsLanguageRoot
 import maia.dmt.settings.presentation.language.SettingsLanguageScreen
 import maia.dmt.settings.presentation.profile.ProfileRoot
@@ -25,6 +26,9 @@ fun NavGraphBuilder.settingsGraph(
                 },
                 onNavigateToProfile = {
                     navController.navigate(SettingsGraphRoutes.Profile)
+                },
+                onNavigateToAppearance = {
+                    navController.navigate(SettingsGraphRoutes.Appearance)
                 }
             )
         }
@@ -38,6 +42,14 @@ fun NavGraphBuilder.settingsGraph(
 
         composable<SettingsGraphRoutes.Profile> {
             ProfileRoot(
+                onNavigateBack = {
+                    navController.navigateUp()
+                }
+            )
+        }
+
+        composable<SettingsGraphRoutes.Appearance> {
+            AppearanceRoot(
                 onNavigateBack = {
                     navController.navigateUp()
                 }

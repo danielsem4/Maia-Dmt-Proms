@@ -1,11 +1,13 @@
 package maia.dmt.proms
 
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.runtime.*
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.compose.rememberNavController
 import maia.dmt.auth.presentation.login.LoginRoot
 import maia.dmt.auth.presentation.navigation.AuthGraphRoutes
 import maia.dmt.core.designsystem.theme.DmtTheme
+import maia.dmt.core.domain.appearance.AppearanceMode
 import maia.dmt.home.presentation.navigation.HomeGraphRoutes
 import maia.dmt.proms.navigation.DeepLinkListener
 import maia.dmt.proms.navigation.NavigationRoot
@@ -27,7 +29,13 @@ fun App(
         }
     }
 
-    DmtTheme {
+    val darkTheme = when (state.themePreference) {
+        AppearanceMode.DARK -> true
+        AppearanceMode.LIGHT -> false
+        AppearanceMode.SYSTEM_DEFAULT -> isSystemInDarkTheme()
+    }
+
+    DmtTheme(darkTheme = darkTheme) {
         if(!state.isCheckingAuth) {
             NavigationRoot(
                 navController = navController,

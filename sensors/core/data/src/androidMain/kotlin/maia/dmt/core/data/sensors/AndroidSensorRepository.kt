@@ -13,6 +13,7 @@ import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.map
 import maia.dmt.core.data.dto.sensors.SensorsDataDto
 import maia.dmt.core.data.dto.sensors.SensorsDataServerRequest
+import maia.dmt.core.data.sensors.mapper.toServerRequest
 import maia.dmt.core.data.sensors.util.SensorMathUtils
 import maia.dmt.core.domain.auth.SessionStorage
 import maia.dmt.core.domain.sensors.SensorsService
@@ -111,6 +112,32 @@ class AndroidSensorRepository(
     override fun stopListening() {}
 
     // --- UPLOAD LOGIC ---
+    suspend fun uploadAnomalyEvent(event: AnomalyEvent) {
+        try {
+            val authInfo = sessionStorage.observeAuthInfo().firstOrNull()
+            val clinicId = authInfo?.user?.clinicId
+            val uid = authInfo?.user?.id
+
+            Log.d("SensorEvent", "Upload ${event.eventType}: patientId=$uid, clinicId=$clinicId, rawAccel=${event.rawAccel.size}, rawGyro=${event.rawGyro.size}")
+
+            val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S", Locale.getDefault())
+            val formattedDate = dateFormat.format(Date())
+
+            val request = event.toServerRequest(
+                patientId = uid ?: 0,
+                clinicId = clinicId ?: 0,
+                uploadDate = formattedDate
+            )
+
+            val result = sensorsService.uploadSensorsAggResults(request)
+            Log.d("SensorEvent", "Upload result: $result")
+            deletionTracker.resetDeleteCount()
+
+        } catch (e: Exception) {
+            Log.e("SensorEvent", "Upload FAILED: ${e.message}", e)
+        }
+    }
+
     suspend fun uploadTremorData(domainData: SensorsData) {
         try {
             val authInfo = sessionStorage.observeAuthInfo().firstOrNull()
@@ -141,6 +168,7 @@ class AndroidSensorRepository(
                 patientId = uid ?: 0,
                 clinicId = clinicId ?: 0,
                 uploadDate = formattedDate,
+                eventType = AnomalyEventType.TREMOR.name,
                 data = dto
             )
 

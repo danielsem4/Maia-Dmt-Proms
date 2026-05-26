@@ -24,38 +24,66 @@ import java.util.concurrent.LinkedBlockingQueue
 import maia.dmt.core.data.sensors.AndroidSensorRepository
 import maia.dmt.core.data.sensors.analysis.TremorAnalysisUseCase
 import maia.dmt.core.domain.sensors.model.Acceleration
+import maia.dmt.core.domain.sensors.model.AnomalyEvent
+import maia.dmt.core.domain.sensors.model.AnomalyEventType
 import maia.dmt.core.domain.sensors.model.Gyroscope
 import maia.dmt.core.domain.sensors.repository.SensorRepository
 import maia.dmt.core.domain.sensors.storage.DeletionTracker
 import maia.dmt.fallandshake.domain.usecase.DetectFallUseCase
+import maia.dmt.fallandshake.domain.usecase.DetectNearFallUseCase
+import maia.dmt.fallandshake.domain.usecase.FallDetectionResult
+import maia.dmt.fallandshake.domain.usecase.NearFallDetectionResult
 
 class SensorService : Service(), KoinComponent {
 
     private val sensorRepository: SensorRepository by inject()
     private val detectFallUseCase: DetectFallUseCase by inject()
+    private val detectNearFallUseCase: DetectNearFallUseCase by inject()
     private val deletionTracker: DeletionTracker by inject()
     private val tremorAnalyzer = TremorAnalysisUseCase()
 
     private val serviceJob = SupervisorJob()
     private val serviceScope = CoroutineScope(Dispatchers.Default + serviceJob)
 
+    // Raw sensor data queues (filled by sensor callbacks)
     private val accelDataQueue = LinkedBlockingQueue<Acceleration>(500)
     private val gyroDataQueue = LinkedBlockingQueue<Gyroscope>(500)
     private val lightDataQueue = LinkedBlockingQueue<Float>(500)
     private val stepDataQueue = LinkedBlockingQueue<Long>(500)
 
+    // FFT frequency buffer for tremor analysis
     private val frequencyBuffer = ArrayDeque<Acceleration>(256)
 
+    // Averaged analysis buffers for tremor stats
     private val tremorBuffer = ArrayDeque<Acceleration>(30)
     private val gyroBuffer = ArrayDeque<Gyroscope>(30)
     private val stepBuffer = ArrayDeque<Long>(30)
     private val lightBuffer = ArrayDeque<Float>(30)
     private val deletionBuffer = ArrayDeque<Int>(30)
 
+    // Ring buffers for raw data snapshots around events (~7s at 50Hz)
+    private val rawAccelRingBuffer = ArrayDeque<Acceleration>(RAW_BUFFER_CAPACITY)
+    private val rawGyroRingBuffer = ArrayDeque<Gyroscope>(RAW_BUFFER_CAPACITY)
+
+    // Post-event capture state (for fall/near-fall, capture 2s of data after event)
+    private var postEventCaptureRemaining = 0
+    private var pendingEventType: AnomalyEventType? = null
+    private var pendingAggregatedStats: maia.dmt.core.domain.sensors.model.SensorsData? = null
+    private var preEventAccelSnapshot: List<Acceleration> = emptyList()
+    private var preEventGyroSnapshot: List<Gyroscope> = emptyList()
+    private val postEventAccel = mutableListOf<Acceleration>()
+    private val postEventGyro = mutableListOf<Gyroscope>()
+
+    // Cooldown to prevent duplicate events
+    private var lastEventTimestamp = 0L
+
     companion object {
         const val NOTIFICATION_ID = 1001
         const val CHANNEL_ID = "Sensor_Service_Channel"
         const val UPDATE_INTERVAL = 500L // 2Hz processing cycle
+        const val RAW_BUFFER_CAPACITY = 400
+        const val POST_EVENT_CYCLES = 4 // ~2s of post-event capture
+        const val EVENT_COOLDOWN_MS = 30_000L
     }
 
     override fun onCreate() {
@@ -117,73 +145,179 @@ class SensorService : Service(), KoinComponent {
         stepDataQueue.drainTo(rawSteps)
         lightDataQueue.drainTo(rawLight)
 
-        if (rawAccel.isNotEmpty()) {
-            if (detectFallUseCase.execute(rawAccel)) {
+        if (rawAccel.isEmpty()) return
+
+        // 1. Append raw data to ring buffers (sliding window for event snapshots)
+        for (point in rawAccel) {
+            if (rawAccelRingBuffer.size >= RAW_BUFFER_CAPACITY) rawAccelRingBuffer.removeFirst()
+            rawAccelRingBuffer.add(point)
+        }
+        for (point in rawGyro) {
+            if (rawGyroRingBuffer.size >= RAW_BUFFER_CAPACITY) rawGyroRingBuffer.removeFirst()
+            rawGyroRingBuffer.add(point)
+        }
+
+        // 2. If we're in post-event capture mode, accumulate and check if done
+        if (postEventCaptureRemaining > 0) {
+            postEventAccel.addAll(rawAccel)
+            postEventGyro.addAll(rawGyro)
+            postEventCaptureRemaining--
+
+            if (postEventCaptureRemaining == 0) {
+                uploadPendingEvent()
+            }
+            return // Don't run detectors during post-event capture
+        }
+
+        // 3. Check cooldown
+        val now = System.currentTimeMillis()
+        val inCooldown = (now - lastEventTimestamp) < EVENT_COOLDOWN_MS
+
+        // 4. Run fall detection (priority 1)
+        if (!inCooldown) {
+            val fallResult = detectFallUseCase.evaluate(rawAccel, rawGyro)
+            if (fallResult is FallDetectionResult.FallDetected) {
+                Log.d("SensorEvent", "FALL DETECTED!")
+                startPostEventCapture(AnomalyEventType.FALL, null)
                 withContext(Dispatchers.Main) {
                     Toast.makeText(applicationContext, "Fall Detected!", Toast.LENGTH_LONG).show()
                 }
-            }
-
-            for (point in rawAccel) {
-                if (frequencyBuffer.size >= 256) frequencyBuffer.removeFirst()
-                frequencyBuffer.add(point)
-            }
-
-            val avgAccelX = rawAccel.map { it.x }.average().toFloat()
-            val avgAccelY = rawAccel.map { it.y }.average().toFloat()
-            val avgAccelZ = rawAccel.map { it.z }.average().toFloat()
-            val lastTimestamp = rawAccel.last().timestamp
-            val averagedAccel = Acceleration(avgAccelX, avgAccelY, avgAccelZ, lastTimestamp)
-
-            val avgGyroX = if (rawGyro.isNotEmpty()) rawGyro.map { it.x }.average().toFloat() else 0f
-            val avgGyroY = if (rawGyro.isNotEmpty()) rawGyro.map { it.y }.average().toFloat() else 0f
-            val avgGyroZ = if (rawGyro.isNotEmpty()) rawGyro.map { it.z }.average().toFloat() else 0f
-            val averagedGyro = Gyroscope(avgGyroX, avgGyroY, avgGyroZ, lastTimestamp)
-
-            val avgLight = if (rawLight.isNotEmpty()) rawLight.average().toFloat() else 0f
-            val currentSteps = if (rawSteps.isNotEmpty()) rawSteps.last() else 0L
-            val currentDeletions = deletionTracker.getDeleteCount()
-
-            addToDeque(tremorBuffer, averagedAccel, 30)
-            addToDeque(gyroBuffer, averagedGyro, 30)
-            addToDeque(lightBuffer, avgLight, 30)
-            addToDeque(stepBuffer, currentSteps, 30)
-            addToDeque(deletionBuffer, currentDeletions, 30)
-
-            Log.d("TremorDebug", "Buffers: tremor=${tremorBuffer.size}/30, freq=${frequencyBuffer.size}/128")
-
-            if (tremorBuffer.size >= 30 && frequencyBuffer.size >= 128) {
-                Log.d("TremorDebug", "Running analysis...")
-
-                val resultData = tremorAnalyzer.analyze(
-                    accelBuffer = tremorBuffer.toList(),
-                    gyroBuffer = gyroBuffer.toList(),
-                    stepBuffer = stepBuffer.toList(),
-                    lightBuffer = lightBuffer.toList(),
-                    deletionBuffer = deletionBuffer.toList(),
-                    rawAccelList = frequencyBuffer.toList()
-                )
-
-                if (resultData != null) {
-                    Log.d("TremorDebug", "TREMOR DETECTED! freq=${resultData.avgFrequency}Hz, uploading...")
-                    withContext(Dispatchers.Main) {
-                        Toast.makeText(applicationContext, "Parkinson's Tremor Detected!", Toast.LENGTH_LONG).show()
-                    }
-                    try {
-                        (sensorRepository as? AndroidSensorRepository)?.uploadTremorData(resultData)
-                        Log.d("TremorDebug", "Upload completed successfully")
-                    } catch (e: Exception) {
-                        Log.e("TremorDebug", "Upload FAILED: ${e.message}", e)
-                    }
-
-                    // Clear buffers to reset detection cycle
-                    tremorBuffer.clear()
-                    frequencyBuffer.clear()
-                } else {
-                    Log.d("TremorDebug", "Analysis returned null (no detection)")
-                }
+                return
             }
         }
+
+        // 5. Run near-fall detection (priority 2)
+        if (!inCooldown) {
+            val nearFallResult = detectNearFallUseCase.evaluate(rawAccel, rawGyro)
+            if (nearFallResult is NearFallDetectionResult.NearFallDetected) {
+                Log.d("SensorEvent", "NEAR-FALL DETECTED!")
+                startPostEventCapture(AnomalyEventType.NEAR_FALL, null)
+                withContext(Dispatchers.Main) {
+                    Toast.makeText(applicationContext, "Near-Fall (Stumble) Detected!", Toast.LENGTH_LONG).show()
+                }
+                return
+            }
+        }
+
+        // 6. Feed data into tremor analysis buffers (existing logic)
+        for (point in rawAccel) {
+            if (frequencyBuffer.size >= 256) frequencyBuffer.removeFirst()
+            frequencyBuffer.add(point)
+        }
+
+        val avgAccelX = rawAccel.map { it.x }.average().toFloat()
+        val avgAccelY = rawAccel.map { it.y }.average().toFloat()
+        val avgAccelZ = rawAccel.map { it.z }.average().toFloat()
+        val lastTimestamp = rawAccel.last().timestamp
+        val averagedAccel = Acceleration(avgAccelX, avgAccelY, avgAccelZ, lastTimestamp)
+
+        val avgGyroX = if (rawGyro.isNotEmpty()) rawGyro.map { it.x }.average().toFloat() else 0f
+        val avgGyroY = if (rawGyro.isNotEmpty()) rawGyro.map { it.y }.average().toFloat() else 0f
+        val avgGyroZ = if (rawGyro.isNotEmpty()) rawGyro.map { it.z }.average().toFloat() else 0f
+        val averagedGyro = Gyroscope(avgGyroX, avgGyroY, avgGyroZ, lastTimestamp)
+
+        val avgLight = if (rawLight.isNotEmpty()) rawLight.average().toFloat() else 0f
+        val currentSteps = if (rawSteps.isNotEmpty()) rawSteps.last() else 0L
+        val currentDeletions = deletionTracker.getDeleteCount()
+
+        addToDeque(tremorBuffer, averagedAccel, 30)
+        addToDeque(gyroBuffer, averagedGyro, 30)
+        addToDeque(lightBuffer, avgLight, 30)
+        addToDeque(stepBuffer, currentSteps, 30)
+        addToDeque(deletionBuffer, currentDeletions, 30)
+
+        Log.d("TremorDebug", "Buffers: tremor=${tremorBuffer.size}/30, freq=${frequencyBuffer.size}/128")
+
+        // 7. Run tremor analysis
+        if (tremorBuffer.size >= 30 && frequencyBuffer.size >= 128) {
+            Log.d("TremorDebug", "Running analysis...")
+
+            val resultData = tremorAnalyzer.analyze(
+                accelBuffer = tremorBuffer.toList(),
+                gyroBuffer = gyroBuffer.toList(),
+                stepBuffer = stepBuffer.toList(),
+                lightBuffer = lightBuffer.toList(),
+                deletionBuffer = deletionBuffer.toList(),
+                rawAccelList = frequencyBuffer.toList()
+            )
+
+            if (resultData != null && !inCooldown) {
+                Log.d("TremorDebug", "TREMOR DETECTED! freq=${resultData.avgFrequency}Hz, uploading...")
+                withContext(Dispatchers.Main) {
+                    Toast.makeText(applicationContext, "Parkinson's Tremor Detected!", Toast.LENGTH_LONG).show()
+                }
+
+                // Upload tremor immediately (duration gate already captured sustained data)
+                val event = AnomalyEvent(
+                    eventType = AnomalyEventType.TREMOR,
+                    timestamp = System.currentTimeMillis(),
+                    rawAccel = rawAccelRingBuffer.toList(),
+                    rawGyro = rawGyroRingBuffer.toList(),
+                    aggregatedStats = resultData
+                )
+
+                try {
+                    (sensorRepository as? AndroidSensorRepository)?.uploadAnomalyEvent(event)
+                    Log.d("SensorEvent", "Tremor upload completed successfully")
+                } catch (e: Exception) {
+                    Log.e("SensorEvent", "Tremor upload FAILED: ${e.message}", e)
+                }
+
+                lastEventTimestamp = System.currentTimeMillis()
+
+                // Clear buffers to reset detection cycle
+                tremorBuffer.clear()
+                frequencyBuffer.clear()
+            } else if (resultData != null) {
+                Log.d("TremorDebug", "Tremor detected but in cooldown, skipping upload")
+            } else {
+                Log.d("TremorDebug", "Analysis returned null (no detection)")
+            }
+        }
+    }
+
+    private fun startPostEventCapture(eventType: AnomalyEventType, aggregatedStats: maia.dmt.core.domain.sensors.model.SensorsData?) {
+        pendingEventType = eventType
+        pendingAggregatedStats = aggregatedStats
+        preEventAccelSnapshot = rawAccelRingBuffer.toList()
+        preEventGyroSnapshot = rawGyroRingBuffer.toList()
+        postEventAccel.clear()
+        postEventGyro.clear()
+        postEventCaptureRemaining = POST_EVENT_CYCLES
+    }
+
+    private suspend fun uploadPendingEvent() {
+        val eventType = pendingEventType ?: return
+
+        val allAccel = preEventAccelSnapshot + postEventAccel
+        val allGyro = preEventGyroSnapshot + postEventGyro
+
+        val event = AnomalyEvent(
+            eventType = eventType,
+            timestamp = System.currentTimeMillis(),
+            rawAccel = allAccel,
+            rawGyro = allGyro,
+            aggregatedStats = pendingAggregatedStats
+        )
+
+        Log.d("SensorEvent", "Uploading ${event.eventType}: rawAccel=${event.rawAccel.size}, rawGyro=${event.rawGyro.size}")
+
+        try {
+            (sensorRepository as? AndroidSensorRepository)?.uploadAnomalyEvent(event)
+            Log.d("SensorEvent", "${event.eventType} upload completed successfully")
+        } catch (e: Exception) {
+            Log.e("SensorEvent", "${event.eventType} upload FAILED: ${e.message}", e)
+        }
+
+        lastEventTimestamp = System.currentTimeMillis()
+
+        // Clear state
+        pendingEventType = null
+        pendingAggregatedStats = null
+        preEventAccelSnapshot = emptyList()
+        preEventGyroSnapshot = emptyList()
+        postEventAccel.clear()
+        postEventGyro.clear()
     }
 
     private fun <T> addToDeque(deque: ArrayDeque<T>, item: T, maxSize: Int) {

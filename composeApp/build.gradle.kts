@@ -79,6 +79,7 @@ kotlin {
 
             implementation(libs.jetbrains.compose.navigation)
             implementation(libs.bundles.koin.common)
+            implementation(libs.kotlinx.serialization.json)
 
             implementation(compose.runtime)
             implementation(compose.foundation)

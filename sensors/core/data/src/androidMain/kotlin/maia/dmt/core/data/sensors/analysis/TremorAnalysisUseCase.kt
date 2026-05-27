@@ -25,8 +25,9 @@ class TremorAnalysisUseCase {
         // Lowered because gravity-removed data has much less power than raw accelerometer
         private const val MIN_TOTAL_POWER = 0.005f
 
-        // Duration gate: tremor must be sustained for 3 seconds
-        private const val MIN_TREMOR_DURATION = 3_000L
+        // Duration gate: tremor must be sustained for 6 seconds
+        // Prevents transient motion (picking up phone) from triggering false positives
+        private const val MIN_TREMOR_DURATION = 6_000L
 
         // Allow up to 2 consecutive missed cycles before resetting the duration gate
         private const val MAX_MISSED_CYCLES = 2

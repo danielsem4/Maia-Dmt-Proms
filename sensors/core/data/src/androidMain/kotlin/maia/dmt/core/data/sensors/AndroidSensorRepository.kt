@@ -14,6 +14,7 @@ import kotlinx.coroutines.flow.map
 import maia.dmt.core.data.dto.sensors.SensorsDataDto
 import maia.dmt.core.data.dto.sensors.SensorsDataServerRequest
 import maia.dmt.core.data.sensors.mapper.toServerRequest
+import maia.dmt.core.domain.util.Result
 import maia.dmt.core.data.sensors.util.SensorMathUtils
 import maia.dmt.core.domain.auth.SessionStorage
 import maia.dmt.core.domain.sensors.SensorsService
@@ -112,6 +113,43 @@ class AndroidSensorRepository(
     override fun stopListening() {}
 
     // --- UPLOAD LOGIC ---
+
+    suspend fun buildServerRequest(event: AnomalyEvent): SensorsDataServerRequest? {
+        return try {
+            val authInfo = sessionStorage.observeAuthInfo().firstOrNull()
+            val clinicId = authInfo?.user?.clinicId
+            val uid = authInfo?.user?.id
+
+            val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S", Locale.getDefault())
+            val formattedDate = dateFormat.format(Date())
+
+            event.toServerRequest(
+                patientId = uid ?: 0,
+                clinicId = clinicId ?: 0,
+                uploadDate = formattedDate
+            )
+        } catch (e: Exception) {
+            Log.e("SensorEvent", "Failed to build server request: ${e.message}", e)
+            null
+        }
+    }
+
+    suspend fun uploadRequest(request: SensorsDataServerRequest): Boolean {
+        return try {
+            val result = sensorsService.uploadSensorsAggResults(request)
+            when (result) {
+                is Result.Success -> {
+                    deletionTracker.resetDeleteCount()
+                    true
+                }
+                is Result.Failure -> false
+            }
+        } catch (e: Exception) {
+            Log.e("SensorEvent", "Upload FAILED: ${e.message}", e)
+            false
+        }
+    }
+
     suspend fun uploadAnomalyEvent(event: AnomalyEvent) {
         try {
             val authInfo = sessionStorage.observeAuthInfo().firstOrNull()

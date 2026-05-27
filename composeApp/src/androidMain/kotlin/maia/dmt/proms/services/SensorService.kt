@@ -1,11 +1,14 @@
 package maia.dmt.proms.services
 
+import android.app.AlarmManager
 import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
+import android.app.PendingIntent
 import android.app.Service
 import android.content.Intent
 import android.os.IBinder
+import android.os.SystemClock
 import android.util.Log
 import android.widget.Toast
 import androidx.core.app.NotificationCompat
@@ -41,6 +44,7 @@ class SensorService : Service(), KoinComponent {
     private val detectNearFallUseCase: DetectNearFallUseCase by inject()
     private val deletionTracker: DeletionTracker by inject()
     private val tremorAnalyzer = TremorAnalysisUseCase()
+    private lateinit var eventCacheManager: EventCacheManager
 
     private val serviceJob = SupervisorJob()
     private val serviceScope = CoroutineScope(Dispatchers.Default + serviceJob)
@@ -84,13 +88,17 @@ class SensorService : Service(), KoinComponent {
         const val RAW_BUFFER_CAPACITY = 400
         const val POST_EVENT_CYCLES = 4 // ~2s of post-event capture
         const val EVENT_COOLDOWN_MS = 30_000L
+        const val RETRY_INTERVAL = 60_000L // 60s between upload retries
+        const val RESTART_REQUEST_CODE = 1002
     }
 
     override fun onCreate() {
         super.onCreate()
+        eventCacheManager = EventCacheManager(applicationContext)
         startForegroundService()
         startDataCollection()
         startProcessingLoop()
+        startRetryLoop()
     }
 
     private fun startDataCollection() {
@@ -130,6 +138,32 @@ class SensorService : Service(), KoinComponent {
             while (isActive) {
                 delay(UPDATE_INTERVAL)
                 processSensorData()
+            }
+        }
+    }
+
+    private fun startRetryLoop() {
+        serviceScope.launch {
+            while (isActive) {
+                delay(RETRY_INTERVAL)
+                retryPendingUploads()
+            }
+        }
+    }
+
+    private suspend fun retryPendingUploads() {
+        val pending = eventCacheManager.getPendingEvents()
+        if (pending.isEmpty()) return
+        Log.d("SensorEvent", "Retrying ${pending.size} pending event uploads...")
+        val repo = sensorRepository as? AndroidSensorRepository ?: return
+        for ((file, request) in pending) {
+            val success = repo.uploadRequest(request)
+            if (success) {
+                eventCacheManager.removeEvent(file)
+                Log.d("SensorEvent", "Retry upload succeeded: ${file.name}")
+            } else {
+                Log.w("SensorEvent", "Retry upload failed: ${file.name}, will try again later")
+                break // Stop on first failure — server likely down
             }
         }
     }
@@ -247,7 +281,7 @@ class SensorService : Service(), KoinComponent {
                     Toast.makeText(applicationContext, "Parkinson's Tremor Detected!", Toast.LENGTH_LONG).show()
                 }
 
-                // Upload tremor immediately (duration gate already captured sustained data)
+                // Cache and upload tremor event
                 val event = AnomalyEvent(
                     eventType = AnomalyEventType.TREMOR,
                     timestamp = System.currentTimeMillis(),
@@ -256,11 +290,17 @@ class SensorService : Service(), KoinComponent {
                     aggregatedStats = resultData
                 )
 
-                try {
-                    (sensorRepository as? AndroidSensorRepository)?.uploadAnomalyEvent(event)
-                    Log.d("SensorEvent", "Tremor upload completed successfully")
-                } catch (e: Exception) {
-                    Log.e("SensorEvent", "Tremor upload FAILED: ${e.message}", e)
+                val repo = sensorRepository as? AndroidSensorRepository
+                val request = repo?.buildServerRequest(event)
+                if (request != null) {
+                    val cachedFile = eventCacheManager.cacheEvent(request)
+                    val success = repo.uploadRequest(request)
+                    if (success && cachedFile != null) {
+                        eventCacheManager.removeEvent(cachedFile)
+                        Log.d("SensorEvent", "Tremor upload succeeded, cache entry removed")
+                    } else {
+                        Log.w("SensorEvent", "Tremor upload failed, cached for retry")
+                    }
                 }
 
                 lastEventTimestamp = System.currentTimeMillis()
@@ -300,13 +340,19 @@ class SensorService : Service(), KoinComponent {
             aggregatedStats = pendingAggregatedStats
         )
 
-        Log.d("SensorEvent", "Uploading ${event.eventType}: rawAccel=${event.rawAccel.size}, rawGyro=${event.rawGyro.size}")
+        Log.d("SensorEvent", "Processing ${event.eventType}: rawAccel=${event.rawAccel.size}, rawGyro=${event.rawGyro.size}")
 
-        try {
-            (sensorRepository as? AndroidSensorRepository)?.uploadAnomalyEvent(event)
-            Log.d("SensorEvent", "${event.eventType} upload completed successfully")
-        } catch (e: Exception) {
-            Log.e("SensorEvent", "${event.eventType} upload FAILED: ${e.message}", e)
+        val repo = sensorRepository as? AndroidSensorRepository
+        val request = repo?.buildServerRequest(event)
+        if (request != null) {
+            val cachedFile = eventCacheManager.cacheEvent(request)
+            val success = repo.uploadRequest(request)
+            if (success && cachedFile != null) {
+                eventCacheManager.removeEvent(cachedFile)
+                Log.d("SensorEvent", "${event.eventType} upload succeeded, cache entry removed")
+            } else {
+                Log.w("SensorEvent", "${event.eventType} upload failed, cached for retry")
+            }
         }
 
         lastEventTimestamp = System.currentTimeMillis()
@@ -340,6 +386,26 @@ class SensorService : Service(), KoinComponent {
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int = START_STICKY
     override fun onBind(intent: Intent?): IBinder? = null
+
+    override fun onTaskRemoved(rootIntent: Intent?) {
+        super.onTaskRemoved(rootIntent)
+        val restartIntent = Intent(this, SensorService::class.java).apply {
+            action = "maia.dmt.ACTION_START_SENSOR_SERVICE"
+            setPackage(packageName)
+        }
+        val pendingIntent = PendingIntent.getService(
+            this, RESTART_REQUEST_CODE, restartIntent,
+            PendingIntent.FLAG_ONE_SHOT or PendingIntent.FLAG_IMMUTABLE
+        )
+        val alarmManager = getSystemService(ALARM_SERVICE) as AlarmManager
+        alarmManager.set(
+            AlarmManager.ELAPSED_REALTIME_WAKEUP,
+            SystemClock.elapsedRealtime() + 3000,
+            pendingIntent
+        )
+        Log.d("SensorService", "App removed from recents, scheduled restart in 3s")
+    }
+
     override fun onDestroy() {
         super.onDestroy()
         serviceJob.cancel()

@@ -36,6 +36,11 @@ import maia.dmt.fallandshake.domain.usecase.DetectFallUseCase
 import maia.dmt.fallandshake.domain.usecase.DetectNearFallUseCase
 import maia.dmt.fallandshake.domain.usecase.FallDetectionResult
 import maia.dmt.fallandshake.domain.usecase.NearFallDetectionResult
+import maia.dmt.onoffstate.data.OnOffStateRepository
+import maia.dmt.onoffstate.domain.model.MedicationState
+import maia.dmt.onoffstate.domain.model.PatientBaseline
+import maia.dmt.onoffstate.domain.usecase.ClassifyOnOffStateUseCase
+import maia.dmt.onoffstate.domain.usecase.ComputeActivityMetricsUseCase
 
 class SensorService : Service(), KoinComponent {
 
@@ -45,6 +50,11 @@ class SensorService : Service(), KoinComponent {
     private val deletionTracker: DeletionTracker by inject()
     private val tremorAnalyzer = TremorAnalysisUseCase()
     private lateinit var eventCacheManager: EventCacheManager
+
+    // ON/OFF state detection
+    private val computeActivityMetrics: ComputeActivityMetricsUseCase by inject()
+    private val classifyOnOffState: ClassifyOnOffStateUseCase by inject()
+    private val onOffStateRepository: OnOffStateRepository by inject()
 
     private val serviceJob = SupervisorJob()
     private val serviceScope = CoroutineScope(Dispatchers.Default + serviceJob)
@@ -81,6 +91,14 @@ class SensorService : Service(), KoinComponent {
     // Cooldown to prevent duplicate events
     private var lastEventTimestamp = 0L
 
+    // ON/OFF state detection buffers (5 min sliding window at 2Hz)
+    private val onOffAccelBuffer = ArrayDeque<Acceleration>(ON_OFF_WINDOW_SIZE)
+    private val onOffGyroBuffer = ArrayDeque<Gyroscope>(ON_OFF_WINDOW_SIZE)
+    private val onOffStepBuffer = ArrayDeque<Long>(ON_OFF_WINDOW_SIZE)
+    private var cachedBaseline: PatientBaseline? = null
+    private var lastOnOffState: MedicationState? = null
+    private var lastOnOffEvalTimestamp = 0L
+
     companion object {
         const val NOTIFICATION_ID = 1001
         const val CHANNEL_ID = "Sensor_Service_Channel"
@@ -90,6 +108,9 @@ class SensorService : Service(), KoinComponent {
         const val EVENT_COOLDOWN_MS = 30_000L
         const val RETRY_INTERVAL = 60_000L // 60s between upload retries
         const val RESTART_REQUEST_CODE = 1002
+        const val ON_OFF_WINDOW_SIZE = 600        // 5 min at 2Hz
+        const val ON_OFF_MIN_BUFFER = 300          // 2.5 min minimum data
+        const val ON_OFF_EVAL_INTERVAL = 60_000L   // evaluate every 60s
     }
 
     override fun onCreate() {
@@ -99,6 +120,7 @@ class SensorService : Service(), KoinComponent {
         startDataCollection()
         startProcessingLoop()
         startRetryLoop()
+        loadCachedBaseline()
     }
 
     private fun startDataCollection() {
@@ -260,6 +282,11 @@ class SensorService : Service(), KoinComponent {
         addToDeque(stepBuffer, currentSteps, 30)
         addToDeque(deletionBuffer, currentDeletions, 30)
 
+        // Feed ON/OFF activity window
+        addToDeque(onOffAccelBuffer, averagedAccel, ON_OFF_WINDOW_SIZE)
+        addToDeque(onOffGyroBuffer, averagedGyro, ON_OFF_WINDOW_SIZE)
+        addToDeque(onOffStepBuffer, currentSteps, ON_OFF_WINDOW_SIZE)
+
         Log.d("TremorDebug", "Buffers: tremor=${tremorBuffer.size}/30, freq=${frequencyBuffer.size}/128")
 
         // 7. Run tremor analysis
@@ -313,6 +340,93 @@ class SensorService : Service(), KoinComponent {
             } else {
                 Log.d("TremorDebug", "Analysis returned null (no detection)")
             }
+        }
+
+        // 8. Run ON/OFF state evaluation (every 60s, if enough data)
+        val onOffNow = System.currentTimeMillis()
+        if (onOffAccelBuffer.size >= ON_OFF_MIN_BUFFER &&
+            (onOffNow - lastOnOffEvalTimestamp) >= ON_OFF_EVAL_INTERVAL
+        ) {
+            lastOnOffEvalTimestamp = onOffNow
+            evaluateOnOffState()
+        }
+    }
+
+    private fun loadCachedBaseline() {
+        serviceScope.launch {
+            try {
+                cachedBaseline = onOffStateRepository.getBaseline()
+                val count = onOffStateRepository.getSampleCount()
+                Log.d("OnOffState", "Loaded baseline: calibrated=${cachedBaseline?.calibrationComplete}, samples=$count")
+            } catch (e: Exception) {
+                Log.w("OnOffState", "Failed to load baseline: ${e.message}")
+            }
+        }
+    }
+
+    private fun evaluateOnOffState() {
+        serviceScope.launch {
+            try {
+                val metrics = computeActivityMetrics.compute(
+                    accelBuffer = onOffAccelBuffer.toList(),
+                    gyroBuffer = onOffGyroBuffer.toList(),
+                    stepBuffer = onOffStepBuffer.toList()
+                ) ?: return@launch
+
+                // Store sample and recompute baseline
+                onOffStateRepository.storeSample(metrics)
+
+                // Reload baseline (it may have just become calibrated)
+                cachedBaseline = onOffStateRepository.getBaseline()
+
+                val baseline = cachedBaseline
+                if (baseline != null && baseline.calibrationComplete) {
+                    val result = classifyOnOffState.classify(metrics, baseline)
+
+                    if (result.state != lastOnOffState) {
+                        Log.d("OnOffState", "State changed: ${lastOnOffState?.name} → ${result.state.name} (confidence=${result.confidence})")
+                        lastOnOffState = result.state
+
+                        // Upload state change
+                        uploadOnOffState(result.state, result.confidence, metrics)
+                    } else {
+                        Log.d("OnOffState", "State: ${result.state.name} (confidence=${result.confidence})")
+                    }
+                } else {
+                    val sampleCount = onOffStateRepository.getSampleCount()
+                    Log.d("OnOffState", "Calibrating... samples=$sampleCount, need=${maia.dmt.onoffstate.domain.usecase.ComputeBaselineUseCase.MIN_CALIBRATION_SAMPLES}")
+                }
+            } catch (e: Exception) {
+                Log.w("OnOffState", "Evaluation error: ${e.message}")
+            }
+        }
+    }
+
+    private suspend fun uploadOnOffState(
+        state: MedicationState,
+        confidence: Float,
+        metrics: maia.dmt.onoffstate.domain.model.ActivityMetrics
+    ) {
+        try {
+            val repo = sensorRepository as? AndroidSensorRepository ?: return
+            val event = AnomalyEvent(
+                eventType = AnomalyEventType.ON_OFF_STATE,
+                timestamp = System.currentTimeMillis(),
+                rawAccel = emptyList(),
+                rawGyro = emptyList(),
+                aggregatedStats = null
+            )
+            val request = repo.buildServerRequest(event)
+            if (request != null) {
+                val success = repo.uploadRequest(request)
+                if (success) {
+                    Log.d("OnOffState", "Upload succeeded: state=$state")
+                } else {
+                    Log.w("OnOffState", "Upload failed for state=$state")
+                }
+            }
+        } catch (e: Exception) {
+            Log.w("OnOffState", "Upload error: ${e.message}")
         }
     }
 

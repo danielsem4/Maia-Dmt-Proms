@@ -9,6 +9,7 @@ import maia.dmt.core.data.sensors.di.sensorsCoreDataModule
 import maia.dmt.core.domain.di.coreDomainModule
 import maia.dmt.evaluation.presentation.di.evaluationPresentationModule
 import maia.dmt.fallandshake.data.di.fallShakeDataModule
+import maia.dmt.onoffstate.data.di.onOffStateModule
 import maia.dmt.hitber.presentation.di.hitberPresentationModule
 import maia.dmt.home.data.di.homeDataModule
 import maia.dmt.home.data.di.platformHomeDataModule
@@ -51,6 +52,7 @@ fun initKoin(config: KoinAppDeclaration? = null) {
             orientationPresentationModule,
             fallShakeDataModule,
             sensorsCoreDataModule,
+            onOffStateModule,
             passPresentationModule,
             hitberPresentationModule
         )

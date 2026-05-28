@@ -181,7 +181,7 @@ class TremorAnalysisUseCase {
             rangeZ = rangeZ,
             rangeGyroX = rangeGyroX,
             rangeGyroZ = rangeGyroZ,
-            steps = stepBuffer.map { it.toFloat() },
+            steps = stepBuffer.lastOrNull()?.toFloat() ?: 0f,
             stdDevSteps = stdDevSteps,
             stdDevDeletions = stdDevDeletions,
             rangeDeletions = deletionsFloats

@@ -1,7 +1,7 @@
 package maia.dmt.core.domain.sensors.model
 
 enum class AnomalyEventType {
-    TREMOR, FALL, NEAR_FALL
+    TREMOR, FALL, NEAR_FALL, ON_OFF_STATE
 }
 
 data class AnomalyEvent(

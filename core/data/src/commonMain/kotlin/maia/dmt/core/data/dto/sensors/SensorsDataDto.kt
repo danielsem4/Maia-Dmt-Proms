@@ -8,6 +8,7 @@ data class SensorsDataServerRequest(
     @SerialName("patient_id") val patientId: Int,
     @SerialName("clinic_id") val clinicId: Int,
     @SerialName("upload_date") val uploadDate: String,
+    @SerialName("event_type") val eventType: String,
     @SerialName("data") val data: SensorsDataDto
 )
 
@@ -21,7 +22,7 @@ data class SensorsDataDto(
     val rangeZ: Float,
     val rangeGyroX: Float,
     val rangeGyroZ: Float,
-    val steps: List<Float>,
+    val steps: Float,
     val stdDevSteps: Float,
     val stdDevDeletions: Float,
     val rangeDeletions: List<Float>

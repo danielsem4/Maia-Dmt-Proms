@@ -13,7 +13,8 @@ import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.map
 import maia.dmt.core.data.dto.sensors.SensorsDataDto
 import maia.dmt.core.data.dto.sensors.SensorsDataServerRequest
-import maia.dmt.core.data.sensors.util.SensorMathUtils
+import maia.dmt.core.data.sensors.mapper.toServerRequest
+import maia.dmt.core.domain.util.Result
 import maia.dmt.core.domain.auth.SessionStorage
 import maia.dmt.core.domain.sensors.SensorsService
 import maia.dmt.core.domain.sensors.model.*
@@ -34,22 +35,32 @@ class AndroidSensorRepository(
         context.getSystemService(Context.SENSOR_SERVICE) as SensorManager
     }
     override fun getAcceleration(): Flow<Acceleration> = callbackFlow {
-        val sensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
-
-        val gravity = FloatArray(3)
-        val linearAcceleration = FloatArray(3)
+        val sensor = sensorManager.getDefaultSensor(Sensor.TYPE_LINEAR_ACCELERATION)
 
         val listener = object : SensorEventListener {
             override fun onSensorChanged(event: SensorEvent?) {
                 if (event != null) {
-                    val (x, y, z) = SensorMathUtils.processAccelerometer(
-                        event.values[0],
-                        event.values[1],
-                        event.values[2],
-                        gravity,
-                        linearAcceleration
-                    )
-                    trySend(Acceleration(x, y, z, System.currentTimeMillis()))
+                    trySend(Acceleration(event.values[0], event.values[1], event.values[2], System.currentTimeMillis()))
+                }
+            }
+            override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {}
+        }
+
+        if (sensor != null) {
+            sensorManager.registerListener(listener, sensor, SensorManager.SENSOR_DELAY_GAME)
+        } else {
+            close()
+        }
+        awaitClose { sensorManager.unregisterListener(listener) }
+    }
+
+    override fun getRawAcceleration(): Flow<Acceleration> = callbackFlow {
+        val sensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
+
+        val listener = object : SensorEventListener {
+            override fun onSensorChanged(event: SensorEvent?) {
+                if (event != null) {
+                    trySend(Acceleration(event.values[0], event.values[1], event.values[2], System.currentTimeMillis()))
                 }
             }
             override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {}
@@ -68,11 +79,7 @@ class AndroidSensorRepository(
         val listener = object : SensorEventListener {
             override fun onSensorChanged(event: SensorEvent?) {
                 if (event != null) {
-                    // Apply Math Utils Process (Normalizing if needed)
-                    val (x, y, z) = SensorMathUtils.processGyroscope(
-                        event.values[0], event.values[1], event.values[2]
-                    )
-                    trySend(Gyroscope(x, y, z, System.currentTimeMillis()))
+                    trySend(Gyroscope(event.values[0], event.values[1], event.values[2], System.currentTimeMillis()))
                 }
             }
             override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {}
@@ -111,6 +118,69 @@ class AndroidSensorRepository(
     override fun stopListening() {}
 
     // --- UPLOAD LOGIC ---
+
+    suspend fun buildServerRequest(event: AnomalyEvent): SensorsDataServerRequest? {
+        return try {
+            val authInfo = sessionStorage.observeAuthInfo().firstOrNull()
+            val clinicId = authInfo?.user?.clinicId
+            val uid = authInfo?.user?.id
+
+            val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S", Locale.getDefault())
+            val formattedDate = dateFormat.format(Date())
+
+            event.toServerRequest(
+                patientId = uid ?: 0,
+                clinicId = clinicId ?: 0,
+                uploadDate = formattedDate
+            )
+        } catch (e: Exception) {
+            Log.e("SensorEvent", "Failed to build server request: ${e.message}", e)
+            null
+        }
+    }
+
+    suspend fun uploadRequest(request: SensorsDataServerRequest): Boolean {
+        return try {
+            val result = sensorsService.uploadSensorsAggResults(request)
+            when (result) {
+                is Result.Success -> {
+                    deletionTracker.resetDeleteCount()
+                    true
+                }
+                is Result.Failure -> false
+            }
+        } catch (e: Exception) {
+            Log.e("SensorEvent", "Upload FAILED: ${e.message}", e)
+            false
+        }
+    }
+
+    suspend fun uploadAnomalyEvent(event: AnomalyEvent) {
+        try {
+            val authInfo = sessionStorage.observeAuthInfo().firstOrNull()
+            val clinicId = authInfo?.user?.clinicId
+            val uid = authInfo?.user?.id
+
+            Log.d("SensorEvent", "Upload ${event.eventType}: patientId=$uid, clinicId=$clinicId, rawAccel=${event.rawAccel.size}, rawGyro=${event.rawGyro.size}")
+
+            val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S", Locale.getDefault())
+            val formattedDate = dateFormat.format(Date())
+
+            val request = event.toServerRequest(
+                patientId = uid ?: 0,
+                clinicId = clinicId ?: 0,
+                uploadDate = formattedDate
+            )
+
+            val result = sensorsService.uploadSensorsAggResults(request)
+            Log.d("SensorEvent", "Upload result: $result")
+            deletionTracker.resetDeleteCount()
+
+        } catch (e: Exception) {
+            Log.e("SensorEvent", "Upload FAILED: ${e.message}", e)
+        }
+    }
+
     suspend fun uploadTremorData(domainData: SensorsData) {
         try {
             val authInfo = sessionStorage.observeAuthInfo().firstOrNull()
@@ -141,6 +211,7 @@ class AndroidSensorRepository(
                 patientId = uid ?: 0,
                 clinicId = clinicId ?: 0,
                 uploadDate = formattedDate,
+                eventType = AnomalyEventType.TREMOR.name,
                 data = dto
             )
 

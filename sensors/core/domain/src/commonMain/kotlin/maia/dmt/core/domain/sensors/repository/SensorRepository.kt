@@ -9,6 +9,7 @@ import maia.dmt.core.domain.sensors.model.StepCount
 
 interface SensorRepository {
     fun getAcceleration(): Flow<Acceleration>
+    fun getRawAcceleration(): Flow<Acceleration>
     fun getGyroscope(): Flow<Gyroscope>
     fun getLightLevel(): Flow<LightLevel>
     fun getStepCount(): Flow<StepCount>

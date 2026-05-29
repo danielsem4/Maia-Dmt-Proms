@@ -11,3 +11,7 @@ data class StepCount(val steps: Long)
 fun Acceleration.magnitude(): Float {
     return sqrt(x * x + y * y + z * z)
 }
+
+fun Gyroscope.magnitude(): Float {
+    return sqrt(x * x + y * y + z * z)
+}

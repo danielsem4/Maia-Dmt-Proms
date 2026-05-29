@@ -22,8 +22,10 @@ class KtorSensorsService(
                     return Result.Failure(DataError.Remote.UNKNOWN)
                 }
 
+                println("sensors upload: $jsonBody")
+
                 httpClient.post(
-                    route = "aggSensorData/",
+                    route = "sensorEvent/",
                     body = jsonBody
                 )
             }

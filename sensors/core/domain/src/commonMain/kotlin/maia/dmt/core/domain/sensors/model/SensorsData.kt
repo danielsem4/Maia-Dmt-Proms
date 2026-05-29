@@ -9,7 +9,7 @@ data class SensorsData(
     val rangeZ: Float,
     val rangeGyroX: Float,
     val rangeGyroZ: Float,
-    val steps: List<Float>,
+    val steps: Float,
     val stdDevSteps: Float,
     val stdDevDeletions: Float,
     val rangeDeletions: List<Float>

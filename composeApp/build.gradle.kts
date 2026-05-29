@@ -75,10 +75,14 @@ kotlin {
             implementation(projects.sensors.fallandshake.domain)
             implementation(projects.sensors.fallandshake.data)
 
+            implementation(projects.sensors.onoffstate.domain)
+            implementation(projects.sensors.onoffstate.data)
+
             implementation(projects.feature.settings.presentation)
 
             implementation(libs.jetbrains.compose.navigation)
             implementation(libs.bundles.koin.common)
+            implementation(libs.kotlinx.serialization.json)
 
             implementation(compose.runtime)
             implementation(compose.foundation)

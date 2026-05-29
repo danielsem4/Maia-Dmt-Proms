@@ -4,23 +4,6 @@ import kotlin.math.pow
 import kotlin.math.sqrt
 
 object SensorMathUtils {
-    private const val ALPHA = 0.8f
-
-    fun processAccelerometer(
-        x: Float, y: Float, z: Float,
-        gravity: FloatArray,
-        linearAcceleration: FloatArray
-    ): Triple<Float, Float, Float> {
-        gravity[0] = ALPHA * gravity[0] + (1 - ALPHA) * x
-        gravity[1] = ALPHA * gravity[1] + (1 - ALPHA) * y
-        gravity[2] = ALPHA * gravity[2] + (1 - ALPHA) * z
-
-        linearAcceleration[0] = x - gravity[0]
-        linearAcceleration[1] = y - gravity[1]
-        linearAcceleration[2] = z - gravity[2]
-
-        return Triple(linearAcceleration[0], linearAcceleration[1], linearAcceleration[2])
-    }
 
     fun calculateMagnitude(x: Float, y: Float, z: Float): Float {
         return sqrt(x * x + y * y + z * z)

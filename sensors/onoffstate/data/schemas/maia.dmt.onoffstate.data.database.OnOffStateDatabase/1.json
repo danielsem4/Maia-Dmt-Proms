@@ -1,0 +1,139 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 1,
+    "identityHash": "0167857ed72c873312dd627df72f7334",
+    "entities": [
+      {
+        "tableName": "activity_samples",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `avgAccelMagnitude` REAL NOT NULL, `accelVariability` REAL NOT NULL, `avgGyroMagnitude` REAL NOT NULL, `stepFrequency` REAL NOT NULL, `windowDurationMs` INTEGER NOT NULL, `timestamp` INTEGER NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "avgAccelMagnitude",
+            "columnName": "avgAccelMagnitude",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "accelVariability",
+            "columnName": "accelVariability",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "avgGyroMagnitude",
+            "columnName": "avgGyroMagnitude",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "stepFrequency",
+            "columnName": "stepFrequency",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "windowDurationMs",
+            "columnName": "windowDurationMs",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "timestamp",
+            "columnName": "timestamp",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "id"
+          ]
+        }
+      },
+      {
+        "tableName": "patient_baseline",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `avgAccelMagnitude` REAL NOT NULL, `stdDevAccelMagnitude` REAL NOT NULL, `avgGyroMagnitude` REAL NOT NULL, `stdDevGyroMagnitude` REAL NOT NULL, `avgStepFrequency` REAL NOT NULL, `stdDevStepFrequency` REAL NOT NULL, `sampleCount` INTEGER NOT NULL, `calibrationComplete` INTEGER NOT NULL, `lastUpdated` INTEGER NOT NULL, PRIMARY KEY(`id`))",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "avgAccelMagnitude",
+            "columnName": "avgAccelMagnitude",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "stdDevAccelMagnitude",
+            "columnName": "stdDevAccelMagnitude",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "avgGyroMagnitude",
+            "columnName": "avgGyroMagnitude",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "stdDevGyroMagnitude",
+            "columnName": "stdDevGyroMagnitude",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "avgStepFrequency",
+            "columnName": "avgStepFrequency",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "stdDevStepFrequency",
+            "columnName": "stdDevStepFrequency",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "sampleCount",
+            "columnName": "sampleCount",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "calibrationComplete",
+            "columnName": "calibrationComplete",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "lastUpdated",
+            "columnName": "lastUpdated",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "id"
+          ]
+        }
+      }
+    ],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '0167857ed72c873312dd627df72f7334')"
+    ]
+  }
+}

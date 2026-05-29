@@ -15,6 +15,7 @@ actual val platformsSensorsCoreDataModule = module {
     single<SensorRepository> {
         object : SensorRepository {
             override fun getAcceleration() = kotlinx.coroutines.flow.emptyFlow<Acceleration>()
+            override fun getRawAcceleration() = kotlinx.coroutines.flow.emptyFlow<Acceleration>()
             override fun getGyroscope() = kotlinx.coroutines.flow.emptyFlow<Gyroscope>()
             override fun getLightLevel() = kotlinx.coroutines.flow.emptyFlow<LightLevel>()
             override fun getStepCount() = kotlinx.coroutines.flow.emptyFlow<StepCount>()

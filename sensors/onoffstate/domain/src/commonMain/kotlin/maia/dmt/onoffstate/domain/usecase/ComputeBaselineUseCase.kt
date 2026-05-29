@@ -8,10 +8,11 @@ import kotlin.math.sqrt
 class ComputeBaselineUseCase {
 
     companion object {
-        // Calibration requires samples spanning at least 24 hours
-        const val MIN_CALIBRATION_SPAN_MS = 24 * 60 * 60 * 1000L
-        // Minimum number of samples required
-        const val MIN_CALIBRATION_SAMPLES = 100
+        // Calibration requires samples spanning at least one medication cycle (~4 hours).
+        // The baseline recalculates on every new sample, so it refines over time.
+        const val MIN_CALIBRATION_SPAN_MS = 4 * 60 * 60 * 1000L
+        // Minimum number of samples required (1 sample/60s → 30 min of data)
+        const val MIN_CALIBRATION_SAMPLES = 30
     }
 
     fun compute(samples: List<ActivityMetrics>): PatientBaseline {

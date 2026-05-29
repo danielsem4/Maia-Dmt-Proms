@@ -11,17 +11,15 @@ sealed class FallDetectionResult {
 }
 
 /**
- * Detects falls using gravity-compensated (linear) acceleration data.
- *
- * Since the accelerometer data has gravity removed via a high-pass filter (ALPHA=0.8):
- *   - At rest: magnitude ≈ 0
- *   - During free-fall: magnitude ≈ 6-12 m/s² (gravity estimate lags behind sudden weightlessness)
- *   - During impact: very large spike (15+ m/s²)
- *   - Post-fall stillness: magnitude ≈ 0
+ * Detects falls using two data streams:
+ *   - Raw accelerometer data (TYPE_ACCELEROMETER) for free-fall detection.
+ *     During true free-fall, raw magnitude drops toward 0 m/s² (weightlessness).
+ *   - Linear acceleration data (TYPE_LINEAR_ACCELERATION) for impact and immobility.
+ *     Gravity is removed by the OS sensor fusion, so at rest magnitude ≈ 0.
  *
  * Detection strategy (retrospective free-fall + impact + immobility):
- *   1. Maintain sliding window of recent acceleration history
- *   2. When impact spike detected, verify free-fall signature existed in recent history
+ *   1. Maintain sliding window of recent raw acceleration history
+ *   2. When impact spike detected on linear data, verify free-fall on raw data
  *   3. Monitor immobility with grace period for post-impact settling
  *   4. Confirm fall if person remains still after grace period
  */
@@ -31,15 +29,13 @@ class DetectFallUseCase {
         // --- Sliding window history ---
         const val HISTORY_WINDOW_MS = 1500L
 
-        // --- Free-fall detection (retrospective) ---
-        // With high-pass filter, free-fall produces magnitude ≈ 6-12 m/s²
-        const val FREE_FALL_MIN_MAGNITUDE = 5.0f
-        const val FREE_FALL_MAX_MAGNITUDE = 14.0f
+        // --- Free-fall detection (retrospective, on raw accelerometer) ---
+        // During true free-fall, raw accel magnitude drops below ~3 m/s² (≈0.3g)
+        const val FREE_FALL_RAW_THRESHOLD = 3.0f
         const val FREE_FALL_MIN_DURATION_MS = 60L
         const val FREE_FALL_LOOKBACK_MS = 1000L
 
-        // --- Impact detection ---
-        // Lowered from 20 to 15 because free-fall validation adds specificity
+        // --- Impact detection (on linear acceleration) ---
         const val IMPACT_THRESHOLD = 15.0f
 
         // Very strong impacts bypass free-fall check entirely (almost certainly a real fall)
@@ -51,12 +47,12 @@ class DetectFallUseCase {
 
         // --- Immobility monitoring ---
         const val IMMOBILITY_WINDOW_MS = 2500L
-        const val IMMOBILITY_ACCEL_THRESHOLD = 2.0f
-        const val IMMOBILITY_GYRO_THRESHOLD = 0.8f
+        const val IMMOBILITY_ACCEL_THRESHOLD = 0.5f
+        const val IMMOBILITY_GYRO_THRESHOLD = 0.3f
         const val RECOVERY_MOVEMENT_THRESHOLD = 10.0f
 
         // Std dev threshold — lying still has very low variance
-        const val IMMOBILITY_ACCEL_STD_THRESHOLD = 1.5f
+        const val IMMOBILITY_ACCEL_STD_THRESHOLD = 0.5f
 
         // Safety timeout to prevent stuck state
         const val STALE_TIMEOUT_MS = 10_000L
@@ -70,23 +66,27 @@ class DetectFallUseCase {
     private var state = State.IDLE
     private var impactTimestamp = 0L
 
-    // Sliding window of recent data for free-fall retrospection
-    private val recentAccelHistory = mutableListOf<Acceleration>()
+    // Sliding window of recent raw accelerometer data for free-fall retrospection
+    private val rawAccelHistory = mutableListOf<Acceleration>()
 
-    // Accumulated data during immobility monitoring
+    // Accumulated data during immobility monitoring (linear acceleration)
     private val immobilityAccelData = mutableListOf<Acceleration>()
     private val immobilityGyroData = mutableListOf<Gyroscope>()
 
-    fun evaluate(accelData: List<Acceleration>, gyroData: List<Gyroscope>): FallDetectionResult {
+    fun evaluate(
+        accelData: List<Acceleration>,
+        gyroData: List<Gyroscope>,
+        rawAccelData: List<Acceleration>
+    ): FallDetectionResult {
         if (accelData.isEmpty()) return FallDetectionResult.NoEvent
+
+        // Maintain raw accel history for free-fall verification
+        rawAccelHistory.addAll(rawAccelData)
+        pruneRawHistory(rawAccelData.lastOrNull()?.timestamp ?: accelData.last().timestamp)
 
         when (state) {
             State.IDLE -> {
-                // Maintain sliding window history
-                recentAccelHistory.addAll(accelData)
-                pruneHistory(accelData.last().timestamp)
-
-                // Scan for impact spike
+                // Scan for impact spike on linear (gravity-removed) data
                 for ((index, sample) in accelData.withIndex()) {
                     val mag = sample.magnitude()
                     if (mag > IMPACT_THRESHOLD) {
@@ -116,35 +116,35 @@ class DetectFallUseCase {
         return FallDetectionResult.NoEvent
     }
 
-    private fun pruneHistory(currentTimestamp: Long) {
+    private fun pruneRawHistory(currentTimestamp: Long) {
         val cutoff = currentTimestamp - HISTORY_WINDOW_MS
-        recentAccelHistory.removeAll { it.timestamp < cutoff }
+        rawAccelHistory.removeAll { it.timestamp < cutoff }
     }
 
     /**
-     * Checks if a free-fall signature exists in recent history before the impact.
+     * Checks if a free-fall signature exists in recent raw accelerometer history.
      *
-     * During free-fall with the high-pass gravity filter, raw accel ≈ 0 (weightlessness)
-     * but the gravity estimate hasn't adapted, so linear acceleration magnitude ≈ 6-12 m/s².
-     * We look for a consecutive run of samples in this band lasting at least 80ms.
+     * During true free-fall, the raw accelerometer (including gravity) reads near 0 m/s²
+     * because the phone is in weightlessness. We look for magnitude < 3.0 m/s² (≈0.3g)
+     * sustained for at least 60ms.
      */
     private fun verifyFreeFall(impactTimestamp: Long): Boolean {
         val lookbackStart = impactTimestamp - FREE_FALL_LOOKBACK_MS
 
-        val candidates = recentAccelHistory.filter {
+        val candidates = rawAccelHistory.filter {
             it.timestamp in lookbackStart until impactTimestamp
         }
 
         if (candidates.size < 4) return false
 
-        // Find longest consecutive run of samples in the free-fall magnitude band
+        // Find longest consecutive run of samples below the free-fall threshold
         var maxConsecutiveDurationMs = 0L
         var runStartTimestamp = 0L
         var inRun = false
 
         for (sample in candidates) {
             val mag = sample.magnitude()
-            if (mag in FREE_FALL_MIN_MAGNITUDE..FREE_FALL_MAX_MAGNITUDE) {
+            if (mag < FREE_FALL_RAW_THRESHOLD) {
                 if (!inRun) {
                     runStartTimestamp = sample.timestamp
                     inRun = true

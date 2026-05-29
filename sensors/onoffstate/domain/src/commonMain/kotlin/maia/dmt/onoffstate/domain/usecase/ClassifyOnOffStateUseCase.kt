@@ -18,7 +18,13 @@ class ClassifyOnOffStateUseCase {
 
         // Minimum std dev to avoid division by zero
         private const val MIN_STD_DEV = 0.001f
+
+        // Hysteresis band to prevent flickering near the decision boundary
+        private const val HYSTERESIS_UPPER = 0.2f
+        private const val HYSTERESIS_LOWER = -0.2f
     }
+
+    private var previousState: MedicationState = MedicationState.UNDETERMINED
 
     fun classify(metrics: ActivityMetrics, baseline: PatientBaseline): OnOffStateResult {
         if (!baseline.calibrationComplete) {
@@ -60,7 +66,16 @@ class ClassifyOnOffStateUseCase {
                 variabilityZScore * WEIGHT_ACCEL_VARIABILITY +
                 gyroZScore * WEIGHT_GYRO_ACTIVITY
 
-        val state = if (compositeScore > 0f) MedicationState.ON else MedicationState.OFF
+        // Hysteresis: only transition when score crosses the upper/lower band.
+        // Scores in the dead zone (−0.2 to +0.2) retain the previous state.
+        val state = when {
+            compositeScore > HYSTERESIS_UPPER -> MedicationState.ON
+            compositeScore < HYSTERESIS_LOWER -> MedicationState.OFF
+            previousState != MedicationState.UNDETERMINED -> previousState
+            else -> if (compositeScore > 0f) MedicationState.ON else MedicationState.OFF
+        }
+        previousState = state
+
         val confidence = min(abs(compositeScore) / 2f, 1f)
 
         return OnOffStateResult(

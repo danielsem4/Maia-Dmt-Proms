@@ -15,7 +15,6 @@ import maia.dmt.core.data.dto.sensors.SensorsDataDto
 import maia.dmt.core.data.dto.sensors.SensorsDataServerRequest
 import maia.dmt.core.data.sensors.mapper.toServerRequest
 import maia.dmt.core.domain.util.Result
-import maia.dmt.core.data.sensors.util.SensorMathUtils
 import maia.dmt.core.domain.auth.SessionStorage
 import maia.dmt.core.domain.sensors.SensorsService
 import maia.dmt.core.domain.sensors.model.*
@@ -36,22 +35,32 @@ class AndroidSensorRepository(
         context.getSystemService(Context.SENSOR_SERVICE) as SensorManager
     }
     override fun getAcceleration(): Flow<Acceleration> = callbackFlow {
-        val sensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
-
-        val gravity = FloatArray(3)
-        val linearAcceleration = FloatArray(3)
+        val sensor = sensorManager.getDefaultSensor(Sensor.TYPE_LINEAR_ACCELERATION)
 
         val listener = object : SensorEventListener {
             override fun onSensorChanged(event: SensorEvent?) {
                 if (event != null) {
-                    val (x, y, z) = SensorMathUtils.processAccelerometer(
-                        event.values[0],
-                        event.values[1],
-                        event.values[2],
-                        gravity,
-                        linearAcceleration
-                    )
-                    trySend(Acceleration(x, y, z, System.currentTimeMillis()))
+                    trySend(Acceleration(event.values[0], event.values[1], event.values[2], System.currentTimeMillis()))
+                }
+            }
+            override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {}
+        }
+
+        if (sensor != null) {
+            sensorManager.registerListener(listener, sensor, SensorManager.SENSOR_DELAY_GAME)
+        } else {
+            close()
+        }
+        awaitClose { sensorManager.unregisterListener(listener) }
+    }
+
+    override fun getRawAcceleration(): Flow<Acceleration> = callbackFlow {
+        val sensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
+
+        val listener = object : SensorEventListener {
+            override fun onSensorChanged(event: SensorEvent?) {
+                if (event != null) {
+                    trySend(Acceleration(event.values[0], event.values[1], event.values[2], System.currentTimeMillis()))
                 }
             }
             override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {}
@@ -70,11 +79,7 @@ class AndroidSensorRepository(
         val listener = object : SensorEventListener {
             override fun onSensorChanged(event: SensorEvent?) {
                 if (event != null) {
-                    // Apply Math Utils Process (Normalizing if needed)
-                    val (x, y, z) = SensorMathUtils.processGyroscope(
-                        event.values[0], event.values[1], event.values[2]
-                    )
-                    trySend(Gyroscope(x, y, z, System.currentTimeMillis()))
+                    trySend(Gyroscope(event.values[0], event.values[1], event.values[2], System.currentTimeMillis()))
                 }
             }
             override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {}

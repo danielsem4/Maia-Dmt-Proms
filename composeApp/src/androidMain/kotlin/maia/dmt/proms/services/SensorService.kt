@@ -61,6 +61,7 @@ class SensorService : Service(), KoinComponent {
 
     // Raw sensor data queues (filled by sensor callbacks)
     private val accelDataQueue = LinkedBlockingQueue<Acceleration>(500)
+    private val rawAccelDataQueue = LinkedBlockingQueue<Acceleration>(500)
     private val gyroDataQueue = LinkedBlockingQueue<Gyroscope>(500)
     private val lightDataQueue = LinkedBlockingQueue<Float>(500)
     private val stepDataQueue = LinkedBlockingQueue<Long>(500)
@@ -130,6 +131,11 @@ class SensorService : Service(), KoinComponent {
             }
         }
         serviceScope.launch {
+            sensorRepository.getRawAcceleration().collect {
+                addToQueue(rawAccelDataQueue, it)
+            }
+        }
+        serviceScope.launch {
             sensorRepository.getGyroscope().collect {
                 addToQueue(gyroDataQueue, it)
             }
@@ -192,11 +198,13 @@ class SensorService : Service(), KoinComponent {
 
     private suspend fun processSensorData() {
         val rawAccel = mutableListOf<Acceleration>()
+        val rawAccelRaw = mutableListOf<Acceleration>()
         val rawGyro = mutableListOf<Gyroscope>()
         val rawSteps = mutableListOf<Long>()
         val rawLight = mutableListOf<Float>()
 
         accelDataQueue.drainTo(rawAccel)
+        rawAccelDataQueue.drainTo(rawAccelRaw)
         gyroDataQueue.drainTo(rawGyro)
         stepDataQueue.drainTo(rawSteps)
         lightDataQueue.drainTo(rawLight)
@@ -231,7 +239,7 @@ class SensorService : Service(), KoinComponent {
 
         // 4. Run fall detection (priority 1)
         if (!inCooldown) {
-            val fallResult = detectFallUseCase.evaluate(rawAccel, rawGyro)
+            val fallResult = detectFallUseCase.evaluate(rawAccel, rawGyro, rawAccelRaw)
             if (fallResult is FallDetectionResult.FallDetected) {
                 Log.d("SensorEvent", "FALL DETECTED!")
                 startPostEventCapture(AnomalyEventType.FALL, null)

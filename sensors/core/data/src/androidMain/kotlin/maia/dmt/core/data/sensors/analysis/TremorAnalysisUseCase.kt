@@ -42,6 +42,14 @@ class TremorAnalysisUseCase {
 
         // Minimum samples needed to compute a reliable sample rate
         private const val MIN_SAMPLES_FOR_RATE = 10
+
+        // Walking gate: suppress resting tremor if patient is actively walking
+        // 0.5 steps/sec ≈ 30 steps/min (slow walk threshold)
+        private const val WALKING_STEP_FREQ_THRESHOLD = 0.5f
+
+        // Uniform resampling rate for FFT (20ms grid = 50 Hz)
+        private const val RESAMPLE_RATE_HZ = 50f
+        private const val RESAMPLE_INTERVAL_MS = 20L
     }
 
     private var tremorStartTime: Long = 0L
@@ -115,19 +123,39 @@ class TremorAnalysisUseCase {
             return null
         }
 
+        // Walking gate: Parkinsonian resting tremor diminishes during voluntary movement.
+        // If the step counter shows active walking, suppress resting tremor detection.
+        if (stepBuffer.size >= 2) {
+            val recentStepDelta = stepBuffer.last() - stepBuffer.first()
+            val windowDurationSec = stepBuffer.size * 0.5f
+            val stepFrequency = if (windowDurationSec > 0) recentStepDelta / windowDurationSec else 0f
+            if (stepFrequency > WALKING_STEP_FREQ_THRESHOLD) {
+                Log.d(TAG, "REJECTED: patient is walking (stepFreq=${stepFrequency} steps/s)")
+                tremorStartTime = 0L
+                return null
+            }
+        }
+
+        // --- Resample onto uniform 20ms grid to eliminate spectral smearing from jitter ---
+        val resampledData = resampleToUniformGrid(rawAccelList)
+        if (resampledData.size < 128) {
+            Log.d(TAG, "Skipping: resampled data too short (${resampledData.size})")
+            return null
+        }
+
         // --- Spectral Power Ratio Analysis (per-axis to preserve true frequency) ---
         // Using per-axis FFT instead of magnitude FFT to avoid frequency doubling.
         // Magnitude of gravity-removed data acts as full-wave rectification, shifting
         // a 5 Hz tremor to 10 Hz in the spectrum. Per-axis FFT preserves the real frequency.
-        val fftSize = Integer.highestOneBit(rawAccelList.size) // e.g., 256 from 256+
-        val lastSamples = rawAccelList.takeLast(fftSize)
+        val fftSize = Integer.highestOneBit(resampledData.size)
+        val lastSamples = resampledData.takeLast(fftSize)
         val xSamples = lastSamples.map { it.x }.toFloatArray()
         val ySamples = lastSamples.map { it.y }.toFloatArray()
         val zSamples = lastSamples.map { it.z }.toFloatArray()
 
-        val actualSampleRate = computeSampleRate(lastSamples)
+        val actualSampleRate = RESAMPLE_RATE_HZ
 
-        Log.d(TAG, "FFT: inputSize=${rawAccelList.size}, fftSize=$fftSize, sampleRate=$actualSampleRate")
+        Log.d(TAG, "FFT: inputSize=${rawAccelList.size}, resampled=${resampledData.size}, fftSize=$fftSize, sampleRate=$actualSampleRate")
 
         // Window each axis to reduce spectral leakage
         val xWindowed = SensorMathUtils.applyHanningWindow(xSamples)
@@ -249,6 +277,51 @@ class TremorAnalysisUseCase {
 
         // Sanity check: Android sensors typically run 20–200 Hz
         return if (rate in 20f..200f) rate else DEFAULT_SAMPLE_RATE
+    }
+
+    /**
+     * Resamples irregularly-spaced sensor data onto a uniform 20ms (50 Hz) time grid
+     * using linear interpolation. This eliminates spectral smearing in the FFT caused
+     * by Android's variable sensor delivery timing.
+     */
+    private fun resampleToUniformGrid(samples: List<Acceleration>): List<Acceleration> {
+        if (samples.size < 2) return samples
+
+        val startTime = samples.first().timestamp
+        val endTime = samples.last().timestamp
+        if (endTime <= startTime) return samples
+
+        val result = mutableListOf<Acceleration>()
+        var srcIndex = 0
+        var t = startTime
+
+        while (t <= endTime) {
+            // Advance source index so samples[srcIndex] <= t < samples[srcIndex+1]
+            while (srcIndex < samples.size - 2 && samples[srcIndex + 1].timestamp <= t) {
+                srcIndex++
+            }
+
+            if (srcIndex >= samples.size - 1) {
+                result.add(samples.last().copy(timestamp = t))
+                break
+            }
+
+            val s0 = samples[srcIndex]
+            val s1 = samples[srcIndex + 1]
+            val dt = (s1.timestamp - s0.timestamp).toFloat()
+            val frac = if (dt > 0f) (t - s0.timestamp).toFloat() / dt else 0f
+
+            result.add(Acceleration(
+                x = s0.x + (s1.x - s0.x) * frac,
+                y = s0.y + (s1.y - s0.y) * frac,
+                z = s0.z + (s1.z - s0.z) * frac,
+                timestamp = t
+            ))
+
+            t += RESAMPLE_INTERVAL_MS
+        }
+
+        return result
     }
 
     /**

@@ -14,20 +14,28 @@ class TremorAnalysisUseCase {
         private const val TAG = "TremorDebug"
         private const val DEFAULT_SAMPLE_RATE = 50f
 
-        // Parkinson's tremor band: 3.5–7.0 Hz (wider than previous 4–6 to catch patient variation)
-        private const val TREMOR_FREQ_LOW = 3.5f
-        private const val TREMOR_FREQ_HIGH = 7.0f
+        // Parkinson's resting tremor band: 4.0–6.5 Hz (classical range)
+        private const val TREMOR_FREQ_LOW = 4.0f
+        private const val TREMOR_FREQ_HIGH = 6.5f
 
-        // Power ratio threshold — if >15% of motion energy is in tremor band, flag it
-        private const val POWER_RATIO_THRESHOLD = 0.15f
+        // Power ratio threshold — if >20% of motion energy is in tremor band, flag it
+        // Raised from 15% to reduce false positives from normal phone use
+        private const val POWER_RATIO_THRESHOLD = 0.20f
 
         // Minimum total power to avoid triggering on noise when phone is nearly still
-        // Lowered because gravity-removed data has much less power than raw accelerometer
-        private const val MIN_TOTAL_POWER = 0.005f
+        private const val MIN_TOTAL_POWER = 0.008f
 
-        // Duration gate: tremor must be sustained for 6 seconds
-        // Prevents transient motion (picking up phone) from triggering false positives
-        private const val MIN_TREMOR_DURATION = 6_000L
+        // Duration gate: tremor must be sustained for 8 seconds
+        // Parkinson's tremor is sustained; filters out transient phone use motions
+        private const val MIN_TREMOR_DURATION = 8_000L
+
+        // Spectral peak sharpness: peak power must be >= 2x the average power in tremor band
+        // Parkinson's tremor produces a narrow peak; normal use produces broad/diffuse energy
+        private const val PEAK_SHARPNESS_THRESHOLD = 2.0f
+
+        // Gyroscope cross-validation: gyro dominant freq must be within ±1.5 Hz of accel freq
+        // Parkinson's resting tremor has correlated rotational (pronation-supination) component
+        private const val GYRO_FREQ_TOLERANCE = 1.5f
 
         // Allow up to 2 consecutive missed cycles before resetting the duration gate
         private const val MAX_MISSED_CYCLES = 2
@@ -91,7 +99,8 @@ class TremorAnalysisUseCase {
         stepBuffer: List<Long>,
         lightBuffer: List<Float>,
         deletionBuffer: List<Int>,
-        rawAccelList: List<Acceleration>
+        rawAccelList: List<Acceleration>,
+        rawGyroList: List<Gyroscope> = emptyList()
     ): SensorsData? {
 
         if (accelBuffer.size < 30 || rawAccelList.size < 128) {
@@ -170,14 +179,19 @@ class TremorAnalysisUseCase {
         // Sum power spectra across axes and analyze
         val analysisResult = computeSpectralPowerRatioMultiAxis(xFFT, yFFT, zFFT, fftSize, actualSampleRate)
 
-        Log.d(TAG, "FFT result: powerRatio=${analysisResult.powerRatio}, dominantFreq=${analysisResult.dominantFreq}Hz, totalPower=${analysisResult.totalPower}, sampleRate=$actualSampleRate")
+        Log.d(TAG, "FFT result: powerRatio=${analysisResult.powerRatio}, dominantFreq=${analysisResult.dominantFreq}Hz, totalPower=${analysisResult.totalPower}, peakSharpness=${analysisResult.peakSharpness}, sampleRate=$actualSampleRate")
 
         val ratioOk = analysisResult.powerRatio > POWER_RATIO_THRESHOLD
         val powerOk = analysisResult.totalPower > MIN_TOTAL_POWER
         val freqOk = analysisResult.dominantFreq in TREMOR_FREQ_LOW..TREMOR_FREQ_HIGH
-        val isDetected = ratioOk && powerOk && freqOk
+        val sharpnessOk = analysisResult.peakSharpness > PEAK_SHARPNESS_THRESHOLD
 
-        Log.d(TAG, "Detection: ratioOk=$ratioOk (${analysisResult.powerRatio}>$POWER_RATIO_THRESHOLD), powerOk=$powerOk, freqOk=$freqOk (${analysisResult.dominantFreq} in $TREMOR_FREQ_LOW..$TREMOR_FREQ_HIGH) → detected=$isDetected")
+        // Gyroscope cross-validation: Parkinson's resting tremor has correlated rotational motion
+        val gyroFreqOk = validateGyroscopeFrequency(rawGyroList, fftSize, actualSampleRate, analysisResult.dominantFreq)
+
+        val isDetected = ratioOk && powerOk && freqOk && sharpnessOk && gyroFreqOk
+
+        Log.d(TAG, "Detection: ratioOk=$ratioOk (${analysisResult.powerRatio}>$POWER_RATIO_THRESHOLD), powerOk=$powerOk, freqOk=$freqOk (${analysisResult.dominantFreq} in $TREMOR_FREQ_LOW..$TREMOR_FREQ_HIGH), sharpnessOk=$sharpnessOk (${analysisResult.peakSharpness}>$PEAK_SHARPNESS_THRESHOLD), gyroFreqOk=$gyroFreqOk → detected=$isDetected")
 
         // Duration gate: must sustain detection for MIN_TREMOR_DURATION
         val gateResult = checkDurationGate(isDetected)
@@ -257,7 +271,8 @@ class TremorAnalysisUseCase {
     private data class SpectralResult(
         val powerRatio: Float,
         val dominantFreq: Float,
-        val totalPower: Float
+        val totalPower: Float,
+        val peakSharpness: Float
     )
 
     /**
@@ -325,6 +340,109 @@ class TremorAnalysisUseCase {
     }
 
     /**
+     * Validates that gyroscope data shows a matching dominant frequency in the tremor band.
+     * Parkinson's resting tremor involves correlated rotational motion (pronation-supination).
+     * Normal phone use (typing, scrolling) lacks this correlated gyroscope pattern.
+     */
+    private fun validateGyroscopeFrequency(
+        rawGyroList: List<Gyroscope>,
+        accelFftSize: Int,
+        sampleRate: Float,
+        accelDominantFreq: Float
+    ): Boolean {
+        if (rawGyroList.size < 128) {
+            Log.d(TAG, "Gyro validation: insufficient data (${rawGyroList.size}), skipping")
+            return false
+        }
+
+        val resampledGyro = resampleGyroToUniformGrid(rawGyroList)
+        if (resampledGyro.size < 128) {
+            Log.d(TAG, "Gyro validation: resampled too short (${resampledGyro.size})")
+            return false
+        }
+
+        val fftSize = Integer.highestOneBit(resampledGyro.size)
+        val lastSamples = resampledGyro.takeLast(fftSize)
+        val xSamples = SensorMathUtils.applyHanningWindow(lastSamples.map { it.x }.toFloatArray())
+        val ySamples = SensorMathUtils.applyHanningWindow(lastSamples.map { it.y }.toFloatArray())
+        val zSamples = SensorMathUtils.applyHanningWindow(lastSamples.map { it.z }.toFloatArray())
+
+        val xFFT = applyFFT(xSamples)
+        val yFFT = applyFFT(ySamples)
+        val zFFT = applyFFT(zSamples)
+
+        // Find dominant frequency in tremor band from gyroscope
+        val n = xFFT.size / 2
+        val freqResolution = sampleRate / fftSize
+        var peakPower = 0f
+        var gyroDominantFreq = 0f
+
+        for (i in 1 until n) {
+            val frequency = i * freqResolution
+            if (frequency > sampleRate / 2) break
+
+            if (frequency in TREMOR_FREQ_LOW..TREMOR_FREQ_HIGH) {
+                val power = xFFT[i * 2].pow(2) + xFFT[i * 2 + 1].pow(2) +
+                            yFFT[i * 2].pow(2) + yFFT[i * 2 + 1].pow(2) +
+                            zFFT[i * 2].pow(2) + zFFT[i * 2 + 1].pow(2)
+                if (power > peakPower) {
+                    peakPower = power
+                    gyroDominantFreq = frequency
+                }
+            }
+        }
+
+        val freqMatch = gyroDominantFreq > 0f &&
+                gyroDominantFreq in TREMOR_FREQ_LOW..TREMOR_FREQ_HIGH &&
+                kotlin.math.abs(gyroDominantFreq - accelDominantFreq) <= GYRO_FREQ_TOLERANCE
+
+        Log.d(TAG, "Gyro validation: gyroDomFreq=${gyroDominantFreq}Hz, accelDomFreq=${accelDominantFreq}Hz, match=$freqMatch")
+        return freqMatch
+    }
+
+    /**
+     * Resamples gyroscope data onto uniform 20ms grid, analogous to accelerometer resampling.
+     */
+    private fun resampleGyroToUniformGrid(samples: List<Gyroscope>): List<Gyroscope> {
+        if (samples.size < 2) return samples
+
+        val startTime = samples.first().timestamp
+        val endTime = samples.last().timestamp
+        if (endTime <= startTime) return samples
+
+        val result = mutableListOf<Gyroscope>()
+        var srcIndex = 0
+        var t = startTime
+
+        while (t <= endTime) {
+            while (srcIndex < samples.size - 2 && samples[srcIndex + 1].timestamp <= t) {
+                srcIndex++
+            }
+
+            if (srcIndex >= samples.size - 1) {
+                result.add(samples.last().copy(timestamp = t))
+                break
+            }
+
+            val s0 = samples[srcIndex]
+            val s1 = samples[srcIndex + 1]
+            val dt = (s1.timestamp - s0.timestamp).toFloat()
+            val frac = if (dt > 0f) (t - s0.timestamp).toFloat() / dt else 0f
+
+            result.add(Gyroscope(
+                x = s0.x + (s1.x - s0.x) * frac,
+                y = s0.y + (s1.y - s0.y) * frac,
+                z = s0.z + (s1.z - s0.z) * frac,
+                timestamp = t
+            ))
+
+            t += RESAMPLE_INTERVAL_MS
+        }
+
+        return result
+    }
+
+    /**
      * Computes summed power spectrum across 3 axes, then evaluates
      * tremor band power ratio and dominant frequency.
      * Summing per-axis power is orientation-invariant and preserves the true tremor frequency.
@@ -343,6 +461,7 @@ class TremorAnalysisUseCase {
         var totalPower = 0f
         var peakPower = 0f
         var dominantFreq = 0f
+        var tremorBinCount = 0
 
         for (i in 1 until n) {
             val frequency = i * freqResolution
@@ -368,6 +487,7 @@ class TremorAnalysisUseCase {
             // Accumulate tremor band power
             if (frequency in TREMOR_FREQ_LOW..TREMOR_FREQ_HIGH) {
                 tremorBandPower += power
+                tremorBinCount++
                 if (power > peakPower) {
                     peakPower = power
                     dominantFreq = frequency
@@ -376,6 +496,12 @@ class TremorAnalysisUseCase {
         }
 
         val ratio = if (totalPower > 0f) tremorBandPower / totalPower else 0f
-        return SpectralResult(ratio, dominantFreq, totalPower)
+
+        // Peak sharpness: how much the dominant bin stands out above the average in the tremor band
+        // Parkinson's tremor produces a narrow, sharp peak; normal phone use is diffuse
+        val avgTremorBandPower = if (tremorBinCount > 0) tremorBandPower / tremorBinCount else 0f
+        val peakSharpness = if (avgTremorBandPower > 0f) peakPower / avgTremorBandPower else 0f
+
+        return SpectralResult(ratio, dominantFreq, totalPower, peakSharpness)
     }
 }

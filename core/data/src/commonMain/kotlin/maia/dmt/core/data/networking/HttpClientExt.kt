@@ -102,6 +102,24 @@ suspend inline fun <reified Response: Any> HttpClient.delete(
     }
 }
 
+suspend inline fun <reified Request, reified Response: Any> HttpClient.delete(
+    route: String,
+    queryParams: Map<String, Any> = mapOf(),
+    body: Request,
+    crossinline builder: HttpRequestBuilder.() -> Unit = {}
+): Result<Response, DataError.Remote> {
+    return safeCall {
+        ktorDelete {
+            url(constructRoute(route))
+            queryParams.forEach { (key, value) ->
+                parameter(key, value)
+            }
+            setBody(body)
+            builder()
+        }
+    }
+}
+
 suspend inline fun <reified T> responseToResult(response: HttpResponse): Result<T, DataError.Remote> {
     return when(response.status.value) {
         in 200..299 -> {

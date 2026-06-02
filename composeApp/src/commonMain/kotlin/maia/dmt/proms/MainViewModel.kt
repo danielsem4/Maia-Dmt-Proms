@@ -11,7 +11,6 @@ import maia.dmt.core.domain.auth.SessionStorage
 import maia.dmt.core.domain.util.onFailure
 import maia.dmt.core.domain.util.onSuccess
 import maia.dmt.home.data.notificaiton.FirebasePushNotificationService
-import maia.dmt.home.domain.models.FcmTokenRequest
 import maia.dmt.home.domain.notification.DeviceTokenService
 
 class MainViewModel(
@@ -75,27 +74,16 @@ class MainViewModel(
 
     private fun registerDeviceTokenIfNeeded(token: String) {
         if (token != previousDeviceToken) {
-            registerDeviceToken(token, getPlatform().name)
+            registerDeviceToken(token)
             previousDeviceToken = token
         }
     }
 
-    private fun registerDeviceToken(token: String, platform: String) {
+    private fun registerDeviceToken(token: String) {
         viewModelScope.launch {
-            val clinicId = sessionStorage.getActiveClinicId()
-            deviceTokenService.registerDeviceToken(
-                token = FcmTokenRequest(
-                    user_id = state.value.user!!.id,
-                    clinic_id = clinicId ?: "",
-                    fcm_token = token
-                )
-            )
-                .onSuccess {
-
-                }
-                .onFailure { error ->
-
-                }
+            deviceTokenService.registerDeviceToken(token = token)
+                .onSuccess { }
+                .onFailure { error -> }
         }
     }
 }

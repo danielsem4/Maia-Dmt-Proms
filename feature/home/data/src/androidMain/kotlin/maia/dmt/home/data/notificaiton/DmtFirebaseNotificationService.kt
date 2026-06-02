@@ -5,7 +5,6 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import maia.dmt.core.domain.auth.SessionStorage
-import maia.dmt.home.domain.models.FcmTokenRequest
 import maia.dmt.home.domain.notification.DeviceTokenService
 import org.koin.android.ext.android.inject
 
@@ -22,14 +21,7 @@ class DmtFirebaseNotificationService: FirebaseMessagingService() {
         applicationScope.launch {
             val authInfo = sessionStorage.observeAuthInfo().first()
             if (authInfo != null) {
-                val clinicId = sessionStorage.getActiveClinicId()
-                deviceTokenService.registerDeviceToken(
-                    token = FcmTokenRequest(
-                        user_id = authInfo.user!!.id,
-                        clinic_id = clinicId ?: "",
-                        fcm_token = token
-                    )
-                )
+                deviceTokenService.registerDeviceToken(token = token)
             }
         }
     }

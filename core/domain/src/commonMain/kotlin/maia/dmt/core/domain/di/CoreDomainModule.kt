@@ -19,7 +19,7 @@ val coreDomainModule = module {
 
     // Use Cases
     factory { GetCurrentLanguageUseCase(repository = get()) }
-    factory { SaveLanguageUseCase(repository = get()) }
+    factory { SaveLanguageUseCase(repository = get(), languageService = get()) }
     factory { UploadImageUseCase(imageUploadService = get()) }
 
 }

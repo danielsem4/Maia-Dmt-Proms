@@ -161,7 +161,7 @@ fun DmtGroceryItemMenuCardPreview() {
                 DmtGroceryItemMenuCard(
                     text = "עגבניות שרי",
                     quantity = 0,
-                    imageUrl = "http://generic2dev.hitheal.org.il/static/measurements/market%20test/images/market_tomato.png",
+                    imageUrl = "http://generic2dev.hitheal.org.il/static/evaluations/market%20test/images/market_tomato.png",
                     onIncrement = {},
                     onDecrement = {},
                     onClick = {}
@@ -170,7 +170,7 @@ fun DmtGroceryItemMenuCardPreview() {
                 DmtGroceryItemMenuCard(
                     text = "קמח לבן",
                     quantity = 3,
-                    imageUrl = "http://generic2dev.hitheal.org.il/static/measurements/market%20test/images/market_flour.png",
+                    imageUrl = "http://generic2dev.hitheal.org.il/static/evaluations/market%20test/images/market_flour.png",
                     onIncrement = {},
                     onDecrement = {},
                     onClick = {}
@@ -184,7 +184,7 @@ fun DmtGroceryItemMenuCardPreview() {
                 DmtGroceryItemMenuCard(
                     text = "לחם אחיד",
                     quantity = 0,
-                    imageUrl = "http://generic2dev.hitheal.org.il/static/measurements/market%20test/images/market_bread.png",
+                    imageUrl = "http://generic2dev.hitheal.org.il/static/evaluations/market%20test/images/market_bread.png",
                     isOutOfStock = true,
                     onIncrement = {},
                     onDecrement = {},

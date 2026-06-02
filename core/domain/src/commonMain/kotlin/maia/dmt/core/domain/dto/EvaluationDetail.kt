@@ -9,30 +9,30 @@ import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.JsonPrimitive
 import kotlinx.serialization.json.jsonObject
 
-sealed class MeasurementDetail {
+sealed class EvaluationDetail {
     abstract val dateTime: String
-    abstract val measureObject: Int
+    abstract val evaluationObject: Int
 }
 
 
-data class MeasurementDetailString(
+data class EvaluationDetailString(
     override val dateTime: String,
-    override val measureObject: Int,
+    override val evaluationObject: Int,
     val value: String
-) : MeasurementDetail()
+) : EvaluationDetail()
 
 
-data class MeasurementDetailInt(
+data class EvaluationDetailInt(
     override val dateTime: String,
-    override val measureObject: Int,
+    override val evaluationObject: Int,
     val value: Int
-) : MeasurementDetail()
+) : EvaluationDetail()
 
 
-data class MeasurementDetailGeneric(
+data class EvaluationDetailGeneric(
     override val dateTime: String,
-    override val measureObject: Int,
+    override val evaluationObject: Int,
     val value: JsonElement
-) : MeasurementDetail()
+) : EvaluationDetail()
 
 

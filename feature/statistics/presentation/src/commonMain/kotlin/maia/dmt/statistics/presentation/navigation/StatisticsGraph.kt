@@ -32,11 +32,11 @@ fun NavGraphBuilder.statisticsGraph(
                 onNavigateBack = {
                     navController.navigateUp()
                 },
-                onNavigateToStatisticDetail = { question, measurementId ->
+                onNavigateToStatisticDetail = { question, evaluationId ->
                     navController.navigate(
                         StatisticsGraphRoutes.StatisticDetail(
                             question = question,
-                            measurementId = measurementId
+                            evaluationId = evaluationId
                         )
                     )
                 }

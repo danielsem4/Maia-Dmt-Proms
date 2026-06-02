@@ -8,7 +8,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import maia.dmt.core.domain.measurement.MeasurementElement
+import maia.dmt.core.domain.evaluation.EvaluationElement
 
 object ElementRendererProvider {
 
@@ -24,7 +24,7 @@ object ElementRendererProvider {
 
     @Composable
     fun RenderElement(
-        element: MeasurementElement,
+        element: EvaluationElement,
         currentAnswer: String,
         onAnswerChange: (String) -> Unit
     ) {

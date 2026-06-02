@@ -4,38 +4,38 @@ import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.int
 import kotlinx.serialization.json.jsonArray
 import kotlinx.serialization.json.jsonPrimitive
-import maia.dmt.core.data.dto.measurement.MeasurementElementDto
-import maia.dmt.core.data.dto.measurement.MeasurementRowDto
-import maia.dmt.core.data.dto.measurement.MeasurementScreenDto
-import maia.dmt.core.data.dto.measurement.MeasurementStructureDto
-import maia.dmt.core.domain.measurement.ElementConfig
-import maia.dmt.core.domain.measurement.ElementType
-import maia.dmt.core.domain.measurement.MeasurementElement
-import maia.dmt.core.domain.measurement.MeasurementRow
-import maia.dmt.core.domain.measurement.MeasurementScreen
-import maia.dmt.core.domain.measurement.MeasurementStructure
+import maia.dmt.core.data.dto.evaluation.EvaluationElementDto
+import maia.dmt.core.data.dto.evaluation.EvaluationRowDto
+import maia.dmt.core.data.dto.evaluation.EvaluationScreenDto
+import maia.dmt.core.data.dto.evaluation.EvaluationStructureDto
+import maia.dmt.core.domain.evaluation.ElementConfig
+import maia.dmt.core.domain.evaluation.ElementType
+import maia.dmt.core.domain.evaluation.EvaluationElement
+import maia.dmt.core.domain.evaluation.EvaluationRow
+import maia.dmt.core.domain.evaluation.EvaluationScreen
+import maia.dmt.core.domain.evaluation.EvaluationStructure
 
-fun MeasurementStructureDto.toDomain() = MeasurementStructure(
-    measurementId = measurementId,
-    measurementName = measurementName,
+fun EvaluationStructureDto.toDomain() = EvaluationStructure(
+    evaluationId = evaluationId,
+    evaluationName = evaluationName,
     screens = screens.map { it.toDomain() }
 )
 
-fun MeasurementScreenDto.toDomain() = MeasurementScreen(
+fun EvaluationScreenDto.toDomain() = EvaluationScreen(
     id = id,
     screenNumber = screenNumber,
     title = title,
     rows = rows.map { it.toDomain() }
 )
 
-fun MeasurementRowDto.toDomain() = MeasurementRow(
+fun EvaluationRowDto.toDomain() = EvaluationRow(
     rowNumber = rowNumber,
     elements = elements.map { it.toDomain() }
 )
 
-fun MeasurementElementDto.toDomain(): MeasurementElement {
+fun EvaluationElementDto.toDomain(): EvaluationElement {
     val type = ElementType.fromString(elementType)
-    return MeasurementElement(
+    return EvaluationElement(
         id = id,
         elementType = type,
         rowNumber = rowNumber,

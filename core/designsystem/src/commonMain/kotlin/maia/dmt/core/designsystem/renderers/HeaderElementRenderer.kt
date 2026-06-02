@@ -6,8 +6,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
-import maia.dmt.core.domain.measurement.ElementType
-import maia.dmt.core.domain.measurement.MeasurementElement
+import maia.dmt.core.domain.evaluation.ElementType
+import maia.dmt.core.domain.evaluation.EvaluationElement
 
 class HeaderElementRenderer : ElementRenderer {
     override fun canRender(elementType: ElementType): Boolean {
@@ -16,7 +16,7 @@ class HeaderElementRenderer : ElementRenderer {
 
     @Composable
     override fun Render(
-        element: MeasurementElement,
+        element: EvaluationElement,
         currentAnswer: String,
         onAnswerChange: (String) -> Unit
     ) {

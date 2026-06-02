@@ -4,9 +4,9 @@ import androidx.compose.runtime.Composable
 import maia.dmt.core.designsystem.components.select.CheckboxOption
 import maia.dmt.core.designsystem.components.select.DmtCheckBoxGroup
 import maia.dmt.core.designsystem.components.select.DmtCheckboxCardGroup
-import maia.dmt.core.domain.measurement.ElementConfig
-import maia.dmt.core.domain.measurement.ElementType
-import maia.dmt.core.domain.measurement.MeasurementElement
+import maia.dmt.core.domain.evaluation.ElementConfig
+import maia.dmt.core.domain.evaluation.ElementType
+import maia.dmt.core.domain.evaluation.EvaluationElement
 
 class InputMultiSelectElementRenderer : ElementRenderer {
     override fun canRender(elementType: ElementType): Boolean {
@@ -15,7 +15,7 @@ class InputMultiSelectElementRenderer : ElementRenderer {
 
     @Composable
     override fun Render(
-        element: MeasurementElement,
+        element: EvaluationElement,
         currentAnswer: String,
         onAnswerChange: (String) -> Unit
     ) {

@@ -3,7 +3,7 @@ package maia.dmt.home.presentation.home
 sealed interface HomeEvent {
     data object LogoutSuccess: HomeEvent
     data class ModuleClicked(val moduleName: String): HomeEvent
-    data class MeasurementClicked(val measurementId: String): HomeEvent
+    data class EvaluationClicked(val evaluationId: String): HomeEvent
 
     data object RefreshHomePage: HomeEvent
 

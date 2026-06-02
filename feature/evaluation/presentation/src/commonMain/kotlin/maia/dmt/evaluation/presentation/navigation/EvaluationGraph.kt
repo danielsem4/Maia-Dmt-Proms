@@ -40,7 +40,7 @@ fun NavGraphBuilder.evaluationGraph(
                         navController.navigateUp()
                     }
                 },
-                measurementId = args.measurementId
+                evaluationId = args.evaluationId
             )
         }
     }

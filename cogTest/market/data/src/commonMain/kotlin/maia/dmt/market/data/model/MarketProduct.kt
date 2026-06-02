@@ -6,7 +6,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class MarketResponseContainer(
-    @SerialName("measurement_json")
+    @SerialName("evaluation_json")
     val data: MarketDataDto
 )
 

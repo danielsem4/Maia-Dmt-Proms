@@ -5,7 +5,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class PatientEvaluationGraphsDto(
     val patient: PatientEvaluationGraphAuthDto,
-    val measurements_data: Map<String, MeasurementDataWrapperDto>,
+    val evaluations_data: Map<String, EvaluationDataWrapperDto>,
     val medications: List<EvaluationGraphsMedicationDto>? = null,
     val show_medications: Boolean
 )
@@ -17,8 +17,8 @@ data class PatientEvaluationGraphAuthDto(
 )
 
 @Serializable
-data class MeasurementDataWrapperDto(
-    val measurement: PatientEvaluationGraphsInfoDto,
+data class EvaluationDataWrapperDto(
+    val evaluation: PatientEvaluationGraphsInfoDto,
     val data: Map<String, XYDataDto>
 )
 

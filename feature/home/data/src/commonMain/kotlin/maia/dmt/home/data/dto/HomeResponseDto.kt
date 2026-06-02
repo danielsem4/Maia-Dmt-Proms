@@ -5,5 +5,5 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class HomeResponseDto(
     val modules: List<ModuleDto> = emptyList(),
-    val measurements: List<MeasurementDto> = emptyList(),
+    val evaluations: List<EvaluationDto> = emptyList(),
 )

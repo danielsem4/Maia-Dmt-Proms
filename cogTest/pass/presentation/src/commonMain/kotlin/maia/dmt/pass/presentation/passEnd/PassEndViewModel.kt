@@ -11,8 +11,8 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import maia.dmt.core.domain.auth.SessionStorage
-import maia.dmt.core.domain.dto.MeasurementDetailString
-import maia.dmt.core.domain.dto.evaluation.MeasurementResult
+import maia.dmt.core.domain.dto.EvaluationDetailString
+import maia.dmt.core.domain.dto.evaluation.EvaluationResult
 import maia.dmt.core.domain.evaluation.EvaluationService
 import maia.dmt.core.domain.util.Result
 import maia.dmt.core.presentation.util.getCurrentFormattedDateTime
@@ -68,18 +68,18 @@ class PassEndViewModel(
             }
 
             val dynamicIds = mutableMapOf<String, Int>()
-            evaluation.measurement_objects.forEach { obj ->
+            evaluation.evaluation_objects.forEach { obj ->
                 dynamicIds[obj.object_label] = obj.id
             }
 
             val currentDateTime = getCurrentFormattedDateTime()
-            val accumulatedResults = ArrayList<MeasurementDetailString>()
+            val accumulatedResults = ArrayList<EvaluationDetailString>()
 
             // Screen 1: Applications Screen
             sessionManager.applicationsScreenResult.value.let { result ->
                 val transfersId = dynamicIds["Applications screen - Number of transfers"] ?: 353
                 accumulatedResults.add(
-                    MeasurementDetailString(
+                    EvaluationDetailString(
                         currentDateTime,
                         transfersId,
                         result.inactivityCount.toString()
@@ -88,7 +88,7 @@ class PassEndViewModel(
 
                 val incorrectClicksId = dynamicIds["Applications screen - Number of incorrect clicks"] ?: 354
                 accumulatedResults.add(
-                    MeasurementDetailString(
+                    EvaluationDetailString(
                         currentDateTime,
                         incorrectClicksId,
                         result.wrongAppPressCount.toString()
@@ -97,7 +97,7 @@ class PassEndViewModel(
 
                 val diagnosisId = dynamicIds["Applications screen - Diagnosis"] ?: 355
                 accumulatedResults.add(
-                    MeasurementDetailString(
+                    EvaluationDetailString(
                         currentDateTime,
                         diagnosisId,
                         result.appsPressed.joinToString(",")
@@ -109,7 +109,7 @@ class PassEndViewModel(
             sessionManager.getAppsSnapshot().let { snapshot ->
                 val transfersPart1Id = dynamicIds["Application screen - Number of transfers (part 1)"] ?: 356
                 accumulatedResults.add(
-                    MeasurementDetailString(
+                    EvaluationDetailString(
                         currentDateTime,
                         transfersPart1Id,
                         snapshot.inactivityCount.toString()
@@ -118,7 +118,7 @@ class PassEndViewModel(
 
                 val diagnosisPart1Id = dynamicIds["Application screen - Diagnosis (part 1)"] ?: 357
                 accumulatedResults.add(
-                    MeasurementDetailString(
+                    EvaluationDetailString(
                         currentDateTime,
                         diagnosisPart1Id,
                         snapshot.appsPressed.joinToString(",")
@@ -129,7 +129,7 @@ class PassEndViewModel(
             sessionManager.applicationsScreenResult.value.let { result ->
                 val transfersPart2Id = dynamicIds["Application screen - Number of transfers (part 2)"] ?: 358
                 accumulatedResults.add(
-                    MeasurementDetailString(
+                    EvaluationDetailString(
                         currentDateTime,
                         transfersPart2Id,
                         result.inactivityCount.toString()
@@ -138,7 +138,7 @@ class PassEndViewModel(
 
                 val diagnosisPart2Id = dynamicIds["Application screen - Diagnosis (part 2)"] ?: 359
                 accumulatedResults.add(
-                    MeasurementDetailString(
+                    EvaluationDetailString(
                         currentDateTime,
                         diagnosisPart2Id,
                         result.appsPressed.joinToString(",")
@@ -150,7 +150,7 @@ class PassEndViewModel(
             sessionManager.contactsScreenResult.value.let { result ->
                 val transfersId = dynamicIds["Contact list  - Number of transfers"] ?: 360
                 accumulatedResults.add(
-                    MeasurementDetailString(
+                    EvaluationDetailString(
                         currentDateTime,
                         transfersId,
                         result.inactivityCount.toString()
@@ -159,7 +159,7 @@ class PassEndViewModel(
 
                 val diagnosisId = dynamicIds["Contact list - Diagnosis"] ?: 361
                 accumulatedResults.add(
-                    MeasurementDetailString(
+                    EvaluationDetailString(
                         currentDateTime,
                         diagnosisId,
                         result.contactsPressed.joinToString(",")
@@ -171,7 +171,7 @@ class PassEndViewModel(
             sessionManager.contactScreenResult.value.let { result ->
                 val transfersId = dynamicIds["Contact screen - Number of transfers"] ?: 362
                 accumulatedResults.add(
-                    MeasurementDetailString(
+                    EvaluationDetailString(
                         currentDateTime,
                         transfersId,
                         result.inactivityCount.toString()
@@ -180,7 +180,7 @@ class PassEndViewModel(
 
                 val diagnosisId = dynamicIds["Contact screen - Diagnosis"] ?: 363
                 accumulatedResults.add(
-                    MeasurementDetailString(
+                    EvaluationDetailString(
                         currentDateTime,
                         diagnosisId,
                         result.buttonsPressed.joinToString(",")
@@ -189,7 +189,7 @@ class PassEndViewModel(
 
                 val part1SummaryId = dynamicIds["Part 1 summary"] ?: 364
                 accumulatedResults.add(
-                    MeasurementDetailString(
+                    EvaluationDetailString(
                         currentDateTime,
                         part1SummaryId,
                         "Part 1 completed"
@@ -201,7 +201,7 @@ class PassEndViewModel(
             sessionManager.dialerResult.value.dialerOpenResult.let { result ->
                 val transfersId = dynamicIds["Opening the dialer - Number of transfers"] ?: 365
                 accumulatedResults.add(
-                    MeasurementDetailString(
+                    EvaluationDetailString(
                         currentDateTime,
                         transfersId,
                         result.inactivityCount.toString()
@@ -210,7 +210,7 @@ class PassEndViewModel(
 
                 val diagnosisId = dynamicIds["Opening the dialer - Diagnosis"] ?: 366
                 accumulatedResults.add(
-                    MeasurementDetailString(
+                    EvaluationDetailString(
                         currentDateTime,
                         diagnosisId,
                         "Dialer opened"
@@ -222,7 +222,7 @@ class PassEndViewModel(
             sessionManager.dialerResult.value.dialToDentistPhaseOneResult.let { result ->
                 val transfersPart1Id = dynamicIds["Dialing a dental clinic - Number of transfers (part 1)"] ?: 367
                 accumulatedResults.add(
-                    MeasurementDetailString(
+                    EvaluationDetailString(
                         currentDateTime,
                         transfersPart1Id,
                         result.inactivityCount.toString()
@@ -231,7 +231,7 @@ class PassEndViewModel(
 
                 val diagnosisPart1Id = dynamicIds["Dialing a dental clinic - Diagnosis (part 1)"] ?: 368
                 accumulatedResults.add(
-                    MeasurementDetailString(
+                    EvaluationDetailString(
                         currentDateTime,
                         diagnosisPart1Id,
                         result.numbersDialed.joinToString(",")
@@ -242,7 +242,7 @@ class PassEndViewModel(
             sessionManager.dialerResult.value.dialToDentistPhaseTwoResult.let { result ->
                 val transfersPart2Id = dynamicIds["Dialing a dental clinic - Number of transfers (part 2)"] ?: 369
                 accumulatedResults.add(
-                    MeasurementDetailString(
+                    EvaluationDetailString(
                         currentDateTime,
                         transfersPart2Id,
                         result.inactivityCount.toString()
@@ -251,7 +251,7 @@ class PassEndViewModel(
 
                 val diagnosisPart2Id = dynamicIds["Dialing a dental clinic - Diagnosis (part 2)"] ?: 370
                 accumulatedResults.add(
-                    MeasurementDetailString(
+                    EvaluationDetailString(
                         currentDateTime,
                         diagnosisPart2Id,
                         result.numbersDialed.joinToString(",")
@@ -260,7 +260,7 @@ class PassEndViewModel(
 
                 val part2SummaryId = dynamicIds["Part 2 summary"] ?: 371
                 accumulatedResults.add(
-                    MeasurementDetailString(
+                    EvaluationDetailString(
                         currentDateTime,
                         part2SummaryId,
                         "Part 2 completed"
@@ -269,16 +269,16 @@ class PassEndViewModel(
             }
 
             // Submit all results
-            val finalMeasurementResult = MeasurementResult(
+            val finalEvaluationResult = EvaluationResult(
                 clinicId = clinicId,
                 date = currentDateTime,
-                measurement = evaluationId,
+                evaluation = evaluationId,
                 patientId = patientId,
                 results = accumulatedResults
             )
 
             if (accumulatedResults.isNotEmpty()) {
-                when (val result = evaluationService.uploadEvaluationResults(finalMeasurementResult)) {
+                when (val result = evaluationService.uploadEvaluationResults(finalEvaluationResult)) {
                     is Result.Success -> {
                         println("DEBUG: Upload SUCCESS!")
                         sessionManager.clear()

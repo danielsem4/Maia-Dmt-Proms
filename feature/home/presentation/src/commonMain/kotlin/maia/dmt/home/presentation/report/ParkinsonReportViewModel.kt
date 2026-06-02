@@ -11,8 +11,8 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import maia.dmt.core.domain.auth.SessionStorage
-import maia.dmt.core.domain.dto.MeasurementDetailString
-import maia.dmt.core.domain.dto.evaluation.MeasurementResult
+import maia.dmt.core.domain.dto.EvaluationDetailString
+import maia.dmt.core.domain.dto.evaluation.EvaluationResult
 import maia.dmt.core.domain.evaluation.EvaluationService
 import maia.dmt.core.domain.util.onFailure
 import maia.dmt.core.domain.util.onSuccess
@@ -65,8 +65,8 @@ class ParkinsonReportViewModel(
 
             evaluationService.getEvaluation(clinicId, patientId, "Parkinson report")
                 .onSuccess { evaluation ->
-                    val sortedQuestions = evaluation.measurement_objects
-                        .sortedWith(compareBy({ it.measurement_screen }, { it.measurement_order }))
+                    val sortedQuestions = evaluation.evaluation_objects
+                        .sortedWith(compareBy({ it.evaluation_screen }, { it.evaluation_order }))
 
                     _state.update {
                         it.copy(
@@ -120,28 +120,28 @@ class ParkinsonReportViewModel(
                 return@launch
             }
 
-            val measurementDetails = arrayListOf<MeasurementDetailString>()
+            val evaluationDetails = arrayListOf<EvaluationDetailString>()
             val currentDateTime = getCurrentFormattedDateTime()
 
             _state.value.answers.forEach { (questionId, answer) ->
-                measurementDetails.add(
-                    MeasurementDetailString(
+                evaluationDetails.add(
+                    EvaluationDetailString(
                         dateTime = currentDateTime,
-                        measureObject = questionId,
+                        evaluationObject = questionId,
                         value = answer
                     )
                 )
             }
 
-            val measurementResult = MeasurementResult(
+            val evaluationResult = EvaluationResult(
                 clinicId = clinicId,
                 date = currentDateTime,
-                measurement = evaluationId,
+                evaluation = evaluationId,
                 patientId = patientId,
-                results = measurementDetails
+                results = evaluationDetails
             )
 
-            evaluationService.uploadEvaluationResults(measurementResult)
+            evaluationService.uploadEvaluationResults(evaluationResult)
                 .onSuccess {
                     _state.update { it.copy(isSubmitting = false) }
                     _events.send(ParkinsonReportEvent.SubmitSuccess)

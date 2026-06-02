@@ -4,9 +4,9 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import maia.dmt.core.designsystem.components.scale.DmtScaleSlider
-import maia.dmt.core.domain.measurement.ElementConfig
-import maia.dmt.core.domain.measurement.ElementType
-import maia.dmt.core.domain.measurement.MeasurementElement
+import maia.dmt.core.domain.evaluation.ElementConfig
+import maia.dmt.core.domain.evaluation.ElementType
+import maia.dmt.core.domain.evaluation.EvaluationElement
 
 class InputScaleElementRenderer : ElementRenderer {
     override fun canRender(elementType: ElementType): Boolean {
@@ -15,7 +15,7 @@ class InputScaleElementRenderer : ElementRenderer {
 
     @Composable
     override fun Render(
-        element: MeasurementElement,
+        element: EvaluationElement,
         currentAnswer: String,
         onAnswerChange: (String) -> Unit
     ) {

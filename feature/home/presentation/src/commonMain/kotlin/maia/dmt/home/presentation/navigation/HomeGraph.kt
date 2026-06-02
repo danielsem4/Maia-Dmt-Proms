@@ -10,7 +10,7 @@ fun NavGraphBuilder.homeGraph(
     navController: NavController,
     onLogoutSuccess: () -> Unit,
     onModuleClicked: (String) -> Unit,
-    onMeasurementClicked: (String) -> Unit
+    onEvaluationClicked: (String) -> Unit
 ) {
     navigation<HomeGraphRoutes.Graph>(
         startDestination = HomeGraphRoutes.Home
@@ -19,7 +19,7 @@ fun NavGraphBuilder.homeGraph(
             HomeRoot(
                 onLogoutSuccess = onLogoutSuccess,
                 onModuleClicked = onModuleClicked,
-                onMeasurementClicked = onMeasurementClicked
+                onEvaluationClicked = onEvaluationClicked
             )
         }
     }

@@ -1,25 +1,25 @@
 package maia.dmt.core.data.mapper
 
-import maia.dmt.core.data.dto.MeasurementDetailDto
-import maia.dmt.core.data.dto.MeasurementDetailGenericDto
-import maia.dmt.core.data.dto.MeasurementDetailIntDto
-import maia.dmt.core.data.dto.MeasurementDetailStringDto
+import maia.dmt.core.data.dto.EvaluationDetailDto
+import maia.dmt.core.data.dto.EvaluationDetailGenericDto
+import maia.dmt.core.data.dto.EvaluationDetailIntDto
+import maia.dmt.core.data.dto.EvaluationDetailStringDto
 import maia.dmt.core.data.dto.evaluation.EvaluationDto
 import maia.dmt.core.data.dto.evaluation.EvaluationObjectDto
 import maia.dmt.core.data.dto.evaluation.EvaluationSettingsDto
 import maia.dmt.core.data.dto.evaluation.EvaluationValueDto
-import maia.dmt.core.data.dto.evaluation.MeasurementResultDto
+import maia.dmt.core.data.dto.evaluation.EvaluationResultDto
 import maia.dmt.core.data.mapper.toDomain
 import maia.dmt.core.data.mapper.toDto
-import maia.dmt.core.domain.dto.MeasurementDetail
-import maia.dmt.core.domain.dto.MeasurementDetailGeneric
-import maia.dmt.core.domain.dto.MeasurementDetailInt
-import maia.dmt.core.domain.dto.MeasurementDetailString
+import maia.dmt.core.domain.dto.EvaluationDetail
+import maia.dmt.core.domain.dto.EvaluationDetailGeneric
+import maia.dmt.core.domain.dto.EvaluationDetailInt
+import maia.dmt.core.domain.dto.EvaluationDetailString
 import maia.dmt.core.domain.dto.evaluation.Evaluation
 import maia.dmt.core.domain.dto.evaluation.EvaluationObject
 import maia.dmt.core.domain.dto.evaluation.EvaluationSettings
 import maia.dmt.core.domain.dto.evaluation.EvaluationValue
-import maia.dmt.core.domain.dto.evaluation.MeasurementResult
+import maia.dmt.core.domain.dto.evaluation.EvaluationResult
 
 fun EvaluationValueDto.toDomain(): EvaluationValue {
     return EvaluationValue(
@@ -27,24 +27,24 @@ fun EvaluationValueDto.toDomain(): EvaluationValue {
         available_value = available_value,
         default_value = default_value,
         object_address = object_address,
-        measurementObject_id = measurementObject_id
+        evaluationObject_id = evaluationObject_id
     )
 }
 
 fun EvaluationSettingsDto.toDomain(): EvaluationSettings {
     return EvaluationSettings(
         id = id,
-        measurement_repeat_period = measurement_repeat_period,
-        measurement_repeat_times = measurement_repeat_times,
-        measurement_begin_time = measurement_begin_time,
-        measurement_last_time = measurement_last_time,
-        measurement_end_time = measurement_end_time,
+        evaluation_repeat_period = evaluation_repeat_period,
+        evaluation_repeat_times = evaluation_repeat_times,
+        evaluation_begin_time = evaluation_begin_time,
+        evaluation_last_time = evaluation_last_time,
+        evaluation_end_time = evaluation_end_time,
         is_repetitive = is_repetitive,
         times_taken = times_taken,
         patient = patient,
         doctor = doctor,
         clinic = clinic,
-        measurement = measurement
+        evaluation = evaluation
     )
 }
 
@@ -52,8 +52,8 @@ fun EvaluationObjectDto.toDomain(): EvaluationObject {
     return EvaluationObject(
         id = id,
         object_label = object_label,
-        measurement_screen = measurement_screen,
-        measurement_order = measurement_order,
+        evaluation_screen = evaluation_screen,
+        evaluation_order = evaluation_order,
         return_value = return_value,
         number_of_values = number_of_values,
         predefined_values = predefined_values,
@@ -72,12 +72,12 @@ fun EvaluationObjectDto.toDomain(): EvaluationObject {
 fun EvaluationDto.toDomain(): Evaluation {
     return Evaluation(
         id = id,
-        measurement_name = measurement_name,
+        evaluation_name = evaluation_name,
         display_as_module = display_as_module,
         is_multilingual = is_multilingual,
         is_active = is_active,
-        measurement_settings = measurement_settings.toDomain(),
-        measurement_objects = measurement_objects.map { it.toDomain() }
+        evaluation_settings = evaluation_settings.toDomain(),
+        evaluation_objects = evaluation_objects.map { it.toDomain() }
     )
 }
 
@@ -88,24 +88,24 @@ fun EvaluationValue.toSerial(): EvaluationValueDto {
         available_value = available_value,
         default_value = default_value,
         object_address = object_address,
-        measurementObject_id = measurementObject_id
+        evaluationObject_id = evaluationObject_id
     )
 }
 
 fun EvaluationSettings.toSerial(): EvaluationSettingsDto {
     return EvaluationSettingsDto(
         id = id,
-        measurement_repeat_period = measurement_repeat_period,
-        measurement_repeat_times = measurement_repeat_times,
-        measurement_begin_time = measurement_begin_time,
-        measurement_last_time = measurement_last_time,
-        measurement_end_time = measurement_end_time,
+        evaluation_repeat_period = evaluation_repeat_period,
+        evaluation_repeat_times = evaluation_repeat_times,
+        evaluation_begin_time = evaluation_begin_time,
+        evaluation_last_time = evaluation_last_time,
+        evaluation_end_time = evaluation_end_time,
         is_repetitive = is_repetitive,
         times_taken = times_taken,
         patient = patient,
         doctor = doctor,
         clinic = clinic,
-        measurement = measurement
+        evaluation = evaluation
     )
 }
 
@@ -113,8 +113,8 @@ fun EvaluationObject.toSerial(): EvaluationObjectDto {
     return EvaluationObjectDto(
         id = id,
         object_label = object_label,
-        measurement_screen = measurement_screen,
-        measurement_order = measurement_order,
+        evaluation_screen = evaluation_screen,
+        evaluation_order = evaluation_order,
         return_value = return_value,
         number_of_values = number_of_values,
         predefined_values = predefined_values,
@@ -133,72 +133,72 @@ fun EvaluationObject.toSerial(): EvaluationObjectDto {
 fun Evaluation.toSerial(): EvaluationDto {
     return EvaluationDto(
         id = id,
-        measurement_name = measurement_name,
+        evaluation_name = evaluation_name,
         display_as_module = display_as_module,
         is_multilingual = is_multilingual,
         is_active = is_active,
-        measurement_settings = measurement_settings.toSerial(),
-        measurement_objects = measurement_objects.map { it.toSerial() }
+        evaluation_settings = evaluation_settings.toSerial(),
+        evaluation_objects = evaluation_objects.map { it.toSerial() }
     )
 }
 
-fun MeasurementDetailDto.toDomain(): MeasurementDetail {
+fun EvaluationDetailDto.toDomain(): EvaluationDetail {
     return when (this) {
-        is MeasurementDetailStringDto -> MeasurementDetailString(
+        is EvaluationDetailStringDto -> EvaluationDetailString(
             dateTime = dateTime,
-            measureObject = measureObject,
+            evaluationObject = evaluationObject,
             value = value
         )
-        is MeasurementDetailIntDto -> MeasurementDetailInt(
+        is EvaluationDetailIntDto -> EvaluationDetailInt(
             dateTime = dateTime,
-            measureObject = measureObject,
+            evaluationObject = evaluationObject,
             value = value
         )
-        is MeasurementDetailGenericDto -> MeasurementDetailGeneric(
+        is EvaluationDetailGenericDto -> EvaluationDetailGeneric(
             dateTime = dateTime,
-            measureObject = measureObject,
+            evaluationObject = evaluationObject,
             value = value
         )
     }
 }
 
-fun MeasurementDetail.toDto(): MeasurementDetailDto {
+fun EvaluationDetail.toDto(): EvaluationDetailDto {
     return when (this) {
-        is MeasurementDetailString -> MeasurementDetailStringDto(
+        is EvaluationDetailString -> EvaluationDetailStringDto(
             dateTime = dateTime,
-            measureObject = measureObject,
+            evaluationObject = evaluationObject,
             value = value
         )
-        is MeasurementDetailInt -> MeasurementDetailIntDto(
+        is EvaluationDetailInt -> EvaluationDetailIntDto(
             dateTime = dateTime,
-            measureObject = measureObject,
+            evaluationObject = evaluationObject,
             value = value
         )
-        is MeasurementDetailGeneric -> MeasurementDetailGenericDto(
+        is EvaluationDetailGeneric -> EvaluationDetailGenericDto(
             dateTime = dateTime,
-            measureObject = measureObject,
+            evaluationObject = evaluationObject,
             value = value
         )
     }
 }
 
-fun MeasurementResultDto.toDomain(): MeasurementResult {
-    return MeasurementResult(
+fun EvaluationResultDto.toDomain(): EvaluationResult {
+    return EvaluationResult(
         clinicId = clinicId,
         date = date,
-        measurement = measurement,
+        evaluation = evaluation,
         patientId = patient_id,
-        results =  ArrayList(results.map { it.toDomain() as MeasurementDetailString })
+        results =  ArrayList(results.map { it.toDomain() as EvaluationDetailString })
     )
 }
 
-fun MeasurementResult.toDto(): MeasurementResultDto {
-    return MeasurementResultDto(
+fun EvaluationResult.toDto(): EvaluationResultDto {
+    return EvaluationResultDto(
         clinicId = clinicId,
         date = date,
-        measurement = measurement,
+        evaluation = evaluation,
         patient_id = patientId,
-        results = ArrayList(results.map { it.toDto() as MeasurementDetailStringDto })
+        results = ArrayList(results.map { it.toDto() as EvaluationDetailStringDto })
     )
 }
 

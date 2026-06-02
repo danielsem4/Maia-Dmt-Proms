@@ -58,7 +58,7 @@ class SelectedStatisticsViewModel(
                 handleSearchQueryChange(action.query)
             }
             is SelectedStatisticsAction.OnStatisticClick -> {
-                handleStatisticClick(action.question, action.measurementId)
+                handleStatisticClick(action.question, action.evaluationId)
             }
             else -> {}
         }
@@ -68,29 +68,29 @@ class SelectedStatisticsViewModel(
         _state.update { currentState ->
             val filteredStatistics = if (query.isBlank()) {
                 currentState.allSelectedStatistics.flatMap { patientGraph ->
-                    patientGraph.measurements_data.flatMap { (_, measurementWrapper) ->
-                        measurementWrapper.data.keys.map { question ->
+                    patientGraph.evaluations_data.flatMap { (_, evaluationWrapper) ->
+                        evaluationWrapper.data.keys.map { question ->
                             StatisticQuestion(
                                 question = question,
-                                measurementId = measurementWrapper.measurement.id,
-                                measurementName = measurementWrapper.measurement.name
+                                evaluationId = evaluationWrapper.evaluation.id,
+                                evaluationName = evaluationWrapper.evaluation.name
                             )
                         }
                     }
                 }
             } else {
                 currentState.allSelectedStatistics.flatMap { patientGraph ->
-                    patientGraph.measurements_data.flatMap { (_, measurementWrapper) ->
-                        measurementWrapper.data.keys
+                    patientGraph.evaluations_data.flatMap { (_, evaluationWrapper) ->
+                        evaluationWrapper.data.keys
                             .filter { question ->
                                 question.contains(query, ignoreCase = true) ||
-                                        measurementWrapper.measurement.name.contains(query, ignoreCase = true)
+                                        evaluationWrapper.evaluation.name.contains(query, ignoreCase = true)
                             }
                             .map { question ->
                                 StatisticQuestion(
                                     question = question,
-                                    measurementId = measurementWrapper.measurement.id,
-                                    measurementName = measurementWrapper.measurement.name
+                                    evaluationId = evaluationWrapper.evaluation.id,
+                                    evaluationName = evaluationWrapper.evaluation.name
                                 )
                             }
                     }
@@ -104,12 +104,12 @@ class SelectedStatisticsViewModel(
         }
     }
 
-    private fun handleStatisticClick(question: String, measurementId: Int) {
+    private fun handleStatisticClick(question: String, evaluationId: Int) {
         viewModelScope.launch {
             eventChannel.send(
                 SelectedStatisticsEvent.NavigateToStatisticDetail(
                     question = question,
-                    measurementId = measurementId
+                    evaluationId = evaluationId
                 )
             )
         }
@@ -151,12 +151,12 @@ class SelectedStatisticsViewModel(
             statisticsService.getPatientEvaluationsGraphs(clinicId, patientId, arrayListOf(evaluationId))
                 .onSuccess { statistics ->
                     val allSelectedStatistics = statistics.flatMap { patientGraph ->
-                        patientGraph.measurements_data.flatMap { (_, measurementWrapper) ->
-                            measurementWrapper.data.keys.map { question ->
+                        patientGraph.evaluations_data.flatMap { (_, evaluationWrapper) ->
+                            evaluationWrapper.data.keys.map { question ->
                                 StatisticQuestion(
                                     question = question,
-                                    measurementId = measurementWrapper.measurement.id,
-                                    measurementName = measurementWrapper.measurement.name
+                                    evaluationId = evaluationWrapper.evaluation.id,
+                                    evaluationName = evaluationWrapper.evaluation.name
                                 )
                             }
                         }

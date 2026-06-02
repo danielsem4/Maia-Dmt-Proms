@@ -15,7 +15,7 @@ import dmtproms.feature.home.presentation.generated.resources.module_document_sh
 import dmtproms.feature.home.presentation.generated.resources.module_fmpt
 import dmtproms.feature.home.presentation.generated.resources.module_hitber
 import dmtproms.feature.home.presentation.generated.resources.module_market
-import dmtproms.feature.home.presentation.generated.resources.module_measurements
+import dmtproms.feature.home.presentation.generated.resources.module_evaluations
 import dmtproms.feature.home.presentation.generated.resources.module_medications
 import dmtproms.feature.home.presentation.generated.resources.module_memory
 import dmtproms.feature.home.presentation.generated.resources.module_new_report
@@ -33,7 +33,7 @@ import org.jetbrains.compose.resources.DrawableResource
 fun mapModuleIcon(moduleName: String): DrawableResource {
     return when (moduleName.lowercase()) {
         "document share" -> Res.drawable.file_upload_icon
-        "questionnaires", "measurements" -> Res.drawable.evaluation_icon
+        "questionnaires", "evaluations" -> Res.drawable.evaluation_icon
         "medications" -> Res.drawable.medications_icon
         "activities" -> Res.drawable.activities_icon
         "memory" -> Res.drawable.memory_icon
@@ -53,7 +53,7 @@ fun mapModuleIcon(moduleName: String): DrawableResource {
 fun mapModuleNameToUiText(moduleName: String): UiText {
     return when (moduleName.lowercase()) {
         "document share" -> UiText.Resource(Res.string.module_document_share)
-        "questionnaires", "measurements" -> UiText.Resource(Res.string.module_measurements)
+        "questionnaires", "evaluations" -> UiText.Resource(Res.string.module_evaluations)
         "medications" -> UiText.Resource(Res.string.module_medications)
         "activities" -> UiText.Resource(Res.string.module_activities)
         "memory" -> UiText.Resource(Res.string.module_memory)

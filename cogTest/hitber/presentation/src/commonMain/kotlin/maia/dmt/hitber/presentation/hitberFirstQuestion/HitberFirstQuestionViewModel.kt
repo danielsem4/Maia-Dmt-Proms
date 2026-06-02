@@ -47,7 +47,7 @@ class HitberFirstQuestionViewModel(
         val evaluation = hitberSessionManager.evaluation.value ?: return
         val targetIds = BATCH_IDS.flatten().toSet()
 
-        val filteredQuestions = evaluation.measurement_objects
+        val filteredQuestions = evaluation.evaluation_objects
             .filter { it.id in targetIds }
 
         _state.update {
@@ -117,12 +117,12 @@ class HitberFirstQuestionViewModel(
         val evaluation = hitberSessionManager.evaluation.value ?: return
         val answers = _state.value.answers
 
-        val updatedObjects = evaluation.measurement_objects.map { obj ->
+        val updatedObjects = evaluation.evaluation_objects.map { obj ->
             val answer = answers[obj.id]
             if (answer != null) obj.copy(answer = answer) else obj
         }
 
-        val updatedEvaluation = evaluation.copy(measurement_objects = updatedObjects)
+        val updatedEvaluation = evaluation.copy(evaluation_objects = updatedObjects)
         hitberSessionManager.setEvaluation(updatedEvaluation)
     }
 

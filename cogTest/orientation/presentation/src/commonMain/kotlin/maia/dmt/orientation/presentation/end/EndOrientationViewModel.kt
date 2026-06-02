@@ -11,8 +11,8 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import maia.dmt.core.domain.auth.SessionStorage
-import maia.dmt.core.domain.dto.MeasurementDetailString
-import maia.dmt.core.domain.dto.evaluation.MeasurementResult
+import maia.dmt.core.domain.dto.EvaluationDetailString
+import maia.dmt.core.domain.dto.evaluation.EvaluationResult
 import maia.dmt.core.domain.evaluation.EvaluationService
 import maia.dmt.core.domain.file.ImagePathParams
 import maia.dmt.core.domain.usecase.UploadImageUseCase
@@ -70,12 +70,12 @@ class EndOrientationViewModel(
             }
 
             val dynamicIds = mutableMapOf<String, Int>()
-            evaluation.measurement_objects.forEach { obj ->
+            evaluation.evaluation_objects.forEach { obj ->
                 dynamicIds[obj.object_label] = obj.id
             }
 
             val currentDateTime = getCurrentFormattedDateTime()
-            val accumulatedResults = ArrayList<MeasurementDetailString>()
+            val accumulatedResults = ArrayList<EvaluationDetailString>()
 
             // Helper function to upload images
             suspend fun uploadAndAddResult(
@@ -101,7 +101,7 @@ class EndOrientationViewModel(
                 val params = ImagePathParams(
                     clinicId = clinicId,
                     patientId = patientId,
-                    measurementId = evaluationId.toString(),
+                    evaluationId = evaluationId.toString(),
                     pathDate = currentDateTime,
                     fileName = "${fileNamePrefix}_${targetId}.png",
                     extraData = extraData
@@ -110,7 +110,7 @@ class EndOrientationViewModel(
                 when (val result = uploadImageUseCase.execute(imageBytes, params)) {
                     is Result.Success -> {
                         accumulatedResults.add(
-                            MeasurementDetailString(currentDateTime, targetId, result.data)
+                            EvaluationDetailString(currentDateTime, targetId, result.data)
                         )
                         println("DEBUG: Uploaded $labelKey successfully: ${result.data}")
                     }
@@ -123,7 +123,7 @@ class EndOrientationViewModel(
             sessionManager.numberSelectionResult.value?.let { result ->
                 val selectedNumberId = dynamicIds["selected_number"] ?: 171
                 accumulatedResults.add(
-                    MeasurementDetailString(
+                    EvaluationDetailString(
                         currentDateTime,
                         selectedNumberId,
                         result.selectedNumber?.toString() ?: "No selection"
@@ -139,7 +139,7 @@ class EndOrientationViewModel(
                     result.secondSelection.name
                 )
                 accumulatedResults.add(
-                    MeasurementDetailString(
+                    EvaluationDetailString(
                         currentDateTime,
                         seasonsId,
                         seasonsArray.joinToString(",")
@@ -151,7 +151,7 @@ class EndOrientationViewModel(
             sessionManager.dragShapeResult.value?.let { result ->
                 val isDraggedId = dynamicIds["is_triangle_dragged"] ?: 173
                 accumulatedResults.add(
-                    MeasurementDetailString(
+                    EvaluationDetailString(
                         currentDateTime,
                         isDraggedId,
                         result.success.toString()
@@ -162,7 +162,7 @@ class EndOrientationViewModel(
             sessionManager.shapeResizeResult.value?.let { result ->
                 val isSizeChangedId = dynamicIds["is_triangle_size_changed"] ?: 174
                 accumulatedResults.add(
-                    MeasurementDetailString(
+                    EvaluationDetailString(
                         currentDateTime,
                         isSizeChangedId,
                         result.hasResized.toString()
@@ -181,7 +181,7 @@ class EndOrientationViewModel(
 
                 val xDrawingId = dynamicIds["x_drawing"] ?: 175
                 accumulatedResults.add(
-                    MeasurementDetailString(
+                    EvaluationDetailString(
                         currentDateTime,
                         xDrawingId,
                         if (result.hasDrawn) "true" else "false"
@@ -192,7 +192,7 @@ class EndOrientationViewModel(
             sessionManager.painScaleResult.value?.let { result ->
                 val painLevelId = dynamicIds["health_level"] ?: 176
                 accumulatedResults.add(
-                    MeasurementDetailString(
+                    EvaluationDetailString(
                         currentDateTime,
                         painLevelId,
                         result.painLevel.toString()
@@ -200,16 +200,16 @@ class EndOrientationViewModel(
                 )
             }
 
-            val finalMeasurementResult = MeasurementResult(
+            val finalEvaluationResult = EvaluationResult(
                 clinicId = clinicId,
                 date = currentDateTime,
-                measurement = evaluationId,
+                evaluation = evaluationId,
                 patientId = patientId,
                 results = accumulatedResults
             )
 
             if (accumulatedResults.isNotEmpty()) {
-                when (val result = evaluationService.uploadEvaluationResults(finalMeasurementResult)) {
+                when (val result = evaluationService.uploadEvaluationResults(finalEvaluationResult)) {
                     is Result.Success -> {
                         println("DEBUG: Upload SUCCESS!")
                         sessionManager.reset()

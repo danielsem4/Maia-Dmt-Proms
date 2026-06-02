@@ -6,9 +6,9 @@ import maia.dmt.core.designsystem.components.buttons.ToggleOrientation
 import maia.dmt.core.designsystem.components.select.CheckboxOption
 import maia.dmt.core.designsystem.components.select.DmtCheckboxCardGroup
 import maia.dmt.core.designsystem.components.select.DmtRadioButtonGroup
-import maia.dmt.core.domain.measurement.ElementConfig
-import maia.dmt.core.domain.measurement.ElementType
-import maia.dmt.core.domain.measurement.MeasurementElement
+import maia.dmt.core.domain.evaluation.ElementConfig
+import maia.dmt.core.domain.evaluation.ElementType
+import maia.dmt.core.domain.evaluation.EvaluationElement
 
 class InputRadioElementRenderer : ElementRenderer {
     override fun canRender(elementType: ElementType): Boolean {
@@ -17,7 +17,7 @@ class InputRadioElementRenderer : ElementRenderer {
 
     @Composable
     override fun Render(
-        element: MeasurementElement,
+        element: EvaluationElement,
         currentAnswer: String,
         onAnswerChange: (String) -> Unit
     ) {

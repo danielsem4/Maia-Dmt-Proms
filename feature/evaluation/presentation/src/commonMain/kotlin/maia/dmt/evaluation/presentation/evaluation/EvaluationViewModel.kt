@@ -13,7 +13,7 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import maia.dmt.core.domain.auth.SessionStorage
 import maia.dmt.core.domain.evaluation.EvaluationService
-import maia.dmt.core.domain.measurement.MeasurementScreen
+import maia.dmt.core.domain.evaluation.EvaluationScreen
 import maia.dmt.core.domain.util.onFailure
 import maia.dmt.core.domain.util.onSuccess
 import maia.dmt.core.presentation.util.UiText
@@ -29,7 +29,7 @@ class EvaluationViewModel(
     private val eventChannel = Channel<EvaluationEvent>()
     val events = eventChannel.receiveAsFlow()
 
-    private var selectedMeasurementId: String = ""
+    private var selectedEvaluationId: String = ""
     private var hasLoadedInitialData = false
 
     val state = _state
@@ -60,14 +60,14 @@ class EvaluationViewModel(
         }
     }
 
-    fun initialize(measurementId: String) {
-        if (selectedMeasurementId == "") {
-            selectedMeasurementId = measurementId
-            loadMeasurementStructure()
+    fun initialize(evaluationId: String) {
+        if (selectedEvaluationId == "") {
+            selectedEvaluationId = evaluationId
+            loadEvaluationStructure()
         }
     }
 
-    private fun loadMeasurementStructure() {
+    private fun loadEvaluationStructure() {
         viewModelScope.launch {
             _state.update {
                 it.copy(isLoadingEvaluationUpload = true)
@@ -88,7 +88,7 @@ class EvaluationViewModel(
             val clinicId = sessionStorage.getActiveClinicId()
             val patientId = authInfo.user?.id
 
-            if (clinicId.isNullOrEmpty() || patientId == null || selectedMeasurementId == "") {
+            if (clinicId.isNullOrEmpty() || patientId == null || selectedEvaluationId == "") {
                 _state.update {
                     it.copy(
                         isLoadingEvaluationUpload = false,
@@ -98,11 +98,11 @@ class EvaluationViewModel(
                 return@launch
             }
 
-            evaluationService.getMeasurementStructure(clinicId, selectedMeasurementId)
+            evaluationService.getEvaluationStructure(clinicId, selectedEvaluationId)
                 .onSuccess { structure ->
                     _state.update {
                         it.copy(
-                            measurementStructure = structure,
+                            evaluationStructure = structure,
                             isLoadingEvaluationUpload = false,
                             evaluationError = null
                         )
@@ -120,7 +120,7 @@ class EvaluationViewModel(
     }
 
     private fun handleEvaluationNextClick() {
-        val structure = _state.value.measurementStructure ?: return
+        val structure = _state.value.evaluationStructure ?: return
         val maxIndex = structure.screens.size - 1
         val currentIndex = _state.value.currentScreenIndex
 
@@ -152,8 +152,8 @@ class EvaluationViewModel(
         }
     }
 
-    fun getCurrentScreen(): MeasurementScreen? {
-        val structure = _state.value.measurementStructure ?: return null
+    fun getCurrentScreen(): EvaluationScreen? {
+        val structure = _state.value.evaluationStructure ?: return null
         return structure.screens.getOrNull(_state.value.currentScreenIndex)
     }
 

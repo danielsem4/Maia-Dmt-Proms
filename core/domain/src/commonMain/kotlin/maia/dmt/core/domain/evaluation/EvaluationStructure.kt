@@ -1,24 +1,24 @@
-package maia.dmt.core.domain.measurement
+package maia.dmt.core.domain.evaluation
 
-data class MeasurementStructure(
-    val measurementId: String,
-    val measurementName: String,
-    val screens: List<MeasurementScreen>
+data class EvaluationStructure(
+    val evaluationId: String,
+    val evaluationName: String,
+    val screens: List<EvaluationScreen>
 )
 
-data class MeasurementScreen(
+data class EvaluationScreen(
     val id: String,
     val screenNumber: Int,
     val title: String,
-    val rows: List<MeasurementRow>
+    val rows: List<EvaluationRow>
 )
 
-data class MeasurementRow(
+data class EvaluationRow(
     val rowNumber: Int,
-    val elements: List<MeasurementElement>
+    val elements: List<EvaluationElement>
 )
 
-data class MeasurementElement(
+data class EvaluationElement(
     val id: String,
     val elementType: ElementType,
     val rowNumber: Int,

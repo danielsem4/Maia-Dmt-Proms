@@ -55,7 +55,7 @@ fun SelectedStatisticsRoot(
                 onNavigateBack()
             }
             is SelectedStatisticsEvent.NavigateToStatisticDetail -> {
-                onNavigateToStatisticDetail(event.question, event.measurementId)
+                onNavigateToStatisticDetail(event.question, event.evaluationId)
             }
         }
     }
@@ -123,7 +123,7 @@ fun SelectedStatisticsScreen(
                         items(
                             count = state.selectedStatistics.size,
                             key = { index ->
-                                "${state.selectedStatistics[index].measurementId}_${state.selectedStatistics[index].question}"
+                                "${state.selectedStatistics[index].evaluationId}_${state.selectedStatistics[index].question}"
                             }
                         ) { index ->
                             val statistic = state.selectedStatistics[index]
@@ -144,7 +144,7 @@ fun SelectedStatisticsScreen(
                                     onAction(
                                         SelectedStatisticsAction.OnStatisticClick(
                                             question = statistic.question,
-                                            measurementId = statistic.measurementId
+                                            evaluationId = statistic.evaluationId
                                         )
                                     )
                                 }
@@ -167,13 +167,13 @@ fun SelectedStatisticsPreview() {
                 selectedStatistics = listOf(
                     StatisticQuestion(
                         question = "מה רמת הכאב שאת/ה מרגיש/ה כרגע?",
-                        measurementId = 43,
-                        measurementName = "Tenscare Measurement"
+                        evaluationId = 43,
+                        evaluationName = "Tenscare Evaluation"
                     ),
                     StatisticQuestion(
                         question = "כמה טוב את/ה מרגיש/ה היום?",
-                        measurementId = 43,
-                        measurementName = "Tenscare Measurement"
+                        evaluationId = 43,
+                        evaluationName = "Tenscare Evaluation"
                     )
                 )
             ),

@@ -1,13 +1,13 @@
 package maia.dmt.evaluation.domain.model
 
-data class MeasurementItem(
+data class EvaluationItem(
     val id: String,
     val patient: String,
     val clinic: String,
     val doctor: String,
-    val measurement: String,
-    val measurementName: String,
-    val measurementType: String,
+    val evaluation: String,
+    val evaluationName: String,
+    val evaluationType: String,
     val startDate: String,
     val endDate: String?,
     val frequency: Frequency,

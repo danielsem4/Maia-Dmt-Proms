@@ -8,16 +8,19 @@ import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import maia.dmt.core.domain.auth.SessionStorage
+import maia.dmt.core.domain.localization.GetCurrentLanguageUseCase
+import maia.dmt.core.domain.localization.LanguageService
 import maia.dmt.core.domain.util.onFailure
 import maia.dmt.core.domain.util.onSuccess
 import maia.dmt.home.data.notificaiton.FirebasePushNotificationService
-import maia.dmt.home.domain.models.FcmTokenRequest
 import maia.dmt.home.domain.notification.DeviceTokenService
 
 class MainViewModel(
     private val sessionStorage: SessionStorage,
     private val pushNotificationService: FirebasePushNotificationService,
-    private val deviceTokenService: DeviceTokenService
+    private val deviceTokenService: DeviceTokenService,
+    private val languageService: LanguageService,
+    private val getCurrentLanguageUseCase: GetCurrentLanguageUseCase
 ): ViewModel() {
 
     private val _state = MutableStateFlow(MainState())
@@ -54,6 +57,9 @@ class MainViewModel(
                 if (isLoggedIn && currentDeviceToken != null) {
                     registerDeviceTokenIfNeeded(currentDeviceToken!!)
                 }
+                if (isLoggedIn) {
+                    syncLanguageToServer()
+                }
                 if (!isLoggedIn) {
                     previousDeviceToken = null
                 }
@@ -75,27 +81,27 @@ class MainViewModel(
 
     private fun registerDeviceTokenIfNeeded(token: String) {
         if (token != previousDeviceToken) {
-            registerDeviceToken(token, getPlatform().name)
+            registerDeviceToken(token)
             previousDeviceToken = token
         }
     }
 
-    private fun registerDeviceToken(token: String, platform: String) {
+    private fun syncLanguageToServer() {
         viewModelScope.launch {
-            val clinicId = sessionStorage.getActiveClinicId()
-            deviceTokenService.registerDeviceToken(
-                token = FcmTokenRequest(
-                    user_id = state.value.user!!.id,
-                    clinic_id = clinicId ?: "",
-                    fcm_token = token
-                )
-            )
-                .onSuccess {
+            try {
+                val language = getCurrentLanguageUseCase()
+                languageService.uploadLanguage(language.iso)
+            } catch (_: Exception) {
+                // Best-effort sync
+            }
+        }
+    }
 
-                }
-                .onFailure { error ->
-
-                }
+    private fun registerDeviceToken(token: String) {
+        viewModelScope.launch {
+            deviceTokenService.registerDeviceToken(token = token)
+                .onSuccess { }
+                .onFailure { error -> }
         }
     }
 }

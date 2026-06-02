@@ -21,6 +21,7 @@ import maia.dmt.core.data.dto.AuthTokensSerializable
 import maia.dmt.core.data.dto.RefreshTokenRequest
 import maia.dmt.core.data.mapper.toDomain
 import maia.dmt.core.domain.auth.SessionStorage
+import maia.dmt.core.domain.util.DataError
 import maia.dmt.core.domain.dto.LoginSuccessfulRequest
 import maia.dmt.core.domain.logger.DmtLogger
 
@@ -84,12 +85,20 @@ class HttpClientFactory(
                                     BearerTokens(newTokens.access, newTokens.refresh)
                                 }
                                 is maia.dmt.core.domain.util.Result.Failure -> {
-                                    sessionStorage.set(null)
+                                    when (response.error) {
+                                        DataError.Remote.UNAUTHORIZED,
+                                        DataError.Remote.FORBIDDEN -> {
+                                            sessionStorage.set(null)
+                                        }
+                                        else -> {
+                                            // Transient error (no internet, server error, etc.)
+                                            // Don't clear session — tokens may still be valid
+                                        }
+                                    }
                                     null
                                 }
                             }
                         } catch (e: Exception) {
-                            sessionStorage.set(null)
                             null
                         }
                     }

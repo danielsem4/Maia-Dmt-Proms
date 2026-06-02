@@ -38,6 +38,16 @@ fun App(
         }
     }
 
+    LaunchedEffect(state.isLoggedIn) {
+        if (!state.isCheckingAuth && !state.isLoggedIn) {
+            navController.navigate(AuthGraphRoutes.Graph) {
+                popUpTo(navController.graph.id) {
+                    inclusive = true
+                }
+            }
+        }
+    }
+
     DmtTheme {
         if(!state.isCheckingAuth) {
             NavigationRoot(

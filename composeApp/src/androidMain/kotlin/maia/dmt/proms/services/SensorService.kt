@@ -307,7 +307,8 @@ class SensorService : Service(), KoinComponent {
                 stepBuffer = stepBuffer.toList(),
                 lightBuffer = lightBuffer.toList(),
                 deletionBuffer = deletionBuffer.toList(),
-                rawAccelList = frequencyBuffer.toList()
+                rawAccelList = frequencyBuffer.toList(),
+                rawGyroList = rawGyroRingBuffer.toList()
             )
 
             if (resultData != null && !inCooldown) {

@@ -19,7 +19,7 @@ class KtorMarketService(
         patientId: String
     ): Result<List<MarketProduct>, DataError.Remote> {
         return httpClient.get<MarketResponseContainer>(
-            route = "loadMeasurementJson/$clinicId/75/"
+            route = "loadEvaluationJson/$clinicId/75/"
         ).map { response ->
             response.data.products.toDomain()
         }

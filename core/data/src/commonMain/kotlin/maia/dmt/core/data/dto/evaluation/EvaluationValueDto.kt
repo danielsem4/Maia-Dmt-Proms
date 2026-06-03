@@ -8,5 +8,5 @@ data class EvaluationValueDto(
     val available_value: String,
     val default_value: Boolean,
     val object_address: String,
-    val measurementObject_id: Int
+    val evaluationObject_id: Int
 )

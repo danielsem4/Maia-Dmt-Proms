@@ -16,11 +16,11 @@ import maia.dmt.core.domain.util.onFailure
 import maia.dmt.core.domain.util.onSuccess
 import maia.dmt.core.presentation.util.UiText
 import maia.dmt.core.presentation.util.toUiText
-import maia.dmt.evaluation.domain.measurements.MeasurementsService
-import maia.dmt.evaluation.domain.model.MeasurementItem
+import maia.dmt.evaluation.domain.evaluations.EvaluationsService
+import maia.dmt.evaluation.domain.model.EvaluationItem
 
 class AllEvaluationsViewModel(
-    private val measurementsService: MeasurementsService,
+    private val evaluationsService: EvaluationsService,
     private val sessionStorage: SessionStorage
 ): ViewModel() {
 
@@ -32,7 +32,7 @@ class AllEvaluationsViewModel(
     val state = _state
         .onStart {
             if (!hasLoadedInitialData) {
-                loadMeasurements()
+                loadEvaluations()
                 hasLoadedInitialData = true
             }
         }
@@ -45,16 +45,16 @@ class AllEvaluationsViewModel(
     fun onAction(action: AllEvaluationsAction) {
         when (action) {
             is AllEvaluationsAction.OnBackClick -> { navigateBack() }
-            is AllEvaluationsAction.OnEvaluationClick -> { handleMeasurementClick(action.measurement) }
+            is AllEvaluationsAction.OnEvaluationClick -> { handleEvaluationClick(action.evaluation) }
             is AllEvaluationsAction.OnSearchQueryChange -> {
                 _state.update { currentState ->
-                    val filtered = filterMeasurements(
-                        allMeasurements = currentState.allMeasurements,
+                    val filtered = filterEvaluations(
+                        allEvaluations = currentState.allEvaluations,
                         query = action.query
                     )
                     currentState.copy(
                         searchQuery = action.query,
-                        measurements = filtered
+                        evaluations = filtered
                     )
                 }
             }
@@ -62,24 +62,24 @@ class AllEvaluationsViewModel(
         }
     }
 
-    private fun filterMeasurements(
-        allMeasurements: List<MeasurementItem>,
+    private fun filterEvaluations(
+        allEvaluations: List<EvaluationItem>,
         query: String
-    ): List<MeasurementItem> {
+    ): List<EvaluationItem> {
         if (query.isBlank()) {
-            return allMeasurements
+            return allEvaluations
         }
 
         val searchQuery = query.trim().lowercase()
 
-        return allMeasurements.filter { measurement ->
-            measurement.measurementName.lowercase().contains(searchQuery) ||
-                    measurement.startDate.lowercase().contains(searchQuery) ||
-                    measurement.frequency.name.lowercase().contains(searchQuery)
+        return allEvaluations.filter { evaluation ->
+            evaluation.evaluationName.lowercase().contains(searchQuery) ||
+                    evaluation.startDate.lowercase().contains(searchQuery) ||
+                    evaluation.frequency.name.lowercase().contains(searchQuery)
         }
     }
 
-    private fun loadMeasurements() {
+    private fun loadEvaluations() {
         viewModelScope.launch {
             _state.update {
                 it.copy(
@@ -112,12 +112,12 @@ class AllEvaluationsViewModel(
                 return@launch
             }
 
-            measurementsService.getMeasurements(clinicId, userId)
-                .onSuccess { measurements ->
+            evaluationsService.getEvaluations(clinicId, userId)
+                .onSuccess { evaluations ->
                     _state.update {
                         it.copy(
-                            allMeasurements = measurements,
-                            measurements = measurements,
+                            allEvaluations = evaluations,
+                            evaluations = evaluations,
                             isLoadingEvaluations = false,
                             evaluationsError = null
                         )
@@ -134,10 +134,10 @@ class AllEvaluationsViewModel(
         }
     }
 
-    private fun handleMeasurementClick(measurement: MeasurementItem) {
-        println("Measurement clicked! $measurement")
+    private fun handleEvaluationClick(evaluation: EvaluationItem) {
+        println("Evaluation clicked! $evaluation")
         viewModelScope.launch {
-            eventChannel.send(AllEvaluationsEvent.NavigateToSelectedEvaluation(measurement.measurement))
+            eventChannel.send(AllEvaluationsEvent.NavigateToSelectedEvaluation(evaluation.evaluation))
         }
     }
 

@@ -138,7 +138,7 @@ fun DmtCartItemCardPreview() {
         ) {
             DmtCartItemCard(
                 itemName = "עגבניות שרי",
-                itemImageUrl = "http://generic2dev.hitheal.org.il/static/measurements/market%20test/images/market_tomato.png",
+                itemImageUrl = "http://generic2dev.hitheal.org.il/static/evaluations/market%20test/images/market_tomato.png",
                 quantity = 1,
                 onQuantityIncrease = {},
                 onQuantityDecrease = {},
@@ -147,7 +147,7 @@ fun DmtCartItemCardPreview() {
 
             DmtCartItemCard(
                 itemName = "ברוקולי קפוא",
-                itemImageUrl = "http://generic2dev.hitheal.org.il/static/measurements/market%20test/images/market_frozen_brocoli.png",
+                itemImageUrl = "http://generic2dev.hitheal.org.il/static/evaluations/market%20test/images/market_frozen_brocoli.png",
                 quantity = 8,
                 onQuantityIncrease = {},
                 onQuantityDecrease = {},
@@ -156,7 +156,7 @@ fun DmtCartItemCardPreview() {
 
             DmtCartItemCard(
                 itemName = "ברוקולי קפוא",
-                itemImageUrl = "http://generic2dev.hitheal.org.il/static/measurements/market%20test/images/market_frozen_brocoli.png",
+                itemImageUrl = "http://generic2dev.hitheal.org.il/static/evaluations/market%20test/images/market_frozen_brocoli.png",
                 quantity = 8,
                 isDonation = true,
                 onQuantityIncrease = {},

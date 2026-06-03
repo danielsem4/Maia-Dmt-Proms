@@ -1,36 +1,36 @@
-package maia.dmt.core.data.dto.measurement
+package maia.dmt.core.data.dto.evaluation
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.JsonObject
 
 @Serializable
-data class MeasurementStructureDto(
-    @SerialName("measurement_id")
-    val measurementId: String,
-    @SerialName("measurement_name")
-    val measurementName: String,
-    val screens: List<MeasurementScreenDto>
+data class EvaluationStructureDto(
+    @SerialName("evaluation_id")
+    val evaluationId: String,
+    @SerialName("evaluation_name")
+    val evaluationName: String,
+    val screens: List<EvaluationScreenDto>
 )
 
 @Serializable
-data class MeasurementScreenDto(
+data class EvaluationScreenDto(
     val id: String,
     @SerialName("screen_number")
     val screenNumber: Int,
     val title: String,
-    val rows: List<MeasurementRowDto>
+    val rows: List<EvaluationRowDto>
 )
 
 @Serializable
-data class MeasurementRowDto(
+data class EvaluationRowDto(
     @SerialName("row_number")
     val rowNumber: Int,
-    val elements: List<MeasurementElementDto>
+    val elements: List<EvaluationElementDto>
 )
 
 @Serializable
-data class MeasurementElementDto(
+data class EvaluationElementDto(
     val id: String,
     @SerialName("element_type")
     val elementType: String,

@@ -12,8 +12,8 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import maia.dmt.cdt.presentation.session.CdtSessionManager
 import maia.dmt.core.domain.auth.SessionStorage
-import maia.dmt.core.domain.dto.MeasurementDetailString
-import maia.dmt.core.domain.dto.evaluation.MeasurementResult
+import maia.dmt.core.domain.dto.EvaluationDetailString
+import maia.dmt.core.domain.dto.evaluation.EvaluationResult
 import maia.dmt.core.domain.evaluation.EvaluationService
 import maia.dmt.core.domain.file.ImagePathParams
 import maia.dmt.core.domain.usecase.UploadImageUseCase
@@ -75,12 +75,12 @@ class CdtEndViewModel(
             }
 
             val dynamicIds = mutableMapOf<String, Int>()
-            evaluation.measurement_objects.forEach { obj ->
+            evaluation.evaluation_objects.forEach { obj ->
                 dynamicIds[obj.object_label] = obj.id
             }
 
             val currentDateTime = getCurrentFormattedDateTime()
-            val accumulatedResults = ArrayList<MeasurementDetailString>()
+            val accumulatedResults = ArrayList<EvaluationDetailString>()
 
             suspend fun uploadAndAddResult(
                 bitmapSource: Any?,
@@ -105,7 +105,7 @@ class CdtEndViewModel(
                 val params = ImagePathParams(
                     clinicId = clinicId,
                     patientId = patientId,
-                    measurementId = evaluationId.toString(),
+                    evaluationId = evaluationId.toString(),
                     pathDate = currentDateTime,
                     fileName = "${fileNamePrefix}_${targetId}.png",
                     extraData = extraData
@@ -113,7 +113,7 @@ class CdtEndViewModel(
 
                 when (val result = uploadImageUseCase.execute(imageBytes, params)) {
                     is Result.Success -> {
-                        accumulatedResults.add(MeasurementDetailString(currentDateTime, targetId, result.data))
+                        accumulatedResults.add(EvaluationDetailString(currentDateTime, targetId, result.data))
                     }
                     is Result.Failure -> {
                         println("DEBUG: Upload Failed for $labelKey: ${result.error}")
@@ -122,7 +122,7 @@ class CdtEndViewModel(
             }
 
             val drawings = cdtSessionManager.getAllDrawingBitmaps()
-            val mainDrawingIndex = evaluation.measurement_objects.indexOfFirst { it.object_label == "imageUrl" }
+            val mainDrawingIndex = evaluation.evaluation_objects.indexOfFirst { it.object_label == "imageUrl" }
             val mainDrawingBitmap = if (mainDrawingIndex != -1 && drawings.containsKey(mainDrawingIndex)) {
                 drawings[mainDrawingIndex]
             } else {
@@ -141,48 +141,48 @@ class CdtEndViewModel(
             if (userTimes.containsKey(0)) {
                 val userTime = userTimes[0]!!
                 val actualId = dynamicIds["Actual time 1"] ?: 193
-                accumulatedResults.add(MeasurementDetailString(currentDateTime, actualId, "${formatTime(userTime.hours)}:${formatTime(userTime.minutes)}"))
+                accumulatedResults.add(EvaluationDetailString(currentDateTime, actualId, "${formatTime(userTime.hours)}:${formatTime(userTime.minutes)}"))
 
                 val requestedId = dynamicIds["Requested time 1"] ?: 190
-                accumulatedResults.add(MeasurementDetailString(currentDateTime, requestedId, requestedTimeStrings.getOrElse(0) { "00:00" }))
+                accumulatedResults.add(EvaluationDetailString(currentDateTime, requestedId, requestedTimeStrings.getOrElse(0) { "00:00" }))
             }
 
             if (userTimes.containsKey(1)) {
                 val userTime = userTimes[1]!!
                 val actualId = dynamicIds["Actual time 2"] ?: 194
-                accumulatedResults.add(MeasurementDetailString(currentDateTime, actualId, "${formatTime(userTime.hours)}:${formatTime(userTime.minutes)}"))
+                accumulatedResults.add(EvaluationDetailString(currentDateTime, actualId, "${formatTime(userTime.hours)}:${formatTime(userTime.minutes)}"))
 
                 val requestedId = dynamicIds["Requested time 2"] ?: 191
-                accumulatedResults.add(MeasurementDetailString(currentDateTime, requestedId, requestedTimeStrings.getOrElse(1) { "00:00" }))
+                accumulatedResults.add(EvaluationDetailString(currentDateTime, requestedId, requestedTimeStrings.getOrElse(1) { "00:00" }))
             }
 
             val grades = cdtSessionManager.grades.value
 
             if (grades.circle.isNotEmpty()) {
                 val id = dynamicIds["circle_perfection"] ?: 89
-                accumulatedResults.add(MeasurementDetailString(currentDateTime, id, grades.circle))
+                accumulatedResults.add(EvaluationDetailString(currentDateTime, id, grades.circle))
             }
 
             if (grades.numbers.isNotEmpty()) {
                 val id = dynamicIds["numbers_sequence"] ?: 90
-                accumulatedResults.add(MeasurementDetailString(currentDateTime, id, grades.numbers))
+                accumulatedResults.add(EvaluationDetailString(currentDateTime, id, grades.numbers))
             }
 
             if (grades.hands.isNotEmpty()) {
                 val id = dynamicIds["hands_position"] ?: 91
-                accumulatedResults.add(MeasurementDetailString(currentDateTime, id, grades.hands))
+                accumulatedResults.add(EvaluationDetailString(currentDateTime, id, grades.hands))
             }
 
             if (accumulatedResults.isNotEmpty()) {
-                val finalMeasurementResult = MeasurementResult(
+                val finalEvaluationResult = EvaluationResult(
                     clinicId = clinicId,
                     date = currentDateTime,
-                    measurement = evaluationId,
+                    evaluation = evaluationId,
                     patientId = patientId,
                     results = accumulatedResults
                 )
 
-                when (val result = evaluationService.uploadEvaluationResults(finalMeasurementResult)) {
+                when (val result = evaluationService.uploadEvaluationResults(finalEvaluationResult)) {
                     is Result.Success -> {
                         cdtSessionManager.clear()
                         _state.update { it.copy(isUploading = false) }

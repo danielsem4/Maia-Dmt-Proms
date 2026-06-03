@@ -58,7 +58,7 @@ class HomeViewModel(
             HomeAction.OnLogoutConfirm -> logout()
 
             is HomeAction.OnFeatureClicked -> handleFeatureClick(action.moduleName)
-            is HomeAction.OnMeasurementClicked -> handleMeasurementClick(action.measurementId)
+            is HomeAction.OnEvaluationClicked -> handleEvaluationClick(action.evaluationId)
             HomeAction.OnShowParkinsonDialog -> _state.update { it.copy(showParkinsonDialog = true) }
             HomeAction.OnParkinsonDialogDismiss -> _state.update { it.copy(showParkinsonDialog = false) }
 
@@ -106,17 +106,17 @@ class HomeViewModel(
                         )
                     }
 
-                    val measurementUiModels = homeData.measurements.map { measurement ->
+                    val evaluationUiModels = homeData.evaluations.map { evaluation ->
                         ModuleUiModel(
-                            icon = mapModuleIcon(measurement.name),
-                            text = mapModuleNameToUiText(measurement.name),
+                            icon = mapModuleIcon(evaluation.name),
+                            text = mapModuleNameToUiText(evaluation.name),
                             onClick = {
-                                onAction(HomeAction.OnMeasurementClicked(measurement.measurementId))
+                                onAction(HomeAction.OnEvaluationClicked(evaluation.evaluationId))
                             }
                         )
                     }
 
-                    val allUiModels = moduleUiModels + measurementUiModels
+                    val allUiModels = moduleUiModels + evaluationUiModels
 
                     val hasSensorModule = homeData.modules.any {
                         it.name.contains("Sensor", ignoreCase = true) ||
@@ -165,8 +165,8 @@ class HomeViewModel(
         viewModelScope.launch { eventChannel.send(HomeEvent.ModuleClicked(name)) }
     }
 
-    private fun handleMeasurementClick(measurementId: String) {
-        viewModelScope.launch { eventChannel.send(HomeEvent.MeasurementClicked(measurementId)) }
+    private fun handleEvaluationClick(evaluationId: String) {
+        viewModelScope.launch { eventChannel.send(HomeEvent.EvaluationClicked(evaluationId)) }
     }
 
     private fun observeFcmToken() {

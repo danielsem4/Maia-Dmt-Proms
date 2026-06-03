@@ -124,10 +124,10 @@ fun AllStatisticsScreen(
                             val evaluation = state.statisticsEvaluation[index]
 
                             DmtEvaluationStatisticsCard(
-                                name = evaluation.measurement_name,
-                                lastDateDone = evaluation.measurement_settings.measurement_last_time
+                                name = evaluation.evaluation_name,
+                                lastDateDone = evaluation.evaluation_settings.evaluation_last_time
                                     ?: "Never",
-                                timesDone = evaluation.measurement_settings.times_taken,
+                                timesDone = evaluation.evaluation_settings.times_taken,
                                 isClickable = true,
                                 onClick = {
                                     onAction(AllStatisticsAction.OnEvaluationClick(evaluation))

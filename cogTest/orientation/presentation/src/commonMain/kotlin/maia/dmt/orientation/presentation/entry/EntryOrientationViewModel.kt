@@ -86,8 +86,8 @@ class EntryOrientationViewModel(
                     sessionManager.setLoading(false)
                     println("DEBUG: Orientation Evaluation loaded successfully")
                     println("DEBUG: Evaluation ID: ${result.data.id}")
-                    println("DEBUG: Measurement Objects Count: ${result.data.measurement_objects.size}")
-                    result.data.measurement_objects.forEach { obj ->
+                    println("DEBUG: Evaluation Objects Count: ${result.data.evaluation_objects.size}")
+                    result.data.evaluation_objects.forEach { obj ->
                         println("DEBUG: Object - ID: ${obj.id}, Label: ${obj.object_label}")
                     }
                 }

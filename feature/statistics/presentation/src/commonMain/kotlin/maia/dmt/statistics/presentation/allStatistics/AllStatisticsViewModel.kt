@@ -74,9 +74,9 @@ class AllStatisticsViewModel(
         val searchQuery = query.trim().lowercase()
 
         return allStatistics.filter { evaluation ->
-            evaluation.measurement_name.lowercase().contains(searchQuery) ||
-                    evaluation.measurement_settings.measurement_begin_time?.lowercase()?.contains(searchQuery) == true ||
-                    evaluation.measurement_settings.measurement_repeat_period?.lowercase()?.contains(searchQuery) == true
+            evaluation.evaluation_name.lowercase().contains(searchQuery) ||
+                    evaluation.evaluation_settings.evaluation_begin_time?.lowercase()?.contains(searchQuery) == true ||
+                    evaluation.evaluation_settings.evaluation_repeat_period?.lowercase()?.contains(searchQuery) == true
         }
     }
 
@@ -118,12 +118,12 @@ class AllStatisticsViewModel(
                     val evaluationUiModels = evaluations.map { evaluation ->
                         Evaluation(
                             id = evaluation.id,
-                            measurement_name = evaluation.measurement_name,
+                            evaluation_name = evaluation.evaluation_name,
                             display_as_module = evaluation.display_as_module,
                             is_multilingual = evaluation.is_multilingual,
                             is_active = evaluation.is_active,
-                            measurement_settings = evaluation.measurement_settings,
-                            measurement_objects = evaluation.measurement_objects
+                            evaluation_settings = evaluation.evaluation_settings,
+                            evaluation_objects = evaluation.evaluation_objects
                         )
                     }
 

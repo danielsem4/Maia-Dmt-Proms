@@ -22,7 +22,7 @@ class KtorHomeService(
         ).map { response ->
             HomeData(
                 modules = response.modules.filter { it.is_active }.map { it.toDomain() },
-                measurements = response.measurements.map { it.toDomain() },
+                evaluations = response.evaluations.map { it.toDomain() },
             )
         }
     }

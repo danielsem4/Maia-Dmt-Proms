@@ -2,7 +2,7 @@ package maia.dmt.statistics.domain.model
 
 data class PatientEvaluationGraphs(
     val patient: PatientEvaluationGraphAuth,
-    val measurements_data: Map<String, MeasurementDataWrapper>,
+    val evaluations_data: Map<String, EvaluationDataWrapper>,
     val medications: List<EvaluationGraphsMedication>? = null,
     val show_medications: Boolean
 )
@@ -12,8 +12,8 @@ data class PatientEvaluationGraphAuth(
     val name: String
 )
 
-data class MeasurementDataWrapper(
-    val measurement: PatientEvaluationGraphsInfo,
+data class EvaluationDataWrapper(
+    val evaluation: PatientEvaluationGraphsInfo,
     val data: Map<String, XYData>
 )
 

@@ -6,8 +6,8 @@ import kotlinx.serialization.Serializable
 data class EvaluationObjectDto(
     val id: Int,
     val object_label: String,
-    val measurement_screen: Int,
-    val measurement_order: Int,
+    val evaluation_screen: Int,
+    val evaluation_order: Int,
     val return_value: Boolean,
     val number_of_values: Int,
     val predefined_values: Boolean,

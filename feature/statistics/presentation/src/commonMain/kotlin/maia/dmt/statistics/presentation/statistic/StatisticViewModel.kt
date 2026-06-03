@@ -31,7 +31,7 @@ class StatisticViewModel(
 
     private val args = savedStateHandle.toRoute<StatisticsGraphRoutes.StatisticDetail>()
     private val question: String = args.question
-    private val measurementId: Int = args.measurementId
+    private val evaluationId: Int = args.evaluationId
 
     private val _state = MutableStateFlow(StatisticState())
     private val eventChannel = Channel<StatisticEvent>()
@@ -97,7 +97,7 @@ class StatisticViewModel(
                 return@launch
             }
 
-            statisticsService.getPatientEvaluationsGraphs(clinicId, patientId, arrayListOf(measurementId.toString()))
+            statisticsService.getPatientEvaluationsGraphs(clinicId, patientId, arrayListOf(evaluationId.toString()))
                 .onSuccess { statistics ->
                     // Extract x and y values from your response
                     var chartDataList = emptyList<ChartData>()
@@ -105,8 +105,8 @@ class StatisticViewModel(
                     var isCategorical = false
 
                     statistics.forEach { patientGraph ->
-                        patientGraph.measurements_data.forEach { (_, measurementWrapper) ->
-                            measurementWrapper.data[question]?.let { questionData ->
+                        patientGraph.evaluations_data.forEach { (_, evaluationWrapper) ->
+                            evaluationWrapper.data[question]?.let { questionData ->
                                 val xValues = questionData.x
                                 val yValues = questionData.y
 

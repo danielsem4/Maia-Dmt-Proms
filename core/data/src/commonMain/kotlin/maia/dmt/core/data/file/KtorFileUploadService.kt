@@ -54,7 +54,7 @@ class KtorFileUploadService(
         val parts = listOf(
             "clinics", params.clinicId,
             "patients", params.patientId,
-            "measurements", params.measurementId,
+            "evaluations", params.evaluationId,
             formattedDate,
             params.progress,
             params.extraData ?: "",

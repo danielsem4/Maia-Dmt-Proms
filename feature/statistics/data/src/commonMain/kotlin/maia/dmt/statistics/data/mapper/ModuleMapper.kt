@@ -1,13 +1,13 @@
 package maia.dmt.statistics.data.mapper
 
 import maia.dmt.statistics.data.dto.EvaluationGraphsMedicationDto
-import maia.dmt.statistics.data.dto.MeasurementDataWrapperDto
+import maia.dmt.statistics.data.dto.EvaluationDataWrapperDto
 import maia.dmt.statistics.data.dto.PatientEvaluationGraphAuthDto
 import maia.dmt.statistics.data.dto.PatientEvaluationGraphsDto
 import maia.dmt.statistics.data.dto.PatientEvaluationGraphsInfoDto
 import maia.dmt.statistics.data.dto.XYDataDto
 import maia.dmt.statistics.domain.model.EvaluationGraphsMedication
-import maia.dmt.statistics.domain.model.MeasurementDataWrapper
+import maia.dmt.statistics.domain.model.EvaluationDataWrapper
 import maia.dmt.statistics.domain.model.PatientEvaluationGraphAuth
 import maia.dmt.statistics.domain.model.PatientEvaluationGraphs
 import maia.dmt.statistics.domain.model.PatientEvaluationGraphsInfo
@@ -17,7 +17,7 @@ import maia.dmt.statistics.domain.model.XYData
 fun PatientEvaluationGraphsDto.toDomain(): PatientEvaluationGraphs =
     PatientEvaluationGraphs(
         patient = patient.toDomain(),
-        measurements_data = measurements_data.mapValues { it.value.toDomain() },
+        evaluations_data = evaluations_data.mapValues { it.value.toDomain() },
         medications = medications?.map { it.toDomain() },
         show_medications = show_medications
     )
@@ -28,9 +28,9 @@ fun PatientEvaluationGraphAuthDto.toDomain(): PatientEvaluationGraphAuth =
         name = name
     )
 
-fun MeasurementDataWrapperDto.toDomain(): MeasurementDataWrapper =
-    MeasurementDataWrapper(
-        measurement = measurement.toDomain(),
+fun EvaluationDataWrapperDto.toDomain(): EvaluationDataWrapper =
+    EvaluationDataWrapper(
+        evaluation = evaluation.toDomain(),
         data = data.mapValues { it.value.toDomain() }
     )
 

@@ -19,9 +19,9 @@ import maia.dmt.core.designsystem.components.toast.ToastDuration
 import maia.dmt.core.designsystem.components.toast.ToastType
 import maia.dmt.core.designsystem.renderers.ElementRendererProvider
 import maia.dmt.core.designsystem.theme.DmtTheme
-import maia.dmt.core.domain.measurement.ElementType
-import maia.dmt.core.domain.measurement.MeasurementElement
-import maia.dmt.core.domain.measurement.MeasurementScreen
+import maia.dmt.core.domain.evaluation.ElementType
+import maia.dmt.core.domain.evaluation.EvaluationElement
+import maia.dmt.core.domain.evaluation.EvaluationScreen
 import maia.dmt.core.presentation.util.ObserveAsEvents
 import maia.dmt.core.presentation.util.UiText
 import maia.dmt.evaluation.presentation.components.layout.DmtEvaluationLayout
@@ -31,7 +31,7 @@ import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
 fun EvaluationRoot(
-    measurementId: String,
+    evaluationId: String,
     viewModel: EvaluationViewModel = koinViewModel(),
     onNavigateBack: () -> Unit,
 ) {
@@ -39,7 +39,7 @@ fun EvaluationRoot(
     var toastMessage by remember { mutableStateOf<String?>(null) }
     var toastType by remember { mutableStateOf(ToastType.Success) }
 
-    viewModel.initialize(measurementId)
+    viewModel.initialize(evaluationId)
 
     ObserveAsEvents(viewModel.events) { event ->
         when(event) {
@@ -86,7 +86,7 @@ fun EvaluationRoot(
 fun EvaluationScreen(
     state: EvaluationState,
     onAction: (EvaluationAction) -> Unit,
-    getCurrentScreen: () -> MeasurementScreen?,
+    getCurrentScreen: () -> EvaluationScreen?,
 ) {
     val currentScreen = getCurrentScreen()
     val scrollState = rememberScrollState()
@@ -156,7 +156,7 @@ fun EvaluationScreen(
 
 @Composable
 private fun RenderElement(
-    element: MeasurementElement,
+    element: EvaluationElement,
     currentAnswer: String,
     onAnswerChange: (String) -> Unit
 ) {

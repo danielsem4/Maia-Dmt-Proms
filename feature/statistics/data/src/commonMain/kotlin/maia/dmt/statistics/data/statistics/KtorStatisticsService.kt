@@ -20,10 +20,10 @@ class KtorStatisticsService(
         patientId: String,
         evaluationsIds: ArrayList<String>
     ): Result<List<PatientEvaluationGraphs>, DataError.Remote> {
-        val measurementsParam = evaluationsIds.joinToString(",", prefix = "[", postfix = "]")
+        val evaluationsParam = evaluationsIds.joinToString(",", prefix = "[", postfix = "]")
 
         return httpClient.get<PatientEvaluationGraphsDto>(
-            route = "getPatientEvaluationsGraphs/$clinicId/$patientId?measurements=$measurementsParam"
+            route = "getPatientEvaluationsGraphs/$clinicId/$patientId?evaluations=$evaluationsParam"
         ).map { listOf(it.toDomain()) }
     }
 

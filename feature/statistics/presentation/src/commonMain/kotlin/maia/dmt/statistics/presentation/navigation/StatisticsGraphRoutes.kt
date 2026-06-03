@@ -16,6 +16,6 @@ interface StatisticsGraphRoutes {
     @Serializable
     data class StatisticDetail(
         val question: String,
-        val measurementId: Int
+        val evaluationId: Int
     ) : StatisticsGraphRoutes
 }

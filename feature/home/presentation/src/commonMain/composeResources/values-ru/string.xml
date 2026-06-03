@@ -13,7 +13,7 @@
 
 
     <string name="module_document_share">Обмен документами</string>
-    <string name="module_measurements">Измерения</string>
+    <string name="module_evaluations">Измерения</string>
     <string name="module_medications">Лекарства</string>
     <string name="module_activities">Активности</string>
     <string name="module_memory">Память</string>

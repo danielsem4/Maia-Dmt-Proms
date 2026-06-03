@@ -1,14 +1,14 @@
 package maia.dmt.evaluation.presentation.allEvaluations
 
 import maia.dmt.core.presentation.util.UiText
-import maia.dmt.evaluation.domain.model.MeasurementItem
+import maia.dmt.evaluation.domain.model.EvaluationItem
 
 data class AllEvaluationsState(
     val searchQuery: String = "",
     val isLoadingEvaluations: Boolean = false,
     val evaluationsError: UiText? = null,
-    val selectedMeasurement: MeasurementItem? = null,
-    val allMeasurements: List<MeasurementItem> = emptyList(),
-    val measurements: List<MeasurementItem> = emptyList(),
+    val selectedEvaluation: EvaluationItem? = null,
+    val allEvaluations: List<EvaluationItem> = emptyList(),
+    val evaluations: List<EvaluationItem> = emptyList(),
     val isReportingEvaluation: Boolean = false,
 )

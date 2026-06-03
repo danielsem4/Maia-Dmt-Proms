@@ -60,7 +60,7 @@ class CdtGradeViewModel(
         val drawings = cdtSessionManager.getAllDrawingBitmaps()
         val evaluation = cdtSessionManager.evaluation.value
 
-        val mainIndex = evaluation?.measurement_objects?.indexOfFirst { it.object_label == "imageUrl" } ?: -1
+        val mainIndex = evaluation?.evaluation_objects?.indexOfFirst { it.object_label == "imageUrl" } ?: -1
 
         return if (mainIndex != -1 && drawings.containsKey(mainIndex)) {
             drawings[mainIndex]

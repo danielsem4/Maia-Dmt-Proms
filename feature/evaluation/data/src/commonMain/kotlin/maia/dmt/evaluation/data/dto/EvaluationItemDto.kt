@@ -4,16 +4,16 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class MeasurementItemDto(
+data class EvaluationItemDto(
     val id: String,
     val patient: String,
     val clinic: String,
     val doctor: String,
-    val measurement: String,
-    @SerialName("measurement_name")
-    val measurementName: String,
-    @SerialName("measurement_type")
-    val measurementType: String,
+    val evaluation: String,
+    @SerialName("evaluation_name")
+    val evaluationName: String,
+    @SerialName("evaluation_type")
+    val evaluationType: String,
     @SerialName("start_date")
     val startDate: String,
     @SerialName("end_date")

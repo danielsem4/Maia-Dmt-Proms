@@ -15,11 +15,19 @@ object ElementRendererProvider {
     private val renderers: List<ElementRenderer> = listOf(
         HeaderElementRenderer(),
         ParagraphElementRenderer(),
+        InfoCardElementRenderer(),
+        ButtonElementRenderer(),
         InputTextElementRenderer(),
+        InputNumberElementRenderer(),
         InputRadioElementRenderer(),
         InputMultiSelectElementRenderer(),
         InputSelectElementRenderer(),
-        InputScaleElementRenderer()
+        InputScaleElementRenderer(),
+        InputDateElementRenderer(),
+        InputTimeElementRenderer(),
+        InputBooleanElementRenderer(),
+        BodyMapVisualElementRenderer(),
+        CognitiveFieldElementRenderer()
     )
 
     @Composable

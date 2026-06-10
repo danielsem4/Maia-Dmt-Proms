@@ -31,11 +31,19 @@ data class EvaluationElement(
 enum class ElementType {
     HEADER,
     PARAGRAPH,
+    INFO_CARD,
+    BUTTON,
     INPUT_TEXT,
+    INPUT_NUMBER,
     INPUT_RADIO,
     INPUT_MULTI_SELECT,
     INPUT_SELECT,
     INPUT_SCALE,
+    INPUT_DATE,
+    INPUT_TIME,
+    INPUT_BOOLEAN,
+    BODY_MAP_VISUAL,
+    COGNITIVE_FIELD,
     UNKNOWN;
 
     companion object {
@@ -50,6 +58,13 @@ sealed interface ElementConfig {
 
     data class InputTextConfig(
         val placeholder: String
+    ) : ElementConfig
+
+    data class InputNumberConfig(
+        val placeholder: String,
+        val min: Int?,
+        val max: Int?,
+        val step: Int
     ) : ElementConfig
 
     data class InputRadioConfig(
@@ -76,4 +91,27 @@ sealed interface ElementConfig {
         val minLabel: String,
         val maxLabel: String
     ) : ElementConfig
+
+    data class InputDateConfig(
+        val placeholder: String
+    ) : ElementConfig
+
+    data class InputTimeConfig(
+        val placeholder: String
+    ) : ElementConfig
+
+    data class InputBooleanConfig(
+        val trueLabel: String,
+        val falseLabel: String,
+        val defaultValue: Boolean
+    ) : ElementConfig
+
+    data class BodyMapVisualConfig(
+        val spots: List<BodyMapSpot>
+    ) : ElementConfig
+
+    data class BodyMapSpot(
+        val point: String,
+        val subItems: List<String>
+    )
 }

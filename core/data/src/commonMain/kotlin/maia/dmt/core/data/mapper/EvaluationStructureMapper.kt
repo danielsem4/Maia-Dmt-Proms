@@ -1,8 +1,11 @@
 package maia.dmt.core.data.mapper
 
 import kotlinx.serialization.json.JsonObject
+import kotlinx.serialization.json.booleanOrNull
 import kotlinx.serialization.json.int
+import kotlinx.serialization.json.intOrNull
 import kotlinx.serialization.json.jsonArray
+import kotlinx.serialization.json.jsonObject
 import kotlinx.serialization.json.jsonPrimitive
 import maia.dmt.core.data.dto.evaluation.EvaluationElementDto
 import maia.dmt.core.data.dto.evaluation.EvaluationRowDto
@@ -48,12 +51,25 @@ fun EvaluationElementDto.toDomain(): EvaluationElement {
 
 private fun parseElementConfig(elementType: ElementType, config: JsonObject): ElementConfig {
     return when (elementType) {
-        ElementType.HEADER, ElementType.PARAGRAPH, ElementType.UNKNOWN ->
+        ElementType.HEADER,
+        ElementType.PARAGRAPH,
+        ElementType.INFO_CARD,
+        ElementType.BUTTON,
+        ElementType.COGNITIVE_FIELD,
+        ElementType.UNKNOWN ->
             ElementConfig.EmptyConfig
 
         ElementType.INPUT_TEXT ->
             ElementConfig.InputTextConfig(
                 placeholder = config["placeholder"]?.jsonPrimitive?.content ?: ""
+            )
+
+        ElementType.INPUT_NUMBER ->
+            ElementConfig.InputNumberConfig(
+                placeholder = config["placeholder"]?.jsonPrimitive?.content ?: "",
+                min = config["min"]?.jsonPrimitive?.intOrNull,
+                max = config["max"]?.jsonPrimitive?.intOrNull,
+                step = config["step"]?.jsonPrimitive?.intOrNull ?: 1
             )
 
         ElementType.INPUT_RADIO ->
@@ -83,6 +99,35 @@ private fun parseElementConfig(elementType: ElementType, config: JsonObject): El
                 step = config["step"]?.jsonPrimitive?.int ?: 1,
                 minLabel = config["min_label"]?.jsonPrimitive?.content ?: "",
                 maxLabel = config["max_label"]?.jsonPrimitive?.content ?: ""
+            )
+
+        ElementType.INPUT_DATE ->
+            ElementConfig.InputDateConfig(
+                placeholder = config["placeholder"]?.jsonPrimitive?.content ?: ""
+            )
+
+        ElementType.INPUT_TIME ->
+            ElementConfig.InputTimeConfig(
+                placeholder = config["placeholder"]?.jsonPrimitive?.content ?: ""
+            )
+
+        ElementType.INPUT_BOOLEAN ->
+            ElementConfig.InputBooleanConfig(
+                trueLabel = config["true_label"]?.jsonPrimitive?.content ?: "Yes",
+                falseLabel = config["false_label"]?.jsonPrimitive?.content ?: "No",
+                defaultValue = config["default_value"]?.jsonPrimitive?.booleanOrNull ?: false
+            )
+
+        ElementType.BODY_MAP_VISUAL ->
+            ElementConfig.BodyMapVisualConfig(
+                spots = config["spots"]?.jsonArray?.map { spotElement ->
+                    val spot = spotElement.jsonObject
+                    ElementConfig.BodyMapSpot(
+                        point = spot["point"]?.jsonPrimitive?.content ?: "",
+                        subItems = spot["subItems"]?.jsonArray?.map { it.jsonPrimitive.content }
+                            ?: emptyList()
+                    )
+                } ?: emptyList()
             )
     }
 }

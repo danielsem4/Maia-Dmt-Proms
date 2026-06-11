@@ -49,7 +49,7 @@ class EvaluationViewModel(
             is EvaluationAction.OnBackClick -> { navigateBack() }
             is EvaluationAction.OnEvaluationNextClick -> { handleEvaluationNextClick() }
             is EvaluationAction.OnEvaluationPreviousClick -> { handleEvaluationPreviousClick() }
-            is EvaluationAction.OnEvaluationReportClick -> { /* Upload deferred */ }
+            is EvaluationAction.OnEvaluationReportClick -> { submitCurrentEvaluation() }
             is EvaluationAction.OnAnswerChanged -> {
                 _state.update {
                     it.copy(
@@ -129,14 +129,63 @@ class EvaluationViewModel(
                 it.copy(currentScreenIndex = currentIndex + 1)
             }
         } else {
-            // Last screen — upload would happen here (deferred)
-            viewModelScope.launch {
-                eventChannel.send(
-                    EvaluationEvent.UploadSuccess(
-                        UiText.DynamicString("Questionnaire completed.")
+            submitCurrentEvaluation()
+        }
+    }
+
+    private fun submitCurrentEvaluation() {
+        val structure = _state.value.evaluationStructure ?: return
+
+        viewModelScope.launch {
+            val clinicId = sessionStorage.getActiveClinicId()
+            if (clinicId.isNullOrEmpty() || selectedEvaluationId.isEmpty()) {
+                val errorText = UiText.DynamicString("No clinic/evaluation ID found.")
+                _state.update {
+                    it.copy(
+                        isLoadingEvaluationUpload = false,
+                        evaluationError = errorText
                     )
+                }
+                eventChannel.send(EvaluationEvent.UploadError(errorText))
+                return@launch
+            }
+
+            _state.update {
+                it.copy(
+                    isLoadingEvaluationUpload = true,
+                    evaluationError = null
                 )
             }
+
+            evaluationService.submitEvaluation(
+                clinicId = clinicId,
+                evaluationId = selectedEvaluationId,
+                structure = structure,
+                answers = _state.value.answers
+            )
+                .onSuccess {
+                    _state.update {
+                        it.copy(
+                            isLoadingEvaluationUpload = false,
+                            evaluationError = null
+                        )
+                    }
+                    eventChannel.send(
+                        EvaluationEvent.UploadSuccess(
+                            UiText.DynamicString("Questionnaire submitted.")
+                        )
+                    )
+                }
+                .onFailure { error ->
+                    val errorText = error.toUiText()
+                    _state.update {
+                        it.copy(
+                            isLoadingEvaluationUpload = false,
+                            evaluationError = errorText
+                        )
+                    }
+                    eventChannel.send(EvaluationEvent.UploadError(errorText))
+                }
         }
     }
 

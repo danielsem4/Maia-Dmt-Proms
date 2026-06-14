@@ -86,14 +86,26 @@ class HomeViewModel(
             }
 
             val clinicId = sessionStorage.getActiveClinicId()
-            val userId = authInfo.user?.id
 
-            if (clinicId.isNullOrEmpty() || userId == null) {
+            if (clinicId.isNullOrEmpty()) {
                 _state.update { it.copy(isLoadingModules = false, modulesError = UiText.DynamicString("Invalid Session")) }
                 return@launch
             }
 
-            homeService.getHomeData(clinicId, userId)
+            val isDoctor = authInfo.user?.role.orEmpty().equals("doctor", ignoreCase = true)
+
+            val result = if (isDoctor) {
+                homeService.getDoctorHomeData(clinicId)
+            } else {
+                val userId = authInfo.user?.id
+                if (userId.isNullOrEmpty()) {
+                    _state.update { it.copy(isLoadingModules = false, modulesError = UiText.DynamicString("Invalid Session")) }
+                    return@launch
+                }
+                homeService.getHomeData(clinicId, userId)
+            }
+
+            result
                 .onSuccess { homeData ->
                     val moduleUiModels = homeData.modules.map { module ->
                         ModuleUiModel(

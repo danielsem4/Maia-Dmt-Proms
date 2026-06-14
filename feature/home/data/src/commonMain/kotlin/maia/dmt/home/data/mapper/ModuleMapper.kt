@@ -8,8 +8,8 @@ import maia.dmt.home.domain.models.Module
 fun ModuleDto.toDomain(): Module {
     return Module(
         id = id,
-        name = module_name,
-        description = module_description,
+        name = if (module_name.isNotEmpty()) module_name else type.orEmpty(),
+        description = if (module_description.isNotEmpty()) module_description else label.orEmpty(),
         isActive = is_active,
     )
 }

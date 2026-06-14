@@ -8,4 +8,6 @@ interface HomeService {
 
     suspend fun getHomeData(clinicId: String, userId: String): Result<HomeData, DataError.Remote>
 
+    suspend fun getDoctorHomeData(clinicId: String): Result<HomeData, DataError.Remote>
+
 }

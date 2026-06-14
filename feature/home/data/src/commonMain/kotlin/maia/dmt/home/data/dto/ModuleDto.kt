@@ -10,4 +10,6 @@ data class ModuleDto(
     val module_name: String = "",
     val module_description: String = "",
     val is_active: Boolean = true,
+    val type: String? = null,
+    val label: String? = null,
 )

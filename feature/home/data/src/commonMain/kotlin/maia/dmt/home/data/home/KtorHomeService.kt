@@ -26,4 +26,17 @@ class KtorHomeService(
             )
         }
     }
+
+    override suspend fun getDoctorHomeData(
+        clinicId: String,
+    ): Result<HomeData, DataError.Remote> {
+        return httpClient.get<HomeResponseDto>(
+            route = "api/v1/mobile/clinics/$clinicId/home/",
+        ).map { response ->
+            HomeData(
+                modules = response.modules.filter { it.is_active }.map { it.toDomain() },
+                evaluations = response.evaluations.map { it.toDomain() },
+            )
+        }
+    }
 }

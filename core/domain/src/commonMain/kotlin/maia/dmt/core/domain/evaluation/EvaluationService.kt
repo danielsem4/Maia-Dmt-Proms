@@ -16,6 +16,14 @@ interface EvaluationService {
 
     suspend fun uploadEvaluationResults(results: Any): Result<Unit, DataError.Remote>
 
+    suspend fun submitEvaluation(
+        clinicId: String,
+        evaluationId: String,
+        structure: EvaluationStructure,
+        answers: Map<String, String>,
+        versionKey: String? = null
+    ): Result<EvaluationSubmissionResult, DataError.Remote>
+
 }
 
 
